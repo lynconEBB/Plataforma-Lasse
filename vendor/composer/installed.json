@@ -1,0 +1,131 @@
+[
+    {
+        "name": "cybermonde/odtphp",
+        "version": "v1.7",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cybermonde/odtphp.git",
+            "reference": "23aba70923ca3c07af15a5600f4072751c1b4a36"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cybermonde/odtphp/zipball/23aba70923ca3c07af15a5600f4072751c1b4a36",
+            "reference": "23aba70923ca3c07af15a5600f4072751c1b4a36",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2015-06-02 07:28:25",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "library"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL"
+        ],
+        "description": "ODT document generator",
+        "homepage": "https://github.com/cybermonde/odtphp",
+        "keywords": [
+            "odt",
+            "php"
+        ]
+    },
+    {
+        "name": "slim/pdo",
+        "version": "1.10.1",
+        "version_normalized": "1.10.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FaaPz/Slim-PDO.git",
+            "reference": "2eaaae8c5fbfeba832bf3c8fa88b1780e23554ee"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FaaPz/Slim-PDO/zipball/2eaaae8c5fbfeba832bf3c8fa88b1780e23554ee",
+            "reference": "2eaaae8c5fbfeba832bf3c8fa88b1780e23554ee",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pdo": "*",
+            "php": ">=5.3.0"
+        },
+        "time": "2017-08-15 10:42:44",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Slim\\PDO\\": "src/PDO/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabian de Laender",
+                "email": "fabian@faapz.nl",
+                "homepage": "http://faapz.nl",
+                "role": "Developer"
+            }
+        ],
+        "description": "PDO database library for Slim Framework",
+        "homepage": "https://github.com/FaaPz/Slim-PDO",
+        "keywords": [
+            "database",
+            "framework",
+            "pdo",
+            "slim"
+        ]
+    },
+    {
+        "name": "php-kit/ext-pdo",
+        "version": "1.1.3",
+        "version_normalized": "1.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-kit/ext-pdo.git",
+            "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-kit/ext-pdo/zipball/b94bf1805b75ba114e4a216dbca441ca7dc893be",
+            "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2018-04-06 12:17:27",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpKit\\ExtPDO\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Claudio Silva",
+                "email": "claudio.silva@impactwave.com"
+            },
+            {
+                "name": "Impactwave",
+                "email": "impactwave@impactwave.com",
+                "homepage": "http://impactwave.com"
+            }
+        ],
+        "description": "An extension to the standard PHP PDO API",
+        "homepage": "https://github.com/php-kit/ext-pdo"
+    }
+]

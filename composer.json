@@ -1,0 +1,7 @@
+{
+    "require": {
+        "cybermonde/odtphp": "^1.7",
+        "slim/pdo": "^1.10",
+        "php-kit/ext-pdo": "^1.1"
+    }
+}
