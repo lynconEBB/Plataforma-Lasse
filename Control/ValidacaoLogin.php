@@ -10,6 +10,7 @@ require_once '../DAO/FuncionarioDAO.php';
 class ValidacaoLogin{
     private $login;
     private $senha;
+    
     public function __construct(){
         session_start();
         $funcDAO = new FuncionarioDAO();

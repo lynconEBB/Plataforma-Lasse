@@ -2,14 +2,15 @@
 include "cabecalho.php";
 ?>
     <form action="../Control/ViagemControl.php" method="post">
+
         <fieldset>
-            Nome Completo:<input type="text" name="nome"><br>
-            RG:<input type="text" name="rg"><br>
-            Data de Emissão: <input type="date" name="dataEm"><br>
-            CPF: <input type="text" name="cpf"><br>
-            Data de Nascimento <input type="date" name="dtNascimento"><br>
-            <input type="radio" name="tipo" value="Colaborador">Colaborador     <input type="radio" name="tipo" value="Terceiros">Terceiros       <input type="radio" name="tipo" value="Bolsista/Voluntário">Bolsista/Voluntário<br>
-            <input type="radio" name="proposito" value="Viagem a">Trabalho     <input type="radio" name="proposito" value="Evento/Congresso">Evento/Congresso       <input type="radio" name="proposito" value="Viagem trei">Treinamento/Aprimoramento<br>
+              Nome Completo:<input type="text" name="nome"><br>
+              RG:<input type="text" name="rg"><br>
+              Data de Emissão: <input type="date" name="dataEm"><br>
+              CPF: <input type="text" name="cpf"><br>
+              Data de Nascimento <input type="date" name="dtNascimento"><br>
+              <input type="radio" name="tipo" value="Colaborador">Colaborador     <input type="radio" name="tipo" value="Terceiros">Terceiros       <input type="radio" name="tipo" value="Bolsista/Voluntário">Bolsista/Voluntário<br>
+              <input type="radio" name="proposito" value="Viagem a">Trabalho     <input type="radio" name="proposito" value="Evento/Congresso">Evento/Congresso       <input type="radio" name="proposito" value="Viagem trei">Treinamento/Aprimoramento<br>
         </fieldset><br>
         <fieldset>
             Nome e Número Convênio: <input type="text" name="nomeNumCon"><br>

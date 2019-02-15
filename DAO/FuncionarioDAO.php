@@ -9,7 +9,7 @@ class FuncionarioDAO{
     }
 
     public function inserir(Funcionario $func){
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         $insert = $this->pdo->prepare("INSERT INTO tbFuncionario (senha,usuario,NomeCompleto,dataNascimento,cpf,rg,dataEmissao,tipo,email) VALUES (?,?,?,?,?,?,?,?,?)");
         $insert->bindValue(1,$func->getSenha());
         $insert->bindValue(2,$func->getUsuario());
@@ -62,6 +62,26 @@ class FuncionarioDAO{
     public function listarPorId($id){
         $buscaId = $this->pdo->prepare("SELECT * FROM tbFuncionario WHERE id=?");
         $buscaId->bindValue(1,$id);
+        $buscaId->execute();
+
+        $linha =  $buscaId->fetch(PDO::FETCH_ASSOC);
+        $fun = new Funcionario();
+        $fun->setNomeCompleto($linha['NomeCompleto']);
+        $fun->setEmail($linha['email']);
+        $fun->setCpf($linha['cpf']);
+        $fun->setId($linha['id']);
+        $fun->setRg($linha['rg']);
+        $fun->setDtNascimento($linha['dataNascimento']);
+        $fun->setTipo($linha['tipo']);
+        $fun->setDtEmissao('dataEmissao');
+        $fun->setSenha($linha['senha']);
+
+        return $fun;
+    }
+
+    public function listarPorUsuario($usuario){
+        $buscaId = $this->pdo->prepare("SELECT * FROM tbFuncionario WHERE usuario=?");
+        $buscaId->bindValue(1,$usuario);
         $buscaId->execute();
 
         $linha =  $buscaId->fetch(PDO::FETCH_ASSOC);
