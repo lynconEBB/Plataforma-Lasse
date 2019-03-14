@@ -1,7 +1,7 @@
 <?php
 
 include 'conexao.php';
-require_once '../Model/Funcionario.php';
+require_once '../Model/Usuario.php';
 class FuncionarioDAO{
     private $pdo;
     public function __construct(){

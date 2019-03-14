@@ -1,5 +1,5 @@
 <?php
-require_once '../Model/Funcionario.php';
+require_once '../Model/Usuario.php';
 require_once '../DAO/FuncionarioDAO.php';
 class FuncionarioControl{
     public function __construct(){

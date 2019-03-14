@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lyncon
- * Date: 16/01/19
- * Time: 09:08
- */
 
-class Funcionario{
+class Usuario{
     private $id;
     private $nomeCompleto;
-    private $usuario;
+    private $login;
     private $senha;
     private $dtNascimento;
     private $cpf;
@@ -17,6 +11,25 @@ class Funcionario{
     private $dtEmissao;
     private $tipo;
     private $email;
+    private $atuacao;
+    private $formacao;
+    private $valorHora;
+
+    public function __construct($id, $nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora){
+        $this->id = $id;
+        $this->nomeCompleto = $nomeCompleto;
+        $this->login = $login;
+        $this->senha = $senha;
+        $this->dtNascimento = $dtNascimento;
+        $this->cpf = $cpf;
+        $this->rg = $rg;
+        $this->dtEmissao = $dtEmissao;
+        $this->tipo = $tipo;
+        $this->email = $email;
+        $this->atuacao = $atuacao;
+        $this->formacao = $formacao;
+        $this->valorHora = $valorHora;
+    }
 
     public function getEmail(){
         return $this->email;
@@ -40,14 +53,6 @@ class Funcionario{
 
     public function setNomeCompleto($nomeCompleto){
         $this->nomeCompleto = $nomeCompleto;
-    }
-
-    public function getUsuario(){
-        return $this->usuario;
-    }
-
-    public function setUsuario($usuario){
-        $this->usuario = $usuario;
     }
 
     public function getSenha(){
@@ -96,6 +101,38 @@ class Funcionario{
 
     public function setTipo($tipo){
         $this->tipo = $tipo;
+    }
+
+    public function getLogin(){
+        return $this->login;
+    }
+
+    public function setLogin($login){
+        $this->login = $login;
+    }
+
+    public function getAtuacao(){
+        return $this->atuacao;
+    }
+
+    public function setAtuacao($atuacao){
+        $this->atuacao = $atuacao;
+    }
+
+    public function getFormacao(){
+        return $this->formacao;
+    }
+
+    public function setFormacao($formacao){
+        $this->formacao = $formacao;
+    }
+
+    public function getValorHora(){
+        return $this->valorHora;
+    }
+
+    public function setValorHora($valorHora){
+        $this->valorHora = $valorHora;
     }
 
 }

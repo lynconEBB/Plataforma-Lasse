@@ -6,12 +6,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2e3dbb-8f2d-4014-aac8-68a168633a16" name="Default Changelist" comment="Adicionando Diagramas V1">
-      <change afterPath="$PROJECT_DIR$/View/FormularioView.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/Atividade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/Tarefa.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/FormularioControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/FormularioControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/Formulário.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Formulário.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/formulario.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Control/FuncionarioControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/FuncionarioControl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/FuncionarioDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/FuncionarioDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Funcionario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Usuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Veiculo.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Veiculo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Viagem.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Viagem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,34 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/View/FormularioView.php">
+        <entry file="file://$PROJECT_DIR$/Model/Veiculo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/Formulário.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+            <state relative-caret-position="315">
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sendo</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,6 +53,13 @@
         <option value="$PROJECT_DIR$/View/FormularioView.php" />
         <option value="$PROJECT_DIR$/js/funcoes.js" />
         <option value="$PROJECT_DIR$/Control/FormularioControl.php" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Model/Funcionario.php" />
+        <option value="$PROJECT_DIR$/Model/Usuario.php" />
+        <option value="$PROJECT_DIR$/Model/Atividade.php" />
+        <option value="$PROJECT_DIR$/Model/Tarefa.php" />
+        <option value="$PROJECT_DIR$/Model/Viagem.php" />
+        <option value="$PROJECT_DIR$/Model/Veiculo.php" />
       </list>
     </option>
   </component>
@@ -167,7 +163,7 @@
       <workItem from="1552324359899" duration="599000" />
       <workItem from="1552408127921" duration="599000" />
       <workItem from="1552494459552" duration="599000" />
-      <workItem from="1552588063467" duration="239000" />
+      <workItem from="1552588063467" duration="4568000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionando Diagramas e Escopo V1">
       <created>1552588199971</created>
@@ -190,11 +186,39 @@
       <option name="project" value="LOCAL" />
       <updated>1552588294911</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Geração de Formulários V1">
+      <created>1552588338179</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552588338179</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adicionando Diagramas V1">
+      <created>1552589301404</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552589301404</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Atualização de README">
+      <created>1552589327817</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1552589327817</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Mudança README">
+      <created>1552589437688</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1552589437688</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63002000" />
+    <option name="totallyTimeSpent" value="67331000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
@@ -213,7 +237,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3291536" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -227,7 +251,11 @@
     <MESSAGE value="Adicionando Diagramas e Escopo V1" />
     <MESSAGE value="Testes com JQuery" />
     <MESSAGE value="Banco de dados V1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Banco de dados V1" />
+    <MESSAGE value="Geração de Formulários V1" />
+    <MESSAGE value="Adicionando Diagramas V1" />
+    <MESSAGE value="Atualização de README" />
+    <MESSAGE value="Mudança README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mudança README" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/DAO/FuncionarioDAO.php">
@@ -252,20 +280,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.php" />
-    <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/Formulário.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/jquey.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1100">
@@ -283,10 +297,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="615">
+            <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/View/FormularioView.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/Formulário.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Viagem.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-735">
+          <caret line="22" column="235" selection-start-line="22" selection-start-column="235" selection-end-line="22" selection-end-column="235" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Tarefa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Atividade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Usuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://PHP/\Veiculo">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>PHP</ID>
+          <OriginalElement>\Veiculo</OriginalElement>
+          <nodes>
+            <node x="" y="">\Veiculo</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="41.5" y="15.5" />
+          <SelectedNodes />
+          <Categories />
+          <VISIBILITY>public</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Veiculo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
         </state>
       </provider>
     </entry>
