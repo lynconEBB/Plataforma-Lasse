@@ -5,16 +5,14 @@
     <bookmark url="file://$PROJECT_DIR$/View/FormularioView.php" line="5" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c2e3dbb-8f2d-4014-aac8-68a168633a16" name="Default Changelist" comment="Adicionando Diagramas V1">
-      <change afterPath="$PROJECT_DIR$/Model/Atividade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Tarefa.php" afterDir="false" />
+    <list default="true" id="8c2e3dbb-8f2d-4014-aac8-68a168633a16" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/Compra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/Item.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/FuncionarioControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/FuncionarioControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/FuncionarioDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/FuncionarioDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Funcionario.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Usuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Veiculo.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Veiculo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Viagem.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Viagem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagramas/BD-PFC.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/Diagramas/BD-PFC.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagramas/Projeto_FInal_Curso.odt" beforeDir="false" afterPath="$PROJECT_DIR$/Diagramas/Projeto_FInal_Curso.odt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Atividade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Atividade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,13 +20,43 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="dbLPM@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="dbLPM@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="dbLPM@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="dbLPM: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Model/Veiculo.php">
+        <entry file="file://$PROJECT_DIR$/Model/Compra.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+            <state relative-caret-position="645">
+              <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -56,24 +84,31 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Model/Funcionario.php" />
         <option value="$PROJECT_DIR$/Model/Usuario.php" />
-        <option value="$PROJECT_DIR$/Model/Atividade.php" />
         <option value="$PROJECT_DIR$/Model/Tarefa.php" />
         <option value="$PROJECT_DIR$/Model/Viagem.php" />
         <option value="$PROJECT_DIR$/Model/Veiculo.php" />
+        <option value="$PROJECT_DIR$/Model/Condutor.php" />
+        <option value="$PROJECT_DIR$/Model/Atividade.php" />
+        <option value="$PROJECT_DIR$/Model/Compra.php" />
+        <option value="$PROJECT_DIR$/Model/Item.php" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-280" />
-    <option name="y" value="-4" />
-    <option name="width" value="1851" />
-    <option name="height" value="1040" />
+    <option name="x" value="52" />
+    <option name="y" value="24" />
+    <option name="width" value="1849" />
+    <option name="height" value="1004" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -94,16 +129,6 @@
             <path>
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="Diagramas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
               <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -115,14 +140,16 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../TOP_2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -163,7 +190,8 @@
       <workItem from="1552324359899" duration="599000" />
       <workItem from="1552408127921" duration="599000" />
       <workItem from="1552494459552" duration="599000" />
-      <workItem from="1552588063467" duration="4568000" />
+      <workItem from="1552588063467" duration="4831000" />
+      <workItem from="1552666786970" duration="3834000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionando Diagramas e Escopo V1">
       <created>1552588199971</created>
@@ -214,18 +242,27 @@
       <option name="project" value="LOCAL" />
       <updated>1552589437688</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Criação de Models">
+      <created>1552593025846</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1552593025846</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67331000" />
+    <option name="totallyTimeSpent" value="71428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20287451" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15975676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Database Console" weight="0.3291536" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -241,7 +278,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.14151464" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +292,8 @@
     <MESSAGE value="Adicionando Diagramas V1" />
     <MESSAGE value="Atualização de README" />
     <MESSAGE value="Mudança README" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mudança README" />
+    <MESSAGE value="Criação de Models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criação de Models" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/DAO/FuncionarioDAO.php">
@@ -267,9 +305,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/View/test.html" />
     <entry file="file://$PROJECT_DIR$/View/meusDados.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/menuFunc.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/View/index.php">
@@ -342,13 +377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Atividade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Usuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -366,17 +394,69 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="41.5" y="15.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="42.0" y="16.0" />
           <SelectedNodes />
           <Categories />
+          <SCOPE>All</SCOPE>
           <VISIBILITY>public</VISIBILITY>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/Veiculo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Condutor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e330b7b8-a5d9-40fe-afe8-0cee1a1e52c0/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://e330b7b8-a5d9-40fe-afe8-0cee1a1e52c0/schema/dbLPM/table/tbAtividade">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Atividade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ViagemControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="69" lean-forward="true" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/test.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/menuFunc.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Compra.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="36" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
         </state>
       </provider>
     </entry>

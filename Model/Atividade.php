@@ -1,6 +1,7 @@
 <?php
 
 class Atividade{
+    private $id;
     private $tipo;
     private $tempoGasto;
     private $comentario;
@@ -15,6 +16,14 @@ class Atividade{
         $this->dataRealizacao = $dataRealizacao;
         $this->usuario = $usuario;
         $this->totalGasto =  $this -> usuario -> valorHora * $this -> tempoGasto;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
     }
 
     public function getTipo(){
