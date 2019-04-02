@@ -6,64 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2e3dbb-8f2d-4014-aac8-68a168633a16" name="Default Changelist" comment="Front-End Index">
-      <change afterPath="$PROJECT_DIR$/Documentos/BD-PFC.mwb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/BD-PFC.mwb.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/DiagramaER.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/DiagramasProjeto.asta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/PFC.odt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/PFC_Camila_e_Lyncon.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/Sistema Gerenciador de Projetos - Camila e Lyncon.pptx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentos/db.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Gasto.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Projeto.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/css/styleSheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bootstrap/js/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/canto1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/canto2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/cantos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/poster.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/videoplayback.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bootstrap/js/funcoes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/conexao.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/conexao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagramas/.~lock.Projeto_FInal_Curso.odt#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagramas/BD-PFC.mwb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagramas/DiagramaER.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagramas/DiagramasProjeto.asta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagramas/Projeto_FInal_Curso.odt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/alteracaoFuncionario.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Funcionário/alteracaoFuncionario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/cabecalho.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/cabecalho.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/cadastroFuncionario.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Funcionário/cadastroFuncionario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/meusDados.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Funcionário/meusDados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Viagem/CadastroViagem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquey.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/css/styleSheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/css/styleSheet.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,20 +50,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+            <state relative-caret-position="405">
+              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bootstrap/js/funcoes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bootstrap/css/styleSheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+            <state relative-caret-position="779">
+              <caret line="124" column="11" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -165,16 +121,18 @@
         <option value="$PROJECT_DIR$/bootstrap/styleSheet.css" />
         <option value="$PROJECT_DIR$/MDB/css/styleSheet.css" />
         <option value="$PROJECT_DIR$/bootstrap/js/jquery.js" />
-        <option value="$PROJECT_DIR$/bootstrap/css/styleSheet.css" />
+        <option value="$PROJECT_DIR$/bootstrap/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/bootstrap/js/funcoes.js" />
         <option value="$PROJECT_DIR$/View/index.php" />
+        <option value="$PROJECT_DIR$/bootstrap/css/styleSheet.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="52" />
-    <option name="width" value="1843" />
-    <option name="height" value="952" />
+    <option name="x" value="2033" />
+    <option name="y" value="-4" />
+    <option name="width" value="1841" />
+    <option name="height" value="944" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -184,7 +142,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,14 +149,37 @@
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../TOP_2" />
@@ -262,7 +242,18 @@
       <workItem from="1553011675781" duration="4545000" />
       <workItem from="1553098921599" duration="1422000" />
       <workItem from="1553185296703" duration="4039000" />
-      <workItem from="1553271053388" duration="12317000" />
+      <workItem from="1553271053388" duration="12378000" />
+      <workItem from="1553530972034" duration="6000" />
+      <workItem from="1553530989248" duration="2788000" />
+      <workItem from="1553614936839" duration="679000" />
+      <workItem from="1553618036030" duration="1321000" />
+      <workItem from="1553630208857" duration="415000" />
+      <workItem from="1553703001725" duration="7052000" />
+      <workItem from="1553885111470" duration="72000" />
+      <workItem from="1553885195414" duration="2896000" />
+      <workItem from="1554135290230" duration="621000" />
+      <workItem from="1554136241783" duration="7769000" />
+      <workItem from="1554221039551" duration="14279000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionando Diagramas e Escopo V1">
       <created>1552588199971</created>
@@ -331,12 +322,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94452000" />
+    <option name="totallyTimeSpent" value="132411000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16970702" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19237147" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -356,7 +348,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.1448314" />
+      <window_info anchor="right" id="Database" order="3" weight="0.1448314" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,26 +370,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/View/test.html" />
     <entry file="file://$PROJECT_DIR$/css/style.php" />
-    <entry file="file://$PROJECT_DIR$/js/jquey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="10305" column="6" selection-start-line="10305" selection-start-column="6" selection-end-line="10305" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="615">
-            <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/js/jquey.js" />
+    <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
@@ -553,13 +527,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/funcoes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/js/funcoes.js" />
     <entry file="file://$PROJECT_DIR$/DAO/FuncionarioDAO.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -573,27 +541,8 @@
         <state relative-caret-position="-45" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="4146" column="7" selection-start-line="4146" selection-start-column="1" selection-end-line="4146" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/styleSheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MDB/css/styleSheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/styleSheet.css" />
+    <entry file="file://$PROJECT_DIR$/MDB/css/styleSheet.css" />
     <entry file="file://$PROJECT_DIR$/bootstrap/js/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1296">
@@ -601,17 +550,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/css/styleSheet.css">
+    <entry file="file://$PROJECT_DIR$/bootstrap/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+        <state relative-caret-position="-519">
+          <caret line="4064" column="32" selection-start-line="4064" selection-start-column="32" selection-end-line="4064" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/View/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+        <state relative-caret-position="405">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/js/funcoes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/css/styleSheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="779">
+          <caret line="124" column="11" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
         </state>
       </provider>
     </entry>
