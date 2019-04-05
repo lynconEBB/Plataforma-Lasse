@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="3df8ec25-fcad-41cd-9d9d-5e61dc403f74" name="server1" url="localhost/Plataforma-Lasse">
-        <fileTransfer port="0" accessType="LOCAL" />
+      <webServer id="b2fdd2af-3b3c-4fd1-83b7-2298ae0cce65" name="Apache on XAMPP" url="http://localhost/Plataforma-Lasse">
+        <fileTransfer port="0" mountedRoot="C:\xampp\htdocs" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

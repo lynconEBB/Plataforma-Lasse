@@ -36,7 +36,7 @@ class ValidacaoLogin{
 
     public function sair(){
         session_destroy();
-        header("Location: ../View/index.php");
+        header("Location: ../View/index.html");
         exit();
     }
 
@@ -46,7 +46,7 @@ class ValidacaoLogin{
         }
         else{
             echo "Você precisa estar Logado para utilzar o site<br>";
-            echo "Por gentileza, faça o seu login <A href='../View/index.php'>clicando aqui</A>.";
+            echo "Por gentileza, faça o seu login <A href='../View/index.html'>clicando aqui</A>.";
             exit();
         }
     }

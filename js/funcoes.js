@@ -1,4 +1,4 @@
-/*$('input').focus(function(){
+$('input').focus(function(){
     $(this).parents('.form-group').addClass('focused');
 });
 
@@ -10,7 +10,7 @@ $('input').blur(function(){
     } else {
         $(this).addClass('filled');
     }
-})*/
+})
 
 $(document).ready(function () {
 
