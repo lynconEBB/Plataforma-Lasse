@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/estiloFuncionario.css" afterDir="false" />
+    <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="Organizando e Começando Mask">
+      <change afterPath="$PROJECT_DIR$/View/select.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/select.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/select.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/estiloFuncionario.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/estiloFuncionario.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/funcoesFuncionario.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesFuncionario.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,30 +18,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="101" selection-start-line="11" selection-start-column="101" selection-end-line="11" selection-end-column="101" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/funcoesFuncionario.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/estiloFuncionario.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+            <state relative-caret-position="432">
+              <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -47,17 +33,25 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
+        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>form-control</find>
+      <find>form-grou</find>
+      <find>form-group</find>
+      <find>row</find>
+      <find>.row</find>
+      <find>custom-select</find>
     </findStrings>
     <replaceStrings>
       <replace>form-input</replace>
+      <replace>form-row</replace>
+      <replace>form-select</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -72,9 +66,12 @@
         <option value="$PROJECT_DIR$/View/test.html" />
         <option value="$PROJECT_DIR$/bootstrap/js/funcoes.js" />
         <option value="$PROJECT_DIR$/View/index.html" />
-        <option value="$PROJECT_DIR$/js/funcoesFuncionario.js" />
-        <option value="$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" />
+        <option value="$PROJECT_DIR$/View/select.html" />
         <option value="$PROJECT_DIR$/css/estiloFuncionario.css" />
+        <option value="$PROJECT_DIR$/css/select.css" />
+        <option value="$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" />
+        <option value="$PROJECT_DIR$/js/select.js" />
+        <option value="$PROJECT_DIR$/js/funcoesFuncionario.js" />
       </list>
     </option>
   </component>
@@ -130,6 +127,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -159,13 +157,13 @@
     <configuration name="cadastroFuncionario.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost/Plataforma-Lasse/View/Funcionario/cadastroFuncionario.html">
       <method v="2" />
     </configuration>
-    <configuration name="cadastroFuncionario.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://home.test/Plataforma-Lasse/View/Funcionario/cadastroFuncionario.html">
-      <method v="2" />
-    </configuration>
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost/Plataforma-Lasse/View/index.html">
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://home.test/Plataforma-Lasse/View/index.html">
+      <method v="2" />
+    </configuration>
+    <configuration name="select.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost/Plataforma-Lasse/View/select.html">
       <method v="2" />
     </configuration>
     <configuration name="funcoesFuncionario.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="funcoesFuncionario.js" working-dir="$PROJECT_DIR$/js">
@@ -173,18 +171,18 @@
     </configuration>
     <list>
       <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="JavaScript Debug.cadastroFuncionario.html" />
       <item itemvalue="JavaScript Debug.index.html (1)" />
       <item itemvalue="JavaScript Debug.cadastroFuncionario.html (1)" />
+      <item itemvalue="JavaScript Debug.select.html" />
       <item itemvalue="Node.js.funcoesFuncionario.js" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.cadastroFuncionario.html (1)" />
+        <item itemvalue="JavaScript Debug.select.html" />
         <item itemvalue="Node.js.funcoesFuncionario.js" />
         <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="JavaScript Debug.cadastroFuncionario.html" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +202,9 @@
       <workItem from="1554500199520" duration="1553000" />
       <workItem from="1554502327008" duration="2411000" />
       <workItem from="1554739853262" duration="14091000" />
+      <workItem from="1554826581143" duration="9411000" />
+      <workItem from="1554912393349" duration="4041000" />
+      <workItem from="1554916460097" duration="10570000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -216,12 +217,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19246000" />
+    <option name="totallyTimeSpent" value="43268000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14285715" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14765458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -292,8 +293,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css.map">
-      <provider editor-type-id="sourcemapFileViewerProvider" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="sourcemapFileViewerProvider" />
     </entry>
     <entry file="file://$PROJECT_DIR$/js/funcoes.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -309,24 +310,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/funcoesFuncionario.js">
+    <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        <state relative-caret-position="156">
+          <caret line="597" column="23" selection-start-line="597" selection-start-column="23" selection-end-line="597" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="101" selection-start-line="11" selection-start-column="101" selection-end-line="11" selection-end-column="101" />
+        <state relative-caret-position="148">
+          <caret line="69" column="32" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/select.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/select.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/estiloFuncionario.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        <state relative-caret-position="-450">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/select.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/funcoesFuncionario.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
         </state>
       </provider>
     </entry>
