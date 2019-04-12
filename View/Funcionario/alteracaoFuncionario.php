@@ -1,6 +1,6 @@
 <?php
     include 'cabecalho.php';
-    require_once '../DAO/FuncionarioDAO.php';
+    require_once '../Services/FuncionarioDAO.php';
     $funcDAO = new FuncionarioDAO();
     $funcionario = $funcDAO->listarPorId($_GET['id']);
 ?>

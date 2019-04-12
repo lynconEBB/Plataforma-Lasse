@@ -1,6 +1,6 @@
 <?php
 require_once '../Model/Usuario.php';
-require_once '../DAO/FuncionarioDAO.php';
+require_once '../Services/FuncionarioDAO.php';
 class FuncionarioControl{
     public function __construct(){
         if(isset($_REQUEST['acao'])){

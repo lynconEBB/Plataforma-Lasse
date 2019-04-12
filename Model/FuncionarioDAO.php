@@ -1,6 +1,6 @@
 <?php
 
-include 'conexao.php';
+include 'PdoFactory.php';
 require_once '../Model/Usuario.php';
 class FuncionarioDAO{
     private $pdo;

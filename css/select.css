@@ -53,7 +53,10 @@
     position: absolute;
     left:50%;
     transform: translate(-50%);
-    top:0;
+    top:50%;
+    background: #ccffcc;
+    text-align: center;
+    font-weight: bold;
 }
 .container{
     position: relative;

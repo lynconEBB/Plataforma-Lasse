@@ -6,6 +6,7 @@
         padding: 50px 30px;
         top:50%;
         left: 50%;
+        height:auto;
         transform: translate(-50%,-50%);
         background-color: #ccffcc;
         margin-left: auto;
@@ -25,6 +26,7 @@
         margin-left: auto;
         margin-right: auto;
         width:90%;
+        box-shadow: 5px 5px 20px;
     }
 }
 
@@ -42,6 +44,7 @@
     position: absolute;
     z-index: 5;
     left: 50%;
+    display: inline-block;
     transform: translate(-50%);
     font-weight: bold;
 }
@@ -113,7 +116,11 @@
 input:focus{
     outline: none;
 }
-
+body{
+    background-image: url("../img/img.jpg");
+    -webkit-background-size: cover;
+    background-size: cover;
+}
 
 
 

@@ -1,5 +1,5 @@
 <?php
-  require_once '../DAO/FuncionarioDAO';
+  require_once '../Services/FuncionarioDAO';
   session_start();
   $usuario = $_SESSION['usuario'];
   $funcDAO = new FuncionarioDAO();

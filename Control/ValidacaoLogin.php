@@ -5,7 +5,7 @@
  * Date: 28/01/2019
  * Time: 09:33
  */
-require_once '../DAO/FuncionarioDAO.php';
+require_once '../Services/FuncionarioDAO.php';
 
 class ValidacaoLogin{
     private $login;
