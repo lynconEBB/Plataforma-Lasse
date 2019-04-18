@@ -1,7 +1,6 @@
 <?php
 
-
-abstract class PadraoControl{
+abstract class CrudControl{
     public function __construct(){
         if( isset($_POST['acao']) ){
             $acao = $_POST['acao'];
@@ -12,9 +11,14 @@ abstract class PadraoControl{
         }
     }
 
-    public function falar(){
-        echo 'classe pai';
-    }
     abstract protected function defineAcao($acao);
+
+    abstract protected function cadastrar();
+
+    abstract protected function excluir();
+
+    abstract protected function listar();
+
+    abstract protected function atualizar();
 
 }

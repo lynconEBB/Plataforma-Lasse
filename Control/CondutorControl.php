@@ -1,16 +1,31 @@
 <?php
 require_once '../Model/Condutor.php';
-require_once 'PadraoControl.php';
-class CondutorControl extends PadraoControl {
+require_once 'CrudControl.php';
+class CondutorControl extends CrudControl {
 
     public function defineAcao($acao){
-        echo 'Estou na classe filho';
-     }
+        switch ($acao){
+            case 1:
 
-     public function falar(){
-         parent::falar();
-     }
+
+        }
+    }
+
+    protected function cadastrar(){
+        // TODO: Implement cadastrar() method.
+    }
+
+    protected function excluir(){
+        // TODO: Implement excluir() method.
+    }
+
+    protected function listar(){
+        // TODO: Implement listar() method.
+    }
+
+    protected function atualizar(){
+        // TODO: Implement atualizar() method.
+    }
 }
 
 $class = new CondutorControl();
-$class::falar();

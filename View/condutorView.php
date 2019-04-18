@@ -28,6 +28,7 @@
                         <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
                         <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
                     </div>
+                    <input type="hidden" name="acao" value="1">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
