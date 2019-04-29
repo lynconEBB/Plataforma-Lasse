@@ -1,14 +1,16 @@
 <?php
 
 class Condutor{
+    private $id;
     private $nome;
     private $cnh;
     private $validadeCNH;
 
-    public function __construct($nome, $cnh, $validadeCNH){
+    public function __construct($nome, $cnh, $validadeCNH,$id=null){
         $this->nome = $nome;
         $this->cnh = $cnh;
         $this->validadeCNH = $validadeCNH;
+        $this->id = $id;
     }
 
     public function getNome(){
@@ -28,14 +30,19 @@ class Condutor{
     }
 
     public function getValidadeCNH(){
-        return $this->validadeCNH;
+        $val = $this->validadeCNH;
+        return $val;
     }
 
     public function setValidadeCNH($validadeCNH){
         $this->validadeCNH = $validadeCNH;
     }
 
+    public function getId(){
+        return $this->id;
+    }
 
-
-
+    public function setId($id){
+        $this->id = $id;
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 
 abstract class CrudControl{
+    public $DAO;
+
     public function __construct(){
         if( isset($_POST['acao']) ){
             $acao = $_POST['acao'];
@@ -15,7 +17,7 @@ abstract class CrudControl{
 
     abstract protected function cadastrar();
 
-    abstract protected function excluir();
+    abstract protected function excluir($id);
 
     abstract protected function listar();
 

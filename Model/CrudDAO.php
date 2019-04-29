@@ -8,4 +8,7 @@ abstract class CrudDAO{
         $this->pdo = PdoFactory::criarConexao();
     }
 
+    abstract function excluir($id);
+    abstract function listar();
+
 }
