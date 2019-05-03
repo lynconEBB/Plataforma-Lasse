@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/CondutorDAO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/edit-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/trash-alt-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/funcoesCondutor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Control/ProjetoControl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/ProjetoDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/projetoView.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/CondutorControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CondutorControl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Control/CrudControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CrudControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/DiagramasProjeto.asta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Condutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Condutor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CrudDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CrudDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PdoFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PdoFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/CondutorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CondutorDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Projeto.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Projeto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/condutorView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/condutorView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/rodape.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/rodape.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoes.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,53 +32,52 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/View/condutorView.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/funcoesCondutor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/CondutorDAO.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="738">
-              <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/CrudDAO.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.56330746">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/View/projetoView.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="5" selection-start-line="5" selection-end-line="5" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="414">
+                  <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Model/ProjetoDAO.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="288">
+                  <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Model/Projeto.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -136,15 +128,19 @@
         <option value="$PROJECT_DIR$/Services/conexao.php" />
         <option value="$PROJECT_DIR$/Control/PadraoControl.php" />
         <option value="$PROJECT_DIR$/Services/PdoFactory.php" />
-        <option value="$PROJECT_DIR$/Control/CrudControl.php" />
         <option value="$PROJECT_DIR$/Model/Condutor.php" />
         <option value="$PROJECT_DIR$/js/funcoes.js" />
         <option value="$PROJECT_DIR$/View/rodape.php" />
-        <option value="$PROJECT_DIR$/View/condutorView.php" />
         <option value="$PROJECT_DIR$/js/funcoesCondutor.js" />
-        <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
         <option value="$PROJECT_DIR$/Model/CrudDAO.php" />
+        <option value="$PROJECT_DIR$/View/condutorView.php" />
+        <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
+        <option value="$PROJECT_DIR$/Control/CrudControl.php" />
+        <option value="$PROJECT_DIR$/Model/Projeto.php" />
         <option value="$PROJECT_DIR$/Model/CondutorDAO.php" />
+        <option value="$PROJECT_DIR$/Model/ProjetoDAO.php" />
+        <option value="$PROJECT_DIR$/Control/ProjetoControl.php" />
+        <option value="$PROJECT_DIR$/View/projetoView.php" />
       </list>
     </option>
   </component>
@@ -164,6 +160,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -175,16 +172,6 @@
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
               <item name="Control" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
@@ -201,23 +188,10 @@
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
               <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="Funcionario" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-              <item name="Viagem" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -320,7 +294,11 @@
       <workItem from="1556040737648" duration="1659000" />
       <workItem from="1556122127105" duration="11074000" />
       <workItem from="1556294331845" duration="12093000" />
-      <workItem from="1556553692792" duration="5624000" />
+      <workItem from="1556553692792" duration="5675000" />
+      <workItem from="1556656518476" duration="55000" />
+      <workItem from="1556657532433" duration="6875000" />
+      <workItem from="1556813462914" duration="595000" />
+      <workItem from="1556911630069" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -350,11 +328,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555617233433</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Crud Condutor">
+      <created>1556561267126</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1556561267126</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118776000" />
+    <option name="totallyTimeSpent" value="126661000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -369,7 +354,7 @@
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1716418" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17803837" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -425,7 +410,8 @@
     <MESSAGE value="Select Personalizado V1" />
     <MESSAGE value="Comecando Estrura Com Classes PHP" />
     <MESSAGE value="Mais um passo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mais um passo" />
+    <MESSAGE value="Crud Condutor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Crud Condutor" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/View/test.html" />
@@ -486,13 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/FuncionarioDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-961">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -524,13 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="116" selection-start-line="11" selection-start-column="116" selection-end-line="11" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/CrudControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -579,27 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/CrudDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/CondutorDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/funcoesCondutor.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -607,10 +558,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Model/FuncionarioDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/CrudDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/CrudControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/CondutorDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/View/condutorView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+        <state relative-caret-position="594">
+          <caret line="33" selection-start-line="7" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/projetoView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/ProjetoDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Projeto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>

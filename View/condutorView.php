@@ -25,7 +25,7 @@
                         echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
                     echo "</button>";
                 echo "</td>";
-                echo "<td><a href='../Control/CondutorControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg'></a></td>";
+                echo "<td><button class='btn'><a href='../Control/CondutorControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
             echo '</tr>';
         }
     ?>

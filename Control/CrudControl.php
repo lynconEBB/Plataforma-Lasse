@@ -13,7 +13,19 @@ abstract class CrudControl{
         }
     }
 
-    abstract protected function defineAcao($acao);
+    public function defineAcao($acao){
+        switch ($acao){
+            case 1:
+                $this->cadastrar();
+                break;
+            case 2:
+                $this->excluir($_GET['id']);
+                break;
+            case 3:
+                $this->atualizar();
+                break;
+        }
+    }
 
     abstract protected function cadastrar();
 

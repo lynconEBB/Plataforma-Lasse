@@ -6,17 +6,12 @@ class CondutorDAO extends CrudDAO {
 
     //Insere Objeto Condutor no Banco de Dados
     function cadastrar(Condutor $condutor){
-        $atributos = [
-            'nome'=>$condutor->getNome(),
-            'cnh'=> $condutor->getCnh(),
-            'validadeCNH'=>$condutor->getValidadeCNH()];
-
         $comando = "INSERT INTO tbcondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindParam(':nome',$atributos['nome']);
-        $stm->bindParam(':cnh',$atributos['cnh']);
-        $stm->bindParam(':validadeCNH',$atributos['validadeCNH']);
+        $stm->bindValue(':nome',$condutor->getNome());
+        $stm->bindValue(':cnh',$condutor->getCnh());
+        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
 
         $stm->execute();
         header('Location:../View/condutorView.php?success=true');
@@ -63,9 +58,7 @@ class CondutorDAO extends CrudDAO {
         header('Location:../View/condutorView.php?success=true');
     }
 
-    function listarPorId(){
 
-    }
 }
 
 new CondutorDAO();

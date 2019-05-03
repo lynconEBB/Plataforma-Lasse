@@ -9,11 +9,11 @@ class Projeto{
     private $nome;
     private $tarefas;
 
-    public function __construct($id, $dataFinalizacao, $dataInicio, $totalGasto, $descricao, $nome, $tarefas){
+    public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$id=null, $tarefas=null){
         $this->id = $id;
         $this->dataFinalizacao = $dataFinalizacao;
         $this->dataInicio = $dataInicio;
-        $this->totalGasto = $totalGasto;
+        $this->totalGasto = 0;
         $this->descricao = $descricao;
         $this->nome = $nome;
         $this->tarefas = $tarefas;
