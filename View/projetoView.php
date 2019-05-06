@@ -20,7 +20,7 @@
                     echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' >";
                         echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
                     echo "</button>";
-                    echo "<a class='btn ' href='../Control/ProjetoControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg'></a>";
+                    echo "<a class='btn ' href='../Control/ProjetoControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg' alt=''></a>";
                 echo '</div>';
             echo '</div>';
         }

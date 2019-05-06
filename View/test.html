@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Tela Login</title>
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+    <script src="../js/test.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="../img/back2.png" class="im" alt="">
+    </div>
+
+    <div class="login">
+        <form action="../Control/ValidacaoLogin.php" method="post" >
+
+            <div class="form-group">
+                <label for="inputUsuario" class="form-label">Nome de usuário ou E-mail</label>
+                <input type="text" name="usuario-email" id="inputUsuario" class="form-input" ><br>
+            </div>
+
+            <div class="form-group ">
+                <label for="inputSenha" class="form-label">Senha</label>
+                <input class="form-input" type="password" name="senha" id="inputSenha" ><br>
+            </div>
+
+            <input type="hidden" name="action" value="login">
+            <input type="submit" class="btn btn-dark rounded-bottom" value="Login">
+        </form>
+    </div>
+</body>
+</html>
