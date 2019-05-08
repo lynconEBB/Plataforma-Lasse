@@ -1,7 +1,7 @@
 <?php
 require_once 'CrudControl.php';
 require_once '../Model/Projeto.php';
-require_once '../Model/ProjetoDAO.php';
+require_once '../DAO/ProjetoDAO.php';
 
 class ProjetoControl extends CrudControl {
 

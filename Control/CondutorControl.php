@@ -1,5 +1,5 @@
 <?php
-require_once '../Model/CondutorDAO.php';
+require_once '../DAO/CondutorDAO.php';
 require_once 'CrudControl.php';
 class CondutorControl extends CrudControl {
 
