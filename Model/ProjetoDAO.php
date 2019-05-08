@@ -39,6 +39,17 @@ class ProjetoDAO extends CrudDAO {
 
     function alterar(Projeto $projeto){
 
+        $comando = "UPDATE tbprojeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':nome',$projeto->getNome());
+        $stm->bindValue(':descr',$projeto->getDescricao());
+        $stm->bindValue(':dtfim',$projeto->getDataFinalizacao());
+        $stm->bindValue(':dtini',$projeto->getDataInicio());
+        $stm->bindValue(':id',$projeto->getId());
+
+        $stm->execute();
+        header('Location:../View/projetoView.php?success=true');
     }
 }
 new ProjetoDAO();

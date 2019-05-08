@@ -40,19 +40,14 @@ class CondutorDAO extends CrudDAO {
     }
 
     function atualizar(Condutor $condutor){
-        $atributos = [
-            'nome'=>$condutor->getNome(),
-            'cnh'=> $condutor->getCnh(),
-            'validadeCNH'=>$condutor->getValidadeCNH(),
-            'id'=>$condutor->getId()];
 
         $comando = "UPDATE tbcondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindParam(':nome',$atributos['nome']);
-        $stm->bindParam(':cnh',$atributos['cnh']);
-        $stm->bindParam(':validadeCNH',$atributos['validadeCNH']);
-        $stm->bindParam(':id',$atributos['id']);
+        $stm->bindValue(':nome',$condutor->getNome());
+        $stm->bindValue(':cnh',$condutor->getCnh());
+        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
+        $stm->bindValue(':id',$condutor->getId());
 
         $stm->execute();
         header('Location:../View/condutorView.php?success=true');

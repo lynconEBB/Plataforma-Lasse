@@ -17,7 +17,7 @@
                     echo "</div>";
                 echo '</div>';
                 echo '<div class="card-footer">';
-                    echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' >";
+                    echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' data-nome='{$registro->getNome()}' data-desc='{$registro->getDescricao()}' data-dtini='{$registro->getDataInicio()}' data-dtfim='{$registro->getDataFinalizacao()}' >";
                         echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
                     echo "</button>";
                     echo "<a class='btn ' href='../Control/ProjetoControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg' alt=''></a>";
@@ -65,6 +65,46 @@
         </div>
     </div>
 </div>
-<?php
-    include 'rodape.php';
-?>
+
+<div class="modal fade" id="modalAlterar" tabindex="-1" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Alteração de Projetos</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </header>
+            <div class="modal-body">
+                <form action="../Control/ProjetoControl.php" method="post">
+                    <div class="form-group">
+                        <label for="nomeProjeto" class="col-form-label">Nome do Projeto</label>
+                        <input class="form-control" id="nomeProjeto" name="nomeProjeto">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao" class="col-form-label">Descrição</label>
+                        <input class="form-control" id="descricao" name="descricao">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataInicio" class="col-form-label">Data de Início</label>
+                        <input type="text" class="form-control" id="dataInicio" name="dataInicio">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataFinalizacao" class="col-form-label">Data de Finalização</label>
+                        <input type="text" class="form-control" id="dataFinalizacao" name="dataFinalizacao">
+                    </div>
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="acao" value="3">
+                    <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/funcoes.js"></script>
+    <script src="../js/funcoesProjeto.js"></script>
+    <script src="../js/bootstrap.js"></script>
+</body>
+</html>

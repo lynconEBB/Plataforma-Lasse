@@ -20,13 +20,13 @@ class ProjetoControl extends CrudControl {
         $this -> DAO -> excluir($id);
     }
 
-    public function listar(){
+    public function listar() {
         return $this -> DAO -> listar();
     }
 
     protected function atualizar(){
-        /*$condutor = new Condutor($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        $this -> DAO -> atualizar($condutor);*/
+        $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id']);
+        $this -> DAO -> alterar($projeto);
     }
 }
 new ProjetoControl();
