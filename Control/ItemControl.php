@@ -1,10 +1,12 @@
 <?php
-require_once '../DAO/CondutorDAO.php';
-require_once 'CrudControl.php';
-class CondutorControl extends CrudControl {
+    require_once 'CrudControl.php';
+    require_once '../Model/Item.php';
+    require_once '../DAO/ItemDAO.php';
+
+class ItemControl extends CrudControl{
 
     public function __construct(){
-        $this->DAO = new CondutorDAO();
+        $this->DAO = new ItemDAO();
         parent::__construct();
     }
 
@@ -23,7 +25,7 @@ class CondutorControl extends CrudControl {
     }
 
     protected function cadastrar(){
-        $condutor = new Condutor($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
+        $condutor = new Item($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
         $this->DAO->cadastrar($condutor);
     }
 
@@ -35,14 +37,8 @@ class CondutorControl extends CrudControl {
         return $this -> DAO -> listar();
     }
 
-    public function listarPorId($id){
-        return $this -> DAO -> listarPorId($id);
-    }
-
     protected function atualizar(){
         $condutor = new Condutor($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
         $this -> DAO -> atualizar($condutor);
     }
 }
-
-$class = new CondutorControl();
