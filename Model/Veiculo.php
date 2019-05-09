@@ -1,6 +1,7 @@
 <?php
 
 class Veiculo{
+    private $id;
     private $nome;
     private $tipo;
     private $dataRetirada;
@@ -9,7 +10,7 @@ class Veiculo{
     private $horarioDevolucao;
     private $condutor;
 
-    public function __construct($nome, $tipo, $dataRetirada, $dataDevolucao, $horarioRetirada, $horarioDevolucao, $condutor){
+    public function __construct($nome, $tipo, $dataRetirada, $dataDevolucao, $horarioRetirada, $horarioDevolucao, $condutor,$id=null){
         $this->nome = $nome;
         $this->tipo = $tipo;
         $this->dataRetirada = $dataRetirada;
@@ -17,6 +18,16 @@ class Veiculo{
         $this->horarioRetirada = $horarioRetirada;
         $this->horarioDevolucao = $horarioDevolucao;
         $this->condutor = $condutor;
+        $this->id=$id;
+    }
+
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id): void{
+        $this->id = $id;
     }
 
     public function getNome(){
@@ -67,7 +78,7 @@ class Veiculo{
         $this->horarioDevolucao = $horarioDevolucao;
     }
 
-    public function getCondutor(){
+    public function getCondutor():Condutor{
         return $this->condutor;
     }
 

@@ -1,6 +1,6 @@
 <?php
 require_once 'CrudDAO.php';
-require_once 'Condutor.php';
+require_once '../Model/Condutor.php';
 
 class CondutorDAO extends CrudDAO {
 
@@ -53,7 +53,16 @@ class CondutorDAO extends CrudDAO {
         header('Location:../View/condutorView.php?success=true');
     }
 
+    public function listarPorId($id){
+        $comando = "SELECT * from tbcondutor WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
 
+        $stm->bindValue(':id',$id);
+
+        $stm->execute();
+        $resul = $stm->fetch(PDO::FETCH_ASSOC);
+        $obj = new Condutor($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
+
+        return $obj;
+    }
 }
-
-new CondutorDAO();

@@ -6,7 +6,7 @@ class Item{
     private $nome;
     private $quantidade;
 
-    public function __construct($id, $valor, $nome, $quantidade){
+    public function __construct($valor, $nome, $quantidade,$id=null){
         $this->id = $id;
         $this->valor = $valor;
         $this->nome = $nome;

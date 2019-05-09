@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/Control/VeiculoControl.php" line="46" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAO/ItemDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAO/VeiculoDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/itemView.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/veiculoView.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/funcoesVeiculo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/CondutorControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CondutorControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/ProjetoControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ProjetoControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/UseCase - Camila e Lyncon.asta" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/UseCase - Camila e Lyncon.asta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/UseCase - Camila e Lyncon.asta.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CondutorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CondutorDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CrudDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CrudDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/FuncionarioDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/FuncionarioDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ProjetoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/ProjetoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CondutorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CondutorDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Item.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Veiculo.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Veiculo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Funcionario/FormularioView.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Funcionario/Formulário.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Funcionario/alteracaoFuncionario.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Funcionario/meusDados.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/Viagem/CadastroViagem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/estiloFuncionario.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/select.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/styleSheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/test.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/funcoes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/select.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/test.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,26 +51,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="862">
-              <caret line="48" column="15" lean-forward="true" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Control/CrudControl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -73,19 +71,18 @@
       <find>.row</find>
       <find>custom-select</find>
       <find>$(this)</find>
+      <find>registro</find>
     </findStrings>
     <replaceStrings>
       <replace>form-input</replace>
       <replace>form-row</replace>
       <replace>form-select</replace>
       <replace>this</replace>
+      <replace>obj</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -116,18 +113,27 @@
         <option value="$PROJECT_DIR$/View/projetoView.php" />
         <option value="$PROJECT_DIR$/Model/CondutorDAO.php" />
         <option value="$PROJECT_DIR$/Model/ProjetoDAO.php" />
-        <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
         <option value="$PROJECT_DIR$/Control/ProjetoControl.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/View/itemView.php" />
+        <option value="$PROJECT_DIR$/Control/ItemControl.php" />
+        <option value="$PROJECT_DIR$/Model/Item.php" />
+        <option value="$PROJECT_DIR$/DAO/CondutorDAO.php" />
+        <option value="$PROJECT_DIR$/Model/Veiculo.php" />
+        <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
+        <option value="$PROJECT_DIR$/js/funcoesVeiculo.js" />
+        <option value="$PROJECT_DIR$/Control/VeiculoControl.php" />
+        <option value="$PROJECT_DIR$/View/veiculoView.php" />
+        <option value="$PROJECT_DIR$/DAO/VeiculoDAO.php" />
       </list>
     </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP on XAMPP" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1577" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="x" value="-1876" />
+    <option name="y" value="-21" />
+    <option name="width" value="1823" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -153,7 +159,22 @@
             <path>
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="DAO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
               <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -272,7 +293,8 @@
       <workItem from="1557180322785" duration="783000" />
       <workItem from="1557170335152" duration="2020000" />
       <workItem from="1557244679880" duration="1105000" />
-      <workItem from="1557333850431" duration="4691000" />
+      <workItem from="1557333850431" duration="5441000" />
+      <workItem from="1557418512735" duration="11825000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -330,11 +352,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557343035565</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Ajuste no Projeto">
+      <created>1557343720590</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1557343720590</updated>
+    </task>
+    <task id="LOCAL-00010" summary="CRUD Veiculo">
+      <created>1557430820969</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1557430820970</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139469000" />
+    <option name="totallyTimeSpent" value="152044000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -347,9 +383,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12100213" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.110341154" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -408,10 +443,11 @@
     <MESSAGE value="Crud Condutor" />
     <MESSAGE value="Crud Projeto" />
     <MESSAGE value="Crud Projeto Finalizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud Projeto Finalizado" />
+    <MESSAGE value="Ajuste no Projeto" />
+    <MESSAGE value="CRUD Veiculo" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD Veiculo" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/View/test.html" />
     <entry file="file://$PROJECT_DIR$/img/poster.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -469,13 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Gasto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/dd09c3bf-6468-4c90-aeb0-0b9173d08311/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -527,24 +556,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DAO/CrudDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/Funcionario/cadastroFuncionario.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/condutorView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -569,24 +584,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/funcoesProjeto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Projeto.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DAO/CondutorDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="53" column="5" lean-forward="true" selection-start-line="42" selection-end-line="53" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -597,20 +598,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/projetoView.php">
+    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="96" column="61" selection-start-line="96" selection-start-column="61" selection-end-line="96" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        <state relative-caret-position="54">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -621,17 +612,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/View/test.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1494">
-          <caret line="83" column="15" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+        <state relative-caret-position="862">
+          <caret line="85" column="15" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Gasto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/condutorView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="58" column="57" lean-forward="true" selection-start-line="58" selection-start-column="57" selection-end-line="58" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -639,6 +640,103 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DAO/ItemDAO.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/itemView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="99" column="6" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="99" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ItemControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DAO/CrudDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/projetoView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="103" selection-start-line="103" selection-end-line="109" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DAO/CondutorDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/funcoesProjeto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="17" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/funcoesVeiculo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/veiculoView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="23" column="29" lean-forward="true" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DAO/VeiculoDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="42" lean-forward="true" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/VeiculoControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Veiculo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
