@@ -1,7 +1,6 @@
 <?php
 
 
-class ItemDAO
-{
+class ItemDAO{
 
 }

@@ -12,19 +12,6 @@ class VeiculoControl extends CrudControl {
         parent::__construct();
     }
 
-    public function defineAcao($acao){
-        switch ($acao){
-            case 1:
-                $this->cadastrar();
-                break;
-            case 2:
-                $this->excluir($_GET['id']);
-                break;
-            case 3:
-                $this->atualizar();
-                break;
-        }
-    }
 
     protected function cadastrar(){
         $condDAO = new CondutorDAO();

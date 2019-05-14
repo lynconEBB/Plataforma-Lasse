@@ -15,7 +15,7 @@ class Usuario{
     private $formacao;
     private $valorHora;
 
-    public function __construct($id, $nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null){
         $this->id = $id;
         $this->nomeCompleto = $nomeCompleto;
         $this->login = $login;

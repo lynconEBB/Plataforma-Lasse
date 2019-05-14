@@ -6,24 +6,31 @@
 ?>
 <div class="card-deck">
     <?php
-        foreach ($resul as $registro){
-            echo '<div class="card border-info" style="width:400px">';
-                echo '<div class="card-body text-info">';
-                    echo "<h4 class='card-title'>{$registro->getNome()}</h4>";
-                    echo "<div class='card-text'>";
-                        echo "<p>{$registro->getDescricao()}</p>";
-                        echo "<p><b>Data de Inicio:</b> {$registro->getDataInicio()}</p>";
-                        echo "<p><b>Data de Finalização:</b> {$registro->getDataFinalizacao()}</p>";
-                    echo "</div>";
-                echo '</div>';
-                echo '<div class="card-footer">';
-                    echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' data-nome='{$registro->getNome()}' data-desc='{$registro->getDescricao()}' data-dtini='{$registro->getDataInicio()}' data-dtfim='{$registro->getDataFinalizacao()}' >";
-                        echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
-                    echo "</button>";
-                    echo "<a class='btn ' href='../Control/ProjetoControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg' alt=''></a>";
-                echo '</div>';
-            echo '</div>';
-        }
+        foreach ($resul as $registro):
+    ?>
+            <div class="card border-info" style="width:400px">
+                <div class="card-body text-info">
+                    <h4 class='card-title'><?php echo $registro->getNome()?></h4>
+                    <div class='card-text'>
+                        <p><?php echo $registro->getDescricao()?></p>
+                       <p><b>Data de Inicio:</b><?php echo $registro->getDataInicio()?></p>
+                        <p><b>Data de Finalização:</b><?php echo $registro->getDataFinalizacao()?></p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>'
+                            data-desc='<?php echo $registro->getDescricao()?>' data-dtini='<?php echo $registro->getDataInicio()?>' data-dtfim='<?php echo $registro->getDataFinalizacao()?>' >
+                        <img width='16' src='../img/edit-regular.svg' alt=''>
+                    </button>
+                    <form action="../Control/ProjetoControl.php" method="post">
+                        <input type="hidden" name="acao" value="2">
+                        <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
+                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                    </form>
+               </div>
+            </div>
+    <?php
+        endforeach;
     ?>
 </div>
 
@@ -103,7 +110,6 @@
 </div>
 
     <script src="../js/jquery.js"></script>
-    <script src="../js/funcoes.js"></script>
     <script src="../js/funcoesProjeto.js"></script>
     <script src="../js/bootstrap.js"></script>
 </body>

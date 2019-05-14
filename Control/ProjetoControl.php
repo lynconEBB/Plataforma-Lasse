@@ -10,7 +10,6 @@ class ProjetoControl extends CrudControl {
         parent::__construct();
     }
 
-
     protected function cadastrar(){
         $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto']);
         $this->DAO->cadastrar($projeto);

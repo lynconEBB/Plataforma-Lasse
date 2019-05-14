@@ -14,21 +14,29 @@
         <th></th>
     </thead>
     <tbody>
-    <?php
-        foreach ($resul as $registro){
-            echo '<tr>';
-                echo "<td>{$registro->getNome()}</td>";
-                echo "<td>{$registro->getCnh()}</td>";
-                echo "<td>{$registro->getValidadeCNH()}</td>";
-                echo "<td>";
-                    echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' data-nome='{$registro->getNome()}' data-cnh='{$registro->getCnh()}' data-val='{$registro->getValidadeCNH()}'>";
-                        echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
-                    echo "</button>";
-                echo "</td>";
-                echo "<td><button class='btn'><a href='../Control/CondutorControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
-            echo '</tr>';
-        }
-    ?>
+        <?php
+            foreach ($resul as $registro):
+        ?>
+        <tr>
+            <td><?php echo $registro->getNome() ?></td>
+            <td><?php echo $registro->getCnh() ?></td>
+            <td><?php echo $registro->getValidadeCNH() ?></td>
+            <td>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>' data-cnh='<?php echo $registro->getCnh()?>' data-val='<?php echo $registro->getValidadeCNH()?>'>
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                </button>
+            </td>
+            <td>
+                <form action="../Control/CondutorControl.php" method="post">
+                    <input type="hidden" name="acao" value="2">
+                    <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
+                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg'></button>
+                </form>
+            </td>
+        </tr>
+        <?php
+            endforeach;
+        ?>
     </tbody>
 </table>
 

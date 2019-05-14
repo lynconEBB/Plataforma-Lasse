@@ -18,4 +18,4 @@
     $html = str_replace(':',':<input type="text">',$html);
     echo $html;
     echo '<script src="../js/jquey.js"></script>';
-    echo '<script src="../js/funcoes.js"></script>';
+    echo '<script src="../js/funcoesLogin.js"></script>';

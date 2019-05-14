@@ -14,7 +14,7 @@ class CondutorControl extends CrudControl {
                 $this->cadastrar();
                 break;
             case 2:
-                $this->excluir($_GET['id']);
+                $this->excluir($_POST['id']);
                 break;
             case 3:
                 $this->atualizar();

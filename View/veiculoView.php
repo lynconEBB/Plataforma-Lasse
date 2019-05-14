@@ -21,23 +21,33 @@ $resul = $veiculoControl->listar();
     </thead>
     <tbody>
     <?php
-    foreach ($resul as $obj){
-        echo '<tr>';
-        echo "<td>{$obj->getNome()}</td>";
-        echo "<td>{$obj->getTipo()}</td>";
-        echo "<td>{$obj->getDataRetirada()}</td>";
-        echo "<td>{$obj->getDataDevolucao()}</td>";
-        echo "<td>{$obj->getHorarioRetirada()}</td>";
-        echo "<td>{$obj->getHorarioDevolucao()}</td>";
-        echo "<td>{$obj->getCondutor()->getNome()}</td>";
-        echo "<td>";
-        echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$obj->getId()}' data-nome='{$obj->getNome()}' data-tipo='{$obj->getTipo()}' data-dtret='{$obj->getDataRetirada()}' data-dtdev='{$obj->getDataDevolucao()}' data-horaret='{$obj->getHorarioRetirada()}' data-horadev='{$obj->getHorarioDevolucao()}' data-idcond='{$obj->getCondutor()->getId()}'>";
-        echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
-        echo "</button>";
-        echo "</td>";
-        echo "<td><button class='btn'><a href='../Control/VeiculoControl.php?acao=2&id={$obj->getId()}'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
-        echo '</tr>';
-    }
+        foreach ($resul as $obj):
+    ?>
+        <tr>
+            <td><?php echo $obj->getNome()?></td>
+            <td><?php echo $obj->getTipo()?></td>
+            <td><?php echo $obj->getDataRetirada()?></td>
+            <td><?php echo $obj->getDataDevolucao()?></td>
+            <td><?php echo $obj->getHorarioRetirada()?></td>
+            <td><?php echo $obj->getHorarioDevolucao()?></td>
+            <td><?php echo $obj->getCondutor()->getNome()?></td>
+            <td>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $obj->getId()?>' data-nome='<?php echo $obj->getNome()?>' data-tipo='<?php echo $obj->getTipo()?>'
+                        data-dtret='<?php echo $obj->getDataRetirada()?>' data-dtdev='<?php echo $obj->getDataDevolucao()?>' data-horaret='<?php echo $obj->getHorarioRetirada()?>'
+                        data-horadev='<?php echo $obj->getHorarioDevolucao()?>' data-idcond='<?php echo $obj->getCondutor()->getId()?>'>
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                </button>
+            </td>
+            <td>
+                <form action="../Control/VeiculoControl.php" method="post">
+                    <input type="hidden" name="acao" value="2">
+                    <input type="hidden" name="id" value="<?php echo $obj->getId()?>">
+                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg' alt=""></button>
+                </form>
+            </td>
+        </tr>
+    <?php
+     endforeach;
     ?>
     </tbody>
 </table>

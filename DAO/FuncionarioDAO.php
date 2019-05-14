@@ -1,18 +1,15 @@
 <?php
 
-include 'PdoFactory.php';
 require_once '../Model/Usuario.php';
-class FuncionarioDAO{
-    private $pdo;
-    public function __construct(){
-        $this->pdo = Conexao::conectar();
-    }
+require_once 'CrudDAO.php';
 
-    public function inserir(Funcionario $func){
+class FuncionarioDAO extends CrudDAO {
 
-        $insert = $this->pdo->prepare("INSERT INTO tbFuncionario (senha,usuario,NomeCompleto,dataNascimento,cpf,rg,dataEmissao,tipo,email) VALUES (?,?,?,?,?,?,?,?,?)");
+    public function cadastrar(Usuario $func){
+
+        $insert = $this->pdo->prepare("INSERT INTO tbFuncionario (senha,usuario,NomeCompleto,dataNascimento,cpf,rg,dataEmissao,tipo,email) VALUES (:senha, :usuario, :nome, :dtNasc, :cpf, :rg, :dtEmissao, :tipo, :email)");
         $insert->bindValue(1,$func->getSenha());
-        $insert->bindValue(2,$func->getUsuario());
+        $insert->bindValue(2,$func->getLogin());
         $insert->bindValue(3,$func->getNomeCompleto());
         $insert->bindValue(4,$func->getDtNascimento());
         $insert->bindValue(5,$func->getCpf());
@@ -21,17 +18,13 @@ class FuncionarioDAO{
         $insert->bindValue(8,$func->getTipo());
         $insert->bindValue(9,$func->getEmail());
 
-        if($insert->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        $insert->execute();
     }
 
-    public function alterar(Funcionario $func){
+    public function alterar(Usuario $func){
         $update = $this->pdo->prepare("UPDATE tbFuncionario SET senha=?,usuario=?,NomeCompleto=?,dataNascimento=?,cpf=?,rg=?, dataEmissao=?, tipo=?, email=? WHERE id=?");
         $update->bindValue(1,$func->getSenha());
-        $update->bindValue(2,$func->getUsuario());
+        $update->bindValue(2,$func->getLogin());
         $update->bindValue(3,$func->getNomeCompleto());
         $update->bindValue(4,$func->getDtNascimento());
         $update->bindValue(5,$func->getCpf());
@@ -41,22 +34,15 @@ class FuncionarioDAO{
         $update->bindValue(9,$func->getEmail());
         $update->bindValue(10,$func->getId());
 
-        if($update->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        $update->execute();
+
     }
 
     public function excluir($id){
         $delete = $this->pdo->prepare("DELETE FROM tbFuncionario WHERE id=?");
         $delete->bindValue(1,$id);
 
-        if($delete->execute()){
-            return true;
-        }else{
-            return false;
-        }
+        $delete->execute();
     }
 
     public function listarPorId($id){
@@ -65,7 +51,7 @@ class FuncionarioDAO{
         $buscaId->execute();
 
         $linha =  $buscaId->fetch(PDO::FETCH_ASSOC);
-        $fun = new Funcionario();
+        $fun = new Usuario();
         $fun->setNomeCompleto($linha['NomeCompleto']);
         $fun->setEmail($linha['email']);
         $fun->setCpf($linha['cpf']);
@@ -85,7 +71,7 @@ class FuncionarioDAO{
         $buscaId->execute();
 
         $linha =  $buscaId->fetch(PDO::FETCH_ASSOC);
-        $fun = new Funcionario();
+        $fun = new Usuario();
         $fun->setNomeCompleto($linha['NomeCompleto']);
         $fun->setEmail($linha['email']);
         $fun->setCpf($linha['cpf']);
@@ -107,7 +93,7 @@ class FuncionarioDAO{
 
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         foreach ($linhas as $linha){
-            $fun = new Funcionario();
+            $fun = new Usuario();
             $fun->setNomeCompleto($linha['NomeCompleto']);
             $fun->setEmail($linha['email']);
             $fun->setCpf($linha['cpf']);
@@ -117,7 +103,7 @@ class FuncionarioDAO{
             $fun->setTipo($linha['tipo']);
             $fun->setDtEmissao('dataEmissao');
             $fun->setSenha($linha['senha']);
-            $fun->setUsuario($linha['usuario']);
+            $fun->setLogin($linha['usuario']);
 
             $funcionarios[]=$fun;
         }
@@ -125,12 +111,12 @@ class FuncionarioDAO{
     }
 
     function consultar($login,$senha){
-        $consulta = $this->pdo->prepare("select * from tbFuncionario where usuario=? and senha=?");
-        $consulta->bindValue(1,$login);
-        $consulta->bindValue(2,$senha);
-        $consulta->execute();
+        $stm = $this->pdo->prepare("select * from tbUsuario where login = :usuario and senha = :senha");
+        $stm->bindValue(':usuario',$login);
+        $stm->bindValue(':senha',$senha);
+        $stm->execute();
 
-        if($consulta->rowCount()!=0){
+        if($stm->rowCount()!=0){
             return true;
         }else{
             return false;
