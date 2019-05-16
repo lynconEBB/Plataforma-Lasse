@@ -1,7 +1,7 @@
 <?php
 require_once "../Model/Viagem.php";
-
-class ViagemDAO{
+require_once "CrudDAO.php";
+class ViagemDAO extends CrudDAO {
 
     function cadastrar(Condutor $condutor){
         /*$comando = "INSERT INTO tbcondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
@@ -26,7 +26,7 @@ class ViagemDAO{
 
     //Retorna todos os condutores em uma lista de objetos da classe modelo Condutor
     public function listar(){
-        $comando = "SELECT * FROM tbViagem";
+        /*$comando = "SELECT * FROM tbViagem";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
@@ -34,7 +34,7 @@ class ViagemDAO{
             $obj = new Viagem($row['nome'],$row['cnh'],$row['validadeCNH']);
             $result[] = $obj;
         }
-        return $result;
+        return $result;*/
     }
 
     function atualizar(Condutor $condutor){
@@ -51,8 +51,8 @@ class ViagemDAO{
         header('Location:../View/condutorView.php?success=true');*/
     }
 
-    public function listarPorId($id){
-        /*$comando = "SELECT * from tbcondutor WHERE id = :id";
+    public function listarPorIdTarefa($id){
+        /*$comando = "SELECT * from tbcondutor WHERE idTarefa = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':id',$id);

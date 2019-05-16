@@ -1,4 +1,5 @@
 <?php
+require_once "CrudControl.php";
 require_once "../DAO/ViagemDAO.php";
 require_once "../DAO/VeiculoDAO.php";
 require_once "../Model/Viagem.php";
@@ -22,7 +23,11 @@ class ViagemControl extends CrudControl {
     }
 
     public function listar(){
-        return $this -> DAO -> listar();
+        //return $this -> DAO -> listar();
+    }
+
+    public function listarPorIdTarefa($idTarefa){
+        return $this -> DAO -> listarPorIdTarefa($idTarefa);
     }
 
     protected function atualizar(){

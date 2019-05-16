@@ -1,34 +1,44 @@
 <?php
+    require_once '../Control/LoginControl.php';
+    LoginControl::verificar();
+    if(isset($_SESSION['idProjeto'])){
+        unset($_SESSION['idProjeto']);
+    }
+
     include 'cabecalho.php';
     require_once '../Control/ProjetoControl.php';
-    $projControl =  new ProjetoControl();
-    $resul = $projControl->listar();
 ?>
 <div class="card-deck">
     <?php
+        $projControl =  new ProjetoControl();
+        $resul = $projControl->listarPorIdUsuario($_SESSION['usuario-id']);
         foreach ($resul as $registro):
     ?>
-            <div class="card border-info" style="width:400px">
-                <div class="card-body text-info">
-                    <h4 class='card-title'><?php echo $registro->getNome()?></h4>
-                    <div class='card-text'>
-                        <p><?php echo $registro->getDescricao()?></p>
-                       <p><b>Data de Inicio:</b><?php echo $registro->getDataInicio()?></p>
-                        <p><b>Data de Finalização:</b><?php echo $registro->getDataFinalizacao()?></p>
-                    </div>
+        <div class="card border-info" style="width:400px">
+            <div class="card-body text-info">
+                <h4 class='card-title'><?php echo $registro->getNome()?></h4>
+                <div class='card-text'>
+                    <p><?php echo $registro->getDescricao()?></p>
+                   <p><b>Data de Inicio:</b><?php echo $registro->getDataInicio()?></p>
+                    <p><b>Data de Finalização:</b><?php echo $registro->getDataFinalizacao()?></p>
                 </div>
-                <div class="card-footer">
-                    <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>'
-                            data-desc='<?php echo $registro->getDescricao()?>' data-dtini='<?php echo $registro->getDataInicio()?>' data-dtfim='<?php echo $registro->getDataFinalizacao()?>' >
-                        <img width='16' src='../img/edit-regular.svg' alt=''>
-                    </button>
-                    <form action="../Control/ProjetoControl.php" method="post">
-                        <input type="hidden" name="acao" value="2">
-                        <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
-                    </form>
-               </div>
             </div>
+            <div class="card-footer">
+                <button  class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>'
+                        data-desc='<?php echo $registro->getDescricao()?>' data-dtini='<?php echo $registro->getDataInicio()?>' data-dtfim='<?php echo $registro->getDataFinalizacao()?>' >
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                </button>
+                <form style="display: inline;" action="../Control/ProjetoControl.php" method="post">
+                    <input type="hidden" name="acao" value="2">
+                    <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
+                    <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                </form>
+                <form style="display: inline;" action="tarefaView.php" method="post">
+                    <input type="hidden" name="idProjeto" value="<?php echo $registro->getId() ?>">
+                    <button class="btn"><img width="16" src="../img/plus-solid.svg" alt=""></button>
+                </form>
+           </div>
+        </div>
     <?php
         endforeach;
     ?>

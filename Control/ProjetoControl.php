@@ -1,4 +1,5 @@
 <?php
+require_once 'LoginControl.php';
 require_once 'CrudControl.php';
 require_once '../Model/Projeto.php';
 require_once '../DAO/ProjetoDAO.php';
@@ -11,6 +12,7 @@ class ProjetoControl extends CrudControl {
     }
 
     protected function cadastrar(){
+
         $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto']);
         $this->DAO->cadastrar($projeto);
     }
@@ -27,5 +29,10 @@ class ProjetoControl extends CrudControl {
         $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id']);
         $this -> DAO -> alterar($projeto);
     }
+
+    public function listarPorIdUsuario($id){
+        return $this->DAO->listarPorIdUsuario($id);
+    }
 }
+LoginControl::verificar();
 new ProjetoControl();

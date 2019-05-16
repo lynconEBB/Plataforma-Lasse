@@ -4,41 +4,41 @@ require_once '../Control/ViagemControl.php';
 require_once '../Control/VeiculoControl.php';
 
 $viagemControl = new ViagemControl();
-$resul = $viagemControl->listar();
+$resul = $viagemControl->listarPorIdTarefa($_POST['idTarefa']);
 
 ?>
 <table class="table table-hover">
     <thead>
-    <th>Nome</th>
-    <th>Tipo</th>
-    <th>Data Retirada</th>
-    <th>Data Devolução</th>
-    <th>Horario Retirada</th>
-    <th>Horario Devolução</th>
-    <th>Nome Condutor</th>
-    <th></th>
-    <th></th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Data Retirada</th>
+        <th>Data Devolução</th>
+        <th>Horario Retirada</th>
+        <th>Horario Devolução</th>
+        <th>Nome Condutor</th>
+        <th></th>
+        <th></th>
     </thead>
     <tbody>
-    <?php
-    foreach ($resul as $obj){
-        echo '<tr>';
-        echo "<td>{$obj->getNome()}</td>";
-        echo "<td>{$obj->getTipo()}</td>";
-        echo "<td>{$obj->getDataRetirada()}</td>";
-        echo "<td>{$obj->getDataDevolucao()}</td>";
-        echo "<td>{$obj->getHorarioRetirada()}</td>";
-        echo "<td>{$obj->getHorarioDevolucao()}</td>";
-        echo "<td>{$obj->getCondutor()->getNome()}</td>";
-        echo "<td>";
-        echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$obj->getId()}' data-nome='{$obj->getNome()}' data-tipo='{$obj->getTipo()}' data-dtret='{$obj->getDataRetirada()}' data-dtdev='{$obj->getDataDevolucao()}' data-horaret='{$obj->getHorarioRetirada()}' data-horadev='{$obj->getHorarioDevolucao()}' data-idcond='{$obj->getCondutor()->getId()}'>";
-        echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
-        echo "</button>";
-        echo "</td>";
-        echo "<td><button class='btn'><a href='../Control/VeiculoControl.php?acao=2&id={$obj->getId()}'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
-        echo '</tr>';
-    }
-    ?>
+        <?php
+        foreach ($resul as $obj){
+            echo '<tr>';
+            echo "<td>{$obj->getNome()}</td>";
+            echo "<td>{$obj->getTipo()}</td>";
+            echo "<td>{$obj->getDataRetirada()}</td>";
+            echo "<td>{$obj->getDataDevolucao()}</td>";
+            echo "<td>{$obj->getHorarioRetirada()}</td>";
+            echo "<td>{$obj->getHorarioDevolucao()}</td>";
+            echo "<td>{$obj->getCondutor()->getNome()}</td>";
+            echo "<td>";
+            echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$obj->getId()}' data-nome='{$obj->getNome()}' data-tipo='{$obj->getTipo()}' data-dtret='{$obj->getDataRetirada()}' data-dtdev='{$obj->getDataDevolucao()}' data-horaret='{$obj->getHorarioRetirada()}' data-horadev='{$obj->getHorarioDevolucao()}' data-idcond='{$obj->getCondutor()->getId()}'>";
+            echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
+            echo "</button>";
+            echo "</td>";
+            echo "<td><button class='btn'><a href='../Control/VeiculoControl.php?acao=2&id={$obj->getId()}'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
+            echo '</tr>';
+        }
+        ?>
     </tbody>
 </table>
 

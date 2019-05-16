@@ -9,16 +9,17 @@ class LoginControl{
     public function __construct(){
         session_start();
         $funcDAO = new FuncionarioDAO();
-        if (isset($_POST["action"]) and $_POST["action"] == "login") {
+        if (isset($_POST["acao"]) and $_POST["acao"] == "login") {
             if ($_POST["usuario-email"] != "" && $_POST["senha"] != "") {
                 $this->login = $_POST["usuario-email"];
                 $this->senha = $_POST["senha"];
 
                 if ($funcDAO->consultar($this->login, $this->senha)) {
+                    $usuario = $funcDAO->listarPorLogin($_POST["usuario-email"]);
+                    $_SESSION["usuario-id"] = $usuario->getId();
                     $_SESSION["usuario"] = $_POST["usuario-email"];
                     $_SESSION["autenticado"] = TRUE;
-                    $_SESSION["success"] = "Logado com Sucesso! :)";
-                    header("Location: ../View/loginView.php");
+                    header("Location: ../View/projetoView.php");
                     die();
 
                 } else {
@@ -32,7 +33,7 @@ class LoginControl{
                 die();
             }
         }
-        elseif (isset($_POST["action"]) and $_POST["action"] == "sair") {
+        elseif (isset($_POST["acao"]) and $_POST["acao"] == "sair") {
             $this->sair();
         }
     }
@@ -45,7 +46,6 @@ class LoginControl{
     }
 
     public static function verificar(){
-
         if(isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE){
             return true;
         }

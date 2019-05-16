@@ -1,23 +1,33 @@
 <?php
 class Tarefa{
+    private $id;
     private $nome;
     private $descricao;
     private $estado;
-    private $dataIncio;
+    private $dataInicio;
     private $dataConclusao;
     private $atividades;
     private $viagens;
     private $compras;
 
-    public function __construct($nome, $descricao, $estado, $dataIncio, $dataConclusao, $atividades, $viagens, $compras){
+    public function __construct($nome, $descricao, $estado, $dataInicio, $dataConclusao,$id=null,$atividades=null, $viagens=null, $compras=null){
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->estado = $estado;
-        $this->dataIncio = $dataIncio;
+        $this->dataInicio = $dataInicio;
         $this->dataConclusao = $dataConclusao;
         $this->atividades = $atividades;
         $this->viagens = $viagens;
         $this->compras = $compras;
+        $this->id = $id;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id): void{
+        $this->id = $id;
     }
 
     public function getNome(){
@@ -44,11 +54,11 @@ class Tarefa{
         $this->estado = $estado;
     }
 
-    public function getDataIncio(){
-        return $this->dataIncio;
+    public function getDataInicio(){
+        return $this->dataInicio;
     }
 
-    public function setDataIncio($dataIncio){
+    public function setDataInicio($dataIncio){
         $this->dataIncio = $dataIncio;
     }
 

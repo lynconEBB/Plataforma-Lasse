@@ -14,8 +14,9 @@ class Usuario{
     private $atuacao;
     private $formacao;
     private $valorHora;
+    private $projetos;
 
-    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null,$projetos=null){
         $this->id = $id;
         $this->nomeCompleto = $nomeCompleto;
         $this->login = $login;
@@ -29,6 +30,15 @@ class Usuario{
         $this->atuacao = $atuacao;
         $this->formacao = $formacao;
         $this->valorHora = $valorHora;
+        $this->projetos = $projetos;
+    }
+
+    public function getProjetos(){
+        return $this->projetos;
+    }
+
+    public function setProjetos($projetos): void{
+        $this->projetos = $projetos;
     }
 
     public function getEmail(){

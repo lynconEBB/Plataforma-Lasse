@@ -1,4 +1,7 @@
 <?php
+    require_once '../Control/LoginControl.php';
+    LoginControl::verificar();
+
     include "cabecalho.php";
     require_once '../Control/ItemControl.php';
 

@@ -28,4 +28,4 @@ class FuncionarioControl extends CrudControl {
         //$this -> DAO -> alterar($projeto);
     }
 }
-new ProjetoControl();
+new FuncionarioControl();
