@@ -1,18 +1,36 @@
 <?php
 require_once "../Model/Viagem.php";
+require_once "../Model/Veiculo.php";
 require_once "CrudDAO.php";
+require_once "VeiculoDAO.php";
+require_once "FuncionarioDAO.php";
+
 class ViagemDAO extends CrudDAO {
 
-    function cadastrar(Condutor $condutor){
-        /*$comando = "INSERT INTO tbcondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
+    function cadastrar(Viagem $viagem, $idTarefa){
+
+        $comando = "INSERT INTO tbViagem (idVeiculo,idTarefa,origem,destino,dataIda,dataVolta,justificativa,observacoes,passagem,dataEntradaHosp,dataSaidaHosp,HorarioEntradaHosp,HorarioSaidaHosp,
+idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :dataEntradaHosp, :dataSaidaHosp, :HorarioEntradaHosp, :HorarioSaidaHosp,
+:idUsuario)";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':nome',$condutor->getNome());
-        $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
+        $stm->bindValue(':idVeiculo',$viagem->getVeiculo()->getId());
+        $stm->bindValue(':idTarefa',$idTarefa);
+        $stm->bindValue(':origem',$viagem->getOrigem());
+        $stm->bindValue(':destino',$viagem->getDestino());
+        $stm->bindValue(':dataIda',$viagem->getDtIda());
+        $stm->bindValue(':dataVolta',$viagem->getDtVolta());
+        $stm->bindValue(':justificativa',$viagem->getJustificativa());
+        $stm->bindValue(':observacoes',$viagem->getObservacoes());
+        $stm->bindValue(':passagem',$viagem->getPassagem());
+        $stm->bindValue(':dataEntradaHosp',$viagem->getDtEntradaHosp());
+        $stm->bindValue(':dataSaidaHosp',$viagem->getDtSaidaHosp());
+        $stm->bindValue(':HorarioEntradaHosp',$viagem->getHoraEntradaHosp());
+        $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
+        $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
 
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');*/
+        header("Location:../View/viagemView.php?idTarefa=".$idTarefa);
     }
 
     function excluir($id){
@@ -52,15 +70,25 @@ class ViagemDAO extends CrudDAO {
     }
 
     public function listarPorIdTarefa($id){
-        /*$comando = "SELECT * from tbcondutor WHERE idTarefa = :id";
+        $comando = "SELECT * from tbViagem WHERE idTarefa = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':id',$id);
 
         $stm->execute();
-        $resul = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new Condutor($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $veiculoDAO = new VeiculoDAO();
+        $funcDAO = new FuncionarioDAO();
+        $viagens = array();
 
-        return $obj;*/
+        foreach ($rows as $resul){
+            $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
+            $viajante = $funcDAO->listarPorId($resul['idUsuario']);
+            $obj = new Viagem($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],'34');
+            $viagens[] = $obj;
+        }
+
+        return $viagens;
+
     }
 }

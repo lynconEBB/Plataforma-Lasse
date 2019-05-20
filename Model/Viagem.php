@@ -1,10 +1,9 @@
 <?php
 
 class Viagem{
+    private $id;
     private $viajante;
     private $veiculo;
-    private $atividade;
-    private $meta;
     private $origem;
     private $destino;
     private $dtIda;
@@ -20,11 +19,9 @@ class Viagem{
     private $totalGasto;
 
 
-    public function __construct($viajante, $veiculo, $atividade, $meta, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $gastos, $totalGasto){
+    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $gastos){
         $this->viajante = $viajante;
         $this->veiculo = $veiculo;
-        $this->atividade = $atividade;
-        $this->meta = $meta;
         $this->origem = $origem;
         $this->destino = $destino;
         $this->dtIda = $dtIda;
@@ -37,6 +34,70 @@ class Viagem{
         $this->horaEntradaHosp = $horaEntradaHosp;
         $this->horaSaidaHosp = $horaSaidaHosp;
         $this->gastos = $gastos;
+        $this->totalGasto = 0.00;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id): void{
+        $this->id = $id;
+    }
+
+    public function getPassagem(){
+        return $this->passagem;
+    }
+
+    public function setPassagem($passagem): void{
+        $this->passagem = $passagem;
+    }
+
+    public function getDtEntradaHosp(){
+        return $this->dtEntradaHosp;
+    }
+
+    public function setDtEntradaHosp($dtEntradaHosp): void{
+        $this->dtEntradaHosp = $dtEntradaHosp;
+    }
+
+    public function getDtSaidaHosp(){
+        return $this->dtSaidaHosp;
+    }
+
+    public function setDtSaidaHosp($dtSaidaHosp): void{
+        $this->dtSaidaHosp = $dtSaidaHosp;
+    }
+
+    public function getHoraEntradaHosp(){
+        return $this->horaEntradaHosp;
+    }
+
+    public function setHoraEntradaHosp($horaEntradaHosp): void{
+        $this->horaEntradaHosp = $horaEntradaHosp;
+    }
+
+    public function getHoraSaidaHosp(){
+        return $this->horaSaidaHosp;
+    }
+
+    public function setHoraSaidaHosp($horaSaidaHosp): void{
+        $this->horaSaidaHosp = $horaSaidaHosp;
+    }
+
+    public function getGastos(){
+        return $this->gastos;
+    }
+
+    public function setGastos($gastos): void{
+        $this->gastos = $gastos;
+    }
+
+    public function getTotalGasto(): float{
+        return $this->totalGasto;
+    }
+
+    public function setTotalGasto(float $totalGasto): void{
         $this->totalGasto = $totalGasto;
     }
 
@@ -55,54 +116,6 @@ class Viagem{
 
     public function setVeiculo($veiculo){
         $this->veiculo = $veiculo;
-    }
-
-    public function getNomeConvenio(){
-        return $this->nomeConvenio;
-    }
-
-    public function setNomeConvenio($nomeConvenio){
-        $this->nomeConvenio = $nomeConvenio;
-    }
-
-    public function getNumeroConvenio(){
-        return $this->numeroConvenio;
-    }
-
-    public function setNumeroConvenio($numeroConvenio){
-        $this->numeroConvenio = $numeroConvenio;
-    }
-
-    public function getNumeroCentro(){
-        return $this->numeroCentro;
-    }
-
-    public function setNumeroCentro($numeroCentro){
-        $this->numeroCentro = $numeroCentro;
-    }
-
-    public function getAtividade(){
-        return $this->atividade;
-    }
-
-    public function setAtividade($atividade){
-        $this->atividade = $atividade;
-    }
-
-    public function getFonteRecurso(){
-        return $this->fonteRecurso;
-    }
-
-    public function setFonteRecurso($fonteRecurso){
-        $this->fonteRecurso = $fonteRecurso;
-    }
-
-    public function getMeta(){
-        return $this->meta;
-    }
-
-    public function setMeta($meta){
-        $this->meta = $meta;
     }
 
     public function getOrigem(){

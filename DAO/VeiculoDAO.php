@@ -19,7 +19,7 @@ class VeiculoDAO extends CrudDAO {
         header('Location:../View/veiculoView.php?success=true');
     }
 
-    //Exclui Veiculo com base no id recebido
+
     function excluir($id){
         $comando = "DELETE FROM tbVeiculo WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -29,7 +29,7 @@ class VeiculoDAO extends CrudDAO {
         header('Location:../View/veiculoView.php?success=true');
     }
 
-    //Retorna todos os condutores em uma lista de objetos da classe modelo Condutor
+
     public function listar(){
         $comando = "SELECT * FROM tbVeiculo";
         $stm = $this->pdo->prepare($comando);
@@ -60,5 +60,22 @@ class VeiculoDAO extends CrudDAO {
 
         $stm->execute();
         header('Location:../View/veiculoView.php?success=true');
+    }
+
+    public function listarPorId($id){
+        $comando = "SELECT * from tbVeiculo WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$id);
+        $stm->execute();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        $condutorDAO = new CondutorDAO();
+        $condutor = $condutorDAO->listarPorId($row['idCondutor']);
+
+
+
+        $obj = new Veiculo($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
+
+        return $obj;
     }
 }

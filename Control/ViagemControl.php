@@ -12,10 +12,13 @@ class ViagemControl extends CrudControl {
     }
 
     protected function cadastrar(){
-        /*$veiculoDAO = new VeiculoDAO();
+        $veiculoDAO = new VeiculoDAO();
         $veiculo = $veiculoDAO->listarPorId($_POST['idVeiculo']);
-        $veiculo = new Veiculo($_POST['nome'],$_POST['tipo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor);
-        $this->DAO->cadastrar($veiculo);*/
+        $funcDAO = new FuncionarioDAO();
+        $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
+        
+        $viagem = new Viagem($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],'34');
+        $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
     }
 
     protected function excluir($id){

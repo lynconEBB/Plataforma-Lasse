@@ -50,29 +50,21 @@ class FuncionarioDAO extends CrudDAO {
         $delete->execute();
     }
 
-    public function listarPorId($id){
-        $buscaId = $this->pdo->prepare("SELECT * FROM tbFuncionario WHERE id=?");
-        $buscaId->bindValue(1,$id);
-        $buscaId->execute();
+    public function listarPorLogin($login){
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login= :login");
+        $stm->bindValue(':login',$login);
+        $stm->execute();
 
-        $linha =  $buscaId->fetch(PDO::FETCH_ASSOC);
-        $fun = new Usuario();
-        $fun->setNomeCompleto($linha['NomeCompleto']);
-        $fun->setEmail($linha['email']);
-        $fun->setCpf($linha['cpf']);
-        $fun->setId($linha['id']);
-        $fun->setRg($linha['rg']);
-        $fun->setDtNascimento($linha['dataNascimento']);
-        $fun->setTipo($linha['tipo']);
-        $fun->setDtEmissao('dataEmissao');
-        $fun->setSenha($linha['senha']);
+        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+        $fun = new Usuario($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
+            $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
 
         return $fun;
     }
 
-    public function listarPorLogin($login){
-        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login= :login");
-        $stm->bindValue(':login',$login);
+    public function listarPorId($id){
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE id= :id");
+        $stm->bindValue(':id',$id);
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
