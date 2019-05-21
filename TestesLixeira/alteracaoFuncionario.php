@@ -1,7 +1,7 @@
 <?php
     include 'cabecalho.php';
-    require_once '../Services/FuncionarioDAO.php';
-    $funcDAO = new FuncionarioDAO();
+    require_once '../Services/FuncionarioDao.php';
+    $funcDAO = new FuncionarioDao();
     $funcionario = $funcDAO->listarPorId($_GET['id']);
 ?>
     <form action="../../Control/FuncionarioControl.php" method="post">
@@ -47,5 +47,5 @@
 
 
 <?php
-    include 'rodape.php';
+    include 'Rodape.php';
 ?>

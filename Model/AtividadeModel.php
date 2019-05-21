@@ -1,6 +1,6 @@
 <?php
 
-class Atividade{
+class AtividadeModel{
     private $id;
     private $tipo;
     private $tempoGasto;

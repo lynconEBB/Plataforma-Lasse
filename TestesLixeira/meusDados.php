@@ -1,8 +1,8 @@
 <?php
-  require_once '../Services/FuncionarioDAO';
+  require_once '../Services/FuncionarioDao';
   session_start();
-  $usuario = $_SESSION['usuario'];
-  $funcDAO = new FuncionarioDAO();
+  $usuario = $_SESSION['UsuarioModel'];
+  $funcDAO = new FuncionarioDao();
   $dados = $funcDAO->listarPorUsuario();
 ?>
 Nome Completo:<input type="text" name="nome" value="<?php echo $dados->getNomeCompleto(); ?>"><br>

@@ -1,6 +1,6 @@
 <?php
     include 'cabecalho.php';
-    require_once '../Control/CondutorControl.php';
+    require_once '../Services/Autoload.php';
 
     $condControl = new CondutorControl();
     $resul = $condControl->listar();
@@ -107,5 +107,5 @@
     </div>
 </div>
 <?php
-    include 'rodape.php';
+    include 'Rodape.php';
 ?>

@@ -17,7 +17,7 @@
 ?>
     <div class="login">
         <h1>Você ja esta logado no sistema como <?php echo $_SESSION['usuario']?></h1>
-        <p><a href="projetoView.php">Clique para acessar o sistema</a></p>
+        <p><a href="ProjetoView.php">Clique para acessar o sistema</a></p>
         <form action="../Control/LoginControl.php" method="post">
             <input type="hidden" name="acao" value="sair">
             <button class="btn btn-danger">Sair</button>

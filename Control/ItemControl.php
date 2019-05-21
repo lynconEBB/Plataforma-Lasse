@@ -1,12 +1,10 @@
 <?php
-    require_once 'CrudControl.php';
-    require_once '../Model/Item.php';
-    require_once '../DAO/ItemDAO.php';
+    require_once '../Services/Autoload.php';
 
 class ItemControl extends CrudControl{
 
     public function __construct(){
-        $this->DAO = new ItemDAO();
+        $this->DAO = new ItemDao();
         parent::__construct();
     }
 
@@ -25,7 +23,7 @@ class ItemControl extends CrudControl{
     }
 
     protected function cadastrar(){
-        $condutor = new Item($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
+        $condutor = new ItemModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
         $this->DAO->cadastrar($condutor);
     }
 
@@ -38,7 +36,7 @@ class ItemControl extends CrudControl{
     }
 
     protected function atualizar(){
-        $condutor = new Condutor($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
+        $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
         $this -> DAO -> atualizar($condutor);
     }
 }

@@ -1,19 +1,16 @@
 <?php
-require_once 'LoginControl.php';
-require_once 'CrudControl.php';
-require_once '../Model/Projeto.php';
-require_once '../DAO/ProjetoDAO.php';
+require_once '../Services/Autoload.php';
 
 class ProjetoControl extends CrudControl {
 
     public function __construct(){
-        $this->DAO = new ProjetoDAO();
+        $this->DAO = new ProjetoDao();
         parent::__construct();
     }
 
     protected function cadastrar(){
 
-        $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto']);
+        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto']);
         $this->DAO->cadastrar($projeto);
     }
 
@@ -26,7 +23,7 @@ class ProjetoControl extends CrudControl {
     }
 
     protected function atualizar(){
-        $projeto = new Projeto($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id']);
+        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id']);
         $this -> DAO -> alterar($projeto);
     }
 

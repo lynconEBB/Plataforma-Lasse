@@ -1,9 +1,9 @@
 <?php
-require_once 'CondutorDAO.php';
+require_once '../Services/Autoload.php';
 
-class VeiculoDAO extends CrudDAO {
+class VeiculoDao extends CrudDao {
 
-    function cadastrar(Veiculo $veiculo){
+    function cadastrar(VeiculoModel $veiculo){
         $comando = "INSERT INTO tbVeiculo (nome,tipo,idCondutor,dataRetirada,dataDevolucao,horarioRetirada,horarioDevolucao) values (:nome, :tipo, :idCondutor, :dtRetirada, :dtDevolucao, :horaRetirada, :horaDevolucao )";
         $stm = $this->pdo->prepare($comando);
 
@@ -16,7 +16,7 @@ class VeiculoDAO extends CrudDAO {
         $stm->bindValue(':horaDevolucao',$veiculo->getHorarioDevolucao());
 
         $stm->execute();
-        header('Location:../View/veiculoView.php?success=true');
+        header('Location:../View/VeiculoView.php?success=true');
     }
 
 
@@ -26,7 +26,7 @@ class VeiculoDAO extends CrudDAO {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/veiculoView.php?success=true');
+        header('Location:../View/VeiculoView.php?success=true');
     }
 
 
@@ -35,16 +35,16 @@ class VeiculoDAO extends CrudDAO {
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
-        $condutorDAO = new CondutorDAO();
+        $condutorDAO = new CondutorDao();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $condutor = $condutorDAO->listarPorId($row['idCondutor']);
-            $obj = new Veiculo($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
+            $obj = new VeiculoModel($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
             $result[] = $obj;
         }
         return $result;
     }
 
-    function atualizar(Veiculo $veiculo){
+    function atualizar(VeiculoModel $veiculo){
 
         $comando = "UPDATE tbVeiculo SET nome=:nome,tipo=:tipo,dataRetirada=:dtRetirada, dataDevolucao = :dtDevolucao, horarioRetirada = :horaRetirada, horarioDevolucao =:horaDevolucao, idCondutor = :idCondutor WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -59,7 +59,7 @@ class VeiculoDAO extends CrudDAO {
         $stm->bindValue(':id',$veiculo->getId());
 
         $stm->execute();
-        header('Location:../View/veiculoView.php?success=true');
+        header('Location:../View/VeiculoView.php?success=true');
     }
 
     public function listarPorId($id){
@@ -69,12 +69,12 @@ class VeiculoDAO extends CrudDAO {
         $stm->execute();
         $row = $stm->fetch(PDO::FETCH_ASSOC);
 
-        $condutorDAO = new CondutorDAO();
+        $condutorDAO = new CondutorDao();
         $condutor = $condutorDAO->listarPorId($row['idCondutor']);
 
 
 
-        $obj = new Veiculo($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
+        $obj = new VeiculoModel($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
 
         return $obj;
     }

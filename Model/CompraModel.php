@@ -1,6 +1,6 @@
 <?php
 
-class Compra{
+class CompraModel{
     private $id;
     private $proprosito;
     private $totalGasto;

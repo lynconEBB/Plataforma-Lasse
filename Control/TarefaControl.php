@@ -1,17 +1,15 @@
 <?php
-require_once 'LoginControl.php';
-require_once 'CrudControl.php';
-require_once '../DAO/TarefaDAO.php';
+require_once '../Services/Autoload.php';
 
 class TarefaControl extends CrudControl {
 
     public function __construct(){
-        $this->DAO = new TarefaDAO();
+        $this->DAO = new TarefaDao();
         parent::__construct();
     }
 
     protected function cadastrar(){
-        $tarefa = new Tarefa($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao']);
+        $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao']);
         $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
     }
 
@@ -20,11 +18,11 @@ class TarefaControl extends CrudControl {
     }
 
     public function listar() {
-        //return $this -> DAO -> listar();
+        //return $this -> Dao -> listar();
     }
 
     protected function atualizar(){
-        $projeto = new Tarefa($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
+        $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
         $this -> DAO ->atualizar($projeto);
     }
 
@@ -35,7 +33,7 @@ class TarefaControl extends CrudControl {
     public function procuraProjeto(){
 
         if(empty($_POST['idProjeto']) && empty($_SESSION['idProjeto'])) {
-            echo "<h3>Nenhum Projeto Selecionado, por favor Selecione um clicando <a href='projetoView.php'>aqui</a></h3>";
+            echo "<h3>Nenhum ProjetoModel Selecionado, por favor Selecione um clicando <a href='ProjetoView.php'>aqui</a></h3>";
             die();
         }
         elseif (isset($_POST['idProjeto']) && empty($_SESSION['idProjeto'])) {

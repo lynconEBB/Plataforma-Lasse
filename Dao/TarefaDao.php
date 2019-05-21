@@ -1,10 +1,9 @@
 <?php
-require_once 'CrudDAO.php';
-require_once '../Model/Tarefa.php';
+require_once '../Services/Autoload.php';
 
-class TarefaDAO extends CrudDAO {
+class TarefaDao extends CrudDao {
 
-    function cadastrar(Tarefa $tarefa, $idProjeto){
+    function cadastrar(TarefaModel $tarefa, $idProjeto){
         $comando = "INSERT INTO tbTarefa (nome,descricao,estado,dataInicio,dataConclusao,idProjeto) values (:nome, :descr, :estado, :dtInicio, :dtConclusao, :idProjeto)";
         $stm = $this->pdo->prepare($comando);
 
@@ -16,7 +15,7 @@ class TarefaDAO extends CrudDAO {
         $stm->bindValue(':idProjeto',$idProjeto);
 
         $stm->execute();
-        header('Location:../View/tarefaView.php');
+        header('Location:../View/TarefaView.php');
     }
 
     function excluir($id){
@@ -25,7 +24,7 @@ class TarefaDAO extends CrudDAO {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/tarefaView.php');
+        header('Location:../View/TarefaView.php');
     }
 
 
@@ -35,13 +34,13 @@ class TarefaDAO extends CrudDAO {
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new Condutor($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
             $result[] = $obj;
         }
         return $result;*/
     }
 
-    function atualizar(Tarefa $tarefa){
+    function atualizar(TarefaModel $tarefa){
         $comando = "UPDATE tbTarefa SET nome = :nome, estado = :estado, descricao = :descricao, dataInicio = :dataInicio, dataConclusao = :dataConclusao WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
@@ -53,7 +52,7 @@ class TarefaDAO extends CrudDAO {
         $stm->bindValue(':id',$tarefa->getId());
 
         $stm->execute();
-        header('Location:../View/tarefaView.php');
+        header('Location:../View/TarefaView.php');
     }
 
     public function listarPorIdProjeto($id){
@@ -64,7 +63,7 @@ class TarefaDAO extends CrudDAO {
 
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new Tarefa($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id']);
+            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id']);
             $result[] = $obj;
         }
         return $result;

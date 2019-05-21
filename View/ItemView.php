@@ -1,9 +1,8 @@
 <?php
-    require_once '../Control/LoginControl.php';
+    require_once '../Services/Autoload.php';
     LoginControl::verificar();
 
     include "cabecalho.php";
-    require_once '../Control/ItemControl.php';
 
     $itemControl = new ItemControl();
     $resul = $itemControl->listar();

@@ -7,5 +7,5 @@
 
     </form>
 <?php
-    include 'rodape.php';
+    include 'Rodape.php';
 ?>

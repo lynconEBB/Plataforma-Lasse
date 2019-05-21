@@ -1,6 +1,6 @@
 <?php
 
-require_once '../DAO/FuncionarioDAO.php';
+require_once '../Services/Autoload.php';
 
 class LoginControl{
     private $login;
@@ -8,7 +8,7 @@ class LoginControl{
     
     public function __construct(){
         session_start();
-        $funcDAO = new FuncionarioDAO();
+        $funcDAO = new FuncionarioDao();
         if (isset($_POST["acao"]) and $_POST["acao"] == "login") {
             if ($_POST["usuario-email"] != "" && $_POST["senha"] != "") {
                 $this->login = $_POST["usuario-email"];
@@ -19,17 +19,17 @@ class LoginControl{
                     $_SESSION["usuario-id"] = $usuario->getId();
                     $_SESSION["usuario"] = $_POST["usuario-email"];
                     $_SESSION["autenticado"] = TRUE;
-                    header("Location: ../View/projetoView.php");
+                    header("Location: ../View/ProjetoView.php");
                     die();
 
                 } else {
                     $_SESSION['danger'] = "Usuário ou Senha Incorretos :(";
-                    header("Location: ../View/loginView.php");
+                    header("Location: ../View/LoginView.php");
                     die();
                 }
             } else {
                 $_SESSION['danger'] = "Os Campos devem ser preenchidos :X";
-                header("Location: ../View/loginView.php");
+                header("Location: ../View/LoginView.php");
                 die();
             }
         }
@@ -41,7 +41,7 @@ class LoginControl{
     public function sair(){
         session_destroy();
         session_start();
-        header("Location: ../View/loginView.php");
+        header("Location: ../View/LoginView.php");
         die();
     }
 
@@ -51,7 +51,7 @@ class LoginControl{
         }
         else{
             $_SESSION['danger'] = "Logue no Sistema para ter acesso as funcionalidades!";
-            header("Location: ../View/loginView.php");
+            header("Location: ../View/LoginView.php");
             die();
         }
     }

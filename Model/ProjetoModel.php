@@ -1,6 +1,6 @@
 <?php
 
-class Projeto{
+class ProjetoModel{
     private $id;
     private $dataFinalizacao;
     private $dataInicio;

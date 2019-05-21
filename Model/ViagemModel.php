@@ -1,6 +1,6 @@
 <?php
 
-class Viagem{
+class ViagemModel{
     private $id;
     private $viajante;
     private $veiculo;

@@ -1,6 +1,6 @@
 <?php
 
-class Veiculo{
+class VeiculoModel{
     private $id;
     private $nome;
     private $tipo;
@@ -78,7 +78,7 @@ class Veiculo{
         $this->horarioDevolucao = $horarioDevolucao;
     }
 
-    public function getCondutor():Condutor{
+    public function getCondutor():CondutorModel{
         return $this->condutor;
     }
 

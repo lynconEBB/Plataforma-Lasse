@@ -1,7 +1,6 @@
 <?php
 include "cabecalho.php";
-require_once '../Control/VeiculoControl.php';
-require_once '../Control/CondutorControl.php';
+require_once '../Services/Autoload.php';
 
 $veiculoControl = new VeiculoControl();
 $resul = $veiculoControl->listar();

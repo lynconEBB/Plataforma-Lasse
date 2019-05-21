@@ -1,9 +1,9 @@
 <?php
-    require_once '../Control/LoginControl.php';
+    require_once '../Services/Autoload.php';
     LoginControl::verificar();
 
     require_once "cabecalho.php";
-    require_once '../Control/TarefaControl.php';
+
     $tarefaControl = new TarefaControl();
     $tarefaControl->procuraProjeto();
 
@@ -47,7 +47,7 @@
                     </form>
                 </td>
                 <td>
-                    <form style="display: inline;" action="viagemView.php" method="post">
+                    <form style="display: inline;" action="ViagemView.php" method="post">
                         <input type="hidden" name="idTarefa" value="<?php echo $registro->getId() ?>">
                         <button class="btn"><img width="16" src="../img/plane-solid.svg" alt=""></button>
                     </form>

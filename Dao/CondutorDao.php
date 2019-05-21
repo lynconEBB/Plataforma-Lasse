@@ -1,11 +1,11 @@
 <?php
-require_once 'CrudDAO.php';
-require_once '../Model/Condutor.php';
 
-class CondutorDAO extends CrudDAO {
+require_once '../Services/Autoload.php';
 
-    //Insere Objeto Condutor no Banco de Dados
-    function cadastrar(Condutor $condutor){
+class CondutorDao extends CrudDao {
+
+    //Insere Objeto CondutorModel no Banco de Dados
+    function cadastrar(CondutorModel $condutor){
         $comando = "INSERT INTO tbcondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
         $stm = $this->pdo->prepare($comando);
 
@@ -14,7 +14,7 @@ class CondutorDAO extends CrudDAO {
         $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
 
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');
+        header('Location:../View/CondutorView.php?success=true');
     }
 
     function excluir($id){
@@ -23,23 +23,23 @@ class CondutorDAO extends CrudDAO {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');
+        header('Location:../View/CondutorView.php?success=true');
     }
 
-    //Retorna todos os condutores em uma lista de objetos da classe modelo Condutor
+    //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
     public function listar(){
         $comando = "SELECT * FROM tbcondutor";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new Condutor($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
             $result[] = $obj;
         }
         return $result;
     }
 
-    function atualizar(Condutor $condutor){
+    function atualizar(CondutorModel $condutor){
 
         $comando = "UPDATE tbcondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -50,7 +50,7 @@ class CondutorDAO extends CrudDAO {
         $stm->bindValue(':id',$condutor->getId());
 
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');
+        header('Location:../View/CondutorView.php?success=true');
     }
 
     public function listarPorId($id){
@@ -61,7 +61,7 @@ class CondutorDAO extends CrudDAO {
 
         $stm->execute();
         $resul = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new Condutor($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
+        $obj = new CondutorModel($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
 
         return $obj;
     }

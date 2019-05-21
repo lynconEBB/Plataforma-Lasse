@@ -1,10 +1,8 @@
 <?php
-require_once "../Control/LoginControl.php";
+require_once '../Services/Autoload.php';
 LoginControl::verificar();
 
 include "cabecalho.php";
-require_once '../Control/ViagemControl.php';
-require_once '../Control/VeiculoControl.php';
 
 $viagemControl = new ViagemControl();
 $resul = $viagemControl->listarPorIdTarefa($_REQUEST['idTarefa']);

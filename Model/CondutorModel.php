@@ -1,6 +1,6 @@
 <?php
 
-class Condutor{
+class CondutorModel{
     private $id;
     private $nome;
     private $cnh;

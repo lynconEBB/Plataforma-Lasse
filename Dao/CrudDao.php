@@ -1,7 +1,7 @@
 <?php
-require_once '../Services/PdoFactory.php';
+require_once '../Services/Autoload.php';
 
-abstract class CrudDAO{
+abstract class CrudDao{
     public $pdo;
 
     public function __construct(){

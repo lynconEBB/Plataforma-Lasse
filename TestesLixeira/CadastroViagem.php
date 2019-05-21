@@ -70,5 +70,5 @@ include "cabecalho.php";
         <input type="submit" value="Fazer Formulário">
     </form>
 <?php
-include "rodape.php";
+include "Rodape.php";
 ?>

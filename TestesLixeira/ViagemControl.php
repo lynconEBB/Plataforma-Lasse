@@ -28,7 +28,7 @@ class ViagemControl{
 
         $odf->setVars('Convênio','Convênio: '.$_POST['nomeNumCon']);
         $odf->setVars('custo','custo: '.$_POST['NumCentro']);
-        $odf->setVars('Atividade','Atividade: '.$_POST['atividade']);
+        $odf->setVars('AtividadeModel','AtividadeModel: '.$_POST['AtividadeModel']);
         $odf->setVars('recurso','recurso: '.$_POST['fonteRecurso']);
         $odf->setVars('rege a viagem','rege a viagem: '.$_POST['metaViagem']);
 
@@ -44,9 +44,9 @@ class ViagemControl{
 
         $odf->setVars('Passagem','Passagem: '.$_POST['passagem']);
         $odf->setVars2(' '.$_POST['tipoPassagem'],'X ) '.$_POST['tipoPassagem']);
-        $odf->setVars('Veículo','Veículo: '.$_POST['veiculo']);
+        $odf->setVars('Veículo','Veículo: '.$_POST['VeiculoModel']);
         $odf->setVars2(' '.$_POST['tipoVeiculo'],'X ) '.$_POST['tipoVeiculo']);
-        $odf->setVars('condutor','condutor: '.$_POST['condutor']);
+        $odf->setVars('CondutorModel','condutor: '.$_POST['CondutorModel']);
         $odf->setVars('CNH','CNH: '.$_POST['cnh']);
         $odf->setVars('Validade','Validade: '.$_POST['validade']);
         $odf->setVars('Categoria','Categoria: '.$_POST['categoria']);

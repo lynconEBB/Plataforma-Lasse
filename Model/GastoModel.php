@@ -1,6 +1,6 @@
 <?php
 
-class Gasto{
+class GastoModel{
     private $id;
     private $valor;
     private $tipo;

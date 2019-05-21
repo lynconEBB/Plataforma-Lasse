@@ -1,11 +1,10 @@
 <?php
 
-require_once '../Model/Usuario.php';
-require_once 'CrudDAO.php';
+require_once '../Services/Autoload.php';
 
-class FuncionarioDAO extends CrudDAO {
+class FuncionarioDao extends CrudDao {
 
-    public function cadastrar(Usuario $func){
+    public function cadastrar(UsuarioModel $func){
 
         $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,tipo,email,valorHora,formacao,atuacao,dtNascimento) VALUES (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :tipo, :email, :valorHora, :formacao, :atuacao,:dtNasc)");
         $insert->bindValue(':senha',$func->getSenha());
@@ -26,7 +25,7 @@ class FuncionarioDAO extends CrudDAO {
         die();
     }
 
-    public function alterar(Usuario $func){
+    public function alterar(UsuarioModel $func){
         $update = $this->pdo->prepare("UPDATE tbFuncionario SET senha=?,usuario=?,NomeCompleto=?,dataNascimento=?,cpf=?,rg=?, dataEmissao=?, tipo=?, email=? WHERE id=?");
         $update->bindValue(1,$func->getSenha());
         $update->bindValue(2,$func->getLogin());
@@ -56,7 +55,7 @@ class FuncionarioDAO extends CrudDAO {
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
-        $fun = new Usuario($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
+        $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
             $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
 
         return $fun;
@@ -68,7 +67,7 @@ class FuncionarioDAO extends CrudDAO {
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
-        $fun = new Usuario($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
+        $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
             $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
 
         return $fun;
@@ -82,7 +81,7 @@ class FuncionarioDAO extends CrudDAO {
 
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         foreach ($linhas as $linha){
-            $fun = new Usuario();
+            $fun = new UsuarioModel();
             $fun->setNomeCompleto($linha['NomeCompleto']);
             $fun->setEmail($linha['email']);
             $fun->setCpf($linha['cpf']);
@@ -92,7 +91,7 @@ class FuncionarioDAO extends CrudDAO {
             $fun->setTipo($linha['tipo']);
             $fun->setDtEmissao('dataEmissao');
             $fun->setSenha($linha['senha']);
-            $fun->setLogin($linha['usuario']);
+            $fun->setLogin($linha['UsuarioModel']);
 
             $funcionarios[]=$fun;
         }

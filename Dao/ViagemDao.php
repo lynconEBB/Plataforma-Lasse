@@ -1,13 +1,10 @@
 <?php
-require_once "../Model/Viagem.php";
-require_once "../Model/Veiculo.php";
-require_once "CrudDAO.php";
-require_once "VeiculoDAO.php";
-require_once "FuncionarioDAO.php";
+require_once '../Services/Autoload.php';
 
-class ViagemDAO extends CrudDAO {
+class ViagemDao extends CrudDao {
 
-    function cadastrar(Viagem $viagem, $idTarefa){
+    function cadastrar(ViagemModel $viagem, $idTarefa)
+    {
 
         $comando = "INSERT INTO tbViagem (idVeiculo,idTarefa,origem,destino,dataIda,dataVolta,justificativa,observacoes,passagem,dataEntradaHosp,dataSaidaHosp,HorarioEntradaHosp,HorarioSaidaHosp,
 idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :dataEntradaHosp, :dataSaidaHosp, :HorarioEntradaHosp, :HorarioSaidaHosp,
@@ -30,32 +27,33 @@ idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolt
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
 
         $stm->execute();
-        header("Location:../View/viagemView.php?idTarefa=".$idTarefa);
+        header("Location:../View/ViagemView.php?idTarefa=".$idTarefa);
     }
 
-    function excluir($id){
+    function excluir($id)
+    {
         /*$comando = "DELETE FROM tbcondutor WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');*/
+        header('Location:../View/CondutorView.php?success=true');*/
     }
 
-    //Retorna todos os condutores em uma lista de objetos da classe modelo Condutor
+    //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
     public function listar(){
         /*$comando = "SELECT * FROM tbViagem";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new Viagem($row['nome'],$row['cnh'],$row['validadeCNH']);
+            $obj = new ViagemModel($row['nome'],$row['cnh'],$row['validadeCNH']);
             $result[] = $obj;
         }
         return $result;*/
     }
 
-    function atualizar(Condutor $condutor){
+    function atualizar(CondutorModel $condutor){
 /*
         $comando = "UPDATE tbcondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -66,7 +64,7 @@ idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolt
         $stm->bindValue(':id',$condutor->getId());
 
         $stm->execute();
-        header('Location:../View/condutorView.php?success=true');*/
+        header('Location:../View/CondutorView.php?success=true');*/
     }
 
     public function listarPorIdTarefa($id){
@@ -77,14 +75,14 @@ idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolt
 
         $stm->execute();
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-        $veiculoDAO = new VeiculoDAO();
-        $funcDAO = new FuncionarioDAO();
+        $veiculoDAO = new VeiculoDao();
+        $funcDAO = new FuncionarioDao();
         $viagens = array();
 
         foreach ($rows as $resul){
             $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
             $viajante = $funcDAO->listarPorId($resul['idUsuario']);
-            $obj = new Viagem($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],'34');
+            $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],'34');
             $viagens[] = $obj;
         }
 

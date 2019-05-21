@@ -1,17 +1,14 @@
 <?php
-require_once '../Control/LoginControl.php';
-require_once 'CrudDAO.php';
-require_once 'FuncionarioDAO.php';
-require_once '../Model/Projeto.php';
+require_once '../Services/Autoload.php';
 
-class ProjetoDAO extends CrudDAO {
+class ProjetoDao extends CrudDao {
 
     function __construct(){
         LoginControl::verificar();
         parent::__construct();
     }
 
-    function cadastrar(Projeto $projeto){
+    function cadastrar(ProjetoModel $projeto){
         $comando1 = "INSERT INTO tbProjeto (nome,descricao,dataFinalizacao,dataInicio) values (:nome, :descr, :dtFim,:dtInicio)";
         $stm = $this->pdo->prepare($comando1);
 
@@ -30,7 +27,7 @@ class ProjetoDAO extends CrudDAO {
 
         $stm->execute();
 
-        header('Location:../View/projetoView.php?success=true');
+        header('Location:../View/ProjetoView.php?success=true');
     }
 
     function excluir($id){
@@ -44,7 +41,7 @@ class ProjetoDAO extends CrudDAO {
         $stm->bindParam(':id',$id);
         $stm->execute();
 
-        header('Location:../View/projetoView.php?success=true');
+        header('Location:../View/ProjetoView.php?success=true');
     }
 
     function listar(){
@@ -53,7 +50,7 @@ class ProjetoDAO extends CrudDAO {
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new Projeto($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
+            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
             $result[] = $obj;
         }
         return $result;
@@ -79,10 +76,10 @@ class ProjetoDAO extends CrudDAO {
         $stm->bindValue(':id',$id);
         $stm->execute();
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $projeto = new Projeto($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
+        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
         return $projeto;
     }
-    function alterar(Projeto $projeto){
+    function alterar(ProjetoModel $projeto){
 
         $comando = "UPDATE tbprojeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -94,6 +91,6 @@ class ProjetoDAO extends CrudDAO {
         $stm->bindValue(':id',$projeto->getId());
 
         $stm->execute();
-        header('Location:../View/projetoView.php?success=true');
+        header('Location:../View/ProjetoView.php?success=true');
     }
 }

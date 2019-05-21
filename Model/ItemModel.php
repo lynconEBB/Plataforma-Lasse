@@ -1,6 +1,6 @@
 <?php
 
-class Item{
+class ItemModel{
     private $id;
     private $valor;
     private $nome;
