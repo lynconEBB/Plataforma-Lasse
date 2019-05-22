@@ -91,13 +91,14 @@ $resul = $viagemControl->listarPorIdTarefa($_REQUEST['idTarefa']);
                         <select class="custom-select" name="idVeiculo" id="idVeiculo">
                             <option selected>Escolha um Veiculo</option>
                             <?php
-                            $veiculoControl = new VeiculoControl();
-                            $veiculos = $veiculoControl->listar();
-                            foreach ($veiculos as $veiculo){
-                                echo "<option value='{$veiculo->getId()}'>{$veiculo->getNome()}</option>";
-                            }
+                                $veiculoControl = new VeiculoControl();
+                                $veiculos = $veiculoControl->listar();
+                                foreach ($veiculos as $veiculo){
+                                    echo "<option value='{$veiculo->getId()}'>{$veiculo->getNome()}</option>";
+                                }
                             ?>
                         </select>
+                        <a href="VeiculoView.php">&plus;</a>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">

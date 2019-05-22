@@ -23,24 +23,24 @@ $resul = $veiculoControl->listar();
         foreach ($resul as $obj):
     ?>
         <tr>
-            <td><?php echo $obj->getNome()?></td>
-            <td><?php echo $obj->getTipo()?></td>
-            <td><?php echo $obj->getDataRetirada()?></td>
-            <td><?php echo $obj->getDataDevolucao()?></td>
-            <td><?php echo $obj->getHorarioRetirada()?></td>
-            <td><?php echo $obj->getHorarioDevolucao()?></td>
-            <td><?php echo $obj->getCondutor()->getNome()?></td>
+            <td><?= $obj->getNome()?></td>
+            <td><?= $obj->getTipo()?></td>
+            <td><?= $obj->getDataRetirada()?></td>
+            <td><?= $obj->getDataDevolucao()?></td>
+            <td><?= $obj->getHorarioRetirada()?></td>
+            <td><?= $obj->getHorarioDevolucao()?></td>
+            <td><?= $obj->getCondutor()->getNome()?></td>
             <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $obj->getId()?>' data-nome='<?php echo $obj->getNome()?>' data-tipo='<?php echo $obj->getTipo()?>'
-                        data-dtret='<?php echo $obj->getDataRetirada()?>' data-dtdev='<?php echo $obj->getDataDevolucao()?>' data-horaret='<?php echo $obj->getHorarioRetirada()?>'
-                        data-horadev='<?php echo $obj->getHorarioDevolucao()?>' data-idcond='<?php echo $obj->getCondutor()->getId()?>'>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $obj->getId()?>' data-nome='<?= $obj->getNome()?>' data-tipo='<?= $obj->getTipo()?>'
+                        data-dtret='<?= $obj->getDataRetirada()?>' data-dtdev='<?= $obj->getDataDevolucao()?>' data-horaret='<?= $obj->getHorarioRetirada()?>'
+                        data-horadev='<?= $obj->getHorarioDevolucao()?>' data-idcond='<?= $obj->getCondutor()->getId()?>'>
                     <img width='16' src='../img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
                 <form action="../Control/VeiculoControl.php" method="post">
                     <input type="hidden" name="acao" value="2">
-                    <input type="hidden" name="id" value="<?php echo $obj->getId()?>">
+                    <input type="hidden" name="id" value="<?= $obj->getId()?>">
                     <button class='btn'><img width='16' src='../img/trash-alt-solid.svg' alt=""></button>
                 </form>
             </td>
@@ -168,6 +168,6 @@ $resul = $veiculoControl->listar();
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesVeiculo.js"></script>
+<script src="../js/funcoesViagem.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    require_once '../Services/Mensagem.php';
+    require_once '../Services/Autoload.php';
     session_start();
 ?>
 <!DOCTYPE html>

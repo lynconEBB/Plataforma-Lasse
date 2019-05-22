@@ -3,12 +3,14 @@ require_once '../Services/Autoload.php';
 
 class ViagemControl extends CrudControl {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->DAO = new ViagemDao();
         parent::__construct();
     }
 
-    protected function cadastrar() {
+    protected function cadastrar()
+    {
         $veiculoDAO = new VeiculoDao();
         $veiculo = $veiculoDAO->listarPorId($_POST['idVeiculo']);
         $funcDAO = new FuncionarioDao();
@@ -18,11 +20,13 @@ class ViagemControl extends CrudControl {
         $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
     }
 
-    protected function excluir($id){
+    protected function excluir($id)
+    {
         //$this -> Dao -> excluir($id);
     }
 
-    public function listar(){
+    public function listar()
+    {
         //return $this -> Dao -> listar();
     }
 
@@ -31,7 +35,8 @@ class ViagemControl extends CrudControl {
         return $this -> DAO -> listarPorIdTarefa($idTarefa);
     }
 
-    protected function atualizar(){
+    protected function atualizar()
+    {
         //$condDAO = new CondutorDao();
         //$condutor = $condDAO->listarPorId($_POST['idCondutor']);
         //$veiculo = new VeiculoModel($_POST['nome'],$_POST['tipo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor,$_POST['id']);
