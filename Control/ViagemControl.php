@@ -40,6 +40,16 @@ class ViagemControl extends CrudControl {
         
         $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],'34');
         $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
+
+        $idViagem = 1;
+
+        $gastoControl = new GastoControl();
+        $gastoControl->cadastrarGastos($_POST['gasto'],$idViagem);
+
+
+
+        header("Location:../View/ViagemView.php?idTarefa=".$_POST['idTarefa']);
+
     }
 
     protected function excluir($id)

@@ -5,7 +5,8 @@ class GastoModel{
     private $valor;
     private $tipo;
 
-    public function __construct($id, $valor, $tipo){
+    public function __construct($valor, $tipo,$id=null)
+    {
         $this->id = $id;
         $this->valor = $valor;
         $this->tipo = $tipo;

@@ -139,6 +139,90 @@ LoginControl::verificar();
                     <input type="text" class="form-control" id="horaSaidaHosp" name="horaSaidaHosp">
                 </div>
             </div>
+
+            <!--*************************** Formulário de Gastos *************************-->
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Aluguel de Veiculos</label>
+                    <input type="hidden" name="gasto[1][nome]" value="Aluguel de Veiculos">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[1][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Combustível</label>
+                    <input type="hidden" name="gasto[2][nome]" value="Combustível">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[2][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Estacionamento</label>
+                    <input type="hidden" name="gasto[3][nome]" value="Estacionamento">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[3][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Passagens rodoviárias (metrô/ônibus)</label>
+                    <input type="hidden" name="gasto[4][nome]" value="Passagens rodoviárias (metrô/ônibus)">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[4][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Passagens rodoviárias internacionais</label>
+                    <input type="hidden" name="gasto[5][nome]" value="Passagens rodoviárias internacionais">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[5][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Pedágio</label>
+                    <input type="hidden" name="gasto[6][nome]" value="Pedágio">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[6][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Seguro internacional (obrigatório)</label>
+                    <input type="hidden" name="gasto[7][nome]" value="Seguro internacional (obrigatório)">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[7][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">Táxi</label>
+                    <input type="hidden" name="gasto[8][nome]" value="Taxí">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[8][valor]">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="AlugueldeVeiculos" class="col-form-label">outras despesas de locação de veículos</label>
+                    <input type="hidden" name="gasto[9][nome]" value="Outras despesas de locação de veículos">
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" id="AlugueldeVeiculos" name="gasto[9][valor]">
+                </div>
+            </div>
+
             <input type="hidden" name="acao" value="4">
             <input type="hidden" name="idTarefa" value="<?= $_GET['idTarefa']?>">
             <input type="hidden" name="idFuncionario" value="<?= $_SESSION['usuario-id']?>">

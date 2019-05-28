@@ -28,7 +28,7 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
 
         $stm->execute();
-        header("Location:../View/ViagemView.php?idTarefa=".$idTarefa);
+
     }
 
     function excluir($id)

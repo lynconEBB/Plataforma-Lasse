@@ -2,111 +2,17 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/Control/VeiculoControl.php" line="51" />
+    <bookmark url="file://$PROJECT_DIR$/Control/GastoControl.php" line="32" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Plataforma-Lasse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Plataforma-Lasse.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Control/GastoControl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/CondutorControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CondutorControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/CrudControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CrudControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/FuncionarioControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/FuncionarioControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/ItemControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ItemControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/LoginControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/LoginControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/ProjetoControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ProjetoControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/TarefaControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/TarefaControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/VeiculoControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/VeiculoControl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Control/ViagemControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ViagemControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/CondutorDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/CondutorDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/CrudDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/CrudDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/FuncionarioDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/FuncionarioDao.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dao/GastoDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/GastoDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/ItemDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/ItemDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/ProjetoDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/ProjetoDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/TarefaDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/TarefaDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/VeiculoDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/VeiculoDao.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dao/ViagemDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/ViagemDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/BD-PFC.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/BD-PFC.mwb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/BD-PFC.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/BD-PFC.mwb.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/PFC - Camila e Lyncon.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/PFC - Camila e Lyncon.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/PFC.odt" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/PFC.odt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/DiagramaER.png" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/DiagramaER.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/Requisitos do Sistema.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/Requisitos do Sistema.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/UC Geral.png" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/Tarefa - Lynco e Camila/UC Geral.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/UseCase - Camila e Lyncon.asta" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/UseCase - Camila e Lyncon.asta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentos/db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/AtividadeModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/AtividadeModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CompraModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CompraModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CondutorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CondutorModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/GastoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/GastoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ItemModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ItemModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ProjetoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ProjetoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/TarefaModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/TarefaModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/UsuarioModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/UsuarioModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/VeiculoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/VeiculoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ViagemModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ViagemModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Mensagem.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Mensagem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PdoFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PdoFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/CadastroViagem.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/CadastroViagem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/FormularioControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/FormularioControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/FormularioView.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/FormularioView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/Formulário.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/Formulário.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/ViagemControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/ViagemControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/alteracaoFuncionario.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/alteracaoFuncionario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/cadastroFuncionario.html" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/cadastroFuncionario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/estiloFuncionario.css" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/estiloFuncionario.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/formularioViagem.odt" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/formularioViagem.odt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/meusDados.php" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/meusDados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/select.css" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/select.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/select.js" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/select.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.css" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/test.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/TestesLixeira/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/CondutorView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/CondutorView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ItemView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/ItemView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/LoginView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/LoginView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ProjetoView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/ProjetoView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/Rodape.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/Rodape.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/TarefaView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/TarefaView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/VeiculoView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/VeiculoView.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/ViagemCadastroView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/ViagemCadastroView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ViagemView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/ViagemView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/cabecalho.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/cabecalho.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/estiloViagemCadastro.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/estiloViagemCadastro.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/styleSheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/styleSheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/back2.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/back2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/canto1.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/canto1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/canto2.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/canto2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/edit-regular.svg" beforeDir="false" afterPath="$PROJECT_DIR$/img/edit-regular.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/img.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plane-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/img/plane-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plus-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/img/plus-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/poster.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/poster.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/trash-alt-solid.svg" beforeDir="false" afterPath="$PROJECT_DIR$/img/trash-alt-solid.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/videoplayback.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/img/videoplayback.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/videoplayback.webm" beforeDir="false" afterPath="$PROJECT_DIR$/img/videoplayback.webm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesCondutor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesCondutor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesFuncionario.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesFuncionario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesProjeto.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesProjeto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesTarefa.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesTarefa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesVeiculo.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesVeiculo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/funcoesViagem.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/funcoesViagem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.mask.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jquery.mask.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/ViagemCadastroView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="135" column="22" lean-forward="true" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
+            <state relative-caret-position="-331">
+              <caret line="146" column="89" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
               <folding>
                 <element signature="n#style#0;n#option#3;n#select#0;n#div#7;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#option#1;n#select#0;n#div#6;n#section#0;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -148,38 +54,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Control/ViagemControl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="660">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Control/VeiculoControl.php">
+        <entry file="file://$PROJECT_DIR$/Control/GastoControl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Dao/ViagemDao.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="585">
+              <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/ViagemModel.php">
+        <entry file="file://$PROJECT_DIR$/Dao/GastoDao.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="450">
+              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -229,9 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TestesLixeira/index.html" />
-        <option value="$PROJECT_DIR$/js/funcoesLogin.js" />
-        <option value="$PROJECT_DIR$/css/styleSheet.css" />
         <option value="$PROJECT_DIR$/Control/CrudControl.php" />
         <option value="$PROJECT_DIR$/View/condutorView.php" />
         <option value="$PROJECT_DIR$/View/veiculoView.php" />
@@ -255,7 +149,6 @@
         <option value="$PROJECT_DIR$/Dao/CrudDao.php" />
         <option value="$PROJECT_DIR$/Services/Autoload.php" />
         <option value="$PROJECT_DIR$/View/ProjetoView.php" />
-        <option value="$PROJECT_DIR$/Dao/ViagemDao.php" />
         <option value="$PROJECT_DIR$/View/CondutorView.php" />
         <option value="$PROJECT_DIR$/View/ItemView.php" />
         <option value="$PROJECT_DIR$/View/TarefaView.php" />
@@ -275,11 +168,15 @@
         <option value="$PROJECT_DIR$/View/ViagemView.php" />
         <option value="$PROJECT_DIR$/Dao/VeiculoDao.php" />
         <option value="$PROJECT_DIR$/js/funcoesViagem.js" />
-        <option value="$PROJECT_DIR$/View/ViagemCadastroView.php" />
         <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
         <option value="$PROJECT_DIR$/Dao/CondutorDao.php" />
-        <option value="$PROJECT_DIR$/Control/ViagemControl.php" />
         <option value="$PROJECT_DIR$/Control/VeiculoControl.php" />
+        <option value="$PROJECT_DIR$/Dao/ViagemDao.php" />
+        <option value="$PROJECT_DIR$/View/ViagemCadastroView.php" />
+        <option value="$PROJECT_DIR$/Model/GastoModel.php" />
+        <option value="$PROJECT_DIR$/Control/ViagemControl.php" />
+        <option value="$PROJECT_DIR$/Control/GastoControl.php" />
+        <option value="$PROJECT_DIR$/Dao/GastoDao.php" />
       </list>
     </option>
   </component>
@@ -319,17 +216,7 @@
             <path>
               <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
               <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
               <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Plataforma-Lasse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Plataforma-Lasse" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -468,7 +355,7 @@
       <workItem from="1558725932825" duration="979000" />
       <workItem from="1558973731579" duration="55000" />
       <workItem from="1558973800712" duration="7474000" />
-      <workItem from="1559058492790" duration="6605000" />
+      <workItem from="1559058492790" duration="11319000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -575,11 +462,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558468160785</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="CRUD Viagem V3">
+      <created>1559069069557</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1559069069558</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241425000" />
+    <option name="totallyTimeSpent" value="246139000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -635,19 +529,10 @@
     <MESSAGE value="CRUD Tarefas" />
     <MESSAGE value="CRUD Viagens V1" />
     <MESSAGE value="Autoload Implementado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Autoload Implementado" />
+    <MESSAGE value="CRUD Viagem V3" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD Viagem V3" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestesLixeira/alteracaoFuncionario.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestesLixeira/FormularioControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestesLixeira/FuncionarioControl.php" />
     <entry file="file://$PROJECT_DIR$/TestesLixeira/cadastroFuncionario.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -811,13 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/GastoDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Dao/ItemDao.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -916,35 +794,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/ViagemCadastroView.php">
+    <entry file="file://$PROJECT_DIR$/Model/ViagemModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="135" column="22" lean-forward="true" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#option#3;n#select#0;n#div#7;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#option#1;n#select#0;n#div#6;n#section#0;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/CondutorDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="809">
-          <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/ViagemControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="570">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
@@ -955,17 +808,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/ViagemModel.php">
+    <entry file="file://$PROJECT_DIR$/Control/CondutorControl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Dao/ViagemDao.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+        <state relative-caret-position="450">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/ViagemCadastroView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="146" column="89" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
+          <folding>
+            <element signature="n#style#0;n#option#3;n#select#0;n#div#7;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#option#1;n#select#0;n#div#6;n#section#0;n#form#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/CondutorDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="65" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/GastoModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/GastoDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/GastoControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ViagemControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
