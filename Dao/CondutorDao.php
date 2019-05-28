@@ -6,7 +6,7 @@ class CondutorDao extends CrudDao {
 
     //Insere Objeto CondutorModel no Banco de Dados
     function cadastrar(CondutorModel $condutor){
-        $comando = "INSERT INTO tbcondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
+        $comando = "INSERT INTO tbCondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':nome',$condutor->getNome());
@@ -14,11 +14,10 @@ class CondutorDao extends CrudDao {
         $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
 
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');
     }
 
     function excluir($id){
-        $comando = "DELETE FROM tbcondutor WHERE id = :id";
+        $comando = "DELETE FROM tbCondutor WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
@@ -28,7 +27,7 @@ class CondutorDao extends CrudDao {
 
     //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
     public function listar(){
-        $comando = "SELECT * FROM tbcondutor";
+        $comando = "SELECT * FROM tbCondutor";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
@@ -41,7 +40,7 @@ class CondutorDao extends CrudDao {
 
     function atualizar(CondutorModel $condutor){
 
-        $comando = "UPDATE tbcondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
+        $comando = "UPDATE tbCondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':nome',$condutor->getNome());
@@ -54,7 +53,7 @@ class CondutorDao extends CrudDao {
     }
 
     public function listarPorId($id){
-        $comando = "SELECT * from tbcondutor WHERE id = :id";
+        $comando = "SELECT * from tbCondutor WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':id',$id);
@@ -65,4 +64,5 @@ class CondutorDao extends CrudDao {
 
         return $obj;
     }
+
 }

@@ -16,7 +16,6 @@ class VeiculoDao extends CrudDao {
         $stm->bindValue(':horaDevolucao',$veiculo->getHorarioDevolucao());
 
         $stm->execute();
-        header('Location:../View/VeiculoView.php?success=true');
     }
 
 
@@ -71,8 +70,6 @@ class VeiculoDao extends CrudDao {
 
         $condutorDAO = new CondutorDao();
         $condutor = $condutorDAO->listarPorId($row['idCondutor']);
-
-
 
         $obj = new VeiculoModel($row['nome'],$row['tipo'],$row['dataRetirada'],$row['dataDevolucao'],$row['horarioRetirada'],$row['horarioDevolucao'],$condutor,$row['id']);
 

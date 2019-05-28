@@ -12,6 +12,7 @@ class CondutorControl extends CrudControl {
         switch ($acao){
             case 1:
                 $this->cadastrar();
+                header('Location:../View/CondutorView.php');
                 break;
             case 2:
                 $this->excluir($_POST['id']);
@@ -22,7 +23,7 @@ class CondutorControl extends CrudControl {
         }
     }
 
-    protected function cadastrar(){
+    public function cadastrar(){
         $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
         $this->DAO->cadastrar($condutor);
     }

@@ -81,7 +81,7 @@ class ProjetoDao extends CrudDao {
     }
     function alterar(ProjetoModel $projeto){
 
-        $comando = "UPDATE tbprojeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
+        $comando = "UPDATE tbProjeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':nome',$projeto->getNome());

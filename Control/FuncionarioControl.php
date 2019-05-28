@@ -1,6 +1,7 @@
 <?php
 require_once '../Services/Autoload.php';
 
+
 class FuncionarioControl extends CrudControl {
 
     public function __construct(){
@@ -9,7 +10,7 @@ class FuncionarioControl extends CrudControl {
     }
 
     protected function cadastrar(){
-        $usuario = new UsuarioModel($_POST['nome'],$_POST['UsuarioModel'],$_POST['senha'],$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
+        $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],$_POST['senha'],$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
         $this->DAO->cadastrar($usuario);
     }
 

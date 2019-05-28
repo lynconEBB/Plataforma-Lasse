@@ -42,10 +42,11 @@ LoginControl::verificar();
                 <label for="passagem" class="col-form-label">Passagem</label>
                 <input type="text" class="form-control" id="passagem" name="passagem">
             </div>
-            <div class="form-group idVeiculo">
+            <div class="form-group" id="group-idVeiculo">
                 <label for="idVeiculo">Veiculo</label>
                 <select class="custom-select" name="idVeiculo" id="idVeiculo">
-                    <option value="novo" selected>Escolha um Veiculo</option>
+                    <option type="hidden" value="escolher"> Escolha um Veiculo</option>
+                    <option style="display:none;" value="novo">Novo</option>
                     <?php
                         $veiculoControl = new VeiculoControl();
                         $veiculos = $veiculoControl->listar();
@@ -62,11 +63,11 @@ LoginControl::verificar();
             <section id="form-veiculo">
                 <div class="form-group">
                     <label for="nome" class="col-form-label">Nome</label>
-                    <input class="form-control" id="nome" name="nome">
+                    <input class="form-control" id="nome" name="nomeVeiculo">
                 </div>
                 <div class="form-group">
                     <label for="tipo" class="col-form-label">Tipo</label>
-                    <input class="form-control" id="tipo" name="tipo">
+                    <input class="form-control" id="tipo" name="tipoVeiculo">
                 </div>
                 <div class="form-group">
                     <label for="dtRetirada" class="col-form-label">Data de Retirada</label>
@@ -84,10 +85,11 @@ LoginControl::verificar();
                     <label for="horarioDevolucao" class="col-form-label">Horário de Devolução</label>
                     <input type="text" class="form-control" id="horarioDevolucao" name="horarioDevolucao">
                 </div>
-                <div class="form-group idCondutor">
+                <div class="form-group" id="group-idCondutor">
                     <label for="idCondutor">Condutor</label>
                     <select class="custom-select" name="idCondutor" id="idCondutor">
-                        <option value="novo" selected>Escolha um Condutor</option>
+                        <option type="hidden" value="escolher"> Escolha um Condutor</option>
+                        <option style="display:none;" value="novo">Novo</option>
                         <?php
                             $condutorControl = new CondutorControl();
                             $condutores = $condutorControl->listar();
@@ -137,9 +139,9 @@ LoginControl::verificar();
                     <input type="text" class="form-control" id="horaSaidaHosp" name="horaSaidaHosp">
                 </div>
             </div>
-            <input type="hidden" name="acao" value="1">
-            <input type="hidden" name="idTarefa" value="">
-            <input type="hidden" name="idFuncionario" value="<">
+            <input type="hidden" name="acao" value="4">
+            <input type="hidden" name="idTarefa" value="<?= $_GET['idTarefa']?>">
+            <input type="hidden" name="idFuncionario" value="<?= $_SESSION['usuario-id']?>">
             <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
 
         </form>

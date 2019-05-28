@@ -9,10 +9,32 @@ class ViagemControl extends CrudControl {
         parent::__construct();
     }
 
+    public function defineAcao($acao){
+        switch ($acao){
+            case 4:
+                $this->cadastrar();
+                break;
+            case 2:
+                $this->excluir($_POST['id']);
+                break;
+            case 3:
+                $this->atualizar();
+                break;
+        }
+    }
+
+
     protected function cadastrar()
     {
-        $veiculoDAO = new VeiculoDao();
-        $veiculo = $veiculoDAO->listarPorId($_POST['idVeiculo']);
+        $veiculoControl = new VeiculoControl();
+        if (isset($_POST['idVeiculo']) && $_POST['idVeiculo'] === 'novo'){
+            $veiculoControl->cadastrar();
+            $id = $veiculoControl->DAO->pdo->lastInsertId();
+            $veiculo = $veiculoControl->listarPorId($id);
+        }else{
+            $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
+        }
+
         $funcDAO = new FuncionarioDao();
         $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
         
@@ -44,4 +66,5 @@ class ViagemControl extends CrudControl {
     }
 
 }
+LoginControl::verificar();
 new ViagemControl();

@@ -7,8 +7,8 @@ class ViagemDao extends CrudDao {
     {
 
         $comando = "INSERT INTO tbViagem (idVeiculo,idTarefa,origem,destino,dataIda,dataVolta,justificativa,observacoes,passagem,dataEntradaHosp,dataSaidaHosp,HorarioEntradaHosp,HorarioSaidaHosp,
-idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :dataEntradaHosp, :dataSaidaHosp, :HorarioEntradaHosp, :HorarioSaidaHosp,
-:idUsuario)";
+idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :dataEntradaHosp, :dataSaidaHosp, :HorarioEntradaHosp, :HorarioSaidaHosp,
+:idUsuario,:totalGasto)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':idVeiculo',$viagem->getVeiculo()->getId());
@@ -25,6 +25,7 @@ idUsuario) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolt
         $stm->bindValue(':HorarioEntradaHosp',$viagem->getHoraEntradaHosp());
         $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
+        $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
 
         $stm->execute();
         header("Location:../View/ViagemView.php?idTarefa=".$idTarefa);

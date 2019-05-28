@@ -19,7 +19,7 @@ class TarefaDao extends CrudDao {
     }
 
     function excluir($id){
-        $comando = "DELETE FROM tbtarefa WHERE id = :id";
+        $comando = "DELETE FROM tbTarefa WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
@@ -56,7 +56,7 @@ class TarefaDao extends CrudDao {
     }
 
     public function listarPorIdProjeto($id){
-        $comando = "SELECT * from tbtarefa WHERE idProjeto = :id";
+        $comando = "SELECT * from tbTarefa WHERE idProjeto = :id";
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':id',$id);
         $stm->execute();

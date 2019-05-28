@@ -26,7 +26,7 @@ class FuncionarioDao extends CrudDao {
     }
 
     public function alterar(UsuarioModel $func){
-        $update = $this->pdo->prepare("UPDATE tbFuncionario SET senha=?,usuario=?,NomeCompleto=?,dataNascimento=?,cpf=?,rg=?, dataEmissao=?, tipo=?, email=? WHERE id=?");
+        $update = $this->pdo->prepare("UPDATE tbUsuario SET senha=?,usuario=?,NomeCompleto=?,dataNascimento=?,cpf=?,rg=?, dataEmissao=?, tipo=?, email=? WHERE id=?");
         $update->bindValue(1,$func->getSenha());
         $update->bindValue(2,$func->getLogin());
         $update->bindValue(3,$func->getNomeCompleto());

@@ -1,10 +1,13 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class PdoFactory{
     const HOST = "localhost";
-    const BANCO = "dblpm";
+    const BANCO = "dbLPM";
     const USUARIO = "root";
-    const SENHA = "";
+    const SENHA = "bancodedados";
     const OPCOES = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL, PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING];
 
     public static function criarConexao(){
@@ -16,4 +19,3 @@ class PdoFactory{
         }
     }
 }
-

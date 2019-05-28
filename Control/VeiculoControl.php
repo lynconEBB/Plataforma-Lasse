@@ -9,11 +9,32 @@ class VeiculoControl extends CrudControl {
         parent::__construct();
     }
 
+    public function defineAcao($acao){
+        switch ($acao){
+            case 1:
+                $this->cadastrar();
+                header('Location:../View/VeiculoView.php');
+                break;
+            case 2:
+                $this->excluir($_POST['id']);
+                break;
+            case 3:
+                $this->atualizar();
+                break;
+        }
+    }
 
-    protected function cadastrar(){
-        $condDAO = new CondutorDao();
-        $condutor = $condDAO->listarPorId($_POST['idCondutor']);
-        $veiculo = new VeiculoModel($_POST['nome'],$_POST['tipo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor);
+    public function cadastrar(){
+        $condControl = new CondutorControl();
+        if ($_POST['idCondutor'] == 'novo'){
+            $condControl->cadastrar();
+            $id = $condControl->DAO->pdo->lastInsertId();
+            $condutor = $condControl->listarPorId($id);
+        }else{
+            $condutor = $condControl->listarPorId($_POST['idCondutor']);
+        }
+
+        $veiculo = new VeiculoModel($_POST['nomeVeiculo'],$_POST['tipoVeiculo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor);
         $this->DAO->cadastrar($veiculo);
     }
 
@@ -32,5 +53,10 @@ class VeiculoControl extends CrudControl {
         $this -> DAO -> atualizar($veiculo);
     }
 
+    public function listarPorId($id){
+        return $this->DAO->listarPorId($id);
+    }
+
 }
+LoginControl::verificar();
 new VeiculoControl();
