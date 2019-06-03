@@ -19,7 +19,7 @@ class LoginControl{
                     $_SESSION["usuario-id"] = $usuario->getId();
                     $_SESSION["usuario"] = $_POST["usuario-email"];
                     $_SESSION["autenticado"] = TRUE;
-                    header("Location: ../View/ProjetoView.php");
+                    header("Location: ../View/UsuarioView.php");
                     die();
 
                 } else {
