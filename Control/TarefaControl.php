@@ -11,10 +11,12 @@ class TarefaControl extends CrudControl {
     protected function cadastrar(){
         $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao']);
         $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
+        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
     }
 
     protected function excluir($id){
         $this -> DAO -> excluir($id);
+        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
     }
 
     public function listar() {
@@ -24,27 +26,31 @@ class TarefaControl extends CrudControl {
     protected function atualizar(){
         $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
         $this -> DAO ->atualizar($projeto);
+
+        header('Location:../View/TarefaView.php?idProjeto='.$_POST['id']);
     }
 
     public function listarPorIdProjeto($id){
         return $this->DAO->listarPorIdProjeto($id);
     }
 
-    public function procuraProjeto(){
+    public function descobrirIdProjeto($id){
+        return $this->DAO->descobrirIdProjeto($id);
+    }
 
-        if(empty($_POST['idProjeto']) && empty($_SESSION['idProjeto'])) {
-            echo "<h3>Nenhum ProjetoModel Selecionado, por favor Selecione um clicando <a href='ProjetoView.php'>aqui</a></h3>";
-            die();
-        }
-        elseif (isset($_POST['idProjeto']) && empty($_SESSION['idProjeto'])) {
-            $_SESSION['idProjeto'] = $_POST['idProjeto'];
-        }
-        elseif(isset($_SESSION['idProjeto']) && isset($_POST['idProjeto'])){
-            if($_SESSION['idProjeto'] != $_POST['idProjeto']){
-                $_SESSION['idProjeto'] = $_POST['idProjeto'];
+    public function verificaPermissao(){
+        if(isset($_GET['idProjeto'])){
+            $projetoControl = new ProjetoControl();
+            if($projetoControl->procuraFuncionario($_GET['idProjeto']) > 0){
+                return true;
+            }else{
+                die("Você não possui acesso a essa tarefa<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
             }
+        }else{
+            die("Nenhuma Projeto Selecionado!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
         }
     }
 }
+
 LoginControl::verificar();
 new TarefaControl();

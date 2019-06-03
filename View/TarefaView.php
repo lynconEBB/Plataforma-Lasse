@@ -5,10 +5,9 @@
     require_once "cabecalho.php";
 
     $tarefaControl = new TarefaControl();
-    $tarefaControl->procuraProjeto();
 
-    if(isset($_SESSION['idProjeto'])){
-        $resul = $tarefaControl->listarPorIdProjeto($_SESSION['idProjeto']);
+    if($tarefaControl->verificaPermissao()){
+        $resul = $tarefaControl->listarPorIdProjeto($_GET['idProjeto']);
 ?>
     <table class="table table-hover">
         <thead>
@@ -26,16 +25,16 @@
             foreach ($resul as $registro):
         ?>
             <tr>
-                <td><?php echo $registro->getNome() ?></td>
-                <td><?php echo $registro->getDescricao() ?></td>
-                <td><?php echo $registro->getEstado() ?></td>
-                <td><?php echo $registro->getDataInicio() ?></td>
-                <td><?php echo $registro->getDataConclusao() ?></td>
+                <td><?= $registro->getNome() ?></td>
+                <td><?= $registro->getDescricao() ?></td>
+                <td><?= $registro->getEstado() ?></td>
+                <td><?= $registro->getDataInicio() ?></td>
+                <td><?= $registro->getDataConclusao() ?></td>
                 <td>
                     <button class='btn' data-toggle='modal' data-target='#modalAlterar'
-                            data-id='<?php echo $registro->getId() ?>' data-nome='<?php echo $registro->getNome() ?>'
-                            data-desc='<?php echo $registro->getDescricao() ?>' data-dtinicio='<?php echo $registro->getDataInicio() ?>'
-                            data-dtconclusao="<?php echo $registro->getDataConclusao() ?>" data-estado="<?php echo $registro->getEstado() ?>" >
+                            data-id='<?= $registro->getId() ?>' data-nome='<?php echo $registro->getNome() ?>'
+                            data-desc='<?= $registro->getDescricao() ?>' data-dtinicio='<?php echo $registro->getDataInicio() ?>'
+                            data-dtconclusao="<?= $registro->getDataConclusao() ?>" data-estado="<?php echo $registro->getEstado() ?>" >
                         <img width='16' src='../img/edit-regular.svg' alt=''>
                     </button>
                 </td>
@@ -43,14 +42,14 @@
                     <form style="display: inline;" action="../Control/TarefaControl.php" method="post">
                         <input type="hidden" name="acao" value="2">
                         <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
+                        <input type="hidden" name="idProjeto" value="<?= $_GET['idProjeto'] ?>">
                         <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                     </form>
                 </td>
                 <td>
-                    <form style="display: inline;" action="ViagemView.php" method="post">
-                        <input type="hidden" name="idTarefa" value="<?php echo $registro->getId() ?>">
+                    <a href="ViagemView.php?idTarefa=<?= $registro->getId()?>">
                         <button class="btn"><img width="16" src="../img/plane-solid.svg" alt=""></button>
-                    </form>
+                    </a>
                 </td>
             </tr>
         <?php
@@ -99,7 +98,7 @@
                             <input type="text" class="form-control" id="dtConclusao" name="dtConclusao">
                         </div>
                         <input type="hidden" name="acao" value="1">
-                        <input type="hidden" name="idProjeto" value="<?php echo $_SESSION['idProjeto'] ?>">
+                        <input type="hidden" name="idProjeto" value="<?= $_GET['idProjeto'] ?>">
                         <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                     </form>
                 </div>
@@ -144,7 +143,7 @@
                         </div>
                         <input type="hidden" name="acao" value="3">
                         <input type="hidden" name="id" id="id">
-                        <input type="hidden" name="idProjeto" value="<?php echo $_SESSION['idProjeto'] ?>">
+                        <input type="hidden" name="idProjeto" value="<?= $_GET['idProjeto'] ?>">
                         <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                     </form>
                 </div>

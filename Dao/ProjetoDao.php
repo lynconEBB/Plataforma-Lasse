@@ -79,6 +79,7 @@ class ProjetoDao extends CrudDao {
         $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
         return $projeto;
     }
+
     function alterar(ProjetoModel $projeto){
 
         $comando = "UPDATE tbProjeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
@@ -92,5 +93,16 @@ class ProjetoDao extends CrudDao {
 
         $stm->execute();
         header('Location:../View/ProjetoView.php?success=true');
+    }
+
+    function procuraFuncionario($id){
+        $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':idProjeto',$id);
+        $stm->bindParam('idUsuario',$_SESSION['usuario-id']);
+
+        $stm->execute();
+        return $stm->rowCount();
     }
 }

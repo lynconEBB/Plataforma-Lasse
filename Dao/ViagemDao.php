@@ -90,4 +90,5 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         return $viagens;
 
     }
+
 }

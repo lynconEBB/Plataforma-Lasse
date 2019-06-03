@@ -2,9 +2,6 @@
     require_once '../Services/Autoload.php';
 
     LoginControl::verificar();
-    if(isset($_SESSION['idProjeto'])){
-        unset($_SESSION['idProjeto']);
-    }
 
     include 'cabecalho.php';
 ?>
@@ -33,10 +30,7 @@
                     <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
                     <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                 </form>
-                <form style="display: inline;" action="TarefaView.php" method="post">
-                    <input type="hidden" name="idProjeto" value="<?php echo $registro->getId() ?>">
-                    <button class="btn"><img width="16" src="../img/plus-solid.svg" alt=""></button>
-                </form>
+                <a href="TarefaView.php?idProjeto=<?= $registro->getId()?>"><button class="btn"><img width="16" src="../img/plus-solid.svg" alt=""></button></a>
            </div>
         </div>
     <?php

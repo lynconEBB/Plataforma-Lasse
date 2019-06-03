@@ -30,6 +30,11 @@ class ProjetoControl extends CrudControl {
     public function listarPorIdUsuario($id){
         return $this->DAO->listarPorIdUsuario($id);
     }
+
+    public function procuraFuncionario($id){
+        return $this->DAO->procuraFuncionario($id);
+    }
+
 }
 LoginControl::verificar();
 new ProjetoControl();

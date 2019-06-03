@@ -5,7 +5,9 @@ LoginControl::verificar();
 include "cabecalho.php";
 
 $viagemControl = new ViagemControl();
-$resul = $viagemControl->listarPorIdTarefa($_REQUEST['idTarefa']);
+$viagemControl->verificaPermissao();
+
+$resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
 
 ?>
 <table class="table table-hover">

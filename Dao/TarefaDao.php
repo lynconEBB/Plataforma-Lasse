@@ -15,7 +15,6 @@ class TarefaDao extends CrudDao {
         $stm->bindValue(':idProjeto',$idProjeto);
 
         $stm->execute();
-        header('Location:../View/TarefaView.php');
     }
 
     function excluir($id){
@@ -24,7 +23,6 @@ class TarefaDao extends CrudDao {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/TarefaView.php');
     }
 
 
@@ -52,7 +50,6 @@ class TarefaDao extends CrudDao {
         $stm->bindValue(':id',$tarefa->getId());
 
         $stm->execute();
-        header('Location:../View/TarefaView.php');
     }
 
     public function listarPorIdProjeto($id){
@@ -68,4 +65,17 @@ class TarefaDao extends CrudDao {
         }
         return $result;
     }
+
+    public function descobrirIdProjeto($id){
+        $comando = "SELECT idProjeto from tbTarefa WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue(':id',$id);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $row['idProjeto'];
+    }
+
+
 }
