@@ -4,7 +4,7 @@ require_once '../Services/Autoload.php';
 class UsuarioControl extends CrudControl {
 
     public function __construct(){
-        $this->DAO = new UsuarioDao();
+        $this->DAO = new FuncionarioDao();
         parent::__construct();
     }
 
@@ -28,6 +28,10 @@ class UsuarioControl extends CrudControl {
         $this -> DAO ->atualizar($projeto);
 
         header('Location:../View/TarefaView.php?idProjeto='.$_POST['id']);*/
+    }
+
+    public function listarPorId($id){
+        return $this->DAO->listarPorId($id);
     }
 
 }

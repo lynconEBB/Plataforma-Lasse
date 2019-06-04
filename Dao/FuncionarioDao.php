@@ -62,13 +62,19 @@ class FuncionarioDao extends CrudDao {
     }
 
     public function listarPorId($id){
+
+        $projetoDAO = new ProjetoDao();
+        $projetos = $projetoDAO->listarPorIdUsuario($id);
+
         $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE id= :id");
         $stm->bindValue(':id',$id);
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
         $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-            $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id'],$projetos);
+
+        
 
         return $fun;
     }

@@ -1,0 +1,153 @@
+html,body{
+    width: 100%;
+    height: 100vh;
+}
+.cont{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.side-bar{
+    width: 20%;
+    display: flex;
+    background-color: #b1dfbb;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100px;
+}
+
+.foto{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 50%;
+    width: auto;
+    height: 30%;
+    position: relative;
+}
+
+.side-bar-title{
+    text-align: center;
+    width: 100%;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 200%;
+    overflow-wrap: break-word;
+    margin-bottom: 0.5em;
+}
+.side-bar-info{
+    text-align: center;
+    width: 100%;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 100%;
+    overflow-wrap: break-word;
+    color:#7e7e73;
+}
+
+.side-bar-button{
+    margin-top: 10px;
+    text-align: center;
+    padding: 1em;
+    border:none;
+    outline: none;
+    border-radius: 20em;
+    font-family: "Arial Black", Gadget, sans-serif;
+    background-color: #80bdff;
+    font-size: 100%;
+    overflow-wrap: break-word;
+    box-shadow: 10px 10px 24px -12px rgba(0,0,0,0.75);
+}
+
+.side-bar-button:hover{
+    box-shadow: none;
+
+}
+
+.perfil{
+    width: 80%;
+    display: flex;
+    text-align: center;
+    overflow: auto;
+}
+
+.perfil-collum{
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2em;
+    margin: 2%;
+    border-radius: 50px;
+    box-shadow: 10px 10px 25px -4px rgba(0,0,0,0.75);
+}
+
+.perfil-item{
+    margin-bottom:10px;
+    display: block;
+}
+
+.item-value{
+    display: block;
+    font-family: sans-serif,arial;
+    font-size: 1.2em;
+    overflow-wrap: break-word;
+}
+
+.item-label{
+    font-family: sans-serif,arial;
+    font-size: 1.1em;
+    overflow-wrap: break-word;
+    display: block;
+    color:#7e7e73;
+    
+}
+
+@media (max-width: 887px) {
+    .foto{
+        border-radius: 50%;
+        width: auto;
+        height: 15%;
+        position: relative;
+        float: left;
+    }
+
+    .side-bar-title{
+        text-align: center;
+        width: 100%;
+        font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 100%;
+        overflow-wrap: break-word;
+    }
+
+    .side-bar-info{
+        text-align: center;
+        width: 100%;
+        font-family: "Arial Black", Gadget, sans-serif;
+        font-size: 50%;
+        overflow-wrap: break-word;
+        color:#7e7e73;
+    }
+
+    .perfil{
+        width: 80%;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .perfil-collum{
+        display: block;
+        border-radius: 50px;
+    }
+
+    .side-bar{
+        width: 20%;
+        display: flex;
+        height: auto ;
+        background-color: #b1dfbb;
+        align-items: center;
+        flex-direction: column;
+        min-width: 100px;
+    }
+
+}
