@@ -1,6 +1,6 @@
 <?php
 
-class CompraModel{
+class CompraModel extends CrudModel{
     private $id;
     private $proprosito;
     private $totalGasto;

@@ -1,6 +1,6 @@
 <?php
 
-class AtividadeModel{
+class AtividadeModel extends CrudModel {
     private $id;
     private $tipo;
     private $tempoGasto;

@@ -1,11 +1,20 @@
 <?php
-include "cabecalho.php";
 require_once '../Services/Autoload.php';
 
 $veiculoControl = new VeiculoControl();
 $resul = $veiculoControl->listar();
 
 ?>
+<html>
+<head>
+    <title>Lasse - PTI</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/styleVeiculo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
 <table class="table table-hover">
     <thead>
         <th>Nome</th>
@@ -55,6 +64,8 @@ $resul = $veiculoControl->listar();
     Cadastrar Novo Veículo
 </button>
 
+<a href="CondutorView.php"><button type="button" class="btn btn-warning">Menu de Condutores</button></a>
+
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -68,11 +79,11 @@ $resul = $veiculoControl->listar();
                 <form action="../Control/VeiculoControl.php" method="post">
                     <div class="form-group">
                         <label for="nome" class="col-form-label">Nome</label>
-                        <input class="form-control" id="nome" name="nome">
+                        <input class="form-control" id="nome" name="nomeVeiculo">
                     </div>
                     <div class="form-group">
                         <label for="tipo" class="col-form-label">Tipo</label>
-                        <input class="form-control" id="tipo" name="tipo">
+                        <input class="form-control" id="tipo" name="tipoVeiculo">
                     </div>
                     <div class="form-group">
                         <label for="dtRetirada" class="col-form-label">Data de Retirada</label>
@@ -90,10 +101,11 @@ $resul = $veiculoControl->listar();
                         <label for="horarioDevolucao" class="col-form-label">Horário de Devolução</label>
                         <input type="text" class="form-control" id="horarioDevolucao" name="horarioDevolucao">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group campo-idCondutor">
                         <label for="idCondutor">Condutor</label>
-                        <select class="custom-select" name="idCondutor" id="idCondutor">
-                            <option selected>Escolha um Condutor</option>
+                        <select class="custom-select" name="idCondutor" id="idCondutorCadastro">
+                            <option value="escolher" selected>Escolha um Condutor</option>
+                            <option style="display: none;" value="novo" ></option>
                         <?php
                             $condControl = new CondutorControl();
                             $condutores = $condControl->listar();
@@ -103,7 +115,22 @@ $resul = $veiculoControl->listar();
                         ?>
                         </select>
                     </div>
-                    <input type="hidden" name="acao" value="1">
+                    <button type="button" class="btn" id="novo-condutor">&plus;</button>
+                    <div id="form-condutor">
+                        <div class="form-group">
+                            <label for="nomeCondutor" class="col-form-label">Nome</label>
+                            <input class="form-control" id="nomeCondutor" name="nomeCondutor">
+                        </div>
+                        <div class="form-group">
+                            <label for="cnh" class="col-form-label">Número CNH</label>
+                            <input class="form-control" id="cnh" name="cnh">
+                        </div>
+                        <div class="form-group">
+                            <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
+                            <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
+                        </div>
+                    </div>
+                    <input type="hidden" name="acao" value="cadastroVeiculo">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
@@ -115,7 +142,7 @@ $resul = $veiculoControl->listar();
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Cadastro de Veiculos</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Alteração de Veiculos</h5>
                 <button class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -146,19 +173,37 @@ $resul = $veiculoControl->listar();
                         <label for="horarioDevolucao" class="col-form-label">Horário de Devolução</label>
                         <input type="text" class="form-control" id="horarioDevolucao" name="horarioDevolucao">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group campo-idCondutor-alter">
                         <label for="idCondutor">Condutor</label>
-                        <select class="custom-select" name="idCondutor" id="idCondutor">
+                        <select class="custom-select" name="idCondutor" id="idCondutorAlteracao">
+
                             <?php
                             foreach ($condutores as $condutor){
                                 echo "<option value='{$condutor->getId()}'>{$condutor->getNome()}</option>";
                             }
                             ?>
+                            <option style="display: none;" value="novo" ></option>
                         </select>
                     </div>
+                    <button type="button" class="btn" id="novo-condutor-alter">&plus;</button>
+                    <div id="form-condutor-alter">
+                        <div class="form-group">
+                            <label for="nomeCondutor" class="col-form-label">Nome</label>
+                            <input class="form-control" id="nomeCondutor" name="nomeCondutor">
+                        </div>
+                        <div class="form-group">
+                            <label for="cnh" class="col-form-label">Número CNH</label>
+                            <input class="form-control" id="cnh" name="cnh">
+                        </div>
+                        <div class="form-group">
+                            <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
+                            <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
+                        </div>
+                    </div>
+                    <input type="hidden" id="last-id-condutor">
                     <input type="hidden" name="acao" value="3">
                     <input type="hidden" name="id" id="id">
-                    <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary align-self-center">Alterar</button>
                 </form>
             </div>
         </div>
@@ -168,6 +213,6 @@ $resul = $veiculoControl->listar();
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesViagem.js"></script>
+<script src="../js/funcoesVeiculo.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-class GastoModel{
+class GastoModel extends CrudModel{
     private $id;
     private $valor;
     private $tipo;

@@ -22,7 +22,7 @@ class CondutorDao extends CrudDao {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');
+
     }
 
     //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
@@ -49,7 +49,7 @@ class CondutorDao extends CrudDao {
         $stm->bindValue(':id',$condutor->getId());
 
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');
+
     }
 
     public function listarPorId($id){

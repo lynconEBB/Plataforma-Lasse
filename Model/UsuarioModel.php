@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioModel{
+class UsuarioModel extends CrudModel {
     private $id;
     private $nomeCompleto;
     private $login;

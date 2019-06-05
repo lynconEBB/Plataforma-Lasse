@@ -18,9 +18,36 @@ $(document).ready(function () {
         modal.find('#dtDevolucao').val(dtDevolucao);
         modal.find('#horarioRetirada').val(horaRetirada);
         modal.find('#horarioDevolucao').val(horaDevolucao);
-        modal.find('#idCondutor').val(idCondutor);
+        modal.find('#idCondutorAlteracao').val(idCondutor);
+        modal.find('#last-id-condutor').val(idCondutor);
         modal.find('#id').val(id);
 
+    });
 
-    })
+    $('#novo-condutor').click(function () {
+        $('#form-condutor').toggle();
+        $('.campo-idCondutor').toggle();
+
+        if($('.campo-idCondutor').is(":hidden")){
+            $('#idCondutorCadastro').val('novo');
+        }else{
+            $('#idCondutorCadastro').val('escolher');
+        }
+
+        console.log($('#idCondutorCadastro').val())
+    });
+
+    $('#novo-condutor-alter').click(function () {
+        $('#form-condutor-alter').toggle();
+        $('.campo-idCondutor-alter').toggle();
+
+        if($('.campo-idCondutor-alter').is(":hidden")){
+            $('#idCondutorAlteracao').val('novo');
+        }else{
+            $('#idCondutorAlteracao').val($('#last-id-condutor').val());
+        }
+
+        console.log($('#idCondutorAlteracao').val())
+    });
+
 });

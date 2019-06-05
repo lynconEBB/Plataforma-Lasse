@@ -20,14 +20,14 @@ class TarefaControl extends CrudControl {
     }
 
     public function listar() {
-        //return $this -> Dao -> listar();
+        return $this -> DAO -> listar();
     }
 
     protected function atualizar(){
         $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
         $this -> DAO ->atualizar($projeto);
 
-        header('Location:../View/TarefaView.php?idProjeto='.$_POST['id']);
+        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
     }
 
     public function listarPorIdProjeto($id){

@@ -16,9 +16,11 @@ class CondutorControl extends CrudControl {
                 break;
             case 2:
                 $this->excluir($_POST['id']);
+                header('Location:../View/CondutorView.php');
                 break;
             case 3:
                 $this->atualizar();
+                header('Location:../View/CondutorView.php');
                 break;
         }
     }
@@ -42,7 +44,7 @@ class CondutorControl extends CrudControl {
 
     protected function atualizar(){
         $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        $this -> DAO -> atualizar($condutor);
+        $this -> DAO -> atualizar($condutor);;
     }
 }
 

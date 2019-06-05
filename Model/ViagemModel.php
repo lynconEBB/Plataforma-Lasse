@@ -1,6 +1,6 @@
 <?php
 
-class ViagemModel{
+class ViagemModel extends CrudModel {
     private $id;
     private $viajante;
     private $veiculo;

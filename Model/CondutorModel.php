@@ -1,6 +1,7 @@
 <?php
 
-class CondutorModel{
+class CondutorModel extends CrudModel
+{
     private $id;
     private $nome;
     private $cnh;

@@ -35,7 +35,7 @@ class ViagemControl extends CrudControl {
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
         }
 
-        $funcDAO = new FuncionarioDao();
+        $funcDAO = new UsuarioDao();
         $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
         
         $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],'34');
@@ -52,12 +52,15 @@ class ViagemControl extends CrudControl {
 
     protected function excluir($id)
     {
-        //$this -> Dao -> excluir($id);
+        $this -> DAO -> excluir($id);
+
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+
     }
 
     public function listar()
     {
-        //return $this -> Dao -> listar();
+        return $this -> DAO -> listar();
     }
 
     public function listarPorIdTarefa($idTarefa)

@@ -1,5 +1,5 @@
 <?php
-class TarefaModel{
+class TarefaModel extends CrudModel {
     private $id;
     private $nome;
     private $descricao;

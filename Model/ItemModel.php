@@ -1,6 +1,6 @@
 <?php
 
-class ItemModel{
+class ItemModel extends CrudModel {
     private $id;
     private $valor;
     private $nome;

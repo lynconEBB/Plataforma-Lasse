@@ -1,6 +1,6 @@
 <?php
 
-class VeiculoModel{
+class VeiculoModel extends CrudModel {
     private $id;
     private $nome;
     private $tipo;

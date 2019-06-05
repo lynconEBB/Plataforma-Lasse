@@ -76,7 +76,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="../Control/FuncionarioControl.php" method="post">
+                        <form action="../Control/UsuarioControl.php" method="post">
                             <div class="form-group">
                                 <label for="nome" class="col-form-label">Nome Completo</label>
                                 <input type="text" class="form-control" name="nome" id="nome">

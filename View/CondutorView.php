@@ -5,6 +5,7 @@
     $condControl = new CondutorControl();
     $resul = $condControl->listar();
 ?>
+
 <table class="table table-hover">
     <thead>
         <th>Nome</th>

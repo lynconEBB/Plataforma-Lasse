@@ -33,12 +33,12 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
 
     function excluir($id)
     {
-        /*$comando = "DELETE FROM tbcondutor WHERE id = :id";
+        $comando = "DELETE FROM tbViagem WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');*/
+
     }
 
     //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
@@ -77,7 +77,7 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         $stm->execute();
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
         $veiculoDAO = new VeiculoDao();
-        $funcDAO = new FuncionarioDao();
+        $funcDAO = new UsuarioDao();
         $viagens = array();
 
         foreach ($rows as $resul){

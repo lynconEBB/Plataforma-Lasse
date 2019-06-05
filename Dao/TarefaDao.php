@@ -27,15 +27,15 @@ class TarefaDao extends CrudDao {
 
 
     public function listar(){
-        /*$comando = "SELECT * FROM tbcondutor";
+        $comando = "SELECT * FROM tbTarefa";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id']);
             $result[] = $obj;
         }
-        return $result;*/
+        return $result;
     }
 
     function atualizar(TarefaModel $tarefa){

@@ -1,6 +1,6 @@
 <?php
 
-class ProjetoModel{
+class ProjetoModel extends CrudModel {
     private $id;
     private $dataFinalizacao;
     private $dataInicio;

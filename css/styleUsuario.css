@@ -58,9 +58,16 @@ html,body{
     box-shadow: 10px 10px 24px -12px rgba(0,0,0,0.75);
 }
 
+.red{
+    background-color: #ff3a47;
+}
+
 .side-bar-button:hover{
     box-shadow: none;
 
+}
+.green{
+    background-color: #00ff05;
 }
 
 .perfil{

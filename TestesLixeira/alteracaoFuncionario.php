@@ -1,7 +1,6 @@
 <?php
     include 'cabecalho.php';
-    require_once '../Services/FuncionarioDao.php';
-    $funcDAO = new FuncionarioDao();
+    require_once '../Services/UsuarioDao.php   $funcDAO = new UsuarioDao();
     $funcionario = $funcDAO->listarPorId($_GET['id']);
 ?>
     <form action="../../Control/FuncionarioControl.php" method="post">

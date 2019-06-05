@@ -11,10 +11,10 @@ class VeiculoControl extends CrudControl {
 
     public function defineAcao($acao){
         switch ($acao){
-            case 1:
+            case "cadastroVeiculo":
                 $this->cadastrar();
                 header('Location:../View/VeiculoView.php');
-                break;
+                die();
             case 2:
                 $this->excluir($_POST['id']);
                 break;
@@ -46,9 +46,14 @@ class VeiculoControl extends CrudControl {
         return $this -> DAO -> listar();
     }
 
-    protected function atualizar(){
-        $condDAO = new CondutorDao();
-        $condutor = $condDAO->listarPorId($_POST['idCondutor']);
+    protected function atualizar(){$condControl = new CondutorControl();
+        if ($_POST['idCondutor'] == 'novo'){
+            $condControl->cadastrar();
+            $id = $condControl->DAO->pdo->lastInsertId();
+            $condutor = $condControl->listarPorId($id);
+        }else{
+            $condutor = $condControl->listarPorId($_POST['idCondutor']);
+        }
         $veiculo = new VeiculoModel($_POST['nome'],$_POST['tipo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor,$_POST['id']);
         $this -> DAO -> atualizar($veiculo);
     }

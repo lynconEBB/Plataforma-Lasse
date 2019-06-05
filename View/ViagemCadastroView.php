@@ -89,7 +89,7 @@ LoginControl::verificar();
                     <label for="idCondutor">Condutor</label>
                     <select class="custom-select" name="idCondutor" id="idCondutor">
                         <option type="hidden" value="escolher"> Escolha um Condutor</option>
-                        <option style="display:none;" value="novo">Novo</option>
+                        <option style="display:none;" value="novo"></option>
                         <?php
                             $condutorControl = new CondutorControl();
                             $condutores = $condutorControl->listar();

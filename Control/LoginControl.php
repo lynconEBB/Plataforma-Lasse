@@ -8,7 +8,7 @@ class LoginControl{
     
     public function __construct(){
         session_start();
-        $funcDAO = new FuncionarioDao();
+        $funcDAO = new UsuarioDao();
         if (isset($_POST["acao"]) and $_POST["acao"] == "login") {
             if ($_POST["usuario-email"] != "" && $_POST["senha"] != "") {
                 $this->login = $_POST["usuario-email"];
