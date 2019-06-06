@@ -17,7 +17,7 @@ class ViagemControl extends CrudControl {
             case 2:
                 $this->excluir($_POST['id']);
                 break;
-            case 3:
+            case "alterarViagem":
                 $this->atualizar();
                 break;
         }
@@ -38,7 +38,7 @@ class ViagemControl extends CrudControl {
         $funcDAO = new UsuarioDao();
         $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
         
-        $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],'34');
+        $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
         $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
 
         $idViagem = $this->DAO->pdo->lastInsertId();
@@ -50,10 +50,30 @@ class ViagemControl extends CrudControl {
 
     }
 
+    protected function atualizar()
+    {
+        $veiculoControl = new VeiculoControl();
+        if (isset($_POST['idVeiculo']) && $_POST['idVeiculo'] === 'novo'){
+            $veiculoControl->cadastrar();
+            $id = $veiculoControl->DAO->pdo->lastInsertId();
+            $veiculo = $veiculoControl->listarPorId($id);
+        }else{
+            $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
+        }
+
+        $funcDAO = new UsuarioDao();
+        $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
+
+        $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],$_POST['idViagem']);
+        $this->DAO->atualizar($viagem);
+
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+    }
+
+
     protected function excluir($id)
     {
         $this -> DAO -> excluir($id);
-
         header('Location: '.$_SERVER['HTTP_REFERER']);
 
     }
@@ -68,13 +88,6 @@ class ViagemControl extends CrudControl {
         return $this -> DAO -> listarPorIdTarefa($idTarefa);
     }
 
-    protected function atualizar()
-    {
-        //$condDAO = new CondutorDao();
-        //$condutor = $condDAO->listarPorId($_POST['idCondutor']);
-        //$veiculo = new VeiculoModel($_POST['nome'],$_POST['tipo'],$_POST['dtRetirada'],$_POST['dtDevolucao'],$_POST['horarioRetirada'],$_POST['horarioDevolucao'],$condutor,$_POST['id']);
-        //$this -> Dao -> atualizar($veiculo);
-    }
 
     public function verificaPermissao(){
 

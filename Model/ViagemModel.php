@@ -19,7 +19,7 @@ class ViagemModel extends CrudModel {
     private $totalGasto;
 
 
-    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $gastos){
+    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $id=null,$gastos=null){
         $this->viajante = $viajante;
         $this->veiculo = $veiculo;
         $this->origem = $origem;
@@ -35,6 +35,7 @@ class ViagemModel extends CrudModel {
         $this->horaSaidaHosp = $horaSaidaHosp;
         $this->gastos = $gastos;
         $this->totalGasto = 0.00;
+        $this->id=$id;
     }
 
     public function getId(){

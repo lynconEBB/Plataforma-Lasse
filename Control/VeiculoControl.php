@@ -46,7 +46,8 @@ class VeiculoControl extends CrudControl {
         return $this -> DAO -> listar();
     }
 
-    protected function atualizar(){$condControl = new CondutorControl();
+    protected function atualizar(){
+        $condControl = new CondutorControl();
         if ($_POST['idCondutor'] == 'novo'){
             $condControl->cadastrar();
             $id = $condControl->DAO->pdo->lastInsertId();

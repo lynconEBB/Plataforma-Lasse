@@ -41,16 +41,21 @@ class GastoDao extends CrudDao
     }
 
     //Retorna todos os condutores em uma lista de objetos da classe modelo CondutorModel
-    public function listar(){
-        /*$comando = "SELECT * FROM tbCondutor";
+    public function listarPorIdViagem($idViagem){
+        $comando = "SELECT * FROM tbGasto WHERE idViagem= :id";
         $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idViagem);
         $stm->execute();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $obj = new GastoModel($row['valor'],$row['tipo'],$row['id']);
             $result[] = $obj;
         }
-        return $result;*/
+        return $result;
+    }
+
+    public function listar(){
+
     }
 
     function atualizar(CondutorModel $condutor){

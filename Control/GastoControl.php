@@ -48,8 +48,8 @@ class GastoControl extends CrudControl
         //return $this -> DAO -> listar();
     }
 
-    public function listarPorId($id){
-        //return $this -> DAO -> listarPorId($id);
+    public function listarPorIdViagem($id){
+        return $this -> DAO -> listarPorIdViagem($id);
     }
 
     protected function atualizar(){
