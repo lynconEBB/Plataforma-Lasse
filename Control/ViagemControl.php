@@ -35,7 +35,7 @@ class ViagemControl extends CrudControl {
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
         }
 
-        $funcDAO = new UsuarioDao();
+        $funcDAO = new UsuarioControl();
         $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
         
         $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
@@ -61,7 +61,7 @@ class ViagemControl extends CrudControl {
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
         }
 
-        $funcDAO = new UsuarioDao();
+        $funcDAO = new UsuarioControl();
         $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
 
         $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp'],$_POST['idViagem']);
