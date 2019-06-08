@@ -51,6 +51,11 @@
                         <button class="btn"><img width="16" src="../img/plane-solid.svg" alt=""></button>
                     </a>
                 </td>
+                <td>
+                    <a href="CompraView.php?idTarefa=<?= $registro->getId()?>">
+                        <button class="btn"><img width="16" src="../img/shopping-cart-solid.svg" alt=""></button>
+                    </a>
+                </td>
             </tr>
         <?php
             endforeach;

@@ -23,8 +23,16 @@ class ItemControl extends CrudControl{
     }
 
     protected function cadastrar(){
-        $condutor = new ItemModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
-        $this->DAO->cadastrar($condutor);
+        /*$condutor = new ItemModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
+        $this->DAO->cadastrar($condutor);*/
+    }
+
+    public function cadastrarPorArray(array $itens, int $idCompra)
+    {
+        foreach ($itens as $item){
+            $ite = new ItemModel($item['valor'],$item['nome'],$item['qtd']);
+            $this->DAO->cadastrar($ite,$idCompra);
+        }
     }
 
     protected function excluir($id){

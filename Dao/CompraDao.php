@@ -2,15 +2,14 @@
 
 require_once '../Services/Autoload.php';
 
-class ItemDao extends CrudDao {
-    function cadastrar(ItemModel $item,$idCompra){
-        $comando = "INSERT INTO tbItem (valor,quantidade,nome,idCompra) values (:valor, :quantidade,:nome,:idCompra)";
+class CompraDao extends CrudDao {
+
+    function cadastrar(CompraModel $compra){
+        $comando = "INSERT INTO tbCompra (proposito,totalGasto) values (:proposito, :totalGasto)";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':valor',$item->getValor());
-        $stm->bindValue(':quantidade',$item->getQuantidade());
-        $stm->bindValue(':nome',$item->getNome());
-        $stm->bindValue(':idCompra',$idCompra);
+        $stm->bindValue(':proposito',$compra->getProprosito());
+        $stm->bindValue(':totalGasto',$compra->getTotalGasto());
 
         $stm->execute();
     }
@@ -62,4 +61,5 @@ class ItemDao extends CrudDao {
 
         return $obj;
     }
+
 }

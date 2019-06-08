@@ -11,5 +11,5 @@
 
         $caminho = "..".DIRECTORY_SEPARATOR.$pasta.DIRECTORY_SEPARATOR.$classe.".php";
 
-        require_once $caminho;
+        require $caminho;
     });
