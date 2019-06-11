@@ -43,6 +43,10 @@ class ItemControl extends CrudControl{
         return $this -> DAO -> listar();
     }
 
+    public function listarPorIdCompra($idCompra){
+        return $this -> DAO -> listarPorIdCompra($idCompra);
+    }
+
     protected function atualizar(){
         $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
         $this -> DAO -> atualizar($condutor);

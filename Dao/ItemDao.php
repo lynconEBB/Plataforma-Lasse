@@ -62,4 +62,19 @@ class ItemDao extends CrudDao {
 
         return $obj;
     }
+
+    public function listarPorIdCompra($id){
+        $comando = "SELECT * from tbItem WHERE idCompra = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':id',$id);
+
+        $stm->execute();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+            $obj = new ItemModel($row['valor'],$row['nome'],$row['quantidade'],$row['id']);
+            $result[] = $obj;
+        }
+
+        return $result;
+    }
 }

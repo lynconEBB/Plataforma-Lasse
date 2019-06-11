@@ -25,7 +25,8 @@ class CompraControl extends CrudControl {
         }
     }
 
-    public function cadastrar(){
+    public function cadastrar()
+    {
         $total = $this->calculaTotal($_POST['itens']);
 
         $compra = new CompraModel($_POST['proposito'],$total);
@@ -35,11 +36,10 @@ class CompraControl extends CrudControl {
 
         $itemControl = new ItemControl();
         $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
-
-
     }
 
-    public function calculaTotal(array $itens){
+    public function calculaTotal(array $itens)
+    {
         $total = 0;
         foreach ($itens as $item){
             $total += $item['valor'] * $item['qtd'];
@@ -47,21 +47,25 @@ class CompraControl extends CrudControl {
         return $total;
     }
 
-    protected function excluir($id){
+    protected function excluir($id)
+    {
         $this -> DAO -> excluir($id);
     }
 
-    public function listar(){
+    public function listar()
+    {
         return $this -> DAO -> listar();
     }
 
-    public function listarPorId($id){
+    public function listarPorIdTarefa($id)
+    {
         return $this -> DAO -> listarPorId($id);
     }
 
-    protected function atualizar(){
+    protected function atualizar()
+    {
         $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        $this -> DAO -> atualizar($condutor);;
+        $this -> DAO -> atualizar($condutor);
     }
 }
 

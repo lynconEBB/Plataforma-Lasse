@@ -15,7 +15,7 @@ class CompraDao extends CrudDao {
     }
 
     function excluir($id){
-        $comando = "DELETE FROM tbCondutor WHERE id = :id";
+        $comando = "DELETE FROM tbCompra WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
@@ -24,20 +24,23 @@ class CompraDao extends CrudDao {
     }
 
     public function listar(){
-        $comando = "SELECT * FROM tbCondutor";
+        $comando = "SELECT * FROM tbCompra";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
+
+        $itemControl = new ItemControl();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $itens = $itemControl->listarPorIdCompra($row['id']);
+            $obj = new CompraModel($row['proprosito'],$row['totalGasto'],$itens,$row['id']);
             $result[] = $obj;
         }
         return $result;
     }
 
-    function atualizar(CondutorModel $condutor){
+    function atualizar(CompraModel $compra){
 
-        $comando = "UPDATE tbCondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
+        $comando = "UPDATE tbCondutor SET nome = :nome, cnh = :cnh, validadeCNH = :validadeCNH WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':nome',$condutor->getNome());

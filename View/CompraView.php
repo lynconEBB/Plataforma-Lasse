@@ -9,9 +9,8 @@ $resul = $compraControl->listar();
 ?>
 <table class="table table-hover">
     <thead>
-    <th>Nome</th>
-    <th>Número CNH</th>
-    <th>Validade CNH</th>
+    <th>Proposito</th>
+    <th>Total Gasto</th>
     <th></th>
     <th></th>
     </thead>
@@ -19,7 +18,6 @@ $resul = $compraControl->listar();
     <?php
     foreach ($resul as $registro){
         echo '<tr>';
-        echo "<td></td>";
         echo "<td></td>";
         echo "<td></td>";
         echo "<td>";
