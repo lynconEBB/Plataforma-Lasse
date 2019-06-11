@@ -18,6 +18,7 @@ class GastoControl extends CrudControl
                 break;
             case 2:
                 $this->excluir($_POST['id']);
+                header('Location:../View/CondutorView.php');
                 break;
             case 3:
                 $this->atualizar();
@@ -26,8 +27,8 @@ class GastoControl extends CrudControl
     }
 
     public function cadastrar(){
-        /*$gasto = new GastoModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
-        $this->DAO->cadastrar($gasto);*/
+        $gasto = new GastoModel($_POST['valor'],$_POST['nome']);
+        $this->DAO->cadastrar($gasto);
     }
 
     public function cadastrarGastos($gastos,$idViagem){
@@ -41,11 +42,11 @@ class GastoControl extends CrudControl
     }
 
     protected function excluir($id){
-        //$this -> DAO -> excluir($id);
+        $this -> DAO -> excluir($id);
     }
 
     public function listar(){
-        //return $this -> DAO -> listar();
+        return $this -> DAO -> listar();
     }
 
     public function listarPorIdViagem($id){
@@ -53,7 +54,12 @@ class GastoControl extends CrudControl
     }
 
     protected function atualizar(){
-        //$condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        //$this -> DAO -> atualizar($condutor);
+        $gasto = new GastoModel($_POST['valor'],$_POST['tipoGasto'],$_POST['id']);
+        $this -> DAO -> atualizar($gasto);
+
+        header('Location:../View/GastoView.php');
+
     }
 }
+
+new GastoControl();

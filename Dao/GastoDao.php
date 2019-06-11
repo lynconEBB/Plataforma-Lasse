@@ -5,15 +5,14 @@ require_once '../Services/Autoload.php';
 class GastoDao extends CrudDao
 {
 
-    function cadastrar(CondutorModel $condutor){
-        /*$comando = "INSERT INTO tbCondutor (nome,cnh,validadeCNH) values (:nome, :cnh, :validadeCNH)";
+    function cadastrar(GastoModel $gasto){
+        $comando = "INSERT INTO tbGasto (tipo,valor) values (:tipo, :valor)";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':nome',$condutor->getNome());
-        $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
+        $stm->bindValue(':tipo',$gasto->getTipo());
+        $stm->bindValue(':cnh',$gasto->getValor());
 
-        $stm->execute();*/
+        $stm->execute();
     }
 
     function cadastrarGastos($gastos,$idViagem){
@@ -32,12 +31,12 @@ class GastoDao extends CrudDao
     }
 
     function excluir($id){
-        /*$comando = "DELETE FROM tbCondutor WHERE id = :id";
+        $comando = "DELETE FROM tbGasto WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');*/
+
     }
 
 
@@ -55,21 +54,28 @@ class GastoDao extends CrudDao
     }
 
     public function listar(){
-
+        $comando = "SELECT * FROM tbGasto";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idViagem);
+        $stm->execute();
+        $result =array();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+            $obj = new GastoModel($row['valor'],$row['tipo'],$row['id']);
+            $result[] = $obj;
+        }
+        return $result;
     }
 
-    function atualizar(CondutorModel $condutor){
-/*
-        $comando = "UPDATE tbCondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
+    function atualizar(GastoModel $gasto){
+        $comando = "UPDATE tbGasto SET tipo=:tipo, valor=:valor WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':nome',$condutor->getNome());
-        $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
-        $stm->bindValue(':id',$condutor->getId());
+        $stm->bindValue(':tipo',$gasto->getTipo());
+        $stm->bindValue(':valor',$gasto->getValor());
+        $stm->bindValue(':id',$gasto->getId());
 
         $stm->execute();
-        header('Location:../View/CondutorView.php?success=true');*/
+
     }
 
 }

@@ -7,7 +7,7 @@ class PdoFactory{
     const HOST = "localhost";
     const BANCO = "dbLPM";
     const USUARIO = "root";
-    const SENHA = "";
+    const SENHA = "bancodedados";
     const OPCOES = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL, PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING];
 
     public static function criarConexao(){

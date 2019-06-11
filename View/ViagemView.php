@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 require_once '../Services/Autoload.php';
 LoginControl::verificar();
 
@@ -73,6 +71,7 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
 </button>
 
 <a href="VeiculoView.php"><button type="button" class="btn btn-warning">Menu de Veiculos</button></a>
+<a href="GastoView.php"><button type="button" class="btn btn-warning">Menu de Gastos</button></a>
 
 <div class="modal fade" id="modalAlterar" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
