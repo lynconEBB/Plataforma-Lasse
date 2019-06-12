@@ -12,11 +12,11 @@ class CompraControl extends CrudControl {
         switch ($acao){
             case 1:
                 $this->cadastrar();
-                header('Location:../View/CompraView.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
             case 2:
                 $this->excluir($_POST['id']);
-                header('Location:../View/CondutorView.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
             case 3:
                 $this->atualizar();
@@ -30,7 +30,7 @@ class CompraControl extends CrudControl {
         $total = $this->calculaTotal($_POST['itens']);
 
         $compra = new CompraModel($_POST['proposito'],$total);
-        $this->DAO->cadastrar($compra);
+        $this->DAO->cadastrar($compra,$_POST['idTarefa']);
 
         $idCompra = $this->DAO->pdo->lastInsertId();
 
@@ -49,17 +49,29 @@ class CompraControl extends CrudControl {
 
     protected function excluir($id)
     {
-        $this -> DAO -> excluir($id);
+        $itemControl = new ItemControl();
+        $itemControl->excluirPorIdCompra($id);
+        $this->DAO->excluir($id);
+    }
+
+    public function organizarItens(array $itens){
+        $jsArray ='[';
+        foreach ($itens as $item){
+            $jsArray .= '["'.$item->getId().'","'.$item->getNome().'","'.$item->getValor().'","'.$item->getQuantidade().'"],';
+        }
+        $jsArray = trim($jsArray,',');
+        $jsArray .= ']';
+        return $jsArray;
     }
 
     public function listar()
     {
-        return $this -> DAO -> listar();
+        return $this->DAO->listar();
     }
 
-    public function listarPorIdTarefa($id)
+    public function listarPorIdTarefa($id):array
     {
-        return $this -> DAO -> listarPorId($id);
+        return $this->DAO->listarPorIdTarefa($id);
     }
 
     protected function atualizar()

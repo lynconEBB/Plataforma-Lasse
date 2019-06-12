@@ -16,10 +16,19 @@ class ItemDao extends CrudDao {
     }
 
     function excluir($id){
-        $comando = "DELETE FROM tbCondutor WHERE id = :id";
+        $comando = "DELETE FROM tbItem WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':id',$id);
+        $stm->execute();
+
+    }
+
+    function excluirPorIdCompra($idCompra){
+        $comando = "DELETE FROM tbItem WHERE idCompra = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':id',$idCompra);
         $stm->execute();
 
     }
@@ -70,6 +79,7 @@ class ItemDao extends CrudDao {
         $stm->bindValue(':id',$id);
 
         $stm->execute();
+        $result = [];
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $obj = new ItemModel($row['valor'],$row['nome'],$row['quantidade'],$row['id']);
             $result[] = $obj;

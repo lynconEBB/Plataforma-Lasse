@@ -10,7 +10,7 @@ class ItemControl extends CrudControl{
 
     public function defineAcao($acao){
         switch ($acao){
-            case 1:
+            case 'cadastrarItem':
                 $this->cadastrar();
                 break;
             case 2:
@@ -23,8 +23,8 @@ class ItemControl extends CrudControl{
     }
 
     protected function cadastrar(){
-        /*$condutor = new ItemModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH']);
-        $this->DAO->cadastrar($condutor);*/
+        $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd']);
+        $this->DAO->cadastrar($item,$_POST['idTarefa']);
     }
 
     public function cadastrarPorArray(array $itens, int $idCompra)
@@ -37,6 +37,10 @@ class ItemControl extends CrudControl{
 
     protected function excluir($id){
         $this -> DAO -> excluir($id);
+    }
+
+    public function excluirPorIdCompra($id){
+        $this -> DAO -> excluirPorIdCompra($id);
     }
 
     public function listar(){

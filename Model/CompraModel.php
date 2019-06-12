@@ -2,13 +2,13 @@
 
 class CompraModel extends CrudModel{
     private $id;
-    private $proprosito;
+    private $proposito;
     private $totalGasto;
     private $itens;
 
-    public function __construct($proprosito,$totalGasto=null, $itens=null,$id=null){
+    public function __construct($proposito,$totalGasto=null, $itens=null,$id=null){
         $this->id = $id;
-        $this->proprosito = $proprosito;
+        $this->proposito = $proposito;
         $this->totalGasto = $totalGasto;
         $this->itens = $itens;
     }
@@ -21,12 +21,12 @@ class CompraModel extends CrudModel{
         $this->id = $id;
     }
 
-    public function getProprosito(){
-        return $this->proprosito;
+    public function getProposito(){
+        return $this->proposito;
     }
 
-    public function setProprosito($proprosito){
-        $this->proprosito = $proprosito;
+    public function setProposito($proposito){
+        $this->proposito = $proposito;
     }
 
     public function getTotalGasto(){

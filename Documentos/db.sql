@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: localhost    Database: dbLPM
 -- ------------------------------------------------------
--- Server version	5.7.25-0ubuntu0.16.04.2
+-- Server version	5.7.26-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,8 +59,11 @@ CREATE TABLE `tbCompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `proposito` varchar(60) NOT NULL,
   `totalGasto` decimal(12,2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idTarefa` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tbTarefa_tbCompra` (`idTarefa`),
+  CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +72,7 @@ CREATE TABLE `tbCompra` (
 
 LOCK TABLES `tbCompra` WRITE;
 /*!40000 ALTER TABLE `tbCompra` DISABLE KEYS */;
+INSERT INTO `tbCompra` VALUES (8,'Melhorar Sala de Aula',216.16,10),(9,'Melhorar Sala de Aula',413.28,10),(10,'',0.00,10),(11,'',0.00,10);
 /*!40000 ALTER TABLE `tbCompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +89,7 @@ CREATE TABLE `tbCondutor` (
   `cnh` varchar(45) NOT NULL,
   `validadeCNH` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +98,7 @@ CREATE TABLE `tbCondutor` (
 
 LOCK TABLES `tbCondutor` WRITE;
 /*!40000 ALTER TABLE `tbCondutor` DISABLE KEYS */;
+INSERT INTO `tbCondutor` VALUES (5,'Condutores','4535634','2019-02-01'),(9,'Condutores','4535634','2019-02-01'),(10,'Andressa','11111','2039-02-01'),(11,'Lyncon','333333','2019-02-01');
 /*!40000 ALTER TABLE `tbCondutor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +117,7 @@ CREATE TABLE `tbGasto` (
   PRIMARY KEY (`id`),
   KEY `fk_tbGasto_tbViagem` (`idViagem`),
   CONSTRAINT `fk_tbGasto_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,13 +130,13 @@ LOCK TABLES `tbGasto` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbProduto`
+-- Table structure for table `tbItem`
 --
 
-DROP TABLE IF EXISTS `tbProduto`;
+DROP TABLE IF EXISTS `tbItem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbProduto` (
+CREATE TABLE `tbItem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompra` int(11) NOT NULL,
   `valor` decimal(9,2) NOT NULL,
@@ -140,16 +145,17 @@ CREATE TABLE `tbProduto` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProduto_tbCompra` (`idCompra`),
   CONSTRAINT `fk_tbProduto_tbCompra` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbProduto`
+-- Dumping data for table `tbItem`
 --
 
-LOCK TABLES `tbProduto` WRITE;
-/*!40000 ALTER TABLE `tbProduto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbProduto` ENABLE KEYS */;
+LOCK TABLES `tbItem` WRITE;
+/*!40000 ALTER TABLE `tbItem` DISABLE KEYS */;
+INSERT INTO `tbItem` VALUES (7,8,54.04,4.00,'Mesa'),(8,9,54.04,4.00,'Mesa'),(9,9,12.32,16.00,'Cadeira');
+/*!40000 ALTER TABLE `tbItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -167,7 +173,7 @@ CREATE TABLE `tbProjeto` (
   `descricao` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +182,7 @@ CREATE TABLE `tbProjeto` (
 
 LOCK TABLES `tbProjeto` WRITE;
 /*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
+INSERT INTO `tbProjeto` VALUES (1,'2038-01-02','2039-02-01',0.00,'Projeto para Projetar','Projeto1'),(2,'2038-01-02','2039-02-01',0.00,'gdfgdfgd','Projeto6'),(3,'2038-01-02','2039-02-01',0.00,'fsdjkhfksd','ProjetoCami'),(5,'2014-03-01','2013-02-02',0.00,'Projeto para Projetar','Bio Gas');
 /*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +204,7 @@ CREATE TABLE `tbTarefa` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
   CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,6 +213,7 @@ CREATE TABLE `tbTarefa` (
 
 LOCK TABLES `tbTarefa` WRITE;
 /*!40000 ALTER TABLE `tbTarefa` DISABLE KEYS */;
+INSERT INTO `tbTarefa` VALUES (10,'2003-03-02','2003-02-01','Concluido','Concluir CRUDS','Tarefa para concluir todos os',1);
 /*!40000 ALTER TABLE `tbTarefa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,8 +237,9 @@ CREATE TABLE `tbUsuario` (
   `email` varchar(45) NOT NULL,
   `login` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
+  `dtNascimento` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,6 +248,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
+INSERT INTO `tbUsuario` VALUES (1,'Lyncon Estevan Baez','12112880993','3424543','3094-03-02','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','Lyncon.ebb','hgj','3094-03-02'),(2,'Camila','1232423423','234543534','2012-02-01','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','camig@gmail.com','cami','123','2019-02-01'),(3,'Lynconeee','12112880993','3424543','3094-03-02','1',93.00,'Es','Terceiros','lynconlyn@gmail.com','aa','123','3094-03-02');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,6 +275,7 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
+INSERT INTO `tbUsuarioProjeto` VALUES (1,1),(2,1),(3,2),(5,3);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +298,7 @@ CREATE TABLE `tbVeiculo` (
   PRIMARY KEY (`id`),
   KEY `fk_tbVeiculo_tbCondutor` (`idCondutor`),
   CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbCondutor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,6 +307,7 @@ CREATE TABLE `tbVeiculo` (
 
 LOCK TABLES `tbVeiculo` WRITE;
 /*!40000 ALTER TABLE `tbVeiculo` DISABLE KEYS */;
+INSERT INTO `tbVeiculo` VALUES (4,5,'CarroCarroso','Celta','2039-02-01','2039-01-01','12:00:00','07:00:00'),(8,9,'CarroCarroso','Celta','2039-02-01','2039-01-01','12:00:00','07:00:00'),(9,10,'Fiat','Uni','2012-02-01','2019-02-01','12:00:00','07:00:00');
 /*!40000 ALTER TABLE `tbVeiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,12 +334,13 @@ CREATE TABLE `tbViagem` (
   `HorarioEntradaHosp` time NOT NULL,
   `HorarioSaidaHosp` time NOT NULL,
   `totalGasto` decimal(12,2) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbViagem_tbVeiculo` (`idVeiculo`),
   KEY `fk_tbViagem_tbTarefa` (`idTarefa`),
   CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
   CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbVeiculo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-14 15:26:09
+-- Dump completed on 2019-06-12 17:01:58

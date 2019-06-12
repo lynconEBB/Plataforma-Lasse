@@ -4,13 +4,13 @@ require_once '../Services/Autoload.php';
 
 class CompraDao extends CrudDao {
 
-    function cadastrar(CompraModel $compra){
-        $comando = "INSERT INTO tbCompra (proposito,totalGasto) values (:proposito, :totalGasto)";
+    function cadastrar(CompraModel $compra,$idTarefa){
+        $comando = "INSERT INTO tbCompra (proposito,totalGasto,idTarefa) values (:proposito, :totalGasto, :idTarefa)";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':proposito',$compra->getProprosito());
+        $stm->bindValue(':proposito',$compra->getProposito());
         $stm->bindValue(':totalGasto',$compra->getTotalGasto());
-
+        $stm->bindValue(':idTarefa',$idTarefa);
         $stm->execute();
     }
 
@@ -52,17 +52,20 @@ class CompraDao extends CrudDao {
 
     }
 
-    public function listarPorId($id){
-        $comando = "SELECT * from tbCondutor WHERE id = :id";
+    public function listarPorIdTarefa($idTarefa){
+        $comando = "SELECT * FROM tbCompra where idTarefa = :id";
         $stm = $this->pdo->prepare($comando);
-
-        $stm->bindValue(':id',$id);
-
+        $stm->bindParam(':id',$idTarefa);
         $stm->execute();
-        $resul = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new CondutorModel($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
+        $result =array();
 
-        return $obj;
+        $itemControl = new ItemControl();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+            $itens = $itemControl->listarPorIdCompra($row['id']);
+            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id']);
+            $result[] = $obj;
+        }
+        return $result;
     }
 
 }

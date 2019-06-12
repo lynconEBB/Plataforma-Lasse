@@ -5,29 +5,40 @@ LoginControl::verificar();
 include "cabecalho.php";
 
 $compraControl = new CompraControl();
-$resul = $compraControl->listar();
+$resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
+
 ?>
 <table class="table table-hover">
     <thead>
-    <th>Proposito</th>
-    <th>Total Gasto</th>
-    <th></th>
-    <th></th>
+        <th>Proposito</th>
+        <th>Total Gasto</th>
+        <th></th>
+        <th></th>
     </thead>
     <tbody>
     <?php
-    foreach ($resul as $registro){
-        echo '<tr>';
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td>";
-        echo "<button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='{$registro->getId()}' data-nome='{$registro->getNome()}' data-cnh='{$registro->getCnh()}' data-val='{$registro->getValidadeCNH()}'>";
-        echo "<img width='16' src='../img/edit-regular.svg' alt=''>";
-        echo "</button>";
-        echo "</td>";
-        echo "<td><button class='btn'><a href='../Control/CondutorControl.php?acao=2&id=".$registro->getId()."'><img width='16' src='../img/trash-alt-solid.svg'></a></button></td>";
-        echo '</tr>';
-    }
+        foreach ($resul as $registro):
+            $itensJS = $compraControl->organizarItens($registro->getItens());
+
+    ?>
+            <tr>
+                <td><?=$registro->getProposito()?></td>
+                <td><?=$registro->getTotalGasto()?></td>
+                <td>
+                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$registro->getId()?>" data-proposito="<?=$registro->getProposito()?>" data-itens='<?= $itensJS ?>' >
+                        <img width='16' src='../img/edit-regular.svg' alt=''>
+                    </button>
+                </td>
+                <td>
+                    <form action="../Control/CompraControl.php" method="post">
+                        <input type="hidden" name="acao" value="2">
+                        <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
+                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                    </form>
+                </td>
+            </tr>
+    <?php
+        endforeach;
     ?>
     </tbody>
 </table>
@@ -35,6 +46,8 @@ $resul = $compraControl->listar();
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
     Cadastrar Nova Compra
 </button>
+
+<a href="ItemView.php"><button type="button" class="btn btn-warning">Menu de Itens</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -51,11 +64,12 @@ $resul = $compraControl->listar();
                         <label for="proposito" class="col-form-label">Proposito da Compra</label>
                         <input class="form-control" id="proposito" name="proposito">
                     </div>
-                    <div class="row" id="compras">
+                    <div class="form-group" id="itensCadastro">
+                        <div id="container-itens"></div>
                     </div>
 
                     <button style="display: block;" class="btn" type="button" id="adicionar-item">&plus;</button>
-
+                    <input type="hidden" name="idTarefa" value="<?=$_GET['idTarefa'];?>">
                     <input type="hidden" name="acao" value="1">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
@@ -65,7 +79,7 @@ $resul = $compraControl->listar();
 </div>
 
 <div class="modal fade" id="modalAlterar" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Alteração de Itens</h5>
@@ -74,21 +88,19 @@ $resul = $compraControl->listar();
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/CondutorControl.php" method="post">
+                <form action="../Control/CompraControl.php" method="post">
                     <div class="form-group">
-                        <label for="nomeCondutor" class="col-form-label">Nome</label>
-                        <input class="form-control" id="nomeCondutor" name="nomeCondutor">
+                        <label for="proposito" class="col-form-label">Proposito da Compra</label>
+                        <input class="form-control" id="proposito" name="proposito">
                     </div>
-                    <div class="form-group">
-                        <label for="cnh" class="col-form-label">Número CNH</label>
-                        <input class="form-control" id="cnh" name="cnh">
+                    <div class="form-group" id="itensAlterar">
+                        <div id="container-Itens"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
-                        <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
-                    </div>
-                    <input type="hidden" name="acao" value="3">
-                    <input type="hidden" id="id" name="id">
+
+                    <button style="display: block;" class="btn" type="button" id="adicionar-item">&plus;</button>
+                    <input type="hidden" name="idTarefa" value="<?=$_GET['idTarefa'];?>">
+                    <input type="hidden" name="acao" value="1">
+                    <input type="hidden" name="id" id="id">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
