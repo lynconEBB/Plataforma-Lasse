@@ -47,18 +47,17 @@ class ItemDao extends CrudDao {
         return $result;
     }
 
-    function atualizar(CondutorModel $condutor){
+    function atualizar(ItemModel $item){
 
-        $comando = "UPDATE tbCondutor SET nome=:nome,cnh=:cnh,validadeCNH=:validadeCNH WHERE id = :id";
+        $comando = "UPDATE tbItem SET nome=:nome,valor=:valor,quantidade=:quantidade WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':nome',$condutor->getNome());
-        $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
-        $stm->bindValue(':id',$condutor->getId());
+        $stm->bindValue(':nome',$item->getNome());
+        $stm->bindValue(':valor',$item->getValor());
+        $stm->bindValue(':quantidade',$item->getQuantidade());
+        $stm->bindValue(':id',$item->getId());
 
         $stm->execute();
-
     }
 
     public function listarPorId($id){
@@ -89,4 +88,5 @@ class ItemDao extends CrudDao {
 
         return $result;
     }
+
 }

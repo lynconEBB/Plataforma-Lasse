@@ -14,16 +14,19 @@ class ItemControl extends CrudControl{
                 $this->cadastrar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 2:
-                $this->excluir($_GET['id']);
+            case 'excluiItem':
+                $this->excluir($_POST['id']);
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 3:
+            case 'alteraItem':
                 $this->atualizar();
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
         }
     }
 
-    protected function cadastrar(){
+    protected function cadastrar()
+    {
         $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd']);
         $this->DAO->cadastrar($item,$_POST['idCompra']);
     }
@@ -36,25 +39,39 @@ class ItemControl extends CrudControl{
         }
     }
 
-    protected function excluir($id){
+    protected function excluir($id)
+    {
         $this -> DAO -> excluir($id);
+        $itens = $this->DAO->listarPorIdCompra($_POST['idCompra']);
+        $compraControl = new CompraControl();
+        $total = $compraControl->calculaTotal($itens);
+        $compraControl->atualizaTotal($total,$_POST['idCompra']);
     }
 
-    public function excluirPorIdCompra($id){
+    public function excluirPorIdCompra($id)
+    {
         $this -> DAO -> excluirPorIdCompra($id);
     }
 
-    public function listar(){
+    public function listar()
+    {
         return $this -> DAO -> listar();
     }
 
-    public function listarPorIdCompra($idCompra){
+    public function listarPorIdCompra($idCompra)
+    {
         return $this -> DAO -> listarPorIdCompra($idCompra);
     }
 
-    protected function atualizar(){
-        $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        $this -> DAO -> atualizar($condutor);
+    protected function atualizar()
+    {
+        $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd'],$_POST['id']);
+        $this -> DAO -> atualizar($item);
+        $itens = $this->DAO->listarPorIdCompra($_POST['idCompra']);
+        $compraControl = new CompraControl();
+        $total = $compraControl->calculaTotal($itens);
+        $compraControl->atualizaTotal($total,$_POST['idCompra']);
+
     }
 }
 

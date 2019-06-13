@@ -51,6 +51,17 @@ class CompraDao extends CrudDao {
 
     }
 
+    function atualizaTotal($idCompra,$novoTotal){
+
+        $comando = "UPDATE tbCompra SET totalGasto = :totalGasto WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':totalGasto',$novoTotal);
+        $stm->bindValue(':id',$idCompra);
+
+        $stm->execute();
+    }
+
     public function listarPorIdTarefa($idTarefa){
         $comando = "SELECT * FROM tbCompra where idTarefa = :id";
         $stm = $this->pdo->prepare($comando);
@@ -65,6 +76,20 @@ class CompraDao extends CrudDao {
             $result[] = $obj;
         }
         return $result;
+    }
+
+    public function listarPorId($id):CompraModel
+    {
+        $comando = "SELECT * FROM tbCompra where id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$id);
+        $stm->execute();
+
+        $itemControl = new ItemControl();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+            $itens = $itemControl->listarPorIdCompra($row['id']);
+            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id']);
+        return $obj;
     }
 
 }

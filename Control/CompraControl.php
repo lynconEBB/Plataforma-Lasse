@@ -27,7 +27,7 @@ class CompraControl extends CrudControl {
 
     public function cadastrar()
     {
-        $total = $this->calculaTotal($_POST['itens']);
+        $total = $this->calculaTotalArray($_POST['itens']);
 
         $compra = new CompraModel($_POST['proposito'],$total);
         $this->DAO->cadastrar($compra,$_POST['idTarefa']);
@@ -38,7 +38,7 @@ class CompraControl extends CrudControl {
         $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
     }
 
-    public function calculaTotal(array $itens)
+    public function calculaTotalArray(array $itens)
     {
         $total = 0;
         foreach ($itens as $item){
@@ -47,6 +47,21 @@ class CompraControl extends CrudControl {
         return $total;
     }
 
+    public function calculaTotal(array $itens)
+    {
+        $total = 0;
+        foreach ($itens as $item){
+            $total += $item->getValor() * $item->getQuantidade();
+        }
+        return $total;
+    }
+
+    public function atualizaTotal($total,$idCompra)
+    {
+        $this->DAO->atualizaTotal($idCompra,$total);
+    }
+
+
     protected function excluir($id)
     {
         $itemControl = new ItemControl();
@@ -54,16 +69,19 @@ class CompraControl extends CrudControl {
         $this->DAO->excluir($id);
     }
 
-
     public function listar()
     {
         return $this->DAO->listar();
     }
 
-
     public function listarPorIdTarefa($id):array
     {
         return $this->DAO->listarPorIdTarefa($id);
+    }
+
+    public function listarPorId($id):CompraModel
+    {
+        return $this->DAO->listarPorId($id);
     }
 
     protected function atualizar()
@@ -72,8 +90,9 @@ class CompraControl extends CrudControl {
         $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
     }
 
-    public function verificaPermissao(){
 
+    public function verificaPermissao()
+    {
         if(isset($_GET['idTarefa'])){
             //Descobrindo id do Projeto em que a tarefa foi criada
             $tarefaControl = new TarefaControl();
