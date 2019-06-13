@@ -20,7 +20,7 @@ class CompraControl extends CrudControl {
                 break;
             case 3:
                 $this->atualizar();
-                header('Location:../View/CondutorView.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
         }
     }
@@ -54,20 +54,12 @@ class CompraControl extends CrudControl {
         $this->DAO->excluir($id);
     }
 
-    public function organizarItens(array $itens){
-        $jsArray ='[';
-        foreach ($itens as $item){
-            $jsArray .= '["'.$item->getId().'","'.$item->getNome().'","'.$item->getValor().'","'.$item->getQuantidade().'"],';
-        }
-        $jsArray = trim($jsArray,',');
-        $jsArray .= ']';
-        return $jsArray;
-    }
 
     public function listar()
     {
         return $this->DAO->listar();
     }
+
 
     public function listarPorIdTarefa($id):array
     {
@@ -76,8 +68,28 @@ class CompraControl extends CrudControl {
 
     protected function atualizar()
     {
-        $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
-        $this -> DAO -> atualizar($condutor);
+        $compra = new CompraModel($_POST['proposito'],null,$_POST['null'],$_POST['id']);
+        $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
+    }
+
+    public function verificaPermissao(){
+
+        if(isset($_GET['idTarefa'])){
+            //Descobrindo id do Projeto em que a tarefa foi criada
+            $tarefaControl = new TarefaControl();
+            $idProjeto = $tarefaControl->descobrirIdProjeto($_GET['idTarefa']);
+
+            // Verifica se o funcionário está relacionado com o Projeto
+            $projetoControl = new ProjetoControl();
+
+            if($projetoControl->procuraFuncionario($idProjeto) > 0){
+                return true;
+            }else{
+                die("Você não possui acesso a essa Compra<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+            }
+        }else{
+            die("Nenhuma Tarefa Selecionada!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+        }
     }
 }
 

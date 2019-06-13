@@ -12,6 +12,7 @@ class ItemControl extends CrudControl{
         switch ($acao){
             case 'cadastrarItem':
                 $this->cadastrar();
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
             case 2:
                 $this->excluir($_GET['id']);
@@ -24,7 +25,7 @@ class ItemControl extends CrudControl{
 
     protected function cadastrar(){
         $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd']);
-        $this->DAO->cadastrar($item,$_POST['idTarefa']);
+        $this->DAO->cadastrar($item,$_POST['idCompra']);
     }
 
     public function cadastrarPorArray(array $itens, int $idCompra)
@@ -56,3 +57,5 @@ class ItemControl extends CrudControl{
         $this -> DAO -> atualizar($condutor);
     }
 }
+
+new ItemControl();

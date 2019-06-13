@@ -38,6 +38,20 @@ class TarefaControl extends CrudControl {
         return $this->DAO->descobrirIdProjeto($id);
     }
 
+    public function listarPorIdUsaurio($id){
+        $listaDeTarefas = [];
+        $projetoControl = new ProjetoControl();
+        $projetos = $projetoControl->listarPorIdUsuario($id);
+        foreach ($projetos as $projeto){
+            $tarefas = $this->listarPorIdProjeto($projeto->getId());
+            foreach ($tarefas as $tarefa){
+                $listaDeTarefas[] = $tarefa;
+            }
+        }
+
+        return $listaDeTarefas;
+    }
+
     public function verificaPermissao(){
         if(isset($_GET['idProjeto'])){
             $projetoControl = new ProjetoControl();

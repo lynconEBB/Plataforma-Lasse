@@ -5,6 +5,7 @@ LoginControl::verificar();
 include "cabecalho.php";
 
 $compraControl = new CompraControl();
+$compraControl->verificaPermissao();
 $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
 
 ?>
@@ -14,18 +15,18 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
         <th>Total Gasto</th>
         <th></th>
         <th></th>
+        <th></th>
     </thead>
     <tbody>
     <?php
         foreach ($resul as $registro):
-            $itensJS = $compraControl->organizarItens($registro->getItens());
-
     ?>
             <tr>
                 <td><?=$registro->getProposito()?></td>
                 <td><?=$registro->getTotalGasto()?></td>
                 <td>
-                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$registro->getId()?>" data-proposito="<?=$registro->getProposito()?>" data-itens='<?= $itensJS ?>' >
+                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$registro->getId()?>" data-proposito="<?=$registro->getProposito()?>"
+                            data-idtarefa="<?=$_GET['idTarefa']?>"  >
                         <img width='16' src='../img/edit-regular.svg' alt=''>
                     </button>
                 </td>
@@ -35,6 +36,9 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                         <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
                         <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                     </form>
+                </td>
+                <td>
+                    <a href="ItemView.php?idCompra=<?=$registro->getId()?>"><button type="button" class="btn"><img width='16' src='../img/box-solid.svg' alt=''></button></a>
                 </td>
             </tr>
     <?php
@@ -96,10 +100,20 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                     <div class="form-group" id="itensAlterar">
                         <div id="container-Itens"></div>
                     </div>
+                    <div class="form-group">
+                        <label for="idTarefa">Tarefa Pertencente</label>
+                        <select class="custom-select" name="idTarefa" id="idTarefa">
+                            <?php
+                                $tarefaControl = new TarefaControl();
+                                $tarefas = $tarefaControl->listarPorIdUsaurio($_SESSION['usuario-id']);
+                                foreach ($tarefas as $tarefa){
+                                    echo "<option value='{$tarefa->getId()}'>{$tarefa->getNome()}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
 
-                    <button style="display: block;" class="btn" type="button" id="adicionar-item">&plus;</button>
-                    <input type="hidden" name="idTarefa" value="<?=$_GET['idTarefa'];?>">
-                    <input type="hidden" name="acao" value="1">
+                    <input type="hidden" name="acao" value="3">
                     <input type="hidden" name="id" id="id">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>

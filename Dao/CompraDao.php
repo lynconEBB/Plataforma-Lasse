@@ -38,15 +38,14 @@ class CompraDao extends CrudDao {
         return $result;
     }
 
-    function atualizar(CompraModel $compra){
+    function atualizar(CompraModel $compra,$idTarefa){
 
-        $comando = "UPDATE tbCondutor SET nome = :nome, cnh = :cnh, validadeCNH = :validadeCNH WHERE id = :id";
+        $comando = "UPDATE tbCompra SET proposito = :proposito, idTarefa = :idTarefa WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindValue(':nome',$condutor->getNome());
-        $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
-        $stm->bindValue(':id',$condutor->getId());
+        $stm->bindValue(':proposito',$compra->getProposito());
+        $stm->bindValue(':idTarefa',$idTarefa);
+        $stm->bindValue(':id',$compra->getId());
 
         $stm->execute();
 

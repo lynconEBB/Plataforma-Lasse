@@ -34,14 +34,16 @@ class ItemDao extends CrudDao {
     }
 
     public function listar(){
-        $comando = "SELECT * FROM tbCondutor";
+        $comando = "SELECT * from tbItem";
         $stm = $this->pdo->prepare($comando);
+
         $stm->execute();
-        $result =array();
+        $result = [];
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new CondutorModel($row['nome'],$row['cnh'],$row['validadeCNH'],$row['id']);
+            $obj = new ItemModel($row['valor'],$row['nome'],$row['quantidade'],$row['id']);
             $result[] = $obj;
         }
+
         return $result;
     }
 
