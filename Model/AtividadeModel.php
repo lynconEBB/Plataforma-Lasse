@@ -9,21 +9,18 @@ class AtividadeModel extends CrudModel {
     private $totalGasto;
     private $usuario;
 
-    public function __construct($tipo, $tempoGasto, $comentario, $dataRealizacao, $usuario){
+    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, UsuarioModel $usuario,$id = null){
         $this->tipo = $tipo;
         $this->tempoGasto = $tempoGasto;
         $this->comentario = $comentario;
         $this->dataRealizacao = $dataRealizacao;
         $this->usuario = $usuario;
-        $this->totalGasto =  $this -> usuario -> valorHora * $this -> tempoGasto;
+        $this->totalGasto =  $this->usuario->getValorHora() * $this->tempoGasto;
+        $this->id = $id;
     }
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getTipo(){

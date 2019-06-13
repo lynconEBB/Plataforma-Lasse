@@ -18,6 +18,7 @@ class LoginControl{
                     $usuario = $funcDAO->listarPorLogin($_POST["usuario-email"]);
                     $_SESSION["usuario-id"] = $usuario->getId();
                     $_SESSION["usuario"] = $_POST["usuario-email"];
+                    $_SESSION["usuario-classe"] = $usuario;
                     $_SESSION["autenticado"] = TRUE;
                     header("Location: ../View/UsuarioView.php");
                     die();
