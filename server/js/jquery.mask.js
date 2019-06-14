@@ -40,9 +40,9 @@
 (function (factory, jQuery, Zepto) {
 
     if (typeof define === 'function' && define.amd) {
-        define(['jquery'], factory);
+        define(['server/js/jquery'], factory);
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
+        module.exports = factory(require('server/js/jquery'));
     } else {
         factory(jQuery || Zepto);
     }
@@ -390,7 +390,7 @@
 
         mask = typeof mask === 'function' ? mask(p.val(), undefined, el,  options) : mask;
 
-        // public methods
+        // server methods
         jMask.mask = mask;
         jMask.options = options;
         jMask.remove = function() {

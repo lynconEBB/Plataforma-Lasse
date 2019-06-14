@@ -6,8 +6,8 @@ LoginControl::verificar();
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/estiloViagemCadastro.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/estiloViagemCadastro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -232,8 +232,8 @@ LoginControl::verificar();
     </main>
 
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesViagem.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/bootstrap.js"></script>
+<script src="../server/js/funcoesViagem.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@
                             data-id='<?= $registro->getId() ?>' data-nome='<?php echo $registro->getNome() ?>'
                             data-desc='<?= $registro->getDescricao() ?>' data-dtinicio='<?php echo $registro->getDataInicio() ?>'
                             data-dtconclusao="<?= $registro->getDataConclusao() ?>" data-estado="<?php echo $registro->getEstado() ?>" >
-                        <img width='35' src='../img/Icons/editarIcone.png' alt=''>
+                        <img width='35' src='../server/img/Icons/editarIcone.png' alt=''>
                     </button>
                 </td>
                 <td>
@@ -45,22 +45,22 @@
                         <input type="hidden" name="acao" value="2">
                         <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
                         <input type="hidden" name="idProjeto" value="<?= $_GET['idProjeto'] ?>">
-                        <button class="btn"><img width='25' src='../img/Icons/lixeiraicone.png' alt=''></button>
+                        <button class="btn"><img width='25' src='../server/img/Icons/lixeiraicone.png' alt=''></button>
                     </form>
                 </td>
                 <td>
                     <a href="ViagemView.php?idTarefa=<?= $registro->getId()?>">
-                        <button class="btn"><img width="30" src="../img/Icons/viagemIcone.png" alt=""></button>
+                        <button class="btn"><img width="30" src="../server/img/Icons/viagemIcone.png" alt=""></button>
                     </a>
                 </td>
                 <td>
                     <a href="CompraView.php?idTarefa=<?= $registro->getId()?>">
-                        <button class="btn"><img width="20" src="../img/Icons/Compra.png" alt=""></button>
+                        <button class="btn"><img width="20" src="../server/img/Icons/Compra.png" alt=""></button>
                     </a>
                 </td>
                 <td>
                     <a href="AtividadeView.php?idTarefa=<?= $registro->getId()?>">
-                        <button class="btn"><img width="25" src="../img/Icons/Atividade.png" alt=""></button>
+                        <button class="btn"><img width="25" src="../server/img/Icons/Atividade.png" alt=""></button>
                     </a>
                 </td>
             </tr>
@@ -166,8 +166,8 @@
     }
 ?>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/funcoesTarefa.js"></script>
-<script src="../js/bootstrap.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/funcoesTarefa.js"></script>
+<script src="../server/js/bootstrap.js"></script>
 </body>
 </html>

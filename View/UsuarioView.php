@@ -1,6 +1,5 @@
 <?php
-    require_once '../Services/Autoload.php';
-    LoginControl::verificar();
+    UsuarioControl::verificar();
 
     $usuarioControl = new UsuarioControl();
     $usuario = $usuarioControl->listarPorId($_SESSION['usuario-id']);
@@ -12,24 +11,28 @@
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleUsuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styleUsuario.css" />
 </head>
 <body>
     <main class="cont">
         <aside class="side-bar">
-            <img src="../img/perfil.png" class="foto">
+            <img src="img/perfil.png" class="foto">
             <span class="side-bar-title"><?= $usuario->getLogin() ?></span>
             <span class="side-bar-info"><?= $usuario->getAtuacao() ?></span>
             <span class="side-bar-info"><?= $usuario->getFormacao() ?></span>
+
             <button class="side-bar-button" data-toggle='modal' data-target='#modalAlterar' data-nome="<?= $usuario->getNomeCompleto()?>"
             data-login="<?=$usuario->getLogin()?>" data-email="<?=$usuario->getEmail()?>" data-dtnasc="<?=$usuario->getDtNascimento()?>" data-rg="<?=$usuario->getRg()?>" data-cpf="<?=$usuario->getCpf()?>"
             data-dtemissao="<?=$usuario->getDtNascimento()?>" data-formacao="<?=$usuario->getFormacao()?>" data-valorhora="<?=$usuario->getValorHora()?>" data-atuacao="<?=$usuario->getAtuacao()?>">Editar</button>
+
             <form action="../Control/LoginControl.php" method="post">
                 <input type="hidden" name="acao" value="sair">
                 <button class="side-bar-button red">Sair</button>
             </form>
+
+            <a href="AtividadeView.php"><button class="side-bar-button">Menu Atividades</button></a>
         </aside>
         <section class="perfil">
             <div class="perfil-collum">
@@ -72,7 +75,6 @@
                     }else{
                         echo '<label class="item-label">Nenhuma Projeto encontrado :(</label>';
                     }
-
                 ?>
                 <a href="ProjetoView.php"><button class="side-bar-button green">Menu dos Projetos</button></a>
             </div>
@@ -149,8 +151,8 @@
         </div>
     </div>
 
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/funcoesUsuario.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/funcoesUsuario.js"></script>
 </body>
 </html>

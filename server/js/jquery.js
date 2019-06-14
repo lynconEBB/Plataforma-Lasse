@@ -4381,7 +4381,7 @@
             }
         },
 
-        // Not public - generate a queueHooks object, or return the current one
+        // Not server - generate a queueHooks object, or return the current one
         _queueHooks: function( elem, type ) {
             var key = type + "queueHooks";
             return dataPriv.get( elem, key ) || dataPriv.access( elem, key, {
@@ -4941,7 +4941,7 @@
     }
 
     /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the server interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
     jQuery.event = {
@@ -14745,7 +14745,7 @@
             }
         },
 
-        // Not public - generate a queueHooks object, or return the current one
+        // Not server - generate a queueHooks object, or return the current one
         _queueHooks: function( elem, type ) {
             var key = type + "queueHooks";
             return dataPriv.get( elem, key ) || dataPriv.access( elem, key, {
@@ -15305,7 +15305,7 @@
     }
 
     /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the server interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
     jQuery.event = {

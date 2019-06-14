@@ -11,8 +11,8 @@ $viagens = $viagemControl->listar();
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/estiloViagemCadastro.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/estiloViagemCadastro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -36,7 +36,7 @@ $viagens = $viagemControl->listar();
             <td><?=$gasto->getValor()?></td>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?=$gasto->getId()?>' data-tipo="<?=$gasto->getTipo()?>" data-valor="<?=$gasto->getValor()?>">
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
                 </button>
             </td>
         </tr>
@@ -75,9 +75,9 @@ $viagens = $viagemControl->listar();
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesGasto.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/bootstrap.js"></script>
+<script src="../server/js/funcoesGasto.js"></script>
 </body>
 </html>
 

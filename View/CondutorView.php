@@ -24,14 +24,14 @@
             <td><?php echo $registro->getValidadeCNH() ?></td>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>' data-cnh='<?php echo $registro->getCnh()?>' data-val='<?php echo $registro->getValidadeCNH()?>'>
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
                 <form action="../Control/CondutorControl.php" method="post">
                     <input type="hidden" name="acao" value="2">
                     <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg'></button>
+                    <button class='btn'><img width='16' src='../server/img/trash-alt-solid.svg'></button>
                 </form>
             </td>
         </tr>

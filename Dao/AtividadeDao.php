@@ -4,7 +4,7 @@ require_once '../Services/Autoload.php';
 
 class AtividadeDao extends CrudDao {
 
-    function cadastrar(AtividadeModel $atividade,$idTarefa){
+    function cadastrarPlanejado(AtividadeModel $atividade,$idTarefa){
         $comando = "INSERT INTO tbAtividade (tipo,comentario,tempoGasto,dataRealizacao,totalGasto,idTarefa,idUsuario) values (:tipo,:comentario,:tempoGasto,:dataRealizacao,:totalGasto,:idTarefa,:idUsuario)";
         $stm = $this->pdo->prepare($comando);
 
@@ -70,6 +70,22 @@ class AtividadeDao extends CrudDao {
 
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $usuario = $usuarioControl->listarPorId($row['idUsuario']);
+            $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
+            $result[] = $obj;
+        }
+        return $result;
+    }
+
+    public function listarPorIdUsuario($idUsuario){
+        $comando = "SELECT * FROM tbAtividade where idUsuario = :id AND idTarefa IS NULL";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idUsuario);
+        $stm->execute();
+        $result =array();
+
+        $usuarioControl = new UsuarioControl();
+        $usuario = $usuarioControl->listarPorId($idUsuario);
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
             $result[] = $obj;
         }

@@ -22,13 +22,18 @@ class AtividadeControl extends CrudControl {
                 $this->atualizar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
+
         }
     }
 
     public function cadastrar()
     {
         $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe']);
-        $this->DAO->cadastrar($atividade,$_POST['idTarefa']);
+        if(isset($_POST['idTarefa'])){
+            $this->DAO->cadastrarPlanejado($atividade,$_POST['idTarefa']);
+        }else{
+            $this->DAO->cadastrarPlanejado($atividade,NULL);
+        }
 
     }
 
@@ -46,6 +51,12 @@ class AtividadeControl extends CrudControl {
     {
         return $this->DAO->listarPorIdTarefa($id);
     }
+
+    public function listarPorIdUsuario($id):array
+    {
+        return $this->DAO->listarPorIdUsuario($id);
+    }
+
 
     protected function atualizar()
     {

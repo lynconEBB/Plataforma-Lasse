@@ -7,29 +7,16 @@ abstract class CrudControl{
         if( isset($_POST['acao']) ){
             $acao = $_POST['acao'];
             $this->defineAcao($acao);
-        }elseif (isset($_GET['acao'])){
-            $acao = $_GET['acao'];
-            $this->defineAcao($acao);
         }
     }
 
-    public function defineAcao($acao){
-        switch ($acao){
-            case 1:
-                $this->cadastrar();
-                break;
-            case 2:
-                $this->excluir($_POST['id']);
-                break;
-            case 3:
-                $this->atualizar();
-                break;
-        }
-    }
+    abstract public function defineAcao($acao);
+
+    abstract public function processaRequisicao(string $parametro);
 
     abstract protected function cadastrar();
 
-    abstract protected function excluir($id);
+    abstract protected function excluir(int $id);
 
     abstract protected function listar();
 

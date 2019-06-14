@@ -27,18 +27,18 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                 <td>
                     <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$registro->getId()?>" data-proposito="<?=$registro->getProposito()?>"
                             data-idtarefa="<?=$_GET['idTarefa']?>"  >
-                        <img width='16' src='../img/edit-regular.svg' alt=''>
+                        <img width='16' src='../server/img/edit-regular.svg' alt=''>
                     </button>
                 </td>
                 <td>
                     <form action="../Control/CompraControl.php" method="post">
                         <input type="hidden" name="acao" value="2">
                         <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                        <button class="btn"><img width='16' src='../server/img/trash-alt-solid.svg' alt=''></button>
                     </form>
                 </td>
                 <td>
-                    <a href="ItemView.php?idCompra=<?=$registro->getId()?>"><button type="button" class="btn"><img width='16' src='../img/box-solid.svg' alt=''></button></a>
+                    <a href="ItemView.php?idCompra=<?=$registro->getId()?>"><button type="button" class="btn"><img width='16' src='../server/img/box-solid.svg' alt=''></button></a>
                 </td>
             </tr>
     <?php
@@ -122,8 +122,8 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/funcoesCompra.js"></script>
-<script src="../js/bootstrap.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/funcoesCompra.js"></script>
+<script src="../server/js/bootstrap.js"></script>
 </body>
 </html>

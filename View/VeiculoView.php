@@ -9,8 +9,8 @@ $resul = $veiculoControl->listar();
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/styleVeiculo.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/styleVeiculo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -43,14 +43,14 @@ $resul = $veiculoControl->listar();
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $obj->getId()?>' data-nome='<?= $obj->getNome()?>' data-tipo='<?= $obj->getTipo()?>'
                         data-dtret='<?= $obj->getDataRetirada()?>' data-dtdev='<?= $obj->getDataDevolucao()?>' data-horaret='<?= $obj->getHorarioRetirada()?>'
                         data-horadev='<?= $obj->getHorarioDevolucao()?>' data-idcond='<?= $obj->getCondutor()->getId()?>'>
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
                 <form action="../Control/VeiculoControl.php" method="post">
                     <input type="hidden" name="acao" value="2">
                     <input type="hidden" name="id" value="<?= $obj->getId()?>">
-                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg' alt=""></button>
+                    <button class='btn'><img width='16' src='../server/img/trash-alt-solid.svg' alt=""></button>
                 </form>
             </td>
         </tr>
@@ -211,8 +211,8 @@ $resul = $veiculoControl->listar();
 </div>
 
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesVeiculo.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/bootstrap.js"></script>
+<script src="../server/js/funcoesVeiculo.js"></script>
 </body>
 </html>

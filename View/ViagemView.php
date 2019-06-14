@@ -13,8 +13,8 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/estiloViagemCadastro.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../server/css/estiloViagemCadastro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -49,14 +49,14 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
                 data-gasto1 ="<?=$obj->getGastos()[0]->getValor()?>" data-gasto2 ="<?=$obj->getGastos()[1]->getValor()?>" data-gasto3 ="<?=$obj->getGastos()[2]->getValor()?>" data-gasto4 ="<?=$obj->getGastos()[3]->getValor()?>"
                 data-gasto5 ="<?=$obj->getGastos()[4]->getValor()?>" data-gasto6 ="<?=$obj->getGastos()[5]->getValor()?>" data-gasto7 ="<?=$obj->getGastos()[6]->getValor()?>" data-gasto8 ="<?=$obj->getGastos()[7]->getValor()?>"
                         data-gasto9 ="<?=$obj->getGastos()[8]->getValor()?>">
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
                 <form action="../Control/ViagemControl.php" method="post">
                     <input type="hidden" name="acao" value="2">
                     <input type="hidden" name="id" value="<?php echo $obj->getId()?>">
-                    <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                    <button class="btn"><img width='16' src='../server/img/trash-alt-solid.svg' alt=''></button>
                 </form>
             </td>
         </tr>
@@ -219,9 +219,9 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
         </div>
     </div>
 </div>
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesViagem.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/bootstrap.js"></script>
+<script src="../server/js/funcoesViagem.js"></script>
 </body>
 </html>
 

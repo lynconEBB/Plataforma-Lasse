@@ -23,14 +23,14 @@
             <div class="card-footer">
                 <button  class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>'
                         data-desc='<?php echo $registro->getDescricao()?>' data-dtini='<?php echo $registro->getDataInicio()?>' data-dtfim='<?php echo $registro->getDataFinalizacao()?>' >
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
                 </button>
                 <form style="display: inline;" action="../Control/ProjetoControl.php" method="post">
                     <input type="hidden" name="acao" value="2">
                     <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                    <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                    <button class="btn"><img width='16' src='../server/img/trash-alt-solid.svg' alt=''></button>
                 </form>
-                <a href="TarefaView.php?idProjeto=<?= $registro->getId()?>"><button class="btn"><img width="16" src="../img/plus-solid.svg" alt=""></button></a>
+                <a href="TarefaView.php?idProjeto=<?= $registro->getId()?>"><button class="btn"><img width="16" src="../server/img/plus-solid.svg" alt=""></button></a>
            </div>
         </div>
     <?php
@@ -113,8 +113,8 @@
     </div>
 </div>
 
-    <script src="../js/jquery.js"></script>
-    <script src="../js/funcoesProjeto.js"></script>
-    <script src="../js/bootstrap.js"></script>
+    <script src="../server/js/jquery.js"></script>
+    <script src="../server/js/funcoesProjeto.js"></script>
+    <script src="../server/js/bootstrap.js"></script>
 </body>
 </html>

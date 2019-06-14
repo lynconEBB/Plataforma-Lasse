@@ -39,7 +39,7 @@
                 <td>
                     <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $item->getId() ?>' data-nome='<?= $item->getNome() ?>'
                             data-valor='<?= $item->getValor() ?>' data-qtd="<?=$item->getQuantidade()?>">
-                        <img width="50px" src='../img/Icons/editarIcone.png' alt=''>
+                        <img width="50px" src='../server/img/Icons/editarIcone.png' alt=''>
                     </button>
                 </td>
                 <td>
@@ -47,7 +47,7 @@
                         <input type="hidden" name="acao" value="excluiItem">
                         <input type="hidden" name="id" value="<?=$item->getId() ?>">
                         <input type="hidden" name="idCompra" value="<?= $_GET['idCompra'] ?>">
-                        <button class="btn"><img width='40px' src='../img/Icons/lixeiraicone.png' alt=''></button>
+                        <button class="btn"><img width='40px' src='../server/img/Icons/lixeiraicone.png' alt=''></button>
                     </form>
                 </td>
             </tr>
@@ -133,8 +133,8 @@
         </div>
     </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/funcoesItem.js"></script>
-<script src="../js/bootstrap.js"></script>
+<script src="../server/js/jquery.js"></script>
+<script src="../server/js/funcoesItem.js"></script>
+<script src="../server/js/bootstrap.js"></script>
 </body>
 </html>

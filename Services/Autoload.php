@@ -9,7 +9,6 @@
             $pasta = "Services";
         }
 
-        $caminho = "..".DIRECTORY_SEPARATOR.$pasta.DIRECTORY_SEPARATOR.$classe.".php";
-
+        $caminho = __DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.$pasta.DIRECTORY_SEPARATOR.$classe.".php";
         require $caminho;
     });

@@ -17,5 +17,5 @@
     $html = $formControl->get_html();
     $html = str_replace(':',':<input type="text">',$html);
     echo $html;
-    echo '<script src="../js/jquey.js"></script>';
-    echo '<script src="../js/funcoesLogin.js"></script>';
+    echo '<script src="../server/js/jquey.js"></script>';
+    echo '<script src="../server/js/funcoesLogin.js"></script>';
