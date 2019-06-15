@@ -1,7 +1,5 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class UsuarioDao extends CrudDao {
 
     public function cadastrar(UsuarioModel $func){
@@ -77,7 +75,6 @@ class UsuarioDao extends CrudDao {
     }
 
     public function listarPorId($id){
-
         $projetoDAO = new ProjetoDao();
         $projetos = $projetoDAO->listarPorIdUsuario($id);
 

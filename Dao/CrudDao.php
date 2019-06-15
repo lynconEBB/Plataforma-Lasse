@@ -1,5 +1,4 @@
 <?php
-require_once '../Services/Autoload.php';
 
 abstract class CrudDao{
     public $pdo;

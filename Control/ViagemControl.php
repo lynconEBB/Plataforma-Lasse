@@ -1,20 +1,20 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class ViagemControl extends CrudControl {
 
     public function __construct()
     {
+        UsuarioControl::verificar();
         $this->DAO = new ViagemDao();
         parent::__construct();
     }
 
     public function defineAcao($acao){
         switch ($acao){
-            case 4:
+            case 'cadastrarViagem':
                 $this->cadastrar();
                 break;
-            case 2:
+            case 'excluirViagem':
                 $this->excluir($_POST['id']);
                 break;
             case "alterarViagem":
@@ -22,7 +22,6 @@ class ViagemControl extends CrudControl {
                 break;
         }
     }
-
 
     protected function cadastrar()
     {
@@ -46,7 +45,7 @@ class ViagemControl extends CrudControl {
         $gastoControl = new GastoControl();
         $gastoControl->cadastrarGastos($_POST['gasto'],$idViagem);
 
-        header("Location:../View/ViagemView.php?idTarefa=".$_POST['idTarefa']);
+        header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
 
     }
 
@@ -73,9 +72,10 @@ class ViagemControl extends CrudControl {
 
     protected function excluir($id)
     {
+        $gastoControl = new GastoControl();
+        $gastoControl->excluirPorIdViagem($id);
         $this -> DAO -> excluir($id);
         header('Location: '.$_SERVER['HTTP_REFERER']);
-
     }
 
     public function listar()
@@ -102,13 +102,33 @@ class ViagemControl extends CrudControl {
             if($projetoControl->procuraFuncionario($idProjeto) > 0){
                 return true;
             }else{
-                die("Você não possui acesso a essa Viagem<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+                require '../View/errorPages/erroSemAcesso.php';
+                exit();
             }
         }else{
-            die("Nenhuma Tarefa Selecionada!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+            require '../View/errorPages/erroNaoSelecionado.php';
+            exit();
         }
     }
 
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaViagens':
+                $this->verificaPermissao();
+                $viagens = $this->listarPorIdTarefa($_GET['idTarefa']);
+                require '../View/ViagemView.php';
+                break;
+            case 'cadastraViagem':
+                $this->verificaPermissao();
+
+                $veiculoControl = new VeiculoControl();
+                $veiculos = $veiculoControl->listar();
+
+                $condutorControl = new CondutorControl();
+                $condutores = $condutorControl->listar();
+                require '../View/ViagemCadastroView.php';
+        }
+    }
 }
-LoginControl::verificar();
-new ViagemControl();
+

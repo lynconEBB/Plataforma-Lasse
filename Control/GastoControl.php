@@ -1,34 +1,33 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class GastoControl extends CrudControl
 {
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new GastoDao();
         parent::__construct();
     }
 
     public function defineAcao($acao){
         switch ($acao){
-            case 1:
+            case 'cadastrarGasto':
                 $this->cadastrar();
-                header('Location:../View/GastoView.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 2:
+            case 'excluirGasto':
                 $this->excluir($_POST['id']);
-                header('Location:../View/CondutorView.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 3:
+            case 'alterarGasto':
                 $this->atualizar();
                 break;
         }
     }
 
     public function cadastrar(){
-        $gasto = new GastoModel($_POST['valor'],$_POST['nome']);
-        $this->DAO->cadastrar($gasto);
+        $gasto = new GastoModel($_POST['valor'],$_POST['tipoGasto']);
+        $this->DAO->cadastrar($gasto,$_POST['idViagem']);
     }
 
     public function cadastrarGastos($gastos,$idViagem){
@@ -45,6 +44,10 @@ class GastoControl extends CrudControl
         $this -> DAO -> excluir($id);
     }
 
+    public function excluirPorIdViagem($id){
+        $this -> DAO -> excluirPorIdViagem($id);
+    }
+
     public function listar(){
         return $this -> DAO -> listar();
     }
@@ -57,9 +60,22 @@ class GastoControl extends CrudControl
         $gasto = new GastoModel($_POST['valor'],$_POST['tipoGasto'],$_POST['id']);
         $this -> DAO -> atualizar($gasto);
 
-        header('Location:../View/GastoView.php');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
 
     }
-}
 
-new GastoControl();
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaGastosGeral':
+                $viagemControl = new ViagemControl();
+                $viagens = $viagemControl->listar();
+                require '../View/listaTodosGastos.php';
+                break;
+            case 'listaGastosViagem':
+                $gastos = $this->listarPorIdViagem($_GET['idViagem']);
+                require '../View/listaGastosViagem.php';
+                break;
+        }
+    }
+}

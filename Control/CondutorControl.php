@@ -1,26 +1,26 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class CondutorControl extends CrudControl {
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new CondutorDao();
         parent::__construct();
     }
 
     public function defineAcao($acao){
         switch ($acao){
-            case 1:
+            case 'cadastrarCondutor':
                 $this->cadastrar();
-                header('Location:../View/CondutorView.php');
+                header('Location: /menu/condutor');
                 break;
-            case 2:
+            case 'excluirCondutor':
                 $this->excluir($_POST['id']);
-                header('Location:../View/CondutorView.php');
+                header('Location: /menu/condutor');
                 break;
-            case 3:
+            case 'alterarCondutor':
                 $this->atualizar();
-                header('Location:../View/CondutorView.php');
+                header('Location: /menu/condutor');
                 break;
         }
     }
@@ -46,6 +46,14 @@ class CondutorControl extends CrudControl {
         $condutor = new CondutorModel($_POST['nomeCondutor'],$_POST['cnh'],$_POST['validadeCNH'],$_POST['id']);
         $this -> DAO -> atualizar($condutor);;
     }
-}
 
-$class = new CondutorControl();
+    public function processaRequisicao(string $parametro)
+    {
+       switch ($parametro){
+           case 'listaCondutores':
+               $condutores = $this->listar();
+               require '../View/CondutorView.php';
+               break;
+       }
+    }
+}

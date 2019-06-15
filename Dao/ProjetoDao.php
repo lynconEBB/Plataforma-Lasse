@@ -1,12 +1,6 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class ProjetoDao extends CrudDao {
-
-    function __construct(){
-        LoginControl::verificar();
-        parent::__construct();
-    }
 
     function cadastrar(ProjetoModel $projeto){
         $comando1 = "INSERT INTO tbProjeto (nome,descricao,dataFinalizacao,dataInicio) values (:nome, :descr, :dtFim,:dtInicio)";
@@ -26,8 +20,6 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':idUsuario',$_SESSION['usuario-id']);
 
         $stm->execute();
-
-        header('Location:../View/ProjetoView.php?success=true');
     }
 
     function excluir($id){
@@ -41,7 +33,6 @@ class ProjetoDao extends CrudDao {
         $stm->bindParam(':id',$id);
         $stm->execute();
 
-        header('Location:../View/ProjetoView.php?success=true');
     }
 
     function listar(){
@@ -62,7 +53,6 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':id',$id);
         $stm->execute();
         $idProjetos = $stm->fetchAll(PDO::FETCH_COLUMN);
-
         $projetos = array();
         foreach ($idProjetos as $idProjeto){
             $projetos[] = $this->listarPorId($idProjeto);
@@ -92,7 +82,6 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':id',$projeto->getId());
 
         $stm->execute();
-        header('Location:../View/ProjetoView.php?success=true');
     }
 
     function procuraFuncionario($id){

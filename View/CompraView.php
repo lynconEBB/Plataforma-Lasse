@@ -1,6 +1,4 @@
 <?php
-require_once '../Services/Autoload.php';
-LoginControl::verificar();
 
 include "cabecalho.php";
 

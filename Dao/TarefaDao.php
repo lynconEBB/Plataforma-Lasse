@@ -1,5 +1,4 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class TarefaDao extends CrudDao {
 

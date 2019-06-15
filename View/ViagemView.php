@@ -1,20 +1,9 @@
-<?php
-
-require_once '../Services/Autoload.php';
-LoginControl::verificar();
-
-$viagemControl = new ViagemControl();
-$viagemControl->verificaPermissao();
-
-$resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
-
-?>
 <html>
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../server/css/estiloViagemCadastro.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/estiloViagemCadastro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -29,35 +18,39 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
         <th>Observacoes</th>
         <th></th>
         <th></th>
+        <th></th>
     </thead>
     <tbody>
         <?php
-        foreach ($resul as $obj) {
+        foreach ($viagens as $viagem) {
         ?>
         <tr>
-            <td><?=$obj->getViajante()->getNomeCompleto()?></td>
-            <td><?=$obj->getVeiculo()->getNome()?></td>
-            <td><?=$obj->getVeiculo()->getCondutor()->getNome()?></td>
-            <td><?=$obj->getOrigem()?></td>
-            <td><?=$obj->getDestino()?></td>
-            <td><?=$obj->getJustificativa()?></td>
-            <td><?=$obj->getObservacoes()?></td>
+            <td><?=$viagem->getViajante()->getNomeCompleto()?></td>
+            <td><?=$viagem->getVeiculo()->getNome()?></td>
+            <td><?=$viagem->getVeiculo()->getCondutor()->getNome()?></td>
+            <td><?=$viagem->getOrigem()?></td>
+            <td><?=$viagem->getDestino()?></td>
+            <td><?=$viagem->getJustificativa()?></td>
+            <td><?=$viagem->getObservacoes()?></td>
             <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?=$obj->getId()?>' data-origem="<?=$obj->getOrigem()?>" data-destino="<?=$obj->getDestino()?>" data-dtida="<?=$obj->getDtIda()?>"
-                data-dtvolta="<?=$obj->getDtVolta()?>" data-justificativa="<?=$obj->getJustificativa()?>" data-observacoes="<?=$obj->getObservacoes()?>" data-passagem="<?=$obj->getPassagem()?>" data-idveiculo="<?=$obj->getVeiculo()->getId()?>"
-                data-dataentrahosp="<?=$obj->getDtEntradaHosp()?>" data-datasaidahosp="<?=$obj->getDtSaidaHosp()?>" data-horaentrahosp="<?=$obj->getHoraEntradaHosp()?>" data-horasaidahosp="<?=$obj->getHoraSaidaHosp()?>"
-                data-gasto1 ="<?=$obj->getGastos()[0]->getValor()?>" data-gasto2 ="<?=$obj->getGastos()[1]->getValor()?>" data-gasto3 ="<?=$obj->getGastos()[2]->getValor()?>" data-gasto4 ="<?=$obj->getGastos()[3]->getValor()?>"
-                data-gasto5 ="<?=$obj->getGastos()[4]->getValor()?>" data-gasto6 ="<?=$obj->getGastos()[5]->getValor()?>" data-gasto7 ="<?=$obj->getGastos()[6]->getValor()?>" data-gasto8 ="<?=$obj->getGastos()[7]->getValor()?>"
-                        data-gasto9 ="<?=$obj->getGastos()[8]->getValor()?>">
-                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?=$viagem->getId()?>' data-origem="<?=$viagem->getOrigem()?>" data-destino="<?=$viagem->getDestino()?>" data-dtida="<?=$viagem->getDtIda()?>"
+                data-dtvolta="<?=$viagem->getDtVolta()?>" data-justificativa="<?=$viagem->getJustificativa()?>" data-observacoes="<?=$viagem->getObservacoes()?>" data-passagem="<?=$viagem->getPassagem()?>" data-idveiculo="<?=$viagem->getVeiculo()->getId()?>"
+                data-dataentrahosp="<?=$viagem->getDtEntradaHosp()?>" data-datasaidahosp="<?=$viagem->getDtSaidaHosp()?>" data-horaentrahosp="<?=$viagem->getHoraEntradaHosp()?>" data-horasaidahosp="<?=$viagem->getHoraSaidaHosp()?>"
+                data-gasto1 ="<?=$viagem->getGastos()[0]->getValor()?>" data-gasto2 ="<?=$viagem->getGastos()[1]->getValor()?>" data-gasto3 ="<?=$viagem->getGastos()[2]->getValor()?>" data-gasto4 ="<?=$viagem->getGastos()[3]->getValor()?>"
+                data-gasto5 ="<?=$viagem->getGastos()[4]->getValor()?>" data-gasto6 ="<?=$viagem->getGastos()[5]->getValor()?>" data-gasto7 ="<?=$viagem->getGastos()[6]->getValor()?>" data-gasto8 ="<?=$viagem->getGastos()[7]->getValor()?>"
+                        data-gasto9 ="<?=$viagem->getGastos()[8]->getValor()?>">
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
-                <form action="../Control/ViagemControl.php" method="post">
-                    <input type="hidden" name="acao" value="2">
-                    <input type="hidden" name="id" value="<?php echo $obj->getId()?>">
-                    <button class="btn"><img width='16' src='../server/img/trash-alt-solid.svg' alt=''></button>
+                <form action="/acaoViagem" method="post">
+                    <input type="hidden" name="acao" value="excluirViagem">
+                    <input type="hidden" name="id" value="<?php echo $viagem->getId()?>">
+                    <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                 </form>
+            </td>
+            <td>
+                <a href="/menu/viagem/gastos?idViagem=<?=$viagem->getId()?>"><button class="btn"><img width='20' src='../img/money-bill-alt-solid.svg' alt=''></button></a>
             </td>
         </tr>
         <?php
@@ -66,12 +59,12 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
     </tbody>
 </table>
 
-<button onclick="location.href='ViagemCadastroView.php?idTarefa=<?= $_REQUEST['idTarefa']?>'" type="button" class="btn btn-primary">
+<button onclick="location.href='/menu/viagem/cadastro?idTarefa=<?= $_REQUEST['idTarefa']?>'" type="button" class="btn btn-primary">
     Cadastrar Nova Viagem
 </button>
 
-<a href="VeiculoView.php"><button type="button" class="btn btn-warning">Menu de Veiculos</button></a>
-<a href="GastoView.php"><button type="button" class="btn btn-warning">Menu de Gastos</button></a>
+<a href="/menu/veiculo"><button type="button" class="btn btn-warning">Menu de Veiculos</button></a>
+<a href="/menu/gasto"><button type="button" class="btn btn-warning">Menu de Gastos</button></a>
 
 <div class="modal fade" id="modalAlterar" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
@@ -83,7 +76,7 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-geral" action="../Control/ViagemControl.php" method="post">
+                <form id="form-geral" action="/acaoViagem" method="post">
                     <div class="form-group">
                         <label for="origem" class="col-form-label">Origem</label>
                         <input class="form-control" id="origem" name="origem">
@@ -127,7 +120,6 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
                         </select>
                     </div>
                     <button type="button" id="cadastra-veiculo">&plus;</button>
-
 
                     <!--********************************* Formulário de Veículos ***********************************-->
                     <section id="form-veiculo">
@@ -219,9 +211,9 @@ $resul = $viagemControl->listarPorIdTarefa($_GET['idTarefa']);
         </div>
     </div>
 </div>
-<script src="../server/js/jquery.js"></script>
-<script src="../server/js/bootstrap.js"></script>
-<script src="../server/js/funcoesViagem.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/funcoesViagem.js"></script>
 </body>
 </html>
 

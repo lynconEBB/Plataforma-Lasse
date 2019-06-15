@@ -1,11 +1,11 @@
-<?php
-    include 'cabecalho.php';
-    require_once '../Services/Autoload.php';
-
-    $condControl = new CondutorControl();
-    $resul = $condControl->listar();
-?>
-
+<html>
+<head>
+    <title>Lasse - PTI</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 <table class="table table-hover">
     <thead>
         <th>Nome</th>
@@ -16,22 +16,22 @@
     </thead>
     <tbody>
         <?php
-            foreach ($resul as $registro):
+            foreach ($condutores as $condutor):
         ?>
         <tr>
-            <td><?php echo $registro->getNome() ?></td>
-            <td><?php echo $registro->getCnh() ?></td>
-            <td><?php echo $registro->getValidadeCNH() ?></td>
+            <td><?php echo $condutor->getNome() ?></td>
+            <td><?php echo $condutor->getCnh() ?></td>
+            <td><?php echo $condutor->getValidadeCNH() ?></td>
             <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $registro->getId()?>' data-nome='<?php echo $registro->getNome()?>' data-cnh='<?php echo $registro->getCnh()?>' data-val='<?php echo $registro->getValidadeCNH()?>'>
-                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $condutor->getId()?>' data-nome='<?php echo $condutor->getNome()?>' data-cnh='<?php echo $condutor->getCnh()?>' data-val='<?php echo $condutor->getValidadeCNH()?>'>
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
-                <form action="../Control/CondutorControl.php" method="post">
-                    <input type="hidden" name="acao" value="2">
-                    <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                    <button class='btn'><img width='16' src='../server/img/trash-alt-solid.svg'></button>
+                <form action="/acaoCondutor" method="post">
+                    <input type="hidden" name="acao" value="excluirCondutor">
+                    <input type="hidden" name="id" value="<?php echo $condutor->getId()?>">
+                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg'></button>
                 </form>
             </td>
         </tr>
@@ -55,7 +55,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/CondutorControl.php" method="post">
+                <form action="/acaoCondutor" method="post">
                     <div class="form-group">
                         <label for="nomeCondutor" class="col-form-label">Nome</label>
                         <input class="form-control" id="nomeCondutor" name="nomeCondutor">
@@ -68,7 +68,7 @@
                         <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
                         <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
                     </div>
-                    <input type="hidden" name="acao" value="1">
+                    <input type="hidden" name="acao" value="cadastrarCondutor">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
@@ -86,7 +86,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/CondutorControl.php" method="post">
+                <form action="/acaoCondutor" method="post">
                     <div class="form-group">
                         <label for="nomeCondutor" class="col-form-label">Nome</label>
                         <input class="form-control" id="nomeCondutor" name="nomeCondutor">
@@ -99,7 +99,7 @@
                         <label for="validadeCNH" class="col-form-label">Data de Validade CNH</label>
                         <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
                     </div>
-                    <input type="hidden" name="acao" value="3">
+                    <input type="hidden" name="acao" value="alterarCondutor">
                     <input type="hidden" id="id" name="id">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
@@ -107,6 +107,8 @@
         </div>
     </div>
 </div>
-<?php
-    include 'Rodape.php';
-?>
+<script src="../js/jquery.js"></script>
+<script src="../js/funcoesCondutor.js"></script>
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>

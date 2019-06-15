@@ -1,16 +1,9 @@
-<?php
-require_once '../Services/Autoload.php';
-
-$veiculoControl = new VeiculoControl();
-$resul = $veiculoControl->listar();
-
-?>
 <html>
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../server/css/styleVeiculo.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/styleVeiculo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -29,28 +22,28 @@ $resul = $veiculoControl->listar();
     </thead>
     <tbody>
     <?php
-        foreach ($resul as $obj):
+        foreach ($veiculos as $veiculo):
     ?>
         <tr>
-            <td><?= $obj->getNome()?></td>
-            <td><?= $obj->getTipo()?></td>
-            <td><?= $obj->getDataRetirada()?></td>
-            <td><?= $obj->getDataDevolucao()?></td>
-            <td><?= $obj->getHorarioRetirada()?></td>
-            <td><?= $obj->getHorarioDevolucao()?></td>
-            <td><?= $obj->getCondutor()->getNome()?></td>
+            <td><?= $veiculo->getNome()?></td>
+            <td><?= $veiculo->getTipo()?></td>
+            <td><?= $veiculo->getDataRetirada()?></td>
+            <td><?= $veiculo->getDataDevolucao()?></td>
+            <td><?= $veiculo->getHorarioRetirada()?></td>
+            <td><?= $veiculo->getHorarioDevolucao()?></td>
+            <td><?= $veiculo->getCondutor()->getNome()?></td>
             <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $obj->getId()?>' data-nome='<?= $obj->getNome()?>' data-tipo='<?= $obj->getTipo()?>'
-                        data-dtret='<?= $obj->getDataRetirada()?>' data-dtdev='<?= $obj->getDataDevolucao()?>' data-horaret='<?= $obj->getHorarioRetirada()?>'
-                        data-horadev='<?= $obj->getHorarioDevolucao()?>' data-idcond='<?= $obj->getCondutor()->getId()?>'>
-                    <img width='16' src='../server/img/edit-regular.svg' alt=''>
+                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $veiculo->getId()?>' data-nome='<?= $veiculo->getNome()?>' data-tipo='<?= $veiculo->getTipo()?>'
+                        data-dtret='<?= $veiculo->getDataRetirada()?>' data-dtdev='<?= $veiculo->getDataDevolucao()?>' data-horaret='<?= $veiculo->getHorarioRetirada()?>'
+                        data-horadev='<?= $veiculo->getHorarioDevolucao()?>' data-idcond='<?= $veiculo->getCondutor()->getId()?>'>
+                    <img width='16' src='../img/edit-regular.svg' alt=''>
                 </button>
             </td>
             <td>
-                <form action="../Control/VeiculoControl.php" method="post">
-                    <input type="hidden" name="acao" value="2">
-                    <input type="hidden" name="id" value="<?= $obj->getId()?>">
-                    <button class='btn'><img width='16' src='../server/img/trash-alt-solid.svg' alt=""></button>
+                <form action="/acaoVeiculo" method="post">
+                    <input type="hidden" name="acao" value="excluirVeiculo">
+                    <input type="hidden" name="id" value="<?= $veiculo->getId()?>">
+                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg' alt=""></button>
                 </form>
             </td>
         </tr>
@@ -64,7 +57,7 @@ $resul = $veiculoControl->listar();
     Cadastrar Novo Veículo
 </button>
 
-<a href="CondutorView.php"><button type="button" class="btn btn-warning">Menu de Condutores</button></a>
+<a href="/menu/condutor"><button type="button" class="btn btn-warning">Menu de Condutores</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
@@ -76,7 +69,7 @@ $resul = $veiculoControl->listar();
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/VeiculoControl.php" method="post">
+                <form action="/acaoVeiculo" method="post">
                     <div class="form-group">
                         <label for="nome" class="col-form-label">Nome</label>
                         <input class="form-control" id="nome" name="nomeVeiculo">
@@ -107,8 +100,6 @@ $resul = $veiculoControl->listar();
                             <option value="escolher" selected>Escolha um Condutor</option>
                             <option style="display: none;" value="novo" ></option>
                         <?php
-                            $condControl = new CondutorControl();
-                            $condutores = $condControl->listar();
                             foreach ($condutores as $condutor){
                                 echo "<option value='{$condutor->getId()}'>{$condutor->getNome()}</option>";
                             }
@@ -130,7 +121,7 @@ $resul = $veiculoControl->listar();
                             <input type="text" class="form-control" id="validadeCNH" name="validadeCNH">
                         </div>
                     </div>
-                    <input type="hidden" name="acao" value="cadastroVeiculo">
+                    <input type="hidden" name="acao" value="cadastrarVeiculo">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
@@ -148,7 +139,7 @@ $resul = $veiculoControl->listar();
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/VeiculoControl.php" method="post">
+                <form action="/acaoVeiculo" method="post">
                     <div class="form-group">
                         <label for="nome" class="col-form-label">Nome</label>
                         <input class="form-control" id="nome" name="nome">
@@ -201,7 +192,7 @@ $resul = $veiculoControl->listar();
                         </div>
                     </div>
                     <input type="hidden" id="last-id-condutor">
-                    <input type="hidden" name="acao" value="3">
+                    <input type="hidden" name="acao" value="alterarVeiculo">
                     <input type="hidden" name="id" id="id">
                     <button type="submit" class="btn btn-primary align-self-center">Alterar</button>
                 </form>
@@ -211,8 +202,8 @@ $resul = $veiculoControl->listar();
 </div>
 
 
-<script src="../server/js/jquery.js"></script>
-<script src="../server/js/bootstrap.js"></script>
-<script src="../server/js/funcoesVeiculo.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/funcoesVeiculo.js"></script>
 </body>
 </html>

@@ -1,16 +1,15 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class GastoDao extends CrudDao
 {
 
-    function cadastrar(GastoModel $gasto){
-        $comando = "INSERT INTO tbGasto (tipo,valor) values (:tipo, :valor)";
+    function cadastrar(GastoModel $gasto,$idViagem){
+        $comando = "INSERT INTO tbGasto (tipo,valor,idViagem) values (:tipo, :valor, :idViagem)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':tipo',$gasto->getTipo());
-        $stm->bindValue(':cnh',$gasto->getValor());
+        $stm->bindValue(':valor',$gasto->getValor());
+        $stm->bindValue(':idViagem',$idViagem);
 
         $stm->execute();
     }
@@ -39,6 +38,14 @@ class GastoDao extends CrudDao
 
     }
 
+    function excluirPorIdViagem($id){
+        $comando = "DELETE FROM tbGasto WHERE idViagem = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':id',$id);
+        $stm->execute();
+
+    }
 
     public function listarPorIdViagem($idViagem){
         $comando = "SELECT * FROM tbGasto WHERE idViagem= :id";
@@ -75,7 +82,6 @@ class GastoDao extends CrudDao
         $stm->bindValue(':id',$gasto->getId());
 
         $stm->execute();
-
     }
 
 }

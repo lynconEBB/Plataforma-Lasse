@@ -1,24 +1,17 @@
-<?php
-    UsuarioControl::verificar();
-
-    $usuarioControl = new UsuarioControl();
-    $usuario = $usuarioControl->listarPorId($_SESSION['usuario-id']);
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/styleUsuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleUsuario.css" />
 </head>
 <body>
     <main class="cont">
         <aside class="side-bar">
-            <img src="img/perfil.png" class="foto">
+            <img src="../img/perfil.png" class="foto">
             <span class="side-bar-title"><?= $usuario->getLogin() ?></span>
             <span class="side-bar-info"><?= $usuario->getAtuacao() ?></span>
             <span class="side-bar-info"><?= $usuario->getFormacao() ?></span>
@@ -27,12 +20,12 @@
             data-login="<?=$usuario->getLogin()?>" data-email="<?=$usuario->getEmail()?>" data-dtnasc="<?=$usuario->getDtNascimento()?>" data-rg="<?=$usuario->getRg()?>" data-cpf="<?=$usuario->getCpf()?>"
             data-dtemissao="<?=$usuario->getDtNascimento()?>" data-formacao="<?=$usuario->getFormacao()?>" data-valorhora="<?=$usuario->getValorHora()?>" data-atuacao="<?=$usuario->getAtuacao()?>">Editar</button>
 
-            <form action="../Control/LoginControl.php" method="post">
+            <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
                 <button class="side-bar-button red">Sair</button>
             </form>
 
-            <a href="AtividadeView.php"><button class="side-bar-button">Menu Atividades</button></a>
+            <a href="/menu/atividade"><button class="side-bar-button">Menu Atividades</button></a>
         </aside>
         <section class="perfil">
             <div class="perfil-collum">
@@ -76,7 +69,7 @@
                         echo '<label class="item-label">Nenhuma Projeto encontrado :(</label>';
                     }
                 ?>
-                <a href="ProjetoView.php"><button class="side-bar-button green">Menu dos Projetos</button></a>
+                <a href="/menu/projeto"><button class="side-bar-button green">Menu dos Projetos</button></a>
             </div>
         </section>
     </main>
@@ -91,7 +84,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="../Control/UsuarioControl.php" method="post">
+                    <form action="/acaoUsuario" method="post">
                         <div class="form-group">
                             <label for="nome" class="col-form-label">Nome Completo</label>
                             <input type="text" class="form-control" name="nome" id="nome">
@@ -136,14 +129,14 @@
                         <div class=form-group">
                             <label for="atuacao" class="col-form-label-select">Atuação</label>
                             <select class="custom-select" name="atuacao" id="atuacao">
-                                <option value="Colaborador" selected>Colaborador</option>
+                                <option value="Colaborador">Colaborador</option>
                                 <option value="Terceiros">Terceiros</option>
                                 <option value="Bolsista/Voluntário">Bolsista/Voluntário</option>
                             </select>
                         </div>
                         <br>
                         <input type="hidden" value="1" name="tipo">
-                        <input type="hidden" value="3" name="acao">
+                        <input type="hidden" value="alterarUsuario" name="acao">
                         <button type="submit" class="btn btn-primary align-self-center">Alterar</button>
                     </form>
                 </div>
@@ -151,8 +144,8 @@
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/funcoesUsuario.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/funcoesUsuario.js"></script>
 </body>
 </html>

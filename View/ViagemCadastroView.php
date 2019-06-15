@@ -1,19 +1,15 @@
-<?php
-require_once '../Services/Autoload.php';
-LoginControl::verificar();
-?>
 <html lang="pt-br">
 <head>
     <title>Lasse - PTI</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../server/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../server/css/estiloViagemCadastro.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../css/estiloViagemCadastro.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <main>
         <!-- Formulario de Viagens -->
-        <form id="form-geral" action="../Control/ViagemControl.php" method="post">
+        <form id="form-geral" action="/acaoViagem" method="post">
             <div class="form-group">
                 <label for="origem" class="col-form-label">Origem</label>
                 <input class="form-control" id="origem" name="origem">
@@ -48,8 +44,7 @@ LoginControl::verificar();
                     <option type="hidden" value="escolher"> Escolha um Veiculo</option>
                     <option style="display:none;" value="novo">Novo</option>
                     <?php
-                        $veiculoControl = new VeiculoControl();
-                        $veiculos = $veiculoControl->listar();
+
                         foreach ($veiculos as $veiculo){
                             echo "<option value='{$veiculo->getId()}'>{$veiculo->getNome()}</option>";
                         }
@@ -91,8 +86,7 @@ LoginControl::verificar();
                         <option type="hidden" value="escolher"> Escolha um Condutor</option>
                         <option style="display:none;" value="novo"></option>
                         <?php
-                            $condutorControl = new CondutorControl();
-                            $condutores = $condutorControl->listar();
+
                             foreach ($condutores as $condutor){
                                 echo "<option value='{$condutor->getId()}'>{$condutor->getNome()}</option>";
                             }
@@ -223,7 +217,7 @@ LoginControl::verificar();
                 </div>
             </div>
 
-            <input type="hidden" name="acao" value="4">
+            <input type="hidden" name="acao" value="cadastrarViagem">
             <input type="hidden" name="idTarefa" value="<?= $_GET['idTarefa']?>">
             <input type="hidden" name="idFuncionario" value="<?= $_SESSION['usuario-id']?>">
             <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
@@ -232,8 +226,8 @@ LoginControl::verificar();
     </main>
 
 
-<script src="../server/js/jquery.js"></script>
-<script src="../server/js/bootstrap.js"></script>
-<script src="../server/js/funcoesViagem.js"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/bootstrap.js"></script>
+<script src="../../js/funcoesViagem.js"></script>
 </body>
 </html>

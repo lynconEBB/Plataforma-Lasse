@@ -52,10 +52,11 @@ class UsuarioControl extends CrudControl {
     }
 
     protected function atualizar(){
+        session_start();
         $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],null,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora'],$_SESSION['usuario-id']);
         $this -> DAO ->alterar($usuario);
 
-        header('Location:../View/UsuarioView.php');
+        header('Location: /menu/usuario');
     }
 
     public function listarPorId($id){
@@ -70,11 +71,13 @@ class UsuarioControl extends CrudControl {
             $senha = $_POST["senha"];
 
             if ($this->DAO->consultar($login, $senha)) {
+
                 $usuario = $this->DAO->listarPorLogin($_POST["nomeUsuario"]);
                 $_SESSION["usuario-id"] = $usuario->getId();
                 $_SESSION["usuario"] = $_POST["nomeUsuario"];
                 $_SESSION["usuario-classe"] = $usuario;
                 $_SESSION["autenticado"] = TRUE;
+                echo 'oi';
                 header("Location: /menu/usuario");
                 die();
 
@@ -90,15 +93,16 @@ class UsuarioControl extends CrudControl {
         }
     }
     public function deslogar(){
-
-        if(session_destroy()){
-            echo 'oi';
-        }
-        /*header("Location: /login");
-        die();*/
+        session_start();
+        session_destroy();
+        header("Location: /login");
+        die();
     }
 
     public static function verificar(){
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if(isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE){
             return true;
         }
@@ -109,17 +113,22 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-
     public function processaRequisicao(string $parametro)
     {
         switch ($parametro){
             case 'login':
                 session_start();
-                require '../View/LoginView.php';
+                if(isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE) {
+                    require '../View/errorPages/avisoJaLogado.php';
+                }else{
+                    require '../View/LoginView.php';
+                }
+
                 break;
             case 'perfil':
+                self::verificar();
+                $usuario = $this->listarPorId($_SESSION['usuario-id']);
                 require '../View/UsuarioView.php';
         }
     }
 }
-new UsuarioControl();

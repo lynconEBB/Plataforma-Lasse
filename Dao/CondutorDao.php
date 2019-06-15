@@ -1,6 +1,5 @@
 <?php
 
-require_once '../Services/Autoload.php';
 
 class CondutorDao extends CrudDao {
 

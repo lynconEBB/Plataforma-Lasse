@@ -1,22 +1,37 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class TarefaControl extends CrudControl {
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new TarefaDao();
         parent::__construct();
+    }
+
+    public function defineAcao($acao)
+    {
+        switch ($acao){
+            case 'cadastrarTarefa':
+                $this->cadastrar();
+                break;
+            case 'excluirTarefa':
+                $this->excluir($_POST['id']);
+                break;
+            case 'alterarTarefa':
+                $this->atualizar();
+                break;
+        }
     }
 
     protected function cadastrar(){
         $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao']);
         $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
-        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
     protected function excluir($id){
         $this -> DAO -> excluir($id);
-        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
     public function listar() {
@@ -27,7 +42,7 @@ class TarefaControl extends CrudControl {
         $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
         $this -> DAO ->atualizar($projeto);
 
-        header('Location:../View/TarefaView.php?idProjeto='.$_POST['idProjeto']);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
     public function listarPorIdProjeto($id){
@@ -48,7 +63,6 @@ class TarefaControl extends CrudControl {
                 $listaDeTarefas[] = $tarefa;
             }
         }
-
         return $listaDeTarefas;
     }
 
@@ -58,13 +72,23 @@ class TarefaControl extends CrudControl {
             if($projetoControl->procuraFuncionario($_GET['idProjeto']) > 0){
                 return true;
             }else{
-                die("Você não possui acesso a essa tarefa<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+                require '../View/errorPages/erroSemAcesso.php';
+                exit();
             }
         }else{
-            die("Nenhuma Projeto Selecionado!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+            require '../View/errorPages/erroNaoSelecionado.php';
+            exit();
+        }
+    }
+
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaTarefas':
+                if($this->verificaPermissao()) {
+                    $tarefas = $this->listarPorIdProjeto($_GET['idProjeto']);
+                    require '../View/TarefaView.php';
+                }
         }
     }
 }
-
-LoginControl::verificar();
-new TarefaControl();

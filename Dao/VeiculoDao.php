@@ -1,5 +1,4 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class VeiculoDao extends CrudDao {
 
@@ -25,7 +24,6 @@ class VeiculoDao extends CrudDao {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-        header('Location:../View/VeiculoView.php');
     }
 
 
@@ -58,7 +56,6 @@ class VeiculoDao extends CrudDao {
         $stm->bindValue(':id',$veiculo->getId());
 
         $stm->execute();
-        header('Location:../View/VeiculoView.php');
     }
 
     public function listarPorId($id){
