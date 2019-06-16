@@ -11,6 +11,7 @@
     <th>Nome</th>
     <th>Valor</th>
     <th>Quantidade</th>
+    <th>Valor Parcial</th>
 
     <th></th>
     <th></th>
@@ -24,6 +25,7 @@
             <td><?= $item->getNome() ?></td>
             <td><?= $item->getValor() ?></td>
             <td><?= $item->getQuantidade() ?></td>
+            <td><?= $item->getValorParcial() ?></td>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $item->getId() ?>'
                         data-nome='<?= $item->getNome() ?>'

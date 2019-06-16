@@ -2,6 +2,7 @@
 
 class ItemModel extends CrudModel {
     private $id;
+    private $valorParcial;
     private $valor;
     private $nome;
     private $quantidade;
@@ -11,6 +12,7 @@ class ItemModel extends CrudModel {
         $this->valor = $valor;
         $this->nome = $nome;
         $this->quantidade = $quantidade;
+        $this->valorParcial = $this->valor * $this->quantidade;
     }
 
     public function getId(){
@@ -43,6 +45,16 @@ class ItemModel extends CrudModel {
 
     public function setQuantidade($quantidade){
         $this->quantidade = $quantidade;
+    }
+
+    public function getValorParcial()
+    {
+        return $this->valorParcial;
+    }
+
+    public function setValorParcial($valorParcial)
+    {
+        $this->valorParcial = $valorParcial;
     }
 
 }

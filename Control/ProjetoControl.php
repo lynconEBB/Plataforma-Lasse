@@ -22,6 +22,9 @@ class ProjetoControl extends CrudControl
             case 'alterarProjeto':
                 $this->atualizar();
                 break;
+            case 'adicionarFuncionario':
+                $this->addFuncionario();
+                break;
         }
     }
 
@@ -55,15 +58,38 @@ class ProjetoControl extends CrudControl
         return $this->DAO->listarPorIdUsuario($id);
     }
 
-    public function procuraFuncionario($id)
+    public function procuraFuncionario($idProjeto,$idUsuario)
     {
-        return $this->DAO->procuraFuncionario($id);
+        return $this->DAO->procuraFuncionario($idProjeto,$idUsuario);
+    }
+
+    public function verificaDono($idProjeto)
+    {
+        $numRows = $this->DAO->verificaDono($idProjeto);
+        if($numRows > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function addFuncionario()
+    {
+        if($this->procuraFuncionario($_POST['idProjeto'],$_POST['idUsuario']) == 0 ){
+            $this->DAO->adicionarFuncionario($_POST['idUsuario'],$_POST['idProjeto']);
+        }else{
+            $_SESSION['danger'] = 'Usuario ja Inserido no Projeto :(';
+        }
+        header('Location: /menu/projeto');
+
     }
 
     public function processaRequisicao(string $parametro)
     {
        switch ($parametro){
            case 'listaProjetos':
+               $usuarioControl = new UsuarioControl();
+               $usuarios = $usuarioControl->listar();
                $projetos = $this->listarPorIdUsuario($_SESSION['usuario-id']);
                require '../View/ProjetoView.php';
        }

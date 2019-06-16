@@ -63,7 +63,12 @@
                 <?php
                     if(count($usuario->getProjetos())>0){
                         foreach ($usuario->getProjetos() as $projeto){
-                            echo '<span class="item-value">'. $projeto->getNome().'</span>';
+                            $projetoControl = new ProjetoControl();
+                            echo '<span class="item-value">'. $projeto->getNome();
+                            if($projetoControl->verificaDono($projeto->getId())){
+                                echo '&#8902;';
+                            }
+                            echo '</span>';
                         }
                     }else{
                         echo '<label class="item-label">Nenhuma Projeto encontrado :(</label>';

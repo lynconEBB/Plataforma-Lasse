@@ -15,4 +15,14 @@ $(document).ready(function () {
         modal.find('#dataFinalizacao').val(dtFim);
         modal.find('#id').val(id);
     })
+
+    $('#modalAdicionaFunc').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+
+        let idProjeto = button.data('idprojeto');
+
+        let modal = $(this);
+
+        modal.find('#idProjeto').val(idProjeto);
+    })
 });

@@ -11,6 +11,7 @@
             <th>Nome</th>
             <th>Valor</th>
             <th>Quantidade</th>
+            <th>Valor Parcial</th>
         </thead>
         <tbody>
         <?php
@@ -20,6 +21,7 @@
                 <td><?= $item->getNome() ?></td>
                 <td><?= $item->getValor() ?></td>
                 <td><?= $item->getQuantidade() ?></td>
+                <td><?= $item->getValorParcial() ?></td>
         <?php
 
             endforeach;

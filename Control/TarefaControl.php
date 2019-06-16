@@ -69,15 +69,15 @@ class TarefaControl extends CrudControl {
     public function verificaPermissao(){
         if(isset($_GET['idProjeto'])){
             $projetoControl = new ProjetoControl();
-            if($projetoControl->procuraFuncionario($_GET['idProjeto']) > 0){
+            if($projetoControl->procuraFuncionario($_GET['idProjeto'],$_SESSION['usuario-id']) > 0){
                 return true;
             }else{
                 require '../View/errorPages/erroSemAcesso.php';
-                exit();
+                return false;
             }
         }else{
             require '../View/errorPages/erroNaoSelecionado.php';
-            exit();
+            return false;
         }
     }
 

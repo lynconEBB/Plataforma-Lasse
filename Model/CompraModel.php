@@ -1,24 +1,39 @@
 <?php
 
-class CompraModel extends CrudModel{
+class CompraModel extends CrudModel
+{
     private $id;
     private $proposito;
-    private $totalGasto;
+    private $totalGasto = 0;
     private $itens;
 
-    public function __construct($proposito,$totalGasto=null, $itens=null,$id=null){
+    public function __construct(string $proposito,$totalGasto, array $itens = null, int $id = null)
+    {
         $this->id = $id;
         $this->proposito = $proposito;
-        $this->totalGasto = $totalGasto;
         $this->itens = $itens;
+        if($this->itens != null and $totalGasto == null){
+           $this->calculaTotal();
+        }else{
+            $this->totalGasto = $totalGasto;
+        }
+    }
+
+    public function calculaTotal(){
+        $total = 0;
+        foreach ($this->itens as $item){
+            $total += $item->getValorParcial();
+        }
+        $this->totalGasto = $total;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getProposito(){
@@ -43,6 +58,7 @@ class CompraModel extends CrudModel{
 
     public function setItens($itens){
         $this->itens = $itens;
+        $this->calculaTotal();
     }
 
 

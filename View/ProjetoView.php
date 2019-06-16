@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<?php Mensagem::exibir('danger');?>
 <div class="card-deck">
     <?php
+
     foreach ($projetos as $projeto):
         ?>
         <div class="card border-info" style="width:400px">
@@ -35,6 +37,16 @@
                 <a href="/menu/tarefa?idProjeto=<?= $projeto->getId() ?>">
                     <button class="btn"><img width="16" src="../img/plus-solid.svg" alt=""></button>
                 </a>
+                <?php
+                    $projetoControl = new ProjetoControl();
+                    if($projetoControl->verificaDono($projeto->getId())):
+                ?>
+                <button type="button" class="btn " data-toggle="modal" data-target="#modalAdicionaFunc" data-idprojeto="<?=$projeto->getId()?>">
+                    <img src="../img/Icons/iconeADD.png" width="20">
+                </button>
+                <?php
+                    endif;
+                ?>
             </div>
         </div>
     <?php
@@ -111,6 +123,37 @@
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="acao" value="alterarProjeto">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAdicionaFunc" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Adicionar Funcionario</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </header>
+            <div class="modal-body">
+                <form action="/acaoProjeto" method="post">
+                    <div class="form-group">
+                        <label for="idUsuario">Funcionario</label>
+                        <select class="custom-select" name="idUsuario" id="idUsuario">
+                            <option value="escolher" selected>Escolha um Funcionario</option>
+                            <?php
+                            foreach ($usuarios as $usuario){
+                                echo "<option value='{$usuario->getId()}'>{$usuario->getNomeCompleto()}</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <input type="hidden" value="adicionarFuncionario" name="acao">
+                    <input type="hidden" id="idProjeto" name="idProjeto">
+                    <button type="submit" class="btn btn-primary align-self-center">Adicionar</button>
                 </form>
             </div>
         </div>

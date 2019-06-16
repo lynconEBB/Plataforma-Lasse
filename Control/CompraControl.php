@@ -27,40 +27,23 @@ class CompraControl extends CrudControl {
 
     public function cadastrar()
     {
-        $total = $this->calculaTotalArray($_POST['itens']);
-
-        $compra = new CompraModel($_POST['proposito'],$total);
+        //Cadastra no banco de dados com Total = 0
+        $compra = new CompraModel($_POST['proposito'],0);
         $this->DAO->cadastrar($compra,$_POST['idTarefa']);
-
+        //Pega id da Compra Inserida
         $idCompra = $this->DAO->pdo->lastInsertId();
 
+        //Cadastra no banco todos os itens da Compra
         $itemControl = new ItemControl();
         $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
+        //pega os Itens inseridos
+        $itens = $itemControl->listarPorIdCompra($idCompra);
+        //Altera a compra para conter os itens e seu id
+        $compra->setItens($itens);
+        $compra->setId($idCompra);
+        //Atualiza total da Compra no banco
+        $this->DAO->atualizarTotal($compra);
     }
-
-    public function calculaTotalArray(array $itens)
-    {
-        $total = 0;
-        foreach ($itens as $item){
-            $total += $item['valor'] * $item['qtd'];
-        }
-        return $total;
-    }
-
-    public function calculaTotal(array $itens)
-    {
-        $total = 0;
-        foreach ($itens as $item){
-            $total += $item->getValor() * $item->getQuantidade();
-        }
-        return $total;
-    }
-
-    public function atualizaTotal($total,$idCompra)
-    {
-        $this->DAO->atualizaTotal($idCompra,$total);
-    }
-
 
     protected function excluir($id)
     {
@@ -84,9 +67,15 @@ class CompraControl extends CrudControl {
         return $this->DAO->listarPorId($id);
     }
 
-    protected function atualizar()
+
+    public function atualizarTotal($compra)
     {
-        $compra = new CompraModel($_POST['proposito'],null,$_POST['null'],$_POST['id']);
+        $this -> DAO -> atualizarTotal($compra);
+    }
+
+    public function atualizar()
+    {
+        $compra = new CompraModel($_POST['proposito'],null,$_POST['id']);
         $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
     }
 
@@ -101,7 +90,7 @@ class CompraControl extends CrudControl {
             // Verifica se o funcionário está relacionado com o Projeto
             $projetoControl = new ProjetoControl();
 
-            if($projetoControl->procuraFuncionario($idProjeto) > 0){
+            if($projetoControl->procuraFuncionario($idProjeto,$_SESSION['usuario-id']) > 0){
                 return true;
             }else{
                 require '../View/errorPages/erroSemAcesso.php';

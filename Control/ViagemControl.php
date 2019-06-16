@@ -97,7 +97,7 @@ class ViagemControl extends CrudControl {
             // Verifica se o funcionário está relacionado com o Projeto
             $projetoControl = new ProjetoControl();
 
-            if($projetoControl->procuraFuncionario($idProjeto) > 0){
+            if($projetoControl->procuraFuncionario($idProjeto,$_SESSION['usuario-id']) > 0){
                 return true;
             }else{
                 require '../View/errorPages/erroSemAcesso.php';

@@ -13,7 +13,7 @@ class ProjetoDao extends CrudDao {
 
         $stm->execute();
 
-        $comando2 = 'INSERT INTO tbUsuarioProjeto (idProjeto,idUsuario) values (:idProjeto, :idUsuario)';
+        $comando2 = 'INSERT INTO tbUsuarioProjeto (idProjeto,idUsuario,dono) values (:idProjeto, :idUsuario,TRUE)';
         $stm = $this->pdo->prepare($comando2);
 
         $stm->bindValue(':idProjeto',$this->pdo->lastInsertId());
@@ -84,14 +84,37 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
     }
 
-    function procuraFuncionario($id){
+    function procuraFuncionario($idProjeto,$idUsuario){
         $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario";
         $stm = $this->pdo->prepare($comando);
 
-        $stm->bindParam(':idProjeto',$id);
+        $stm->bindParam(':idProjeto',$idProjeto);
+        $stm->bindParam('idUsuario',$idUsuario);
+
+        $stm->execute();
+        return $stm->rowCount();
+    }
+
+    function verificaDono($idProjeto)
+    {
+        $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario and dono = TRUE";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':idProjeto',$idProjeto);
         $stm->bindParam('idUsuario',$_SESSION['usuario-id']);
 
         $stm->execute();
         return $stm->rowCount();
+    }
+
+    function adicionarFuncionario($idUsuario,$idProjeto)
+    {
+        $comando = "insert into tbUsuarioProjeto (idProjeto,idUsuario,dono) values (:idProjeto,:idUsuario,FALSE)";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':idProjeto',$idProjeto);
+        $stm->bindParam('idUsuario',$idUsuario);
+
+        $stm->execute();
     }
 }
