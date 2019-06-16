@@ -1,24 +1,24 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class CompraControl extends CrudControl {
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new CompraDao();
         parent::__construct();
     }
 
     public function defineAcao($acao){
         switch ($acao){
-            case 1:
+            case 'cadastrarCompra':
                 $this->cadastrar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 2:
+            case 'excluirCompra':
                 $this->excluir($_POST['id']);
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 3:
+            case 'alterarCompra':
                 $this->atualizar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
@@ -104,12 +104,25 @@ class CompraControl extends CrudControl {
             if($projetoControl->procuraFuncionario($idProjeto) > 0){
                 return true;
             }else{
-                die("Você não possui acesso a essa Compra<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+                require '../View/errorPages/erroSemAcesso.php';
+                exit();
             }
         }else{
-            die("Nenhuma Tarefa Selecionada!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+            require '../View/errorPages/erroNaoSelecionado.php';
+            exit();
+        }
+    }
+
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaCompras':
+                $this->verificaPermissao();
+                $tarefaControl = new TarefaControl();
+                $tarefas = $tarefaControl->listarPorIdUsaurio($_SESSION['usuario-id']);
+                $compras = $this->listarPorIdTarefa($_GET['idTarefa']);
+                require '../View/CompraView.php';
+                break;
         }
     }
 }
-
-$class = new CompraControl();

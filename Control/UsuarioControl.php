@@ -77,7 +77,6 @@ class UsuarioControl extends CrudControl {
                 $_SESSION["usuario"] = $_POST["nomeUsuario"];
                 $_SESSION["usuario-classe"] = $usuario;
                 $_SESSION["autenticado"] = TRUE;
-                echo 'oi';
                 header("Location: /menu/usuario");
                 die();
 

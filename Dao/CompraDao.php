@@ -1,7 +1,5 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class CompraDao extends CrudDao {
 
     function cadastrar(CompraModel $compra,$idTarefa){

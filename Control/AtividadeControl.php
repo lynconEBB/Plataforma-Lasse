@@ -1,24 +1,24 @@
 <?php
-require_once '../Services/Autoload.php';
 
 class AtividadeControl extends CrudControl {
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new AtividadeDao();
         parent::__construct();
     }
 
     public function defineAcao($acao){
         switch ($acao){
-            case 'cadastraAtividade':
+            case 'cadastrarAtividade':
                 $this->cadastrar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 'excluiAtividade':
+            case 'excluirAtividade':
                 $this->excluir($_POST['id']);
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 'alteraAtividade':
+            case 'alterarAtividade':
                 $this->atualizar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
@@ -77,12 +77,27 @@ class AtividadeControl extends CrudControl {
             if($projetoControl->procuraFuncionario($idProjeto) > 0){
                 return true;
             }else{
-                die("Você não possui acesso a essa Atividade<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+                require '../View/errorPages/erroSemAcesso.php';
+                exit();
             }
         }else{
-            die("Nenhuma Tarefa Selecionada!!<br>Selecione um projeto <a href='../View/ProjetoView.php'>aqui</a>");
+            require '../View/errorPages/erroNaoSelecionado.php';
+            exit();
+        }
+    }
+
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaAtividadesPlanejadas':
+                $this->verificaPermissao();
+                $atividades = $this->listarPorIdTarefa($_GET['idTarefa']);
+                require '../View/AtividadePlanejadaView.php';
+                break;
+            case 'listaAtividadesNaoPlanejadas':
+                $atividades = $this->listarPorIdUsuario($_SESSION['usuario-id']);
+                require '../View/AtividadeNaoPlanejadaView.php';
+                break;
         }
     }
 }
-LoginControl::verificar();
-$class = new AtividadeControl();

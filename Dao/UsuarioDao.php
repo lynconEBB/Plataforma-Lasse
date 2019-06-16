@@ -2,40 +2,39 @@
 
 class UsuarioDao extends CrudDao {
 
-    public function cadastrar(UsuarioModel $func){
-
+    public function cadastrar(UsuarioModel $usuario){
         $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,tipo,email,valorHora,formacao,atuacao,dtNascimento) VALUES (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :tipo, :email, :valorHora, :formacao, :atuacao,:dtNasc)");
-        $insert->bindValue(':senha',$func->getSenha());
-        $insert->bindValue(':login',$func->getLogin());
-        $insert->bindValue(':nomeCompleto',$func->getNomeCompleto());
-        $insert->bindValue(':cpf',$func->getCpf());
-        $insert->bindValue(':rg',$func->getRg());
-        $insert->bindValue(':dataDeEmissao',$func->getDtEmissao());
-        $insert->bindValue(':tipo',$func->getTipo());
-        $insert->bindValue(':email',$func->getEmail());
-        $insert->bindValue(':valorHora',$func->getValorHora());
-        $insert->bindValue(':formacao',$func->getFormacao());
-        $insert->bindValue(':atuacao',$func->getAtuacao());
-        $insert->bindValue(':dtNasc',$func->getDtNascimento());
+        $insert->bindValue(':senha',$usuario->getSenha());
+        $insert->bindValue(':login',$usuario->getLogin());
+        $insert->bindValue(':nomeCompleto',$usuario->getNomeCompleto());
+        $insert->bindValue(':cpf',$usuario->getCpf());
+        $insert->bindValue(':rg',$usuario->getRg());
+        $insert->bindValue(':dataDeEmissao',$usuario->getDtEmissao());
+        $insert->bindValue(':tipo',$usuario->getTipo());
+        $insert->bindValue(':email',$usuario->getEmail());
+        $insert->bindValue(':valorHora',$usuario->getValorHora());
+        $insert->bindValue(':formacao',$usuario->getFormacao());
+        $insert->bindValue(':atuacao',$usuario->getAtuacao());
+        $insert->bindValue(':dtNasc',$usuario->getDtNascimento());
 
         $insert->execute();
     }
 
-    public function alterar(UsuarioModel $func){
+    public function alterar(UsuarioModel $usuario){
         $update = $this->pdo->prepare("UPDATE tbUsuario SET login=:login, NomeCompleto=:nome, dtNascimento = :dtNasc, cpf = :cpf, rg = :rg, dataDeEmissao= :dtEmissao, tipo = :tipo, email= :email,
                 atuacao = :atuacao, formacao =:formacao, valorHora = :valorHora WHERE id = :id");
-        $update->bindValue(':login',$func->getLogin());
-        $update->bindValue(':nome',$func->getNomeCompleto());
-        $update->bindValue(':dtNasc',$func->getDtNascimento());
-        $update->bindValue(':cpf',$func->getCpf());
-        $update->bindValue(':rg',$func->getRg());
-        $update->bindValue(':dtEmissao',$func->getDtEmissao());
-        $update->bindValue(':tipo',$func->getTipo());
-        $update->bindValue(':email',$func->getEmail());
-        $update->bindValue(':atuacao',$func->getAtuacao());
-        $update->bindValue(':formacao',$func->getFormacao());
-        $update->bindValue(':valorHora',$func->getValorHora());
-        $update->bindValue(':id',$func->getId());
+        $update->bindValue(':login',$usuario->getLogin());
+        $update->bindValue(':nome',$usuario->getNomeCompleto());
+        $update->bindValue(':dtNasc',$usuario->getDtNascimento());
+        $update->bindValue(':cpf',$usuario->getCpf());
+        $update->bindValue(':rg',$usuario->getRg());
+        $update->bindValue(':dtEmissao',$usuario->getDtEmissao());
+        $update->bindValue(':tipo',$usuario->getTipo());
+        $update->bindValue(':email',$usuario->getEmail());
+        $update->bindValue(':atuacao',$usuario->getAtuacao());
+        $update->bindValue(':formacao',$usuario->getFormacao());
+        $update->bindValue(':valorHora',$usuario->getValorHora());
+        $update->bindValue(':id',$usuario->getId());
 
         $update->execute();
     }

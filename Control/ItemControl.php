@@ -1,9 +1,9 @@
 <?php
-    require_once '../Services/Autoload.php';
 
 class ItemControl extends CrudControl{
 
     public function __construct(){
+        UsuarioControl::verificar();
         $this->DAO = new ItemDao();
         parent::__construct();
     }
@@ -14,11 +14,11 @@ class ItemControl extends CrudControl{
                 $this->cadastrar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 'excluiItem':
+            case 'excluirItem':
                 $this->excluir($_POST['id']);
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
-            case 'alteraItem':
+            case 'alterarItem':
                 $this->atualizar();
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
@@ -71,8 +71,19 @@ class ItemControl extends CrudControl{
         $compraControl = new CompraControl();
         $total = $compraControl->calculaTotal($itens);
         $compraControl->atualizaTotal($total,$_POST['idCompra']);
+    }
 
+    public function processaRequisicao(string $parametro)
+    {
+        switch ($parametro){
+            case 'listaItens':
+                $itens = $this->listar();
+                require '../View/ItemView.php';
+                break;
+            case 'listaItensCompra':
+                $itens = $this->listarPorIdCompra($_GET['idCompra']);
+                require '../View/ItemCompraView.php';
+                break;
+        }
     }
 }
-
-new ItemControl();

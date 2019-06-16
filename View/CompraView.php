@@ -1,12 +1,12 @@
-<?php
+<html>
+<head>
+    <title>Lasse - PTI</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 
-include "cabecalho.php";
-
-$compraControl = new CompraControl();
-$compraControl->verificaPermissao();
-$resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
-
-?>
 <table class="table table-hover">
     <thead>
         <th>Proposito</th>
@@ -17,26 +17,26 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
     </thead>
     <tbody>
     <?php
-        foreach ($resul as $registro):
+        foreach ($compras as $compra):
     ?>
             <tr>
-                <td><?=$registro->getProposito()?></td>
-                <td><?=$registro->getTotalGasto()?></td>
+                <td><?=$compra->getProposito()?></td>
+                <td><?=$compra->getTotalGasto()?></td>
                 <td>
-                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$registro->getId()?>" data-proposito="<?=$registro->getProposito()?>"
+                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$compra->getId()?>" data-proposito="<?=$compra->getProposito()?>"
                             data-idtarefa="<?=$_GET['idTarefa']?>"  >
-                        <img width='16' src='../server/img/edit-regular.svg' alt=''>
+                        <img width='16' src='../img/edit-regular.svg' alt=''>
                     </button>
                 </td>
                 <td>
-                    <form action="../Control/CompraControl.php" method="post">
-                        <input type="hidden" name="acao" value="2">
-                        <input type="hidden" name="id" value="<?php echo $registro->getId()?>">
-                        <button class="btn"><img width='16' src='../server/img/trash-alt-solid.svg' alt=''></button>
+                    <form action="/acaoCompra" method="post">
+                        <input type="hidden" name="acao" value="excluirCompra">
+                        <input type="hidden" name="id" value="<?php echo $compra->getId()?>">
+                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                     </form>
                 </td>
                 <td>
-                    <a href="ItemView.php?idCompra=<?=$registro->getId()?>"><button type="button" class="btn"><img width='16' src='../server/img/box-solid.svg' alt=''></button></a>
+                    <a href="/menu/compra/item?idCompra=<?=$compra->getId()?>"><button type="button" class="btn"><img width='16' src='../img/box-solid.svg' alt=''></button></a>
                 </td>
             </tr>
     <?php
@@ -49,7 +49,7 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
     Cadastrar Nova Compra
 </button>
 
-<a href="ItemView.php"><button type="button" class="btn btn-warning">Menu de Itens</button></a>
+<a href="/menu/item""><button type="button" class="btn btn-warning">Menu de Itens</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -61,7 +61,7 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/CompraControl.php" method="post">
+                <form action="/acaoCompra" method="post">
                     <div class="form-group">
                         <label for="proposito" class="col-form-label">Proposito da Compra</label>
                         <input class="form-control" id="proposito" name="proposito">
@@ -72,7 +72,7 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
 
                     <button style="display: block;" class="btn" type="button" id="adicionar-item">&plus;</button>
                     <input type="hidden" name="idTarefa" value="<?=$_GET['idTarefa'];?>">
-                    <input type="hidden" name="acao" value="1">
+                    <input type="hidden" name="acao" value="cadastrarCompra">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
             </div>
@@ -90,7 +90,7 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../Control/CompraControl.php" method="post">
+                <form action="/acaoCompra" method="post">
                     <div class="form-group">
                         <label for="proposito" class="col-form-label">Proposito da Compra</label>
                         <input class="form-control" id="proposito" name="proposito">
@@ -102,8 +102,6 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                         <label for="idTarefa">Tarefa Pertencente</label>
                         <select class="custom-select" name="idTarefa" id="idTarefa">
                             <?php
-                                $tarefaControl = new TarefaControl();
-                                $tarefas = $tarefaControl->listarPorIdUsaurio($_SESSION['usuario-id']);
                                 foreach ($tarefas as $tarefa){
                                     echo "<option value='{$tarefa->getId()}'>{$tarefa->getNome()}</option>";
                                 }
@@ -111,7 +109,7 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
                         </select>
                     </div>
 
-                    <input type="hidden" name="acao" value="3">
+                    <input type="hidden" name="acao" value="alterarCompra">
                     <input type="hidden" name="id" id="id">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>
                 </form>
@@ -120,8 +118,8 @@ $resul = $compraControl->listarPorIdTarefa($_GET['idTarefa']);
     </div>
 </div>
 
-<script src="../server/js/jquery.js"></script>
-<script src="../server/js/funcoesCompra.js"></script>
-<script src="../server/js/bootstrap.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/funcoesCompra.js"></script>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>

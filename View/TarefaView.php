@@ -58,7 +58,7 @@
                 </a>
             </td>
             <td>
-                <a href="/menu/atividade?idTarefa=<?= $tarefa->getId() ?>">
+                <a href="/menu/atividadePlanejada?idTarefa=<?= $tarefa->getId() ?>">
                     <button class="btn"><img width="25" src="../img/Icons/Atividade.png" alt=""></button>
                 </a>
             </td>

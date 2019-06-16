@@ -18,14 +18,14 @@
 
             <button class="side-bar-button" data-toggle='modal' data-target='#modalAlterar' data-nome="<?= $usuario->getNomeCompleto()?>"
             data-login="<?=$usuario->getLogin()?>" data-email="<?=$usuario->getEmail()?>" data-dtnasc="<?=$usuario->getDtNascimento()?>" data-rg="<?=$usuario->getRg()?>" data-cpf="<?=$usuario->getCpf()?>"
-            data-dtemissao="<?=$usuario->getDtNascimento()?>" data-formacao="<?=$usuario->getFormacao()?>" data-valorhora="<?=$usuario->getValorHora()?>" data-atuacao="<?=$usuario->getAtuacao()?>">Editar</button>
+            data-dtemissao="<?=$usuario->getDtNascimento()?>" data-formacao="<?=$usuario->getFormacao()?>" data-valorhora="<?=$usuario->getValorHora()?>" data-atuacao="<?=$usuario->getAtuacao()?>">Alterar</button>
 
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
                 <button class="side-bar-button red">Sair</button>
             </form>
 
-            <a href="/menu/atividade"><button class="side-bar-button">Menu Atividades</button></a>
+            <a href="/menu/atividadeNaoPlanejada"><button class="side-bar-button">Menu Atividades</button></a>
         </aside>
         <section class="perfil">
             <div class="perfil-collum">

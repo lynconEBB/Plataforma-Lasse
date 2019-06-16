@@ -1,7 +1,5 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class AtividadeDao extends CrudDao {
 
     function cadastrarPlanejado(AtividadeModel $atividade,$idTarefa){

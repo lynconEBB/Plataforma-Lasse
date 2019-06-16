@@ -1,5 +1,5 @@
 <?php
-    const MVC = array('Model', 'View', 'Control', 'Dao');
+    const MVC = array('Model', 'Control', 'Dao');
 
     spl_autoload_register(function ($classe) {
         $partes = preg_split('/(?=[A-Z])/', $classe, -1, PREG_SPLIT_NO_EMPTY);

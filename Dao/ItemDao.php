@@ -1,7 +1,5 @@
 <?php
 
-require_once '../Services/Autoload.php';
-
 class ItemDao extends CrudDao {
     function cadastrar(ItemModel $item,$idCompra){
         $comando = "INSERT INTO tbItem (valor,quantidade,nome,idCompra) values (:valor, :quantidade,:nome,:idCompra)";

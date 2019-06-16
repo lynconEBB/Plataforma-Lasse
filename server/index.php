@@ -22,8 +22,14 @@ class RouteController{
         '/menu/gasto' => ['classe' => GastoControl::class,'parametro'=>'listaGastosGeral'],
         '/menu/viagem/gastos' => ['classe' => GastoControl::class,'parametro'=>'listaGastosViagem'],
         '/acaoGasto' => ['classe' => GastoControl::class,'parametro'=>''],
-        '/menu/AtividadePlanejada' => ['classe' => AtividadeControl::class,'parametro'=>'listaAtividadesPlanejadas'],
+        '/menu/atividadePlanejada' => ['classe' => AtividadeControl::class,'parametro'=>'listaAtividadesPlanejadas'],
+        '/menu/atividadeNaoPlanejada' => ['classe' => AtividadeControl::class,'parametro'=>'listaAtividadesNaoPlanejadas'],
         '/acaoAtividade' => ['classe' => AtividadeControl::class,'parametro'=>''],
+        '/menu/compra' => ['classe' => CompraControl::class,'parametro'=>'listaCompras'],
+        '/acaoCompra' => ['classe' => CompraControl::class,'parametro'=>''],
+        '/menu/compra/item' => ['classe' => ItemControl::class,'parametro'=>'listaItensCompra'],
+        '/menu/item' => ['classe' => ItemControl::class,'parametro'=>'listaItens'],
+        '/acaoItem' => ['classe' => ItemControl::class,'parametro'=>''],
         ];
     private $caminho;
 

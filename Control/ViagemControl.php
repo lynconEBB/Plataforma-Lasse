@@ -34,10 +34,8 @@ class ViagemControl extends CrudControl {
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
         }
 
-        $funcDAO = new UsuarioControl();
-        $viajante = $funcDAO->listarPorId($_POST['idFuncionario']);
         
-        $viagem = new ViagemModel($viajante,$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
+        $viagem = new ViagemModel($_SESSION['usuario-classe'],$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
         $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
 
         $idViagem = $this->DAO->pdo->lastInsertId();

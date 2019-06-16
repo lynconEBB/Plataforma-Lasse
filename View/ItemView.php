@@ -1,27 +1,16 @@
-<?php
-
-    require_once "cabecalho.php";
-
-    $itemControl = new ItemControl();
-    if(isset($_GET['idCompra'])){
-        $itens = $itemControl->listarPorIdCompra($_GET['idCompra']);
-    }else{
-        $itens = $itemControl->listar();
-    }
-?>
+<html>
+<head>
+    <title>Lasse - PTI</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
     <table class="table table-hover">
         <thead>
             <th>Nome</th>
             <th>Valor</th>
             <th>Quantidade</th>
-            <?php
-                if(isset($_GET['idCompra'])) {
-            ?>
-                <th></th>
-                <th></th>
-            <?php
-                }
-            ?>
         </thead>
         <tbody>
         <?php
@@ -31,40 +20,12 @@
                 <td><?= $item->getNome() ?></td>
                 <td><?= $item->getValor() ?></td>
                 <td><?= $item->getQuantidade() ?></td>
-                <?php
-                    if(isset($_GET['idCompra'])) {
-                ?>
-                <td>
-                    <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $item->getId() ?>' data-nome='<?= $item->getNome() ?>'
-                            data-valor='<?= $item->getValor() ?>' data-qtd="<?=$item->getQuantidade()?>">
-                        <img width="50px" src='../server/img/Icons/editarIcone.png' alt=''>
-                    </button>
-                </td>
-                <td>
-                    <form action="../Control/ItemControl.php" method="post">
-                        <input type="hidden" name="acao" value="excluiItem">
-                        <input type="hidden" name="id" value="<?=$item->getId() ?>">
-                        <input type="hidden" name="idCompra" value="<?= $_GET['idCompra'] ?>">
-                        <button class="btn"><img width='40px' src='../server/img/Icons/lixeiraicone.png' alt=''></button>
-                    </form>
-                </td>
-            </tr>
         <?php
-            }
+
             endforeach;
         ?>
         </tbody>
     </table>
-<?php
-    if(isset($_GET['idCompra'])) {
-?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-        Cadastrar Novo Item
-    </button>
-<?php
-    }
-?>
-
 
     <div class="modal fade" id="modalCadastro" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -131,8 +92,8 @@
         </div>
     </div>
 
-<script src="../server/js/jquery.js"></script>
-<script src="../server/js/funcoesItem.js"></script>
-<script src="../server/js/bootstrap.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/funcoesItem.js"></script>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>
