@@ -28,7 +28,7 @@ class CompraControl extends CrudControl {
     public function cadastrar()
     {
         //Cadastra no banco de dados com Total = 0
-        $compra = new CompraModel($_POST['proposito'],0);
+        $compra = new CompraModel($_POST['proposito']);
         $this->DAO->cadastrar($compra,$_POST['idTarefa']);
         //Pega id da Compra Inserida
         $idCompra = $this->DAO->pdo->lastInsertId();
@@ -36,20 +36,22 @@ class CompraControl extends CrudControl {
         //Cadastra no banco todos os itens da Compra
         $itemControl = new ItemControl();
         $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
-        //pega os Itens inseridos
-        $itens = $itemControl->listarPorIdCompra($idCompra);
-        //Altera a compra para conter os itens e seu id
-        $compra->setItens($itens);
-        $compra->setId($idCompra);
+
         //Atualiza total da Compra no banco
-        $this->DAO->atualizarTotal($compra);
+        $this->atualizarTotal($idCompra);
+
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($_POST['idTarefa']);
     }
 
-    protected function excluir($id)
+    protected function excluir(int $id)
     {
         $itemControl = new ItemControl();
         $itemControl->excluirPorIdCompra($id);
         $this->DAO->excluir($id);
+
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($_POST['idTarefa']);
     }
 
     public function listar()
@@ -67,16 +69,23 @@ class CompraControl extends CrudControl {
         return $this->DAO->listarPorId($id);
     }
 
-
-    public function atualizarTotal($compra)
+    public function atualizarTotal($idCompra)
     {
-        $this -> DAO -> atualizarTotal($compra);
+        $compra = $this->DAO->listarPorId($idCompra);
+        $this->DAO->atualizarTotal($compra);
+        $idTarefa = $this->DAO->descobreIdTarefa($idCompra);
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($idTarefa);
     }
 
     public function atualizar()
     {
-        $compra = new CompraModel($_POST['proposito'],null,$_POST['id']);
+        $compra = new CompraModel($_POST['proposito'],null,null,$_POST['id']);
         $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
+
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        $tarefaControl->atualizaTotal($_POST['idTarefaAntiga']);
     }
 
 

@@ -3,11 +3,10 @@
 class CompraDao extends CrudDao {
 
     function cadastrar(CompraModel $compra,$idTarefa){
-        $comando = "INSERT INTO tbCompra (proposito,totalGasto,idTarefa) values (:proposito, :totalGasto, :idTarefa)";
+        $comando = "INSERT INTO tbCompra (proposito,idTarefa) values (:proposito, :idTarefa)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':proposito',$compra->getProposito());
-        $stm->bindValue(':totalGasto',$compra->getTotalGasto());
         $stm->bindValue(':idTarefa',$idTarefa);
         $stm->execute();
     }
@@ -68,9 +67,9 @@ class CompraDao extends CrudDao {
         $stm->execute();
         $result =array();
 
-        $itemControl = new ItemControl();
+        $itemDAO = new ItemDao();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $itens = $itemControl->listarPorIdCompra($row['id']);
+            $itens = $itemDAO->listarPorIdCompra($row['id']);
             $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id']);
             $result[] = $obj;
         }
@@ -83,9 +82,25 @@ class CompraDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->bindParam(':id',$id);
         $stm->execute();
+
+        $itemDAO = new ItemDao();
+        $itens = $itemDAO->listarPorIdCompra($id);
+
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-            $obj = new CompraModel($row['proposito'],$row['totalGasto'],null,$row['id']);
+        $obj = new CompraModel($row['proposito'],0,$itens,$row['id']);
         return $obj;
+    }
+
+    public function descobreIdTarefa($idCompra)
+    {
+        $comando = "SELECT idTarefa FROM tbCompra where id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idCompra);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $row['idTarefa'];
     }
 
 }

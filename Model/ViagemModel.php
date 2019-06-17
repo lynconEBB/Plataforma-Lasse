@@ -34,10 +34,22 @@ class ViagemModel extends CrudModel {
         $this->horaEntradaHosp = $horaEntradaHosp;
         $this->horaSaidaHosp = $horaSaidaHosp;
         $this->gastos = $gastos;
-        $this->totalGasto = 0.00;
+        if($gastos == null){
+            $this->totalGasto = 0.00;
+        }else{
+            $this->calculaTotal();
+        }
         $this->id=$id;
     }
 
+    public function calculaTotal()
+    {
+        $total =0;
+        foreach ($this->gastos as $gasto){
+            $total += $gasto->getValor();
+        }
+        $this->totalGasto = $total;
+    }
     public function getId(){
         return $this->id;
     }
@@ -90,15 +102,16 @@ class ViagemModel extends CrudModel {
         return $this->gastos;
     }
 
-    public function setGastos($gastos): void{
+    public function setGastos($gastos){
         $this->gastos = $gastos;
+        $this->calculaTotal();
     }
 
     public function getTotalGasto(): float{
         return $this->totalGasto;
     }
 
-    public function setTotalGasto(float $totalGasto): void{
+    public function setTotalGasto(float $totalGasto){
         $this->totalGasto = $totalGasto;
     }
 

@@ -7,7 +7,7 @@ class CompraModel extends CrudModel
     private $totalGasto = 0;
     private $itens;
 
-    public function __construct(string $proposito,$totalGasto, array $itens = null, int $id = null)
+    public function __construct(string $proposito,$totalGasto = null, array $itens = null, int $id = null)
     {
         $this->id = $id;
         $this->proposito = $proposito;

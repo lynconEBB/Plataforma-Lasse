@@ -30,13 +30,13 @@ class ProjetoControl extends CrudControl
 
     protected function cadastrar()
     {
-        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto']);
+        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],null,null,null,null);
         $this->DAO->cadastrar($projeto);
 
         header('Location: /menu/projeto');
     }
 
-    protected function excluir($id){
+    protected function excluir(int $id){
         $this -> DAO -> excluir($id);
 
         header('Location: /menu/projeto');
@@ -47,7 +47,7 @@ class ProjetoControl extends CrudControl
     }
 
     protected function atualizar(){
-        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id']);
+        $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id'],null,null,null);
         $this -> DAO -> alterar($projeto);
 
         header('Location: /menu/projeto');

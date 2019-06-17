@@ -60,7 +60,7 @@ class UsuarioControl extends CrudControl {
     }
 
     public function listarPorId($id){
-        return $this->DAO->listarPorId($id);
+        $this->DAO->listarPorId($id);
     }
 
     public function tentaLogar()
@@ -126,8 +126,8 @@ class UsuarioControl extends CrudControl {
                 break;
             case 'perfil':
                 self::verificar();
-                $usuario = $this->listarPorId($_SESSION['usuario-id']);
-                require '../View/UsuarioView.php';
+                $this->listarPorId($_SESSION['usuario-id']);
+                //require '../View/UsuarioView.php';
         }
     }
 }

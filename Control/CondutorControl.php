@@ -30,7 +30,7 @@ class CondutorControl extends CrudControl {
         $this->DAO->cadastrar($condutor);
     }
 
-    protected function excluir($id){
+    protected function excluir(int $id){
         $this -> DAO -> excluir($id);
     }
 

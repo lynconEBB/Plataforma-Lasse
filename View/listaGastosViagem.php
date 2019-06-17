@@ -31,6 +31,7 @@
                     <form action="/acaoGasto" method="post">
                         <input type="hidden" name="acao" value="excluirGasto">
                         <input type="hidden" name="id" value="<?=$gasto->getId()?>">
+                        <input type="hidden" name="idViagem" value="<?=$_GET['idViagem']?>">
                         <button class='btn'><img width='16' src='../../img/trash-alt-solid.svg'></button>
                     </form>
                 </td>
@@ -94,6 +95,7 @@
                     </div>
                     <input type="hidden" name="acao" value="alterarGasto">
                     <input type="hidden" id="id" name="id">
+                    <input type="hidden" name="idViagem" value="<?=$_GET['idViagem']?>">
                     <button type="submit" class="btn btn-primary align-self-center">Alterar</button>
                 </form>
             </div>

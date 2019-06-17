@@ -29,9 +29,15 @@ class TarefaDao extends CrudDao {
         $comando = "SELECT * FROM tbTarefa";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
+        $atividadeDAO = new AtividadeDao();
+        $viagemDAO = new ViagemDao();
+        $compraDAO = new CompraDao();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id']);
+            $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
+            $compras = $compraDAO->listarPorIdTarefa($row['id']);
+            $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
+            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
             $result[] = $obj;
         }
         return $result;
@@ -51,18 +57,52 @@ class TarefaDao extends CrudDao {
         $stm->execute();
     }
 
+    function atualizaTotal(TarefaModel $tarefa){
+        $comando = "UPDATE tbTarefa SET totalGasto = :totalGasto WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':totalGasto',$tarefa->getTotalGasto());
+        $stm->bindValue(':id',$tarefa->getId());
+
+        $stm->execute();
+    }
+
     public function listarPorIdProjeto($id){
         $comando = "SELECT * from tbTarefa WHERE idProjeto = :id";
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':id',$id);
         $stm->execute();
-
+        $atividadeDAO = new AtividadeDao();
+        $viagemDAO = new ViagemDao();
+        $compraDAO = new CompraDao();
         $result =array();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id']);
+            $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
+            $compras = $compraDAO->listarPorIdTarefa($row['id']);
+            $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
+            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
             $result[] = $obj;
         }
         return $result;
+    }
+
+    public function listarPorId($id){
+        $comando = "SELECT * from tbTarefa WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue(':id',$id);
+        $stm->execute();
+
+        $viagemDAO = new ViagemDao();
+        $viagens = $viagemDAO->listarPorIdTarefa($id);
+        $atividadeDAO = new AtividadeDao();
+        $atividades = $atividadeDAO->listarPorIdTarefa($id);
+        $compraDAO = new CompraDao();
+        $compras = $compraDAO->listarPorIdTarefa($id);
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+        $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,null);
+
+        return $obj;
     }
 
     public function descobrirIdProjeto($id){

@@ -42,7 +42,7 @@
                     if($projetoControl->verificaDono($projeto->getId())):
                 ?>
                 <button type="button" class="btn " data-toggle="modal" data-target="#modalAdicionaFunc" data-idprojeto="<?=$projeto->getId()?>">
-                    <img src="../img/Icons/iconeADD.png" width="20">
+                    <img src="../img/Icons/IconeADD.png" width="20">
                 </button>
                 <?php
                     endif;

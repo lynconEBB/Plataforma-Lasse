@@ -16,12 +16,16 @@
         <th>Destino</th>
         <th>Justificativa</th>
         <th>Observacoes</th>
+        <th>Total Gasto</th>
         <th></th>
         <th></th>
         <th></th>
     </thead>
     <tbody>
         <?php
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
         foreach ($viagens as $viagem) {
         ?>
         <tr>
@@ -32,13 +36,11 @@
             <td><?=$viagem->getDestino()?></td>
             <td><?=$viagem->getJustificativa()?></td>
             <td><?=$viagem->getObservacoes()?></td>
+            <td><?=$viagem->getTotalGasto()?></td>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?=$viagem->getId()?>' data-origem="<?=$viagem->getOrigem()?>" data-destino="<?=$viagem->getDestino()?>" data-dtida="<?=$viagem->getDtIda()?>"
                 data-dtvolta="<?=$viagem->getDtVolta()?>" data-justificativa="<?=$viagem->getJustificativa()?>" data-observacoes="<?=$viagem->getObservacoes()?>" data-passagem="<?=$viagem->getPassagem()?>" data-idveiculo="<?=$viagem->getVeiculo()->getId()?>"
-                data-dataentrahosp="<?=$viagem->getDtEntradaHosp()?>" data-datasaidahosp="<?=$viagem->getDtSaidaHosp()?>" data-horaentrahosp="<?=$viagem->getHoraEntradaHosp()?>" data-horasaidahosp="<?=$viagem->getHoraSaidaHosp()?>"
-                data-gasto1 ="<?=$viagem->getGastos()[0]->getValor()?>" data-gasto2 ="<?=$viagem->getGastos()[1]->getValor()?>" data-gasto3 ="<?=$viagem->getGastos()[2]->getValor()?>" data-gasto4 ="<?=$viagem->getGastos()[3]->getValor()?>"
-                data-gasto5 ="<?=$viagem->getGastos()[4]->getValor()?>" data-gasto6 ="<?=$viagem->getGastos()[5]->getValor()?>" data-gasto7 ="<?=$viagem->getGastos()[6]->getValor()?>" data-gasto8 ="<?=$viagem->getGastos()[7]->getValor()?>"
-                        data-gasto9 ="<?=$viagem->getGastos()[8]->getValor()?>">
+                data-dataentrahosp="<?=$viagem->getDtEntradaHosp()?>" data-datasaidahosp="<?=$viagem->getDtSaidaHosp()?>" data-horaentrahosp="<?=$viagem->getHoraEntradaHosp()?>" data-horasaidahosp="<?=$viagem->getHoraSaidaHosp()?>">
                     <img width='16' src='../img/edit-regular.svg' alt=''>
                 </button>
             </td>
@@ -46,6 +48,7 @@
                 <form action="/acaoViagem" method="post">
                     <input type="hidden" name="acao" value="excluirViagem">
                     <input type="hidden" name="id" value="<?php echo $viagem->getId()?>">
+                    <input type="hidden" name="idTarefa" value="<?=$_GET['idTarefa']?>">
                     <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                 </form>
             </td>

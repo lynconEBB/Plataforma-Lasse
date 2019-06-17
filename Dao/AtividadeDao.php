@@ -64,10 +64,9 @@ class AtividadeDao extends CrudDao {
         $stm->execute();
         $result =array();
 
-        $usuarioControl = new UsuarioControl();
-
+        $usuarioDAO = new UsuarioDao();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $usuario = $usuarioControl->listarPorId($row['idUsuario']);
+            $usuario = $usuarioDAO->listarPorId($row['idUsuario']);
             $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
             $result[] = $obj;
         }

@@ -28,6 +28,8 @@ class GastoControl extends CrudControl
     public function cadastrar(){
         $gasto = new GastoModel($_POST['valor'],$_POST['tipoGasto']);
         $this->DAO->cadastrar($gasto,$_POST['idViagem']);
+        $viagemControl = new ViagemControl();
+        $viagemControl->atualizaTotal($_POST['idViagem']);
     }
 
     public function cadastrarGastos($gastos,$idViagem){
@@ -38,10 +40,13 @@ class GastoControl extends CrudControl
         }
 
         $this->DAO->cadastrarGastos($listaGastos,$idViagem);
+        return $listaGastos;
     }
 
-    protected function excluir($id){
+    protected function excluir(int $id){
         $this -> DAO -> excluir($id);
+        $viagemControl = new ViagemControl();
+        $viagemControl->atualizaTotal($_POST['idViagem']);
     }
 
     public function excluirPorIdViagem($id){
@@ -56,12 +61,14 @@ class GastoControl extends CrudControl
         return $this -> DAO -> listarPorIdViagem($id);
     }
 
+
     protected function atualizar(){
         $gasto = new GastoModel($_POST['valor'],$_POST['tipoGasto'],$_POST['id']);
         $this -> DAO -> atualizar($gasto);
 
+        $viagemControl = new ViagemControl();
+        $viagemControl->atualizaTotal($_POST['idViagem']);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
-
     }
 
     public function processaRequisicao(string $parametro)

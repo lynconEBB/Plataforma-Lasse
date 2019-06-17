@@ -40,22 +40,26 @@ class ProjetoDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
+        $tarefaDAO = new TarefaDao();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
+            $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
+            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto']);
             $result[] = $obj;
         }
         return $result;
     }
 
     public function listarPorIdUsuario($id){
-        $comando1 = "select idProjeto from tbUsuarioProjeto where idUsuario = :id";
+        $comando1 = "select tbProjeto.dataFinalizacao, tbProjeto.dataInicio, tbProjeto.descricao, tbProjeto.nome, tbProjeto.id, tbProjeto.totalGasto from tbProjeto inner join tbUsuarioProjeto on tbProjeto.id = tbUsuarioProjeto.idProjeto where tbUsuarioProjeto.idUsuario = :id";
         $stm = $this->pdo->prepare($comando1);
         $stm->bindValue(':id',$id);
         $stm->execute();
-        $idProjetos = $stm->fetchAll(PDO::FETCH_COLUMN);
         $projetos = array();
-        foreach ($idProjetos as $idProjeto){
-            $projetos[] = $this->listarPorId($idProjeto);
+        $tarefaDAO = new TarefaDao();
+        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+            $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
+            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto']);
+            $projetos[] = $obj;
         }
         return $projetos;
     }
@@ -65,8 +69,11 @@ class ProjetoDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':id',$id);
         $stm->execute();
+
+        $tarefaDAO = new TarefaDao();
+        $tarefas = $tarefaDAO->listarPorIdProjeto($id);
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id']);
+        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null);
         return $projeto;
     }
 

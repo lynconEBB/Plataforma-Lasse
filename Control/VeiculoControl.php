@@ -37,7 +37,7 @@ class VeiculoControl extends CrudControl {
         $this->DAO->cadastrar($veiculo);
     }
 
-    protected function excluir($id){
+    protected function excluir(int $id){
         $this -> DAO -> excluir($id);
         header('Location: /menu/veiculo');
     }

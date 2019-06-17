@@ -13,6 +13,7 @@
     <th>Estado</th>
     <th>Data de inicio</th>
     <th>Data de Conclusão</th>
+    <th>Total Gasto</th>
     <th></th>
     <th></th>
     <th></th>
@@ -29,6 +30,7 @@
             <td><?= $tarefa->getEstado() ?></td>
             <td><?= $tarefa->getDataInicio() ?></td>
             <td><?= $tarefa->getDataConclusao() ?></td>
+            <td><?= $tarefa->getTotalGasto() ?></td>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar'
                         data-id='<?= $tarefa->getId() ?>' data-nome='<?php echo $tarefa->getNome() ?>'

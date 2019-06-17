@@ -29,11 +29,8 @@ class ItemControl extends CrudControl{
     {
         $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd']);
         $this->DAO->cadastrar($item,$_POST['idCompra']);
-        $itens = $this->DAO->listarPorIdCompra($_POST['idCompra']);
         $compraControl = new CompraControl();
-        $compra = $compraControl->listarPorId($_POST['idCompra']);
-        $compra->setItens($itens);
-        $compraControl->atualizarTotal($compra);
+        $compraControl->atualizarTotal($_POST['idCompra']);
     }
 
     public function cadastrarPorArray(array $itens, int $idCompra)
@@ -42,17 +39,13 @@ class ItemControl extends CrudControl{
             $ite = new ItemModel($item['valor'],$item['nome'],$item['qtd']);
             $this->DAO->cadastrar($ite,$idCompra);
         }
-
     }
 
-    protected function excluir($id)
+    protected function excluir(int $id)
     {
         $this -> DAO -> excluir($id);
-        $itens = $this->DAO->listarPorIdCompra($_POST['idCompra']);
         $compraControl = new CompraControl();
-        $compra = $compraControl->listarPorId($_POST['idCompra']);
-        $compra->setItens($itens);
-        $compraControl->atualizarTotal($compra);
+        $compraControl->atualizarTotal($_POST['idCompra']);
     }
 
     public function excluirPorIdCompra($id)
@@ -74,11 +67,8 @@ class ItemControl extends CrudControl{
     {
         $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd'],$_POST['id']);
         $this -> DAO -> atualizar($item);
-        $itens = $this->DAO->listarPorIdCompra($_POST['idCompra']);
         $compraControl = new CompraControl();
-        $compra = $compraControl->listarPorId($_POST['idCompra']);
-        $compra->setItens($itens);
-        $compraControl->atualizarTotal($compra);
+        $compraControl->atualizarTotal($_POST['idCompra']);
     }
 
     public function processaRequisicao(string $parametro)

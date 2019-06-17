@@ -28,6 +28,7 @@ $(document).ready(function () {
         let modal = $(this);
         modal.find('#proposito').val(proposito);
         modal.find('#idTarefa').val(idTarefa);
+        modal.find('#idTarefaAntiga').val(idTarefa);
         modal.find('#id').val(id);
         console.log(idTarefa);
     })

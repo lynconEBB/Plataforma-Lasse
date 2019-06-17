@@ -32,6 +32,7 @@
                     <form action="/acaoCompra" method="post">
                         <input type="hidden" name="acao" value="excluirCompra">
                         <input type="hidden" name="id" value="<?php echo $compra->getId()?>">
+                        <input type="hidden" name="idTarefa" value="<?php echo $_GET['idTarefa']?>">
                         <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
                     </form>
                 </td>
@@ -49,7 +50,7 @@
     Cadastrar Nova Compra
 </button>
 
-<a href="/menu/item""><button type="button" class="btn btn-warning">Menu de Itens</button></a>
+<a href="/menu/item"><button type="button" class="btn btn-warning">Menu de Itens</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -108,7 +109,7 @@
                             ?>
                         </select>
                     </div>
-
+                    <input type="hidden" name="idTarefaAntiga" id="idTarefaAntiga">
                     <input type="hidden" name="acao" value="alterarCompra">
                     <input type="hidden" name="id" id="id">
                     <button type="submit" class="btn btn-primary align-self-center">Cadastrar</button>

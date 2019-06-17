@@ -8,16 +8,44 @@ class ProjetoModel extends CrudModel {
     private $descricao;
     private $nome;
     private $tarefas;
+    private $participantes;
 
-    public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$id=null, $tarefas=null){
+    public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$id, $tarefas,$totalGasto,$participantes){
         $this->id = $id;
         $this->dataFinalizacao = $dataFinalizacao;
         $this->dataInicio = $dataInicio;
-        $this->totalGasto = 0;
         $this->descricao = $descricao;
         $this->nome = $nome;
         $this->tarefas = $tarefas;
+        $this->participantes = $participantes;
+        if($tarefas != null && $totalGasto == null){
+            $this->calculaTotal();
+        }elseif($totalGasto == null){
+            $this->totalGasto = 0;
+        }else{
+            $this->totalGasto = $totalGasto;
+        }
     }
+
+    public function calculaTotal()
+    {
+        $total = 0;
+        foreach ($this->tarefas as $tarefa){
+            $total += $tarefa->getTotalGasto();
+        }
+        $this->totalGasto = $total;
+    }
+
+    public function getParticipantes()
+    {
+        return $this->participantes;
+    }
+
+    public function setParticipantes($participantes): void
+    {
+        $this->participantes = $participantes;
+    }
+
 
     public function getId(){
         return $this->id;

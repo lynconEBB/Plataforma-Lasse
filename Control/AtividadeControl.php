@@ -37,7 +37,7 @@ class AtividadeControl extends CrudControl {
 
     }
 
-    protected function excluir($id)
+    protected function excluir(int $id)
     {
         $this->DAO->excluir($id);
     }
@@ -45,6 +45,12 @@ class AtividadeControl extends CrudControl {
     public function listar()
     {
         return $this->DAO->listar();
+    }
+
+    protected function atualizar()
+    {
+        $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id']);
+        $this -> DAO -> atualizar($atividade);
     }
 
     public function listarPorIdTarefa($id):array
@@ -57,13 +63,6 @@ class AtividadeControl extends CrudControl {
         return $this->DAO->listarPorIdUsuario($id);
     }
 
-
-    protected function atualizar()
-    {
-        $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id']);
-        $this -> DAO -> atualizar($atividade);
-    }
-
     public function verificaPermissao()
     {
         if(isset($_GET['idTarefa'])){
@@ -74,7 +73,7 @@ class AtividadeControl extends CrudControl {
             // Verifica se o funcionário está relacionado com o Projeto
             $projetoControl = new ProjetoControl();
 
-            if($projetoControl->procuraFuncionario($idProjeto) > 0){
+            if($projetoControl->procuraFuncionario($idProjeto,$_SESSION['usuario-id']) > 0){
                 return true;
             }else{
                 require '../View/errorPages/erroSemAcesso.php';

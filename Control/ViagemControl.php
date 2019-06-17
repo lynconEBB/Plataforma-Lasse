@@ -13,6 +13,7 @@ class ViagemControl extends CrudControl {
         switch ($acao){
             case 'cadastrarViagem':
                 $this->cadastrar();
+                header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
                 break;
             case 'excluirViagem':
                 $this->excluir($_POST['id']);
@@ -34,17 +35,32 @@ class ViagemControl extends CrudControl {
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
         }
 
-        
+        //Cadastra viagem com total = 0
         $viagem = new ViagemModel($_SESSION['usuario-classe'],$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
         $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
 
+        //Pega id da viagem inserida
         $idViagem = $this->DAO->pdo->lastInsertId();
 
+        //cadastra os gastos relacionados a viagem
         $gastoControl = new GastoControl();
         $gastoControl->cadastrarGastos($_POST['gasto'],$idViagem);
 
-        header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
+        //atualiza total da viagem
+        $this->atualizaTotal($idViagem);
 
+        //Atualiza total da tarefa
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($_POST['idTarefa']);
+    }
+
+    public function atualizaTotal($idViagem)
+    {
+        $viagem = $this->DAO->listarPorId($idViagem);
+        $this->DAO->atualizarTotal($viagem);
+        $idTarefa = $this->DAO->descobrirIdTarefa($idViagem);
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($idTarefa);
     }
 
     protected function atualizar()
@@ -68,11 +84,14 @@ class ViagemControl extends CrudControl {
     }
 
 
-    protected function excluir($id)
+    protected function excluir(int $id)
     {
         $gastoControl = new GastoControl();
         $gastoControl->excluirPorIdViagem($id);
         $this -> DAO -> excluir($id);
+
+        $tarefaControl = new TarefaControl();
+        $tarefaControl->atualizaTotal($_POST['idTarefa']);
         header('Location: '.$_SERVER['HTTP_REFERER']);
     }
 
@@ -85,7 +104,6 @@ class ViagemControl extends CrudControl {
     {
         return $this -> DAO -> listarPorIdTarefa($idTarefa);
     }
-
 
     public function verificaPermissao(){
 

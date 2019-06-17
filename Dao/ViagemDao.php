@@ -25,7 +25,6 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
         $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
-
         $stm->execute();
 
     }
@@ -103,11 +102,56 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
             $viajante = $funcDAO->listarPorId($resul['idUsuario']);
             $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
             $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],$resul['id'],$gastos);
+            $obj->setTotalGasto($resul['totalGasto']);
             $viagens[] = $obj;
         }
 
         return $viagens;
+    }
 
+    public function listarPorId($id):ViagemModel
+    {
+        $comando = "SELECT * from tbViagem WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':id',$id);
+
+        $stm->execute();
+        $resul = $stm->fetch(PDO::FETCH_ASSOC);
+
+        $veiculoDAO = new VeiculoDao();
+        $funcDAO = new UsuarioDao();
+        $gastoDAO = new GastoDao();
+
+        $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
+        $viajante = $funcDAO->listarPorId($resul['idUsuario']);
+        $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
+        $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],$resul['id'],$gastos);
+
+        return $obj;
+    }
+
+    function atualizarTotal(ViagemModel $viagem){
+        $comando = "UPDATE tbViagem SET totalGasto =:totalGasto WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
+        $stm->bindValue(':id',$viagem->getId());
+
+
+        $stm->execute();
+    }
+
+    public function descobrirIdTarefa($idCompra)
+    {
+        $comando = "SELECT idTarefa FROM tbViagem where id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idCompra);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $row['idTarefa'];
     }
 
 }

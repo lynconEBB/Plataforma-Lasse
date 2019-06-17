@@ -36,7 +36,7 @@ CREATE TABLE `tbAtividade` (
   KEY `fk_tbAtividade_tbTarefa` (`idTarefa`),
   CONSTRAINT `fk_tbAtividade_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
   CONSTRAINT `fk_tbAtividade_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `tbAtividade` (
 
 LOCK TABLES `tbAtividade` WRITE;
 /*!40000 ALTER TABLE `tbAtividade` DISABLE KEYS */;
+INSERT INTO `tbAtividade` VALUES (2,2,10,'Desenvolvimento',0.30,'Programacao de Verificacao de permissao','2019-06-12',67.01),(3,2,10,'Desenvolvimento',0.30,'Programacao de Verificacao de permissao','2019-06-12',67.01);
 /*!40000 ALTER TABLE `tbAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,12 +59,12 @@ DROP TABLE IF EXISTS `tbCompra`;
 CREATE TABLE `tbCompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `proposito` varchar(60) NOT NULL,
-  `totalGasto` decimal(12,2) NOT NULL,
+  `totalGasto` decimal(6,2) DEFAULT '0.00',
   `idTarefa` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbTarefa_tbCompra` (`idTarefa`),
   CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +73,7 @@ CREATE TABLE `tbCompra` (
 
 LOCK TABLES `tbCompra` WRITE;
 /*!40000 ALTER TABLE `tbCompra` DISABLE KEYS */;
-INSERT INTO `tbCompra` VALUES (8,'Melhorar Sala de Aula',216.16,10),(9,'Melhorar Sala de Aula',413.28,10),(10,'',0.00,10),(11,'',0.00,10);
+INSERT INTO `tbCompra` VALUES (18,'Melhorar Sala de Aula',48.00,10),(20,'Melhorar Sala de Aula',252.16,10),(21,'Melhorar Sala de Aula',216.16,13);
 /*!40000 ALTER TABLE `tbCompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +99,7 @@ CREATE TABLE `tbCondutor` (
 
 LOCK TABLES `tbCondutor` WRITE;
 /*!40000 ALTER TABLE `tbCondutor` DISABLE KEYS */;
-INSERT INTO `tbCondutor` VALUES (5,'Condutores','4535634','2019-02-01'),(9,'Condutores','4535634','2019-02-01'),(10,'Andressa','11111','2039-02-01'),(11,'Lyncon','333333','2019-02-01');
+INSERT INTO `tbCondutor` VALUES (9,'Condutores','4535634','2019-02-01'),(10,'Andressa','11111','2039-02-01');
 /*!40000 ALTER TABLE `tbCondutor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +118,7 @@ CREATE TABLE `tbGasto` (
   PRIMARY KEY (`id`),
   KEY `fk_tbGasto_tbViagem` (`idViagem`),
   CONSTRAINT `fk_tbGasto_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +127,7 @@ CREATE TABLE `tbGasto` (
 
 LOCK TABLES `tbGasto` WRITE;
 /*!40000 ALTER TABLE `tbGasto` DISABLE KEYS */;
+INSERT INTO `tbGasto` VALUES (76,30.00,'Aluguel de Veiculos',9),(85,100.00,'Gasto com AlmoÃ§o',9);
 /*!40000 ALTER TABLE `tbGasto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +147,7 @@ CREATE TABLE `tbItem` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProduto_tbCompra` (`idCompra`),
   CONSTRAINT `fk_tbProduto_tbCompra` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +156,7 @@ CREATE TABLE `tbItem` (
 
 LOCK TABLES `tbItem` WRITE;
 /*!40000 ALTER TABLE `tbItem` DISABLE KEYS */;
-INSERT INTO `tbItem` VALUES (7,8,54.04,4.00,'Mesa'),(8,9,54.04,4.00,'Mesa'),(9,9,12.32,16.00,'Cadeira');
+INSERT INTO `tbItem` VALUES (49,18,4.00,6.00,'Passat'),(50,18,4.00,6.00,'Passat'),(81,20,54.04,4.00,'Mesa'),(82,20,12.00,3.00,'Cadeira'),(83,21,54.04,4.00,'Mesa');
 /*!40000 ALTER TABLE `tbItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +175,7 @@ CREATE TABLE `tbProjeto` (
   `descricao` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +184,7 @@ CREATE TABLE `tbProjeto` (
 
 LOCK TABLES `tbProjeto` WRITE;
 /*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
-INSERT INTO `tbProjeto` VALUES (1,'2038-01-02','2039-02-01',0.00,'Projeto para Projetar','Projeto1'),(2,'2038-01-02','2039-02-01',0.00,'gdfgdfgd','Projeto6'),(3,'2038-01-02','2039-02-01',0.00,'fsdjkhfksd','ProjetoCami'),(5,'2014-03-01','2013-02-02',0.00,'Projeto para Projetar','Bio Gas');
+INSERT INTO `tbProjeto` VALUES (1,'2038-01-02','2039-02-01',0.00,'Projeto para Projetar','Projeto1'),(3,'2038-01-02','2039-02-01',0.00,'fsdjkhfksd','ProjetoCami'),(5,'2014-03-01','2013-02-02',0.00,'Projeto para Projetar','Bio Gas'),(6,'2038-01-02','2039-02-01',0.00,'Projeto para Projetar','Bio Gas');
 /*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,10 +203,11 @@ CREATE TABLE `tbTarefa` (
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(45) NOT NULL,
   `idProjeto` int(11) NOT NULL,
+  `totalGasto` decimal(9,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
   CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +216,7 @@ CREATE TABLE `tbTarefa` (
 
 LOCK TABLES `tbTarefa` WRITE;
 /*!40000 ALTER TABLE `tbTarefa` DISABLE KEYS */;
-INSERT INTO `tbTarefa` VALUES (10,'2003-03-02','2003-02-01','Concluido','Concluir CRUDS','Tarefa para concluir todos os',1);
+INSERT INTO `tbTarefa` VALUES (10,'2003-03-02','2003-02-01','Concluido','Concluir CRUDS','Tarefa para concluir todos os',1,355.96),(13,'2003-03-02','2003-02-01','Trabalhando','Teste 1','Testando Calculo de gAstos totais',1,346.16);
 /*!40000 ALTER TABLE `tbTarefa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +242,7 @@ CREATE TABLE `tbUsuario` (
   `senha` varchar(45) NOT NULL,
   `dtNascimento` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +251,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (1,'Lyncon Estevan Baez','12112880993','3424543','3094-03-02','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','Lyncon.ebb','hgj','3094-03-02'),(2,'Camila','1232423423','234543534','2012-02-01','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','camig@gmail.com','cami','123','2019-02-01'),(3,'Lynconeee','12112880993','3424543','3094-03-02','1',93.00,'Es','Terceiros','lynconlyn@gmail.com','aa','123','3094-03-02');
+INSERT INTO `tbUsuario` VALUES (1,'Lyncon Estevan Baez','12112880993','3424543','3094-03-02','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','Lyncon.ebb','hgj','3094-03-02'),(2,'Camila','1232423423','234543534','2012-02-01','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','camig@gmail.com','cami','123','2019-02-01'),(3,'Lynconeee','12112880993','3424543','3094-03-02','1',93.00,'Es','Terceiros','lynconlyn@gmail.com','aa','123','3094-03-02'),(4,'Passat','1232423423','3424543','2012-02-01','1',50.03,'Estudante','Terceiros','lynconlyn@gmail.com','Rodrigo','123','2019-02-01');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,6 +265,7 @@ DROP TABLE IF EXISTS `tbUsuarioProjeto`;
 CREATE TABLE `tbUsuarioProjeto` (
   `idProjeto` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
+  `dono` tinyint(1) NOT NULL,
   PRIMARY KEY (`idUsuario`,`idProjeto`),
   KEY `fk_tbUsuarioProjeto_tbProjeto` (`idProjeto`),
   CONSTRAINT `fk_tbUsuarioProjeto_tbProjeto` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`),
@@ -275,7 +279,7 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
-INSERT INTO `tbUsuarioProjeto` VALUES (1,1),(2,1),(3,2),(5,3);
+INSERT INTO `tbUsuarioProjeto` VALUES (1,1,0),(6,1,1),(3,2,0),(5,3,0);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +302,7 @@ CREATE TABLE `tbVeiculo` (
   PRIMARY KEY (`id`),
   KEY `fk_tbVeiculo_tbCondutor` (`idCondutor`),
   CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbCondutor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +311,7 @@ CREATE TABLE `tbVeiculo` (
 
 LOCK TABLES `tbVeiculo` WRITE;
 /*!40000 ALTER TABLE `tbVeiculo` DISABLE KEYS */;
-INSERT INTO `tbVeiculo` VALUES (4,5,'CarroCarroso','Celta','2039-02-01','2039-01-01','12:00:00','07:00:00'),(8,9,'CarroCarroso','Celta','2039-02-01','2039-01-01','12:00:00','07:00:00'),(9,10,'Fiat','Uni','2012-02-01','2019-02-01','12:00:00','07:00:00');
+INSERT INTO `tbVeiculo` VALUES (10,10,'Passat','Celta','2012-02-01','2039-01-01','12:00:00','07:00:00');
 /*!40000 ALTER TABLE `tbVeiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +344,7 @@ CREATE TABLE `tbViagem` (
   KEY `fk_tbViagem_tbTarefa` (`idTarefa`),
   CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
   CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbVeiculo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -349,6 +353,7 @@ CREATE TABLE `tbViagem` (
 
 LOCK TABLES `tbViagem` WRITE;
 /*!40000 ALTER TABLE `tbViagem` DISABLE KEYS */;
+INSERT INTO `tbViagem` VALUES (9,10,13,'Londres','Curitiva','2039-02-01','2031-02-01','dhfksdhfk','dfhjkshfksdhkf','32424','2012-03-03','2018-02-01','09:00:00','08:00:00',130.00,1);
 /*!40000 ALTER TABLE `tbViagem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -361,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-12 17:01:58
+-- Dump completed on 2019-06-17 17:00:03

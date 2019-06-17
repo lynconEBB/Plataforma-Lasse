@@ -24,12 +24,12 @@ class TarefaControl extends CrudControl {
     }
 
     protected function cadastrar(){
-        $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao']);
+        $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],null,null,null,null,null);
         $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
-    protected function excluir($id){
+    protected function excluir(int $id){
         $this -> DAO -> excluir($id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
@@ -39,7 +39,7 @@ class TarefaControl extends CrudControl {
     }
 
     protected function atualizar(){
-        $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id']);
+        $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id'],null,null,null,null);
         $this -> DAO ->atualizar($projeto);
 
         header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -48,6 +48,11 @@ class TarefaControl extends CrudControl {
     public function listarPorIdProjeto($id){
         return $this->DAO->listarPorIdProjeto($id);
     }
+
+    public function listarPorId($id){
+        return $this->DAO->listarPorId($id);
+    }
+
 
     public function descobrirIdProjeto($id){
         return $this->DAO->descobrirIdProjeto($id);
@@ -64,6 +69,13 @@ class TarefaControl extends CrudControl {
             }
         }
         return $listaDeTarefas;
+    }
+
+    public function atualizaTotal($idTarefa){
+        $tarefa = $this->listarPorId($idTarefa);
+        $this->DAO->atualizaTotal($tarefa);
+        $idProjeto = $this->DAO->descobrirIdProjeto($idTarefa);
+
     }
 
     public function verificaPermissao(){
