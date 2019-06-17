@@ -61,6 +61,22 @@ class UsuarioDao extends CrudDao {
         return $funcionarios;
     }
 
+    public function listarPorIdProjeto($idProjeto){
+        $busca = $this->pdo->prepare("SELECT tbUsuario.nomeCompleto,tbUsuario.login, tbUsuario.dtNascimento,tbUsuario.cpf, tbUsuario.rg, tbUsuario.dataDeEmissao, tbUsuario.tipo, tbUsuario.email,
+ tbUsuario.atuacao, FROM tbUsuario");
+        $busca->execute();
+
+        $funcionarios =  array();
+
+        $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($linhas as $linha){
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
+                $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $funcionarios[]=$fun;
+        }
+        return $funcionarios;
+    }
+
     public function listarPorLogin($login){
         $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login= :login");
         $stm->bindValue(':login',$login);
