@@ -19,6 +19,7 @@
                     <p><?php echo $projeto->getDescricao() ?></p>
                     <p><b>Data de Inicio:</b><?php echo $projeto->getDataInicio() ?></p>
                     <p><b>Data de Finalização:</b><?php echo $projeto->getDataFinalizacao() ?></p>
+                    <p><b>Total Gasto:</b><?=$projeto->getTotalGasto() ?></p>
                 </div>
             </div>
             <div class="card-footer">

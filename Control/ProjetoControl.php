@@ -63,6 +63,12 @@ class ProjetoControl extends CrudControl
         return $this->DAO->procuraFuncionario($idProjeto,$idUsuario);
     }
 
+    public function atualizaTotal($idProjeto)
+    {
+        $projeto = $this->DAO->listarPorId($idProjeto);
+        $this->DAO->atualizarTotal($projeto);
+    }
+
     public function verificaDono($idProjeto)
     {
         $numRows = $this->DAO->verificaDono($idProjeto);

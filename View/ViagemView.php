@@ -23,10 +23,7 @@
     </thead>
     <tbody>
         <?php
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-        foreach ($viagens as $viagem) {
+            foreach ($viagens as $viagem) {
         ?>
         <tr>
             <td><?=$viagem->getViajante()->getNomeCompleto()?></td>
@@ -37,6 +34,7 @@
             <td><?=$viagem->getJustificativa()?></td>
             <td><?=$viagem->getObservacoes()?></td>
             <td><?=$viagem->getTotalGasto()?></td>
+            <?php if($viagem->getViajante()->getId() == $_SESSION['usuario-id']): ?>
             <td>
                 <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?=$viagem->getId()?>' data-origem="<?=$viagem->getOrigem()?>" data-destino="<?=$viagem->getDestino()?>" data-dtida="<?=$viagem->getDtIda()?>"
                 data-dtvolta="<?=$viagem->getDtVolta()?>" data-justificativa="<?=$viagem->getJustificativa()?>" data-observacoes="<?=$viagem->getObservacoes()?>" data-passagem="<?=$viagem->getPassagem()?>" data-idveiculo="<?=$viagem->getVeiculo()->getId()?>"
@@ -55,6 +53,7 @@
             <td>
                 <a href="/menu/viagem/gastos?idViagem=<?=$viagem->getId()?>"><button class="btn"><img width='20' src='../img/money-bill-alt-solid.svg' alt=''></button></a>
             </td>
+            <?php endif; ?>
         </tr>
         <?php
         }

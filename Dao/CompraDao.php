@@ -3,11 +3,12 @@
 class CompraDao extends CrudDao {
 
     function cadastrar(CompraModel $compra,$idTarefa){
-        $comando = "INSERT INTO tbCompra (proposito,idTarefa) values (:proposito, :idTarefa)";
+        $comando = "INSERT INTO tbCompra (proposito,idTarefa,idComprador) values (:proposito, :idTarefa, :idComprador)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':proposito',$compra->getProposito());
         $stm->bindValue(':idTarefa',$idTarefa);
+        $stm->bindValue(':idComprador',$compra->getComprador()->getId());
         $stm->execute();
     }
 
@@ -25,11 +26,12 @@ class CompraDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
-
+        $usuarioDAO = new UsuarioDao();
         $itemControl = new ItemControl();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $itens = $itemControl->listarPorIdCompra($row['id']);
-            $obj = new CompraModel($row['proprosito'],$row['totalGasto'],$itens,$row['id']);
+            $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+            $obj = new CompraModel($row['proprosito'],$row['totalGasto'],$itens,$row['id'],$comprador);
             $result[] = $obj;
         }
         return $result;
@@ -67,10 +69,12 @@ class CompraDao extends CrudDao {
         $stm->execute();
         $result =array();
 
+        $usuarioDAO = new UsuarioDao();
         $itemDAO = new ItemDao();
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $itens = $itemDAO->listarPorIdCompra($row['id']);
-            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id']);
+            $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
             $result[] = $obj;
         }
         return $result;
@@ -85,9 +89,12 @@ class CompraDao extends CrudDao {
 
         $itemDAO = new ItemDao();
         $itens = $itemDAO->listarPorIdCompra($id);
+        $usuarioDAO = new UsuarioDao();
+
 
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new CompraModel($row['proposito'],0,$itens,$row['id']);
+        $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+        $obj = new CompraModel($row['proposito'],0,$itens,$row['id'],$comprador);
         return $obj;
     }
 

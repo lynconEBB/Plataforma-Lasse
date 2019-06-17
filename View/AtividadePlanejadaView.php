@@ -44,6 +44,7 @@
                         <form action="/acaoAtividade" method="post">
                             <input type="hidden" name="acao" value="excluirAtividade">
                             <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
+                            <input type="hidden" name="idTarefa" value="<?= $_GET['idTarefa']; ?>">
                             <button class="btn"><img width='16' src='../img/Icons/lixeiraicone.png' alt=''></button>
                         </form>
                     </td>

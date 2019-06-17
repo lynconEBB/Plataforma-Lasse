@@ -61,8 +61,8 @@
             <div class="perfil-collum">
                 <span class="side-bar-title">Projetos</span>
                 <?php
-                    if(count($usuario->getProjetos())>0){
-                        foreach ($usuario->getProjetos() as $projeto){
+                    if(count($projetos)>0){
+                        foreach ($projetos as $projeto){
                             $projetoControl = new ProjetoControl();
                             echo '<span class="item-value">'. $projeto->getNome();
                             if($projetoControl->verificaDono($projeto->getId())){

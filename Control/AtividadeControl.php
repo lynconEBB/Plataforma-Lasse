@@ -31,15 +31,20 @@ class AtividadeControl extends CrudControl {
         $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe']);
         if(isset($_POST['idTarefa'])){
             $this->DAO->cadastrarPlanejado($atividade,$_POST['idTarefa']);
+            $tarefaControl = new TarefaControl();
+            $tarefaControl->atualizaTotal($_POST['idTarefa']);
         }else{
-            $this->DAO->cadastrarPlanejado($atividade,NULL);
+            $this->DAO->cadastrarPlanejado($atividade,null);
         }
-
     }
 
     protected function excluir(int $id)
     {
         $this->DAO->excluir($id);
+        if(isset($_POST['idTarefa'])) {
+            $tarefaControl = new TarefaControl();
+            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        }
     }
 
     public function listar()
@@ -51,6 +56,10 @@ class AtividadeControl extends CrudControl {
     {
         $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id']);
         $this -> DAO -> atualizar($atividade);
+        if(isset($_POST['idTarefa'])) {
+            $tarefaControl = new TarefaControl();
+            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        }
     }
 
     public function listarPorIdTarefa($id):array

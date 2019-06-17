@@ -6,12 +6,14 @@ class CompraModel extends CrudModel
     private $proposito;
     private $totalGasto = 0;
     private $itens;
+    private $comprador;
 
-    public function __construct(string $proposito,$totalGasto = null, array $itens = null, int $id = null)
+    public function __construct($proposito,$totalGasto,  $itens , $id,$comprador)
     {
         $this->id = $id;
         $this->proposito = $proposito;
         $this->itens = $itens;
+        $this->comprador = $comprador;
         if($this->itens != null and $totalGasto == null){
            $this->calculaTotal();
         }else{
@@ -25,6 +27,16 @@ class CompraModel extends CrudModel
             $total += $item->getValorParcial();
         }
         $this->totalGasto = $total;
+    }
+
+    public function getComprador()
+    {
+        return $this->comprador;
+    }
+
+    public function setComprador($comprador): void
+    {
+        $this->comprador = $comprador;
     }
 
     public function setId(int $id)

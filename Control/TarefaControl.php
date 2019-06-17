@@ -32,6 +32,8 @@ class TarefaControl extends CrudControl {
     protected function excluir(int $id){
         $this -> DAO -> excluir($id);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+        $projetoControl = new ProjetoControl();
+        $projetoControl->atualizaTotal($_POST['idProjeto']);
     }
 
     public function listar() {
@@ -75,7 +77,8 @@ class TarefaControl extends CrudControl {
         $tarefa = $this->listarPorId($idTarefa);
         $this->DAO->atualizaTotal($tarefa);
         $idProjeto = $this->DAO->descobrirIdProjeto($idTarefa);
-
+        $projetoControl = new ProjetoControl();
+        $projetoControl->atualizaTotal($idProjeto);
     }
 
     public function verificaPermissao(){

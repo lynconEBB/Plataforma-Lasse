@@ -56,9 +56,11 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
         $projetos = array();
         $tarefaDAO = new TarefaDao();
+        $usuarioDAO = new UsuarioDao();
+        $usuario = $usuarioDAO->listarPorId($id);
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
-            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto']);
+            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$usuario);
             $projetos[] = $obj;
         }
         return $projetos;
@@ -72,8 +74,11 @@ class ProjetoDao extends CrudDao {
 
         $tarefaDAO = new TarefaDao();
         $tarefas = $tarefaDAO->listarPorIdProjeto($id);
+        $usuarioDAO = new UsuarioDao();
+        $usuarios = $usuarioDAO->listarPorIdProjeto($id);
+
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null);
+        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null,$usuarios);
         return $projeto;
     }
 
@@ -86,6 +91,17 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':descr',$projeto->getDescricao());
         $stm->bindValue(':dtfim',$projeto->getDataFinalizacao());
         $stm->bindValue(':dtini',$projeto->getDataInicio());
+        $stm->bindValue(':id',$projeto->getId());
+
+        $stm->execute();
+    }
+
+    function atualizarTotal(ProjetoModel $projeto){
+
+        $comando = "UPDATE tbProjeto SET totalGasto = :totalGasto WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':totalGasto',$projeto->getTotalGasto());
         $stm->bindValue(':id',$projeto->getId());
 
         $stm->execute();

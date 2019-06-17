@@ -62,8 +62,10 @@ class UsuarioDao extends CrudDao {
     }
 
     public function listarPorIdProjeto($idProjeto){
-        $busca = $this->pdo->prepare("SELECT tbUsuario.nomeCompleto,tbUsuario.login, tbUsuario.dtNascimento,tbUsuario.cpf, tbUsuario.rg, tbUsuario.dataDeEmissao, tbUsuario.tipo, tbUsuario.email,
- tbUsuario.atuacao, FROM tbUsuario");
+        $busca = $this->pdo->prepare("SELECT tbUsuario.nomeCompleto,tbUsuario.login, tbUsuario.dtNascimento,
+tbUsuario.cpf, tbUsuario.rg, tbUsuario.dataDeEmissao, tbUsuario.tipo, tbUsuario.email,tbUsuario.atuacao,tbUsuario.formacao,
+tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on tbUsuario.id = tbUsuarioProjeto.idUsuario where tbUsuarioProjeto.idProjeto = :id");
+        $busca->bindParam(':id',$idProjeto);
         $busca->execute();
 
         $funcionarios =  array();
@@ -95,6 +97,7 @@ class UsuarioDao extends CrudDao {
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+
         $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
             $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
 

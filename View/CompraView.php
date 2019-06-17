@@ -11,6 +11,7 @@
     <thead>
         <th>Proposito</th>
         <th>Total Gasto</th>
+        <th>Comprador</th>
         <th></th>
         <th></th>
         <th></th>
@@ -22,6 +23,8 @@
             <tr>
                 <td><?=$compra->getProposito()?></td>
                 <td><?=$compra->getTotalGasto()?></td>
+                <td><?=$compra->getComprador()->getLogin()?></td>
+                <?php if($compra->getComprador()->getId() == $_SESSION['usuario-id']): ?>
                 <td>
                     <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$compra->getId()?>" data-proposito="<?=$compra->getProposito()?>"
                             data-idtarefa="<?=$_GET['idTarefa']?>"  >
@@ -39,6 +42,7 @@
                 <td>
                     <a href="/menu/compra/item?idCompra=<?=$compra->getId()?>"><button type="button" class="btn"><img width='16' src='../img/box-solid.svg' alt=''></button></a>
                 </td>
+                <?php endif;?>
             </tr>
     <?php
         endforeach;

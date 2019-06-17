@@ -28,7 +28,7 @@ class CompraControl extends CrudControl {
     public function cadastrar()
     {
         //Cadastra no banco de dados com Total = 0
-        $compra = new CompraModel($_POST['proposito']);
+        $compra = new CompraModel($_POST['proposito'],null,null,null,$_SESSION['usuario-classe']);
         $this->DAO->cadastrar($compra,$_POST['idTarefa']);
         //Pega id da Compra Inserida
         $idCompra = $this->DAO->pdo->lastInsertId();
@@ -80,7 +80,7 @@ class CompraControl extends CrudControl {
 
     public function atualizar()
     {
-        $compra = new CompraModel($_POST['proposito'],null,null,$_POST['id']);
+        $compra = new CompraModel($_POST['proposito'],null,null,$_POST['id'],null);
         $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
 
         $tarefaControl = new TarefaControl();
@@ -117,7 +117,8 @@ class CompraControl extends CrudControl {
             case 'listaCompras':
                 $this->verificaPermissao();
                 $tarefaControl = new TarefaControl();
-                $tarefas = $tarefaControl->listarPorIdUsaurio($_SESSION['usuario-id']);
+                $idProjeto = $tarefaControl->descobrirIdProjeto($_GET['idTarefa']);
+                $tarefas = $tarefaControl->listarPorIdProjeto($idProjeto);
                 $compras = $this->listarPorIdTarefa($_GET['idTarefa']);
                 require '../View/CompraView.php';
                 break;
