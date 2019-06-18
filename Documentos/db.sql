@@ -61,8 +61,11 @@ CREATE TABLE `tbCompra` (
   `proposito` varchar(60) NOT NULL,
   `totalGasto` decimal(6,2) DEFAULT '0.00',
   `idTarefa` int(11) NOT NULL,
+  `idComprador` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbTarefa_tbCompra` (`idTarefa`),
+  KEY `fk_tbCompra_tbUsuario` (`idComprador`),
+  CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`idComprador`) REFERENCES `tbUsuario` (`id`),
   CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -73,7 +76,6 @@ CREATE TABLE `tbCompra` (
 
 LOCK TABLES `tbCompra` WRITE;
 /*!40000 ALTER TABLE `tbCompra` DISABLE KEYS */;
-INSERT INTO `tbCompra` VALUES (18,'Melhorar Sala de Aula',48.00,10),(20,'Melhorar Sala de Aula',252.16,10),(21,'Melhorar Sala de Aula',216.16,13);
 /*!40000 ALTER TABLE `tbCompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +158,6 @@ CREATE TABLE `tbItem` (
 
 LOCK TABLES `tbItem` WRITE;
 /*!40000 ALTER TABLE `tbItem` DISABLE KEYS */;
-INSERT INTO `tbItem` VALUES (49,18,4.00,6.00,'Passat'),(50,18,4.00,6.00,'Passat'),(81,20,54.04,4.00,'Mesa'),(82,20,12.00,3.00,'Cadeira'),(83,21,54.04,4.00,'Mesa');
 /*!40000 ALTER TABLE `tbItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-17 17:00:03
+-- Dump completed on 2019-06-18 12:57:09
