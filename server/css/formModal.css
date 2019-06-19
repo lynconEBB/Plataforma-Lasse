@@ -1,0 +1,96 @@
+
+.modal-group{
+    position: relative;
+    width: 90%;
+    max-width: 300px;
+    margin: 2em auto;
+}
+.modal-label{
+    position: absolute;
+    z-index: 5;
+    display: block;
+    font-size: 1.2em;
+    width: 100%;
+    cursor: pointer;
+}
+
+.modal-input{
+    background: #C7D8C6;
+    text-align: center;
+    width: 100%;
+    border:none;
+    font-size: 1.2em;
+
+}
+.modal-label.changed{
+    animation-name: selecao-label;
+    animation-duration: 300ms;
+    animation-timing-function: ease;
+    animation-delay: 100ms;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-play-state: unset;
+}
+
+@keyframes selecao-label {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        font-size: 12px;
+        transform: translateY(-1.5em);
+    }
+}
+
+.modal-group::after{
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    border:4px solid #A9B7C0;
+    border-right: none;
+    top:-5px;
+    left: 0;
+    width: 50%;
+    border-top-left-radius: 2em;
+    border-bottom-left-radius: 2em;
+    height: 100%;
+    transition: all 300ms cubic-bezier(.43,.79,.6,1.59);
+}
+
+.modal-group::before{
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    border:4px solid #A9B7C0;
+    border-left:none;
+    top:-5px;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+    transition: all 300ms cubic-bezier(.43,.79,.6,1.59);
+}
+
+.modal-group.changed::before{
+    transform: translate(10px);
+}
+
+.modal-group.changed::after{
+    transform: translate(-10px);
+}
+
+.modal-btn, input:focus{
+    outline: none;
+}
+
+.modal-btn{
+    border: none;
+    padding: 0.5em 2em;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px;
+}

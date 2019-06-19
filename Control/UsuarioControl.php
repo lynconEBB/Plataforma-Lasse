@@ -120,7 +120,7 @@ class UsuarioControl extends CrudControl {
                 if(isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE) {
                     require '../View/errorPages/avisoJaLogado.php';
                 }else{
-                    require '../View/LoginView.php';
+                    require '../View/telaLogin.php';
                 }
 
                 break;
@@ -130,6 +130,9 @@ class UsuarioControl extends CrudControl {
                 $projetoControl = new ProjetoControl();
                 $projetos = $projetoControl->listarPorIdUsuario($_SESSION['usuario-id']);
                 require '../View/UsuarioView.php';
+                break;
+            case 'teste':
+                require '../View/telaUsuario.html';
         }
     }
 }
