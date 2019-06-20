@@ -133,7 +133,7 @@ class ViagemControl extends CrudControl {
             case 'listaViagens':
                 $this->verificaPermissao();
                 $viagens = $this->listarPorIdTarefa($_GET['idTarefa']);
-                require '../View/ViagemView.php';
+                require '../View/telaViagem.php';
                 break;
             case 'cadastraViagem':
                 $this->verificaPermissao();
@@ -143,7 +143,7 @@ class ViagemControl extends CrudControl {
 
                 $condutorControl = new CondutorControl();
                 $condutores = $condutorControl->listar();
-                require '../View/ViagemCadastroView.php';
+                require '../View/formViagemCadastro.php';
         }
     }
 }

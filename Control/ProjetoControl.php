@@ -97,7 +97,7 @@ class ProjetoControl extends CrudControl
                $usuarioControl = new UsuarioControl();
                $usuarios = $usuarioControl->listar();
                $projetos = $this->listarPorIdUsuario($_SESSION['usuario-id']);
-               require '../View/ProjetoView.php';
+               require '../View/telaProjetos.php';
        }
     }
 }

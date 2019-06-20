@@ -32,6 +32,39 @@ $(document).ready(function () {
 
     });
 
+    $("#cadastra-veiculo-alterar").click(function(){
+
+        if ($("#form-veiculo-alterar").is(":hidden") && $("#form-condutor-alterar").is(":hidden")) {
+            $("#form-veiculo-alterar").show();
+            $('#idVeiculo-alterar').val("novo");
+        } else {
+            $('#idVeiculo-alterar').val('escolher');
+            $("#form-veiculo-alterar").hide();
+        }
+
+        $("#group-idVeiculo-alterar").toggle();
+
+        if ($("#form-condutor-alterar").is(":visible")) {
+            $("#group-idCondutor-alterar").show();
+            $("#form-condutor-alterar").toggle();
+
+        }
+        $('#idCondutor-alterar').val('escolher');
+    });
+
+    $("#cadastra-condutor-alterar").click(function(){
+
+        if ( $("#form-condutor-alterar").is(":hidden"))  {
+            $('#idCondutor-alterar').val('novo');
+        } else {
+            $('#idCondutor-alterar').val('escolher');
+        }
+
+        $("#group-idCondutor-alterar").toggle();
+        $("#form-condutor-alterar").toggle();
+
+    });
+
 
     $('#modalAlterar').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);

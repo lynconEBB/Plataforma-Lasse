@@ -1,0 +1,42 @@
+.main-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,400px));
+    column-gap: 1em;
+    row-gap: 1em;
+    padding: 0 5em;
+}
+
+.container-projeto{
+    background-color: #EE6C4D;
+    display: grid;
+    grid-template-columns: auto 58px;
+    box-shadow: 3px 7px 20px -7px rgba(0,0,0,0.75);
+    transition: transform ease-in-out 300ms;
+}
+.container-projeto:hover{
+    transform: scale(1.05);
+}
+
+.info-projeto{
+    color: white;
+    padding: 1em;
+}
+.title-projeto{
+    display: block;
+    font-weight: bolder;
+}
+.detail-projeto{
+    display: block;
+}
+.footer-projeto{
+    border-left: solid 3px #8e4945;
+    background-color: #b35a48;
+    padding: 0.5em 0;
+}
+.opcao-projeto{
+    width: 45px;
+    margin: 0.2em auto;
+    display: block;
+    background-color: transparent;
+    cursor: pointer;
+}

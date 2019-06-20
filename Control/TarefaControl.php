@@ -102,7 +102,7 @@ class TarefaControl extends CrudControl {
             case 'listaTarefas':
                 if($this->verificaPermissao()) {
                     $tarefas = $this->listarPorIdProjeto($_GET['idProjeto']);
-                    require '../View/TarefaView.php';
+                    require '../View/telaTarefa.php';
                 }
         }
     }
