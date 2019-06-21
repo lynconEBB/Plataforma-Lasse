@@ -18,12 +18,17 @@
 <div class="side-bar-back">
     <aside class="side-bar">
         <article class="side-bar-start">
-            <a href="/menu/tarefa" class="side-bar-icon">
+            <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
                 <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
-
+            <a href="/menu/veiculo" class="side-bar-icon">
+                <img src="../img/Icons/veiculo.png" class="img-icon" alt="Menu de Veiculos">
+            </a>
+            <a href="/menu/gasto" class="side-bar-icon">
+                <img src="../img/Icons/gastoTodos.png" class="img-icon" alt="Menu de todos os Gastos">
+            </a>
         </article>
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
@@ -124,7 +129,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>

@@ -1,63 +1,83 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Lasse - PTI</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/styleVeiculo.css">
+    <meta charset="utf-8"/>
+    <title>LPM - Menu Veiculos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleVeiculo.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<table class="table table-hover">
-    <thead>
-        <th>Nome</th>
-        <th>Tipo</th>
-        <th>Data Retirada</th>
-        <th>Data Devolução</th>
-        <th>Horario Retirada</th>
-        <th>Horario Devolução</th>
-        <th>Nome Condutor</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-    <?php
+<header class="page-header">
+    <span class="titulo-header">Veiculos</span>
+</header>
+
+<div class="side-bar-back">
+    <aside class="side-bar">
+        <article class="side-bar-start">
+            <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
+                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+            </a>
+        </article>
+        <article class="side-bar-middle">
+            <a href="/menu/condutor" class="side-bar-icon">
+                <img src="../img/Icons/condutor.png" class="img-icon" alt="Menu de Veiculos">
+            </a>
+        </article>
+        <article class="side-bar-end">
+            <form action="/acaoUsuario" method="post">
+                <input type="hidden" name="acao" value="sair">
+                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+            </form>
+        </article>
+    </aside>
+</div>
+
+<main class="main-content">
+    <div class="container-veiculos">
+        <header class="row-header">
+            <h3>Nome</h3>
+            <h3>Tipo</h3>
+            <h3>Retirada</h3>
+            <h3>Devolução</h3>
+            <h3>Condutor</h3>
+        </header>
+        <?php
         foreach ($veiculos as $veiculo):
-    ?>
-        <tr>
-            <td><?= $veiculo->getNome()?></td>
-            <td><?= $veiculo->getTipo()?></td>
-            <td><?= $veiculo->getDataRetirada()?></td>
-            <td><?= $veiculo->getDataDevolucao()?></td>
-            <td><?= $veiculo->getHorarioRetirada()?></td>
-            <td><?= $veiculo->getHorarioDevolucao()?></td>
-            <td><?= $veiculo->getCondutor()->getNome()?></td>
-            <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $veiculo->getId()?>' data-nome='<?= $veiculo->getNome()?>' data-tipo='<?= $veiculo->getTipo()?>'
+            ?>
+        <div class="container-row">
+            <h6><?= $veiculo->getNome()?></h6>
+            <h6><?= $veiculo->getTipo()?></h6>
+            <h6><?= $veiculo->getDataRetirada()?> - <?= $veiculo->getHorarioRetirada()?></h6>
+            <h6><?= $veiculo->getDataDevolucao()?> - <?= $veiculo->getHorarioDevolucao()?></h6>
+            <h6><?= $veiculo->getCondutor()->getNome()?></h6>
+            <div class="botoes">
+                <button class='btn-opcao' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $veiculo->getId()?>' data-nome='<?= $veiculo->getNome()?>' data-tipo='<?= $veiculo->getTipo()?>'
                         data-dtret='<?= $veiculo->getDataRetirada()?>' data-dtdev='<?= $veiculo->getDataDevolucao()?>' data-horaret='<?= $veiculo->getHorarioRetirada()?>'
                         data-horadev='<?= $veiculo->getHorarioDevolucao()?>' data-idcond='<?= $veiculo->getCondutor()->getId()?>'>
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
                 </button>
-            </td>
-            <td>
                 <form action="/acaoVeiculo" method="post">
                     <input type="hidden" name="acao" value="excluirVeiculo">
                     <input type="hidden" name="id" value="<?= $veiculo->getId()?>">
-                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg' alt=""></button>
+                    <button class='btn-opcao'><img class="img-icon" src='../img/Icons/lixeiraIcone.png' alt=""></button>
                 </form>
-            </td>
-        </tr>
-    <?php
-     endforeach;
-    ?>
-    </tbody>
-</table>
+            </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-    Cadastrar Novo Veículo
+        </div>
+        <?php
+        endforeach;
+        ?>
+    </div>
+</main>
+
+<button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
+    <img src="../img/Icons/adicionar.png" class="img-icon" alt="Botao para cadastrar">
 </button>
-
-<a href="/menu/condutor"><button type="button" class="btn btn-warning">Menu de Condutores</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
@@ -99,11 +119,11 @@
                         <select class="custom-select" name="idCondutor" id="idCondutorCadastro">
                             <option value="escolher" selected>Escolha um Condutor</option>
                             <option style="display: none;" value="novo" ></option>
-                        <?php
+                            <?php
                             foreach ($condutores as $condutor){
                                 echo "<option value='{$condutor->getId()}'>{$condutor->getNome()}</option>";
                             }
-                        ?>
+                            ?>
                         </select>
                     </div>
                     <button type="button" class="btn" id="novo-condutor">&plus;</button>
@@ -200,7 +220,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>

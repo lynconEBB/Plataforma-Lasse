@@ -12,7 +12,7 @@
 
 
 
-<img style="float: left" src="../img/Icons/RaioConfuso.png">
+<img style="float: left" src="../img/mascote/RaioConfuso.png">
 <h1>Erro 404: Pagina nao encontrada</h1>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>

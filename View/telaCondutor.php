@@ -1,50 +1,73 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Lasse - PTI</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta charset="utf-8"/>
+    <title>LPM - Menu Veiculos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleCondutor.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-<table class="table table-hover">
-    <thead>
-        <th>Nome</th>
-        <th>Número CNH</th>
-        <th>Validade CNH</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        <?php
-            foreach ($condutores as $condutor):
+
+<header class="page-header">
+    <span class="titulo-header">Condutores</span>
+</header>
+
+<div class="side-bar-back">
+    <aside class="side-bar">
+        <article class="side-bar-start">
+            <a href="javascript:history.go(-2)" title="Return to the previous page" class="side-bar-icon">
+                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+            </a>
+        </article>
+        <article class="side-bar-middle">
+        </article>
+        <article class="side-bar-end">
+            <form action="/acaoUsuario" method="post">
+                <input type="hidden" name="acao" value="sair">
+                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+            </form>
+        </article>
+    </aside>
+</div>
+
+<main class="main-content">
+    <?php
+    foreach ($condutores as $condutor):
         ?>
-        <tr>
-            <td><?php echo $condutor->getNome() ?></td>
-            <td><?php echo $condutor->getCnh() ?></td>
-            <td><?php echo $condutor->getValidadeCNH() ?></td>
-            <td>
-                <button class='btn' data-toggle='modal' data-target='#modalAlterar' data-id='<?php echo $condutor->getId()?>' data-nome='<?php echo $condutor->getNome()?>' data-cnh='<?php echo $condutor->getCnh()?>' data-val='<?php echo $condutor->getValidadeCNH()?>'>
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+        <div class="container-condutor">
+            <div class="container-foto">
+                <img src="../img/Icons/condutor.png" class="img-condutor">
+            </div>
+            <div class="container-content">
+                <h3><b>Nome:</b> <?= $condutor->getNome() ?></h3>
+                <h6><b>CNH:</b> <?= $condutor->getCnh() ?></h6>
+                <h6><b>Validade CNH:</b> <?= $condutor->getValidadeCNH() ?></h6>
+            </div>
+        </div>
+        <div class="acoes">
+            <button class='btn-opcao' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $condutor->getId()?>' data-nome='<?= $condutor->getNome()?>' data-cnh='<?= $condutor->getCnh()?>' data-val='<?= $condutor->getValidadeCNH()?>'>
+                <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
+            </button>
+            <form action="/acaoCondutor" method="post">
+                <input type="hidden" name="acao" value="excluirCondutor">
+                <input type="hidden" name="id" value="<?= $condutor->getId()?>">
+                <button class='btn-opcao'>
+                    <img class="img-icon" src='../img/Icons/lixeiraIcone.png'>
                 </button>
-            </td>
-            <td>
-                <form action="/acaoCondutor" method="post">
-                    <input type="hidden" name="acao" value="excluirCondutor">
-                    <input type="hidden" name="id" value="<?php echo $condutor->getId()?>">
-                    <button class='btn'><img width='16' src='../img/trash-alt-solid.svg'></button>
-                </form>
-            </td>
-        </tr>
-        <?php
-            endforeach;
-        ?>
-    </tbody>
-</table>
+            </form>
+        </div>
+    <?php
+    endforeach;
+    ?>
+</main>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-    Cadastrar Novo Condutor
+<button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
+    <img src="../img/Icons/adicionar.png" class="img-icon">
 </button>
-
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -107,8 +130,10 @@
         </div>
     </div>
 </div>
+
 <script src="../js/jquery.js"></script>
-<script src="../js/funcoesCondutor.js"></script>
 <script src="../js/bootstrap.js"></script>
+<script src="../js/funcoesCondutor.js"></script>
 </body>
 </html>
+

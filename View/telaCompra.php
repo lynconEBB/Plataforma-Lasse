@@ -1,60 +1,87 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Lasse - PTI</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta charset="utf-8"/>
+    <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleCompra.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+<header class="page-header">
+    <span class="titulo-header">Compras da Tarefa</span>
+</header>
 
-<table class="table table-hover">
-    <thead>
-        <th>Proposito</th>
-        <th>Total Gasto</th>
-        <th>Comprador</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
+<div class="side-bar-back">
+    <aside class="side-bar">
+        <article class="side-bar-start">
+            <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
+                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+            </a>
+        </article>
+        <article class="side-bar-middle">
+            <a href="/menu/item" class="side-bar-icon">
+                <img src="../img/Icons/itemBranco.png" class="img-icon" alt="Menu de Itens">
+            </a>
+        </article>
+        <article class="side-bar-end">
+            <form action="/acaoUsuario" method="post">
+                <input type="hidden" name="acao" value="sair">
+                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+            </form>
+        </article>
+    </aside>
+</div>
+
+<main class="main-content">
+    <div class="container-compras">
+        <header class="header-row">
+            <h3>Proposito</h3>
+            <h3>Total Gasto</h3>
+            <h3>Comprador</h3>
+        </header>
     <?php
-        foreach ($compras as $compra):
-    ?>
-            <tr>
-                <td><?=$compra->getProposito()?></td>
-                <td><?=$compra->getTotalGasto()?></td>
-                <td><?=$compra->getComprador()->getLogin()?></td>
-                <?php if($compra->getComprador()->getId() == $_SESSION['usuario-id']): ?>
-                <td>
-                    <button class='btn' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$compra->getId()?>" data-proposito="<?=$compra->getProposito()?>"
+    foreach ($compras as $compra):
+        ?>
+            <div class="container-row">
+                <div class="row-content">
+                    <h5><?=$compra->getProposito()?></h5>
+                    <h5><?=$compra->getTotalGasto()?></h5>
+                    <h5><?=$compra->getComprador()->getLogin()?></h5>
+                </div>
+                <div class="row-options">
+                    <?php if($compra->getComprador()->getId() == $_SESSION['usuario-id']): ?>
+
+                    <button class='btn-opcao' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$compra->getId()?>" data-proposito="<?=$compra->getProposito()?>"
                             data-idtarefa="<?=$_GET['idTarefa']?>"  >
-                        <img width='16' src='../img/edit-regular.svg' alt=''>
+                        <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
                     </button>
-                </td>
-                <td>
                     <form action="/acaoCompra" method="post">
                         <input type="hidden" name="acao" value="excluirCompra">
                         <input type="hidden" name="id" value="<?php echo $compra->getId()?>">
                         <input type="hidden" name="idTarefa" value="<?php echo $_GET['idTarefa']?>">
-                        <button class="btn"><img width='16' src='../img/trash-alt-solid.svg' alt=''></button>
+                        <button class="btn-opcao">
+                            <img class="img-icon" src='../img/Icons/lixeiraIcone.png' alt=''>
+                        </button>
                     </form>
-                </td>
-                <td>
-                    <a href="/menu/compra/item?idCompra=<?=$compra->getId()?>"><button type="button" class="btn"><img width='16' src='../img/box-solid.svg' alt=''></button></a>
-                </td>
-                <?php endif;?>
-            </tr>
-    <?php
-        endforeach;
-    ?>
-    </tbody>
-</table>
+                    <button type="button" class="btn-opcao">
+                        <a href="/menu/compra/item?idCompra=<?=$compra->getId()?>">
+                            <img class="img-icon" src='../img/Icons/item.png' alt=''>
+                        </a>
+                    </button>
+                    <?php endif;?>
+                </div>
+            </div>
+    <?php endforeach; ?>
+    </div>
+</main>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-    Cadastrar Nova Compra
+<button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
+    <img src="../img/Icons/adicionar.png" class="img-icon">
 </button>
-
-<a href="/menu/item"><button type="button" class="btn btn-warning">Menu de Itens</button></a>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -107,9 +134,9 @@
                         <label for="idTarefa">Tarefa Pertencente</label>
                         <select class="custom-select" name="idTarefa" id="idTarefa">
                             <?php
-                                foreach ($tarefas as $tarefa){
-                                    echo "<option value='{$tarefa->getId()}'>{$tarefa->getNome()}</option>";
-                                }
+                            foreach ($tarefas as $tarefa){
+                                echo "<option value='{$tarefa->getId()}'>{$tarefa->getNome()}</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -122,9 +149,8 @@
         </div>
     </div>
 </div>
-
 <script src="../js/jquery.js"></script>
-<script src="../js/funcoesCompra.js"></script>
 <script src="../js/bootstrap.js"></script>
+<script src="../js/funcoesCompra.js"></script>
 </body>
 </html>

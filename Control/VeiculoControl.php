@@ -72,7 +72,7 @@ class VeiculoControl extends CrudControl {
                 $condControl = new CondutorControl();
                 $condutores = $condControl->listar();
                 $veiculos = $this->listar();
-                require '../View/VeiculoView.php';
+                require '../View/telaVeiculo.php';
 
         }
     }

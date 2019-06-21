@@ -1,0 +1,38 @@
+.container-viagem{
+    width: 90%;
+    max-width: 1000px;
+    color: white;
+    background-color: #2d395a;
+    margin: 0 auto;
+    padding: 1em;
+}
+.container-gastos{
+    width: 85%;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    background-color: #98c1d9;
+}
+.gasto{
+    border-bottom: solid 2px #b1b1b4;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1em;
+    text-align: center;
+}
+.gasto:last-child{
+    border: none;
+}
+.gasto-viagem{
+    display: grid;
+    background-color: #98c1d9;
+    grid-template-columns: 1fr 1fr 0.3fr 0.3fr;
+    padding: 1em;
+    margin-bottom: 2em;
+    text-align: center;
+    box-shadow: 11px 14px 0px 2px rgba(0,0,0,0.75);
+}
+.viagem{
+    background-color: transparent;
+}

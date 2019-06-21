@@ -52,7 +52,7 @@ class CondutorControl extends CrudControl {
        switch ($parametro){
            case 'listaCondutores':
                $condutores = $this->listar();
-               require '../View/CondutorView.php';
+               require '../View/telaCondutor.php';
                break;
        }
     }

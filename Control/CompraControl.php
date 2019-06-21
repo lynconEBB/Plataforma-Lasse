@@ -120,7 +120,7 @@ class CompraControl extends CrudControl {
                 $idProjeto = $tarefaControl->descobrirIdProjeto($_GET['idTarefa']);
                 $tarefas = $tarefaControl->listarPorIdProjeto($idProjeto);
                 $compras = $this->listarPorIdTarefa($_GET['idTarefa']);
-                require '../View/CompraView.php';
+                require '../View/telaCompra.php';
                 break;
         }
     }

@@ -77,11 +77,11 @@ class GastoControl extends CrudControl
             case 'listaGastosGeral':
                 $viagemControl = new ViagemControl();
                 $viagens = $viagemControl->listar();
-                require '../View/listaTodosGastos.php';
+                require '../View/telaGastosGerais.php';
                 break;
             case 'listaGastosViagem':
                 $gastos = $this->listarPorIdViagem($_GET['idViagem']);
-                require '../View/listaGastosViagem.php';
+                require '../View/telaGastosViagem.php';
                 break;
         }
     }

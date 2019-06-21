@@ -6,7 +6,6 @@ class RouteController{
 
     private $rotas = [
         '/login' => ['classe' => UsuarioControl::class,'parametro'=>'login'],
-        '/teste' => ['classe' => UsuarioControl::class,'parametro'=>'teste'],
         '/acaoUsuario' => ['classe' => UsuarioControl::class,'parametro'=>''],
         '/menu/usuario' => ['classe' => UsuarioControl::class,'parametro'=>'perfil'],
         '/menu/projeto' => ['classe' => ProjetoControl::class,'parametro'=>'listaProjetos'],
@@ -46,7 +45,9 @@ class RouteController{
         }
     }
 
-    public function instanciaClasse(){
+    public function instanciaClasse()
+    {
+
         $classeController = $this->rotas[$this->caminho]['classe'];
         $parametro = $this->rotas[$this->caminho]['parametro'];
 
