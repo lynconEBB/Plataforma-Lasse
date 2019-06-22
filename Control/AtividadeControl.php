@@ -100,11 +100,11 @@ class AtividadeControl extends CrudControl {
             case 'listaAtividadesPlanejadas':
                 $this->verificaPermissao();
                 $atividades = $this->listarPorIdTarefa($_GET['idTarefa']);
-                require '../View/AtividadePlanejadaView.php';
+                require '../View/telaAtividadePlanejada.php';
                 break;
             case 'listaAtividadesNaoPlanejadas':
                 $atividades = $this->listarPorIdUsuario($_SESSION['usuario-id']);
-                require '../View/AtividadeNaoPlanejadaView.php';
+                require '../View/telaAtividadeNaoPlanejada.php';
                 break;
         }
     }

@@ -31,7 +31,7 @@ class CompraDao extends CrudDao {
         while($row = $stm->fetch(PDO::FETCH_ASSOC)){
             $itens = $itemControl->listarPorIdCompra($row['id']);
             $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-            $obj = new CompraModel($row['proprosito'],$row['totalGasto'],$itens,$row['id'],$comprador);
+            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
             $result[] = $obj;
         }
         return $result;

@@ -23,7 +23,7 @@
                 <div class="container-foto">
                     <img src="../img/Icons/profile.jpg" class="foto-perfil" alt="Foto de Usuario">
                 </div>
-                <span class="side-bar-title">Lyncon Estevan</span>
+                <span class="side-bar-title"><?=$usuario->getLogin()?></span>
 
                 <button class="side-bar-button" data-toggle="modal" data-target="#modalInfo">
                     <img src="../img/Icons/info.png" class="side-bar-icon" alt="Foto de Usuario">

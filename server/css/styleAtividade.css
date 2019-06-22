@@ -1,0 +1,42 @@
+.container-atividades{
+    width: 90%;
+    max-width: 1200px;
+}
+.atividade-row{
+    padding: 1em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr;
+    background-color: #2d395a;
+    border: #2a2a67 outset 5px;
+    grid-gap: 1em;
+    margin-bottom: 1.5em;
+}
+.cell{
+    display: grid;
+    background-color: #ee6c4d;
+    grid-auto-rows: 1fr 1fr;
+    text-align: center;
+    box-shadow: 10px 10px 19px -6px rgba(0,0,0,0.75);
+}
+.cell h4{
+    font-weight: bold;
+}
+.atividade-row form{
+    display: flex;
+    align-items: center;
+}
+.atividadeN-row{
+    padding: 1em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.3fr 0.3fr;
+    background-color: #2d395a;
+    border: #2a2a67 outset 5px;
+    grid-gap: 1em;
+    margin-bottom: 1.5em;
+}
+.atividadeN-row form{
+    display: flex;
+    align-items: center;
+}

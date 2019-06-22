@@ -1,60 +1,84 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Lasse - PTI</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <meta charset="utf-8"/>
+    <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleAtividade.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-<table class="table table-hover">
-    <thead>
-    <th>Usuario</th>
-    <th>Tipo</th>
-    <th>Comentario</th>
-    <th>Tempo Gasto</th>
-    <th>Total Gasto</th>
-    <th>Data de Realizacao</th>
-    <th></th>
-    <th></th>
-    </thead>
-    <tbody>
-    <?php
-    foreach ($atividades as $atividade):
-        ?>
-        <tr>
-            <td><?= $atividade->getUsuario()->getNomeCompleto() ?></td>
-            <td><?= $atividade->getTipo() ?></td>
-            <td><?= $atividade->getComentario() ?></td>
-            <td><?= $atividade->getTempoGasto() ?></td>
-            <td><?= $atividade->getTotalGasto() ?></td>
-            <td><?= $atividade->getDataRealizacao() ?></td>
+<header class="page-header">
+    <span class="titulo-header">Atividades Não Planejadas</span>
+</header>
 
-            <td>
-                <button class='btn' data-toggle='modal' data-target="#modalAlterar"
+<div class="side-bar-back">
+    <aside class="side-bar">
+        <article class="side-bar-start">
+            <a href="/menu/usuario" class="side-bar-icon">
+                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+            </a>
+        </article>
+        <article class="side-bar-middle">
+        </article>
+        <article class="side-bar-end">
+            <form action="/acaoUsuario" method="post">
+                <input type="hidden" name="acao" value="sair">
+                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+            </form>
+        </article>
+    </aside>
+</div>
+
+<main class="main-content">
+    <div class="container-atividades">
+        <?php
+        foreach ($atividades as $atividade):
+            ?>
+            <div class="atividadeN-row">
+                <div class="cell">
+                    <h4>Tipo</h4>
+                    <h5><?= $atividade->getTipo() ?></h5>
+                </div>
+                <div class="cell">
+                    <h4>Comentário</h4>
+                    <h5><?= $atividade->getComentario() ?></h5>
+                </div>
+                <div class="cell">
+                    <h4>Tempo Gasto</h4>
+                    <h5><?= $atividade->getTempoGasto() ?></h5>
+                </div>
+                <div class="cell">
+                    <h4>Total Gasto</h4>
+                    <h5><?= $atividade->getTotalGasto() ?></h5>
+                </div>
+                <button class='btn-opcao' data-toggle='modal' data-target="#modalAlterar"
                         data-id="<?= $atividade->getId() ?>"
                         data-tempogasto="<?= $atividade->getTempoGasto() ?>"
                         data-tipo="<?= $atividade->getTipo() ?>"
                         data-comentario="<?= $atividade->getComentario() ?>"
                         data-datarealizacao="<?= $atividade->getDataRealizacao() ?>">
-                    <img width='16' src='../img/edit-regular.svg' alt=''>
+                    <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
                 </button>
-            </td>
-            <td>
                 <form action="/acaoAtividade" method="post">
                     <input type="hidden" name="acao" value="excluirAtividade">
                     <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
-                    <button class="btn"><img width='16' src='../img/Icons/lixeiraicone.png' alt=''></button>
+                    <button class="btn-opcao">
+                        <img class="img-icon" src='../img/Icons/lixeiraicone.png' alt=''>
+                    </button>
                 </form>
-            </td>
-        </tr>
-    <?php
-    endforeach;
-    ?>
-    </tbody>
-</table>
+            </div>
+        <?php
+        endforeach;
+        ?>
+    </div>
+</main>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
-    Cadastrar Nova Atividade
+<button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
+    <img src="../img/Icons/adicionar.png" class="img-icon">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -139,9 +163,8 @@
         </div>
     </div>
 </div>
-
 <script src="../js/jquery.js"></script>
-<script src="../js/funcoesAtividade.js"></script>
 <script src="../js/bootstrap.js"></script>
+<script src="../js/funcoesAtividade.js"></script>
 </body>
 </html>

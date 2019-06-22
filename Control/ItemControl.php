@@ -75,12 +75,13 @@ class ItemControl extends CrudControl{
     {
         switch ($parametro){
             case 'listaItens':
-                $itens = $this->listar();
-                require '../View/ItemView.php';
+                $compraControl = new CompraControl();
+                $compras = $compraControl->listar();
+                require '../View/telaItensGerais.php';
                 break;
             case 'listaItensCompra':
                 $itens = $this->listarPorIdCompra($_GET['idCompra']);
-                require '../View/ItemCompraView.php';
+                require '../View/telaItensCompra.php';
                 break;
         }
     }
