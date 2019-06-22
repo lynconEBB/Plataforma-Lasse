@@ -6,22 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/View/telaAtividadePlanejada.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/View/telaItensGerais.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/css/styleAtividade.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/css/styleItem.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/AtividadeControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/AtividadeControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/ItemControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ItemControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dao/CompraDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/CompraDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PdoFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PdoFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/AtividadeNaoPlanejadaView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/AtividadePlanejadaView.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ItemCompraView.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaItensCompra.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ItemView.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/Rodape.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/cabecalho.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/telaUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaUsuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Control/CompraControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/CompraControl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentos/BD-PFC.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/BD-PFC.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentos/Diagramas UML/Diagramas UML.asta" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/Diagramas UML/Diagramas UML.asta" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,33 +42,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/css/styleAtividade.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/View/telaUsuario.php">
+        <entry file="file://$PROJECT_DIR$/Control/CompraControl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="25" column="70" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-              <folding>
-                <element signature="e#4391#4398#1#HTML" expanded="true" />
-                <element signature="e#6531#6538#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="410">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -159,6 +124,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -194,7 +160,6 @@
         <option value="$PROJECT_DIR$/Control/GastoControl.php" />
         <option value="$PROJECT_DIR$/server/css/styleGasto.css" />
         <option value="$PROJECT_DIR$/View/telaGastosViagem.php" />
-        <option value="$PROJECT_DIR$/Control/CompraControl.php" />
         <option value="$PROJECT_DIR$/View/CompraView.php" />
         <option value="$PROJECT_DIR$/View/telaCompra.php" />
         <option value="$PROJECT_DIR$/server/css/styleCompra.css" />
@@ -214,16 +179,16 @@
         <option value="$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php" />
         <option value="$PROJECT_DIR$/server/css/styleAtividade.css" />
         <option value="$PROJECT_DIR$/View/telaUsuario.php" />
+        <option value="$PROJECT_DIR$/Control/CompraControl.php" />
       </list>
     </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP on XAMPP" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="699" />
-    <option name="height" value="744" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -244,6 +209,11 @@
               <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
               <item name="Control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
@@ -431,7 +401,7 @@
       <workItem from="1561031656877" duration="30846000" />
       <workItem from="1561068835362" duration="598000" />
       <workItem from="1561127491265" duration="20127000" />
-      <workItem from="1561219735064" duration="5728000" />
+      <workItem from="1561219735064" duration="8481000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -650,11 +620,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561066224769</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Front-End Terminado">
+      <created>1561229011997</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1561229011997</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="484235000" />
+    <option name="totallyTimeSpent" value="486988000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -666,9 +643,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="699" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.3255086" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.15733737" />
       <window_info id="Structure" order="1" sideWeight="0.50151974" side_tool="true" weight="0.09744409" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32960597" />
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.2300216" />
@@ -683,7 +661,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49840257" weight="0.32721382" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4989339" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50159746" side_tool="true" weight="0.325054" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50159746" side_tool="true" weight="0.32405892" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="13" weight="0.32998884" />
       <window_info anchor="bottom" id="Messages" order="14" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Console" order="15" weight="0.32925585" />
@@ -724,7 +702,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Mais um passo" />
     <MESSAGE value="Crud Condutor" />
     <MESSAGE value="Crud Projeto" />
     <MESSAGE value="Crud Projeto Finalizado" />
@@ -749,49 +726,10 @@
     <MESSAGE value="Implementacao de Calulo de Gastos" />
     <MESSAGE value="Database atualizada" />
     <MESSAGE value="Front-End Atualizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front-End Atualizado" />
+    <MESSAGE value="Front-End Terminado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Front-End Terminado" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/css/styleTarefa.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/css/estiloViagemCadastro.css" />
-    <entry file="file://$PROJECT_DIR$/View/formViagemAlterar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="84" column="59" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="59" />
-          <folding>
-            <element signature="n#style#0;n#option#1;n#select#0;n#div#7;n#form#0;n#!!top" expanded="true" />
-            <element signature="e#2741#2747#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#option#0;n#select#0;n#div#6;n#section#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="e#5490#5496#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/js/funcoesViagem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="56" column="29" lean-forward="true" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/formViagemCadastro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#style#0;n#option#1;n#select#0;n#div#7;n#form#0;n#!!top" expanded="true" />
-            <element signature="e#2339#2345#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#option#1;n#select#0;n#div#6;n#section#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="e#4739#4745#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/telaTarefa.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
@@ -973,20 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Control/CompraControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="122" column="43" selection-start-line="122" selection-start-column="43" selection-end-line="122" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/ItemControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/ItemCompraView.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
@@ -1073,8 +997,143 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/View/telaUsuario.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="70" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
+        <state relative-caret-position="510">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://PHP/C:/Users/CAMIL/Desktop/Lasse-Project-Manager/Control">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>PHP</ID>
+          <OriginalElement>$PROJECT_DIR$/Control</OriginalElement>
+          <nodes>
+            <node x="0.0" y="318.0">\GastoControl</node>
+            <node x="2134.0" y="307.0">\CompraControl</node>
+            <node x="1085.0" y="0.0">\CrudControl</node>
+            <node x="967.0000000000001" y="307.0">\UsuarioControl</node>
+            <node x="1917.0" y="318.0">\AtividadeControl</node>
+            <node x="1433.0" y="340.0">\VeiculoControl</node>
+            <node x="1200.0" y="318.0">\ViagemControl</node>
+            <node x="248.0000000000001" y="318.0">\ItemControl</node>
+            <node x="734.0000000000001" y="340.0">\CondutorControl</node>
+            <node x="501.0000000000001" y="285.0">\TarefaControl</node>
+            <node x="1650.0" y="296.0">\ProjetoControl</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="\ProjetoControl" target="\CrudControl">
+              <point x="0.0" y="-157.5" />
+              <point x="1773.5" y="245.0" />
+              <point x="1242.5" y="245.0" />
+              <point x="52.5" y="102.5" />
+            </edge>
+            <edge source="\TarefaControl" target="\CrudControl">
+              <point x="0.0" y="-168.5" />
+              <point x="607.5000000000001" y="245.0" />
+              <point x="1137.5" y="245.0" />
+              <point x="-52.5" y="102.5" />
+            </edge>
+            <edge source="\GastoControl" target="\CrudControl">
+              <point x="0.0" y="-135.5" />
+              <point x="114.0" y="225.0" />
+              <point x="1095.5" y="225.0" />
+              <point x="-94.5" y="102.5" />
+            </edge>
+            <edge source="\UsuarioControl" target="\CrudControl">
+              <point x="0.0" y="-146.5" />
+              <point x="1073.5" y="265.0" />
+              <point x="1179.5" y="265.0" />
+              <point x="-10.5" y="102.5" />
+            </edge>
+            <edge source="\CondutorControl" target="\CrudControl">
+              <point x="0.0" y="-113.5" />
+              <point x="840.5000000000001" y="255.0" />
+              <point x="1158.5" y="255.0" />
+              <point x="-31.5" y="102.5" />
+            </edge>
+            <edge source="\VeiculoControl" target="\CrudControl">
+              <point x="0.0" y="-113.5" />
+              <point x="1531.5" y="255.0" />
+              <point x="1221.5" y="255.0" />
+              <point x="31.5" y="102.5" />
+            </edge>
+            <edge source="\ItemControl" target="\CrudControl">
+              <point x="0.0" y="-135.5" />
+              <point x="364.5000000000001" y="235.0" />
+              <point x="1116.5" y="235.0" />
+              <point x="-73.5" y="102.5" />
+            </edge>
+            <edge source="\AtividadeControl" target="\CrudControl">
+              <point x="0.0" y="-135.5" />
+              <point x="2015.5" y="235.0" />
+              <point x="1263.5" y="235.0" />
+              <point x="73.5" y="102.5" />
+            </edge>
+            <edge source="\CompraControl" target="\CrudControl">
+              <point x="0.0" y="-146.5" />
+              <point x="2232.5" y="225.0" />
+              <point x="1284.5" y="225.0" />
+              <point x="94.5" y="102.5" />
+            </edge>
+            <edge source="\ViagemControl" target="\CrudControl">
+              <point x="0.0" y="-135.5" />
+              <point x="1306.5" y="265.0" />
+              <point x="1200.5" y="265.0" />
+              <point x="10.5" y="102.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.79288256227758" x="282.6929982046679" y="256.6929982046679" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Constants</Category>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/ProjetoModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/CompraModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ItemControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/TarefaControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1003">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-782">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/CompraControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>

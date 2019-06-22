@@ -40,8 +40,6 @@ class CompraControl extends CrudControl {
         //Atualiza total da Compra no banco
         $this->atualizarTotal($idCompra);
 
-        $tarefaControl = new TarefaControl();
-        $tarefaControl->atualizaTotal($_POST['idTarefa']);
     }
 
     protected function excluir(int $id)
