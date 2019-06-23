@@ -1,6 +1,7 @@
 <?php
 
-class ViagemModel extends CrudModel {
+class ViagemModel
+{
     private $id;
     private $viajante;
     private $veiculo;
@@ -17,7 +18,6 @@ class ViagemModel extends CrudModel {
     private $horaSaidaHosp;
     private $gastos;
     private $totalGasto;
-
 
     public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $id=null,$gastos=null){
         $this->viajante = $viajante;
@@ -50,12 +50,9 @@ class ViagemModel extends CrudModel {
         }
         $this->totalGasto = $total;
     }
+
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id): void{
-        $this->id = $id;
     }
 
     public function getPassagem(){

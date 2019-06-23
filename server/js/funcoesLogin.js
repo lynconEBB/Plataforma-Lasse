@@ -15,7 +15,7 @@ $( document ).ready(function () {
         $('.modal').slideDown('fast');
     });
 
-    $('.close').click(function () {
+    $('.btn-close').click(function () {
         $('.modal').slideUp('fast');
     });
 

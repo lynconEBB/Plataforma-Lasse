@@ -7,16 +7,16 @@ body{
 }
 /*************************header********************************************************/
 .page-header{
+    display: grid;
+    grid-template-rows: auto auto;
     grid-column: 2/3;
     grid-row: 1/2;
     background-color: #E0FBFC;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .titulo-header{
     font-weight: bolder;
+    margin-top: 0.5em;
     font-size: 3em;
     text-shadow: 1px 1px 2px black;
 }

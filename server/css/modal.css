@@ -30,7 +30,7 @@ h1{
     margin: 0 1em;
     text-align: left;
 }
-.close {
+.btn-close {
     color: #aaaaaa;
     right: 0;
     float: right;
@@ -39,8 +39,8 @@ h1{
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.btn-close:hover,
+.btn-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;

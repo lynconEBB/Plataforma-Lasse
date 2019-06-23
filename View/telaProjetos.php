@@ -11,8 +11,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="page-header">
-        <span class="titulo-header">Projetos</span>
+        <?php Mensagem::exibir('danger');?>
+
+        <div style="display: block; width: 100%">
+            <span class="titulo-header">Projetos</span>
+        </div>
     </header>
 
     <div class="side-bar-back">

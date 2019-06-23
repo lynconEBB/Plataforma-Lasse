@@ -1,6 +1,6 @@
 <?php
 
-class CondutorModel extends CrudModel
+class CondutorModel
 {
     private $id;
     private $nome;
@@ -41,9 +41,5 @@ class CondutorModel extends CrudModel
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 }

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../css/styleLogin.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../css/modal.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../css/formModal.css"/>
@@ -20,6 +21,7 @@
 </div>
 <div class="login">
     <form action="/acaoUsuario" method="post" class="form-login">
+        <?php Mensagem::exibir('danger');?>
         <div class="form-group">
             <label for="inputUsuario" class="form-label">Usuário</label>
             <input type="text" name="nomeUsuario" id="inputUsuario" class="form-input">
@@ -31,14 +33,14 @@
         <button type="button" class="link-login abre-modal">Registre-se</button>
 
         <input type="hidden" name="acao" value="logar">
-        <input type="submit" class="btn-login rounded-bottom" value="Login" >
+        <input type="submit" class="btn-login" value="Login" >
     </form>
 </div>
 
 <div class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="btn-close">&times;</span>
             <h1>Cadastro de Usuários</h1>
         </div>
         <form action="/acaoUsuario" method="post" class="form-modal">
@@ -62,30 +64,28 @@
                 <label for="dtNasc" class="modal-label">Dt. de Nascimento</label>
                 <input type="text" class="modal-input" name="dtNasc" id="dtNasc" autocomplete="off">
             </div>
-            <div class="row">
-                <div class="modal-group col-sm-6 ">
-                    <label for="rg" class="modal-label">RG</label>
-                    <input type="text" class="modal-input" name="rg" id="rg" autocomplete="off">
-                </div>
-                <div class="modal-group col-sm-6 ">
-                    <label for="dtEmissao" class="modal-label">Dt. Emissão</label>
-                    <input type="text" class="modal-input" name="dtEmissao" id="dtEmissao" autocomplete="off">
-                </div>
+
+            <div class="modal-group">
+                <label for="rg" class="modal-label">RG</label>
+                <input type="text" class="modal-input" name="rg" id="rg" autocomplete="off">
+            </div>
+            <div class="modal-group">
+                <label for="dtEmissao" class="modal-label">Dt. Emissão</label>
+                <input type="text" class="modal-input" name="dtEmissao" id="dtEmissao" autocomplete="off">
             </div>
             <div class="modal-group">
                 <label for="cpf" class="modal-label">CPF</label>
                 <input type="text" class="modal-input" name="cpf" id="cpf" autocomplete="off">
             </div>
-            <div class="row">
-                <div class="modal-group col-sm-6">
-                    <label for="formacao" class="modal-label">Formação</label>
-                    <input type="text" class="modal-input" name="formacao" id="formacao" autocomplete="off">
-                </div>
-                <div class="modal-group col-sm-6">
-                    <label for="valorHora" class="modal-label">Valor Hora</label>
-                    <input type="text" class="modal-input" name="valorHora" id="valorHora" autocomplete="off">
-                </div>
+            <div class="modal-group">
+                <label for="formacao" class="modal-label">Formação</label>
+                <input type="text" class="modal-input" name="formacao" id="formacao" autocomplete="off">
             </div>
+            <div class="modal-group">
+                <label for="valorHora" class="modal-label">Valor Hora</label>
+                <input type="text" class="modal-input" name="valorHora" id="valorHora" autocomplete="off">
+            </div>
+
             <div class="container-select">
                 <div class="modal-select">
                     <label for="back-select" class="select-label">Atuação</label>
@@ -104,6 +104,7 @@
 </div>
 
 <script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
 <script src="../js/funcoesLogin.js"></script>
 </body>
 </html>

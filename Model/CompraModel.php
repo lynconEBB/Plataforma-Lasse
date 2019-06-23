@@ -1,6 +1,6 @@
 <?php
 
-class CompraModel extends CrudModel
+class CompraModel
 {
     private $id;
     private $proposito;
@@ -37,11 +37,6 @@ class CompraModel extends CrudModel
     public function setComprador($comprador): void
     {
         $this->comprador = $comprador;
-    }
-
-    public function setId(int $id)
-    {
-        $this->id = $id;
     }
 
     public function getId(){

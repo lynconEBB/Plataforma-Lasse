@@ -1,6 +1,7 @@
 <?php
 
-class VeiculoModel extends CrudModel {
+class VeiculoModel
+{
     private $id;
     private $nome;
     private $tipo;
@@ -24,10 +25,6 @@ class VeiculoModel extends CrudModel {
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id): void{
-        $this->id = $id;
     }
 
     public function getNome(){

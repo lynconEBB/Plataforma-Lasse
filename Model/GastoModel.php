@@ -1,6 +1,7 @@
 <?php
 
-class GastoModel extends CrudModel{
+class GastoModel
+{
     private $id;
     private $valor;
     private $tipo;
@@ -14,10 +15,6 @@ class GastoModel extends CrudModel{
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getValor(){

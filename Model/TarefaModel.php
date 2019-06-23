@@ -1,5 +1,6 @@
 <?php
-class TarefaModel extends CrudModel {
+class TarefaModel
+{
     private $id;
     private $nome;
     private $descricao;
@@ -63,10 +64,6 @@ class TarefaModel extends CrudModel {
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id): void{
-        $this->id = $id;
     }
 
     public function getNome(){

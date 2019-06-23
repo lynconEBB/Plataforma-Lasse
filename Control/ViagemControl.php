@@ -49,9 +49,6 @@ class ViagemControl extends CrudControl {
         //atualiza total da viagem
         $this->atualizaTotal($idViagem);
 
-        //Atualiza total da tarefa
-        $tarefaControl = new TarefaControl();
-        $tarefaControl->atualizaTotal($_POST['idTarefa']);
     }
 
     public function atualizaTotal($idViagem)

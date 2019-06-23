@@ -21,7 +21,7 @@
             <article class="side-bar-start">
 
                 <div class="container-foto">
-                    <img src="../img/Icons/profile.jpg" class="foto-perfil" alt="Foto de Usuario">
+                    <img src="../img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
                 </div>
                 <span class="side-bar-title"><?=$usuario->getLogin()?></span>
 
@@ -105,7 +105,7 @@
                         ?>
                         <div class="alert">
                             <img src="../img/mascote/RaioSozinho.png" class="alert-img">
-                            <span class="alert-text">Nenhum Projeto Encontrado</span>
+                            <span class="alert-text">Nenhuma Atividade Encontrado</span>
                         </div>
                         <?php
                     }
@@ -120,7 +120,7 @@
             <div class="menu-body">
                 <div class="alert">
                     <img src="../img/mascote/RaioSozinho.png" class="alert-img">
-                    <span class="alert-text">Nenhum Projeto Encontrado</span>
+                    <span class="alert-text">Nenhum Formulário Encontrado</span>
                 </div>
             </div>
         </section>
@@ -208,7 +208,7 @@
                 <div class="modal-body">
 
                     <div class="container-info">
-                        <img src="../img/Icons/profile.jpg" class="foto-perfil" alt="Foto de Usuario">
+                        <img src="../img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
                     </div>
                     <div class="info-item">
                         <label class="item-label">Nome Completo:</label>

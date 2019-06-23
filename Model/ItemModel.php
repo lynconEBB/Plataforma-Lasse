@@ -1,6 +1,7 @@
 <?php
 
-class ItemModel extends CrudModel {
+class ItemModel
+{
     private $id;
     private $valorParcial;
     private $valor;
@@ -17,10 +18,6 @@ class ItemModel extends CrudModel {
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getValor(){

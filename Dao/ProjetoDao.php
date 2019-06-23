@@ -23,11 +23,6 @@ class ProjetoDao extends CrudDao {
     }
 
     function excluir($id){
-        $comando1 = "DELETE FROM tbUsuarioProjeto WHERE idProjeto = :id";
-        $stm = $this->pdo->prepare($comando1);
-        $stm->bindParam(':id',$id);
-        $stm->execute();
-
         $comando2 = "DELETE FROM tbProjeto WHERE id = :id";
         $stm = $this->pdo->prepare($comando2);
         $stm->bindParam(':id',$id);

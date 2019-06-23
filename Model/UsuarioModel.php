@@ -1,6 +1,7 @@
 <?php
 
-class UsuarioModel extends CrudModel {
+class UsuarioModel
+{
     private $id;
     private $nomeCompleto;
     private $login;
@@ -41,10 +42,6 @@ class UsuarioModel extends CrudModel {
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getNomeCompleto(){

@@ -95,10 +95,11 @@
                     <div class="form-group">
                         <label for="tipo">Tipo de Atividade</label>
                         <select class="custom-select" name="tipo" id="tipo">
-                            <option value="Desenvolvimento">Desenvolvimento</option>
-                            <option value="Palestra">Palestra</option>
-                            <option value="Manutencao">Manutenção</option>
-                            <option value="Aprimoramento">Aprimoramento</option>
+                            <option value="Atraso">Atraso</option>
+                            <option value="Consulta">Consulta</option>
+                            <option value="Doença">Doença</option>
+                            <option value="Viagem">Viagem</option>
+                            <option value="Acidente">Acidente</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -106,7 +107,7 @@
                         <input class="form-control" id="comentario" name="comentario">
                     </div>
                     <div class="form-group">
-                        <label for="tempoGasto" class="col-form-label">Tempo Gasto</label>
+                        <label for="tempoGasto" class="col-form-label">Tempo Gasto(h)</label>
                         <input class="form-control" id="tempoGasto" name="tempoGasto">
                     </div>
                     <div class="form-group">
@@ -136,10 +137,11 @@
                     <div class="form-group">
                         <label for="tipo">Tipo de Atividade</label>
                         <select class="custom-select" name="tipo" id="tipo">
-                            <option value="Desenvolvimento">Desenvolvimento</option>
-                            <option value="Palestra">Palestra</option>
-                            <option value="Manutencao">Manutenção</option>
-                            <option value="Aprimoramento">Aprimoramento</option>
+                            <option value="Atraso">Atraso</option>
+                            <option value="Consulta">Consulta</option>
+                            <option value="Doença">Doença</option>
+                            <option value="Viagem">Viagem</option>
+                            <option value="Acidente">Acidente</option>
                         </select>
                     </div>
                     <div class="form-group">

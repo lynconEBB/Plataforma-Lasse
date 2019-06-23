@@ -1,6 +1,7 @@
 <?php
 
-class ProjetoModel extends CrudModel {
+class ProjetoModel
+{
     private $id;
     private $dataFinalizacao;
     private $dataInicio;
@@ -49,10 +50,6 @@ class ProjetoModel extends CrudModel {
 
     public function getId(){
         return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
     }
 
     public function getDataFinalizacao(){
