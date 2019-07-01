@@ -7,30 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ffafa12-f2d3-40f5-bbb1-eabff67f9075" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/img/Icons/cat.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/OdtParser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/telaFormulario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control/ViagemControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ViagemControl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Control/AtividadeControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/AtividadeControl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Control/ProjetoControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Control/ProjetoControl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dao/ProjetoDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Dao/ProjetoDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/AtividadeModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/AtividadeModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CompraModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CompraModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CondutorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/CondutorModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/CrudModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/GastoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/GastoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ItemModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ItemModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ProjetoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ProjetoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/TarefaModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/TarefaModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/UsuarioModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/UsuarioModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/VeiculoModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/VeiculoModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ViagemModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ViagemModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Mensagem.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Mensagem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/PdoFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Services/PdoFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/telaLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaLogin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentos/Diagramas UML/Diagramas UML.asta" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/Diagramas UML/Diagramas UML.asta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentos/PFC.odt" beforeDir="false" afterPath="$PROJECT_DIR$/Documentos/PFC.odt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/CadastroViagem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/FormularioControl.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/FormularioView.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/Formulário.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/ViagemControl.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/alteracaoFuncionario.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/cadastroFuncionario.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/estiloFuncionario.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/formularioViagem.odt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/meusDados.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/select.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/select.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestesLixeira/test.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/View/telaProjetos.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaProjetos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/telaUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/View/telaUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/css/grid-padrao.css" beforeDir="false" afterPath="$PROJECT_DIR$/server/css/grid-padrao.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/css/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/server/css/modal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/js/funcoesLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/js/funcoesLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,14 +64,51 @@
     </favorites_list>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="990">
+              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dao/ProjetoDao.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-195">
+              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/View/telaProjetos.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1200">
+              <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -141,12 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/View/VeiculoView.php" />
-        <option value="$PROJECT_DIR$/server/css/styleVeiculo.css" />
-        <option value="$PROJECT_DIR$/Control/CondutorControl.php" />
-        <option value="$PROJECT_DIR$/View/CondutorView.php" />
-        <option value="$PROJECT_DIR$/View/telaCondutor.php" />
-        <option value="$PROJECT_DIR$/server/css/styleCondutor.css" />
         <option value="$PROJECT_DIR$/View/telaVeiculo.php" />
         <option value="$PROJECT_DIR$/View/listaTodosGastos.php" />
         <option value="$PROJECT_DIR$/View/telaGastosGerais.php" />
@@ -165,14 +197,12 @@
         <option value="$PROJECT_DIR$/View/telaItensCompra.php" />
         <option value="$PROJECT_DIR$/server/css/botoes.css" />
         <option value="$PROJECT_DIR$/server/css/styleItem.css" />
-        <option value="$PROJECT_DIR$/Control/AtividadeControl.php" />
         <option value="$PROJECT_DIR$/View/AtividadePlanejadaView.php" />
         <option value="$PROJECT_DIR$/View/telaAtividadePlanejada.php" />
         <option value="$PROJECT_DIR$/View/AtividadeNaoPlanejadaView.php" />
         <option value="$PROJECT_DIR$/server/css/styleAtividade.css" />
         <option value="$PROJECT_DIR$/Control/CompraControl.php" />
         <option value="$PROJECT_DIR$/Services/PdoFactory.php" />
-        <option value="$PROJECT_DIR$/Dao/ProjetoDao.php" />
         <option value="$PROJECT_DIR$/Model/AtividadeModel.php" />
         <option value="$PROJECT_DIR$/Model/VeiculoModel.php" />
         <option value="$PROJECT_DIR$/Model/CompraModel.php" />
@@ -191,17 +221,25 @@
         <option value="$PROJECT_DIR$/View/telaAtividadeNaoPlanejada.php" />
         <option value="$PROJECT_DIR$/server/css/grid-padrao.css" />
         <option value="$PROJECT_DIR$/Control/ViagemControl.php" />
+        <option value="$PROJECT_DIR$/Control/AtividadeControl.php" />
         <option value="$PROJECT_DIR$/View/telaProjetos.php" />
+        <option value="$PROJECT_DIR$/TestesLixeira/h.html" />
+        <option value="$PROJECT_DIR$/TestesLixeira/Formulário.php" />
+        <option value="$PROJECT_DIR$/Control/FormularioControl.php" />
+        <option value="$PROJECT_DIR$/Services/OdtParser.php" />
+        <option value="$PROJECT_DIR$/Control/ProjetoControl.php" />
+        <option value="$PROJECT_DIR$/Dao/ProjetoDao.php" />
+        <option value="$PROJECT_DIR$/server/index.php" />
       </list>
     </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP on XAMPP" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2303" />
-    <option name="y" value="302" />
-    <option name="width" value="974" />
-    <option name="height" value="733" />
+    <option name="x" value="1985" />
+    <option name="y" value="-4" />
+    <option name="width" value="1855" />
+    <option name="height" value="1084" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -218,6 +256,21 @@
             <path>
               <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="Control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="Dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lasse-Project-Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lasse-Project-Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="Services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -246,11 +299,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/View" />
       <recent name="C:\Users\User\Desktop\Plataforma-Lasse\View\errorPages" />
       <recent name="C:\xampp\htdocs\Plataforma-Lasse\css" />
       <recent name="C:\xampp\htdocs\Plataforma-Lasse\Control" />
       <recent name="C:\xampp\htdocs\Plataforma-Lasse\View" />
-      <recent name="C:\xampp\htdocs\Plataforma-Lasse\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -385,6 +438,12 @@
       <workItem from="1561219735064" duration="8481000" />
       <workItem from="1561316533366" duration="8048000" />
       <workItem from="1561327507083" duration="2187000" />
+      <workItem from="1561479987277" duration="1258000" />
+      <workItem from="1561564340627" duration="3734000" />
+      <workItem from="1561573554345" duration="599000" />
+      <workItem from="1561653337789" duration="1198000" />
+      <workItem from="1561656552008" duration="3253000" />
+      <workItem from="1561998376445" duration="2005000" />
     </task>
     <task id="LOCAL-00001" summary="Organizando e Começando Mask">
       <created>1554493913510</created>
@@ -614,7 +673,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="498779000" />
+    <option name="totallyTimeSpent" value="510826000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -626,14 +685,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="302" width="1382" height="744" extended-state="6" />
+    <frame x="1985" y="-4" width="1855" height="1084" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.18429004" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.12658927" />
       <window_info id="Structure" order="1" sideWeight="0.50151974" side_tool="true" weight="0.09744409" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32960597" />
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.2300216" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32569557" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32517838" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.2708559" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
@@ -712,50 +772,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Front-End Terminado" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/View/CompraView.php" />
-    <entry file="file://$PROJECT_DIR$/server/css/styleCompra.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/telaGastosGerais.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="15" column="45" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/ItemView.php" />
-    <entry file="file://$PROJECT_DIR$/Dao/ItemDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/CompraDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="48" lean-forward="true" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/css/styleGasto.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/View/telaGastosViagem.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="59" column="19" selection-end-line="123" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/telaItensGerais.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -788,21 +804,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Control/AtividadeControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="102" column="61" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/AtividadePlanejadaView.php" />
-    <entry file="file://$PROJECT_DIR$/View/telaAtividadePlanejada.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="140" column="29" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/AtividadeNaoPlanejadaView.php" />
     <entry file="file://$PROJECT_DIR$/server/css/styleAtividade.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -933,20 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dao/ProjetoDao.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Services/PdoFactory.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -984,13 +972,6 @@
           </Categories>
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1108,13 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/telaProjetos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Control/ViagemControl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -1137,6 +1111,68 @@
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="e#57#64#1" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/AtividadeControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1470">
+          <caret line="98" column="28" lean-forward="true" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestesLixeira/test.html" />
+    <entry file="file://$PROJECT_DIR$/View/telaAtividadePlanejada.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2100">
+          <caret line="140" column="29" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestesLixeira/h.html" />
+    <entry file="file://$PROJECT_DIR$/TestesLixeira/cadastroFuncionario.html" />
+    <entry file="file://$PROJECT_DIR$/Control/FormularioControl.php" />
+    <entry file="file://$PROJECT_DIR$/View/telaFormulario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestesLixeira/FormularioView.php" />
+    <entry file="file://$PROJECT_DIR$/TestesLixeira/FormularioControl.php" />
+    <entry file="file://$PROJECT_DIR$/Services/OdtParser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Control/ProjetoControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dao/ProjetoDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/telaProjetos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1200">
+          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
         </state>
       </provider>
     </entry>

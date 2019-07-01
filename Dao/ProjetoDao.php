@@ -2,7 +2,7 @@
 
 class ProjetoDao extends CrudDao {
 
-    function cadastrar(ProjetoModel $projeto){
+    public function cadastrar(ProjetoModel $projeto){
         $comando1 = "INSERT INTO tbProjeto (nome,descricao,dataFinalizacao,dataInicio) values (:nome, :descr, :dtFim,:dtInicio)";
         $stm = $this->pdo->prepare($comando1);
 
@@ -22,7 +22,7 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
     }
 
-    function excluir($id){
+    public function excluir($id){
         $comando2 = "DELETE FROM tbProjeto WHERE id = :id";
         $stm = $this->pdo->prepare($comando2);
         $stm->bindParam(':id',$id);
@@ -30,7 +30,7 @@ class ProjetoDao extends CrudDao {
 
     }
 
-    function listar(){
+    public function listar(){
         $comando = "SELECT * FROM tbProjeto";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
@@ -77,7 +77,7 @@ class ProjetoDao extends CrudDao {
         return $projeto;
     }
 
-    function alterar(ProjetoModel $projeto){
+    public function alterar(ProjetoModel $projeto){
 
         $comando = "UPDATE tbProjeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -91,7 +91,7 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
     }
 
-    function atualizarTotal(ProjetoModel $projeto){
+    public function atualizarTotal(ProjetoModel $projeto){
 
         $comando = "UPDATE tbProjeto SET totalGasto = :totalGasto WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -102,7 +102,7 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
     }
 
-    function procuraFuncionario($idProjeto,$idUsuario){
+    public function procuraFuncionario($idProjeto,$idUsuario){
         $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario";
         $stm = $this->pdo->prepare($comando);
 
@@ -113,7 +113,7 @@ class ProjetoDao extends CrudDao {
         return $stm->rowCount();
     }
 
-    function verificaDono($idProjeto)
+    public function verificaDono($idProjeto)
     {
         $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario and dono = TRUE";
         $stm = $this->pdo->prepare($comando);
@@ -125,7 +125,7 @@ class ProjetoDao extends CrudDao {
         return $stm->rowCount();
     }
 
-    function adicionarFuncionario($idUsuario,$idProjeto)
+    public function adicionarFuncionario($idUsuario,$idProjeto)
     {
         $comando = "insert into tbUsuarioProjeto (idProjeto,idUsuario,dono) values (:idProjeto,:idUsuario,FALSE)";
         $stm = $this->pdo->prepare($comando);

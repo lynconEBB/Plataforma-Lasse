@@ -52,25 +52,12 @@
                     <span class="detail-projeto">Total Gasto: <?=$projeto->getTotalGasto() ?></span>
                 </main>
                 <footer class="footer-projeto">
-                    <button class='opcao-projeto' data-toggle='modal' data-target='#modalAlterar'
-                            data-id='<?php echo $projeto->getId() ?>' data-nome='<?php echo $projeto->getNome() ?>'
-                            data-desc='<?php echo $projeto->getDescricao() ?>'
-                            data-dtini='<?php echo $projeto->getDataInicio() ?>'
-                            data-dtfim='<?php echo $projeto->getDataFinalizacao() ?>'>
-                        <img width='16' src='../img/Icons/editarIcone.png' alt='' class="img-icon">
-                    </button>
-                    <form style="display: inline;" action="/acaoProjeto" method="post">
-                        <input type="hidden" name="acao" value="excluirProjeto">
-                        <input type="hidden" name="id" value="<?php echo $projeto->getId() ?>">
-                        <button class="opcao-projeto">
-                            <img width='16' src='../img/Icons/lixeiraIcone.png' alt='' class="img-icon">
-                        </button>
-                    </form>
                         <a href="/menu/tarefa?idProjeto=<?= $projeto->getId() ?>" >
                             <button class="opcao-projeto">
                                 <img width="16" src="../img/Icons/tarefa.png" alt="" class="img-icon">
                             </button>
                         </a>
+
                     <?php
                     $projetoControl = new ProjetoControl();
                     if($projetoControl->verificaDono($projeto->getId())):
@@ -78,6 +65,20 @@
                         <button type="button" class="opcao-projeto" data-toggle="modal" data-target="#modalAdicionaFunc" data-idprojeto="<?=$projeto->getId()?>">
                             <img src="../img/Icons/IconeADD.png" class="img-icon">
                         </button>
+                        <button class='opcao-projeto' data-toggle='modal' data-target='#modalAlterar'
+                                data-id='<?php echo $projeto->getId() ?>' data-nome='<?php echo $projeto->getNome() ?>'
+                                data-desc='<?php echo $projeto->getDescricao() ?>'
+                                data-dtini='<?php echo $projeto->getDataInicio() ?>'
+                                data-dtfim='<?php echo $projeto->getDataFinalizacao() ?>'>
+                            <img width='16' src='../img/Icons/editarIcone.png' alt='' class="img-icon">
+                        </button>
+                        <form style="display: inline;" action="/acaoProjeto" method="post">
+                            <input type="hidden" name="acao" value="excluirProjeto">
+                            <input type="hidden" name="id" value="<?php echo $projeto->getId() ?>">
+                            <button class="opcao-projeto">
+                                <img width='16' src='../img/Icons/lixeiraicone.png' alt='' class="img-icon">
+                            </button>
+                        </form>
                     <?php
                     endif;
                     ?>

@@ -15,15 +15,19 @@ class ProjetoControl extends CrudControl
         switch ($acao){
             case 'cadastrarProjeto':
                 $this->cadastrar();
+                header('Location: /menu/projeto');
                 break;
             case 'excluirProjeto':
                 $this->excluir($_POST['id']);
+                header('Location: /menu/projeto');
                 break;
             case 'alterarProjeto':
                 $this->atualizar();
+                header('Location: /menu/projeto');
                 break;
             case 'adicionarFuncionario':
                 $this->addFuncionario();
+                header('Location: /menu/projeto');
                 break;
         }
     }
@@ -32,14 +36,10 @@ class ProjetoControl extends CrudControl
     {
         $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],null,null,null,null);
         $this->DAO->cadastrar($projeto);
-
-        header('Location: /menu/projeto');
     }
 
     protected function excluir(int $id){
         $this -> DAO -> excluir($id);
-
-        header('Location: /menu/projeto');
     }
 
     public function listar() {
@@ -49,8 +49,6 @@ class ProjetoControl extends CrudControl
     protected function atualizar(){
         $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id'],null,null,null);
         $this -> DAO -> alterar($projeto);
-
-        header('Location: /menu/projeto');
     }
 
     public function listarPorIdUsuario($id)
@@ -86,8 +84,6 @@ class ProjetoControl extends CrudControl
         }else{
             $_SESSION['danger'] = 'Usuario ja Inserido no Projeto :(';
         }
-        header('Location: /menu/projeto');
-
     }
 
     public function processaRequisicao(string $parametro)
