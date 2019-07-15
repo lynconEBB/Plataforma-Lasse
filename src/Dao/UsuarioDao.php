@@ -90,10 +90,13 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
-        $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-            $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
-
-        return $fun;
+        if ($linha != false) {
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
+                $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            return $fun;
+        }else {
+            return false;
+        }
     }
 
     public function listarPorId($id){

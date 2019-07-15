@@ -1,4 +1,35 @@
 $( document ).ready(function () {
+    var options = {
+        translation:{
+            'd': { pattern: /[0-3]/ },
+            'm': { pattern: /[0-1]/ },
+            'y': { pattern: /[1-2]/ }
+        }
+    };
+
+    $('#dtNasc').mask('d0/m0/y000', options);
+    $('#dtEmissao').mask('d0/m0/y000', options);
+    $("#cpf").mask("000.000.000-00");
+    $("#rg").mask("999.999.999-W", {
+        translation: {
+            'W': {
+                pattern: /[X0-9]/
+            }
+        },
+        reverse: true
+    });
+
+    $("#valorHora").mask("990,00", {reverse: true});
+
+    $('#valorHora').blur(function () {
+        let value = $(this).val();
+
+        if(!value.includes(',')){
+           value += ',00';
+           $(this).val(value);
+        }
+    });
+
     $('.form-group input').focus(function () {
         let label = $(this).siblings('.form-label');
         label.addClass('selecionado');
@@ -74,5 +105,7 @@ $( document ).ready(function () {
         }
 
     })
+
+
 
 });

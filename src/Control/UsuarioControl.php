@@ -2,6 +2,8 @@
 
 namespace Lasse\LPM\Control;
 
+use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\UsuarioModel;
 
@@ -32,17 +34,32 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-    /*
+
+    /**
      * Cria um Objeto Usuario
      * cadastra no banco de dados usando o Objeto Criado
      * Retorna para a tela de Login
      */
     protected function cadastrar(){
-        $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],$_POST['senha'],$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
-        $this->DAO->cadastrar($usuario);
+        session_start();
+        try{
+            if(!$this->DAO->listarPorLogin($_POST['usuario'])){
+                $hash = password_hash($_POST['senha'],PASSWORD_BCRYPT);
+                $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],$hash,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
+                $this->DAO->cadastrar($usuario);
 
-        header('Location: /login');
-        die();
+                header('Location: /login');
+                die();
+            }else {
+                throw new Exception("Nome de Usuário ja utilizado");
+            }
+        }catch (Exception $argumentException) {
+            $_SESSION['danger'] = $argumentException->getMessage();
+            header("Location: /login");
+            die();
+        }
+
+
     }
 
     protected function excluir(int $id){
@@ -58,6 +75,7 @@ class UsuarioControl extends CrudControl {
 
     protected function atualizar(){
         session_start();
+
         $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],null,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora'],$_SESSION['usuario-id']);
         $this -> DAO ->alterar($usuario);
 
@@ -75,18 +93,22 @@ class UsuarioControl extends CrudControl {
             $login = $_POST["nomeUsuario"];
             $senha = $_POST["senha"];
 
-            if ($this->DAO->consultar($login, $senha)) {
+            if ($usuario = $this->DAO->listarPorLogin($login)) {
+                if( password_verify($senha,$usuario->getSenha())){
+                    $_SESSION["usuario-id"] = $usuario->getId();
+                    $_SESSION["usuario"] = $_POST["nomeUsuario"];
+                    $_SESSION["usuario-classe"] = $usuario;
+                    $_SESSION["autenticado"] = TRUE;
 
-                $usuario = $this->DAO->listarPorLogin($_POST["nomeUsuario"]);
-                $_SESSION["usuario-id"] = $usuario->getId();
-                $_SESSION["usuario"] = $_POST["nomeUsuario"];
-                $_SESSION["usuario-classe"] = $usuario;
-                $_SESSION["autenticado"] = TRUE;
-                header("Location: /menu/usuario");
-                die();
-
+                    header("Location: /menu/usuario");
+                    die();
+                }else{
+                    $_SESSION['danger'] = "Senha errada :(";
+                    header("Location: /login");
+                    die();
+                }
             } else {
-                $_SESSION['danger'] = "Usuário ou Senha Incorretos :(";
+                $_SESSION['danger'] = "Usuário não registrado :(";
                 header("Location: /login");
                 die();
             }

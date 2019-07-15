@@ -2,6 +2,9 @@
 
 namespace Lasse\LPM\Model;
 
+
+use Lasse\LPM\Services\Validacao;
+
 class UsuarioModel
 {
     private $id;
@@ -19,8 +22,8 @@ class UsuarioModel
     private $valorHora;
 
     public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null){
-        $this->id = $id;
-        $this->nomeCompleto = $nomeCompleto;
+        $this->setId($id);
+        $this->setNomeCompleto($nomeCompleto);
         $this->login = $login;
         $this->senha = $senha;
         $this->dtNascimento = $dtNascimento;
@@ -38,8 +41,16 @@ class UsuarioModel
         return $this->email;
     }
 
-    public function setEmail($email){
+    public function setEmail($email)
+    {
+        Validacao::ehObrigatorio('Nome Completo',$email);
+
         $this->email = $email;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getId(){
@@ -51,6 +62,8 @@ class UsuarioModel
     }
 
     public function setNomeCompleto($nomeCompleto){
+        Validacao::ehObrigatorio('Nome Completo',$nomeCompleto);
+
         $this->nomeCompleto = $nomeCompleto;
     }
 
@@ -75,6 +88,8 @@ class UsuarioModel
     }
 
     public function setCpf($cpf){
+        Validacao::ehObrigatorio('cpf',$cpf);
+
         $this->cpf = $cpf;
     }
 

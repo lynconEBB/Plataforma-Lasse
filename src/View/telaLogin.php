@@ -108,6 +108,7 @@ use Lasse\LPM\Services\Mensagem;
 </div>
 
 <script src="../js/jquery.js"></script>
+<script src="../js/jquery.mask.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/funcoesLogin.js"></script>
 </body>
