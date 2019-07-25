@@ -12,8 +12,8 @@
     "require": {
         "cybermonde/odtphp": "^1.7",
         "ext-pdo": "*",
-        "ext-http": "*"
-
+        "ext-http": "*",
+        "ext-ctype": "*"
     },
     "autoload": {
         "psr-4": {

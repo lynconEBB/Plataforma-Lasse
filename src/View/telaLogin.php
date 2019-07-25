@@ -1,4 +1,11 @@
 <?php
+var_dump(preg_match("/[0-9]{2}/[0-9]{2}/[0-9]{4}/",'23/34/2001'));
+try{
+    \Lasse\LPM\Services\Validacao::validar('email','hgfhfg','nuloOUtexto');
+}catch (Exception $e){
+    echo $e->getMessage();
+}
+
 use Lasse\LPM\Services\Mensagem;
 ?>
 
@@ -9,19 +16,19 @@ use Lasse\LPM\Services\Mensagem;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleLogin.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/modal.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/formModal.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/select.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleLogin.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/modal.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/formModal.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/select.css"/>
 </head>
 <body>
-<img src="../img/login/poster.png" class="poster">
-<img src="../img/login/estante.png" class="estante">
-<img src="../img/login/monitor.png" class="monitor">
-<img src="../img/login/celular.png" class="celular">
+<img src="/img/login/poster.png" class="poster">
+<img src="/img/login/estante.png" class="estante">
+<img src="/img/login/monitor.png" class="monitor">
+<img src="/img/login/celular.png" class="celular">
 <div class="container-logo">
-    <img src="../img/login/logo.png" class="logo">
+    <img src="/img/login/logo.png" class="logo">
 </div>
 <div class="login">
     <form action="/acaoUsuario" method="post" class="form-login">
@@ -107,9 +114,9 @@ use Lasse\LPM\Services\Mensagem;
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/jquery.mask.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesLogin.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mask.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/funcoesLogin.js"></script>
 </body>
 </html>

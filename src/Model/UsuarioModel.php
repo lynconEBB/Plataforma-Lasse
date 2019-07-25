@@ -15,7 +15,7 @@ class UsuarioModel
     private $cpf;
     private $rg;
     private $dtEmissao;
-    private $tipo;
+
     private $email;
     private $atuacao;
     private $formacao;
@@ -24,17 +24,16 @@ class UsuarioModel
     public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null){
         $this->setId($id);
         $this->setNomeCompleto($nomeCompleto);
-        $this->login = $login;
-        $this->senha = $senha;
-        $this->dtNascimento = $dtNascimento;
-        $this->cpf = $cpf;
-        $this->rg = $rg;
-        $this->dtEmissao = $dtEmissao;
-        $this->tipo = $tipo;
-        $this->email = $email;
-        $this->atuacao = $atuacao;
-        $this->formacao = $formacao;
-        $this->valorHora = $valorHora;
+        $this->setLogin($login);
+        $this->setSenha($senha);
+        $this->setDtNascimento($dtNascimento);
+        $this->setCpf($cpf);
+        $this->setRg($rg);
+        $this->setDtEmissao($dtEmissao);
+        $this->setEmail($email);
+        $this->setAtuacao($atuacao);
+        $this->setFormacao($formacao);
+        $this->setValorHora($valorHora);
     }
 
     public function getEmail(){
@@ -43,13 +42,13 @@ class UsuarioModel
 
     public function setEmail($email)
     {
-        Validacao::ehObrigatorio('Nome Completo',$email);
-
+        Validacao::validar('E-mail',$email,'email');
         $this->email = $email;
     }
 
     public function setId($id)
     {
+        Validacao::validar('Id',$id,'nuloOUinteiro');
         $this->id = $id;
     }
 
@@ -62,7 +61,7 @@ class UsuarioModel
     }
 
     public function setNomeCompleto($nomeCompleto){
-        Validacao::ehObrigatorio('Nome Completo',$nomeCompleto);
+        Validacao::validar('Nome Completo',$nomeCompleto,'obrigatorio','texto');
 
         $this->nomeCompleto = $nomeCompleto;
     }
@@ -72,6 +71,7 @@ class UsuarioModel
     }
 
     public function setSenha($senha){
+        Validacao::validar('Senha',$senha,'nuloOUtexto');
         $this->senha = $senha;
     }
 
@@ -80,6 +80,7 @@ class UsuarioModel
     }
 
     public function setDtNascimento($dtNascimento){
+        Validacao::validar('E-mail',$email,'email');
         $this->dtNascimento = $dtNascimento;
     }
 
@@ -88,8 +89,7 @@ class UsuarioModel
     }
 
     public function setCpf($cpf){
-        Validacao::ehObrigatorio('cpf',$cpf);
-
+        Validacao::validar('cpf',$cpf,'obrigatorio');
         $this->cpf = $cpf;
     }
 
@@ -98,6 +98,7 @@ class UsuarioModel
     }
 
     public function setRg($rg){
+        Validacao::validar('E-mail',$email,'email');
         $this->rg = $rg;
     }
 
@@ -106,15 +107,8 @@ class UsuarioModel
     }
 
     public function setDtEmissao($dtEmissao){
+        Validacao::validar('E-mail',$email,'email');
         $this->dtEmissao = $dtEmissao;
-    }
-
-    public function getTipo(){
-        return $this->tipo;
-    }
-
-    public function setTipo($tipo){
-        $this->tipo = $tipo;
     }
 
     public function getLogin(){
@@ -122,6 +116,7 @@ class UsuarioModel
     }
 
     public function setLogin($login){
+        Validacao::validar('E-mail',$email,'email');
         $this->login = $login;
     }
 
@@ -130,6 +125,7 @@ class UsuarioModel
     }
 
     public function setAtuacao($atuacao){
+        Validacao::validar('E-mail',$email,'email');
         $this->atuacao = $atuacao;
     }
 
@@ -138,6 +134,7 @@ class UsuarioModel
     }
 
     public function setFormacao($formacao){
+        Validacao::validar('E-mail',$email,'email');
         $this->formacao = $formacao;
     }
 
@@ -146,6 +143,7 @@ class UsuarioModel
     }
 
     public function setValorHora($valorHora){
+        Validacao::validar('E-mail',$email,'email');
         $this->valorHora = $valorHora;
     }
 

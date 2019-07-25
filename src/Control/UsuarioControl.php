@@ -6,6 +6,9 @@ use Exception;
 use InvalidArgumentException;
 use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\UsuarioModel;
+use Lasse\LPM\Services\PdoFactory;
+use Lasse\LPM\Services\Validacao;
+use PDO;
 
 class UsuarioControl extends CrudControl {
 
@@ -43,11 +46,11 @@ class UsuarioControl extends CrudControl {
     protected function cadastrar(){
         session_start();
         try{
+            Validacao::validar('Senha',$_POST['senha'],'semEspaco','obrigatorio','texto',['minimo',6]);
             if(!$this->DAO->listarPorLogin($_POST['usuario'])){
                 $hash = password_hash($_POST['senha'],PASSWORD_BCRYPT);
                 $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],$hash,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['tipo'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
                 $this->DAO->cadastrar($usuario);
-
                 header('Location: /login');
                 die();
             }else {

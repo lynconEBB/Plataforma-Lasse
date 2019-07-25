@@ -1,21 +1,23 @@
 <?php
 
 namespace Lasse\LPM\Dao;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 use Lasse\LPM\Model\UsuarioModel;
 use PDO;
+use PDOException;
 
 class UsuarioDao extends CrudDao {
 
     public function cadastrar(UsuarioModel $usuario){
-        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,tipo,email,valorHora,formacao,atuacao,dtNascimento) VALUES (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :tipo, :email, :valorHora, :formacao, :atuacao,:dtNasc)");
+        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,email,valorHora,formacao,atuacao,dtNascimento) VALUES (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :email, :valorHora, :formacao, :atuacao,:dtNasc)");
         $insert->bindValue(':senha',$usuario->getSenha());
         $insert->bindValue(':login',$usuario->getLogin());
         $insert->bindValue(':nomeCompleto',$usuario->getNomeCompleto());
         $insert->bindValue(':cpf',$usuario->getCpf());
         $insert->bindValue(':rg',$usuario->getRg());
         $insert->bindValue(':dataDeEmissao',$usuario->getDtEmissao());
-        $insert->bindValue(':tipo',$usuario->getTipo());
         $insert->bindValue(':email',$usuario->getEmail());
         $insert->bindValue(':valorHora',$usuario->getValorHora());
         $insert->bindValue(':formacao',$usuario->getFormacao());
@@ -26,7 +28,7 @@ class UsuarioDao extends CrudDao {
     }
 
     public function alterar(UsuarioModel $usuario){
-        $update = $this->pdo->prepare("UPDATE tbUsuario SET login=:login, NomeCompleto=:nome, dtNascimento = :dtNasc, cpf = :cpf, rg = :rg, dataDeEmissao= :dtEmissao, tipo = :tipo, email= :email,
+        $update = $this->pdo->prepare("UPDATE tbUsuario SET login=:login, NomeCompleto=:nome, dtNascimento = :dtNasc, cpf = :cpf, rg = :rg, dataDeEmissao= :dtEmissao, email= :email,
                 atuacao = :atuacao, formacao =:formacao, valorHora = :valorHora WHERE id = :id");
         $update->bindValue(':login',$usuario->getLogin());
         $update->bindValue(':nome',$usuario->getNomeCompleto());
@@ -34,7 +36,6 @@ class UsuarioDao extends CrudDao {
         $update->bindValue(':cpf',$usuario->getCpf());
         $update->bindValue(':rg',$usuario->getRg());
         $update->bindValue(':dtEmissao',$usuario->getDtEmissao());
-        $update->bindValue(':tipo',$usuario->getTipo());
         $update->bindValue(':email',$usuario->getEmail());
         $update->bindValue(':atuacao',$usuario->getAtuacao());
         $update->bindValue(':formacao',$usuario->getFormacao());
@@ -59,8 +60,7 @@ class UsuarioDao extends CrudDao {
 
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         foreach ($linhas as $linha){
-            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-                $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
             $funcionarios[]=$fun;
         }
         return $funcionarios;
@@ -68,7 +68,7 @@ class UsuarioDao extends CrudDao {
 
     public function listarPorIdProjeto($idProjeto){
         $busca = $this->pdo->prepare("SELECT tbUsuario.nomeCompleto,tbUsuario.login, tbUsuario.dtNascimento,
-tbUsuario.cpf, tbUsuario.rg, tbUsuario.dataDeEmissao, tbUsuario.tipo, tbUsuario.email,tbUsuario.atuacao,tbUsuario.formacao,
+tbUsuario.cpf, tbUsuario.rg, tbUsuario.dataDeEmissao, tbUsuario.email,tbUsuario.atuacao,tbUsuario.formacao,
 tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on tbUsuario.id = tbUsuarioProjeto.idUsuario where tbUsuarioProjeto.idProjeto = :id");
         $busca->bindParam(':id',$idProjeto);
         $busca->execute();
@@ -77,8 +77,7 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
 
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         foreach ($linhas as $linha){
-            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-                $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
             $funcionarios[]=$fun;
         }
         return $funcionarios;
@@ -91,8 +90,7 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
         if ($linha != false) {
-            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-                $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
             return $fun;
         }else {
             return false;
@@ -106,8 +104,7 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
 
-        $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],
-            $linha['tipo'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+        $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
 
         return $fun;
     }
