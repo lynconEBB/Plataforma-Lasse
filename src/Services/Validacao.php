@@ -3,7 +3,6 @@
 
 namespace Lasse\LPM\Services;
 
-
 use InvalidArgumentException;
 
 abstract class Validacao
@@ -75,11 +74,33 @@ abstract class Validacao
 
     private static function data($nomeParametro,$valor)
     {
-        if (!preg_match("/[0-9]{2}-[0-9]{2}-[0-9]{4}/",$valor) && !preg_match("/[0-9]{2}/[0-9]{2}/[0-9]{4}/",4535)) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser nulo ou texto');
+        if (!preg_match("/[0-9]{4}-[0-9]{2}-[0-9]{2}/",$valor) && !preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/",$valor)) {
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato de data');
         }
     }
 
+    private static function cpf($nomeParametro,$valor)
+    {
+
+        // Extrai somente os números
+        $cpf = preg_replace( '/[^0-9]/is', '', $valor );
+
+        // Verifica se foi informado todos os digitos corretamente
+        if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf) || !preg_match("/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/",$valor)) {
+            throw new InvalidArgumentException($nomeParametro.' inválido');
+        }
+
+        // Faz o calculo para validar o CPF
+        for ($t = 9; $t < 11; $t++) {
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf{$c} * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf{$c} != $d) {
+                throw new InvalidArgumentException($nomeParametro.' inválido');
+            }
+        }
+    }
 
 
 

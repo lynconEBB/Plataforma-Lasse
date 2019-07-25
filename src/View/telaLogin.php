@@ -1,7 +1,6 @@
 <?php
-var_dump(preg_match("/[0-9]{2}/[0-9]{2}/[0-9]{4}/",'23/34/2001'));
 try{
-    \Lasse\LPM\Services\Validacao::validar('email','hgfhfg','nuloOUtexto');
+    \Lasse\LPM\Services\Validacao::validar('CPF','','cpf');
 }catch (Exception $e){
     echo $e->getMessage();
 }

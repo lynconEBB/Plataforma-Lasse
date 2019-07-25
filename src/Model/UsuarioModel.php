@@ -2,7 +2,8 @@
 
 namespace Lasse\LPM\Model;
 
-
+use DateTime;
+use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
 class UsuarioModel
@@ -66,7 +67,8 @@ class UsuarioModel
         $this->nomeCompleto = $nomeCompleto;
     }
 
-    public function getSenha(){
+    public function getSenha():DateTime
+    {
         return $this->senha;
     }
 
@@ -80,8 +82,8 @@ class UsuarioModel
     }
 
     public function setDtNascimento($dtNascimento){
-        Validacao::validar('E-mail',$email,'email');
-        $this->dtNascimento = $dtNascimento;
+        Validacao::validar('Data de Nascimento',$dtNascimento,'data');
+        $this->dtNascimento = Formatacao::formataData($dtNascimento);
     }
 
     public function getCpf(){
@@ -89,7 +91,7 @@ class UsuarioModel
     }
 
     public function setCpf($cpf){
-        Validacao::validar('cpf',$cpf,'obrigatorio');
+        Validacao::validar('CPF',$cpf,'cpf');
         $this->cpf = $cpf;
     }
 
@@ -98,7 +100,7 @@ class UsuarioModel
     }
 
     public function setRg($rg){
-        Validacao::validar('E-mail',$email,'email');
+        Validacao::validar('RG',$rg,'texto','obrigatorio');
         $this->rg = $rg;
     }
 
@@ -107,8 +109,8 @@ class UsuarioModel
     }
 
     public function setDtEmissao($dtEmissao){
-        Validacao::validar('E-mail',$email,'email');
-        $this->dtEmissao = $dtEmissao;
+        Validacao::validar('Data de Emissão',$dtEmissao,'data');
+        $this->dtEmissao = Formatacao::formataData($dtEmissao);
     }
 
     public function getLogin(){
@@ -116,7 +118,7 @@ class UsuarioModel
     }
 
     public function setLogin($login){
-        Validacao::validar('E-mail',$email,'email');
+        Validacao::validar('Nome de Usuário',$login,'email','texto',['min',6]);
         $this->login = $login;
     }
 
@@ -125,7 +127,7 @@ class UsuarioModel
     }
 
     public function setAtuacao($atuacao){
-        Validacao::validar('E-mail',$email,'email');
+        Validacao::validar('Atuação',$atuacao,'obrigatorio','texto');
         $this->atuacao = $atuacao;
     }
 
@@ -134,7 +136,7 @@ class UsuarioModel
     }
 
     public function setFormacao($formacao){
-        Validacao::validar('E-mail',$email,'email');
+        Validacao::validar('Formação',$formacao,'obrigatorio','texto');
         $this->formacao = $formacao;
     }
 
@@ -143,7 +145,7 @@ class UsuarioModel
     }
 
     public function setValorHora($valorHora){
-        Validacao::validar('E-mail',$email,'email');
+        Validacao::validar('Valor Hora',$valorHora,'valorMonetario');
         $this->valorHora = $valorHora;
     }
 
