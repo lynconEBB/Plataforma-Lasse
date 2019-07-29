@@ -19,4 +19,15 @@ class Formatacao
         }
         return $dataFormatada;
     }
+
+    public static function formataMonetario($valor)
+    {
+        $valorFormatado = $valor;
+        if (substr_count($valor,',') > 0) {
+            $valorFormatado = str_replace(',','.',$valor);
+        } elseif (substr_count($valor,'.') == 0){
+           $valorFormatado = $valor.'.00';
+        }
+        return $valorFormatado;
+    }
 }

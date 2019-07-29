@@ -1,11 +1,6 @@
 <?php
-try{
-    \Lasse\LPM\Services\Validacao::validar('CPF','','cpf');
-}catch (Exception $e){
-    echo $e->getMessage();
-}
-
 use Lasse\LPM\Services\Mensagem;
+
 ?>
 
 <!DOCTYPE html>

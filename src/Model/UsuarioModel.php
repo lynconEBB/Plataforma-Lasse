@@ -16,13 +16,12 @@ class UsuarioModel
     private $cpf;
     private $rg;
     private $dtEmissao;
-
     private $email;
     private $atuacao;
     private $formacao;
     private $valorHora;
 
-    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $tipo, $email, $atuacao, $formacao, $valorHora,$id=null){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id=null){
         $this->setId($id);
         $this->setNomeCompleto($nomeCompleto);
         $this->setLogin($login);
@@ -67,7 +66,7 @@ class UsuarioModel
         $this->nomeCompleto = $nomeCompleto;
     }
 
-    public function getSenha():DateTime
+    public function getSenha()
     {
         return $this->senha;
     }
@@ -77,7 +76,7 @@ class UsuarioModel
         $this->senha = $senha;
     }
 
-    public function getDtNascimento(){
+    public function getDtNascimento():DateTime{
         return $this->dtNascimento;
     }
 
@@ -104,7 +103,7 @@ class UsuarioModel
         $this->rg = $rg;
     }
 
-    public function getDtEmissao(){
+    public function getDtEmissao():DateTime{
         return $this->dtEmissao;
     }
 
@@ -118,7 +117,7 @@ class UsuarioModel
     }
 
     public function setLogin($login){
-        Validacao::validar('Nome de Usuário',$login,'email','texto',['min',6]);
+        Validacao::validar('Nome de Usuário',$login,'texto',['minimo',6]);
         $this->login = $login;
     }
 
@@ -145,8 +144,8 @@ class UsuarioModel
     }
 
     public function setValorHora($valorHora){
-        Validacao::validar('Valor Hora',$valorHora,'valorMonetario');
-        $this->valorHora = $valorHora;
+        Validacao::validar('Valor Hora',$valorHora,'monetario');
+        $this->valorHora = Formatacao::formataMonetario($valorHora);
     }
 
 }

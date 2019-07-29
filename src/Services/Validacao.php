@@ -102,6 +102,16 @@ abstract class Validacao
         }
     }
 
+    private static function monetario($nomeParametro,$valor)
+    {
+        if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato monetário');
+        }
+        if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato monetário');
+        }
+    }
+
 
 
 }
