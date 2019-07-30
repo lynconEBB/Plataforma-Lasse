@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: dbLPM
 -- ------------------------------------------------------
--- Server version	5.7.26-0ubuntu0.16.04.1
+-- Server version	5.7.27-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `tbAtividade` (
   KEY `fk_tbAtividade_tbTarefa` (`idTarefa`),
   CONSTRAINT `fk_tbAtividade_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
   CONSTRAINT `fk_tbAtividade_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `tbAtividade` (
 
 LOCK TABLES `tbAtividade` WRITE;
 /*!40000 ALTER TABLE `tbAtividade` DISABLE KEYS */;
-INSERT INTO `tbAtividade` VALUES (2,2,10,'Desenvolvimento',0.30,'Programacao de Verificacao de permissao','2019-06-12',67.01),(3,2,10,'Desenvolvimento',0.30,'Programacao de Verificacao de permissao','2019-06-12',67.01);
+INSERT INTO `tbAtividade` VALUES (1,5,NULL,'Atraso',3.00,'lfjgdflk','2001-02-23',37.29);
 /*!40000 ALTER TABLE `tbAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `tbCompra` (
   KEY `fk_tbCompra_tbUsuario` (`idComprador`),
   CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`idComprador`) REFERENCES `tbUsuario` (`id`),
   CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `tbCondutor` (
   `cnh` varchar(45) NOT NULL,
   `validadeCNH` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `tbItem` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProduto_tbCompra` (`idCompra`),
   CONSTRAINT `fk_tbProduto_tbCompra` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +176,7 @@ CREATE TABLE `tbProjeto` (
   `descricao` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `tbTarefa` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
   CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,10 +240,11 @@ CREATE TABLE `tbUsuario` (
   `atuacao` varchar(45) DEFAULT 'Colaborador',
   `email` varchar(45) NOT NULL,
   `login` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL,
+  `senha` longtext NOT NULL,
   `dtNascimento` date NOT NULL,
+  `estado` varchar(45) DEFAULT 'ativado',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +253,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (1,'Lyncon Estevan Baez','12112880993','3424543','3094-03-02','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','Lyncon.ebb','hgj','3094-03-02'),(2,'Camila','1232423423','234543534','2012-02-01','1',93.00,'Estudante','Bolsista/VoluntÃ¡rio','camig@gmail.com','cami','123','2019-02-01'),(3,'Lynconeee','12112880993','3424543','3094-03-02','1',93.00,'Es','Terceiros','lynconlyn@gmail.com','aa','123','3094-03-02'),(4,'Passat','1232423423','3424543','2012-02-01','1',50.03,'Estudante','Terceiros','lynconlyn@gmail.com','Rodrigo','123','2019-02-01');
+INSERT INTO `tbUsuario` VALUES (5,'Lyncon Baez','121.128.809-93','12.622.282-3','2001-03-02','1',12.43,'Desenvolvedor','Colaborador','lynconlyn@gmail.com','lyncon','$2y$10$MkySd/T/TuvMi462izYz/u6lq23hBdOJ3aFHmnJK/ztgR1y1MY.f.','2003-02-26','ativado'),(6,'Camila Gomes ','121.128.809-93','124.546.542-3','1993-02-21','1',12.43,'Designer','Bolsista/VoluntÃ¡rio','camilagf20016@gmail.com','camila','$2y$10$EAF6YOSdIJ0UBRCYaJxiouy27.F/ZEPuDH195Dq25O3XrpolJt372','1999-03-21','ativado');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,8 +270,8 @@ CREATE TABLE `tbUsuarioProjeto` (
   `dono` tinyint(1) NOT NULL,
   PRIMARY KEY (`idUsuario`,`idProjeto`),
   KEY `fk_tbUsuarioProjeto_tbProjeto` (`idProjeto`),
-  CONSTRAINT `fk_tbUsuarioProjeto_tbProjeto` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`),
-  CONSTRAINT `fk_tbUsuarioProjeto_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`)
+  CONSTRAINT `fk_tbUsuarioProjeto_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`),
+  CONSTRAINT `tbUsuarioProjeto_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -280,7 +281,6 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
-INSERT INTO `tbUsuarioProjeto` VALUES (1,1,0),(6,1,1),(3,2,0),(5,3,0);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-18 12:57:09
+-- Dump completed on 2019-07-30 10:41:36
