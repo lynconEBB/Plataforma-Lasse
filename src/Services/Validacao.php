@@ -5,7 +5,7 @@ namespace Lasse\LPM\Services;
 
 use InvalidArgumentException;
 
-abstract class Validacao
+class Validacao
 {
     public static function validar($nomeParametro,$valor, ...$validacoes)
     {
@@ -58,6 +58,13 @@ abstract class Validacao
         }
     }
 
+    private static function inteiro($nomeParametro,$valor)
+    {
+        if (!is_numeric($valor) || $valor != (int)$valor) {
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero inteiro');
+        }
+    }
+
     private static function minimo($nomeParametro,$valor,$tamanhoMinimo)
     {
         if (strlen($valor) < $tamanhoMinimo) {
@@ -105,10 +112,23 @@ abstract class Validacao
     private static function monetario($nomeParametro,$valor)
     {
         if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato monetário');
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal');
         }
         if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato monetário');
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal');
+        }
+    }
+
+    private static function nuloOUmonetario($nomeParametro,$valor)
+    {
+        if(is_null($valor)){
+            return;
+        }
+        if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo');
+        }
+        if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo');
         }
     }
 

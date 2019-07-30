@@ -8,14 +8,14 @@ use PDO;
 
 class AtividadeDao extends CrudDao {
 
-    function cadastrarPlanejado(AtividadeModel $atividade,$idTarefa){
+    function cadastrar(AtividadeModel $atividade,$idTarefa){
         $comando = "INSERT INTO tbAtividade (tipo,comentario,tempoGasto,dataRealizacao,totalGasto,idTarefa,idUsuario) values (:tipo,:comentario,:tempoGasto,:dataRealizacao,:totalGasto,:idTarefa,:idUsuario)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':tipo',$atividade->getTipo());
         $stm->bindValue(':comentario',$atividade->getComentario());
         $stm->bindValue(':tempoGasto',$atividade->getTempoGasto());
-        $stm->bindValue(':dataRealizacao',$atividade->getDataRealizacao());
+        $stm->bindValue(':dataRealizacao',$atividade->getDataRealizacao()->format('Y-m-d'));
         $stm->bindValue(':totalGasto',$atividade->getTotalGasto());
         $stm->bindValue(':idTarefa',$idTarefa);
         $stm->bindValue(':idUsuario',$atividade->getUsuario()->getId());
@@ -38,13 +38,18 @@ class AtividadeDao extends CrudDao {
         $result =array();
 
         $usuarioControl = new UsuarioControl();
-
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $usuario = $usuarioControl->listarPorId($row['idUsuario']);
-            $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
-            $result[] = $obj;
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (count($linhas) > 0){
+            foreach ($linhas as $row) {
+                $usuario = $usuarioControl->listarPorId($row['idUsuario']);
+                $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id'],$row['totalGasto']);
+                $result[] = $obj;
+            }
+            return $result;
+        }else{
+            return false;
         }
-        return $result;
+
     }
 
     function atualizar(AtividadeModel $atividade){
@@ -55,7 +60,7 @@ class AtividadeDao extends CrudDao {
         $stm->bindValue(':tipo',$atividade->getTipo());
         $stm->bindValue(':comentario',$atividade->getComentario());
         $stm->bindValue(':tempoGasto',$atividade->getTempoGasto());
-        $stm->bindValue(':dataRealizacao',$atividade->getDataRealizacao());
+        $stm->bindValue(':dataRealizacao',$atividade->getDataRealizacao()->format('Y-m-d'));
         $stm->bindValue(':totalGasto',$atividade->getTotalGasto());
         $stm->bindValue(':id',$atividade->getId());
 
@@ -69,14 +74,19 @@ class AtividadeDao extends CrudDao {
         $stm->bindParam(':id',$idTarefa);
         $stm->execute();
         $result =array();
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        $usuarioDAO = new UsuarioDao();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $usuario = $usuarioDAO->listarPorId($row['idUsuario']);
-            $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
-            $result[] = $obj;
+        if (count($linhas) > 0){
+            $usuarioDAO = new UsuarioDao();
+            foreach ($linhas as $row){
+                $usuario = $usuarioDAO->listarPorId($row['idUsuario']);
+                $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id'],$row['totalGasto']);
+                $result[] = $obj;
+            }
+            return $result;
+        }else{
+            return false;
         }
-        return $result;
     }
 
     public function listarPorIdUsuario($idUsuario){
@@ -85,14 +95,19 @@ class AtividadeDao extends CrudDao {
         $stm->bindParam(':id',$idUsuario);
         $stm->execute();
         $result =array();
-
-        $usuarioControl = new UsuarioControl();
-        $usuario = $usuarioControl->listarPorId($idUsuario);
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id']);
-            $result[] = $obj;
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if(count($linhas) > 0){
+            $usuarioControl = new UsuarioControl();
+            $usuario = $usuarioControl->listarPorId($idUsuario);
+            foreach ($linhas as $row) {
+                $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id'],$row['totalGasto']);
+                $result[] = $obj;
+            }
+            return $result;
+        }else{
+            return false;
         }
-        return $result;
+
     }
 
 }

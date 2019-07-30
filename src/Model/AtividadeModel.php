@@ -2,6 +2,10 @@
 
 namespace Lasse\LPM\Model;
 
+use DateTime;
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class AtividadeModel {
     private $id;
     private $tipo;
@@ -11,18 +15,23 @@ class AtividadeModel {
     private $totalGasto;
     private $usuario;
 
-    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, UsuarioModel $usuario,$id = null){
-        $this->tipo = $tipo;
-        $this->tempoGasto = $tempoGasto;
-        $this->comentario = $comentario;
-        $this->dataRealizacao = $dataRealizacao;
-        $this->usuario = $usuario;
-        $this->totalGasto =  $this->usuario->getValorHora() * $this->tempoGasto;
-        $this->id = $id;
+    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, UsuarioModel $usuario,$id,$totalGasto){
+        $this->setTipo($tipo);
+        $this->setTempoGasto($tempoGasto);
+        $this->setComentario($comentario);
+        $this->setDataRealizacao($dataRealizacao);
+        $this->setUsuario($usuario);
+        $this->setTotalGasto($totalGasto);
+        $this->setId($id);
     }
 
     public function getId(){
         return $this->id;
+    }
+
+    private function setId($id){
+        Validacao::validar('Id',$id,'nuloOUinteiro');
+        $this->id = $id;
     }
 
     public function getTipo(){
@@ -30,6 +39,7 @@ class AtividadeModel {
     }
 
     public function setTipo($tipo){
+        Validacao::validar('Tipo',$tipo,'obrigatorio','texto');
         $this->tipo = $tipo;
     }
 
@@ -38,7 +48,8 @@ class AtividadeModel {
     }
 
     public function setTempoGasto($tempoGasto){
-        $this->tempoGasto = $tempoGasto;
+        Validacao::validar('Tempo Gasto',$tempoGasto,'monetario');
+        $this->tempoGasto = Formatacao::formataMonetario($tempoGasto);
     }
 
     public function getComentario(){
@@ -46,15 +57,17 @@ class AtividadeModel {
     }
 
     public function setComentario($comentario){
+        Validacao::validar('Comentário',$comentario,'obrigatorio','texto');
         $this->comentario = $comentario;
     }
 
-    public function getDataRealizacao(){
+    public function getDataRealizacao():DateTime{
         return $this->dataRealizacao;
     }
 
     public function setDataRealizacao($dataRealizacao){
-        $this->dataRealizacao = $dataRealizacao;
+        Validacao::validar('Data de realização',$dataRealizacao,'data');
+        $this->dataRealizacao = Formatacao::formataData($dataRealizacao);
     }
 
     public function getTotalGasto(){
@@ -62,10 +75,15 @@ class AtividadeModel {
     }
 
     public function setTotalGasto($totalGasto){
-        $this->totalGasto = $totalGasto;
+        Validacao::validar('TotalGasto',$totalGasto,'nuloOUmonetario');
+        if (is_null($totalGasto)) {
+            $this->totalGasto = $this->usuario->getValorHora() * $this->tempoGasto;
+        }else{
+            $this->totalGasto = $totalGasto;
+        }
     }
 
-    public function getUsuario(){
+    public function getUsuario():UsuarioModel{
         return $this->usuario;
     }
 

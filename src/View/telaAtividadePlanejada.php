@@ -4,10 +4,10 @@
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleAtividade.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleAtividade.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +19,7 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
-                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
@@ -27,7 +27,7 @@
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -36,6 +36,7 @@
 <main class="main-content">
     <div class="container-atividades">
         <?php
+        if ($atividades != false):
         foreach ($atividades as $atividade):
             ?>
             <div class="atividade-row">
@@ -65,7 +66,7 @@
                         data-tempogasto="<?= $atividade->getTempoGasto() ?>"
                         data-tipo="<?= $atividade->getTipo() ?>"
                         data-comentario="<?= $atividade->getComentario() ?>"
-                        data-datarealizacao="<?= $atividade->getDataRealizacao() ?>">
+                        data-datarealizacao="<?= $atividade->getDataRealizacao()->format('d/m/Y') ?>">
                     <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
                 </button>
                 <form action="/acaoAtividade" method="post">
@@ -80,12 +81,13 @@
             </div>
         <?php
         endforeach;
+        endif;
         ?>
     </div>
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../img/Icons/adicionar.png" class="img-icon">
+    <img src="/img/Icons/adicionar.png" class="img-icon">
 </button>
 <div class="modal fade" id="modalCadastro" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -171,8 +173,8 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesAtividade.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/funcoesAtividade.js"></script>
 </body>
 </html>

@@ -1,9 +1,13 @@
 <?php
 
 namespace Lasse\LPM\Control;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+use Exception;
 use Lasse\LPM\Dao\AtividadeDao;
 use Lasse\LPM\Model\AtividadeModel;
+use PDOException;
 
 class AtividadeControl extends CrudControl {
 
@@ -17,7 +21,7 @@ class AtividadeControl extends CrudControl {
         switch ($acao){
             case 'cadastrarAtividade':
                 $this->cadastrar();
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                //header('Location: ' . $_SERVER['HTTP_REFERER']);
                 break;
             case 'excluirAtividade':
                 $this->excluir($_POST['id']);
@@ -33,49 +37,101 @@ class AtividadeControl extends CrudControl {
 
     public function cadastrar()
     {
-        $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe']);
-        if(isset($_POST['idTarefa'])){
-            $this->DAO->cadastrarPlanejado($atividade,$_POST['idTarefa']);
-            $tarefaControl = new TarefaControl();
-            $tarefaControl->atualizaTotal($_POST['idTarefa']);
-        }else{
-            $this->DAO->cadastrarPlanejado($atividade,null);
+        try{
+            $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],null,null);
+            if(isset($_POST['idTarefa'])){
+                $this->DAO->cadastrar($atividade,$_POST['idTarefa']);
+                $tarefaControl = new TarefaControl();
+                $tarefaControl->atualizaTotal($_POST['idTarefa']);
+            }else{
+                $this->DAO->cadastrar($atividade,null);
+            }
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }catch (Exception $excecao){
+            $_SESSION['danger'] = $excecao->getMessage();
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
         }
     }
 
     protected function excluir(int $id)
     {
-
-        $this->DAO->excluir($id);
-        if(isset($_POST['idTarefa'])) {
-            $tarefaControl = new TarefaControl();
-            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        try{
+            $this->DAO->excluir($id);
+            if(isset($_POST['idTarefa'])) {
+                $tarefaControl = new TarefaControl();
+                $tarefaControl->atualizaTotal($_POST['idTarefa']);
+            }
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }catch (Exception $excecao){
+            $_SESSION['danger'] = 'Erro durante Exclusão';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
         }
+
     }
 
     public function listar()
     {
-        return $this->DAO->listar();
+        try{
+            return $this->DAO->listar();
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+
     }
 
     protected function atualizar()
     {
-        $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id']);
-        $this -> DAO -> atualizar($atividade);
-        if(isset($_POST['idTarefa'])) {
-            $tarefaControl = new TarefaControl();
-            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        try{
+            $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id'],null);
+            $this->DAO->atualizar($atividade);
+            if(isset($_POST['idTarefa'])) {
+                $tarefaControl = new TarefaControl();
+                $tarefaControl->atualizaTotal($_POST['idTarefa']);
+            }
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante alteração no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }catch (Exception $excecao){
+            $_SESSION['danger'] = $excecao->getMessage();
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
         }
+
     }
 
-    public function listarPorIdTarefa($id):array
+    public function listarPorIdTarefa($id)
     {
-        return $this->DAO->listarPorIdTarefa($id);
+        try{
+            return $this->DAO->listarPorIdTarefa($id);
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+
     }
 
-    public function listarPorIdUsuario($id):array
+    public function listarPorIdUsuario($id)
     {
-        return $this->DAO->listarPorIdUsuario($id);
+        try{
+            return $this->DAO->listarPorIdUsuario($id);
+        }catch (PDOException $excecaoPDO){
+            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+
     }
 
     public function verificaPermissao()
@@ -104,6 +160,7 @@ class AtividadeControl extends CrudControl {
     {
         switch ($parametro){
             case 'listaAtividadesPlanejadas':
+
                 $this->verificaPermissao();
                 $atividades = $this->listarPorIdTarefa($_GET['idTarefa']);
                 require '../View/telaAtividadePlanejada.php';

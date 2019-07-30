@@ -4,22 +4,23 @@
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleAtividade.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleAtividade.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="page-header">
     <span class="titulo-header">Atividades Não Planejadas</span>
+    <?php \Lasse\LPM\Services\Mensagem::exibir('danger');?>
 </header>
 
 <div class="side-bar-back">
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="/menu/usuario" class="side-bar-icon">
-                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
@@ -27,7 +28,7 @@
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -36,49 +37,51 @@
 <main class="main-content">
     <div class="container-atividades">
         <?php
-        foreach ($atividades as $atividade):
-            ?>
-            <div class="atividadeN-row">
-                <div class="cell">
-                    <h4>Tipo</h4>
-                    <h5><?= $atividade->getTipo() ?></h5>
-                </div>
-                <div class="cell">
-                    <h4>Comentário</h4>
-                    <h5><?= $atividade->getComentario() ?></h5>
-                </div>
-                <div class="cell">
-                    <h4>Tempo Gasto</h4>
-                    <h5><?= $atividade->getTempoGasto() ?></h5>
-                </div>
-                <div class="cell">
-                    <h4>Total Gasto</h4>
-                    <h5><?= $atividade->getTotalGasto() ?></h5>
-                </div>
-                <button class='btn-opcao' data-toggle='modal' data-target="#modalAlterar"
-                        data-id="<?= $atividade->getId() ?>"
-                        data-tempogasto="<?= $atividade->getTempoGasto() ?>"
-                        data-tipo="<?= $atividade->getTipo() ?>"
-                        data-comentario="<?= $atividade->getComentario() ?>"
-                        data-datarealizacao="<?= $atividade->getDataRealizacao() ?>">
-                    <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
-                </button>
-                <form action="/acaoAtividade" method="post">
-                    <input type="hidden" name="acao" value="excluirAtividade">
-                    <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
-                    <button class="btn-opcao">
-                        <img class="img-icon" src='../img/Icons/lixeiraicone.png' alt=''>
+        if($atividades != false):
+            foreach ($atividades as $atividade):
+        ?>
+                <div class="atividadeN-row">
+                    <div class="cell">
+                        <h4>Tipo</h4>
+                        <h5><?= $atividade->getTipo() ?></h5>
+                    </div>
+                    <div class="cell">
+                        <h4>Comentário</h4>
+                        <h5><?= $atividade->getComentario() ?></h5>
+                    </div>
+                    <div class="cell">
+                        <h4>Tempo Gasto</h4>
+                        <h5><?= $atividade->getTempoGasto() ?></h5>
+                    </div>
+                    <div class="cell">
+                        <h4>Total Gasto</h4>
+                        <h5><?= $atividade->getTotalGasto() ?></h5>
+                    </div>
+                    <button class='btn-opcao' data-toggle='modal' data-target="#modalAlterar"
+                            data-id="<?= $atividade->getId() ?>"
+                            data-tempogasto="<?= $atividade->getTempoGasto() ?>"
+                            data-tipo="<?= $atividade->getTipo() ?>"
+                            data-comentario="<?= $atividade->getComentario() ?>"
+                            data-datarealizacao="<?= $atividade->getDataRealizacao()->format('d/m/Y') ?>">
+                        <img class="img-icon" src='/img/Icons/editarIcone.png' alt=''>
                     </button>
-                </form>
-            </div>
+                    <form action="/acaoAtividade" method="post">
+                        <input type="hidden" name="acao" value="excluirAtividade">
+                        <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
+                        <button class="btn-opcao">
+                            <img class="img-icon" src='/img/Icons/lixeiraicone.png' alt=''>
+                        </button>
+                    </form>
+                </div>
         <?php
-        endforeach;
+            endforeach;
+        endif;
         ?>
     </div>
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../img/Icons/adicionar.png" class="img-icon">
+    <img src="/img/Icons/adicionar.png" class="img-icon" alt="Icone para cadastrar uma nova Atividade">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -165,8 +168,8 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesAtividade.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/funcoesAtividade.js"></script>
 </body>
 </html>
