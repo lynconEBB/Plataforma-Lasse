@@ -1,7 +1,9 @@
 <?php
 
 namespace Lasse\LPM\Dao;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 use Lasse\LPM\Model\UsuarioModel;
 use PDO;
 use PDOException;
@@ -31,10 +33,10 @@ class UsuarioDao extends CrudDao {
                 atuacao = :atuacao, formacao =:formacao, valorHora = :valorHora WHERE id = :id");
         $update->bindValue(':login',$usuario->getLogin());
         $update->bindValue(':nome',$usuario->getNomeCompleto());
-        $update->bindValue(':dtNasc',$usuario->getDtNascimento());
+        $update->bindValue(':dtNasc',$usuario->getDtNascimento()->format('Y-m-d'));
         $update->bindValue(':cpf',$usuario->getCpf());
         $update->bindValue(':rg',$usuario->getRg());
-        $update->bindValue(':dtEmissao',$usuario->getDtEmissao());
+        $update->bindValue(':dtEmissao',$usuario->getDtEmissao()->format('Y-m-d'));
         $update->bindValue(':email',$usuario->getEmail());
         $update->bindValue(':atuacao',$usuario->getAtuacao());
         $update->bindValue(':formacao',$usuario->getFormacao());

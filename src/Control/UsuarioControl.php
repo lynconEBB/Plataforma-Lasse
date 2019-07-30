@@ -24,7 +24,7 @@ class UsuarioControl extends CrudControl {
                 $this->cadastrar();
                 break;
             case 'excluirUsuario':
-                $this->excluir($_POST['id']);
+                $this->excluir($_POST['idUsuario']);
                 break;
             case 'alterarUsuario':
                 $this->atualizar();
@@ -69,10 +69,22 @@ class UsuarioControl extends CrudControl {
 
     protected function excluir(int $id){
         try{
+            $projetoControl = new ProjetoControl();
+            $projetos = $projetoControl->listarPorIdUsuario($id);
+            foreach ($projetos as $projeto){
+                if ($projetoControl->verificaDono($projeto->getId())) {
+                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.<br> Exclua seus projetos ou transfira o dominio para outro funcionário");
+                }
+            }
             $this->DAO->excluir($id);
-        }catch (Exception $excecao){
+            $this->deslogar();
+        }catch (PDOException $excecao){
             $_SESSION['danger'] = 'Erro durante exclusão no banco de dados.';
             header('Location: /login');
+            die();
+        }catch (Exception $excecao){
+            $_SESSION['danger'] = $excecao->getMessage();
+            header('Location: /menu/usuario');
             die();
         }
     }
@@ -88,11 +100,18 @@ class UsuarioControl extends CrudControl {
     }
 
     protected function atualizar(){
-        session_start();
+        try{
+            session_start();
+            $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],null,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora'],$_SESSION['usuario-id']);
+            $this->DAO->alterar($usuario);
+            $_SESSION['danger'] = 'Dados alterados com sucesso!';
+            header('Location: /menu/usuario');
+        }catch (PDOException $excecao){
+            $_SESSION['danger'] = 'Erro durante alteração no banco de dados.';
+            header('Location: /erro');
+            die();
+        }
 
-        $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],null,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora'],$_SESSION['usuario-id']);
-        $this -> DAO ->alterar($usuario);
-        header('Location: /menu/usuario');
     }
 
     public function listarPorId($id){
