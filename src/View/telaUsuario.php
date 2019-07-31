@@ -70,7 +70,7 @@ use Lasse\LPM\Control\ProjetoControl;
             </header>
             <div class="menu-body">
                 <?php
-                if(count($projetos)>0){
+                if($projetos != false){
                     foreach ($projetos as $projeto){
                     $projetoControl = new ProjetoControl();
                     ?>

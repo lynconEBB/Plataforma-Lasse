@@ -10,10 +10,10 @@ use Lasse\LPM\Services\Mensagem;
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleProjeto.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleProjeto.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +30,7 @@ use Lasse\LPM\Services\Mensagem;
         <aside class="side-bar">
             <article class="side-bar-start">
                 <a href="/menu/usuario" class="side-bar-icon">
-                    <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                    <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
                 </a>
             </article>
             <article class="side-bar-middle">
@@ -39,7 +39,7 @@ use Lasse\LPM\Services\Mensagem;
             <article class="side-bar-end">
                 <form action="/acaoUsuario" method="post">
                     <input type="hidden" name="acao" value="sair">
-                    <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                    <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
                 </form>
             </article>
         </aside>
@@ -47,56 +47,59 @@ use Lasse\LPM\Services\Mensagem;
 
     <main class="main-content">
         <?php
-
-        foreach ($projetos as $projeto):
-            ?>
-            <article class="container-projeto">
-                <main class="info-projeto">
-                    <h2 class="title-projeto"><?php echo $projeto->getNome() ?></h2>
-                    <span class="detail-projeto">Data de Inicio: <?php echo $projeto->getDataInicio() ?></span>
-                    <span class="detail-projeto">Data de Finalização: <?php echo $projeto->getDataFinalizacao()?></span>
-                    <span class="detail-projeto">Total Gasto: <?=$projeto->getTotalGasto() ?></span>
-                </main>
-                <footer class="footer-projeto">
-                        <a href="/menu/tarefa?idProjeto=<?= $projeto->getId() ?>" >
+        if($projetos != false) {
+            foreach ($projetos as $projeto):
+                ?>
+                <article class="container-projeto">
+                    <main class="info-projeto">
+                        <h2 class="title-projeto"><?php echo $projeto->getNome() ?></h2>
+                        <span class="detail-projeto">Data de Inicio: <?php echo $projeto->getDataInicio()->format('d/m/Y') ?></span>
+                        <span class="detail-projeto">Data de Finalização: <?php echo $projeto->getDataFinalizacao()->format('d/m/Y') ?></span>
+                        <span class="detail-projeto">Total Gasto: <?= $projeto->getTotalGasto() ?></span>
+                    </main>
+                    <footer class="footer-projeto">
+                        <a href="/menu/tarefa?idProjeto=<?= $projeto->getId() ?>">
                             <button class="opcao-projeto">
-                                <img width="16" src="../img/Icons/tarefa.png" alt="" class="img-icon">
+                                <img width="16" src="/img/Icons/tarefa.png" alt="" class="img-icon">
                             </button>
                         </a>
 
-                    <?php
-                    $projetoControl = new ProjetoControl();
-                    if($projetoControl->verificaDono($projeto->getId())):
-                        ?>
-                        <button type="button" class="opcao-projeto" data-toggle="modal" data-target="#modalAdicionaFunc" data-idprojeto="<?=$projeto->getId()?>">
-                            <img src="../img/Icons/IconeADD.png" class="img-icon">
-                        </button>
-                        <button class='opcao-projeto' data-toggle='modal' data-target='#modalAlterar'
-                                data-id='<?php echo $projeto->getId() ?>' data-nome='<?php echo $projeto->getNome() ?>'
-                                data-desc='<?php echo $projeto->getDescricao() ?>'
-                                data-dtini='<?php echo $projeto->getDataInicio() ?>'
-                                data-dtfim='<?php echo $projeto->getDataFinalizacao() ?>'>
-                            <img width='16' src='../img/Icons/editarIcone.png' alt='' class="img-icon">
-                        </button>
-                        <form style="display: inline;" action="/acaoProjeto" method="post">
-                            <input type="hidden" name="acao" value="excluirProjeto">
-                            <input type="hidden" name="id" value="<?php echo $projeto->getId() ?>">
-                            <button class="opcao-projeto">
-                                <img width='16' src='../img/Icons/lixeiraicone.png' alt='' class="img-icon">
+                        <?php
+                        $projetoControl = new ProjetoControl();
+                        if ($projetoControl->verificaDono($projeto->getId())):
+                            ?>
+                            <button type="button" class="opcao-projeto" data-toggle="modal"
+                                    data-target="#modalAdicionaFunc" data-idprojeto="<?= $projeto->getId() ?>">
+                                <img src="/img/Icons/IconeADD.png" class="img-icon">
                             </button>
-                        </form>
-                    <?php
-                    endif;
-                    ?>
-                </footer>
-            </article>
-        <?php
-        endforeach;
+                            <button class='opcao-projeto' data-toggle='modal' data-target='#modalAlterar'
+                                    data-id='<?php echo $projeto->getId() ?>'
+                                    data-nome='<?php echo $projeto->getNome() ?>'
+                                    data-desc='<?php echo $projeto->getDescricao() ?>'
+                                    data-dtini='<?php echo $projeto->getDataInicio()->format('d/m/Y') ?>'
+                                    data-dtfim='<?php echo $projeto->getDataFinalizacao()->format('d/m/Y') ?>'>
+                                <img width='16' src='/img/Icons/editarIcone.png' alt='' class="img-icon">
+                            </button>
+                            <form style="display: inline;" action="/acaoProjeto" method="post">
+                                <input type="hidden" name="acao" value="excluirProjeto">
+                                <input type="hidden" name="id" value="<?php echo $projeto->getId() ?>">
+                                <button class="opcao-projeto">
+                                    <img width='16' src='/img/Icons/lixeiraicone.png' alt='' class="img-icon">
+                                </button>
+                            </form>
+                        <?php
+                        endif;
+                        ?>
+                    </footer>
+                </article>
+            <?php
+            endforeach;
+        }
         ?>
     </main>
 
     <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-        <img src="../img/Icons/adicionar.png" class="img-icon">
+        <img src="/img/Icons/adicionar.png" class="img-icon">
     </button>
 
     <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -202,8 +205,8 @@ use Lasse\LPM\Services\Mensagem;
     </div>
 
 
-    <script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesProjeto.js"></script>
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/funcoesProjeto.js"></script>
 </body>
 </html>

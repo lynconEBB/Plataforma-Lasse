@@ -2,6 +2,8 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Validacao;
+
 class TarefaModel
 {
     private $id;
@@ -37,21 +39,17 @@ class TarefaModel
     public function calculaTotal()
     {
         $total = 0;
-        if($this->atividades != null){
-            foreach ($this->atividades as $atividade){
-                $total += $atividade->getTotalGasto();
-            }
+
+        foreach ($this->atividades as $atividade){
+            $total += $atividade->getTotalGasto();
         }
-        if($this->compras != null){
-            foreach ($this->compras as $compra){
-                $total += $compra->getTotalGasto();
-            }
+        foreach ($this->compras as $compra){
+            $total += $compra->getTotalGasto();
         }
-        if($this->viagens != null){
-            foreach ($this->viagens as $viagem){
-                $total += $viagem->getTotalGasto();
-            }
+        foreach ($this->viagens as $viagem){
+            $total += $viagem->getTotalGasto();
         }
+
         $this->totalGasto = $total;
     }
 
@@ -69,11 +67,19 @@ class TarefaModel
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        Validacao::validar('Id',$id,'nuloOUinteiro');
+        $this->id = $id;
+    }
+
     public function getNome(){
         return $this->nome;
     }
 
-    public function setNome($nome){
+    public function setNome($nome)
+    {
+        Validacao::validar('Nome',$nome,'obrigatorio','texto');
         $this->nome = $nome;
     }
 
@@ -81,7 +87,9 @@ class TarefaModel
         return $this->descricao;
     }
 
-    public function setDescricao($descricao){
+    public function setDescricao($descricao)
+    {
+        Validacao::validar('Descrição',$descricao,'obrigatorio','texto');
         $this->descricao = $descricao;
     }
 
@@ -89,7 +97,8 @@ class TarefaModel
         return $this->estado;
     }
 
-    public function setEstado($estado){
+    public function setEstado ($estado){
+        Validacao::validar('Estado',$estado,'obrigatorio','texto');
         $this->estado = $estado;
     }
 
@@ -97,15 +106,20 @@ class TarefaModel
         return $this->dataInicio;
     }
 
-    public function setDataInicio($dataIncio){
+    public function setDataInicio($dataIncio)
+    {
+        Validacao::validar('Data de Início',$dataIncio,'data');
         $this->dataIncio = $dataIncio;
     }
 
-    public function getDataConclusao(){
+    public function getDataConclusao()
+    {
         return $this->dataConclusao;
     }
 
-    public function setDataConclusao($dataConclusao){
+    public function setDataConclusao($dataConclusao)
+    {
+        Validacao::validar('Data de Conclusão',$dataConclusao,'data');
         $this->dataConclusao = $dataConclusao;
     }
 
@@ -113,7 +127,8 @@ class TarefaModel
         return $this->atividades;
     }
 
-    public function setAtividades($atividades){
+    public function setAtividades($atividades)
+    {
         $this->atividades = $atividades;
     }
 
@@ -121,7 +136,8 @@ class TarefaModel
         return $this->viagens;
     }
 
-    public function setViagens($viagens){
+    public function setViagens($viagens)
+    {
         $this->viagens = $viagens;
     }
 
@@ -129,11 +145,8 @@ class TarefaModel
         return $this->compras;
     }
 
-    public function setCompras($compras){
+    public function setCompras($compras)
+    {
         $this->compras = $compras;
     }
-
-
-
-
 }

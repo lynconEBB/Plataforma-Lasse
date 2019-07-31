@@ -2,6 +2,11 @@
 
 namespace Lasse\LPM\Model;
 
+use DateTime;
+use Exception;
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class ProjetoModel
 {
     private $id;
@@ -14,25 +19,19 @@ class ProjetoModel
     private $participantes;
 
     public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$id, $tarefas,$totalGasto,$participantes){
-        $this->id = $id;
-        $this->dataFinalizacao = $dataFinalizacao;
-        $this->dataInicio = $dataInicio;
-        $this->descricao = $descricao;
-        $this->nome = $nome;
-        $this->tarefas = $tarefas;
-        $this->participantes = $participantes;
-        if($tarefas != null && $totalGasto == null){
-            $this->calculaTotal();
-        }elseif($totalGasto == null){
-            $this->totalGasto = 0;
-        }else{
-            $this->totalGasto = $totalGasto;
-        }
+        $this->setId($id);
+        $this->setDataInicio($dataInicio);
+        $this->setDataFinalizacao($dataFinalizacao);
+        $this->setDescricao($descricao);
+        $this->setNome($nome);
+        $this->setTarefas($tarefas);
+        $this->setParticipantes($participantes);
+        $this->settotalGasto($totalGasto);
     }
 
     public function calculaTotal()
     {
-        $total = 0;
+        $total = 0.00;
         foreach ($this->tarefas as $tarefa){
             $total += $tarefa->getTotalGasto();
         }
@@ -49,40 +48,67 @@ class ProjetoModel
         $this->participantes = $participantes;
     }
 
+    public function setId($id)
+    {
+        Validacao::validar('Id',$id,'nuloOUinteiro');
+        $this->id = $id;
+    }
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getDataFinalizacao(){
+    public function getDataFinalizacao():DateTime
+    {
         return $this->dataFinalizacao;
     }
 
-    public function setDataFinalizacao($dataFinalizacao){
-        $this->dataFinalizacao = $dataFinalizacao;
+    public function setDataFinalizacao($dataFinalizacao)
+    {
+
+        Validacao::validar('Data de Finalização',$dataFinalizacao,'data');
+        $dataformatada = Formatacao::formataData($dataFinalizacao);
+        if ($dataformatada < $this->dataInicio) {
+            throw new Exception('A data de finalização não pode ser anterior a data de Início');
+        }else {
+            $this->dataFinalizacao = $dataformatada;
+        }
+
     }
 
-    public function getDataInicio(){
+    public function getDataInicio():DateTime{
         return $this->dataInicio;
     }
 
-    public function setDataInicio($dataInicio){
-        $this->dataInicio = $dataInicio;
+    public function setDataInicio($dataInicio)
+    {
+        Validacao::validar('Data de Início',$dataInicio,'data');
+        $this->dataInicio = Formatacao::formataData($dataInicio);
     }
 
-    public function getTotalGasto(){
+    public function getTotalGasto()
+    {
         return $this->totalGasto;
     }
 
-    public function setTotalGasto($totalGasto){
-        $this->totalGasto = $totalGasto;
+    public function setTotalGasto($totalGasto)
+    {
+        if(is_null($totalGasto)){
+            $this->calculaTotal();
+        }else{
+            Validacao::validar('Total Gasto',$totalGasto,'monetario');
+            $this->totalGasto = $totalGasto;
+        }
     }
 
     public function getDescricao(){
         return $this->descricao;
     }
 
-    public function setDescricao($descricao){
+    public function setDescricao($descricao)
+    {
+        Validacao::validar('Descrição',$descricao,'obrigatorio','texto');
         $this->descricao = $descricao;
     }
 
@@ -90,7 +116,9 @@ class ProjetoModel
         return $this->nome;
     }
 
-    public function setNome($nome){
+    public function setNome($nome)
+    {
+        Validacao::validar('Nome',$nome,'obrigatorio','texto');
         $this->nome = $nome;
     }
 
@@ -98,9 +126,8 @@ class ProjetoModel
         return $this->tarefas;
     }
 
-    public function setTarefas($tarefas){
+    public function setTarefas($tarefas)
+    {
         $this->tarefas = $tarefas;
     }
 }
-
-?>

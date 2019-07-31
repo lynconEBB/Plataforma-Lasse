@@ -13,8 +13,8 @@ class ProjetoDao extends CrudDao {
 
         $stm->bindValue(':nome',$projeto->getNome());
         $stm->bindValue(':descr',$projeto->getDescricao());
-        $stm->bindValue(':dtFim',$projeto->getDataFinalizacao());
-        $stm->bindValue(':dtInicio',$projeto->getDataInicio());
+        $stm->bindValue(':dtFim',$projeto->getDataFinalizacao()->format('Y-m-d'));
+        $stm->bindValue(':dtInicio',$projeto->getDataInicio()->format('Y-m-d'));
 
         $stm->execute();
 
@@ -40,13 +40,22 @@ class ProjetoDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
         $result =array();
-        $tarefaDAO = new TarefaDao();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
-            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto']);
-            $result[] = $obj;
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($linhas) > 0) {
+            $tarefaDAO = new TarefaDao();
+            $usuarioDAO = new UsuarioDao();
+
+            foreach ($linhas as $row) {
+                $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
+                $participantes = $usuarioDAO->listarPorIdProjeto($row['id']);
+                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
+                $result[] = $obj;
+            }
+            return $result;
+        }else{
+            return false;
         }
-        return $result;
     }
 
     public function listarPorIdUsuario($id){
@@ -55,15 +64,23 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':id',$id);
         $stm->execute();
         $projetos = array();
-        $tarefaDAO = new TarefaDao();
-        $usuarioDAO = new UsuarioDao();
-        $usuario = $usuarioDAO->listarPorId($id);
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
-            $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$usuario);
-            $projetos[] = $obj;
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($linhas) > 0) {
+            $tarefaDAO = new TarefaDao();
+            $usuarioDAO = new UsuarioDao();
+
+            foreach ($linhas as $row) {
+                $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
+                $participantes = $usuarioDAO->listarPorIdProjeto($row['id']);
+                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
+                $projetos[] = $obj;
+            }
+            return $projetos;
+        }else {
+            return false;
         }
-        return $projetos;
+
     }
 
     public function listarPorId($id){
@@ -72,14 +89,20 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':id',$id);
         $stm->execute();
 
-        $tarefaDAO = new TarefaDao();
-        $tarefas = $tarefaDAO->listarPorIdProjeto($id);
-        $usuarioDAO = new UsuarioDao();
-        $usuarios = $usuarioDAO->listarPorIdProjeto($id);
+        $linha = $stm->fetchAll(PDO::FETCH_ASSOC);
 
-        $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null,$usuarios);
-        return $projeto;
+        if (count($linha) > 0){
+            $tarefaDAO = new TarefaDao();
+            $tarefas = $tarefaDAO->listarPorIdProjeto($id);
+            $usuarioDAO = new UsuarioDao();
+            $usuarios = $usuarioDAO->listarPorIdProjeto($id);
+
+            $row = $stm->fetch(PDO::FETCH_ASSOC);
+            $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null,$usuarios);
+            return $projeto;
+        }else{
+            return false;
+        }
     }
 
     public function alterar(ProjetoModel $projeto){
@@ -89,8 +112,8 @@ class ProjetoDao extends CrudDao {
 
         $stm->bindValue(':nome',$projeto->getNome());
         $stm->bindValue(':descr',$projeto->getDescricao());
-        $stm->bindValue(':dtfim',$projeto->getDataFinalizacao());
-        $stm->bindValue(':dtini',$projeto->getDataInicio());
+        $stm->bindValue(':dtfim',$projeto->getDataFinalizacao()->format('Y-m-d'));
+        $stm->bindValue(':dtini',$projeto->getDataInicio()->format('Y-m-d'));
         $stm->bindValue(':id',$projeto->getId());
 
         $stm->execute();
