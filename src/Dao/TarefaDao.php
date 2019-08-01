@@ -14,8 +14,8 @@ class TarefaDao extends CrudDao {
         $stm->bindValue(':nome',$tarefa->getNome());
         $stm->bindValue(':descr',$tarefa->getDescricao());
         $stm->bindValue(':estado',$tarefa->getEstado());
-        $stm->bindValue(':dtInicio',$tarefa->getDataInicio());
-        $stm->bindValue(':dtConclusao',$tarefa->getDataConclusao());
+        $stm->bindValue(':dtInicio',$tarefa->getDataInicio()->format('Y-m-d'));
+        $stm->bindValue(':dtConclusao',$tarefa->getDataConclusao()->format('Y-m-d'));
         $stm->bindValue(':idProjeto',$idProjeto);
 
         $stm->execute();
@@ -29,23 +29,30 @@ class TarefaDao extends CrudDao {
         $stm->execute();
     }
 
-
     public function listar(){
         $comando = "SELECT * FROM tbTarefa";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
-        $atividadeDAO = new AtividadeDao();
-        $viagemDAO = new ViagemDao();
-        $compraDAO = new CompraDao();
-        $result =array();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
-            $compras = $compraDAO->listarPorIdTarefa($row['id']);
-            $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
-            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
-            $result[] = $obj;
+
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($rows) > 0) {
+            $atividadeDAO = new AtividadeDao();
+            $viagemDAO = new ViagemDao();
+            $compraDAO = new CompraDao();
+            $result =array();
+
+            foreach ($rows as $row) {
+                $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
+                $compras = $compraDAO->listarPorIdTarefa($row['id']);
+                $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
+                $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
+                $result[] = $obj;
+            }
+            return $result;
+        }else {
+            return false;
         }
-        return $result;
     }
 
     function atualizar(TarefaModel $tarefa){
@@ -55,8 +62,8 @@ class TarefaDao extends CrudDao {
         $stm->bindValue(':nome',$tarefa->getNome());
         $stm->bindValue(':descricao',$tarefa->getDescricao());
         $stm->bindValue(':estado',$tarefa->getEstado());
-        $stm->bindValue(':dataInicio',$tarefa->getDataInicio());
-        $stm->bindValue(':dataConclusao',$tarefa->getDataConclusao());
+        $stm->bindValue(':dataInicio',$tarefa->getDataInicio()->format('Y-m-d'));
+        $stm->bindValue(':dataConclusao',$tarefa->getDataConclusao()->format('Y-m-d'));
         $stm->bindValue(':id',$tarefa->getId());
 
         $stm->execute();
@@ -77,18 +84,26 @@ class TarefaDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':id',$id);
         $stm->execute();
-        $atividadeDAO = new AtividadeDao();
-        $viagemDAO = new ViagemDao();
-        $compraDAO = new CompraDao();
-        $result =array();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
-            $compras = $compraDAO->listarPorIdTarefa($row['id']);
-            $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
-            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
-            $result[] = $obj;
+
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($rows) > 0) {
+            $atividadeDAO = new AtividadeDao();
+            $viagemDAO = new ViagemDao();
+            $compraDAO = new CompraDao();
+            $result =array();
+            foreach ($rows as $row){
+                $atividades = $atividadeDAO->listarPorIdTarefa($row['id']);
+                $compras = $compraDAO->listarPorIdTarefa($row['id']);
+                $viagens = $viagemDAO->listarPorIdTarefa($row['id']);
+                $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,$row['totalGasto']);
+                $result[] = $obj;
+            }
+            return $result;
+        } else {
+            return false;
         }
-        return $result;
+
     }
 
     public function listarPorId($id){
@@ -97,17 +112,22 @@ class TarefaDao extends CrudDao {
         $stm->bindValue(':id',$id);
         $stm->execute();
 
-        $viagemDAO = new ViagemDao();
-        $viagens = $viagemDAO->listarPorIdTarefa($id);
-        $atividadeDAO = new AtividadeDao();
-        $atividades = $atividadeDAO->listarPorIdTarefa($id);
-        $compraDAO = new CompraDao();
-        $compras = $compraDAO->listarPorIdTarefa($id);
-
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,null);
 
-        return $obj;
+        if ($row != false) {
+            $viagemDAO = new ViagemDao();
+            $viagens = $viagemDAO->listarPorIdTarefa($id);
+            $atividadeDAO = new AtividadeDao();
+            $atividades = $atividadeDAO->listarPorIdTarefa($id);
+            $compraDAO = new CompraDao();
+            $compras = $compraDAO->listarPorIdTarefa($id);
+
+            $obj = new TarefaModel($row['nome'],$row['descricao'],$row['estado'],$row['dataInicio'],$row['dataConclusao'],$row['id'],$atividades,$viagens,$compras,null);
+
+            return $obj;
+        }else {
+             return false;
+        }
     }
 
     public function descobrirIdProjeto($id){
@@ -120,6 +140,4 @@ class TarefaDao extends CrudDao {
 
         return $row['idProjeto'];
     }
-
-
 }

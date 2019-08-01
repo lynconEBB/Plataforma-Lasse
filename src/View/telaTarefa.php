@@ -4,22 +4,23 @@
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleTarefa.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleTarefa.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="page-header">
     <span class="titulo-header">Tarefas do Projeto</span>
+    <?php \Lasse\LPM\Services\Mensagem::exibir('danger');?>
 </header>
 
 <div class="side-bar-back">
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="/menu/projeto" class="side-bar-icon">
-                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
@@ -28,7 +29,7 @@
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -53,10 +54,10 @@
                 <span class="cell-detail"><?= $tarefa->getEstado() ?></span>
             </div>
             <div class="cell">
-                <span class="cell-detail"><?= $tarefa->getDataInicio() ?></span>
+                <span class="cell-detail"><?= $tarefa->getDataInicio()->format('d/m/Y') ?></span>
             </div>
             <div class="cell">
-                <span class="cell-detail"><?= $tarefa->getDataConclusao() ?></span>
+                <span class="cell-detail"><?= $tarefa->getDataConclusao()->format('d/m/Y') ?></span>
             </div>
             <div class="cell">
                 <span class="cell-detail"><?= $tarefa->getTotalGasto() ?></span>
@@ -66,41 +67,36 @@
                     <button class="btn-opcao" data-toggle='modal' data-target='#modalAlterar'
                             data-id='<?= $tarefa->getId() ?>' data-nome='<?php echo $tarefa->getNome() ?>'
                             data-desc='<?= $tarefa->getDescricao() ?>'
-                            data-dtinicio='<?php echo $tarefa->getDataInicio() ?>'
-                            data-dtconclusao="<?= $tarefa->getDataConclusao() ?>"
+                            data-dtinicio='<?php echo $tarefa->getDataInicio()->format('d/m/Y') ?>'
+                            data-dtconclusao="<?= $tarefa->getDataConclusao()->format('d/m/Y') ?>"
                             data-estado="<?php echo $tarefa->getEstado() ?>">
-                        <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
+                        <img class="img-icon" src='/img/Icons/editarIcone.png' alt=''>
                     </button>
                     <form action="/acaoTarefa" method="post">
                         <input type="hidden" name="acao" value="excluirTarefa">
                         <input type="hidden" name="id" value="<?php echo $tarefa->getId() ?>">
                         <input type="hidden" name="idProjeto" value="<?= $_GET['idProjeto'] ?>">
                         <button class="btn-opcao">
-                            <img class="img-icon" src='../img/Icons/lixeiraicone.png' alt=''>
+                            <img class="img-icon" src='/img/Icons/lixeiraicone.png' alt=''>
                         </button>
                     </form>
                 </div>
                 <div class="acoes">
-
                     <button class="btn-opcao">
                         <a href="/menu/viagem?idTarefa=<?= $tarefa->getId() ?>">
-                            <img class="img-icon" src="../img/Icons/viagemIcone.png" alt="">
+                            <img class="img-icon" src="/img/Icons/viagemIcone.png" alt="">
                         </a>
                     </button>
-
                     <button class="btn-opcao">
                         <a href="/menu/compra?idTarefa=<?= $tarefa->getId() ?>">
-                            <img class="img-icon" src="../img/Icons/Compra.png" alt="">
+                            <img class="img-icon" src="/img/Icons/Compra.png" alt="">
                         </a>
                     </button>
-
-
                     <button class="btn-opcao">
                         <a href="/menu/atividadePlanejada?idTarefa=<?= $tarefa->getId() ?>">
-                            <img class="img-icon" src="../img/Icons/Atividade.png" alt="">
+                            <img class="img-icon" src="/img/Icons/Atividade.png" alt="">
                         </a>
                     </button>
-
                 </div>
             </footer>
         </div>
@@ -109,7 +105,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../img/Icons/adicionar.png" class="img-icon">
+    <img src="/img/Icons/adicionar.png" class="img-icon">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -201,8 +197,8 @@
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesTarefa.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/funcoesTarefa.js"></script>
 </body>
 </html>

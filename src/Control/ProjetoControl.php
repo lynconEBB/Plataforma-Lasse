@@ -81,7 +81,7 @@ class ProjetoControl extends CrudControl
             $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id'],null,null,null);
             $this -> DAO -> alterar($projeto);
         }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            $_SESSION['danger'] = 'Erro durante atualização no banco de dados';
 
         }catch (Exception $exception){
             $_SESSION['danger'] = $exception->getMessage();
@@ -93,7 +93,18 @@ class ProjetoControl extends CrudControl
         try{
             return $this->DAO->listarPorIdUsuario($id);
         }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
+            header("Location: /menu/projeto");
+            die();
+        }
+    }
+
+    public function listarPorId($id)
+    {
+        try{
+            return $this->DAO->listarPorId($id);
+        }catch (PDOException $pdoexcecao) {
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
             header("Location: /menu/projeto");
             die();
         }

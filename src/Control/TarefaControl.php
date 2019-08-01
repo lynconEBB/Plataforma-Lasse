@@ -2,8 +2,10 @@
 
 namespace Lasse\LPM\Control;
 
+use Exception;
 use Lasse\LPM\Dao\TarefaDao;
 use Lasse\LPM\Model\TarefaModel;
+use PDOException;
 
 class TarefaControl extends CrudControl {
 
@@ -17,6 +19,7 @@ class TarefaControl extends CrudControl {
     {
         switch ($acao){
             case 'cadastrarTarefa':
+
                 $this->cadastrar();
                 break;
             case 'excluirTarefa':
@@ -29,61 +32,116 @@ class TarefaControl extends CrudControl {
     }
 
     protected function cadastrar(){
-        $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],null,null,null,null,null);
-        $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        try{
+            $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],null,null,null,null,null);
+
+            $projetoControl = new ProjetoControl();
+            $projeto = $projetoControl->listarPorId($_POST['idProjeto']);
+            if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
+                $this->DAO->cadastrar($tarefa,$_POST['idProjeto']);
+            } else {
+                throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+            }
+        } catch (PDOException $pdoException){
+            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
+        } catch (Exception $exception){
+            $_SESSION['danger'] = $exception->getMessage();
+        } finally {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
     }
 
     protected function excluir(int $id){
-        $this -> DAO -> excluir($id);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        $projetoControl = new ProjetoControl();
-        $projetoControl->atualizaTotal($_POST['idProjeto']);
+        try{
+            $this -> DAO -> excluir($id);
+            $projetoControl = new ProjetoControl();
+            $projetoControl->atualizaTotal($_POST['idProjeto']);
+        } catch (PDOException $pdoException){
+            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+        } finally {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
     }
 
     public function listar() {
-        return $this -> DAO -> listar();
+        try{
+            return $this->DAO->listar();
+        }catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados.';
+            header('Location: /menu/tarefa');
+            die();
+        }
     }
 
     protected function atualizar(){
-        $projeto = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id'],null,null,null,null);
-        $this -> DAO ->atualizar($projeto);
+        try{
+            $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id'],null,null,null,null);
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+            $projetoControl = new ProjetoControl();
+            $projeto = $projetoControl->listarPorId($_POST['idProjeto']);
+
+            if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
+                $this -> DAO ->atualizar($tarefa);
+            } else {
+                throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+            }
+        } catch (PDOException $pdoException){
+            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
+        } catch (Exception $exception){
+            $_SESSION['danger'] = $exception->getMessage();
+        } finally {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+
     }
 
     public function listarPorIdProjeto($id){
-        return $this->DAO->listarPorIdProjeto($id);
+        try{
+            return $this->DAO->listarPorIdProjeto($id);
+        }catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados.';
+            header('Location: /erro');
+            die();
+        }
     }
 
     public function listarPorId($id){
-        return $this->DAO->listarPorId($id);
+        try{
+            return $this->DAO->listarPorId($id);
+        }catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados.';
+            header('Location: /erro');
+            die();
+        }
     }
 
 
     public function descobrirIdProjeto($id){
-        return $this->DAO->descobrirIdProjeto($id);
-    }
-
-    public function listarPorIdUsaurio($id){
-        $listaDeTarefas = [];
-        $projetoControl = new ProjetoControl();
-        $projetos = $projetoControl->listarPorIdUsuario($id);
-        foreach ($projetos as $projeto){
-            $tarefas = $this->listarPorIdProjeto($projeto->getId());
-            foreach ($tarefas as $tarefa){
-                $listaDeTarefas[] = $tarefa;
-            }
+        try{
+            return $this->DAO->descobrirIdProjeto($id);
+        }catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante seleção no banco de dados.';
+            header('Location: /erro');
+            die();
         }
-        return $listaDeTarefas;
+
     }
 
     public function atualizaTotal($idTarefa){
-        $tarefa = $this->listarPorId($idTarefa);
-        $this->DAO->atualizaTotal($tarefa);
-        $idProjeto = $this->DAO->descobrirIdProjeto($idTarefa);
-        $projetoControl = new ProjetoControl();
-        $projetoControl->atualizaTotal($idProjeto);
+        try{
+            $tarefa = $this->listarPorId($idTarefa);
+            $this->DAO->atualizaTotal($tarefa);
+            $idProjeto = $this->DAO->descobrirIdProjeto($idTarefa);
+            $projetoControl = new ProjetoControl();
+            $projetoControl->atualizaTotal($idProjeto);
+        }catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante atualização no banco de dados.';
+            header('Location: /erro');
+            die();
+        }
     }
 
     public function verificaPermissao(){

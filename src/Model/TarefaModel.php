@@ -2,6 +2,8 @@
 
 namespace Lasse\LPM\Model;
 
+use Exception;
+use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
 class TarefaModel
@@ -18,36 +20,35 @@ class TarefaModel
     private $compras;
 
     public function __construct($nome, $descricao, $estado, $dataInicio, $dataConclusao,$id,$atividades, $viagens, $compras,$totalGasto){
-        $this->nome = $nome;
-        $this->descricao = $descricao;
-        $this->estado = $estado;
-        $this->dataInicio = $dataInicio;
-        $this->dataConclusao = $dataConclusao;
-        $this->atividades = $atividades;
-        $this->viagens = $viagens;
-        $this->compras = $compras;
-        if(($atividades != null || $viagens != null || $compras != null) && $totalGasto == null){
-            $this->calculaTotal();
-        }elseif($totalGasto == null) {
-            $this->totalGasto = 0;
-        }else{
-            $this->totalGasto = $totalGasto;
-        }
-        $this->id = $id;
+        $this->setNome($nome);
+        $this->setDescricao($descricao);
+        $this->setEstado($estado);
+        $this->setDataInicio($dataInicio);
+        $this->setDataConclusao($dataConclusao);
+        $this->setAtividades($atividades);
+        $this->setViagens($viagens);
+        $this->setCompras($compras);
+        $this->setTotalGasto($totalGasto);
+        $this->setId($id);
     }
 
     public function calculaTotal()
     {
         $total = 0;
-
-        foreach ($this->atividades as $atividade){
-            $total += $atividade->getTotalGasto();
+        if (is_array($this->atividades)){
+            foreach ($this->atividades as $atividade){
+                $total += $atividade->getTotalGasto();
+            }
         }
-        foreach ($this->compras as $compra){
-            $total += $compra->getTotalGasto();
+        if (is_array($this->compras)){
+            foreach ($this->compras as $compra){
+                $total += $compra->getTotalGasto();
+            }
         }
-        foreach ($this->viagens as $viagem){
-            $total += $viagem->getTotalGasto();
+        if (is_array($this->compras)){
+            foreach ($this->viagens as $viagem){
+                $total += $viagem->getTotalGasto();
+            }
         }
 
         $this->totalGasto = $total;
@@ -60,7 +61,12 @@ class TarefaModel
 
     public function setTotalGasto($totalGasto): void
     {
-        $this->totalGasto = $totalGasto;
+        if(is_null($totalGasto)){
+            $this->calculaTotal();
+        }else{
+            Validacao::validar('Total Gasto',$totalGasto,'monetario');
+            $this->totalGasto = $totalGasto;
+        }
     }
 
     public function getId(){
@@ -109,7 +115,7 @@ class TarefaModel
     public function setDataInicio($dataIncio)
     {
         Validacao::validar('Data de Início',$dataIncio,'data');
-        $this->dataIncio = $dataIncio;
+        $this->dataInicio = Formatacao::formataData($dataIncio);
     }
 
     public function getDataConclusao()
@@ -120,7 +126,12 @@ class TarefaModel
     public function setDataConclusao($dataConclusao)
     {
         Validacao::validar('Data de Conclusão',$dataConclusao,'data');
-        $this->dataConclusao = $dataConclusao;
+        $dataformatada = Formatacao::formataData($dataConclusao);
+        if ($dataformatada < $this->dataInicio) {
+            throw new Exception('A data de Conclusão precisa ser posterior a data de Início');
+        } else {
+            $this->dataConclusao = $dataformatada;
+        }
     }
 
     public function getAtividades(){

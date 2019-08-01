@@ -89,15 +89,14 @@ class ProjetoDao extends CrudDao {
         $stm->bindValue(':id',$id);
         $stm->execute();
 
-        $linha = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
 
-        if (count($linha) > 0){
+        if ($row != false){
             $tarefaDAO = new TarefaDao();
             $tarefas = $tarefaDAO->listarPorIdProjeto($id);
             $usuarioDAO = new UsuarioDao();
             $usuarios = $usuarioDAO->listarPorIdProjeto($id);
 
-            $row = $stm->fetch(PDO::FETCH_ASSOC);
             $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null,$usuarios);
             return $projeto;
         }else{

@@ -79,8 +79,8 @@ use Lasse\LPM\Control\ProjetoControl;
                             echo '<span class="item-img">&#8902;</span>';
                         } ?>
                         <span class="item-title"><?=$projeto->getNome()?></span>
-                        <span class="item-detail">Data de Inicio: <?=$projeto->getDataInicio()?></span>
-                        <span class="item-detail">Data de Finalização: <?=$projeto->getDataFinalizacao()?></span>
+                        <span class="item-detail">Data de Inicio: <?=$projeto->getDataInicio()->format('d/m/Y')?></span>
+                        <span class="item-detail">Data de Finalização: <?=$projeto->getDataFinalizacao()->format('d/m/Y')?></span>
                     </div>
                 <?php
                     }

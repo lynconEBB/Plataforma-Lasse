@@ -2,6 +2,8 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Validacao;
+
 class CompraModel
 {
     private $id;
@@ -12,10 +14,11 @@ class CompraModel
 
     public function __construct($proposito,$totalGasto,  $itens , $id,$comprador)
     {
-        $this->id = $id;
+        $this->setId($id);
         $this->proposito = $proposito;
         $this->itens = $itens;
         $this->comprador = $comprador;
+
         if($this->itens != null and $totalGasto == null){
            $this->calculaTotal();
         }else{
@@ -31,7 +34,7 @@ class CompraModel
         $this->totalGasto = $total;
     }
 
-    public function getComprador()
+    public function getComprador():UsuarioModel
     {
         return $this->comprador;
     }
@@ -41,8 +44,15 @@ class CompraModel
         $this->comprador = $comprador;
     }
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        Validacao::validar('Id',$id,'nuloOUinteiro');
+        $this->id = $id;
     }
 
     public function getProposito(){
@@ -50,6 +60,7 @@ class CompraModel
     }
 
     public function setProposito($proposito){
+        Validacao::validar('Proprósito',$proposito,'obrigatorio','texto');
         $this->proposito = $proposito;
     }
 
