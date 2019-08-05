@@ -81,19 +81,25 @@ class Validacao
 
     private static function data($nomeParametro,$valor)
     {
-        if (!preg_match("/[0-9]{4}-[0-9]{2}-[0-9]{2}/",$valor) && !preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/",$valor)) {
+        if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/",$valor)) {
             throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato de data');
+        }
+    }
+
+    private static function dataHora($nomeParametro,$valor)
+    {
+        if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4} [0-9]{2}:[0-9]{2}$/",$valor)) {
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato de data e hora (dd/mm/yyyy hh:mm:ss)');
         }
     }
 
     private static function cpf($nomeParametro,$valor)
     {
-
         // Extrai somente os números
         $cpf = preg_replace( '/[^0-9]/is', '', $valor );
 
         // Verifica se foi informado todos os digitos corretamente
-        if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf) || !preg_match("/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/",$valor)) {
+        if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf) || !preg_match("/^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$/",$valor)) {
             throw new InvalidArgumentException($nomeParametro.' inválido');
         }
 

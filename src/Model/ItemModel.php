@@ -2,6 +2,9 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class ItemModel
 {
     private $id;
@@ -11,23 +14,31 @@ class ItemModel
     private $quantidade;
 
     public function __construct($valor, $nome, $quantidade,$id=null){
-        $this->id = $id;
-        $this->valor = $valor;
-        $this->nome = $nome;
-        $this->quantidade = $quantidade;
-        $this->valorParcial = $this->valor * $this->quantidade;
+        $this->setId($id);
+        $this->setValor($valor);
+        $this->setNome($nome);
+        $this->setQuantidade($quantidade);
+        $this->setValorParcial();
     }
 
     public function getId(){
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        Validacao::validar('Id',$id,'nuloOUinteiro');
+        $this->id = $id;
+    }
+
+
     public function getValor(){
         return $this->valor;
     }
 
     public function setValor($valor){
-        $this->valor = $valor;
+        Validacao::validar('Valor do item',$valor,'monetario');
+        $this->valor = Formatacao::formataMonetario($valor);
     }
 
     public function getNome(){
@@ -35,6 +46,7 @@ class ItemModel
     }
 
     public function setNome($nome){
+        Validacao::validar('Nome',$nome,'obrigatorio','texto');
         $this->nome = $nome;
     }
 
@@ -42,7 +54,9 @@ class ItemModel
         return $this->quantidade;
     }
 
-    public function setQuantidade($quantidade){
+    public function setQuantidade($quantidade)
+    {
+        Validacao::validar('Quantidade de Itens',$quantidade,'monetario');
         $this->quantidade = $quantidade;
     }
 
@@ -51,9 +65,9 @@ class ItemModel
         return $this->valorParcial;
     }
 
-    public function setValorParcial($valorParcial)
+    public function setValorParcial()
     {
-        $this->valorParcial = $valorParcial;
+        $this->valorParcial = $this->valor * $this->quantidade;
     }
 
 }

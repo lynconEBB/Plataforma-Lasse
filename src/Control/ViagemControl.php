@@ -1,7 +1,9 @@
 <?php
 
 namespace Lasse\LPM\Control;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 use Lasse\LPM\Dao\ViagemDao;
 use Lasse\LPM\Model\ViagemModel;
 
@@ -18,7 +20,7 @@ class ViagemControl extends CrudControl {
         switch ($acao){
             case 'cadastrarViagem':
                 $this->cadastrar();
-                header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
+                //header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
                 break;
             case 'excluirViagem':
                 $this->excluir($_POST['id']);
@@ -31,18 +33,25 @@ class ViagemControl extends CrudControl {
 
     protected function cadastrar()
     {
-        $veiculoControl = new VeiculoControl();
+        /*$veiculoControl = new VeiculoControl();
         if (isset($_POST['idVeiculo']) && $_POST['idVeiculo'] === 'novo'){
             $veiculoControl->cadastrar();
             $id = $veiculoControl->DAO->pdo->lastInsertId();
             $veiculo = $veiculoControl->listarPorId($id);
         }else{
             $veiculo = $veiculoControl->listarPorId($_POST['idVeiculo']);
-        }
+        }*/
 
         //Cadastra viagem com total = 0
-        $viagem = new ViagemModel($_SESSION['usuario-classe'],$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'],$_POST['dtSaidaHosp'],$_POST['horaEntradaHosp'],$_POST['horaSaidaHosp']);
-        $this->DAO->cadastrar($viagem,$_POST['idTarefa']);
+        try {
+            $veiculo = 0;
+            $viagem = new ViagemModel($_SESSION['usuario-classe'],$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'].' '.$_POST['horaEntradaHosp'],$_POST['dtSaidaHosp'].' '.$_POST['horaSaidaHosp'],null,null,null);
+            echo $viagem->getEntradaHosp()->format('H:i:s');
+        }
+        catch (\Exception $exception){
+            $_SESSION['danger'] = $exception->getMessage();
+        }
+         /*$this->DAO->cadastrar($viagem,$_POST['idTarefa']);
 
         //Pega id da viagem inserida
         $idViagem = $this->DAO->pdo->lastInsertId();
@@ -52,7 +61,7 @@ class ViagemControl extends CrudControl {
         $gastoControl->cadastrarGastos($_POST['gasto'],$idViagem);
 
         //atualiza total da viagem
-        $this->atualizaTotal($idViagem);
+        $this->atualizaTotal($idViagem);*/
 
     }
 

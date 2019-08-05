@@ -15,15 +15,11 @@ class CompraModel
     public function __construct($proposito,$totalGasto,  $itens , $id,$comprador)
     {
         $this->setId($id);
-        $this->proposito = $proposito;
-        $this->itens = $itens;
-        $this->comprador = $comprador;
+        $this->setProposito($proposito);
+        $this->setItens($itens);
+        $this->setComprador($comprador);
+        $this->setTotalGasto($totalGasto);
 
-        if($this->itens != null and $totalGasto == null){
-           $this->calculaTotal();
-        }else{
-            $this->totalGasto = $totalGasto;
-        }
     }
 
     public function calculaTotal(){
@@ -69,16 +65,21 @@ class CompraModel
     }
 
     public function setTotalGasto($totalGasto){
-        $this->totalGasto = $totalGasto;
+        if(is_null($totalGasto)){
+            $this->calculaTotal();
+        }else{
+            Validacao::validar('Total Gasto',$totalGasto,'monetario');
+            $this->totalGasto = $totalGasto;
+        }
     }
 
     public function getItens(){
         return $this->itens;
     }
 
-    public function setItens($itens){
+    public function setItens($itens)
+    {
         $this->itens = $itens;
-        $this->calculaTotal();
     }
 
 

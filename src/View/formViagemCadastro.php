@@ -76,7 +76,6 @@
                 <option type="hidden" value="escolher"> Escolha um Condutor</option>
                 <option style="display:none;" value="novo"></option>
                 <?php
-
                     foreach ($condutores as $condutor){
                         echo "<option value='{$condutor->getId()}'>{$condutor->getNome()}</option>";
                     }

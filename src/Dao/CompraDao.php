@@ -31,16 +31,21 @@ class CompraDao extends CrudDao {
         $comando = "SELECT * FROM tbCompra";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
-        $result =array();
-        $usuarioDAO = new UsuarioDao();
-        $itemControl = new ItemControl();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $itens = $itemControl->listarPorIdCompra($row['id']);
-            $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
-            $result[] = $obj;
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (count($rows) > 0) {
+            $result =array();
+            $usuarioDAO = new UsuarioDao();
+            $itemControl = new ItemControl();
+            foreach ($rows as $row){
+                $itens = $itemControl->listarPorIdCompra($row['id']);
+                $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
+                $result[] = $obj;
+            }
+            return $result;
+        } else {
+            return false;
         }
-        return $result;
     }
 
     function atualizar(CompraModel $compra,$idTarefa){
@@ -65,7 +70,6 @@ class CompraDao extends CrudDao {
         $stm->bindValue(':id',$compra->getId());
 
         $stm->execute();
-
     }
 
     public function listarPorIdTarefa($idTarefa){
@@ -73,35 +77,42 @@ class CompraDao extends CrudDao {
         $stm = $this->pdo->prepare($comando);
         $stm->bindParam(':id',$idTarefa);
         $stm->execute();
-        $result =array();
 
-        $usuarioDAO = new UsuarioDao();
-        $itemDAO = new ItemDao();
-        while($row = $stm->fetch(PDO::FETCH_ASSOC)){
-            $itens = $itemDAO->listarPorIdCompra($row['id']);
-            $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-            $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
-            $result[] = $obj;
+        $result =array();
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (count($rows) > 0) {
+            $usuarioDAO = new UsuarioDao();
+            $itemDAO = new ItemDao();
+            foreach ($rows as $row){
+                $itens = $itemDAO->listarPorIdCompra($row['id']);
+                $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
+                $result[] = $obj;
+            }
+            return $result;
+        } else {
+            return false;
         }
-        return $result;
     }
 
-    public function listarPorId($id):CompraModel
+    public function listarPorId($id)
     {
         $comando = "SELECT * FROM tbCompra where id = :id";
         $stm = $this->pdo->prepare($comando);
         $stm->bindParam(':id',$id);
         $stm->execute();
 
-        $itemDAO = new ItemDao();
-        $itens = $itemDAO->listarPorIdCompra($id);
-        $usuarioDAO = new UsuarioDao();
-
-
         $row = $stm->fetch(PDO::FETCH_ASSOC);
-        $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-        $obj = new CompraModel($row['proposito'],0,$itens,$row['id'],$comprador);
-        return $obj;
+        if ($row != false) {
+            $itemDAO = new ItemDao();
+            $itens = $itemDAO->listarPorIdCompra($id);
+            $usuarioDAO = new UsuarioDao();
+            $comprador = $usuarioDAO->listarPorId($row['idComprador']);
+            $obj = new CompraModel($row['proposito'],null,$itens,$row['id'],$comprador);
+            return $obj;
+        } else {
+            return false;
+        }
     }
 
     public function descobreIdTarefa($idCompra)
@@ -115,5 +126,4 @@ class CompraDao extends CrudDao {
 
         return $row['idTarefa'];
     }
-
 }

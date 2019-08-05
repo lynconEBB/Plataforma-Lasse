@@ -78,7 +78,6 @@ class TarefaControl extends CrudControl {
     protected function atualizar(){
         try{
             $tarefa = new TarefaModel($_POST['nomeTarefa'],$_POST['descricao'],$_POST['estado'],$_POST['dtInicio'],$_POST['dtConclusao'],$_POST['id'],null,null,null,null);
-
             $projetoControl = new ProjetoControl();
             $projeto = $projetoControl->listarPorId($_POST['idProjeto']);
 

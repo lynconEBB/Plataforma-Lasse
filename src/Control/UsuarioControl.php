@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\UsuarioModel;
+use Lasse\LPM\Services\Mensagem;
 use Lasse\LPM\Services\PdoFactory;
 use Lasse\LPM\Services\Validacao;
 use PDO;
@@ -202,6 +203,9 @@ class UsuarioControl extends CrudControl {
                  }else{
                      $this->deslogar();
                  }
+                break;
+            case 'erro':
+                Mensagem::exibir('danger');
                 break;
         }
     }

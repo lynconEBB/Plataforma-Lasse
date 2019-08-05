@@ -45,6 +45,7 @@ class RouteController{
         '/menu/item' => ['classe' => ItemControl::class,'parametro'=>'listaItens'],
         '/acaoItem' => ['classe' => ItemControl::class,'parametro'=>''],
         '/menu/formulario' => ['classe' => OdtParser::class,'parametro'=>'criaFormulario'],
+        '/erro' => ['classe' => UsuarioControl::class,'parametro'=>'erro']
         ];
     private $caminho;
 

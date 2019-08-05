@@ -2,8 +2,11 @@
 
 namespace Lasse\LPM\Control;
 
+use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Dao\CompraDao;
 use Lasse\LPM\Model\CompraModel;
+use PDOException;
 
 class CompraControl extends CrudControl {
 
@@ -32,44 +35,78 @@ class CompraControl extends CrudControl {
 
     public function cadastrar()
     {
-        //Cadastra no banco de dados com Total = 0
-        $compra = new CompraModel($_POST['proposito'],null,null,null,$_SESSION['usuario-classe']);
-        $this->DAO->cadastrar($compra,$_POST['idTarefa']);
-        //Pega id da Compra Inserida
-        $idCompra = $this->DAO->pdo->lastInsertId();
+        try{
+            //Cadastra no banco de dados com Total = 0
+            $compra = new CompraModel($_POST['proposito'],null,null,null,$_SESSION['usuario-classe']);
+            $this->DAO->cadastrar($compra,$_POST['idTarefa']);
+            //Pega id da Compra Inserida
+            $idCompra = $this->DAO->pdo->lastInsertId();
 
-        //Cadastra no banco todos os itens da Compra
-        $itemControl = new ItemControl();
-        $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
+            //Cadastra no banco todos os itens da Compra
+            $itemControl = new ItemControl();
+            $itemControl->cadastrarPorArray($_POST['itens'],$idCompra);
 
-        //Atualiza total da Compra no banco
-        $this->atualizarTotal($idCompra);
-
+            //Atualiza total da Compra no banco
+            $this->atualizarTotal($idCompra);
+        } catch (PDOException $pdoexcecao){
+            $_SESSION['danger'] = 'Erro durante cadastro no Banco de dados';
+        } catch (InvalidArgumentException $exception){
+            $_SESSION['danger'] = $exception->getMessage();
+        } catch (Exception $exception) {
+            $_SESSION['danger'] = 'Erro inesperado durante cadastro.';
+        }
     }
 
     protected function excluir(int $id)
     {
-        $itemControl = new ItemControl();
-        $itemControl->excluirPorIdCompra($id);
-        $this->DAO->excluir($id);
-
-        $tarefaControl = new TarefaControl();
-        $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        try {
+            $this->DAO->excluir($id);
+            $tarefaControl = new TarefaControl();
+            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        } catch (PDOException $exception) {
+            $_SESSION['danger'] = 'Erro durante exclusão no Banco de dados';
+        } catch (Exception $exception) {
+            $_SESSION['danger'] = 'Erro inesperado durante exclusão';
+        }
     }
 
     public function listar()
     {
-        return $this->DAO->listar();
+        try{
+            return $this->DAO->listar();
+        } catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante listagen do Banco de dados';
+            header('Location: /erro');
+        } catch (Exception $exception){
+            $_SESSION['danger'] = 'Erro inesperado durante listagem.';
+            header('Location: /erro');
+        }
     }
 
-    public function listarPorIdTarefa($id):array
+    public function listarPorIdTarefa($id)
     {
-        return $this->DAO->listarPorIdTarefa($id);
+        try{
+            return $this->DAO->listarPorIdTarefa($id);
+        } catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante listagem do Banco de dados';
+            header('Location: /erro');
+        } catch (Exception $exception){
+            $_SESSION['danger'] = 'Erro inesperado durante listagem.';
+            header('Location: /erro');
+        }
     }
 
     public function listarPorId($id):CompraModel
     {
-        return $this->DAO->listarPorId($id);
+        try{
+            return $this->DAO->listarPorId($id);
+        } catch (PDOException $exception){
+            $_SESSION['danger'] = 'Erro durante listagem do Banco de dados';
+            header('Location: /erro');
+        } catch (Exception $exception){
+            $_SESSION['danger'] = 'Erro inesperado durante listagem.';
+            header('Location: /erro');
+        }
     }
 
     public function atualizarTotal($idCompra)
@@ -83,14 +120,20 @@ class CompraControl extends CrudControl {
 
     public function atualizar()
     {
-        $compra = new CompraModel($_POST['proposito'],null,null,$_POST['id'],null);
-        $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
-
-        $tarefaControl = new TarefaControl();
-        $tarefaControl->atualizaTotal($_POST['idTarefa']);
-        $tarefaControl->atualizaTotal($_POST['idTarefaAntiga']);
+        try{
+            $compra = new CompraModel($_POST['proposito'],null,null,$_POST['id'],null);
+            $this -> DAO -> atualizar($compra,$_POST['idTarefa']);
+            $tarefaControl = new TarefaControl();
+            $tarefaControl->atualizaTotal($_POST['idTarefa']);
+            $tarefaControl->atualizaTotal($_POST['idTarefaAntiga']);
+        }  catch (PDOException $pdoexcecao){
+            $_SESSION['danger'] = 'Erro durante atualização no Banco de dados';
+        } catch (InvalidArgumentException $exception){
+            $_SESSION['danger'] = $exception->getMessage();
+        } catch (Exception $exception) {
+            $_SESSION['danger'] = 'Erro inesperado durante alteração.';
+        }
     }
-
 
     public function verificaPermissao()
     {
@@ -103,7 +146,7 @@ class CompraControl extends CrudControl {
             $projetoControl = new ProjetoControl();
 
             if($projetoControl->procuraFuncionario($idProjeto,$_SESSION['usuario-id']) > 0){
-                return true;
+                return;
             }else{
                 require '../View/errorPages/erroSemAcesso.php';
                 exit();

@@ -1,3 +1,8 @@
+<?php
+
+use Lasse\LPM\Control\CondutorControl;
+use Lasse\LPM\Control\VeiculoControl; ?>
+
 <form id="form-geral" action="/acaoViagem" method="post">
     <div class="form-group">
         <label for="origem" class="col-form-label">Origem</label>
@@ -38,7 +43,8 @@
             foreach ($veiculos as $veiculo){
                 echo "<option value='{$veiculo->getId()}'>{$veiculo->getNome()}</option>";
             }
-            ?>
+
+             ?>
         </select>
     </div>
     <button type="button" id="cadastra-veiculo-alterar">&plus;</button>

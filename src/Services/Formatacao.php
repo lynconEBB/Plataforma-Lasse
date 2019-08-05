@@ -20,6 +20,16 @@ class Formatacao
         return $dataFormatada;
     }
 
+    public static function formataDataHora($dataHora)
+    {
+        $partes = explode(' ',$dataHora);
+        $dataFormatada = self::formataData($partes[0]);
+        $partesHorario = explode(':',$partes[1]);
+        $dataFormatada->setTime($partesHorario[0],$partesHorario[1]);
+
+        return $dataFormatada;
+    }
+
     public static function formataMonetario($valor)
     {
         $valorFormatado = $valor;

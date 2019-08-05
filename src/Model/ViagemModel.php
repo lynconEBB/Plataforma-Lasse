@@ -2,6 +2,10 @@
 
 namespace Lasse\LPM\Model;
 
+use DateTime;
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class ViagemModel
 {
     private $id;
@@ -14,34 +18,26 @@ class ViagemModel
     private $passagem;
     private $justificativa;
     private $observacoes;
-    private $dtEntradaHosp;
-    private $dtSaidaHosp;
-    private $horaEntradaHosp;
-    private $horaSaidaHosp;
+    private $EntradaHosp;
+    private $SaidaHosp;
     private $gastos;
     private $totalGasto;
 
-    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $dtEntradaHosp, $dtSaidaHosp, $horaEntradaHosp, $horaSaidaHosp, $id=null,$gastos=null){
-        $this->viajante = $viajante;
-        $this->veiculo = $veiculo;
-        $this->origem = $origem;
-        $this->destino = $destino;
-        $this->dtIda = $dtIda;
-        $this->dtVolta = $dtVolta;
-        $this->passagem = $passagem;
-        $this->justificativa = $justificativa;
-        $this->observacoes = $observacoes;
-        $this->dtEntradaHosp = $dtEntradaHosp;
-        $this->dtSaidaHosp = $dtSaidaHosp;
-        $this->horaEntradaHosp = $horaEntradaHosp;
-        $this->horaSaidaHosp = $horaSaidaHosp;
-        $this->gastos = $gastos;
-        if($gastos == null){
-            $this->totalGasto = 0.00;
-        }else{
-            $this->calculaTotal();
-        }
-        $this->id=$id;
+    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp, $totalGasto,$id,$gastos){
+        /*$this->setViajante($viajante);
+        $this->setVeiculo($veiculo);
+        $this->setOrigem($origem);
+        $this->setDestino($destino);
+        $this->setDtIda($dtIda);
+        $this->setDtVolta($dtVolta);
+        $this->setPassagem($passagem);
+        $this->setJustificativa($justificativa);
+        $this->setObservacoes($observacoes);*/
+        $this->setEntradaHosp($EntradaHosp);
+        /*$this->setSaidaHosp($SaidaHosp);
+        $this->setGastos($gastos);
+        $this->setTotalGasto($totalGasto);
+        $this->setId($id);*/
     }
 
     public function calculaTotal()
@@ -57,44 +53,37 @@ class ViagemModel
         return $this->id;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
+
     public function getPassagem(){
         return $this->passagem;
     }
 
-    public function setPassagem($passagem): void{
+    public function setPassagem($passagem): void
+    {
+        Validacao::validar('Passagem',$passagem,'obrigatorio','texto');
         $this->passagem = $passagem;
     }
 
-    public function getDtEntradaHosp(){
-        return $this->dtEntradaHosp;
+    public function getEntradaHosp():DateTime{
+        return $this->EntradaHosp;
     }
 
-    public function setDtEntradaHosp($dtEntradaHosp): void{
-        $this->dtEntradaHosp = $dtEntradaHosp;
+    public function setEntradaHosp($EntradaHosp): void
+    {
+        Validacao::validar('Entrada na Hospedagem',$EntradaHosp,'dataHora');
+        $this->EntradaHosp = Formatacao::formataDataHora($EntradaHosp);
     }
 
-    public function getDtSaidaHosp(){
-        return $this->dtSaidaHosp;
+    public function getSaidaHosp():DateTime
+    {
+        return $this->SaidaHosp;
     }
 
-    public function setDtSaidaHosp($dtSaidaHosp): void{
-        $this->dtSaidaHosp = $dtSaidaHosp;
-    }
-
-    public function getHoraEntradaHosp(){
-        return $this->horaEntradaHosp;
-    }
-
-    public function setHoraEntradaHosp($horaEntradaHosp): void{
-        $this->horaEntradaHosp = $horaEntradaHosp;
-    }
-
-    public function getHoraSaidaHosp(){
-        return $this->horaSaidaHosp;
-    }
-
-    public function setHoraSaidaHosp($horaSaidaHosp): void{
-        $this->horaSaidaHosp = $horaSaidaHosp;
+    public function setSaidaHosp($SaidaHosp): void{
+        $this->SaidaHosp = $SaidaHosp;
     }
 
     public function getGastos(){
@@ -111,6 +100,11 @@ class ViagemModel
     }
 
     public function setTotalGasto(float $totalGasto){
+        if($gastos == null){
+            $this->totalGasto = 0.00;
+        }else{
+            $this->calculaTotal();
+        }
         $this->totalGasto = $totalGasto;
     }
 
