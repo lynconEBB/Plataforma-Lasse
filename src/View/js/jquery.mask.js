@@ -40,9 +40,9 @@
 (function (factory, jQuery, Zepto) {
 
     if (typeof define === 'function' && define.amd) {
-        define(['server/js/jquery'], factory);
+        define(['js/jquery'], factory);
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('server/js/jquery'));
+        module.exports = factory(require('js/jquery'));
     } else {
         factory(jQuery || Zepto);
     }

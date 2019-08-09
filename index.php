@@ -1,6 +1,6 @@
 <?php
 
-require '../../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 use Lasse\LPM\Control\AtividadeControl;
 use Lasse\LPM\Control\CompraControl;
@@ -15,7 +15,10 @@ use Lasse\LPM\Control\VeiculoControl;
 use Lasse\LPM\Control\ViagemControl;
 use Lasse\LPM\Services\OdtParser;
 
-class RouteController{
+class Router{
+
+    private $url;
+    private $metodo;
 
     private $rotas = [
         '/login' => ['classe' => UsuarioControl::class,'parametro'=>'login'],
@@ -46,20 +49,35 @@ class RouteController{
         '/menu/formulario' => ['classe' => OdtParser::class,'parametro'=>'criaFormulario'],
         '/erro' => ['classe' => UsuarioControl::class,'parametro'=>'erro']
         ];
-    private $caminho;
 
-    public function __construct($caminho)
+    public function __construct()
     {
-        $this->caminho = $caminho;
+        $this->metodo = $_SERVER['REQUEST_METHOD'];
+        $this->url = $this->formataURL($_SERVER['SCRIPT_URL']);
 
-        if(!array_key_exists($this->caminho,$this->rotas)) {
-            require '../View/errorPages/erro404.php';
-            exit();
-        }else{
-            $this->instanciaClasse();
+        if ($this->url[0] == 'api') {
+            if (count($this->url) > 1) {
+                $this->decideControler();
+            } else {
+                http_response_code(400);
+            }
+        } else {
+            echo 'ola';
         }
+
     }
 
+    private function decideControler()
+    {
+
+    }
+
+    private function formataURL(string $url):array
+    {
+        $url = trim($url,'/');
+        $partes = explode('/',$url);
+        return $partes;
+    }
     public function instanciaClasse()
     {
 
@@ -76,4 +94,4 @@ class RouteController{
     }
 }
 
-new RouteController($_SERVER['PHP_SELF']);
+new Router();

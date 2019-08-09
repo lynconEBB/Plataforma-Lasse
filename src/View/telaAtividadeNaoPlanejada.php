@@ -4,10 +4,10 @@
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleAtividade.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/styleAtividade.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +20,7 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="/menu/usuario" class="side-bar-icon">
-                <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="/View/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
@@ -28,7 +28,7 @@
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="/View/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -63,13 +63,13 @@
                             data-tipo="<?= $atividade->getTipo() ?>"
                             data-comentario="<?= $atividade->getComentario() ?>"
                             data-datarealizacao="<?= $atividade->getDataRealizacao()->format('d/m/Y') ?>">
-                        <img class="img-icon" src='/img/Icons/editarIcone.png' alt=''>
+                        <img class="img-icon" src='/View/img/Icons/editarIcone.png' alt=''>
                     </button>
                     <form action="/acaoAtividade" method="post">
                         <input type="hidden" name="acao" value="excluirAtividade">
                         <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
                         <button class="btn-opcao">
-                            <img class="img-icon" src='/img/Icons/lixeiraicone.png' alt=''>
+                            <img class="img-icon" src='/View/img/Icons/lixeiraicone.png' alt=''>
                         </button>
                     </form>
                 </div>
@@ -81,7 +81,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="/img/Icons/adicionar.png" class="img-icon" alt="Icone para cadastrar uma nova Atividade">
+    <img src="/View/img/Icons/adicionar.png" class="img-icon" alt="Icone para cadastrar uma nova Atividade">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -168,8 +168,8 @@
         </div>
     </div>
 </div>
-<script src="/js/jquery.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/funcoesAtividade.js"></script>
+<script src="/View/js/jquery.js"></script>
+<script src="/View/js/bootstrap.js"></script>
+<script src="/View/js/funcoesAtividade.js"></script>
 </body>
 </html>

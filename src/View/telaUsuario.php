@@ -9,10 +9,10 @@ use Lasse\LPM\Control\ProjetoControl;
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleUsuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/styleUsuario.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,39 +25,39 @@ use Lasse\LPM\Control\ProjetoControl;
             <article class="side-bar-start">
 
                 <div class="container-foto">
-                    <img src="/img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
+                    <img src="/View/img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
                 </div>
                 <span class="side-bar-title"><?=$usuario->getLogin()?></span>
 
                 <button class="side-bar-button" data-toggle="modal" data-target="#modalInfo">
-                    <img src="/img/Icons/info.png" class="side-bar-icon" alt="Foto de Usuario">
+                    <img src="/View/img/Icons/info.png" class="side-bar-icon" alt="Foto de Usuario">
                 </button>
                 <button class="side-bar-button" data-toggle='modal' data-target='#modalAlterar' data-nome="<?= $usuario->getNomeCompleto()?>"
                         data-login="<?=$usuario->getLogin()?>" data-email="<?=$usuario->getEmail()?>" data-dtnasc="<?=$usuario->getDtNascimento()->format('d/m/Y')?>" data-rg="<?=$usuario->getRg()?>" data-cpf="<?=$usuario->getCpf()?>"
                         data-dtemissao="<?=$usuario->getDtEmissao()->format('d/m/Y')?>" data-formacao="<?=$usuario->getFormacao()?>" data-valorhora="<?=$usuario->getValorHora()?>" data-atuacao="<?=$usuario->getAtuacao()?>">
-                    <img src="/img/Icons/editarIcone.png" class="side-bar-icon" alt="Alterar dados do Usuario">
+                    <img src="/View/img/Icons/editarIcone.png" class="side-bar-icon" alt="Alterar dados do Usuario">
                 </button>
-                <img src="/img/Icons/grafico.png" class="side-bar-icon" alt="Exibir graficos de Usuário">
+                <img src="/View/img/Icons/grafico.png" class="side-bar-icon" alt="Exibir graficos de Usuário">
             </article>
             <article class="side-bar-middle">
                 <a href="https://webmail.pti.org.br/">
-                    <img src="/img/Icons/email.png" class="side-bar-icon" alt="Icone para levar ao webmail zimbra">
+                    <img src="/View/img/Icons/email.png" class="side-bar-icon" alt="Icone para levar ao webmail zimbra">
                 </a>
                 <a href="https://git.pti.org.br/users/sign_in">
-                    <img src="/img/Icons/gitlab.png" class="side-bar-icon" alt="Icone para ir para site do GitLab">
+                    <img src="/View/img/Icons/gitlab.png" class="side-bar-icon" alt="Icone para ir para site do GitLab">
                 </a>
                 <form action="/acaoUsuario" method="post">
                     <input type="hidden" name="acao" value="excluirUsuario">
                     <input type="hidden" name="idUsuario" value="<?=$_SESSION['usuario-id']?>">
                     <button class="side-bar-button">
-                        <img src="/img/Icons/deletar-conta.svg" class="side-bar-icon" alt="Icone para deletar conta">
+                        <img src="/View/img/Icons/deletar-conta.svg" class="side-bar-icon" alt="Icone para deletar conta">
                     </button>
                 </form>
             </article>
             <article class="side-bar-end">
                 <form action="/acaoUsuario" method="post">
                     <input type="hidden" name="acao" value="sair">
-                    <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                    <button class="side-bar-button"><img src="/View/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
                 </form>
             </article>
         </aside>
@@ -87,7 +87,7 @@ use Lasse\LPM\Control\ProjetoControl;
                 }else{
                 ?>
                     <div class="alert">
-                        <img src="/img/mascote/RaioSozinho.png" class="alert-img">
+                        <img src="/View/img/mascote/RaioSozinho.png" class="alert-img">
                         <span class="alert-text">Nenhum Projeto Encontrado</span>
                     </div>
                 <?php
@@ -115,7 +115,7 @@ use Lasse\LPM\Control\ProjetoControl;
                     }else{
                         ?>
                         <div class="alert">
-                            <img src="/img/mascote/RaioSozinho.png" class="alert-img">
+                            <img src="/View/img/mascote/RaioSozinho.png" class="alert-img">
                             <span class="alert-text">Nenhuma Atividade Encontrado</span>
                         </div>
                         <?php
@@ -130,7 +130,7 @@ use Lasse\LPM\Control\ProjetoControl;
             </header>
             <div class="menu-body">
                 <div class="alert">
-                    <img src="/img/mascote/RaioSozinho.png" class="alert-img">
+                    <img src="/View/img/mascote/RaioSozinho.png" class="alert-img">
                     <span class="alert-text">Nenhum Formulário Encontrado</span>
                 </div>
             </div>
@@ -219,7 +219,7 @@ use Lasse\LPM\Control\ProjetoControl;
                 <div class="modal-body">
 
                     <div class="container-info">
-                        <img src="/img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
+                        <img src="/View/img/Icons/cat.jpg" class="foto-perfil" alt="Foto de Usuario">
                     </div>
                     <div class="info-item">
                         <label class="item-label">Nome Completo:</label>
@@ -253,8 +253,8 @@ use Lasse\LPM\Control\ProjetoControl;
             </div>
         </div>
     </div>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/funcoesUsuario.js"></script>
+    <script src="/View/js/jquery.js"></script>
+    <script src="/View/js/bootstrap.js"></script>
+    <script src="/View/js/funcoesUsuario.js"></script>
 </body>
 </html>

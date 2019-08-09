@@ -10,10 +10,10 @@ use Lasse\LPM\Services\Mensagem;
     <meta charset="utf-8"/>
     <title>Perfil Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/styleProjeto.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/View/css/styleProjeto.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +30,7 @@ use Lasse\LPM\Services\Mensagem;
         <aside class="side-bar">
             <article class="side-bar-start">
                 <a href="/menu/usuario" class="side-bar-icon">
-                    <img src="/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                    <img src="/View/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
                 </a>
             </article>
             <article class="side-bar-middle">
@@ -39,7 +39,7 @@ use Lasse\LPM\Services\Mensagem;
             <article class="side-bar-end">
                 <form action="/acaoUsuario" method="post">
                     <input type="hidden" name="acao" value="sair">
-                    <button class="side-bar-button"><img src="/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                    <button class="side-bar-button"><img src="/View/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
                 </form>
             </article>
         </aside>
@@ -60,7 +60,7 @@ use Lasse\LPM\Services\Mensagem;
                     <footer class="footer-projeto">
                         <a href="/menu/tarefa?idProjeto=<?= $projeto->getId() ?>">
                             <button class="opcao-projeto">
-                                <img width="16" src="/img/Icons/tarefa.png" alt="" class="img-icon">
+                                <img width="16" src="/View/img/Icons/tarefa.png" alt="" class="img-icon">
                             </button>
                         </a>
 
@@ -70,7 +70,7 @@ use Lasse\LPM\Services\Mensagem;
                             ?>
                             <button type="button" class="opcao-projeto" data-toggle="modal"
                                     data-target="#modalAdicionaFunc" data-idprojeto="<?= $projeto->getId() ?>">
-                                <img src="/img/Icons/IconeADD.png" class="img-icon">
+                                <img src="/View/img/Icons/IconeADD.png" class="img-icon">
                             </button>
                             <button class='opcao-projeto' data-toggle='modal' data-target='#modalAlterar'
                                     data-id='<?php echo $projeto->getId() ?>'
@@ -78,13 +78,13 @@ use Lasse\LPM\Services\Mensagem;
                                     data-desc='<?php echo $projeto->getDescricao() ?>'
                                     data-dtini='<?php echo $projeto->getDataInicio()->format('d/m/Y') ?>'
                                     data-dtfim='<?php echo $projeto->getDataFinalizacao()->format('d/m/Y') ?>'>
-                                <img width='16' src='/img/Icons/editarIcone.png' alt='' class="img-icon">
+                                <img width='16' src='/View/img/Icons/editarIcone.png' alt='' class="img-icon">
                             </button>
                             <form style="display: inline;" action="/acaoProjeto" method="post">
                                 <input type="hidden" name="acao" value="excluirProjeto">
                                 <input type="hidden" name="id" value="<?php echo $projeto->getId() ?>">
                                 <button class="opcao-projeto">
-                                    <img width='16' src='/img/Icons/lixeiraicone.png' alt='' class="img-icon">
+                                    <img width='16' src='/View/img/Icons/lixeiraicone.png' alt='' class="img-icon">
                                 </button>
                             </form>
                         <?php
@@ -99,7 +99,7 @@ use Lasse\LPM\Services\Mensagem;
     </main>
 
     <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-        <img src="/img/Icons/adicionar.png" class="img-icon">
+        <img src="/View/img/Icons/adicionar.png" class="img-icon">
     </button>
 
     <div class="modal fade" id="modalCadastro" tabindex="-1">
@@ -205,8 +205,8 @@ use Lasse\LPM\Services\Mensagem;
     </div>
 
 
-    <script src="/js/jquery.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/funcoesProjeto.js"></script>
+    <script src="/View/js/jquery.js"></script>
+<script src="/View/js/bootstrap.js"></script>
+<script src="/View/js/funcoesProjeto.js"></script>
 </body>
 </html>
