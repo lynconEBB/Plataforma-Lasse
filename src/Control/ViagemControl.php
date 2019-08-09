@@ -1,9 +1,12 @@
 <?php
 
 namespace Lasse\LPM\Control;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+use Exception;
 use Lasse\LPM\Dao\ViagemDao;
 use Lasse\LPM\Model\ViagemModel;
 
@@ -48,7 +51,7 @@ class ViagemControl extends CrudControl {
             $viagem = new ViagemModel($_SESSION['usuario-classe'],$veiculo,$_POST['origem'],$_POST['destino'],$_POST['dtIda'],$_POST['dtVolta'],$_POST['passagem'],$_POST['justificativa'],$_POST['observacoes'],$_POST['dtEntradaHosp'].' '.$_POST['horaEntradaHosp'],$_POST['dtSaidaHosp'].' '.$_POST['horaSaidaHosp'],null,null,null);
             echo $viagem->getEntradaHosp()->format('H:i:s');
         }
-        catch (\Exception $exception){
+        catch (Exception $exception){
             $_SESSION['danger'] = $exception->getMessage();
         }
          /*$this->DAO->cadastrar($viagem,$_POST['idTarefa']);

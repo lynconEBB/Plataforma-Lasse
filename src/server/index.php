@@ -15,7 +15,6 @@ use Lasse\LPM\Control\VeiculoControl;
 use Lasse\LPM\Control\ViagemControl;
 use Lasse\LPM\Services\OdtParser;
 
-
 class RouteController{
 
     private $rotas = [
