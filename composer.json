@@ -12,8 +12,8 @@
     "require": {
         "cybermonde/odtphp": "^1.7",
         "ext-pdo": "*",
-        "ext-http": "*",
-        "ext-ctype": "*"
+        "firebase/php-jwt": "^5.0",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

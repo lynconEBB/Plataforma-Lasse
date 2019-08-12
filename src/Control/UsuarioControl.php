@@ -11,60 +11,45 @@ use Lasse\LPM\Services\PdoFactory;
 use Lasse\LPM\Services\Validacao;
 use PDO;
 use PDOException;
+use stdClass;
+use Firebase\JWT\JWT;
 
-class UsuarioControl extends CrudControl {
+class UsuarioControl {
 
-    public function __construct(){
+    private $metodo;
+    private $url;
+
+    public function __construct($url){
+        $this->metodo = $_SERVER['REQUEST_METHOD'];
+        $this->url = $url;
         $this->DAO = new UsuarioDao();
-        parent::__construct();
-    }
-
-    public function defineAcao($acao){
-        switch ($acao){
-            case 'cadastrarUsuario':
-                $this->cadastrar();
-                break;
-            case 'excluirUsuario':
-                $this->excluir($_POST['idUsuario']);
-                break;
-            case 'alterarUsuario':
-                $this->atualizar();
-                break;
-            case 'logar':
-                $this->tentaLogar();
-                break;
-            case 'sair':
-                $this->deslogar();
-                break;
-        }
+        $this->processaRequisicao();
     }
 
     /**
      * Cria um Objeto Usuario
      * cadastra no banco de dados usando o Objeto Criado
-     * Retorna para a tela de Login
+     * @param stdClass $info
      */
-    protected function cadastrar(){
+    protected function cadastrar($info){
         try{
-            session_start();
-            Validacao::validar('Senha',$_POST['senha'],'semEspaco','obrigatorio','texto',['minimo',6]);
-            if(!$this->DAO->listarPorLogin($_POST['usuario'])){
-                $hash = password_hash($_POST['senha'],PASSWORD_BCRYPT);
-                $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],$hash,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora']);
+            Validacao::validar('Senha',$info->senha,'semEspaco','obrigatorio','texto',['minimo',6]);
+            if(!$this->DAO->listarPorLogin($info->login)){
+                $hash = password_hash($info->senha,PASSWORD_BCRYPT);
+                $usuario = new UsuarioModel($info->nomeCompleto,$info->login,$hash,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora);
                 $this->DAO->cadastrar($usuario);
-                header('Location: /login');
-                die();
+                http_response_code(200);
+                echo json_encode(array("message" => "Usuario Registrado com Sucesso!"));
             }else {
-                throw new Exception("Nome de Usuário ja utilizado");
+                http_response_code(400);
+                echo json_encode(array("message" => "Nome de Usuário ja utilizado"));
             }
         }catch (PDOException $pdoErro){
-            $_SESSION['danger'] = "Erro durante inserção no banco de dados";
-            header("Location: /login");
-            die();
+            http_response_code(400);
+            echo json_encode(array("message" => "Nome de Usuário ja utilizado"));
         }catch (Exception $argumentException) {
-            $_SESSION['danger'] = $argumentException->getMessage();
-            header("Location: /login");
-            die();
+            http_response_code(400);
+            echo json_encode(array("message" => "Nome de Usuário ja utilizado"));
         }
     }
 
@@ -92,7 +77,8 @@ class UsuarioControl extends CrudControl {
 
     public function listar() {
         try{
-            return $this->DAO->listar();
+            self::autenticar();
+            //return $this->DAO->listar();
         }catch (PDOException $excecao){
             $_SESSION['danger'] = 'Erro durante seleção no banco de dados.';
             header('Location: /erro');
@@ -125,23 +111,37 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-    public function tentaLogar()
+    public function tentaLogar($info)
     {
         try{
-            session_start();
-            if ($_POST["nomeUsuario"] != "" && $_POST["senha"] != "") {
-                $login = $_POST["nomeUsuario"];
-                $senha = $_POST["senha"];
+            if ($info->login != "" && $info->senha != "") {
+                $login = $info->login;
+                $senha = $info->senha;
 
                 if ($usuario = $this->DAO->listarPorLogin($login)) {
                     if( password_verify($senha,$usuario->getSenha())){
-                        $_SESSION["usuario-id"] = $usuario->getId();
-                        $_SESSION["usuario"] = $_POST["nomeUsuario"];
-                        $_SESSION["usuario-classe"] = $usuario;
-                        $_SESSION["autenticado"] = TRUE;
+                        $secret_key = "SUPERSENHA123";
+                        $issuedat_claim = time();
+                        $notbefore_claim = $issuedat_claim;
+                        $expire_claim = $issuedat_claim + 60;
+                        $token = array(
+                            "iss" => "Lasse-Project-Manager",  // Fornecedor da API
+                            "aud" => "All",                    // Audiencia da API
+                            "iat" => $issuedat_claim,          // Horario em que o token foi criado
+                            "nbf" => $notbefore_claim,         // Tempo ate o token ser valido
+                            "exp" => $expire_claim,            // Tempo ate o token expirar
+                            "data" => array(                   // Informações que gerarão o token
+                                "id" => $usuario->getId(),
+                                "login" => $usuario->getLogin(),
+                                "email" => $usuario->getEmail(),
+                            ));
 
-                        header("Location: /menu/usuario");
-                        die();
+                        http_response_code(200);
+
+                        $jwt = JWT::encode($token, $secret_key);
+                        header("Set-Cookie: token={$jwt}");
+                        echo json_encode(array("message" => "Logado com Sucesso"));
+
                     }else{
                         throw new Exception("Senha errada :(");
                     }
@@ -152,60 +152,35 @@ class UsuarioControl extends CrudControl {
                 throw new Exception("Os Campos devem ser preenchidos :X");
             }
         }catch (Exception $excecao){
-            $_SESSION['danger'] = $excecao->getMessage();
-            header("Location: /login");
-            die();
+            http_response_code(400);
+            echo json_encode(array("message" => $excecao->getMessage()));
         }
     }
 
-    public function deslogar(){
-        session_start();
-        session_destroy();
-        $_SESSION['danger'] = 'Deslogado com sucesso';
-        header("Location: /login");
-        die();
-    }
-
-    public static function verificar(){
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        if(isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE){
-            return true;
-        } else{
-            $_SESSION['danger'] = "Logue no Sistema para ter acesso as funcionalidades!";
-            header("Location: /login");
-            die();
-        }
-    }
-
-    public function processaRequisicao(string $parametro)
+    public static function autenticar()
     {
-        switch ($parametro){
-            case 'login':
-                session_start();
-                if (isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == TRUE) {
-                    require '../View/errorPages/avisoJaLogado.php';
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            echo $_SERVER['HTTP_AUTHORIZATION'];
+        }
+    }
+
+    public function processaRequisicao()
+    {
+        switch ($this->metodo) {
+            case 'POST':
+                $info = json_decode(file_get_contents("php://input"));
+                if (isset($this->url[2]) && $this->url[2] == 'login') {
+                    $this->tentaLogar($info);
                 } else {
-                    require '../View/telaLogin.php';
+                    $this->cadastrar($info);
                 }
                 break;
-            case 'perfil':
-                self::verificar();
-                 if ($usuario = $this->listarPorId($_SESSION['usuario-id'])) {
-                     $projetoControl = new ProjetoControl();
-                     $projetos = $projetoControl->listarPorIdUsuario($_SESSION['usuario-id']);
-
-                     $atividadeControl = new AtividadeControl();
-                     $atividades = $atividadeControl->listarPorIdUsuario($_SESSION['usuario-id']);
-                     require '../View/telaUsuario.php';
-                 }else{
-                     $this->deslogar();
-                 }
+            case 'GET':
+                $this->listar();
                 break;
-            case 'erro':
-                Mensagem::exibir('danger');
+            case 'PUT':
+                break;
+            case 'DELETE':
                 break;
         }
     }

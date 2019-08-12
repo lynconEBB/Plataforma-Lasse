@@ -18,7 +18,6 @@ use Lasse\LPM\Services\OdtParser;
 class Router{
 
     private $url;
-    private $metodo;
 
     private $rotas = [
         '/login' => ['classe' => UsuarioControl::class,'parametro'=>'login'],
@@ -69,7 +68,11 @@ class Router{
 
     private function decideControler()
     {
-
+        switch ($this->url[1]) {
+            case 'users':
+                $controler = new UsuarioControl($this->url);
+                break;
+        }
     }
 
     private function formataURL(string $url):array
