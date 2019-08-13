@@ -3,7 +3,7 @@
 
 namespace Lasse\LPM\Services;
 
-use InvalidArgumentException;
+use Exception;
 
 class Validacao
 {
@@ -22,28 +22,28 @@ class Validacao
     private static function obrigatorio($nomeParametro,$valor)
     {
         if (empty($valor)){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser preenchido');
+            throw new Exception('O campo '.$nomeParametro.' deve ser preenchido',1);
         }
     }
 
     private static function texto($nomeParametro,$valor)
     {
         if (!is_string($valor)) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um texto');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um texto',1);
         }
     }
 
     private static function semEspaco($nomeParametro,$valor)
     {
         if (strpos($valor,' ') !== false) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' não pode conter espaços');
+            throw new Exception('O campo '.$nomeParametro.' não pode conter espaços',1);
         }
     }
 
     private static function email($nomeParametro,$valor)
     {
         if (!filter_var($valor,FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException($nomeParametro.' inválido');
+            throw new Exception($nomeParametro.' inválido',1);
         }
     }
 
@@ -54,42 +54,42 @@ class Validacao
         }
 
         if (!is_numeric($valor) || $valor != (int)$valor) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero inteiro ou nulo');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero inteiro ou nulo',1);
         }
     }
 
     private static function inteiro($nomeParametro,$valor)
     {
         if (!is_numeric($valor) || $valor != (int)$valor) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero inteiro');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero inteiro',1);
         }
     }
 
     private static function minimo($nomeParametro,$valor,$tamanhoMinimo)
     {
         if (strlen($valor) < $tamanhoMinimo) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ter no minimo '.$tamanhoMinimo.' caracteres');
+            throw new Exception('O campo '.$nomeParametro.' deve ter no minimo '.$tamanhoMinimo.' caracteres',1);
         }
     }
 
     private static function nuloOUtexto($nomeParametro,$valor)
     {
         if (!is_null($valor) && !is_string($valor)) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser nulo ou texto');
+            throw new Exception('O campo '.$nomeParametro.' deve ser nulo ou texto',1);
         }
     }
 
     private static function data($nomeParametro,$valor)
     {
         if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/",$valor)) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato de data');
+            throw new Exception('O campo '.$nomeParametro.' deve estar no formato de data',1);
         }
     }
 
     private static function dataHora($nomeParametro,$valor)
     {
         if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4} [0-9]{2}:[0-9]{2}$/",$valor)) {
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve estar no formato de data e hora (dd/mm/yyyy hh:mm:ss)');
+            throw new Exception('O campo '.$nomeParametro.' deve estar no formato de data e hora (dd/mm/yyyy hh:mm:ss)',1);
         }
     }
 
@@ -100,7 +100,7 @@ class Validacao
 
         // Verifica se foi informado todos os digitos corretamente
         if (strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf) || !preg_match("/^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$/",$valor)) {
-            throw new InvalidArgumentException($nomeParametro.' inválido');
+            throw new Exception($nomeParametro.' inválido',1);
         }
 
         // Faz o calculo para validar o CPF
@@ -110,7 +110,7 @@ class Validacao
             }
             $d = ((10 * $d) % 11) % 10;
             if ($cpf{$c} != $d) {
-                throw new InvalidArgumentException($nomeParametro.' inválido');
+                throw new Exception($nomeParametro.' inválido',1);
             }
         }
     }
@@ -118,10 +118,10 @@ class Validacao
     private static function monetario($nomeParametro,$valor)
     {
         if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero decimal',1);
         }
         if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero decimal',1);
         }
     }
 
@@ -131,10 +131,10 @@ class Validacao
             return;
         }
         if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo',1);
         }
         if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo');
+            throw new Exception('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo',1);
         }
     }
 

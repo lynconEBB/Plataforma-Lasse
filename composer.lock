@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "edd087e0fae19dccbe465f8594c566db",
+    "content-hash": "8fea6cf21271a7adc91e66ac50f13c6d",
     "packages": [
         {
             "name": "cybermonde/odtphp",
@@ -95,7 +95,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }
