@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require 'vendor/autoload.php';
 
 use Lasse\LPM\Control\AtividadeControl;
@@ -27,10 +31,12 @@ class Router{
             if (count($this->url) > 1) {
                 $this->decideControler();
             } else {
-                http_response_code(400);
+                http_response_code(404);
             }
         } else {
-            echo 'ola';
+            if ($this->url[0] == "" && count($this->url) == 1) {
+                require 'src/View/Usuario/telaLogin.html';
+            }
         }
     }
 
@@ -39,6 +45,9 @@ class Router{
         switch ($this->url[1]) {
             case 'users':
                 $controler = new UsuarioControl($this->url);
+                break;
+            case 'projetos':
+                //$controler = new ProjetoControl($this->url);
                 break;
         }
     }

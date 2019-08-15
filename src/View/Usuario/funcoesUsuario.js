@@ -1,4 +1,31 @@
-$(document).ready(function () {
+var botaoEntrar = document.querySelector("#botao-entrar");
+
+botaoEntrar.addEventListener("click",function (event) {
+    var inputs = document.querySelectorAll("input");
+    var data = {
+        login: inputs[0].value,
+        senha: inputs[1].value
+    }
+
+    var request = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost/api/users/login";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(request);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json);
+            console.log(document.cookie);
+        }
+    };
+});
+
+
+/*$(document).ready(function () {
     $('#modalAlterar').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);
 
@@ -25,4 +52,4 @@ $(document).ready(function () {
         modal.find('#atuacao').val(atuacao);
         modal.find('#valorHora').val(valorHora);
     })
-});
+});*/

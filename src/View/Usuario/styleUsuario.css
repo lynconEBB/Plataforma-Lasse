@@ -1,0 +1,97 @@
+body,html{
+    height: 100vh;
+    width: 100vw;
+    background: #CDD1D2 0 0 no-repeat padding-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 80%;
+    min-height: 800px;
+    height: 80%;
+}
+
+.ilustracao {
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #0c7f99;
+    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.75);
+}
+
+.container {
+    max-width: 380px;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container-logo {
+    height:30%;
+    background-color: #06404d;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-logo img {
+    width: 60%;
+    background-color: #06404d;
+}
+
+.container form {
+    width: 100%;
+    height: 60%;
+    background-color: #06404d;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.container input {
+    width: 60%;
+    margin: 30px auto;
+    font-size: 20px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-bottom: #ffffff solid 4px;
+}
+.container input:focus{
+    outline: none;
+}
+.container input::placeholder{
+    outline: none;
+    color: white;
+}
+.container button {
+    width: 45%;
+    font-size: 25px;
+    color: #06404d;
+    background-color: #67e69c;
+    margin: 30px auto;
+    border: none;
+    padding: 10px 0;
+    cursor: pointer;
+    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.25);
+}
+.container button:hover {
+    box-shadow: none;
+}
+
+.container span {
+    margin: 30px auto;
+    color: #67e69c;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+

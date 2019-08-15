@@ -21,7 +21,7 @@ class UsuarioModel
     private $formacao;
     private $valorHora;
 
-    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id=null){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id){
         $this->setId($id);
         $this->setNomeCompleto($nomeCompleto);
         $this->setLogin($login);
@@ -35,9 +35,10 @@ class UsuarioModel
         $this->setFormacao($formacao);
         $this->setValorHora($valorHora);
     }
-    public function toJSON()
+
+    public function toArray()
     {
-        $json = [
+        $array = [
             "id" => $this->getId(),
             "nomeCompleto" => $this->getNomeCompleto(),
             "login" => $this->getLogin(),
@@ -50,8 +51,9 @@ class UsuarioModel
             "formacao" => $this->getFormacao(),
             "valorHora" => $this->getValorHora()
         ];
-        return json_encode($json);
+        return $array;
     }
+
     public function getEmail(){
         return $this->email;
     }
@@ -163,6 +165,4 @@ class UsuarioModel
         Validacao::validar('Valor Hora',$valorHora,'monetario');
         $this->valorHora = Formatacao::formataMonetario($valorHora);
     }
-
-
 }

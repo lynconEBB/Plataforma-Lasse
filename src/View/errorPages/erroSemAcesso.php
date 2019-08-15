@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleUsuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../Usuario/styleUsuario.css" />
 </head>
 <body>
 
@@ -16,6 +16,6 @@
 <h1>Você não possui acesso a essa tarefa<br>Selecione um projeto <a href='/menu/projeto'>aqui</a></h1>
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesUsuario.js"></script>
+<script src="../Usuario/funcoesUsuario.js"></script>
 </body>
 </html>

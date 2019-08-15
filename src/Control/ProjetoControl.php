@@ -12,9 +12,8 @@ class ProjetoControl extends CrudControl
 
     public function __construct()
     {
-        UsuarioControl::verificar();
+        UsuarioControl::autenticar();
         $this->DAO = new ProjetoDao();
-        parent::__construct();
     }
 
     public function defineAcao($acao)
@@ -169,14 +168,15 @@ class ProjetoControl extends CrudControl
         }
     }
 
-    public function processaRequisicao(string $parametro)
+    public function processaRequisicao()
     {
+        /*
        switch ($parametro){
            case 'listaProjetos':
                $usuarioControl = new UsuarioControl();
                $usuarios = $usuarioControl->listar();
                $projetos = $this->listarPorIdUsuario($_SESSION['usuario-id']);
                require '../View/telaProjetos.php';
-       }
+       }*/
     }
 }

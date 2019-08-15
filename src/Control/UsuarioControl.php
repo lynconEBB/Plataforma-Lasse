@@ -9,73 +9,129 @@ use Lasse\LPM\Model\UsuarioModel;
 use Lasse\LPM\Services\Validacao;
 use Firebase\JWT\JWT;
 
-class UsuarioControl {
-
-    private $metodo;
-    private $url;
-    private $DAO;
+class UsuarioControl extends CrudControl {
 
     public function __construct($url){
-        header('Content-Type: application/json');
         $this->metodo = $_SERVER['REQUEST_METHOD'];
         $this->url = $url;
         $this->DAO = new UsuarioDao();
         $this->processaRequisicao();
     }
 
-    /**
+    public function processaRequisicao()
+    {
+        switch ($this->metodo) {
+            case 'POST':
+                $info = json_decode(@file_get_contents("php://input"));
+                // /api/users/login
+                if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
+                    $this->tentaLogar($info);
+                }
+                // /api/users
+                elseif (count($this->url) == 2) {
+                    $this->cadastrar($info);
+                }
+                break;
+            case 'GET':
+                // /api/users/{idUsuario}
+                if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                    $this->listarPorId($this->url[2]);
+                }
+                // /api/users
+                elseif (count($this->url) == 2) {
+                    $this->listar();
+                }
+                break;
+            case 'PUT':
+                $info = json_decode(@file_get_contents("php://input"));
+                if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                    $this->atualizar($info);
+                }
+                break;
+            case 'DELETE':
+                if (count($this->url) == 2) {
+                    $this->excluir();
+                }
+                break;
+        }
+    }
+
+    /*
      * Cria um Objeto Usuario
      * cadastra no banco de dados usando o Objeto Criado
-     * @param $info
-     * @throws Exception
      */
     protected function cadastrar($info){
         Validacao::validar('Senha',$info->senha,'semEspaco','obrigatorio','texto',['minimo',6]);
         if(!$this->DAO->listarPorLogin($info->login)){
             $hash = password_hash($info->senha,PASSWORD_BCRYPT);
-            $usuario = new UsuarioModel($info->nomeCompleto,$info->login,$hash,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora);
+            $usuario = new UsuarioModel($info->nomeCompleto,$info->login,$hash,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora,null);
             $this->DAO->cadastrar($usuario);
-            http_response_code(200);
-            echo json_encode(array("message" => "Usuario Registrado com Sucesso!"));
+            $this->respostaSucesso("Usuario Registrado com Sucesso!");
         }else {
             throw new Exception("Nome de Usuário já registrado");
         }
     }
 
-    protected function excluir(int $id){
+    protected function excluir(){
+        $userInfo = self::autenticar();
         $projetoControl = new ProjetoControl();
-        $projetos = $projetoControl->listarPorIdUsuario($id);
-        foreach ($projetos as $projeto){
-            if ($projetoControl->verificaDono($projeto->getId())) {
-                throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.<br> Exclua seus projetos ou transfira o dominio para outro funcionário");
+        $projetos = $projetoControl->listarPorIdUsuario($userInfo['id']);
+        if ($projetos != false) {
+            foreach ($projetos as $projeto){
+                if ($projetoControl->verificaDono($projeto->getId())) {
+                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário");
+                }
             }
         }
-        $this->DAO->excluir($id);
-        $this->deslogar();
+        $this->DAO->excluir($userInfo['id']);
+        $this->respostaSucesso("Usuario Excluido com sucesso",null,$userInfo);
+        if (isset($_COOKIE['token'])) {
+            unset($_COOKIE['token']);
+        }
     }
 
     public function listar() {
-        self::autenticar();
+        $userInfo = self::autenticar();
         $usuarios = $this->DAO->listar();
-        $resposta = "{[";
-        http_response_code(200);
+        $dados = array();
         foreach ($usuarios as $usuario) {
-            $resposta .= $usuario->toJSON().",";
+            $dados[] = $usuario->toArray();
         }
-        $resposta .= "]}";
-        echo $resposta;
+        $this->respostaSucesso("Listando todos Usuários do banco de dados",$dados,$userInfo);
     }
 
-    protected function atualizar(){
-        session_start();
-        $usuario = new UsuarioModel($_POST['nome'],$_POST['usuario'],null,$_POST['dtNasc'],$_POST['cpf'],$_POST['rg'],$_POST['dtEmissao'],$_POST['email'],$_POST['atuacao'],$_POST['formacao'],$_POST['valorHora'],$_SESSION['usuario-id']);
+    protected function atualizar($info) {
+        $userInfo = self::autenticar();
+        $usuario = new UsuarioModel($info->nomeCompleto,$info->login,null,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora,$userInfo['id']);
         $this->DAO->alterar($usuario);
-        $_SESSION['danger'] = 'Dados alterados com sucesso!';
-        header('Location: /menu/usuario');
+        $this->respostaSucesso("Dados de Usuário alterados com sucesso",null,$userInfo);
     }
 
     public function listarPorId($id){
-        return $this->DAO->listarPorId($id);
+        $userInfo = self::autenticar();
+        $usuario = $this->DAO->listarPorId($id);
+        $this->respostaSucesso("Listando Usuário.",$usuario->toArray(),$userInfo);
+    }
+
+    public function tentaLogar($info)
+    {
+        if ($info->login != "" && $info->senha != "") {
+            $login = $info->login;
+            $senha = $info->senha;
+            if ($usuario = $this->DAO->listarPorLogin($login)) {
+                if( password_verify($senha,$usuario->getSenha())){
+                    $token = $this->criaToken($usuario);
+                    header("Set-Cookie: token={$token}");
+                    $this->respostaSucesso("Logado com Sucesso");
+                }else{
+                    throw new Exception("Senha errada :(");
+                }
+            } else {
+                throw new Exception("Usuário não registrado :(");
+            }
+        } else {
+            throw new Exception("Os Campos devem ser preenchidos :X");
+        }
     }
 
     private function criaToken($usuario) {
@@ -95,30 +151,8 @@ class UsuarioControl {
                 "email" => $usuario->getEmail(),
             ));
 
-        http_response_code(200);
         $token = JWT::encode($token, $secret_key);
         return $token;
-    }
-
-    public function tentaLogar($info)
-    {
-        if ($info->login != "" && $info->senha != "") {
-            $login = $info->login;
-            $senha = $info->senha;
-            if ($usuario = $this->DAO->listarPorLogin($login)) {
-                if( password_verify($senha,$usuario->getSenha())){
-                    $token = $this->criaToken($usuario);
-                    header("Set-Cookie: token={$token}");
-                    echo json_encode(array("message" => "Logado com Sucesso"));
-                }else{
-                    throw new Exception("Senha errada :(");
-                }
-            } else {
-                throw new Exception("Usuário não registrado :(");
-            }
-        } else {
-            throw new Exception("Os Campos devem ser preenchidos :X");
-        }
     }
 
     public static function autenticar()
@@ -128,33 +162,12 @@ class UsuarioControl {
             if (count($auth) == 2) {
                 $auth = $auth[1];
                 $decoded = JWT::decode($auth,'SUPERSENHA123',array('HS256'));
+                $userInfo = ["id" => $decoded->data->id, "login" => $decoded->data->login];
+                return $userInfo;
             } else
                 throw new SignatureInvalidException();
         } else
             throw new SignatureInvalidException();
     }
 
-    public function processaRequisicao()
-    {
-        switch ($this->metodo) {
-            case 'POST':
-                $info = json_decode(file_get_contents("php://input"));
-                if (isset($this->url[2]) && $this->url[2] == 'login') {
-                    $this->tentaLogar($info);
-                } else {
-                    $this->cadastrar($info);
-                }
-                break;
-            case 'GET':
-                $this->listar();
-                break;
-            case 'PUT':
-                $this->atualizar();
-                break;
-            case 'DELETE':
-                $this->excluir();
-                $this->atualizar();
-                break;
-        }
-    }
 }
