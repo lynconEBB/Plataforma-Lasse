@@ -4,179 +4,110 @@ namespace Lasse\LPM\Control;
 
 use Exception;
 use Lasse\LPM\Dao\ProjetoDao;
+use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\ProjetoModel;
-use PDOException;
 
 class ProjetoControl extends CrudControl
 {
-
-    public function __construct()
+    private $requisitor;
+    public function __construct($url)
     {
-        UsuarioControl::autenticar();
+        $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new ProjetoDao();
+        parent::__construct($url);
+        $this->processaRequisicao();
     }
 
-    public function defineAcao($acao)
+    public function processaRequisicao()
     {
-        switch ($acao){
-            case 'cadastrarProjeto':
-                $this->cadastrar();
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'excluirProjeto':
-                $this->excluir($_POST['id']);
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'alterarProjeto':
-                $this->atualizar();
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'adicionarFuncionario':
-                $this->addFuncionario();
-                header('Location: /menu/projeto');
-                die();
-                break;
+        if (!is_null($this->url)) {
+            switch ($this->metodo) {
+                case 'POST':
+                    $info = json_encode(@file_get_contents("php://input"));
+                    // /api/projetos
+                    if (count($this->url) == 2) {
+                        $this->cadastrar($info);
+                    }
+                    break;
+                case 'GET':
+                    break;
+                case 'PUT':
+                    break;
+                case 'DELETE':
+                    break;
+            }
         }
     }
 
-    protected function cadastrar()
+    protected function cadastrar($info)
     {
-        try{
-            $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],null,null,null,null);
-            $this->DAO->cadastrar($projeto);
-        }catch (PDOException $pdoexcecao){
-            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
-        }
+        $usuarioControl = new UsuarioControl(null);
+
+        $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, null);
+        $this->DAO->cadastrar($projeto);
+        $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
     }
 
-    protected function excluir(int $id)
+    protected function excluir($id)
     {
-        try{
-            $this->DAO->excluir($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-        }
-
+        $id = $this->url[3];
+        $this->DAO->excluir($id);
+        $this->respostaSucesso("Projeto excluído com sucesso",null,$this->requisitor);
     }
 
     public function listar()
     {
-        try{
-            return $this->DAO->listar();
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        return $this->DAO->listar();
     }
 
-    protected function atualizar(){
-        try{
-            $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id'],null,null,null);
-            $this -> DAO -> alterar($projeto);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante atualização no banco de dados';
-
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
-        }
+    protected function atualizar()
+    {
+        $projeto = new ProjetoModel($_POST['dataFinalizacao'], $_POST['dataInicio'], $_POST['descricao'], $_POST['nomeProjeto'], $_POST['id'], null, null, null);
+        $this->DAO->alterar($projeto);
     }
 
     public function listarPorIdUsuario($id)
     {
-        try{
-            return $this->DAO->listarPorIdUsuario($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        return $this->DAO->listarPorIdUsuario($id);
     }
 
     public function listarPorId($id)
     {
-        try{
-            return $this->DAO->listarPorId($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        return $this->DAO->listarPorId($id);
     }
 
-    public function procuraFuncionario($idProjeto,$idUsuario)
+    public function procuraFuncionario($idProjeto, $idUsuario)
     {
-        try{
-            $result = $this->DAO->procuraFuncionario($idProjeto,$idUsuario);
-            if ($result > 0) {
-                return true;
-            }else {
-                return false;
-            }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
+        $result = $this->DAO->procuraFuncionario($idProjeto, $idUsuario);
+        if ($result > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public function atualizaTotal($idProjeto)
     {
-        try{
-            $projeto = $this->DAO->listarPorId($idProjeto);
-            $this->DAO->atualizarTotal($projeto);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        $projeto = $this->DAO->listarPorId($idProjeto);
+        $this->DAO->atualizarTotal($projeto);
     }
 
     public function verificaDono($idProjeto)
     {
-        try{
-            $numRows = $this->DAO->verificaDono($idProjeto);
-            if($numRows > 0 ){
-                return true;
-            }else{
-                return false;
-            }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
+        $numRows = $this->DAO->verificaDono($idProjeto);
+        if ($numRows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public function addFuncionario()
     {
-        try{
-            if(!$this->procuraFuncionario($_POST['idProjeto'],$_POST['idUsuario'])){
-                $this->DAO->adicionarFuncionario($_POST['idUsuario'],$_POST['idProjeto']);
-            }else{
-                throw new Exception('Funcionário já inserido');
-            }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
+        if (!$this->procuraFuncionario($_POST['idProjeto'], $_POST['idUsuario'])) {
+            $this->DAO->adicionarFuncionario($_POST['idUsuario'], $_POST['idProjeto']);
+        } else {
+            throw new Exception('Funcionário já inserido');
         }
-    }
-
-    public function processaRequisicao()
-    {
-        /*
-       switch ($parametro){
-           case 'listaProjetos':
-               $usuarioControl = new UsuarioControl();
-               $usuarios = $usuarioControl->listar();
-               $projetos = $this->listarPorIdUsuario($_SESSION['usuario-id']);
-               require '../View/telaProjetos.php';
-       }*/
     }
 }

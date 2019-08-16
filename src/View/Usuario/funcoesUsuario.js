@@ -1,3 +1,4 @@
+"use strict";
 var botaoEntrar = document.querySelector("#botao-entrar");
 
 botaoEntrar.addEventListener("click",function (event) {
@@ -5,25 +6,27 @@ botaoEntrar.addEventListener("click",function (event) {
     var data = {
         login: inputs[0].value,
         senha: inputs[1].value
-    }
+    };
 
-    var request = JSON.stringify(data);
+    data = JSON.stringify(data);
 
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost/api/users/login";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(request);
+    var response = post("http://localhost/api/users/login",data);
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
+    xhr.onreadystatechange =function () {
+        if (xhr.readyState === 4) {
             var json = JSON.parse(xhr.responseText);
-            console.log(json);
-            console.log(document.cookie);
+            var mensagem = document.querySelector(".mensagem");
+            if (json.status === 'erro') {
+                mensagem.innerHTML = json.mensagem;
+            } else {
+                mensagem.style.backgroundColor = "green";
+                mensagem.innerHTML = json.mensagem;
+                document.cookie = "token="+json.dados.token;
+                console.log(document.cookie);
+            }
         }
     };
 });
-
 
 /*$(document).ready(function () {
     $('#modalAlterar').on('show.bs.modal', function (event) {

@@ -4,10 +4,10 @@
     <meta charset="utf-8"/>
     <title>LPM - Menu Veiculos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/grid-padrao.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/botoes.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/styleVeiculo.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../Default/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../Default/css/grid-padrao.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../Default/css/botoes.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../Default/css/styleVeiculo.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -20,18 +20,18 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
-                <img src="../img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="../Default/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
             <a href="/menu/condutor" class="side-bar-icon">
-                <img src="../img/Icons/condutor.png" class="img-icon" alt="Menu de Veiculos">
+                <img src="../Default/img/Icons/condutor.png" class="img-icon" alt="Menu de Veiculos">
             </a>
         </article>
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="../Default/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -59,12 +59,12 @@
                 <button class='btn-opcao' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $veiculo->getId()?>' data-nome='<?= $veiculo->getNome()?>' data-tipo='<?= $veiculo->getTipo()?>'
                         data-dtret='<?= $veiculo->getDataRetirada()?>' data-dtdev='<?= $veiculo->getDataDevolucao()?>' data-horaret='<?= $veiculo->getHorarioRetirada()?>'
                         data-horadev='<?= $veiculo->getHorarioDevolucao()?>' data-idcond='<?= $veiculo->getCondutor()->getId()?>'>
-                    <img class="img-icon" src='../img/Icons/editarIcone.png' alt=''>
+                    <img class="img-icon" src='../Default/img/Icons/editarIcone.png' alt=''>
                 </button>
                 <form action="/acaoVeiculo" method="post">
                     <input type="hidden" name="acao" value="excluirVeiculo">
                     <input type="hidden" name="id" value="<?= $veiculo->getId()?>">
-                    <button class='btn-opcao'><img class="img-icon" src='../img/Icons/lixeiraIcone.png' alt=""></button>
+                    <button class='btn-opcao'><img class="img-icon" src='../Default/img/Icons/lixeiraIcone.png' alt=""></button>
                 </form>
             </div>
 
@@ -76,7 +76,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../img/Icons/adicionar.png" class="img-icon" alt="Botao para cadastrar">
+    <img src="../Default/img/Icons/adicionar.png" class="img-icon" alt="Botao para cadastrar">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
@@ -221,8 +221,8 @@
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/funcoesVeiculo.js"></script>
+<script src="../Default/js/jquery.js"></script>
+<script src="../Default/js/bootstrap.js"></script>
+<script src="../Default/js/funcoesVeiculo.js"></script>
 </body>
 </html>

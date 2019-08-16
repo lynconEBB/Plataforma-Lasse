@@ -28,6 +28,7 @@ function handleExceptionTypes(Exception $exception) {
             $mensagem = "Token de Authenticação invalido ou não encontrado";
             break;
         case Exception::class:
+            //http_response_code(400);
             $mensagem = $exception->getMessage();
             break;
         case PDOException::class:

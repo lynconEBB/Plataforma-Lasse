@@ -12,10 +12,8 @@ use Firebase\JWT\JWT;
 class UsuarioControl extends CrudControl {
 
     public function __construct($url){
-        $this->metodo = $_SERVER['REQUEST_METHOD'];
-        $this->url = $url;
         $this->DAO = new UsuarioDao();
-        $this->processaRequisicao();
+        parent::__construct($url);
     }
 
     public function processaRequisicao()
@@ -25,9 +23,8 @@ class UsuarioControl extends CrudControl {
                 $info = json_decode(@file_get_contents("php://input"));
                 // /api/users/login
                 if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
-                    $this->tentaLogar($info);
-                }
-                // /api/users
+                    $this->logar($info);
+                } // /api/users
                 elseif (count($this->url) == 2) {
                     $this->cadastrar($info);
                 }
@@ -36,24 +33,29 @@ class UsuarioControl extends CrudControl {
                 // /api/users/{idUsuario}
                 if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
                     $this->listarPorId($this->url[2]);
-                }
-                // /api/users
+                } // /api/users
                 elseif (count($this->url) == 2) {
                     $this->listar();
                 }
                 break;
             case 'PUT':
                 $info = json_decode(@file_get_contents("php://input"));
+                // /api/users
                 if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
                     $this->atualizar($info);
                 }
                 break;
             case 'DELETE':
+                // /api/users
                 if (count($this->url) == 2) {
                     $this->excluir();
+                } // /api/users/deslogar
+                elseif (count($this->url) == 3 && $this->url[2] == 'deslogar') {
+                    $this->deslogar();
                 }
                 break;
         }
+
     }
 
     /*
@@ -78,16 +80,13 @@ class UsuarioControl extends CrudControl {
         $projetos = $projetoControl->listarPorIdUsuario($userInfo['id']);
         if ($projetos != false) {
             foreach ($projetos as $projeto){
-                if ($projetoControl->verificaDono($projeto->getId())) {
+                if ($projetoControl->verificaDono($projeto->getxId())) {
                     throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário");
                 }
             }
         }
         $this->DAO->excluir($userInfo['id']);
         $this->respostaSucesso("Usuario Excluido com sucesso",null,$userInfo);
-        if (isset($_COOKIE['token'])) {
-            unset($_COOKIE['token']);
-        }
     }
 
     public function listar() {
@@ -113,7 +112,7 @@ class UsuarioControl extends CrudControl {
         $this->respostaSucesso("Listando Usuário.",$usuario->toArray(),$userInfo);
     }
 
-    public function tentaLogar($info)
+    public function logar($info)
     {
         if ($info->login != "" && $info->senha != "") {
             $login = $info->login;
@@ -122,7 +121,7 @@ class UsuarioControl extends CrudControl {
                 if( password_verify($senha,$usuario->getSenha())){
                     $token = $this->criaToken($usuario);
                     header("Set-Cookie: token={$token}");
-                    $this->respostaSucesso("Logado com Sucesso");
+                    $this->respostaSucesso("Logado com Sucesso",["token" => $token]);
                 }else{
                     throw new Exception("Senha errada :(");
                 }
@@ -155,19 +154,32 @@ class UsuarioControl extends CrudControl {
         return $token;
     }
 
+    public function deslogar() {
+        $token = explode(' ',$_SERVER['HTTP_AUTHORIZATION']);
+        $token = $token[1];
+        $userInfo = self::autenticar();
+        $this->DAO->deslogar($userInfo['id'],$token);
+        $this->respostaSucesso("Deslogado com sucesso!",null,$userInfo);
+    }
+
     public static function autenticar()
     {
         if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
-            $auth =  explode(' ',$_SERVER['HTTP_AUTHORIZATION']);
-            if (count($auth) == 2) {
-                $auth = $auth[1];
-                $decoded = JWT::decode($auth,'SUPERSENHA123',array('HS256'));
-                $userInfo = ["id" => $decoded->data->id, "login" => $decoded->data->login];
-                return $userInfo;
+            $token =  explode(' ',$_SERVER['HTTP_AUTHORIZATION']);
+            if (count($token) == 2) {
+                $token = $token[1];
+                $decoded = JWT::decode($token,'SUPERSENHA123',array('HS256'));
+                $usuarioDAO = new UsuarioDao();
+                $tokenLogout = $usuarioDAO->ultimoTokenPorId($decoded->data->id);
+                    if ($tokenLogout != $token) {
+                        $userInfo = ["id" => $decoded->data->id, "login" => $decoded->data->login];
+                        return $userInfo;
+                    } else {
+                        throw new Exception("Usuário deslogado");
+                    }
             } else
                 throw new SignatureInvalidException();
         } else
             throw new SignatureInvalidException();
     }
-
 }

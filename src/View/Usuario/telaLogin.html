@@ -6,25 +6,29 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/src/View/Usuario/styleUsuario.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+    <article class="mensagem">
+
+    </article>
     <main>
         <section class="ilustracao">
-            <img src="/src/View/img/login/ilustracao.svg">
+            <img src="/src/View/Default/img/login/ilustracao.svg">
         </section>
         <section class="container">
             <div class="container-logo">
-                <img src="/src/View/img/login/logo.png">
+                <img src="/src/View/Default/img/login/logo.png">
             </div>
             <form id="form-login">
-                <input type="text" placeholder="Usuário">
+                <i class="material-icons" style="color: white;">lock</i><input type="text" placeholder="Usuário">
                 <input type="password" placeholder="Senha">
                 <span>Registre-se</span>
                 <button type="button" id="botao-entrar">Entrar</button>
             </form>
         </section>
     </main>
-
+<script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Usuario/funcoesUsuario.js"></script>
 </body>
 </html>

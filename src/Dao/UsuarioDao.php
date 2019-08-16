@@ -54,9 +54,7 @@ class UsuarioDao extends CrudDao {
     public function listar(){
         $busca = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE estado='ativado'");
         $busca->execute();
-
         $funcionarios =  array();
-
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         if (count($linhas) !== 0){
             foreach ($linhas as $linha){
@@ -67,7 +65,6 @@ class UsuarioDao extends CrudDao {
         }else{
             return false;
         }
-
     }
 
     public function listarPorIdProjeto($idProjeto){
@@ -116,5 +113,23 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
         }else{
             return false;
         }
+    }
+
+    public function deslogar($id,$token)
+    {
+        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenLogout = :token WHERE id=:id");
+        $delete->bindValue(':id',$id);
+        $delete->bindValue(':token',$token);
+        $delete->execute();
+    }
+
+    public function ultimoTokenPorId($id)
+    {
+        $stm = $this->pdo->prepare("SELECT tokenLogout FROM tbUsuario WHERE id = :id");
+        $stm->bindValue(':id',$id);
+        $stm->execute();
+
+        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+        return $linha['tokenLogout'];
     }
 }

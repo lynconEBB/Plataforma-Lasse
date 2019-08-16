@@ -18,7 +18,6 @@ use Lasse\LPM\Control\ProjetoControl;
 <body>
     <header class="page-header">
             <span class="titulo-header">Perfil de Usuário</span>
-        <?php \Lasse\LPM\Services\Mensagem::exibir('danger'); ?>
     </header>
     <div class="side-bar-back">
         <aside class="side-bar">

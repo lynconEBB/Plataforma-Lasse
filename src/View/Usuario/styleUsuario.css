@@ -94,4 +94,12 @@ main{
     font-size: 20px;
 }
 
+.mensagem{
+    position: absolute;
+    right: 50px;
+    top: 20px;
+    font-size: 25px;
+    background-color: red;
+}
+
 
