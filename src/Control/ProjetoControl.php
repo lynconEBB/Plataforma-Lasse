@@ -17,53 +17,54 @@ class ProjetoControl extends CrudControl
 
     public function processaRequisicao()
     {
-        switch ($this->metodo) {
-            case 'POST':
-                $info = json_decode(@file_get_contents("php://input"));
-                // /api/projetos
-                if (count($this->url) == 2) {
-                    $this->cadastrar($info);
-                    $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
-                }
-                // /api/projetos/adicionar
-                elseif (count($this->url) == 3 && $this->url[2] == "adicionar") {
-                    $this->addFuncionario($info->idProjeto,$info->idUsuario);
-                    $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
-                }
-                break;
-            case 'GET':
-                // /api/projetos
-                if (count($this->url) == 2) {
-                    $projetos = $this->listar();
-                    $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
-                // /api/projetos/{idProjeto}
-                } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                    $projeto = $this->listarPorId($this->url[2]);
-                    $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
-                }
-                // /api/projetos/user/{idUsuario}
-                elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
-                    $projetos = $this->listarPorIdUsuario($this->url[3]);
-                    $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
-                }
-                break;
-            case 'PUT':
-                $info = json_decode(@file_get_contents("php://input"));
-                // /api/projetos
-                if (count($this->url) == 2) {
-                    $projeto = $this->atualizar($info);
-                    $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);
-                }
-                break;
-            case 'DELETE':
-                // /api/projetos/{idProjeto}
-                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
-                    $this->excluir($this->url[2]);
-                    $this->respostaSucesso("Projeto excluido com sucesso.",null,$this->requisitor);
-                }
-                break;
+        if (!is_null($this->url)) {
+            switch ($this->metodo) {
+                case 'POST':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/projetos
+                    if (count($this->url) == 2) {
+                        $this->cadastrar($info);
+                        $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
+                    }
+                    // /api/projetos/adicionar
+                    elseif (count($this->url) == 3 && $this->url[2] == "adicionar") {
+                        $this->addFuncionario($info->idProjeto,$info->idUsuario);
+                        $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
+                    }
+                    break;
+                case 'GET':
+                    // /api/projetos
+                    if (count($this->url) == 2) {
+                        $projetos = $this->listar();
+                        $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
+                        // /api/projetos/{idProjeto}
+                    } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $projeto = $this->listarPorId($this->url[2]);
+                        $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
+                    }
+                    // /api/projetos/user/{idUsuario}
+                    elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
+                        $projetos = $this->listarPorIdUsuario($this->url[3]);
+                        $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
+                    }
+                    break;
+                case 'PUT':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/projetos
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $projeto = $this->atualizar($info,$this->url[2]);
+                        $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);
+                    }
+                    break;
+                case 'DELETE':
+                    // /api/projetos/{idProjeto}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                        $this->excluir($this->url[2]);
+                        $this->respostaSucesso("Projeto excluido com sucesso.",null,$this->requisitor);
+                    }
+                    break;
+            }
         }
-
     }
 
     protected function cadastrar($info)
@@ -89,10 +90,10 @@ class ProjetoControl extends CrudControl
         return $projetos;
     }
 
-    protected function atualizar($info)
+    protected function atualizar($info,$id)
     {
-        if ($this->verificaDono($info->id,$this->requisitor['id'])) {
-            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $info->id, null, null, null);
+        if ($this->verificaDono($id,$this->requisitor['id'])) {
+            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $id, null, null, null);
             $this->DAO->alterar($projeto);
         } else {
             throw new Exception("Permissão negada para alterar este projeto");
