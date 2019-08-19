@@ -24,6 +24,20 @@ class VeiculoModel
         $this->id=$id;
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "tipo" => $this->tipo,
+            "dataRetirada" => $this->dataRetirada,
+            "dataDevolucao" => $this->dataDevolucao,
+            "horarioRetirada" => $this->horarioRetirada,
+            "horarioDevolucao" => $this->horarioDevolucao,
+            "condutor" => $this->condutor->toArray()
+        ];
+        return $array;
+    }
 
     public function getId(){
         return $this->id;

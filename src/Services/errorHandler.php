@@ -18,7 +18,7 @@ function errorToException( $code, $message, $file, $line )
     throw new ErroException( $code, $message, $file, $line );
 }
 
-function handleExceptionTypes(Exception $exception) {
+function handleExceptionTypes($exception) {
     $mensagem = "";
     $exceptionClass = get_class($exception);
 
@@ -28,7 +28,7 @@ function handleExceptionTypes(Exception $exception) {
             $mensagem = "Token de Authenticação invalido ou não encontrado";
             break;
         case Exception::class:
-            //http_response_code(400);
+            http_response_code(400);
             $mensagem = $exception->getMessage();
             break;
         case PDOException::class:

@@ -47,7 +47,7 @@ class Router{
                 $controler = new UsuarioControl($this->url);
                 break;
             case 'projetos':
-                //$controler = new ProjetoControl($this->url);
+                $controler = new ProjetoControl($this->url);
                 break;
         }
     }

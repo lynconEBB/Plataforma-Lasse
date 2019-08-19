@@ -18,44 +18,52 @@ class UsuarioControl extends CrudControl {
 
     public function processaRequisicao()
     {
-        switch ($this->metodo) {
-            case 'POST':
-                $info = json_decode(@file_get_contents("php://input"));
-                // /api/users/login
-                if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
-                    $this->logar($info);
-                } // /api/users
-                elseif (count($this->url) == 2) {
-                    $this->cadastrar($info);
-                }
-                break;
-            case 'GET':
-                // /api/users/{idUsuario}
-                if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
-                    $this->listarPorId($this->url[2]);
-                } // /api/users
-                elseif (count($this->url) == 2) {
-                    $this->listar();
-                }
-                break;
-            case 'PUT':
-                $info = json_decode(@file_get_contents("php://input"));
-                // /api/users
-                if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
-                    $this->atualizar($info);
-                }
-                break;
-            case 'DELETE':
-                // /api/users
-                if (count($this->url) == 2) {
-                    $this->excluir();
-                } // /api/users/deslogar
-                elseif (count($this->url) == 3 && $this->url[2] == 'deslogar') {
-                    $this->deslogar();
-                }
-                break;
+        if ($this->url != null) {
+            switch ($this->metodo) {
+                case 'POST':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/users/login
+                    if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
+                        $token = $this->logar($info);
+                        $this->respostaSucesso("Logado com Sucesso",$token);
+                    } // /api/users
+                    elseif (count($this->url) == 2) {
+                        $this->cadastrar($info);
+                        $this->respostaSucesso("Usuario Registrado com Sucesso!");
+                    }
+                    break;
+                case 'GET':
+                    // /api/users/{idUsuario}
+                    if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                        $usuario = $this->listarPorId($this->url[2]);
+                        $this->respostaSucesso("Listando Usuário.",$usuario,$this->requisitor);
+                    } // /api/users
+                    elseif (count($this->url) == 2) {
+                        $usuarios = $this->listar();
+                        $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$this->requisitor);
+                    }
+                    break;
+                case 'PUT':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/users
+                    if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                        $this->atualizar($info);
+                        $this->respostaSucesso("Dados de Usuário alterados com sucesso",null,$this->requisitor);
+                    }
+                    break;
+                case 'DELETE':
+                    // /api/users
+                    if (count($this->url) == 2) {
+                        $this->excluir();
+                        $this->respostaSucesso("Usuario Excluido com sucesso",null,$this->requisitor);
+                    } // /api/users/deslogar
+                    elseif (count($this->url) == 3 && $this->url[2] == 'deslogar') {
+                        $this->deslogar();
+                        $this->respostaSucesso("Deslogado com sucesso!",null,$this->requisitor);
+                    }
+                    break;
+            }
         }
-
     }
 
     /*
@@ -68,16 +76,15 @@ class UsuarioControl extends CrudControl {
             $hash = password_hash($info->senha,PASSWORD_BCRYPT);
             $usuario = new UsuarioModel($info->nomeCompleto,$info->login,$hash,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora,null);
             $this->DAO->cadastrar($usuario);
-            $this->respostaSucesso("Usuario Registrado com Sucesso!");
         }else {
             throw new Exception("Nome de Usuário já registrado");
         }
     }
 
     protected function excluir(){
-        $userInfo = self::autenticar();
+        $this->requisitor = self::autenticar();
         $projetoControl = new ProjetoControl();
-        $projetos = $projetoControl->listarPorIdUsuario($userInfo['id']);
+        $projetos = $projetoControl->listarPorIdUsuario($this->requisitor['id']);
         if ($projetos != false) {
             foreach ($projetos as $projeto){
                 if ($projetoControl->verificaDono($projeto->getxId())) {
@@ -85,31 +92,25 @@ class UsuarioControl extends CrudControl {
                 }
             }
         }
-        $this->DAO->excluir($userInfo['id']);
-        $this->respostaSucesso("Usuario Excluido com sucesso",null,$userInfo);
+        $this->DAO->excluir($this->requisitor['id']);
     }
 
     public function listar() {
-        $userInfo = self::autenticar();
+        $this->requisitor = self::autenticar();
         $usuarios = $this->DAO->listar();
-        $dados = array();
-        foreach ($usuarios as $usuario) {
-            $dados[] = $usuario->toArray();
-        }
-        $this->respostaSucesso("Listando todos Usuários do banco de dados",$dados,$userInfo);
+        return $usuarios;
     }
 
     protected function atualizar($info) {
-        $userInfo = self::autenticar();
+        $this->requisitor = self::autenticar();
         $usuario = new UsuarioModel($info->nomeCompleto,$info->login,null,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora,$userInfo['id']);
         $this->DAO->alterar($usuario);
-        $this->respostaSucesso("Dados de Usuário alterados com sucesso",null,$userInfo);
     }
 
     public function listarPorId($id){
-        $userInfo = self::autenticar();
+        $this->requisitor = self::autenticar();
         $usuario = $this->DAO->listarPorId($id);
-        $this->respostaSucesso("Listando Usuário.",$usuario->toArray(),$userInfo);
+        return $usuario;
     }
 
     public function logar($info)
@@ -121,7 +122,7 @@ class UsuarioControl extends CrudControl {
                 if( password_verify($senha,$usuario->getSenha())){
                     $token = $this->criaToken($usuario);
                     header("Set-Cookie: token={$token}");
-                    $this->respostaSucesso("Logado com Sucesso",["token" => $token]);
+                    return $token;
                 }else{
                     throw new Exception("Senha errada :(");
                 }
@@ -157,9 +158,8 @@ class UsuarioControl extends CrudControl {
     public function deslogar() {
         $token = explode(' ',$_SERVER['HTTP_AUTHORIZATION']);
         $token = $token[1];
-        $userInfo = self::autenticar();
-        $this->DAO->deslogar($userInfo['id'],$token);
-        $this->respostaSucesso("Deslogado com sucesso!",null,$userInfo);
+        $this->requisitor= self::autenticar();
+        $this->DAO->deslogar($this->requisitor['id'],$token);
     }
 
     public static function autenticar()

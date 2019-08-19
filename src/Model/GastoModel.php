@@ -15,6 +15,16 @@ class GastoModel
         $this->tipo = $tipo;
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "valor" => $this->valor,
+            "tipo" => $this->tipo,
+        ];
+        return $array;
+    }
+
     public function getId(){
         return $this->id;
     }

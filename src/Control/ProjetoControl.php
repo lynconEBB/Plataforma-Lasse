@@ -4,76 +4,117 @@ namespace Lasse\LPM\Control;
 
 use Exception;
 use Lasse\LPM\Dao\ProjetoDao;
-use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\ProjetoModel;
 
 class ProjetoControl extends CrudControl
 {
-    private $requisitor;
     public function __construct($url)
     {
         $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new ProjetoDao();
         parent::__construct($url);
-        $this->processaRequisicao();
     }
 
     public function processaRequisicao()
     {
-        if (!is_null($this->url)) {
-            switch ($this->metodo) {
-                case 'POST':
-                    $info = json_encode(@file_get_contents("php://input"));
-                    // /api/projetos
-                    if (count($this->url) == 2) {
-                        $this->cadastrar($info);
-                    }
-                    break;
-                case 'GET':
-                    break;
-                case 'PUT':
-                    break;
-                case 'DELETE':
-                    break;
-            }
+        switch ($this->metodo) {
+            case 'POST':
+                $info = json_decode(@file_get_contents("php://input"));
+                // /api/projetos
+                if (count($this->url) == 2) {
+                    $this->cadastrar($info);
+                    $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
+                }
+                // /api/projetos/adicionar
+                elseif (count($this->url) == 3 && $this->url[2] == "adicionar") {
+                    $this->addFuncionario($info->idProjeto,$info->idUsuario);
+                    $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
+                }
+                break;
+            case 'GET':
+                // /api/projetos
+                if (count($this->url) == 2) {
+                    $projetos = $this->listar();
+                    $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
+                // /api/projetos/{idProjeto}
+                } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                    $projeto = $this->listarPorId($this->url[2]);
+                    $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
+                }
+                // /api/projetos/user/{idUsuario}
+                elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
+                    $projetos = $this->listarPorIdUsuario($this->url[3]);
+                    $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
+                }
+                break;
+            case 'PUT':
+                $info = json_decode(@file_get_contents("php://input"));
+                // /api/projetos
+                if (count($this->url) == 2) {
+                    $projeto = $this->atualizar($info);
+                    $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);
+                }
+                break;
+            case 'DELETE':
+                // /api/projetos/{idProjeto}
+                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                    $this->excluir($this->url[2]);
+                    $this->respostaSucesso("Projeto excluido com sucesso.",null,$this->requisitor);
+                }
+                break;
         }
+
     }
 
     protected function cadastrar($info)
     {
         $usuarioControl = new UsuarioControl(null);
-
-        $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, null);
+        $dono = $usuarioControl->listarPorId($this->requisitor['id']);
+        $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, $dono);
         $this->DAO->cadastrar($projeto);
-        $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
     }
 
     protected function excluir($id)
     {
-        $id = $this->url[3];
-        $this->DAO->excluir($id);
-        $this->respostaSucesso("Projeto excluído com sucesso",null,$this->requisitor);
+        if ($this->verificaDono($id,$this->requisitor['id'])) {
+            $this->DAO->excluir($id);
+        } else {
+            throw new Exception("Você precisa ser dono deste projeto para deleta-lo.");
+        }
     }
 
     public function listar()
     {
-        return $this->DAO->listar();
+        $projetos = $this->DAO->listar();
+        return $projetos;
     }
 
-    protected function atualizar()
+    protected function atualizar($info)
     {
-        $projeto = new ProjetoModel($_POST['dataFinalizacao'], $_POST['dataInicio'], $_POST['descricao'], $_POST['nomeProjeto'], $_POST['id'], null, null, null);
-        $this->DAO->alterar($projeto);
+        if ($this->verificaDono($info->id,$this->requisitor['id'])) {
+            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $info->id, null, null, null);
+            $this->DAO->alterar($projeto);
+        } else {
+            throw new Exception("Permissão negada para alterar este projeto");
+        }
+
     }
 
     public function listarPorIdUsuario($id)
     {
-        return $this->DAO->listarPorIdUsuario($id);
+        if ($this->requisitor['id'] == $id) {
+            $projetos = $this->DAO->listarPorIdUsuario($id);
+            return $projetos;
+        } else {
+            throw new Exception("Permissão negada");
+        }
+
     }
 
     public function listarPorId($id)
     {
-        return $this->DAO->listarPorId($id);
+        $projeto = $this->DAO->listarPorId($id);
+        return $projeto;
     }
 
     public function procuraFuncionario($idProjeto, $idUsuario)
@@ -92,9 +133,9 @@ class ProjetoControl extends CrudControl
         $this->DAO->atualizarTotal($projeto);
     }
 
-    public function verificaDono($idProjeto)
+    public function verificaDono($idProjeto,$idUsuario)
     {
-        $numRows = $this->DAO->verificaDono($idProjeto);
+        $numRows = $this->DAO->verificaDono($idProjeto,$idUsuario);
         if ($numRows > 0) {
             return true;
         } else {
@@ -102,12 +143,17 @@ class ProjetoControl extends CrudControl
         }
     }
 
-    public function addFuncionario()
+    public function addFuncionario($idProjeto,$idUsuario)
     {
-        if (!$this->procuraFuncionario($_POST['idProjeto'], $_POST['idUsuario'])) {
-            $this->DAO->adicionarFuncionario($_POST['idUsuario'], $_POST['idProjeto']);
+        if ($this->verificaDono($idProjeto,$this->requisitor['id'])) {
+            if (!$this->procuraFuncionario($idProjeto,$idUsuario)) {
+                $this->DAO->adicionarFuncionario($idUsuario, $idProjeto);
+            } else {
+                throw new Exception('Funcionário já inserido');
+            }
         } else {
-            throw new Exception('Funcionário já inserido');
+            throw new Exception("Você não possui permissão para adicionar funcionários nesse projeto.");
         }
+
     }
 }

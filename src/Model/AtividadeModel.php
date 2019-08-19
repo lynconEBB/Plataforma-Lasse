@@ -25,6 +25,20 @@ class AtividadeModel {
         $this->setId($id);
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "tipo" => $this->tipo,
+            "tempoGasto" => $this->tempoGasto,
+            "comentario" => $this->comentario,
+            "usuario" => $this->usuario->toArray(),
+            "dataRealizacao" => $this->dataRealizacao,
+            "totalGasto" => $this->totalGasto
+        ];
+        return $array;
+    }
+
     public function getId(){
         return $this->id;
     }

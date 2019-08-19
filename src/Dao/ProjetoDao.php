@@ -22,7 +22,7 @@ class ProjetoDao extends CrudDao {
         $stm = $this->pdo->prepare($comando2);
 
         $stm->bindValue(':idProjeto',$this->pdo->lastInsertId());
-        $stm->bindValue(':idUsuario',$_SESSION['usuario-id']);
+        $stm->bindValue(':idUsuario',$projeto->getParticipantes()->getId());
 
         $stm->execute();
     }
@@ -140,13 +140,13 @@ class ProjetoDao extends CrudDao {
         return $stm->rowCount();
     }
 
-    public function verificaDono($idProjeto)
+    public function verificaDono($idProjeto,$idUsuario)
     {
         $comando = "select * from tbUsuarioProjeto where idProjeto = :idProjeto and idUsuario = :idUsuario and dono = TRUE";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindParam(':idProjeto',$idProjeto);
-        $stm->bindParam('idUsuario',$_SESSION['usuario-id']);
+        $stm->bindParam('idUsuario',$idUsuario);
 
         $stm->execute();
         return $stm->rowCount();

@@ -29,11 +29,44 @@ class ProjetoModel
         $this->settotalGasto($totalGasto);
     }
 
+    public function toArray()
+    {
+        if (is_array($this->tarefas)) {
+            $tarefas = array();
+            foreach ($this->tarefas as $tarefa) {
+                $tarefas[] = $tarefa->toArray();
+            }
+        } else {
+            $tarefas = null;
+        }
+        if (is_array($this->participantes)) {
+            $participantes = array();
+            foreach ($this->participantes as $participante) {
+                $participantes[] = $participante->toArray();
+            }
+        } else {
+            $participantes = null;
+        }
+        $array = [
+            "id" => $this->id,
+            "dataInicio" => $this->dataInicio->format("d/m/Y"),
+            "dataFinalizacao" => $this->dataFinalizacao->format("d/m/Y"),
+            "nome" => $this->nome,
+            "descricao" => $this->descricao,
+            "tarefas" => $tarefas,
+            "totalGasto" => $this->totalGasto,
+            "participantes" => $participantes
+        ];
+        return $array;
+    }
+
     public function calculaTotal()
     {
         $total = 0.00;
-        foreach ($this->tarefas as $tarefa){
-            $total += $tarefa->getTotalGasto();
+        if (is_array($this->tarefas)) {
+            foreach ($this->tarefas as $tarefa){
+                $total += $tarefa->getTotalGasto();
+            }
         }
         $this->totalGasto = $total;
     }
@@ -43,7 +76,7 @@ class ProjetoModel
         return $this->participantes;
     }
 
-    public function setParticipantes($participantes): void
+    public function setParticipantes($participantes)
     {
         $this->participantes = $participantes;
     }

@@ -16,6 +16,17 @@ class CondutorModel
         $this->id = $id;
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "cnh" => $this->cnh,
+            "validadeCNH" => $this->validadeCNH
+        ];
+        return $array;
+    }
+
     public function getNome(){
         return $this->nome;
     }

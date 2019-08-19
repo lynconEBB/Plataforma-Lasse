@@ -32,6 +32,47 @@ class TarefaModel
         $this->setId($id);
     }
 
+    public function toArray()
+    {
+        if (is_array($this->atividades)) {
+            $atividades = array();
+            foreach ($this->atividades as $atividade) {
+                $atividades[] = $atividade->toArray();
+            }
+        } else {
+            $atividades = null;
+        }
+        if (is_array($this->compras)) {
+            $compras = array();
+            foreach ($this->compras as $compra) {
+                $compras[] = $compra->toArray();
+            }
+        } else {
+            $compras = null;
+        }
+        if (is_array($this->viagens)) {
+            $viagens = array();
+            foreach ($this->viagens as $viagem) {
+                $viagens[] = $viagem->toArray();
+            }
+        } else {
+            $viagens = null;
+        }
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "descricao" => $this->descricao,
+            "estado" => $this->estado,
+            "dataInicio" => $this->dataInicio->format("d/m/y"),
+            "dataConclusao" => $this->dataConclusao->format("d/m/y"),
+            "atividades" => $atividades,
+            "compras" => $compras,
+            "viagens" => $viagens,
+            "totalGasto" => $this->totalGasto,
+        ];
+        return $array;
+    }
+
     public function calculaTotal()
     {
         $total = 0;

@@ -40,6 +40,35 @@ class ViagemModel
         $this->setId($id);*/
     }
 
+    public function toArray()
+    {
+        if (is_array($this->gastos)) {
+            $gastos = array();
+            foreach ($this->gastos as $gasto) {
+                $gastos[] = $gasto->toArray();
+            }
+        } else {
+            $gastos = null;
+        }
+        $array = [
+            "viajante" => $this->viajante->toArray(),
+            "veiculo" => $this->veiculo->toArray(),
+            "origem" => $this->origem,
+            "destino" => $this->destino,
+            "dtIda" => $this->dtIda,
+            "dtVolta" => $this->dtVolta,
+            "passagem" => $this->passagem,
+            "justificativa" => $this->justificativa,
+            "obeservacoes" => $this->observacoes,
+            "saidaHosp" => $this->SaidaHosp->format('d/m/Y h:i'),
+            "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
+            "totalGasto" => $this->totalGasto,
+            "id" => $this->id,
+            "gastos" => $gastos
+        ];
+        return $array;
+    }
+
     public function calculaTotal()
     {
         $total =0;
