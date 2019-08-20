@@ -7,43 +7,33 @@ use Lasse\LPM\Model\ItemModel;
 
 class ItemControl extends CrudControl{
 
-    public function __construct(){
-        UsuarioControl::verificar();
+    public function __construct($url=null){
+        $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new ItemDao();
-        parent::__construct();
+        parent::__construct($url);
     }
 
-    public function defineAcao($acao){
-        switch ($acao){
-            case 'cadastrarItem':
-                $this->cadastrar();
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+    public function processaRequisicao()
+    {
+        switch ($this->metodo){
+            case 'listaItens':
+                $compraControl = new CompraControl();
+                $compras = $compraControl->listar();
+                require '../View/telaItensGerais.php';
                 break;
-            case 'excluirItem':
-                $this->excluir($_POST['id']);
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-                break;
-            case 'alterarItem':
-                $this->atualizar();
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            case 'listaItensCompra':
+                $itens = $this->listarPorIdCompra($_GET['idCompra']);
+                require '../View/telaItensCompra.php';
                 break;
         }
     }
 
-    protected function cadastrar()
+    public function cadastrar($valor,$nome,$quantidade,$idCompra)
     {
-        $item = new ItemModel($_POST['valor'],$_POST['nome'],$_POST['qtd']);
-        $this->DAO->cadastrar($item,$_POST['idCompra']);
-        $compraControl = new CompraControl();
-        $compraControl->atualizarTotal($_POST['idCompra']);
-    }
-
-    public function cadastrarPorArray(array $itens, int $idCompra)
-    {
-        foreach ($itens as $item){
-            $ite = new ItemModel($item['valor'],$item['nome'],$item['qtd']);
-            $this->DAO->cadastrar($ite,$idCompra);
-        }
+        $item = new ItemModel($valor,$nome,$quantidade);
+        $this->DAO->cadastrar($item,$idCompra);
+        $compraControl = new CompraControl(null);
+        $compraControl->atualizarTotal($idCompra);
     }
 
     protected function excluir(int $id)
@@ -53,10 +43,6 @@ class ItemControl extends CrudControl{
         $compraControl->atualizarTotal($_POST['idCompra']);
     }
 
-    public function excluirPorIdCompra($id)
-    {
-        $this -> DAO -> excluirPorIdCompra($id);
-    }
 
     public function listar()
     {
@@ -76,18 +62,5 @@ class ItemControl extends CrudControl{
         $compraControl->atualizarTotal($_POST['idCompra']);
     }
 
-    public function processaRequisicao(string $parametro)
-    {
-        switch ($parametro){
-            case 'listaItens':
-                $compraControl = new CompraControl();
-                $compras = $compraControl->listar();
-                require '../View/telaItensGerais.php';
-                break;
-            case 'listaItensCompra':
-                $itens = $this->listarPorIdCompra($_GET['idCompra']);
-                require '../View/telaItensCompra.php';
-                break;
-        }
-    }
+
 }

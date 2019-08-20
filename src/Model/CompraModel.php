@@ -44,8 +44,10 @@ class CompraModel
 
     public function calculaTotal(){
         $total = 0;
-        foreach ($this->itens as $item){
-            $total += $item->getValorParcial();
+        if (is_array($this->itens)) {
+            foreach ($this->itens as $item){
+                $total += $item->getValorParcial();
+            }
         }
         $this->totalGasto = $total;
     }
