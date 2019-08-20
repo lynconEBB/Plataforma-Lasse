@@ -50,7 +50,7 @@ class ProjetoControl extends CrudControl
                     break;
                 case 'PUT':
                     $info = json_decode(@file_get_contents("php://input"));
-                    // /api/projetos
+                    // /api/projetos/{idProjeto}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $projeto = $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);

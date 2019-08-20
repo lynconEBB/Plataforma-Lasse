@@ -52,6 +52,9 @@ class Router{
             case 'tarefas':
                 $controler = new TarefaControl($this->url);
                 break;
+            case 'atividades':
+                $controler = new AtividadeControl($this->url);
+                break;
         }
     }
 

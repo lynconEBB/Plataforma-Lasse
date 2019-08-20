@@ -15,7 +15,7 @@ class AtividadeModel {
     private $totalGasto;
     private $usuario;
 
-    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, UsuarioModel $usuario,$id,$totalGasto){
+    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, $usuario,$id,$totalGasto){
         $this->setTipo($tipo);
         $this->setTempoGasto($tempoGasto);
         $this->setComentario($comentario);
@@ -32,9 +32,9 @@ class AtividadeModel {
             "tipo" => $this->tipo,
             "tempoGasto" => $this->tempoGasto,
             "comentario" => $this->comentario,
-            "usuario" => $this->usuario->toArray(),
-            "dataRealizacao" => $this->dataRealizacao,
-            "totalGasto" => $this->totalGasto
+            "dataRealizacao" => $this->dataRealizacao->format('d/m/Y'),
+            "totalGasto" => $this->totalGasto,
+            "usuario" => $this->usuario->toArray()
         ];
         return $array;
     }

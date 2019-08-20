@@ -37,7 +37,7 @@ class AtividadeDao extends CrudDao {
         $stm->execute();
         $result =array();
 
-        $usuarioControl = new UsuarioControl();
+        $usuarioControl = new UsuarioControl(null);
         $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
         if (count($linhas) > 0){
             foreach ($linhas as $row) {
@@ -97,7 +97,7 @@ class AtividadeDao extends CrudDao {
         $result =array();
         $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
         if(count($linhas) > 0){
-            $usuarioControl = new UsuarioControl();
+            $usuarioControl = new UsuarioControl(null);
             $usuario = $usuarioControl->listarPorId($idUsuario);
             foreach ($linhas as $row) {
                 $obj = new AtividadeModel($row['tipo'],$row['tempoGasto'],$row['comentario'],$row['dataRealizacao'],$usuario,$row['id'],$row['totalGasto']);
@@ -107,7 +107,37 @@ class AtividadeDao extends CrudDao {
         }else{
             return false;
         }
+    }
 
+    public function listarPorId($id){
+        $comando = "SELECT * FROM tbAtividade where id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$id);
+        $stm->execute();
+        $linha = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if($linha != false){
+            $usuarioControl = new UsuarioControl(null);
+            $usuario = $usuarioControl->listarPorId($linha['idUsuario']);
+            $obj = new AtividadeModel($linha['tipo'],$linha['tempoGasto'],$linha['comentario'],$linha['dataRealizacao'],$usuario,$linha['id'],$linha['totalGasto']);
+            return $obj;
+        }else{
+            return false;
+        }
+
+    }
+
+
+    public function descobrirIdTarefa($id)
+    {
+        $comando = "SELECT idTarefa from tbAtividade WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue(':id',$id);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $row['idTarefa'];
     }
 
 }
