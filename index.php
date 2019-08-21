@@ -21,6 +21,7 @@ use Lasse\LPM\Control\ViagemControl;
 class Router{
 
     private $url;
+    private $metodo;
 
     public function __construct()
     {
@@ -58,6 +59,10 @@ class Router{
             case 'compras':
                 $controler = new CompraControl($this->url);
                 break;
+            case 'viagens':
+                $controler = new ViagemControl();
+                break;
+
         }
     }
 
