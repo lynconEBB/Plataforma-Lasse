@@ -28,15 +28,6 @@ class ItemDao extends CrudDao {
 
     }
 
-    function excluirPorIdCompra($idCompra){
-        $comando = "DELETE FROM tbItem WHERE idCompra = :id";
-        $stm = $this->pdo->prepare($comando);
-
-        $stm->bindParam(':id',$idCompra);
-        $stm->execute();
-
-    }
-
     public function listar(){
         $comando = "SELECT * from tbItem";
         $stm = $this->pdo->prepare($comando);
@@ -91,6 +82,18 @@ class ItemDao extends CrudDao {
         }
 
         return $result;
+    }
+
+    public function descobrirIdCompra($idItem)
+    {
+        $comando = "SELECT idCompra FROM tbItem where id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$idItem);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        return $row['idCompra'];
     }
 
 }

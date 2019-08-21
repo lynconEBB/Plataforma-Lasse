@@ -59,10 +59,12 @@ class Router{
             case 'compras':
                 $controler = new CompraControl($this->url);
                 break;
+            case 'itens':
+                $controler = new ItemControl($this->url);
+                break;
             case 'viagens':
                 $controler = new ViagemControl();
                 break;
-
         }
     }
 

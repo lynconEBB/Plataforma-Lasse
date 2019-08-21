@@ -133,12 +133,17 @@ class CompraControl extends CrudControl {
     public function listarPorId($id)
     {
         $idTarefa = $this->DAO->descobreIdTarefa($id);
-        if ($this->verificaPermissao($idTarefa)) {
-            $compra = $this->DAO->listarPorId($id);
-            return $compra;
+        if (!is_null($idTarefa)) {
+            if ($this->verificaPermissao($idTarefa)) {
+                $compra = $this->DAO->listarPorId($id);
+                return $compra;
+            } else {
+                throw new Exception("Permissão de acesso a Compra Negada");
+            }
         } else {
-            throw new Exception("Permissão negada");
+            throw new Exception("Compra não encontrada no sistema");
         }
+
     }
 
     public function atualizarTotal($idCompra)
@@ -157,5 +162,10 @@ class CompraControl extends CrudControl {
         $projetoControl = new ProjetoControl(null);
         $resposta = $projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id']);
         return $resposta;
+    }
+
+    public function descibrirIdTarefa($idCompra)
+    {
+        return $this->DAO->descobreIdTarefa($idCompra);
     }
 }
