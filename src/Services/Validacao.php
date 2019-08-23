@@ -88,7 +88,8 @@ class Validacao
 
     private static function dataHora($nomeParametro,$valor)
     {
-        if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4} [0-9]{2}:[0-9]{2}$/",$valor)) {
+        if (!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4} [0-9]{2}:[0-9]{2}$/",$valor)
+        && !preg_match("/^[0-9]{2}\/[0-9]{2}\/[0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2}$/",$valor) && !preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/",$valor)) {
             throw new Exception('O campo '.$nomeParametro.' deve estar no formato de data e hora (dd/mm/yyyy hh:mm:ss)',1);
         }
     }

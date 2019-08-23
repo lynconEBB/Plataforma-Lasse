@@ -14,7 +14,7 @@ class CondutorDao extends CrudDao {
 
         $stm->bindValue(':nome',$condutor->getNome());
         $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
+        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH()->format('Y-m-d'));
 
         $stm->execute();
     }
@@ -48,7 +48,7 @@ class CondutorDao extends CrudDao {
 
         $stm->bindValue(':nome',$condutor->getNome());
         $stm->bindValue(':cnh',$condutor->getCnh());
-        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH());
+        $stm->bindValue(':validadeCNH',$condutor->getValidadeCNH()->format('Y-m-d'));
         $stm->bindValue(':id',$condutor->getId());
 
         $stm->execute();
@@ -63,9 +63,12 @@ class CondutorDao extends CrudDao {
 
         $stm->execute();
         $resul = $stm->fetch(PDO::FETCH_ASSOC);
-        $obj = new CondutorModel($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
-
-        return $obj;
+        if ($resul != false) {
+            $obj = new CondutorModel($resul['nome'],$resul['cnh'],$resul['validadeCNH'],$resul['id']);
+            return $obj;
+        } else {
+            return false;
+        }
     }
 
 }

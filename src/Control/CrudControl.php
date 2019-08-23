@@ -20,6 +20,7 @@ abstract class CrudControl{
     public function respostaSucesso($mensagem,$dados= null,$requisitor = null)
     {
         header("Content-type: application/json; charset=utf-8");
+        header("Accept: application/json");
         http_response_code(200);
         $resposta = ["status" => "sucesso" , "mensagem" => $mensagem];
 

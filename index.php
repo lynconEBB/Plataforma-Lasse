@@ -63,7 +63,13 @@ class Router{
                 $controler = new ItemControl($this->url);
                 break;
             case 'viagens':
-                $controler = new ViagemControl();
+                $controler = new ViagemControl($this->url);
+                break;
+            case 'condutores':
+                $controler = new CondutorControl($this->url);
+                break;
+            case 'veiculos':
+                $controler = new VeiculoControl($this->url);
                 break;
         }
     }

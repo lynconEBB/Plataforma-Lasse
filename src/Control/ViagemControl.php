@@ -12,26 +12,11 @@ use Lasse\LPM\Model\ViagemModel;
 
 class ViagemControl extends CrudControl {
 
-    public function __construct()
+    public function __construct($url)
     {
         UsuarioControl::verificar();
         $this->DAO = new ViagemDao();
-        parent::__construct();
-    }
-
-    public function defineAcao($acao){
-        switch ($acao){
-            case 'cadastrarViagem':
-                $this->cadastrar();
-                //header('Location: /menu/viagem?idTarefa='.$_POST['idTarefa']);
-                break;
-            case 'excluirViagem':
-                $this->excluir($_POST['id']);
-                break;
-            case "alterarViagem":
-                $this->atualizar();
-                break;
-        }
+        parent::__construct($url);
     }
 
     protected function cadastrar()
