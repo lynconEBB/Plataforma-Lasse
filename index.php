@@ -27,7 +27,7 @@ class Router{
     {
         $this->metodo = $_SERVER['REQUEST_METHOD'];
         $this->url = $this->formataURL($_SERVER['SCRIPT_URL']);
-
+        
         if ($this->url[0] == 'api') {
             if (count($this->url) > 1) {
                 $this->decideControler();
@@ -70,6 +70,9 @@ class Router{
                 break;
             case 'veiculos':
                 $controler = new VeiculoControl($this->url);
+                break;
+            case 'gastos':
+                $controler = new GastoControl($this->url);
                 break;
         }
     }

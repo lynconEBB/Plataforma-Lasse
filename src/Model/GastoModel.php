@@ -2,6 +2,9 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class GastoModel
 {
     private $id;
@@ -10,9 +13,9 @@ class GastoModel
 
     public function __construct($valor, $tipo,$id=null)
     {
-        $this->id = $id;
-        $this->valor = $valor;
-        $this->tipo = $tipo;
+        $this->setId($id);
+        $this->setValor($valor);
+        $this->setTipo($tipo);
     }
 
     public function toArray()
@@ -25,6 +28,11 @@ class GastoModel
         return $array;
     }
 
+    private function setId($id)
+    {
+        Validacao::validar("Id",$id,'nuloOUinteiro');
+        $this->id = $id;
+    }
     public function getId(){
         return $this->id;
     }
@@ -34,7 +42,8 @@ class GastoModel
     }
 
     public function setValor($valor){
-        $this->valor = $valor;
+        Validacao::validar("Valor do Gasto",$valor,'monetario');
+        $this->valor = Formatacao::formataMonetario($valor);
     }
 
     public function getTipo(){
@@ -42,8 +51,7 @@ class GastoModel
     }
 
     public function setTipo($tipo){
+        Validacao::validar("Tipo de Gasto",$tipo,'obrigatorio','texto');
         $this->tipo = $tipo;
     }
 }
-
-?>
