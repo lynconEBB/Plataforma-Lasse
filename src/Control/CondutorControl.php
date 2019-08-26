@@ -22,7 +22,7 @@ class CondutorControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/condutores
                     if (count($this->url) == 2) {
-                        $this->cadastrar($info->nome,$info->cnh,$info->validadeCNH);
+                        $this->cadastrar($info);
                         $this->respostaSucesso("Condutor cadastrado com sucesso",null,$this->requisitor);
                     }
                     break;
@@ -62,9 +62,13 @@ class CondutorControl extends CrudControl {
         }
     }
 
-    public function cadastrar($nome,$cnh,$validadeCNH){
-        $condutor = new CondutorModel($nome,$cnh,$validadeCNH);
-        $this->DAO->cadastrar($condutor);
+    public function cadastrar($dados){
+        if (isset($dados->nome) && isset($dados->cnh) && isset($dados->validadeCNH)) {
+            $condutor = new CondutorModel($dados->nome,$dados->cnh,$dados->validadeCNH);
+            $this->DAO->cadastrar($condutor);
+        } else {
+            throw new Exception("Paramentros Insuficentes ou mal estruturados");
+        }
     }
 
     protected function excluir($id){

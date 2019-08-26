@@ -17,30 +17,37 @@ class GastoControl extends CrudControl
 
     public function processaRequisicao()
     {
-        switch ($this->metodo){
-            case 'POST':
-                $requestBody = json_decode(file_get_contents('php://input'));
-                if (isset($requestBody->tipo) && isset($requestBody->valor) && isset($requestBody->idViagem)) {
-                    $this->cadastrar($requestBody->tipo,$requestBody->valor,$requestBody->idViagem);
-                    $this->respostaSucesso("Gasto Cadastrado com sucesso");
-                } else {
-                    throw new Exception("Parametros faltando ou mal estruturados");
-                }
-                break;
-            case 'GET':
-                break;
-            case 'PUT':
-                break;
-            case 'DELETE':
-                break;
+        if (!is_null($this->url)) {
+            switch ($this->metodo){
+                case 'POST':
+                    $requestBody = json_decode(file_get_contents('php://input'));
+                    if (isset($requestBody->idViagem)) {
+                        $this->cadastrar($requestBody,$requestBody->idViagem);
+                        $this->respostaSucesso("Gasto Cadastrado com sucesso");
+                    } else {
+                        throw new Exception("Parametros faltando ou mal estruturados");
+                    }
+                    break;
+                case 'GET':
+                    break;
+                case 'PUT':
+                    break;
+                case 'DELETE':
+                    break;
+            }
         }
+
     }
 
-    public function cadastrar($tipo,$valor,$idViagem){
-        $gasto = new GastoModel($valor,$tipo);
-        $this->DAO->cadastrar($gasto,$idViagem);
-        $viagemControl = new ViagemControl(null);
-        $viagemControl->atualizaTotal($idViagem);
+    public function cadastrar($dados,$idViagem){
+        if (isset($dados->tipo) && isset($dados->valor)) {
+            $gasto = new GastoModel($dados->valor,$dados->tipo);
+            $this->DAO->cadastrar($gasto,$idViagem);
+            $viagemControl = new ViagemControl(null);
+            $viagemControl->atualizaTotal($idViagem);
+        }else {
+            throw new Exception("Parametros faltando ou mal estruturados no cadastramento de Gastos");
+        }
     }
 
     protected function excluir(int $id){

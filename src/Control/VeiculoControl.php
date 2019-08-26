@@ -23,12 +23,8 @@ class VeiculoControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/veiculos
                     if (count($this->url) == 2) {
-                        if (isset($info->nome) && isset($info->tipo) && isset($info->dtRetirada) && isset($info->horaRetirada) && isset($info->dtDevolucao) && isset($info->horaDevolucao) && isset($info->condutor) ) {
-                            $this->cadastrar($info->nome,$info->tipo,$info->dtRetirada,$info->horaRetirada,$info->dtDevolucao,$info->horaDevolucao,$info->condutor);
-                            $this->respostaSucesso("Veiculo cadastrado com sucesso",null,$this->requisitor);
-                        } else {
-                            throw new Exception("Parâmetros insuficientes ou mal estruturados");
-                        }
+                        $this->cadastrar($info);
+                        $this->respostaSucesso("Veiculo cadastrado com sucesso",null,$this->requisitor);
                     }
                     break;
                 case 'GET':
@@ -66,17 +62,21 @@ class VeiculoControl extends CrudControl {
         }
     }
 
-    public function cadastrar($nome,$tipo,$dtRetirada,$horaRetirada,$dtDevolucao,$horaDevolucao,$condutor){
-        $condControl = new CondutorControl(null);
-        if ($condutor instanceof stdClass) {
-            $condControl->cadastrar($condutor->nome,$condutor->cnh,$condutor->validadeCNH);
-            $id = $condControl->DAO->pdo->lastInsertId();
-            $condutor = $condControl->listarPorId($id);
+    public function cadastrar($info){
+        if (isset($info->nome) && isset($info->tipo) && isset($info->dtRetirada) && isset($info->horaRetirada) && isset($info->dtDevolucao) && isset($info->horaDevolucao) && isset($info->condutor) ) {
+            $condControl = new CondutorControl(null);
+            if ($info->condutor instanceof stdClass) {
+                $condControl->cadastrar($info->condutor);
+                $id = $condControl->DAO->pdo->lastInsertId();
+                $condutor = $condControl->listarPorId($id);
+            } else {
+                $condutor = $condControl->listarPorId($info->condutor);
+            }
+            $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor);
+            $this->DAO->cadastrar($veiculo);
         } else {
-            $condutor = $condControl->listarPorId($condutor);
+            throw new Exception("Parâmetros insuficientes ou mal estruturados");
         }
-        $veiculo = new VeiculoModel($nome,$tipo,$dtRetirada.' '.$horaRetirada,$dtDevolucao.' '.$horaDevolucao,$condutor);
-        $this->DAO->cadastrar($veiculo);
     }
 
     protected function excluir($id){

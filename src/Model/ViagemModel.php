@@ -52,20 +52,20 @@ class ViagemModel
             $gastos = null;
         }
         $array = [
-            "viajante" => $this->viajante->toArray(),
-            "veiculo" => $this->veiculo->toArray(),
+            "id" => $this->id,
             "origem" => $this->origem,
             "destino" => $this->destino,
-            "dtIda" => $this->dtIda,
-            "dtVolta" => $this->dtVolta,
+            "dtIda" => $this->dtIda->format('d/m/Y'),
+            "dtVolta" => $this->dtVolta->format('d/m/Y'),
             "passagem" => $this->passagem,
             "justificativa" => $this->justificativa,
             "obeservacoes" => $this->observacoes,
             "saidaHosp" => $this->SaidaHosp->format('d/m/Y h:i'),
             "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
             "totalGasto" => $this->totalGasto,
-            "id" => $this->id,
-            "gastos" => $gastos
+            "gastos" => $gastos,
+            "viajante" => $this->viajante->toArray(),
+            "veiculo" => $this->veiculo->toArray()
         ];
         return $array;
     }
@@ -191,7 +191,12 @@ class ViagemModel
 
     public function setDtVolta($dtVolta){
         Validacao::validar("Data Volta",$dtVolta,'data');
-        $this->dtVolta = Formatacao::formataData($dtVolta);
+        $voltaFormatada = Formatacao::formataData($dtVolta);
+        if ($voltaFormatada > $this->dtIda) {
+            $this->dtVolta = $voltaFormatada;
+        } else {
+            throw new Exception("A data de Volta deve ser posterior a data de Ida");
+        }
     }
 
     public function getJustificativa()
