@@ -26,7 +26,7 @@ class Router{
     public function __construct()
     {
         $this->metodo = $_SERVER['REQUEST_METHOD'];
-        $this->url = $this->formataURL($_SERVER['SCRIPT_URL']);
+        $this->url = $this->formataURL($_SERVER['REQUEST_URI']);
         
         if ($this->url[0] == 'api') {
             if (count($this->url) > 1) {
@@ -37,6 +37,8 @@ class Router{
         } else {
             if ($this->url[0] == "" && count($this->url) == 1) {
                 require 'src/View/Usuario/telaLogin.html';
+            }elseif ($this->url[0] == "testeApi" && count($this->url) == 1) {
+                require 'src/View/testeApi/test.html';
             }
         }
     }

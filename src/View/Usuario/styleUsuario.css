@@ -1,5 +1,5 @@
 body,html{
-    height: 100vh;
+    height: 1080px;
     width: 100vw;
     background: #CDD1D2 0 0 no-repeat padding-box;
     display: flex;
@@ -11,8 +11,9 @@ body,html{
 
 main{
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: minmax(600px,1200px) minmax(500px,600px);
     width: 80%;
+    max-width: 1800px;
     min-height: 800px;
     height: 80%;
 }
@@ -23,6 +24,7 @@ main{
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
     background-color: #0c7f99;
     box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.75);
 }
@@ -101,5 +103,3 @@ main{
     font-size: 25px;
     background-color: red;
 }
-
-
