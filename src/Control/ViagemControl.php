@@ -22,11 +22,10 @@ class ViagemControl extends CrudControl {
         if (is_array($this->url)) {
             switch ($this->metodo){
                 case 'POST':
-
                     $info = json_decode(file_get_contents("php://input"));
                     // /api/viagens
                     if (count($this->url) == 2) {
-                        if ($this->validaDados($info)) {
+                        if ($this->verificaDados($info)) {
                             $this->cadastrar($info);
                             $this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
                         } else {
@@ -47,6 +46,18 @@ class ViagemControl extends CrudControl {
                     }
                     break;
                 case 'PUT':
+                    $info = json_decode(file_get_contents("php://input"));
+                    // /api/viagens/{idViagem}v
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        if (isset($info->dataIda) && isset($info->dataVolta) && isset($info->origem) && isset($info->destino) &&
+                          isset($info->passagem) && isset($info->justificativa) && isset($info->observacoes) && isset($info->dtEntradaHosp) &&
+                          isset($info->dtSaidaHosp) && isset($info->horaEntradaHosp) && isset($info->horaSaidaHosp) && isset($info->veiculo)){
+                            $this->atualizar($info,$this->url[2]);
+                            $this->respostaSucesso("Viagem atualizada com sucesso",null,$this->requisitor);
+                        } else {
+                            throw new Exception("Requisição com parâmetros faltando ou mal estruturados na viagem");
+                        }
+                    }
                     break;
                 case 'DELETE':
                     // /api/viagens/{idViagem}
@@ -55,7 +66,6 @@ class ViagemControl extends CrudControl {
                         $this->respostaSucesso("Viagem Excluida com sucesso",null,$this->requisitor);
                     }
                     break;
-
             }
         }
     }
@@ -104,22 +114,28 @@ class ViagemControl extends CrudControl {
         $tarefaControl->atualizaTotal($idTarefa);
     }
 
-    protected function atualizar($dados)
+    protected function atualizar($dados,$id)
     {
-        $veiculoControl = new VeiculoControl(null);
-        if (isset($dados->idVeiculo) && $dados->idVeiculo === 'novo'){
-            $veiculoControl->cadastrar();
-            $id = $veiculoControl->DAO->pdo->lastInsertId();
-            $veiculo = $veiculoControl->listarPorId($id);
-        }else{
-            $veiculo = $veiculoControl->listarPorId($dados->idVeiculo);
+        $viagem = $this->DAO->listarPorId($id);
+        if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
+            $veiculoControl = new VeiculoControl(null);
+            if ($dados->veiculo instanceof stdClass){
+                $veiculoControl->cadastrar($dados->veiculo);
+                $idVeiculo = $veiculoControl->DAO->pdo->lastInsertId();
+                $veiculo = $veiculoControl->listarPorId($idVeiculo);
+            }else{
+                $veiculo = $veiculoControl->listarPorId($dados->idVeiculo);
+            }
+
+            $funcDAO = new UsuarioControl(null);
+            $viajante = $funcDAO->listarPorId($this->requisitor['id']);
+
+            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,null,$id,null);
+            $this->DAO->atualizar($viagem);
+        } else {
+            throw new Exception("Você não possui permissão para atualizar esta viagem");
         }
 
-        $funcDAO = new UsuarioControl();
-        $viajante = $funcDAO->listarPorId($dados->idFuncionario);
-
-        $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dtIda,$dados->dtVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp,$dados->dtSaidaHosp,$dados->horaEntradaHosp,$dados->horaSaidaHosp,$dados->idViagem);
-        $this->DAO->atualizar($viagem);
     }
 
     protected function excluir($id)
@@ -159,7 +175,7 @@ class ViagemControl extends CrudControl {
         return $resposta;
     }
 
-    public function validaDados($dados)
+    public function verificaDados($dados)
     {
         if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
             !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||

@@ -69,22 +69,20 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
 
     function atualizar(ViagemModel $viagem){
         $comando = "UPDATE tbViagem SET origem = :origem, destino=:destino,dataIda=:dataIda, dataVolta=:dataVolta, justificativa=:justificativa, observacoes=:observacoes, passagem=:passagem,
-                    idVeiculo=:idVeiculo, dataEntradaHosp=:dataEntradaHosp, dataSaidaHosp=:dataSaidaHosp, HorarioEntradaHosp=:HorarioEntradaHosp, HorarioSaidaHosp=:HorarioSaidaHosp,idUsuario=:idUsuario WHERE id = :id";
+                    idVeiculo=:idVeiculo, entradaHosp=:entradaHosp, saidaHosp=:saidaHosp,idUsuario=:idUsuario WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':idVeiculo',$viagem->getVeiculo()->getId());
         $stm->bindValue(':id',$viagem->getId());
         $stm->bindValue(':origem',$viagem->getOrigem());
         $stm->bindValue(':destino',$viagem->getDestino());
-        $stm->bindValue(':dataIda',$viagem->getDtIda());
-        $stm->bindValue(':dataVolta',$viagem->getDtVolta());
+        $stm->bindValue(':dataIda',$viagem->getDtIda()->format('Y-m-d'));
+        $stm->bindValue(':dataVolta',$viagem->getDtVolta()->format('Y-m-d'));
         $stm->bindValue(':justificativa',$viagem->getJustificativa());
         $stm->bindValue(':observacoes',$viagem->getObservacoes());
         $stm->bindValue(':passagem',$viagem->getPassagem());
-        $stm->bindValue(':dataEntradaHosp',$viagem->getDtEntradaHosp());
-        $stm->bindValue(':dataSaidaHosp',$viagem->getDtSaidaHosp());
-        $stm->bindValue(':HorarioEntradaHosp',$viagem->getHoraEntradaHosp());
-        $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
+        $stm->bindValue(':entradaHosp',$viagem->getEntradaHosp()->format('Y-m-d h:i:s'));
+        $stm->bindValue(':saidaHosp',$viagem->getSaidaHosp()->format('Y-m-d h:i:s'));
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
 
         $stm->execute();
