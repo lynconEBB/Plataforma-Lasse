@@ -10,24 +10,21 @@ class ViagemDao extends CrudDao {
     function cadastrar(ViagemModel $viagem, $idTarefa)
     {
 
-        $comando = "INSERT INTO tbViagem (idVeiculo,idTarefa,origem,destino,dataIda,dataVolta,justificativa,observacoes,passagem,dataEntradaHosp,dataSaidaHosp,HorarioEntradaHosp,HorarioSaidaHosp,
-idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :dataEntradaHosp, :dataSaidaHosp, :HorarioEntradaHosp, :HorarioSaidaHosp,
-:idUsuario,:totalGasto)";
+        $comando = "INSERT INTO tbViagem (idVeiculo,idTarefa,origem,destino,dataIda,dataVolta,justificativa,observacoes,passagem,saidaHosp,entradaHosp,
+idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda, :dataVolta, :justificativa, :observacoes, :passagem, :saidaHosp, :entradaHosp,:idUsuario,:totalGasto)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':idVeiculo',$viagem->getVeiculo()->getId());
         $stm->bindValue(':idTarefa',$idTarefa);
         $stm->bindValue(':origem',$viagem->getOrigem());
         $stm->bindValue(':destino',$viagem->getDestino());
-        $stm->bindValue(':dataIda',$viagem->getDtIda());
-        $stm->bindValue(':dataVolta',$viagem->getDtVolta());
+        $stm->bindValue(':dataIda',$viagem->getDtIda()->format('Y-m-d'));
+        $stm->bindValue(':dataVolta',$viagem->getDtVolta()->format('Y-m-d'));
         $stm->bindValue(':justificativa',$viagem->getJustificativa());
         $stm->bindValue(':observacoes',$viagem->getObservacoes());
         $stm->bindValue(':passagem',$viagem->getPassagem());
-        $stm->bindValue(':dataEntradaHosp',$viagem->getDtEntradaHosp());
-        $stm->bindValue(':dataSaidaHosp',$viagem->getDtSaidaHosp());
-        $stm->bindValue(':HorarioEntradaHosp',$viagem->getHoraEntradaHosp());
-        $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
+        $stm->bindValue(':entradaHosp',$viagem->getEntradaHosp()->format('Y-m-d H:i:s'));
+        $stm->bindValue(':saidaHosp',$viagem->getSaidaHosp()->format('Y-m-d H:i:s'));
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
         $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
         $stm->execute();
@@ -50,40 +47,42 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
 
         $stm->execute();
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-        $veiculoDAO = new VeiculoDao();
-        $funcDAO = new UsuarioDao();
-        $gastoDAO = new GastoDao();
-        $viagens = array();
+        if (count($rows) > 0) {
+            $veiculoDAO = new VeiculoDao();
+            $funcDAO = new UsuarioDao();
+            $gastoDAO = new GastoDao();
+            $viagens = array();
 
-        foreach ($rows as $resul){
-            $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
-            $viajante = $funcDAO->listarPorId($resul['idUsuario']);
-            $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
-            $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],$resul['id'],$gastos);
-            $viagens[] = $obj;
+            foreach ($rows as $resul){
+                $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
+                $viajante = $funcDAO->listarPorId($resul['idUsuario']);
+                $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
+                $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['entradaHosp'],$resul['saidaHosp'],$resul['totalGasto'],$resul['id'],$gastos);
+                $viagens[] = $obj;
+            }
+
+            return $viagens;
+        } else {
+            return false;
         }
-
-        return $viagens;
     }
 
     function atualizar(ViagemModel $viagem){
         $comando = "UPDATE tbViagem SET origem = :origem, destino=:destino,dataIda=:dataIda, dataVolta=:dataVolta, justificativa=:justificativa, observacoes=:observacoes, passagem=:passagem,
-                    idVeiculo=:idVeiculo, dataEntradaHosp=:dataEntradaHosp, dataSaidaHosp=:dataSaidaHosp, HorarioEntradaHosp=:HorarioEntradaHosp, HorarioSaidaHosp=:HorarioSaidaHosp,idUsuario=:idUsuario WHERE id = :id";
+                    idVeiculo=:idVeiculo, entradaHosp=:entradaHosp, saidaHosp=:saidaHosp,idUsuario=:idUsuario WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':idVeiculo',$viagem->getVeiculo()->getId());
         $stm->bindValue(':id',$viagem->getId());
         $stm->bindValue(':origem',$viagem->getOrigem());
         $stm->bindValue(':destino',$viagem->getDestino());
-        $stm->bindValue(':dataIda',$viagem->getDtIda());
-        $stm->bindValue(':dataVolta',$viagem->getDtVolta());
+        $stm->bindValue(':dataIda',$viagem->getDtIda()->format('Y-m-d'));
+        $stm->bindValue(':dataVolta',$viagem->getDtVolta()->format('Y-m-d'));
         $stm->bindValue(':justificativa',$viagem->getJustificativa());
         $stm->bindValue(':observacoes',$viagem->getObservacoes());
         $stm->bindValue(':passagem',$viagem->getPassagem());
-        $stm->bindValue(':dataEntradaHosp',$viagem->getDtEntradaHosp());
-        $stm->bindValue(':dataSaidaHosp',$viagem->getDtSaidaHosp());
-        $stm->bindValue(':HorarioEntradaHosp',$viagem->getHoraEntradaHosp());
-        $stm->bindValue(':HorarioSaidaHosp',$viagem->getHoraSaidaHosp());
+        $stm->bindValue(':entradaHosp',$viagem->getEntradaHosp()->format('Y-m-d h:i:s'));
+        $stm->bindValue(':saidaHosp',$viagem->getSaidaHosp()->format('Y-m-d h:i:s'));
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
 
         $stm->execute();
@@ -106,7 +105,7 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
             $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
             $viajante = $funcDAO->listarPorId($resul['idUsuario']);
             $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
-            $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],$resul['id'],$gastos);
+            $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['entradaHosp'],$resul['saidaHosp'],$resul['totalGasto'],$resul['id'],$gastos);
             $obj->setTotalGasto($resul['totalGasto']);
             $viagens[] = $obj;
         }
@@ -114,7 +113,7 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         return $viagens;
     }
 
-    public function listarPorId($id):ViagemModel
+    public function listarPorId($id)
     {
         $comando = "SELECT * from tbViagem WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -123,17 +122,20 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
 
         $stm->execute();
         $resul = $stm->fetch(PDO::FETCH_ASSOC);
+        if ($resul != false) {
+            $veiculoDAO = new VeiculoDao();
+            $funcDAO = new UsuarioDao();
+            $gastoDAO = new GastoDao();
 
-        $veiculoDAO = new VeiculoDao();
-        $funcDAO = new UsuarioDao();
-        $gastoDAO = new GastoDao();
+            $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
+            $viajante = $funcDAO->listarPorId($resul['idUsuario']);
+            $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
+            $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['entradaHosp'],$resul['saidaHosp'],null,$resul['id'],$gastos);
 
-        $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
-        $viajante = $funcDAO->listarPorId($resul['idUsuario']);
-        $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
-        $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['dataEntradaHosp'],$resul['dataSaidaHosp'],$resul['HorarioEntradaHosp'],$resul['HorarioSaidaHosp'],$resul['id'],$gastos);
-
-        return $obj;
+            return $obj;
+        } else {
+            return false;
+        }
     }
 
     function atualizarTotal(ViagemModel $viagem){

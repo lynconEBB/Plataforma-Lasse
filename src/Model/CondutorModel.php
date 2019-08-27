@@ -2,6 +2,9 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class CondutorModel
 {
     private $id;
@@ -10,9 +13,25 @@ class CondutorModel
     private $validadeCNH;
 
     public function __construct($nome, $cnh, $validadeCNH,$id=null){
-        $this->nome = $nome;
-        $this->cnh = $cnh;
-        $this->validadeCNH = $validadeCNH;
+        $this->setNome($nome);
+        $this->setCnh($cnh);
+        $this->setValidadeCNH($validadeCNH);
+        $this->setId($id);
+    }
+
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "cnh" => $this->cnh,
+            "validadeCNH" => $this->validadeCNH->format('d/m/Y')
+        ];
+        return $array;
+    }
+
+    private function setId($id) {
+        Validacao::validar("id",$id,'nuloOUinteiro');
         $this->id = $id;
     }
 
@@ -21,6 +40,7 @@ class CondutorModel
     }
 
     public function setNome($nome){
+        Validacao::validar("Nome do Condutor",$nome,'obrigatorio','texto');
         $this->nome = $nome;
     }
 
@@ -29,6 +49,7 @@ class CondutorModel
     }
 
     public function setCnh($cnh){
+        Validacao::validar("Número CNH",$cnh,'obrigatorio','texto');
         $this->cnh = $cnh;
     }
 
@@ -38,7 +59,8 @@ class CondutorModel
     }
 
     public function setValidadeCNH($validadeCNH){
-        $this->validadeCNH = $validadeCNH;
+        Validacao::validar("Data de validade CNH",$validadeCNH,"data");
+        $this->validadeCNH = Formatacao::formataData($validadeCNH);
     }
 
     public function getId(){

@@ -3,25 +3,45 @@
 namespace Lasse\LPM\Control;
 
 abstract class CrudControl{
-    public $DAO;
+    protected $DAO;
+    protected $metodo;
+    protected $url;
+    protected $requisitor;
 
-    public function __construct(){
-        if( isset($_POST['acao']) ){
-            $acao = $_POST['acao'];
-            $this->defineAcao($acao);
-        }
+    public function __construct($url)
+    {
+        $this->metodo = $_SERVER['REQUEST_METHOD'];
+        $this->url = $url;
+        $this->processaRequisicao();
     }
 
-    abstract public function defineAcao($acao);
+    abstract public function processaRequisicao();
 
-    abstract public function processaRequisicao(string $parametro);
+    public function respostaSucesso($mensagem,$dados= null,$requisitor = null)
+    {
+        header("Content-type: application/json; charset=utf-8");
+        header("Accept: application/json");
+        http_response_code(200);
+        $resposta = ["status" => "sucesso" , "mensagem" => $mensagem];
 
-    abstract protected function cadastrar();
+        if (!is_null($requisitor)) {
+            $resposta["requisitor"] = $requisitor;
+        }
+        if (!is_null($dados)) {
+            if (is_array($dados)) {
+                $array = array();
+                foreach ($dados as $obj) {
+                    $array[] = $obj->toArray();
+                }
+                $resposta["dados"] = $array;
+            } elseif (is_bool($dados) || is_string($dados)) {
+                $resposta["dados"] = $dados;
+            } else {
+                $resposta["dados"] = $dados->toArray();
+            }
 
-    abstract protected function excluir(int $id);
-
-    abstract protected function listar();
-
-    abstract protected function atualizar();
+        }
+        echo json_encode($resposta);
+    }
 
 }

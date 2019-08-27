@@ -21,6 +21,18 @@ class ItemModel
         $this->setValorParcial();
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "valor" => $this->valor,
+            "quantidade" => $this->quantidade,
+            "valorParcial" => $this->valorParcial
+        ];
+        return $array;
+    }
+
     public function getId(){
         return $this->id;
     }

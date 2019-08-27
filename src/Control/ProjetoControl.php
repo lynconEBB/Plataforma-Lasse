@@ -5,178 +5,156 @@ namespace Lasse\LPM\Control;
 use Exception;
 use Lasse\LPM\Dao\ProjetoDao;
 use Lasse\LPM\Model\ProjetoModel;
-use PDOException;
 
 class ProjetoControl extends CrudControl
 {
-
-    public function __construct()
+    public function __construct($url)
     {
-        UsuarioControl::verificar();
+        $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new ProjetoDao();
-        parent::__construct();
+        parent::__construct($url);
     }
 
-    public function defineAcao($acao)
+    public function processaRequisicao()
     {
-        switch ($acao){
-            case 'cadastrarProjeto':
-                $this->cadastrar();
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'excluirProjeto':
-                $this->excluir($_POST['id']);
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'alterarProjeto':
-                $this->atualizar();
-                header('Location: /menu/projeto');
-                die();
-                break;
-            case 'adicionarFuncionario':
-                $this->addFuncionario();
-                header('Location: /menu/projeto');
-                die();
-                break;
+        if (!is_null($this->url)) {
+            switch ($this->metodo) {
+                case 'POST':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/projetos
+                    if (count($this->url) == 2) {
+                        $this->cadastrar($info);
+                        $this->respostaSucesso("Projeto Cadastrado com sucesso",null,$this->requisitor);
+                    }
+                    // /api/projetos/adicionar
+                    elseif (count($this->url) == 3 && $this->url[2] == "adicionar") {
+                        $this->addFuncionario($info->idProjeto,$info->idUsuario);
+                        $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
+                    }
+                    break;
+                case 'GET':
+                    // /api/projetos
+                    if (count($this->url) == 2) {
+                        $projetos = $this->listar();
+                        $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
+                        // /api/projetos/{idProjeto}
+                    } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $projeto = $this->listarPorId($this->url[2]);
+                        $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
+                    }
+                    // /api/projetos/user/{idUsuario}
+                    elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
+                        $projetos = $this->listarPorIdUsuario($this->url[3]);
+                        $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
+                    }
+                    break;
+                case 'PUT':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/projetos/{idProjeto}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $projeto = $this->atualizar($info,$this->url[2]);
+                        $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);
+                    }
+                    break;
+                case 'DELETE':
+                    // /api/projetos/{idProjeto}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                        $this->excluir($this->url[2]);
+                        $this->respostaSucesso("Projeto excluido com sucesso.",null,$this->requisitor);
+                    }
+                    break;
+            }
         }
     }
 
-    protected function cadastrar()
+    protected function cadastrar($info)
     {
-        try{
-            $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],null,null,null,null);
-            $this->DAO->cadastrar($projeto);
-        }catch (PDOException $pdoexcecao){
-            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
-        }
+        $usuarioControl = new UsuarioControl(null);
+        $dono = $usuarioControl->listarPorId($this->requisitor['id']);
+        $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, $dono);
+        $this->DAO->cadastrar($projeto);
     }
 
-    protected function excluir(int $id)
+    protected function excluir($id)
     {
-        try{
+        if ($this->verificaDono($id,$this->requisitor['id'])) {
             $this->DAO->excluir($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
+        } else {
+            throw new Exception("Você precisa ser dono deste projeto para deleta-lo.");
         }
-
     }
 
     public function listar()
     {
-        try{
-            return $this->DAO->listar();
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        $projetos = $this->DAO->listar();
+        return $projetos;
     }
 
-    protected function atualizar(){
-        try{
-            $projeto = new ProjetoModel($_POST['dataFinalizacao'],$_POST['dataInicio'],$_POST['descricao'],$_POST['nomeProjeto'],$_POST['id'],null,null,null);
-            $this -> DAO -> alterar($projeto);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante atualização no banco de dados';
-
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
+    protected function atualizar($info,$id)
+    {
+        if ($this->verificaDono($id,$this->requisitor['id'])) {
+            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $id, null, null, null);
+            $this->DAO->alterar($projeto);
+        } else {
+            throw new Exception("Permissão negada para alterar este projeto");
         }
+
     }
 
     public function listarPorIdUsuario($id)
     {
-        try{
-            return $this->DAO->listarPorIdUsuario($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
-            header("Location: /menu/projeto");
-            die();
+        if ($this->requisitor['id'] == $id) {
+            $projetos = $this->DAO->listarPorIdUsuario($id);
+            return $projetos;
+        } else {
+            throw new Exception("Permissão negada");
         }
+
     }
 
     public function listarPorId($id)
     {
-        try{
-            return $this->DAO->listarPorId($id);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro durante seleção no banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
+        $projeto = $this->DAO->listarPorId($id);
+        return $projeto;
     }
 
-    public function procuraFuncionario($idProjeto,$idUsuario)
+    public function procuraFuncionario($idProjeto, $idUsuario)
     {
-        try{
-            $result = $this->DAO->procuraFuncionario($idProjeto,$idUsuario);
-            if ($result > 0) {
-                return true;
-            }else {
-                return false;
-            }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
+        $result = $this->DAO->procuraFuncionario($idProjeto, $idUsuario);
+        if ($result > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public function atualizaTotal($idProjeto)
     {
-        try{
-            $projeto = $this->DAO->listarPorId($idProjeto);
-            $this->DAO->atualizarTotal($projeto);
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
+        $projeto = $this->DAO->listarPorId($idProjeto);
+        $this->DAO->atualizarTotal($projeto);
+    }
+
+    public function verificaDono($idProjeto,$idUsuario)
+    {
+        $numRows = $this->DAO->verificaDono($idProjeto,$idUsuario);
+        if ($numRows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public function verificaDono($idProjeto)
+    public function addFuncionario($idProjeto,$idUsuario)
     {
-        try{
-            $numRows = $this->DAO->verificaDono($idProjeto);
-            if($numRows > 0 ){
-                return true;
-            }else{
-                return false;
-            }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-            header("Location: /menu/projeto");
-            die();
-        }
-    }
-
-    public function addFuncionario()
-    {
-        try{
-            if(!$this->procuraFuncionario($_POST['idProjeto'],$_POST['idUsuario'])){
-                $this->DAO->adicionarFuncionario($_POST['idUsuario'],$_POST['idProjeto']);
-            }else{
+        if ($this->verificaDono($idProjeto,$this->requisitor['id'])) {
+            if (!$this->procuraFuncionario($idProjeto,$idUsuario)) {
+                $this->DAO->adicionarFuncionario($idUsuario, $idProjeto);
+            } else {
                 throw new Exception('Funcionário já inserido');
             }
-        }catch (PDOException $pdoexcecao) {
-            $_SESSION['danger'] = 'Erro com banco de dados';
-        }catch (Exception $exception){
-            $_SESSION['danger'] = $exception->getMessage();
+        } else {
+            throw new Exception("Você não possui permissão para adicionar funcionários nesse projeto.");
         }
-    }
 
-    public function processaRequisicao(string $parametro)
-    {
-       switch ($parametro){
-           case 'listaProjetos':
-               $usuarioControl = new UsuarioControl();
-               $usuarios = $usuarioControl->listar();
-               $projetos = $this->listarPorIdUsuario($_SESSION['usuario-id']);
-               require '../View/telaProjetos.php';
-       }
     }
 }

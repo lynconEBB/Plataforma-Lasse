@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lasse Project Manager</title>
-    <link rel="stylesheet" type="text/css" href="css/styleSheet.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../Default/css/styleSheet.css">
+    <link rel="stylesheet" type="text/css" href="../Default/css/bootstrap.css">
 </head>
 <body>
     <div class="login">
@@ -18,7 +18,7 @@
     </div>
 </body>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/funcoesLogin.js"></script>
+<script src="../Default/js/jquery.js"></script>
+<script src="../Default/js/bootstrap.js"></script>
+<script src="../Default/js/funcoesLogin.js"></script>
 </html>

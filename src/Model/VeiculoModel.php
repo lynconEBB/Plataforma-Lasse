@@ -2,28 +2,49 @@
 
 namespace Lasse\LPM\Model;
 
+use DateTime;
+use Exception;
+use Lasse\LPM\Services\Formatacao;
+use Lasse\LPM\Services\Validacao;
+
 class VeiculoModel
 {
     private $id;
     private $nome;
     private $tipo;
-    private $dataRetirada;
-    private $dataDevolucao;
-    private $horarioRetirada;
-    private $horarioDevolucao;
+    private $retirada;
+    private $devolucao;
     private $condutor;
 
-    public function __construct($nome, $tipo, $dataRetirada, $dataDevolucao, $horarioRetirada, $horarioDevolucao, $condutor,$id=null){
-        $this->nome = $nome;
-        $this->tipo = $tipo;
-        $this->dataRetirada = $dataRetirada;
-        $this->dataDevolucao = $dataDevolucao;
-        $this->horarioRetirada = $horarioRetirada;
-        $this->horarioDevolucao = $horarioDevolucao;
-        $this->condutor = $condutor;
-        $this->id=$id;
+    public function __construct($nome, $tipo, $dataRetirada, $dataDevolucao, $condutor,$id=null){
+        $this->setNome($nome);
+        $this->setTipo($tipo);
+        $this->setRetirada($dataRetirada);
+        $this->setDevolucao($dataDevolucao);
+        $this->setCondutor($condutor);
+        $this->setId($id);
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "tipo" => $this->tipo,
+            "dataRetirada" => $this->retirada->format('d/m/Y'),
+            "dataDevolucao" => $this->devolucao->format('d/m/Y'),
+            "horarioRetirada" => $this->retirada->format('h:i'),
+            "horarioDevolucao" => $this->devolucao->format('h:i'),
+            "condutor" => $this->condutor->toArray()
+        ];
+        return $array;
+    }
+
+    private function setId($id)
+    {
+        Validacao::validar("Id",$id,'nuloOUinteiro');
+        $this->id = $id;
+    }
 
     public function getId(){
         return $this->id;
@@ -34,6 +55,7 @@ class VeiculoModel
     }
 
     public function setNome($nome){
+        Validacao::validar('Nome do Veiculo',$nome,'obrigatorio','texto');
         $this->nome = $nome;
     }
 
@@ -42,47 +64,46 @@ class VeiculoModel
     }
 
     public function setTipo($tipo){
+        Validacao::validar('Tipo de Veiculo',$tipo,'obrigatorio','texto');
         $this->tipo = $tipo;
     }
 
-    public function getDataRetirada(){
-        return $this->dataRetirada;
-    }
 
-    public function setDataRetirada($dataRetirada){
-        $this->dataRetirada = $dataRetirada;
-    }
-
-    public function getDataDevolucao(){
-        return $this->dataDevolucao;
-    }
-
-    public function setDataDevolucao($dataDevolucao){
-        $this->dataDevolucao = $dataDevolucao;
-    }
-
-    public function getHorarioRetirada(){
-        return $this->horarioRetirada;
-    }
-
-    public function setHorarioRetirada($horarioRetirada){
-        $this->horarioRetirada = $horarioRetirada;
-    }
-
-    public function getHorarioDevolucao(){
-        return $this->horarioDevolucao;
-    }
-
-    public function setHorarioDevolucao($horarioDevolucao){
-        $this->horarioDevolucao = $horarioDevolucao;
-    }
-
-    public function getCondutor():CondutorModel{
+    public function getCondutor():CondutorModel
+    {
         return $this->condutor;
     }
 
-    public function setCondutor($condutor){
+    public function setCondutor(CondutorModel $condutor){
         $this->condutor = $condutor;
+    }
+
+    public function getRetirada()
+    {
+        return $this->retirada;
+    }
+
+    public function setRetirada($retirada)
+    {
+        Validacao::validar("Data e Hora Retirada",$retirada,'dataHora');
+        $this->retirada = Formatacao::formataDataHora($retirada);
+    }
+
+
+    public function getDevolucao()
+    {
+        return $this->devolucao;
+    }
+
+    public function setDevolucao($devolucao)
+    {
+        Validacao::validar("Data e Hora de devolução",$devolucao,'dataHora');
+        $devFormatada = Formatacao::formataDataHora($devolucao);
+        if ($devFormatada > $this->retirada) {
+            $this->devolucao = $devFormatada;
+        } else {
+            throw new Exception("O horario e data de devolução devem ser posteiores a retirada");
+        }
     }
 
 

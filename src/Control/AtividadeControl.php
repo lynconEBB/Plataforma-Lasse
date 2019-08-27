@@ -1,175 +1,169 @@
 <?php
 
 namespace Lasse\LPM\Control;
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 use Exception;
 use Lasse\LPM\Dao\AtividadeDao;
 use Lasse\LPM\Model\AtividadeModel;
-use PDOException;
 
 class AtividadeControl extends CrudControl {
 
-    public function __construct(){
-        UsuarioControl::verificar();
+    public function __construct($url){
+        $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new AtividadeDao();
-        parent::__construct();
+        parent::__construct($url);
     }
 
-    public function defineAcao($acao){
-        switch ($acao){
-            case 'cadastrarAtividade':
-                $this->cadastrar();
-                //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                break;
-            case 'excluirAtividade':
-                $this->excluir($_POST['id']);
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-                break;
-            case 'alterarAtividade':
-                $this->atualizar();
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-                break;
-
+    public function processaRequisicao()
+    {
+        if (!is_null($this->url)) {
+            switch ($this->metodo){
+                case 'POST':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/atividades
+                    if (count($this->url) == 2) {
+                        $this->cadastrar($info);
+                        $this->respostaSucesso("Atividade inserido com sucesso",null,$this->requisitor);
+                    }
+                    break;
+                case 'GET':
+                    // /api/atividades
+                    if (count($this->url) == 2) {
+                        $atividades = $this->listar();
+                        $this->respostaSucesso("Listando todas atividades",$atividades,$this->requisitor);
+                    }
+                    // /api/atividades/tarefa/{idTarefa}
+                    elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'tarefa') {
+                        $atividades = $this->listarPorIdTarefa($this->url[3]);
+                        $this->respostaSucesso("Listando atividades da tarefa",$atividades,$this->requisitor);
+                    }
+                    // /api/atividades/user/{idusuario}
+                    elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
+                        $atividades = $this->listarPorIdUsuario($this->url[3]);
+                        $this->respostaSucesso("Listando atividades do usuário",$atividades,$this->requisitor);
+                    }
+                    break;
+                case 'PUT':
+                    $info = json_decode(@file_get_contents("php://input"));
+                    // /api/atividades/{idAtividade}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $this->atualizar($info,$this->url[2]);
+                        $this->respostaSucesso("Atividade Atualizada com sucesso",null,$this->requisitor);
+                    }
+                    break;
+                case 'DELETE':
+                    // /api/atividades/{idAtividade}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $this->excluir($this->url[2]);
+                        $this->respostaSucesso("Atividade excluida com sucesso",null,$this->requisitor);
+                    }
+                    break;
+            }
         }
     }
 
-    public function cadastrar()
+    public function cadastrar($info)
     {
-        try{
-            $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],null,null);
-            if(isset($_POST['idTarefa'])){
-                $this->DAO->cadastrar($atividade,$_POST['idTarefa']);
-                $tarefaControl = new TarefaControl();
-                $tarefaControl->atualizaTotal($_POST['idTarefa']);
-            }else{
-                $this->DAO->cadastrar($atividade,null);
+        $usuarioControl = new UsuarioControl(null);
+        $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
+        $atividade = new AtividadeModel($info->tipo,$info->tempoGasto,$info->comentario,$info->dataRealizacao,$usuario,null,null);
+
+        if(isset($info->idTarefa)){
+            if ($this->verificaPermissao($info->idTarefa)) {
+                $this->DAO->cadastrar($atividade,$info->idTarefa);
+                $tarefaControl = new TarefaControl(null);
+                $tarefaControl->atualizaTotal($info->idTarefa);
+            } else {
+                throw new Exception("Usuário não possui permissão para cadastrar atividades neste projeto");
             }
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante cadastro no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }catch (Exception $excecao){
-            $_SESSION['danger'] = $excecao->getMessage();
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
+        }else{
+            $this->DAO->cadastrar($atividade,null);
         }
     }
 
     protected function excluir(int $id)
     {
-        try{
+        $atividade = $this->listarPorId($id);
+        if ($this->requisitor['id'] ==  $atividade->getUsuario()->getId()) {
             $this->DAO->excluir($id);
-            if(isset($_POST['idTarefa'])) {
-                $tarefaControl = new TarefaControl();
-                $tarefaControl->atualizaTotal($_POST['idTarefa']);
+            $idTarefa = $this->DAO->descobrirIdTarefa($id);
+            if(!is_null($idTarefa)) {
+                $tarefaControl = new TarefaControl(null);
+                $tarefaControl->atualizaTotal($idTarefa);
             }
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }catch (Exception $excecao){
-            $_SESSION['danger'] = 'Erro durante Exclusão';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
+        } else {
+            throw new Exception("Usuário não possui permissão para excluir esta atividade");
         }
-
     }
 
     public function listar()
     {
-        try{
-            return $this->DAO->listar();
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }
-
+        $atividades = $this->DAO->listar();
+        return $atividades;
     }
 
-    protected function atualizar()
+    protected function atualizar($info,$id)
     {
-        try{
-            $atividade = new AtividadeModel($_POST['tipo'],$_POST['tempoGasto'],$_POST['comentario'],$_POST['dataRealizacao'],$_SESSION['usuario-classe'],$_POST['id'],null);
-            $this->DAO->atualizar($atividade);
-            if(isset($_POST['idTarefa'])) {
-                $tarefaControl = new TarefaControl();
-                $tarefaControl->atualizaTotal($_POST['idTarefa']);
+        $atividade = $this->listarPorId($id);
+        if ($atividade != false) {
+            if ($this->requisitor['id'] ==  $atividade->getUsuario()->getId()) {
+                $atividade = new AtividadeModel($info->tipo,$info->tempoGasto,$info->comentario,$info->dataRealizacao,$atividade->getUsuario(),$id,null);
+                $this->DAO->atualizar($atividade);
+                $idTarefa = $this->DAO->descobrirIdTarefa($id);
+                if(!is_null($idTarefa)) {
+                    $tarefaControl = new TarefaControl(null);
+                    $tarefaControl->atualizaTotal($idTarefa);
+                }
+            } else {
+                throw new Exception("Usuário não possui permissão para atualizar esta atividade");
             }
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante alteração no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }catch (Exception $excecao){
-            $_SESSION['danger'] = $excecao->getMessage();
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
+        } else {
+            throw new Exception("Atividade não existente no sistema");
         }
-
     }
 
-    public function listarPorIdTarefa($id)
+    public function listarPorId($id)
     {
-        try{
-            return $this->DAO->listarPorIdTarefa($id);
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }
-
-    }
-
-    public function listarPorIdUsuario($id)
-    {
-        try{
-            return $this->DAO->listarPorIdUsuario($id);
-        }catch (PDOException $excecaoPDO){
-            $_SESSION['danger'] = 'Erro durante exclusão no banco de dados';
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
-        }
-
-    }
-
-    public function verificaPermissao()
-    {
-        if(isset($_GET['idTarefa'])){
-            //Descobrindo id do Projeto em que a tarefa foi criada
-            $tarefaControl = new TarefaControl();
-            $idProjeto = $tarefaControl->descobrirIdProjeto($_GET['idTarefa']);
-
-            // Verifica se o funcionário está relacionado com o Projeto
-            $projetoControl = new ProjetoControl();
-
-            if($projetoControl->procuraFuncionario($idProjeto,$_SESSION['usuario-id']) > 0){
-                return true;
-            }else{
-                require '../View/errorPages/erroSemAcesso.php';
-                exit();
+        $atividade = $this->DAO->listarPorId($id);
+        if ($atividade != false) {
+            if ($this->requisitor['id'] ==  $atividade->getUsuario()->getId()) {
+                return $atividade;
+            } else {
+                throw new Exception("Usuário não possui permissão ás funcionalidades desta atividade");
             }
-        }else{
-            require '../View/errorPages/erroNaoSelecionado.php';
-            exit();
+        } else {
+            throw new Exception("Atividade não existente no sistema");
+        }
+
+    }
+
+    public function listarPorIdTarefa($idTarefa)
+    {
+        if ($this->verificaPermissao($idTarefa)) {
+            $atividades = $this->DAO->listarPorIdTarefa($idTarefa);
+            return $atividades;
+        } else {
+            throw new Exception("Usuário não possui permissão para listar atividades neste projeto");
         }
     }
 
-    public function processaRequisicao(string $parametro)
+    public function listarPorIdUsuario($idUsuario)
     {
-        switch ($parametro){
-            case 'listaAtividadesPlanejadas':
-
-                $this->verificaPermissao();
-                $atividades = $this->listarPorIdTarefa($_GET['idTarefa']);
-                require '../View/telaAtividadePlanejada.php';
-                break;
-
-            case 'listaAtividadesNaoPlanejadas':
-                $atividades = $this->listarPorIdUsuario($_SESSION['usuario-id']);
-                require '../View/telaAtividadeNaoPlanejada.php';
-                break;
+        if ($this->requisitor['id'] == $idUsuario) {
+            $atividades = $this->DAO->listarPorIdUsuario($idUsuario);
+            return $atividades;
+        } else {
+            throw new Exception("Usuário não possui permissão para acessar as atividades deste usuario");
         }
+
+    }
+
+    public function verificaPermissao($idTarefa)
+    {
+        $tarefaControl = new TarefaControl(null);
+        $idProjeto = $tarefaControl->descobrirIdProjeto($idTarefa);
+        $projetoControl = new ProjetoControl(null);
+        $resposta = $projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id']);
+        return $resposta;
     }
 }

@@ -15,7 +15,7 @@ class AtividadeModel {
     private $totalGasto;
     private $usuario;
 
-    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, UsuarioModel $usuario,$id,$totalGasto){
+    public function __construct(string $tipo, string $tempoGasto, string $comentario, string $dataRealizacao, $usuario,$id,$totalGasto){
         $this->setTipo($tipo);
         $this->setTempoGasto($tempoGasto);
         $this->setComentario($comentario);
@@ -23,6 +23,20 @@ class AtividadeModel {
         $this->setUsuario($usuario);
         $this->setTotalGasto($totalGasto);
         $this->setId($id);
+    }
+
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->id,
+            "tipo" => $this->tipo,
+            "tempoGasto" => $this->tempoGasto,
+            "comentario" => $this->comentario,
+            "dataRealizacao" => $this->dataRealizacao->format('d/m/Y'),
+            "totalGasto" => $this->totalGasto,
+            "usuario" => $this->usuario->toArray()
+        ];
+        return $array;
     }
 
     public function getId(){

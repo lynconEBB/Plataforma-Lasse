@@ -3,6 +3,7 @@
 namespace Lasse\LPM\Model;
 
 use DateTime;
+use Exception;
 use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
@@ -24,7 +25,7 @@ class ViagemModel
     private $totalGasto;
 
     public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp, $totalGasto,$id,$gastos){
-        /*$this->setViajante($viajante);
+        $this->setViajante($viajante);
         $this->setVeiculo($veiculo);
         $this->setOrigem($origem);
         $this->setDestino($destino);
@@ -32,21 +33,41 @@ class ViagemModel
         $this->setDtVolta($dtVolta);
         $this->setPassagem($passagem);
         $this->setJustificativa($justificativa);
-        $this->setObservacoes($observacoes);*/
+        $this->setObservacoes($observacoes);
         $this->setEntradaHosp($EntradaHosp);
-        /*$this->setSaidaHosp($SaidaHosp);
+        $this->setSaidaHosp($SaidaHosp);
         $this->setGastos($gastos);
         $this->setTotalGasto($totalGasto);
-        $this->setId($id);*/
+        $this->setId($id);
     }
 
-    public function calculaTotal()
+    public function toArray()
     {
-        $total =0;
-        foreach ($this->gastos as $gasto){
-            $total += $gasto->getValor();
+        if (is_array($this->gastos)) {
+            $gastos = array();
+            foreach ($this->gastos as $gasto) {
+                $gastos[] = $gasto->toArray();
+            }
+        } else {
+            $gastos = null;
         }
-        $this->totalGasto = $total;
+        $array = [
+            "id" => $this->id,
+            "origem" => $this->origem,
+            "destino" => $this->destino,
+            "dtIda" => $this->dtIda->format('d/m/Y'),
+            "dtVolta" => $this->dtVolta->format('d/m/Y'),
+            "passagem" => $this->passagem,
+            "justificativa" => $this->justificativa,
+            "obeservacoes" => $this->observacoes,
+            "saidaHosp" => $this->SaidaHosp->format('d/m/Y h:i'),
+            "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
+            "totalGasto" => $this->totalGasto,
+            "gastos" => $gastos,
+            "viajante" => $this->viajante->toArray(),
+            "veiculo" => $this->veiculo->toArray()
+        ];
+        return $array;
     }
 
     public function getId(){
@@ -67,7 +88,8 @@ class ViagemModel
         $this->passagem = $passagem;
     }
 
-    public function getEntradaHosp():DateTime{
+    public function getEntradaHosp():DateTime
+    {
         return $this->EntradaHosp;
     }
 
@@ -82,8 +104,15 @@ class ViagemModel
         return $this->SaidaHosp;
     }
 
-    public function setSaidaHosp($SaidaHosp): void{
-        $this->SaidaHosp = $SaidaHosp;
+    public function setSaidaHosp($SaidaHosp): void
+    {
+        Validacao::validar("Saida da Hospedagem",$SaidaHosp,'dataHora');
+        $saidaFormat = Formatacao::formataDataHora($SaidaHosp);
+        if ($saidaFormat > $this->EntradaHosp) {
+            $this->SaidaHosp = $saidaFormat;
+        } else {
+            throw new Exception("A data e Hora de saida necessitam ser posteriores a entrada");
+        }
     }
 
     public function getGastos(){
@@ -92,22 +121,26 @@ class ViagemModel
 
     public function setGastos($gastos){
         $this->gastos = $gastos;
-        $this->calculaTotal();
     }
 
-    public function getTotalGasto(): float{
+    public function getTotalGasto(){
         return $this->totalGasto;
     }
 
-    public function setTotalGasto(float $totalGasto){
-        if($gastos == null){
+    public function setTotalGasto($totalGasto){
+        if(is_null($this->gastos) && is_null($totalGasto)){
             $this->totalGasto = 0.00;
-        }else{
-            $this->calculaTotal();
+        }elseif (is_array($this->gastos) && is_null($totalGasto)){
+            $total = 0;
+            foreach ($this->gastos as $gasto){
+                $total += $gasto->getValor();
+            }
+            $this->totalGasto = $total;
+        } else {
+            Validacao::validar("Total Gasto",$totalGasto,'monetario');
+            $this->totalGasto = Formatacao::formataMonetario($totalGasto);
         }
-        $this->totalGasto = $totalGasto;
     }
-
 
     public function getViajante(){
         return $this->viajante;
@@ -130,6 +163,7 @@ class ViagemModel
     }
 
     public function setOrigem($origem){
+        Validacao::validar("Origem",$origem,'obrigatorio','texto');
         $this->origem = $origem;
     }
 
@@ -138,6 +172,7 @@ class ViagemModel
     }
 
     public function setDestino($destino){
+        Validacao::validar("Destino",$destino,'obrigatorio','texto');
         $this->destino = $destino;
     }
 
@@ -146,7 +181,8 @@ class ViagemModel
     }
 
     public function setDtIda($dtIda){
-        $this->dtIda = $dtIda;
+        Validacao::validar("Data Ida",$dtIda,'data');
+        $this->dtIda = Formatacao::formataData($dtIda);
     }
 
     public function getDtVolta(){
@@ -154,14 +190,22 @@ class ViagemModel
     }
 
     public function setDtVolta($dtVolta){
-        $this->dtVolta = $dtVolta;
+        Validacao::validar("Data Volta",$dtVolta,'data');
+        $voltaFormatada = Formatacao::formataData($dtVolta);
+        if ($voltaFormatada > $this->dtIda) {
+            $this->dtVolta = $voltaFormatada;
+        } else {
+            throw new Exception("A data de Volta deve ser posterior a data de Ida");
+        }
     }
 
-    public function getJustificativa(){
+    public function getJustificativa()
+    {
         return $this->justificativa;
     }
 
     public function setJustificativa($justificativa){
+        Validacao::validar("Justificativa",$justificativa,'obrigatorio','texto');
         $this->justificativa = $justificativa;
     }
 
@@ -170,6 +214,7 @@ class ViagemModel
     }
 
     public function setObservacoes($observacoes){
+        Validacao::validar("Observações",$observacoes,'obrigatorio','texto');
         $this->observacoes = $observacoes;
     }
 }

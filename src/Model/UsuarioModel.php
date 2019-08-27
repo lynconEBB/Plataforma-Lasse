@@ -21,7 +21,7 @@ class UsuarioModel
     private $formacao;
     private $valorHora;
 
-    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id=null){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id){
         $this->setId($id);
         $this->setNomeCompleto($nomeCompleto);
         $this->setLogin($login);
@@ -34,6 +34,24 @@ class UsuarioModel
         $this->setAtuacao($atuacao);
         $this->setFormacao($formacao);
         $this->setValorHora($valorHora);
+    }
+
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->getId(),
+            "nomeCompleto" => $this->getNomeCompleto(),
+            "login" => $this->getLogin(),
+            "dtNasc" => $this->getDtNascimento()->format('d/m/Y'),
+            "cpf" => $this->getCpf(),
+            "rg" => $this->getRg(),
+            "dtEmissao" => $this->getDtEmissao()->format('d/m/Y'),
+            "email" => $this->getEmail(),
+            "atuacao" => $this->getAtuacao(),
+            "formacao" => $this->getFormacao(),
+            "valorHora" => $this->getValorHora()
+        ];
+        return $array;
     }
 
     public function getEmail(){
@@ -147,5 +165,4 @@ class UsuarioModel
         Validacao::validar('Valor Hora',$valorHora,'monetario');
         $this->valorHora = Formatacao::formataMonetario($valorHora);
     }
-
 }

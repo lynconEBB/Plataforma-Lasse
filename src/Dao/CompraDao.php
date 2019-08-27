@@ -24,7 +24,6 @@ class CompraDao extends CrudDao {
 
         $stm->bindParam(':id',$id);
         $stm->execute();
-
     }
 
     public function listar(){
@@ -48,13 +47,12 @@ class CompraDao extends CrudDao {
         }
     }
 
-    function atualizar(CompraModel $compra,$idTarefa){
+    function atualizar(CompraModel $compra){
 
-        $comando = "UPDATE tbCompra SET proposito = :proposito, idTarefa = :idTarefa WHERE id = :id";
+        $comando = "UPDATE tbCompra SET proposito = :proposito WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':proposito',$compra->getProposito());
-        $stm->bindValue(':idTarefa',$idTarefa);
         $stm->bindValue(':id',$compra->getId());
 
         $stm->execute();

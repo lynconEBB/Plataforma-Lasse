@@ -12,7 +12,7 @@ class CompraModel
     private $itens;
     private $comprador;
 
-    public function __construct($proposito,$totalGasto,  $itens , $id,$comprador)
+    public function __construct($proposito,$totalGasto, $itens, $id,$comprador)
     {
         $this->setId($id);
         $this->setProposito($proposito);
@@ -22,10 +22,32 @@ class CompraModel
 
     }
 
+    public function toArray()
+    {
+        if (is_array($this->itens)) {
+            $itens = array();
+            foreach ($this->itens as $item) {
+                $itens[] = $item->toArray();
+            }
+        } else {
+            $itens = null;
+        }
+        $array = [
+            "id" => $this->id,
+            "proposito" => $this->proposito,
+            "totalGasto" => $this->totalGasto,
+            "itens" => $itens,
+            "comprador" => $this->comprador->toArray()
+        ];
+        return $array;
+    }
+
     public function calculaTotal(){
         $total = 0;
-        foreach ($this->itens as $item){
-            $total += $item->getValorParcial();
+        if (is_array($this->itens)) {
+            foreach ($this->itens as $item){
+                $total += $item->getValorParcial();
+            }
         }
         $this->totalGasto = $total;
     }

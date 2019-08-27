@@ -12,12 +12,14 @@
     "require": {
         "cybermonde/odtphp": "^1.7",
         "ext-pdo": "*",
-        "ext-http": "*",
-        "ext-ctype": "*"
+        "firebase/php-jwt": "^5.0",
+        "ext-json": "*",
+        "ext-http": "*"
     },
     "autoload": {
         "psr-4": {
             "Lasse\\LPM\\": "src/"
-        }
+        },
+        "files": ["src/Services/errorHandler.php"]
     }
 }
