@@ -10,6 +10,7 @@ use Lasse\LPM\Control\AtividadeControl;
 use Lasse\LPM\Control\CompraControl;
 use Lasse\LPM\Control\CondutorControl;
 use Lasse\LPM\Control\CrudControl;
+use Lasse\LPM\Control\FormularioControl;
 use Lasse\LPM\Control\GastoControl;
 use Lasse\LPM\Control\ItemControl;
 use Lasse\LPM\Control\ProjetoControl;
@@ -39,6 +40,8 @@ class Router{
                 require 'src/View/Usuario/telaLogin.html';
             }elseif ($this->url[0] == "testeApi" && count($this->url) == 1) {
                 require 'src/View/testeApi/test.html';
+            }elseif ($this->url[0] == "testeFile" && count($this->url) == 1) {
+                require 'src/View/Formulario/formulario.html';
             }
         }
     }
@@ -75,6 +78,9 @@ class Router{
                 break;
             case 'gastos':
                 $controler = new GastoControl($this->url);
+                break;
+            case 'formulario':
+                $controler = new FormularioControl($this->url);
                 break;
         }
     }

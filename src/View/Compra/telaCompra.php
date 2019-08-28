@@ -19,18 +19,18 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
-                <img src="../Default/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="../../../assets/images/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
             <a href="/menu/item" class="side-bar-icon">
-                <img src="../Default/img/Icons/itemBranco.png" class="img-icon" alt="Menu de Itens">
+                <img src="../../../assets/images/Icons/itemBranco.png" class="img-icon" alt="Menu de Itens">
             </a>
         </article>
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../Default/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="../../../assets/images/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -57,19 +57,19 @@
 
                     <button class='btn-opcao' data-toggle='modal' data-target="#modalAlterar" data-id="<?=$compra->getId()?>" data-proposito="<?=$compra->getProposito()?>"
                             data-idtarefa="<?=$_GET['idTarefa']?>"  >
-                        <img class="img-icon" src='../Default/img/Icons/editarIcone.png' alt=''>
+                        <img class="img-icon" src='../../../assets/images/Icons/editarIcone.png' alt=''>
                     </button>
                     <form action="/acaoCompra" method="post">
                         <input type="hidden" name="acao" value="excluirCompra">
                         <input type="hidden" name="id" value="<?php echo $compra->getId()?>">
                         <input type="hidden" name="idTarefa" value="<?php echo $_GET['idTarefa']?>">
                         <button class="btn-opcao">
-                            <img class="img-icon" src='../Default/img/Icons/lixeiraIcone.png' alt=''>
+                            <img class="img-icon" src='../../../assets/images/Icons/lixeiraIcone.png' alt=''>
                         </button>
                     </form>
                     <button type="button" class="btn-opcao">
                         <a href="/menu/compra/item?idCompra=<?=$compra->getId()?>">
-                            <img class="img-icon" src='../Default/img/Icons/item.png' alt=''>
+                            <img class="img-icon" src='../../../assets/images/Icons/item.png' alt=''>
                         </a>
                     </button>
                     <?php endif;?>
@@ -80,7 +80,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../Default/img/Icons/adicionar.png" class="img-icon">
+    <img src="../../../assets/images/Icons/adicionar.png" class="img-icon">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >

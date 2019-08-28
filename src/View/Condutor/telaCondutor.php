@@ -20,7 +20,7 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="javascript:history.go(-2)" title="Return to the previous page" class="side-bar-icon">
-                <img src="../Default/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="../../../assets/images/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
@@ -28,7 +28,7 @@
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../Default/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="../../../assets/images/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -40,7 +40,7 @@
         ?>
         <div class="container-condutor">
             <div class="container-foto">
-                <img src="../Default/img/Icons/condutor.png" class="img-condutor">
+                <img src="../../../assets/images/Icons/condutor.png" class="img-condutor">
             </div>
             <div class="container-content">
                 <h3><b>Nome:</b> <?= $condutor->getNome() ?></h3>
@@ -50,13 +50,13 @@
         </div>
         <div class="acoes">
             <button class='btn-opcao' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $condutor->getId()?>' data-nome='<?= $condutor->getNome()?>' data-cnh='<?= $condutor->getCnh()?>' data-val='<?= $condutor->getValidadeCNH()?>'>
-                <img class="img-icon" src='../Default/img/Icons/editarIcone.png' alt=''>
+                <img class="img-icon" src='../../../assets/images/Icons/editarIcone.png' alt=''>
             </button>
             <form action="/acaoCondutor" method="post">
                 <input type="hidden" name="acao" value="excluirCondutor">
                 <input type="hidden" name="id" value="<?= $condutor->getId()?>">
                 <button class='btn-opcao'>
-                    <img class="img-icon" src='../Default/img/Icons/lixeiraIcone.png'>
+                    <img class="img-icon" src='../../../assets/images/Icons/lixeiraIcone.png'>
                 </button>
             </form>
         </div>
@@ -66,7 +66,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../Default/img/Icons/adicionar.png" class="img-icon">
+    <img src="../../../assets/images/Icons/adicionar.png" class="img-icon">
 </button>
 <div class="modal fade" id="modalCadastro" tabindex="-1" >
     <div class="modal-dialog modal-dialog-centered">

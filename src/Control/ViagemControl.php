@@ -11,7 +11,6 @@ class ViagemControl extends CrudControl {
 
     public function __construct($url)
     {
-
         $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new ViagemDao();
         parent::__construct($url);

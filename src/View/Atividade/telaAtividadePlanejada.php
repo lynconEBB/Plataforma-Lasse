@@ -67,14 +67,14 @@
                         data-tipo="<?= $atividade->getTipo() ?>"
                         data-comentario="<?= $atividade->getComentario() ?>"
                         data-datarealizacao="<?= $atividade->getDataRealizacao()->format('d/m/Y') ?>">
-                    <img class="img-icon" src='../Default/img/Icons/editarIcone.png' alt=''>
+                    <img class="img-icon" src='../../../assets/images/Icons/editarIcone.png' alt=''>
                 </button>
                 <form action="/acaoAtividade" method="post">
                     <input type="hidden" name="acao" value="excluirAtividade">
                     <input type="hidden" name="id" value="<?= $atividade->getId() ?>">
                     <input type="hidden" name="idTarefa" value="<?= $_GET['idTarefa']; ?>">
                     <button class="btn-opcao">
-                        <img class="img-icon" src='../Default/img/Icons/lixeiraicone.png' alt=''>
+                        <img class="img-icon" src='../../../assets/images/Icons/lixeiraicone.png' alt=''>
                     </button>
                 </form>
                 <?php endif; ?>

@@ -12,7 +12,7 @@
 
 
 
-<img style="float: left" src="../Default/img/Icons/RaioNPossuiAcesso.png">
+<img style="float: left" src="../../../assets/images/Icons/RaioNPossuiAcesso.png">
 <h1>Você não possui acesso a essa tarefa<br>Selecione um projeto <a href='/menu/projeto'>aqui</a></h1>
 <script src="../Default/js/jquery.js"></script>
 <script src="../Default/js/bootstrap.js"></script>

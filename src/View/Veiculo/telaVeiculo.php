@@ -20,18 +20,18 @@
     <aside class="side-bar">
         <article class="side-bar-start">
             <a href="javascript:history.go(-1)" title="Return to the previous page" class="side-bar-icon">
-                <img src="../Default/img/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
+                <img src="../../../assets/images/Icons/voltar.png" class="img-icon" alt="Icone para voltar a pagina anterior">
             </a>
         </article>
         <article class="side-bar-middle">
             <a href="/menu/condutor" class="side-bar-icon">
-                <img src="../Default/img/Icons/condutor.png" class="img-icon" alt="Menu de Veiculos">
+                <img src="../../../assets/images/Icons/condutor.png" class="img-icon" alt="Menu de Veiculos">
             </a>
         </article>
         <article class="side-bar-end">
             <form action="/acaoUsuario" method="post">
                 <input type="hidden" name="acao" value="sair">
-                <button class="side-bar-button"><img src="../Default/img/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
+                <button class="side-bar-button"><img src="../../../assets/images/Icons/Sair.png" class="side-bar-icon" alt="Icone para sair do Sistema"></button>
             </form>
         </article>
     </aside>
@@ -59,12 +59,12 @@
                 <button class='btn-opcao' data-toggle='modal' data-target='#modalAlterar' data-id='<?= $veiculo->getId()?>' data-nome='<?= $veiculo->getNome()?>' data-tipo='<?= $veiculo->getTipo()?>'
                         data-dtret='<?= $veiculo->getDataRetirada()?>' data-dtdev='<?= $veiculo->getDataDevolucao()?>' data-horaret='<?= $veiculo->getHorarioRetirada()?>'
                         data-horadev='<?= $veiculo->getHorarioDevolucao()?>' data-idcond='<?= $veiculo->getCondutor()->getId()?>'>
-                    <img class="img-icon" src='../Default/img/Icons/editarIcone.png' alt=''>
+                    <img class="img-icon" src='../../../assets/images/Icons/editarIcone.png' alt=''>
                 </button>
                 <form action="/acaoVeiculo" method="post">
                     <input type="hidden" name="acao" value="excluirVeiculo">
                     <input type="hidden" name="id" value="<?= $veiculo->getId()?>">
-                    <button class='btn-opcao'><img class="img-icon" src='../Default/img/Icons/lixeiraIcone.png' alt=""></button>
+                    <button class='btn-opcao'><img class="img-icon" src='../../../assets/images/Icons/lixeiraIcone.png' alt=""></button>
                 </form>
             </div>
 
@@ -76,7 +76,7 @@
 </main>
 
 <button type="button" class="add-button" data-toggle="modal" data-target="#modalCadastro">
-    <img src="../Default/img/Icons/adicionar.png" class="img-icon" alt="Botao para cadastrar">
+    <img src="../../../assets/images/Icons/adicionar.png" class="img-icon" alt="Botao para cadastrar">
 </button>
 
 <div class="modal fade" id="modalCadastro" tabindex="-1" >

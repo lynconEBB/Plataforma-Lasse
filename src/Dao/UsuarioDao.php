@@ -9,7 +9,8 @@ use PDOException;
 class UsuarioDao extends CrudDao {
 
     public function cadastrar(UsuarioModel $usuario){
-        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,email,valorHora,formacao,atuacao,dtNascimento,tipo) VALUES (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :email, :valorHora, :formacao, :atuacao,:dtNasc,:tipo)");
+        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,email,valorHora,formacao,atuacao,dtNascimento,admin,caminhoFoto) VALUES 
+            (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :email, :valorHora, :formacao, :atuacao,:dtNasc,:tipo,:foto)");
         $insert->bindValue(':senha',$usuario->getSenha());
         $insert->bindValue(':login',$usuario->getLogin());
         $insert->bindValue(':nomeCompleto',$usuario->getNomeCompleto());
@@ -21,7 +22,8 @@ class UsuarioDao extends CrudDao {
         $insert->bindValue(':formacao',$usuario->getFormacao());
         $insert->bindValue(':atuacao',$usuario->getAtuacao());
         $insert->bindValue(':dtNasc',$usuario->getDtNascimento()->format("Y-m-d"));
-        $insert->bindValue(':tipo','1');
+        $insert->bindValue(':tipo',$usuario->getAdmin());
+        $insert->bindValue(':foto',$usuario->getFoto());
 
         $insert->execute();
     }
@@ -58,7 +60,7 @@ class UsuarioDao extends CrudDao {
         $linhas =  $busca->fetchAll(PDO::FETCH_ASSOC);
         if (count($linhas) !== 0){
             foreach ($linhas as $linha){
-                $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+                $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],null,$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['caminhoFoto'],$linha['admin'],$linha['id']);
                 $funcionarios[]=$fun;
             }
             return $funcionarios;
@@ -77,7 +79,7 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
         $linhas = $busca->fetchAll(PDO::FETCH_ASSOC);
         if (count($linhas) != 0) {
             foreach ($linhas as $linha) {
-                $fun = new UsuarioModel($linha['nomeCompleto'], $linha['login'], null, $linha['dtNascimento'], $linha['cpf'], $linha['rg'], $linha['dataDeEmissao'], $linha['email'], $linha['atuacao'], $linha['formacao'], $linha['valorHora'], $linha['id']);
+                $fun = new UsuarioModel($linha['nomeCompleto'], $linha['login'], null, $linha['dtNascimento'], $linha['cpf'], $linha['rg'], $linha['dataDeEmissao'], $linha['email'], $linha['atuacao'], $linha['formacao'], $linha['valorHora'], $linha['caminhoFoto'],$linha['admin'],$linha['id']);
                 $funcionarios[] = $fun;
             }
             return $funcionarios;
@@ -94,7 +96,7 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
         if ($linha != false) {
-            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['id']);
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['caminhoFoto'],$linha['admin'],$linha['id']);
             return $fun;
         }else {
             return false;
@@ -108,28 +110,36 @@ tbUsuario.valorHora,tbUsuario.id FROM tbUsuario inner join tbUsuarioProjeto on t
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
         if ($linha != false) {
-            $fun = new UsuarioModel($linha['nomeCompleto'], $linha['login'], $linha['senha'], $linha['dtNascimento'], $linha['cpf'], $linha['rg'], $linha['dataDeEmissao'], $linha['email'], $linha['atuacao'], $linha['formacao'], $linha['valorHora'], $linha['id']);
+            $fun = new UsuarioModel($linha['nomeCompleto'], $linha['login'], $linha['senha'], $linha['dtNascimento'], $linha['cpf'], $linha['rg'], $linha['dataDeEmissao'], $linha['email'], $linha['atuacao'], $linha['formacao'], $linha['valorHora'], $linha['caminhoFoto'],$linha['admin'],$linha['id']);
             return $fun;
         }else{
             return false;
         }
     }
 
-    public function deslogar($id,$token)
+    public function deslogar($id)
     {
-        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenLogout = :token WHERE id=:id");
+        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenValido = :token WHERE id=:id");
         $delete->bindValue(':id',$id);
-        $delete->bindValue(':token',$token);
+        $delete->bindValue(':token',"NULL");
         $delete->execute();
     }
 
-    public function ultimoTokenPorId($id)
+    public function getTokenPorId($id)
     {
-        $stm = $this->pdo->prepare("SELECT tokenLogout FROM tbUsuario WHERE id = :id");
+        $stm = $this->pdo->prepare("SELECT tokenValido FROM tbUsuario WHERE id = :id");
         $stm->bindValue(':id',$id);
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
-        return $linha['tokenLogout'];
+        return $linha['tokenValido'];
+    }
+
+    public function setToken($token,$id)
+    {
+        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenValido = :token WHERE id=:id");
+        $delete->bindValue(':id',$id);
+        $delete->bindValue(':token',$token);
+        $delete->execute();
     }
 }

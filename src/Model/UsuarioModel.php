@@ -20,8 +20,10 @@ class UsuarioModel
     private $atuacao;
     private $formacao;
     private $valorHora;
+    private $admin;
+    private $foto;
 
-    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$id){
+    public function __construct($nomeCompleto, $login, $senha, $dtNascimento, $cpf, $rg, $dtEmissao, $email, $atuacao, $formacao, $valorHora,$foto,$admin,$id){
         $this->setId($id);
         $this->setNomeCompleto($nomeCompleto);
         $this->setLogin($login);
@@ -34,6 +36,8 @@ class UsuarioModel
         $this->setAtuacao($atuacao);
         $this->setFormacao($formacao);
         $this->setValorHora($valorHora);
+        $this->setFoto($foto);
+        $this->setAdmin($admin);
     }
 
     public function toArray()
@@ -165,4 +169,26 @@ class UsuarioModel
         Validacao::validar('Valor Hora',$valorHora,'monetario');
         $this->valorHora = Formatacao::formataMonetario($valorHora);
     }
+
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
+
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
+
+
 }
