@@ -54,9 +54,9 @@ class UsuarioControl extends CrudControl {
                     }
                     break;
                 case 'PUT':
-                    $info = json_decode(@file_get_contents("php://input"));
-                    // /api/users
-                    if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                    $info = json_decode(file_get_contents("php://input"));
+                    // /api/users/
+                    if (count($this->url) == 2) {
                         $this->atualizar($info);
                         $this->respostaSucesso("Dados de Usuário alterados com sucesso",null,$this->requisitor);
                     }
@@ -66,7 +66,8 @@ class UsuarioControl extends CrudControl {
                     if (count($this->url) == 2) {
                         $this->excluir();
                         $this->respostaSucesso("Usuario Excluido com sucesso",null,$this->requisitor);
-                    } // /api/users/deslogar
+                    }
+                    // /api/users/deslogar
                     elseif (count($this->url) == 3 && $this->url[2] == 'deslogar') {
                         $this->deslogar();
                         $this->respostaSucesso("Deslogado com sucesso!",null,$this->requisitor);
@@ -110,19 +111,12 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-    private function salvarFoto($idUsuario)
+    private function salvarFoto($usuario)
     {
         $foto = $_FILES['foto'];
         if ($foto['type'] == "image/png" || $foto['type'] == "image/jpeg" ) {
             $extensao = substr($foto['name'], strrpos($foto['name'], '.') + 1);
-            $pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$idUsuario;
-            $caminhoFoto = $pastaUsuario."/perfil.".$extensao;
-            if (!is_dir($pastaUsuario)) {
-                mkdir($pastaUsuario);
-            }
-            if (is_file($caminhoFoto)) {
-                unlink($caminhoFoto);
-            }
+
             if (move_uploaded_file($foto['tmp_name'],$caminhoFoto)) {
                 return $caminhoFoto;
             } else {
@@ -131,6 +125,34 @@ class UsuarioControl extends CrudControl {
         } else {
             throw new Exception("Apenas arquivos de imagem são suportados");
         }
+    }
+
+    private function salvarfoto2($usuario,$base64)
+    {
+        $partes = explode(',',$base64);
+        if (count($partes) == 2) {
+            if (($partes[0] == "data:image/png;base64" || $partes[0] == "data:image/jpg;base64") && (base64_encode(base64_decode($partes[1], true)) === $partes[1])) {
+                $extensao = array();
+                preg_match('/\/(.*?);/', $partes[0], $extensao);
+                $extensao = $extensao[1];
+                $pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$usuario;
+                $arquivoFoto = $pastaUsuario."/perfil.".$extensao;
+                if (!is_dir($pastaUsuario)) {
+                    mkdir($pastaUsuario);
+                }
+                if (is_file($arquivoFoto)) {
+                    unlink($arquivoFoto);
+                }
+                $arquivoFoto = fopen($arquivoFoto,"wb");
+                fwrite($arquivoFoto,base64_decode($partes[1]));
+                fclose($arquivoFoto);
+            } else {
+                throw new Exception("Imagem inválida");
+            }
+        } else {
+            throw new Exception("Imagem inválida");
+        }
+
     }
 
     protected function excluir(){
@@ -152,10 +174,19 @@ class UsuarioControl extends CrudControl {
         return $usuarios;
     }
 
-    protected function atualizar($info) {
+    protected function atualizar($dados) {
         $this->requisitor = self::autenticar();
-        $usuario = new UsuarioModel($info->nomeCompleto,$info->login,null,$info->dtNasc,$info->cpf,$info->rg,$info->dtEmissao,$info->email,$info->atuacao,$info->formacao,$info->valorHora,$this->requisitor['id']);
-        $this->DAO->alterar($usuario);
+        //if (!isset($dados->nomeCompleto) || !isset($dados->login) ||  !isset($dados->dtNasc) || !isset($dados->cpf) || !isset($dados->rg) || !isset($dados->dtEmissao) || !isset($dados->email) || !isset($dados->atuacao) || !isset($dados->formacao) || !isset($dados->valorHora)) {
+            $usuario = new UsuarioModel($dados->nomeCompleto,$dados->login,null,$dados->dtNasc,$dados->cpf,$dados->rg,$dados->dtEmissao,$dados->email,$dados->atuacao,$dados->formacao,$dados->valorHora,null,$this->requisitor['admin'],$this->requisitor['id']);
+            if (isset($dados->foto)) {
+                $caminhoFoto = $this->salvarFoto2($this->requisitor['login'],$dados->foto);
+            } else {
+                $caminhoFoto = $this->requisitor['foto'];
+            }
+            $usuario->setFoto($caminhoFoto);
+            //var_dump($usuario);
+            $this->DAO->alterar($usuario);
+
     }
 
     public function listarPorId($id){
