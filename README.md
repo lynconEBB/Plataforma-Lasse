@@ -43,4 +43,3 @@ Todos os usuários terão acesso a uma funcionalidade em que o sistema deve rece
 ### Diagramas
 
 #### Diagrama Entidade-Relacionamento
-![alt text](https://github.com/lynconEBB/Plataforma-Lasse/blob/master/Diagramas/DiagramaER.png)
