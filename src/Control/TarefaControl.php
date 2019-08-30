@@ -80,7 +80,8 @@ class TarefaControl extends CrudControl {
 
     }
 
-    protected function excluir(int $id){
+    protected function excluir($id)
+    {
         $projetoControl = new ProjetoControl(null);
         $idProjeto = $this->descobrirIdProjeto($id);
         if ($projetoControl->verificaDono($idProjeto,$this->requisitor['id'])) {

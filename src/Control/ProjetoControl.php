@@ -52,8 +52,16 @@ class ProjetoControl extends CrudControl
                     }
                     // /api/projetos/user/{idUsuario}
                     elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
-                        $projetos = $this->listarPorIdUsuario($this->url[3]);
-                        $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
+                        if ($this->requisitor['id'] == $this->url[3] || $this->requisitor['admin'] == "1") {
+                            $projetos = $this->listarPorIdUsuario($this->url[3]);
+                            if ($projetos != false) {
+                                $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
+                            } else {
+                                $this->respostaSucesso("Nenhum projeto encontrado",null,$this->requisitor);
+                            }
+                        } else {
+                            throw new Exception("Você não possui acesso aos projetos deste usuario");
+                        }
                     }
                     break;
                 case 'PUT':
@@ -77,10 +85,15 @@ class ProjetoControl extends CrudControl
 
     protected function cadastrar($info)
     {
-        $usuarioControl = new UsuarioControl(null);
-        $dono = $usuarioControl->listarPorId($this->requisitor['id']);
-        $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, $dono);
-        $this->DAO->cadastrar($projeto);
+        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome)) {
+            $usuarioControl = new UsuarioControl(null);
+            $dono = $usuarioControl->listarPorId($this->requisitor['id']);
+            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, $dono);
+            $this->DAO->cadastrar($projeto);
+        } else {
+            throw new Exception("Parametros insuficientes ou mal estruturados",401);
+        }
+
     }
 
     protected function excluir($id)
@@ -104,23 +117,22 @@ class ProjetoControl extends CrudControl
 
     protected function atualizar($info,$id)
     {
-        if ($this->verificaDono($id,$this->requisitor['id'])) {
-            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $id, null, null, null);
-            $this->DAO->alterar($projeto);
+        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome)) {
+            if ($this->verificaDono($id, $this->requisitor['id'])) {
+                $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $id, null, null, null);
+                $this->DAO->alterar($projeto);
+            } else {
+                throw new Exception("Permissão negada para alterar este projeto",401);
+            }
         } else {
-            throw new Exception("Permissão negada para alterar este projeto");
+            throw new Exception("Parametros insuficientes ou mal estruturados",400);
         }
-
     }
 
     public function listarPorIdUsuario($id)
     {
-        if ($this->requisitor['id'] == $id) {
-            $projetos = $this->DAO->listarPorIdUsuario($id);
-            return $projetos;
-        } else {
-            throw new Exception("Permissão negada");
-        }
+        $projetos = $this->DAO->listarPorIdUsuario($id);
+        return $projetos;
     }
 
     public function listarPorId($id)
@@ -161,6 +173,9 @@ class ProjetoControl extends CrudControl
 
     public function addFuncionario($idProjeto,$idUsuario)
     {
+        $this->listarPorId($idProjeto);
+        $usuarioControl = new UsuarioControl(null);
+        $usuarioControl->listarPorId($idUsuario);
         if ($this->verificaDono($idProjeto,$this->requisitor['id'])) {
             if (!$this->procuraFuncionario($idProjeto,$idUsuario)) {
                 $this->DAO->adicionarFuncionario($idUsuario, $idProjeto);

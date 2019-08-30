@@ -24,8 +24,12 @@ class UsuarioControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/users/login
                     if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
-                        $token = $this->logar($info);
-                        $this->respostaSucesso("Logado com Sucesso",$token);
+                        if (isset($info->login) && isset($info->senha)) {
+                            $token = $this->logar($info);
+                            $this->respostaSucesso("Logado com Sucesso",$token);
+                        } else {
+                            throw new Exception("Parametros insuficientes ou mal estruturados");
+                        }
                     } // /api/users
                     elseif (count($this->url) == 2) {
                         $this->cadastrar($info);
@@ -35,8 +39,14 @@ class UsuarioControl extends CrudControl {
                 case 'GET':
                     // /api/users/{idUsuario}
                     if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
-                        $usuario = $this->listarPorId($this->url[2]);
-                        $this->respostaSucesso("Listando Usuário.",$usuario,$this->requisitor);
+                        $this->requisitor = self::autenticar();
+                        if ($this->requisitor['id'] == $this->url[2] || $this->requisitor['admin'] == "1") {
+                            $usuario = $this->listarPorId($this->url[2]);
+                            $this->respostaSucesso("Listando Usuário.",$usuario,$this->requisitor);
+                        } else {
+                            throw new Exception("Você não tem acesso as informações desse usuário");
+                        }
+
                     } // /api/users
                     elseif (count($this->url) == 2) {
                         $this->requisitor = self::autenticar();
@@ -121,16 +131,19 @@ class UsuarioControl extends CrudControl {
         $this->deslogar();
     }
 
-    public function listar() {
-
+    public function listar()
+    {
         $usuarios = $this->DAO->listar();
         return $usuarios;
     }
 
     public function listarPorId($id){
-        $this->requisitor = self::autenticar();
         $usuario = $this->DAO->listarPorId($id);
-        return $usuario;
+        if ($usuario != false ) {
+            return $usuario;
+        } else {
+            throw new Exception("Usuário não encontrado no sistema");
+        }
     }
 
     protected function atualizar($dados) {
@@ -144,7 +157,7 @@ class UsuarioControl extends CrudControl {
             $this->requisitor['login'] = $usuario->getLogin();
             $this->DAO->alterar($usuario);
         } else {
-            throw new Exception("Parametros invalidos ou mal estruturadoskhjk");
+            throw new Exception("Parametros invalidos ou mal estruturados");
         }
     }
 
