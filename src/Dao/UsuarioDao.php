@@ -30,7 +30,7 @@ class UsuarioDao extends CrudDao {
 
     public function alterar(UsuarioModel $usuario){
         $update = $this->pdo->prepare("UPDATE tbUsuario SET login=:login, NomeCompleto=:nome, dtNascimento = :dtNasc, cpf = :cpf, rg = :rg, dataDeEmissao= :dtEmissao, email= :email,
-                atuacao = :atuacao, formacao =:formacao, valorHora = :valorHora WHERE id = :id");
+                atuacao = :atuacao, formacao =:formacao, valorHora = :valorHora, caminhoFoto= :foto WHERE id = :id");
         $update->bindValue(':login',$usuario->getLogin());
         $update->bindValue(':nome',$usuario->getNomeCompleto());
         $update->bindValue(':dtNasc',$usuario->getDtNascimento()->format('Y-m-d'));
@@ -41,6 +41,7 @@ class UsuarioDao extends CrudDao {
         $update->bindValue(':atuacao',$usuario->getAtuacao());
         $update->bindValue(':formacao',$usuario->getFormacao());
         $update->bindValue(':valorHora',$usuario->getValorHora());
+        $update->bindValue(':foto',$usuario->getFoto());
         $update->bindValue(':id',$usuario->getId());
 
         $update->execute();

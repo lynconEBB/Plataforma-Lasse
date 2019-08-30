@@ -36,11 +36,19 @@ class ProjetoControl extends CrudControl
                     // /api/projetos
                     if (count($this->url) == 2) {
                         $projetos = $this->listar();
-                        $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
-                        // /api/projetos/{idProjeto}
+                        if ($projetos != false ) {
+                            $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
+                        } else {
+                            $this->respostaSucesso("Nenhum projeto encontrado",null,$this->requisitor);
+                        }
+                    // /api/projetos/{idProjeto}
                     } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        $projeto = $this->listarPorId($this->url[2]);
-                        $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
+                        if ($this->procuraFuncionario($this->url[2],$this->requisitor['id'])) {
+                            $projeto = $this->listarPorId($this->url[2]);
+                            $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
+                        } else {
+                            throw new Exception("Você precisa participar deste projeto para ter acesso à suas informações");
+                        }
                     }
                     // /api/projetos/user/{idUsuario}
                     elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == 'user') {
@@ -86,8 +94,12 @@ class ProjetoControl extends CrudControl
 
     public function listar()
     {
-        $projetos = $this->DAO->listar();
-        return $projetos;
+        if ($this->requisitor['admin'] == '1') {
+            $projetos = $this->DAO->listar();
+            return $projetos;
+        } else {
+            throw new Exception("Você precisa ser administrador para acessar essa funcionalidade");
+        }
     }
 
     protected function atualizar($info,$id)
@@ -109,13 +121,16 @@ class ProjetoControl extends CrudControl
         } else {
             throw new Exception("Permissão negada");
         }
-
     }
 
     public function listarPorId($id)
     {
         $projeto = $this->DAO->listarPorId($id);
-        return $projeto;
+        if ($projeto != false) {
+            return $projeto;
+        } else {
+            throw new Exception("Projeto não encontrado no sistema");
+        }
     }
 
     public function procuraFuncionario($idProjeto, $idUsuario)
