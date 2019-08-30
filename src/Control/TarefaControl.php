@@ -29,18 +29,27 @@ class TarefaControl extends CrudControl {
                 case 'GET':
                     // /api/tarefas
                     if (count($this->url) == 2) {
-                        $tarefas = $this->listar();
-                        $this->respostaSucesso("Listado Tarefas",$tarefas,$this->requisitor);
+                        if ($this->requisitor['admin'] == "1") {
+                            $tarefas = $this->listar();
+                            if ($tarefas) {
+                                $this->respostaSucesso("Listado Tarefas",$tarefas,$this->requisitor);
+                            } else {
+                                $this->respostaSucesso("Nenhuma Tarefa Encontrada",null,$this->requisitor);
+                            }
+                        } else {
+                            throw new Exception("Você não possui permissão para utilziar essa funcionalidade");
+                        }
                     }
                     // /api/tarefas/{idTarefa}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        $tarefa = $this->listarPorId($this->url[2]);
-                        $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
-                    }
-                    // /api/tarefas/projeto/{idProjeto}
-                    elseif (count($this->url) == 4 && $this->url[2] == 'projeto' && $this->url[3] == (int)$this->url[3]) {
-                        $tarefas = $this->listarPorIdProjeto($this->url[3]);
-                        $this->respostaSucesso("Listado Tarefas do projeto",$tarefas,$this->requisitor);
+                        $idProjeto = $this->descobrirIdProjeto($this->url[2]);
+                        $projetoControl = new ProjetoControl(null);
+                        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
+                            $tarefa = $this->listarPorId($this->url[2]);
+                            $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
+                        } else {
+                            throw new Exception("Você não tem permissão para acessar esta tarefa");
+                        }
                     }
                     break;
                 case 'PUT':
@@ -64,20 +73,23 @@ class TarefaControl extends CrudControl {
     }
 
     protected function cadastrar($info){
-        $projetoControl = new ProjetoControl(null);
-        if ($projetoControl->procuraFuncionario($info->idProjeto,$this->requisitor['id'])) {
-            $tarefa = new TarefaModel($info->nome,$info->descricao,$info->estado,$info->dataInicio,$info->dataConclusao,null,null,null,null,null);
+        if (isset($info->nome) && isset($info->estado) && isset($info->descricao) && isset($info->dataConclusao) && isset($info->dataInicio) && isset($info->idProjeto)){
+            $projetoControl = new ProjetoControl(null);
             $projeto = $projetoControl->listarPorId($info->idProjeto);
-            // Verifica se tarefa está no periodo de inicio e conclusão do projeto
-            if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
-                $this->DAO->cadastrar($tarefa,$info->idProjeto);
+            if ($projetoControl->procuraFuncionario($info->idProjeto,$this->requisitor['id'])) {
+                $tarefa = new TarefaModel($info->nome,$info->descricao,$info->estado,$info->dataInicio,$info->dataConclusao,null,null,null,null,null);
+                // Verifica se tarefa está no periodo de inicio e conclusão do projeto
+                if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
+                    $this->DAO->cadastrar($tarefa,$info->idProjeto);
+                } else {
+                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+                }
             } else {
-                throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+                throw new Exception("Você não tem permissao para adicionar uma tarefa neste projeto");
             }
         } else {
-            throw new Exception("Você não tem permissao para adicionar uma tarefa neste projeto");
+            throw new Exception("Parametros insuficientes ou mal estruturados",400);
         }
-
     }
 
     protected function excluir($id)
@@ -90,7 +102,6 @@ class TarefaControl extends CrudControl {
         } else {
             throw new Exception("Você não tem permissão para deletar uma tarefa deste projeto");
         }
-
     }
 
     public function listar() {
@@ -114,30 +125,23 @@ class TarefaControl extends CrudControl {
         }
     }
 
-    public function listarPorIdProjeto($idProjeto){
-        $projetoControl = new ProjetoControl(null);
-        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
-            $tarefas = $this->DAO->listarPorIdProjeto($idProjeto);
-            return $tarefas;
-        } else {
-            throw new Exception("Você não tem permissão para acessar estas tarefas");
-        }
-    }
-
     public function listarPorId($id){
-        $idProjeto = $this->descobrirIdProjeto($id);
-        $projetoControl = new ProjetoControl(null);
-        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
-            $tarefa = $this->DAO->listarPorId($id);
+        $tarefa = $this->DAO->listarPorId($id);
+        if ($tarefa) {
             return $tarefa;
         } else {
-            throw new Exception("Você não tem permissão para acessar esta tarefa");
+            throw new Exception("Tarefa não encontrada");
         }
     }
 
     public function descobrirIdProjeto($id){
         $idProjeto = $this->DAO->descobrirIdProjeto($id);
-        return $idProjeto;
+        if (is_null($idProjeto)) {
+            throw new Exception("Tarefa não encontrada");
+        } else {
+            return $idProjeto;
+        }
+
     }
 
     public function atualizaTotal($idTarefa){
