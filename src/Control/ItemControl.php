@@ -32,11 +32,6 @@ class ItemControl extends CrudControl{
                         $itens = $this->listar();
                         $this->respostaSucesso("Listando todos Itens",$itens, $this->requisitor);
                     }
-                    // /api/itens/compra/{idCompra}
-                    elseif (count($this->url) == 4 && $this->url[2] == "compra" && $this->url[3] == (int)$this->url[3] ) {;
-                        $itens = $this->listarPorIdCompra($this->url[3]);
-                        $this->respostaSucesso("Listando itens da compra",$itens, $this->requisitor);
-                    }
                     break;
                 case 'PUT':
                     $info = json_decode(@file_get_contents("php://input"));
@@ -97,17 +92,6 @@ class ItemControl extends CrudControl{
         return $itens;
     }
 
-    public function listarPorIdCompra($idCompra)
-    {
-        $compraControl = new CompraControl(null);
-        $idTarefa = $compraControl->descibrirIdTarefa($idCompra);
-        if ($compraControl->verificaPermissao($idTarefa)) {
-            $itens =  $this -> DAO -> listarPorIdCompra($idCompra);
-            return $itens;
-        } else {
-            throw new Exception("Permissão negada para acessar os itens desta compra");
-        }
-    }
 
     protected function atualizar($valor,$nome,$quantidade,$id)
     {
