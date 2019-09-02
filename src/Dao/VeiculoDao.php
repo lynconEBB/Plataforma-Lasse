@@ -81,4 +81,25 @@ class VeiculoDao extends CrudDao {
             return false;
         }
     }
+
+    public function listarPorIdCondutor($idCondutor){
+        $comando = "SELECT * FROM tbVeiculo WHERE idCondutor = :idCondutor";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(":idCondutor",$idCondutor);
+        $stm->execute();
+        $result = array();
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($rows) > 0) {
+            $condutorDAO = new CondutorDao();
+            $condutor = $condutorDAO->listarPorId($idCondutor);
+            foreach ($rows as $row) {
+                $obj = new VeiculoModel($row['nome'],$row['tipo'],$row['retirada'],$row['devolucao'],$condutor,$row['id']);
+                $result[] = $obj;
+            }
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

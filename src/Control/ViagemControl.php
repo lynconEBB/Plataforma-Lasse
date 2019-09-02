@@ -166,6 +166,12 @@ class ViagemControl extends CrudControl {
         }
     }
 
+    public function listarPorIdVeiculo($idVeiculo)
+    {
+        $viagens = $this->DAO->listarPorIdVeiculo($idVeiculo);
+        return $viagens;
+    }
+
     public function verificaPermissao($idTarefa){
         $tarefaControl = new TarefaControl(null);
         $idProjeto = $tarefaControl->descobrirIdProjeto($idTarefa);

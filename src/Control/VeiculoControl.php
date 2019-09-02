@@ -43,12 +43,8 @@ class VeiculoControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/veiculos/{idVeiculo}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
-                        if (isset($info->nome) && isset($info->tipo) && isset($info->dtRetirada) && isset($info->horaRetirada) && isset($info->dtDevolucao) && isset($info->horaDevolucao) && isset($info->condutor) && isset($info->id) ) {
-                            $this->atualizar($info->nome,$info->tipo,$info->dtRetirada,$info->horaRetirada,$info->dtDevolucao,$info->horaDevolucao,$info->condutor,$info->id);
-                            $this->respostaSucesso("Veiculo atualizado com sucesso",null,$this->requisitor);
-                        } else {
-                            throw new Exception("Parâmetros insuficientes ou mal estruturados");
-                        }
+                        $this->atualizar($info,$this->url[2]);
+                        $this->respostaSucesso("Veiculo atualizado com sucesso",null,$this->requisitor);
                     }
                     break;
                 case 'DELETE':
@@ -81,7 +77,12 @@ class VeiculoControl extends CrudControl {
 
     protected function excluir($id){
         $this->listarPorId($id);
-        $this->DAO->excluir($id);
+        $viagemControl = new ViagemControl(null);
+        if ($viagemControl->listarPorIdVeiculo($id) == false) {
+            $this->DAO->excluir($id);
+        } else {
+            throw new Exception("Não foi possível excluir este veiculo pois já está em uso");
+        }
     }
 
     public function listar(){
@@ -89,18 +90,27 @@ class VeiculoControl extends CrudControl {
         return $veiculos;
     }
 
-    protected function atualizar($nome,$tipo,$dtRetirada,$horaRetirada,$dtDevolucao,$horaDevolucao,$condutor,$id){
+    protected function atualizar($info,$id){
         $this->listarPorId($id);
-        $condControl = new CondutorControl(null);
-        if ($condutor instanceof stdClass) {
-            $condControl->cadastrar($condutor->nome,$condutor->cnh,$condutor->validadeCNH);
-            $idCondutor = $condControl->DAO->pdo->lastInsertId();
-            $condutor = $condControl->listarPorId($idCondutor);
+        if (isset($info->nome) && isset($info->tipo) && isset($info->dtRetirada) && isset($info->horaRetirada) && isset($info->dtDevolucao) && isset($info->horaDevolucao) && isset($info->condutor) ) {
+            $viagemControl = new ViagemControl(null);
+            if ($viagemControl->listarPorIdVeiculo($id) == false) {
+                $condControl = new CondutorControl(null);
+                if ($info->condutor instanceof stdClass) {
+                    $condControl->cadastrar($info->condutor);
+                    $idCondutor = $condControl->DAO->pdo->lastInsertId();
+                    $condutor = $condControl->listarPorId($idCondutor);
+                } else {
+                    $condutor = $condControl->listarPorId($info->condutor);
+                }
+                $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor,$id);
+                $this->DAO->atualizar($veiculo);
+            } else {
+                throw new Exception("Não é possível atualizar este veiculo pois já está em uso");
+            }
         } else {
-            $condutor = $condControl->listarPorId($condutor);
+            throw new Exception("Parametros insuficientes ou mal estruturados",400);
         }
-        $veiculo = new VeiculoModel($nome,$tipo,$dtRetirada.' '.$horaRetirada,$dtDevolucao.' '.$horaDevolucao,$condutor,$id);
-        $this->DAO->atualizar($veiculo);
     }
 
     public function listarPorId($id){
@@ -110,5 +120,10 @@ class VeiculoControl extends CrudControl {
         } else {
             throw new Exception("Veículo não encotrado");
         }
+    }
+
+    public function listarPorIdCondutor($idCondutor){
+        $veiculos = $this->DAO->listarPorIdCondutor($idCondutor);
+        return $veiculos;
     }
 }

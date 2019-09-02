@@ -176,7 +176,7 @@ class ViagemModel
         $this->destino = $destino;
     }
 
-    public function getDtIda(){
+    public function getDtIda():DateTime{
         return $this->dtIda;
     }
 

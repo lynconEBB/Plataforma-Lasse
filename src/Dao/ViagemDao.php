@@ -138,13 +138,40 @@ idUsuario,totalGasto) values (:idVeiculo, :idTarefa, :origem, :destino, :dataIda
         }
     }
 
+    public function listarPorIdVeiculo($idVeiculo){
+        $comando = "SELECT * from tbViagem WHERE idVeiculo = :id";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindValue(':id',$idVeiculo);
+
+        $stm->execute();
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (count($rows) > 0) {
+            $veiculoDAO = new VeiculoDao();
+            $funcDAO = new UsuarioDao();
+            $gastoDAO = new GastoDao();
+            $viagens = array();
+
+            foreach ($rows as $resul){
+                $veiculo = $veiculoDAO->listarPorId($resul['idVeiculo']);
+                $viajante = $funcDAO->listarPorId($resul['idUsuario']);
+                $gastos = $gastoDAO->listarPorIdViagem($resul['id']);
+                $obj = new ViagemModel($viajante,$veiculo,$resul['origem'],$resul['destino'],$resul['dataIda'],$resul['dataVolta'],$resul['passagem'],$resul['justificativa'],$resul['observacoes'],$resul['entradaHosp'],$resul['saidaHosp'],$resul['totalGasto'],$resul['id'],$gastos);
+                $viagens[] = $obj;
+            }
+            return $viagens;
+        } else {
+            return false;
+        }
+
+    }
+
     function atualizarTotal(ViagemModel $viagem){
         $comando = "UPDATE tbViagem SET totalGasto =:totalGasto WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':totalGasto',$viagem->getTotalGasto());
         $stm->bindValue(':id',$viagem->getId());
-
 
         $stm->execute();
     }

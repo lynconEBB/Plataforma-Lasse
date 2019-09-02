@@ -46,7 +46,7 @@ class CondutorControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/condutores/{idCondutor}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        $this->atualizar($info->nome,$info->cnh,$info->validadeCNH,$this->url[2]);
+                        $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Condutor atualizado com sucesso",null,$this->requisitor);
                     }
                     break;
@@ -72,10 +72,12 @@ class CondutorControl extends CrudControl {
     }
 
     protected function excluir($id){
-        if ($this->listarPorId($id)) {
+        $this->listarPorId($id);
+        $veiculoControl = new VeiculoControl(null);
+        if ($veiculoControl->listarPorIdCondutor($id) == false) {
             $this->DAO->excluir($id);
         } else {
-            throw new Exception("Condutor não encontrado no sistema");
+            throw new Exception("Não é possivel excluir este condutor pois já está em uso");
         }
     }
 
@@ -93,12 +95,19 @@ class CondutorControl extends CrudControl {
         }
     }
 
-    protected function atualizar($nome,$cnh,$validadeCNH,$id){
-        if ($this->listarPorId($id)) {
-            $condutor = new CondutorModel($nome,$cnh,$validadeCNH,$id);
-            $this->DAO->atualizar($condutor);;
+    protected function atualizar($info,$id)
+    {
+        if (isset($info->nome) && isset($info->cnh) && isset($info->validadeCNH)) {
+            $this->listarPorId($id);
+            $veiculoControl = new VeiculoControl(null);
+            if ($veiculoControl->listarPorIdCondutor($id) == false) {
+                $condutor = new CondutorModel($info->nome,$info->cnh,$info->validadeCNH,$id);
+                $this->DAO->atualizar($condutor);
+            } else {
+                throw new Exception("Não é possivel atualizar este condutor pois já está em uso");
+            }
         } else {
-            throw new Exception("Condutor não encontrado no sistema");
+            throw new Exception("Parametros insuficientes ou mal estruturados");
         }
     }
 }
