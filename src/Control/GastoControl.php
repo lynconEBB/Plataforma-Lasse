@@ -32,12 +32,30 @@ class GastoControl extends CrudControl
                 case 'GET':
                     // /api/gastos
                     if (count($this->url) == 2) {
-                        $gastos = $this->listar();
+                        if ($this->requisitor['admin'] == "1") {
+                            $gastos = $this->listar();
+                            if ($gastos != false) {
+                                $this->respostaSucesso("Listando gastos",$gastos,$this->requisitor);
+                            } else {
+                                $this->respostaSucesso("Nenhum gasto encontrado",$this->requisitor);
+                                http_response_code(201);
+                            }
+                        } else {
+                            throw new Exception("Você precisa ser administrador para ter acesso a todos os gastos",401);
+                        }
                     }
                     // /api/gastos/{idGasto}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $gasto = $this->listarPorId($this->url[2]);
-                        $this->respostaSucesso("Gasto excluido com sucesso",$gasto, $this->requisitor);
+                        $idViagem = $this->DAO->descobrirIdViagem($this->url[2]);
+                        $viagemControl = new ViagemControl(null);
+                        $viagem = $viagemControl->listarPorId($idViagem);
+
+                        if ($this->requisitor['id'] == $viagem->getViajante()->getId() || $this->requisitor['admin'] == "1") {
+                            $this->respostaSucesso("Gasto excluido com sucesso",$gasto, $this->requisitor);
+                        } else {
+                            throw new Exception("Você não possui acesso aos detalhes deste gasto");
+                        }
                     }
                     break;
                 case 'PUT':
@@ -84,6 +102,7 @@ class GastoControl extends CrudControl
         $idViagem = $this->DAO->descobrirIdViagem($id);
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
+
         if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
             $this -> DAO -> excluir($id);
             $viagemControl->atualizaTotal($idViagem);
@@ -95,12 +114,7 @@ class GastoControl extends CrudControl
     public function listar()
     {
         $gastos = $this->DAO->listar();
-        if ($gastos != false) {
-            $this->respostaSucesso("Listando gastos",$gastos,$this->requisitor);
-        } else {
-            $this->respostaSucesso("Nenhum gasto encontrado",$this->requisitor);
-            http_response_code(201);
-        }
+        return $gastos;
     }
 
     public function listarPorId($id)

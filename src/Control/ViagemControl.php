@@ -24,7 +24,7 @@ class ViagemControl extends CrudControl {
                     $info = json_decode(file_get_contents("php://input"));
                     // /api/viagens
                     if (count($this->url) == 2) {
-                        if ($this->verificaDados($info)) {
+                        if ($this->verificaDados($info,'cadastro')) {
                             $this->cadastrar($info);
                             $this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
                         } else {
@@ -35,22 +35,34 @@ class ViagemControl extends CrudControl {
                 case 'GET':
                     // /api/viagens
                     if (count($this->url) == 2) {
-                        $viagens = $this->listar();
-                        $this->respostaSucesso("Listando todas Viagens",$viagens,$this->requisitor);
+                        if ($this->requisitor['admin'] == "1") {
+                            $viagens = $this->listar();
+                            if ($viagens != false) {
+                                $this->respostaSucesso("Listando todas Viagens",$viagens,$this->requisitor);
+                            } else {
+                                $this->respostaSucesso("Nenhum Viagem encontrada no sistema",null,$this->requisitor);
+                                http_response_code(201);
+                            }
+
+                        } else {
+                            throw new Exception("Você precisa ser administrador para ter acesso a todas as viagens");
+                        }
                     }
                     // /api/viagens/{idViagem}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $viagem = $this->listarPorId($this->url[2]);
-                        $this->respostaSucesso("Listando Viagem",$viagem,$this->requisitor);
+                        if ($this->requisitor['id'] == $viagem->getViajante()->getId() || $this->requisitor['admin'] == "1") {
+                            $this->respostaSucesso("Listando Viagem",$viagem,$this->requisitor);
+                        } else {
+                            throw new Exception("Você não possui acesso aos detalhes desta viagem");
+                        }
                     }
                     break;
                 case 'PUT':
                     $info = json_decode(file_get_contents("php://input"));
-                    // /api/viagens/{idViagem}v
+                    // /api/viagens/{idViagem}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        if (isset($info->dataIda) && isset($info->dataVolta) && isset($info->origem) && isset($info->destino) &&
-                          isset($info->passagem) && isset($info->justificativa) && isset($info->observacoes) && isset($info->dtEntradaHosp) &&
-                          isset($info->dtSaidaHosp) && isset($info->horaEntradaHosp) && isset($info->horaSaidaHosp) && isset($info->veiculo)){
+                        if ($this->verificaDados($info,'atualizacao')){
                             $this->atualizar($info,$this->url[2]);
                             $this->respostaSucesso("Viagem atualizada com sucesso",null,$this->requisitor);
                         } else {
@@ -115,7 +127,7 @@ class ViagemControl extends CrudControl {
 
     protected function atualizar($dados,$id)
     {
-        $viagem = $this->DAO->listarPorId($id);
+        $viagem = $this->listarPorId($id);
         if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
             $veiculoControl = new VeiculoControl(null);
             if ($dados->veiculo instanceof stdClass){
@@ -158,7 +170,7 @@ class ViagemControl extends CrudControl {
 
     public function listarPorId($id)
     {
-        $viagem = $this->DAO->listarPorId($id);
+        $viagem = $this->DAO->listarPorId($id);;
         if ($viagem != false) {
             return $viagem;
         } else {
@@ -180,21 +192,30 @@ class ViagemControl extends CrudControl {
         return $resposta;
     }
 
-    public function verificaDados($dados)
+    public function verificaDados($dados,$requisicao)
     {
-        if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
-            !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
-            !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->gastos) ||
-            !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos)) {
-            return false;
-        } else {
-            foreach ($dados->gastos as $gasto) {
-                if (!isset($gasto->valor) || !isset($gasto->tipo)){
-                    return false;
+        if ($requisicao == 'cadastro') {
+            if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
+                !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
+                !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->gastos) ||
+                !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos)) {
+                return false;
+            } else {
+                foreach ($dados->gastos as $gasto) {
+                    if (!isset($gasto->valor) || !isset($gasto->tipo)){
+                        return false;
+                    }
                 }
             }
-            return true;
         }
+        if ($requisicao == 'atualizacao') {
+            if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
+                !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
+                !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->veiculo)){
+                return false;
+            }
+        }
+        return true;
     }
 }
 
