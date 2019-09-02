@@ -44,7 +44,7 @@ class TarefaControl extends CrudControl {
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $idProjeto = $this->descobrirIdProjeto($this->url[2]);
                         $projetoControl = new ProjetoControl(null);
-                        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
+                        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id']) || $this->requisitor['admin'] ==  "1") {
                             $tarefa = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
                         } else {
@@ -58,10 +58,10 @@ class TarefaControl extends CrudControl {
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $tarefa = $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Tarefa atualizada com sucesso",$tarefa,$this->requisitor);
+
                     }
                     break;
                 case 'DELETE':
-                    $info = json_decode(@file_get_contents("php://input"));
                     // /api/tarefas/{idTarefa}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $this->excluir($this->url[2]);
@@ -94,13 +94,13 @@ class TarefaControl extends CrudControl {
 
     protected function excluir($id)
     {
+        $idProjeto = $this->descobrirIdProjeto($this->url[2]);
         $projetoControl = new ProjetoControl(null);
-        $idProjeto = $this->descobrirIdProjeto($id);
-        if ($projetoControl->verificaDono($idProjeto,$this->requisitor['id'])) {
+        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
             $this->DAO->excluir($id);
             $projetoControl->atualizaTotal($idProjeto);
         } else {
-            throw new Exception("Você não tem permissão para deletar uma tarefa deste projeto");
+            throw new Exception("Você não tem permissão para excluir esta tarefa");
         }
     }
 
@@ -110,19 +110,25 @@ class TarefaControl extends CrudControl {
     }
 
     protected function atualizar($info,$id){
-        $projetoControl = new ProjetoControl(null);
-        $idProjeto = $this->descobrirIdProjeto($id);
-
-        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
-
-            $tarefa = new TarefaModel($info->nome,$info->descricao,$info->estado,$info->dataInicio,$info->dataConclusao,$id,null,null,null,null);
-            $projeto = $projetoControl->listarPorId($idProjeto);
-            if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
-                $this->DAO->atualizar($tarefa);
+        if (isset($info->nome) && isset($info->estado) && isset($info->descricao) && isset($info->dataConclusao) && isset($info->dataInicio)){
+            $projetoControl = new ProjetoControl(null);
+            $idProjeto = $this->descobrirIdProjeto($id);
+            if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
+                $tarefa = new TarefaModel($info->nome,$info->descricao,$info->estado,$info->dataInicio,$info->dataConclusao,$id,null,null,null,null);
+                $projeto = $projetoControl->listarPorId($idProjeto);
+                // Verifica se tarefa está no periodo de inicio e conclusão do projeto
+                if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
+                    $this->DAO->atualizar($tarefa);
+                } else {
+                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',401);
+                }
             } else {
-                throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+                throw new Exception("Você não tem permissão para atualizar esta tarefa");
             }
+        } else {
+            throw new Exception("Parametros insuficientes ou mal estruturados",400);
         }
+
     }
 
     public function listarPorId($id){
@@ -141,7 +147,6 @@ class TarefaControl extends CrudControl {
         } else {
             return $idProjeto;
         }
-
     }
 
     public function atualizaTotal($idTarefa){
