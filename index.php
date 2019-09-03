@@ -79,7 +79,7 @@ class Router{
             case 'gastos':
                 $controler = new GastoControl($this->url);
                 break;
-            case 'formulario':
+            case 'formularios':
                 $controler = new FormularioControl($this->url);
                 break;
         }

@@ -13,8 +13,7 @@
         "cybermonde/odtphp": "^1.7",
         "ext-pdo": "*",
         "firebase/php-jwt": "^5.0",
-        "ext-json": "*",
-        "ext-http": "*"
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
