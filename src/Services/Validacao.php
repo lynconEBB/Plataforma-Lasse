@@ -139,6 +139,19 @@ class Validacao
         }
     }
 
+    private static function documento($nomeParametro,$valor) {
+        $extensao = pathinfo($valor,PATHINFO_EXTENSION);
+
+        if ($extensao != 'odt' && $extensao != 'docx') {
+            throw new Exception("O campo {$nomeParametro} precisa receber uma arquivo em formato odt ou docx");
+        }
+    }
+
+    private static function nomeArquivo($nomeParametro,$valor) {
+        if (strpos('/',$valor) != false || strpos(' ',$valor) != false) {
+            throw new Exception("O campo {$nomeParametro} não pode conter espaços e barras");
+        }
+    }
 
 
 }

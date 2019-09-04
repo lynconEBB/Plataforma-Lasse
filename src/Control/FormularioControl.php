@@ -3,13 +3,21 @@
 namespace Lasse\LPM\Control;
 
 
+use DOMDocument;
+use DOMXPath;
 use Exception;
+use Lasse\LPM\Dao\FormularioDao;
+use Lasse\LPM\Model\FormularioModel;
 
 class FormularioControl extends CrudControl
 {
+    private $pastaUsuario;
+
     public function __construct($url)
     {
+        $this->DAO = new FormularioDao();
         $this->requisitor = UsuarioControl::autenticar();
+        $this->pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$this->requisitor['id'];
         parent::__construct($url);
     }
 
@@ -20,46 +28,82 @@ class FormularioControl extends CrudControl
                 // /api/formularios
                 if (count($this->url) == 2) {
                     if (isset($_POST['nome']) && isset($_FILES['formulario'])) {
-                        $this->cadastrar($_FILES['formulario'],$_POST['nome']);
+                        if (is_string($_FILES['formulario']['name'])) {
+                            $this->cadastrar($_FILES['formulario'],$_POST['nome']);
+                            //$this->respostaSucesso("Formulario Cadastrado com sucesso",null,$this->requisitor);
+                        } else {
+                            throw new Exception("Apenas 1 arquivo é permitido");
+                        }
                     } else {
-                        throw new Exception("Paramentros insuficientes ou mal estruturados");
+                        throw new Exception("Parâmetros insuficientes ou mal estruturados");
                     }
                 }
+                break;
+            case 'DELETE':
+                // /api/formularios/{idFormulario}
+                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                    $this->excluir($this->url[2]);
+                    $this->respostaSucesso("Excluido com sucesso",null,$this->requisitor);
+                }
+                break;
         }
     }
 
     public function cadastrar($arquivo,$nome)
     {
-        if (strpos('/',$nome) == false && strpos(' ',$nome) == false && is_string($arquivo['name'])) {
-            $pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$this->requisitor['id'];
+        //if ($this->DAO->listarPorUsuarioNome($nome,$this->requisitor['id']) == false) {
             $caminhoArquivoTemp = $arquivo['tmp_name'];
             $extensao = pathinfo($arquivo['name'],PATHINFO_EXTENSION);
-            if ($extensao != 'odt' && $extensao != 'docx') {
-                throw new Exception("Formato de arquivo não suportado");
-            }
-            $caminhoArquivoUpload = $pastaUsuario."/".$nome.".".$extensao;
-            if (is_file($caminhoArquivoUpload)) {
-                unlink($caminhoArquivoUpload);
-            }
-            putenv('PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin');
-            putenv('HOME=' . $pastaUsuario);
+            $caminhoArquivoUpload = $this->pastaUsuario."/".$nome.".".$extensao;
+            $caminhoArquivoHTML = $this->pastaUsuario."/".$nome.".html";
 
-            if (move_uploaded_file($caminhoArquivoTemp,$caminhoArquivoUpload)) {
-                $comando = "soffice --headless --convert-to html:HTML --outdir ";
-                $comando .= $pastaUsuario." ";
-                $comando .= $caminhoArquivoUpload;
+            $formulario = new FormularioModel($nome,$caminhoArquivoUpload,$caminhoArquivoHTML,null);
 
-                if (exec($comando)) {
-                    require $pastaUsuario.'/formViagem.html';
-                } else {
-                    echo 'errou feio';
+            if (move_uploaded_file($caminhoArquivoTemp,$formulario->getCaminhoDocumento())) {
+                //$html = $this->converterParaHTML($formulario);
+                $newHtml = "";
+                $html = file_get_contents($caminhoArquivoHTML);
+                $domDoc = new domDocument();
+                $domDoc->loadHTML('<a href="http://foo.bar/">Click here</a>');
+                $imgs = $domDoc->getElementsByTagName('a');
+                var_dump($imgs);
+                foreach ($domDoc->getElementsByTagName('a') as $item) {
+
                 }
-
+                //$this->DAO->cadastrar($formulario,$this->requisitor['id']);
             } else {
-                throw new Exception("");
+                if (is_file($formulario->getCaminhoDocumento())) {
+                    unlink($formulario->getCaminhoDocumento());
+                }
+                throw new Exception("Não foi possível upar o arquivo");
             }
+       // } else {
+           // throw new Exception("Nome de Formulário já utilizado");
+       // }
+
+    }
+
+    private function converterParaHTML(FormularioModel $formulario)
+    {
+        putenv('PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin');
+        putenv('HOME=' . $this->pastaUsuario);
+        $comando = "soffice --headless --convert-to html:HTML --outdir ";
+        $comando .= $this->pastaUsuario." ";
+        $comando .= $formulario->getCaminhoDocumento();
+
+        if (exec($comando)) {
+            return file_get_contents($formulario->getCaminhoHTML());
         } else {
-            throw new Exception("Nome de arquivo invalido");
+            if (is_file($formulario->getCaminhoHTML())) {
+                unlink($formulario->getCaminhoHTML());
+            }
+            throw new Exception("Erro durante conversão para exibição");
         }
     }
+
+    public function excluir($id)
+    {
+
+    }
+
 }
