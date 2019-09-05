@@ -3,11 +3,10 @@
 namespace Lasse\LPM\Control;
 
 
-use DOMDocument;
-use DOMXPath;
 use Exception;
 use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Model\FormularioModel;
+use Lasse\LPM\Services\OdtManipulator;
 
 class FormularioControl extends CrudControl
 {
@@ -30,13 +29,18 @@ class FormularioControl extends CrudControl
                     if (isset($_POST['nome']) && isset($_FILES['formulario'])) {
                         if (is_string($_FILES['formulario']['name'])) {
                             $this->cadastrar($_FILES['formulario'],$_POST['nome']);
-                            //$this->respostaSucesso("Formulario Cadastrado com sucesso",null,$this->requisitor);
+                            $this->respostaSucesso("Formulario Cadastrado com sucesso",null,$this->requisitor);
                         } else {
                             throw new Exception("Apenas 1 arquivo é permitido");
                         }
                     } else {
                         throw new Exception("Parâmetros insuficientes ou mal estruturados");
                     }
+                }
+                // /api/formularios/requisicaoViagem/{idViagem}
+                elseif (count($this->url) == 4 && $this->url[2] == "requisicaoViagem" && $this->url[3] == (int)$this->url[3]) {
+                    $this->gerarRequisicaoViagem($this->url[3]);
+                    //$this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",null,$this->requisitor);
                 }
                 break;
             case 'DELETE':
@@ -46,12 +50,15 @@ class FormularioControl extends CrudControl
                     $this->respostaSucesso("Excluido com sucesso",null,$this->requisitor);
                 }
                 break;
+            case 'GET':
+
+                break;
         }
     }
 
     public function cadastrar($arquivo,$nome)
     {
-        //if ($this->DAO->listarPorUsuarioNome($nome,$this->requisitor['id']) == false) {
+        if ($this->DAO->listarPorUsuarioNome($nome,$this->requisitor['id']) == false) {
             $caminhoArquivoTemp = $arquivo['tmp_name'];
             $extensao = pathinfo($arquivo['name'],PATHINFO_EXTENSION);
             $caminhoArquivoUpload = $this->pastaUsuario."/".$nome.".".$extensao;
@@ -60,26 +67,17 @@ class FormularioControl extends CrudControl
             $formulario = new FormularioModel($nome,$caminhoArquivoUpload,$caminhoArquivoHTML,null);
 
             if (move_uploaded_file($caminhoArquivoTemp,$formulario->getCaminhoDocumento())) {
-                //$html = $this->converterParaHTML($formulario);
-                $newHtml = "";
-                $html = file_get_contents($caminhoArquivoHTML);
-                $domDoc = new domDocument();
-                $domDoc->loadHTML('<a href="http://foo.bar/">Click here</a>');
-                $imgs = $domDoc->getElementsByTagName('a');
-                var_dump($imgs);
-                foreach ($domDoc->getElementsByTagName('a') as $item) {
-
-                }
-                //$this->DAO->cadastrar($formulario,$this->requisitor['id']);
+                $html = $this->converterParaHTML($formulario);
+                $this->DAO->cadastrar($formulario,$this->requisitor['id']);
             } else {
                 if (is_file($formulario->getCaminhoDocumento())) {
                     unlink($formulario->getCaminhoDocumento());
                 }
                 throw new Exception("Não foi possível upar o arquivo");
             }
-       // } else {
-           // throw new Exception("Nome de Formulário já utilizado");
-       // }
+        } else {
+            throw new Exception("Nome de Formulário já utilizado");
+        }
 
     }
 
@@ -104,6 +102,24 @@ class FormularioControl extends CrudControl
     public function excluir($id)
     {
 
+    }
+
+    public function gerarRequisicaoViagem($idViagem) {
+        $file = $_SERVER['DOCUMENT_ROOT']."/requisicaoViagem.odt";
+
+
+
+        /*$viagemControl = new ViagemControl(null);
+        $viagem = $viagemControl->listarPorId($idViagem);
+        if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
+            $arquivo = "/home/lasse/Lasse-Project-Manager/assets/files/default/requisicaoViagem.odt";
+            //echo $arquivo;
+            $pasta = $this->pastaUsuario."/tmp";
+            $manipulator = new OdtManipulator($arquivo,$pasta);
+
+        } else {
+            throw new Exception("Você não possui permissão para gerar um formulário desta viagem");
+        }*/
     }
 
 }
