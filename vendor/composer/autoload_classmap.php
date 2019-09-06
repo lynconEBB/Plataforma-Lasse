@@ -6,4 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Odf' => $vendorDir . '/cybermonde/odtphp/library/Odf.php',
+    'OdfException' => $vendorDir . '/cybermonde/odtphp/library/Odf.php',
+    'PclZip' => $vendorDir . '/cybermonde/odtphp/library/zip/pclzip/pclzip.lib.php',
+    'PclZipProxy' => $vendorDir . '/cybermonde/odtphp/library/zip/PclZipProxy.php',
+    'PclZipProxyException' => $vendorDir . '/cybermonde/odtphp/library/zip/PclZipProxy.php',
+    'PhpZipProxy' => $vendorDir . '/cybermonde/odtphp/library/zip/PhpZipProxy.php',
+    'PhpZipProxyException' => $vendorDir . '/cybermonde/odtphp/library/zip/PhpZipProxy.php',
+    'Segment' => $vendorDir . '/cybermonde/odtphp/library/Segment.php',
+    'SegmentException' => $vendorDir . '/cybermonde/odtphp/library/Segment.php',
+    'SegmentIterator' => $vendorDir . '/cybermonde/odtphp/library/SegmentIterator.php',
+    'ZipInterface' => $vendorDir . '/cybermonde/odtphp/library/zip/ZipInterface.php',
 );

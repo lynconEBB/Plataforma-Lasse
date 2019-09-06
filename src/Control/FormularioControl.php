@@ -7,6 +7,8 @@ use Exception;
 use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Services\OdtManipulator;
+use Odf;
+
 
 class FormularioControl extends CrudControl
 {
@@ -59,6 +61,9 @@ class FormularioControl extends CrudControl
     public function cadastrar($arquivo,$nome)
     {
         if ($this->DAO->listarPorUsuarioNome($nome,$this->requisitor['id']) == false) {
+            if (!is_dir($this->pastaUsuario)){
+                mkdir($this->pastaUsuario);
+            }
             $caminhoArquivoTemp = $arquivo['tmp_name'];
             $extensao = pathinfo($arquivo['name'],PATHINFO_EXTENSION);
             $caminhoArquivoUpload = $this->pastaUsuario."/".$nome.".".$extensao;
@@ -105,21 +110,24 @@ class FormularioControl extends CrudControl
     }
 
     public function gerarRequisicaoViagem($idViagem) {
-        $file = $_SERVER['DOCUMENT_ROOT']."/requisicaoViagem.odt";
-
-
-
-        /*$viagemControl = new ViagemControl(null);
+        $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
         if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
-            $arquivo = "/home/lasse/Lasse-Project-Manager/assets/files/default/requisicaoViagem.odt";
-            //echo $arquivo;
-            $pasta = $this->pastaUsuario."/tmp";
-            $manipulator = new OdtManipulator($arquivo,$pasta);
+
+            $arquivo = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
+            $pastaArquivo = $this->pastaUsuario."/requisicaoViagem".$viagem->getId();
+
+            if (!is_dir($pastaArquivo)) {
+                mkdir($pastaArquivo);
+            }
+            $odtManipulator = new OdtManipulator($arquivo,$pastaArquivo);
+            $odtManipulator->unzipODT();
+            $odtManipulator->setCampo("viajante",$viagem->getViajante()->getNomeCompleto());
+            //$odtManipulator->zipSave();
 
         } else {
             throw new Exception("Você não possui permissão para gerar um formulário desta viagem");
-        }*/
+        }
     }
 
 }

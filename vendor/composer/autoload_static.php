@@ -32,11 +32,26 @@ class ComposerStaticInit6c534bb2c883ffbe084261fd504f4296
         ),
     );
 
+    public static $classMap = array (
+        'Odf' => __DIR__ . '/..' . '/cybermonde/odtphp/library/Odf.php',
+        'OdfException' => __DIR__ . '/..' . '/cybermonde/odtphp/library/Odf.php',
+        'PclZip' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/pclzip/pclzip.lib.php',
+        'PclZipProxy' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/PclZipProxy.php',
+        'PclZipProxyException' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/PclZipProxy.php',
+        'PhpZipProxy' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/PhpZipProxy.php',
+        'PhpZipProxyException' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/PhpZipProxy.php',
+        'Segment' => __DIR__ . '/..' . '/cybermonde/odtphp/library/Segment.php',
+        'SegmentException' => __DIR__ . '/..' . '/cybermonde/odtphp/library/Segment.php',
+        'SegmentIterator' => __DIR__ . '/..' . '/cybermonde/odtphp/library/SegmentIterator.php',
+        'ZipInterface' => __DIR__ . '/..' . '/cybermonde/odtphp/library/zip/ZipInterface.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6c534bb2c883ffbe084261fd504f4296::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6c534bb2c883ffbe084261fd504f4296::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6c534bb2c883ffbe084261fd504f4296::$classMap;
 
         }, null, ClassLoader::class);
     }
