@@ -112,17 +112,21 @@ class FormularioControl extends CrudControl
     public function gerarRequisicaoViagem($idViagem) {
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
+        if (!is_dir($this->pastaUsuario)) {
+            mkdir($this->pastaUsuario);
+        }
         if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
 
             $arquivo = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
             $pastaArquivo = $this->pastaUsuario."/requisicaoViagem".$viagem->getId();
 
-            if (!is_dir($pastaArquivo)) {
+            /*if (!is_dir($pastaArquivo)) {
                 mkdir($pastaArquivo);
             }
+
             $odtManipulator = new OdtManipulator($arquivo,$pastaArquivo);
             $odtManipulator->unzipODT();
-            $odtManipulator->setCampo("viajante",$viagem->getViajante()->getNomeCompleto());
+            $odtManipulator->setCampo("viajante",$viagem->getViajante()->getNomeCompleto());*/
             //$odtManipulator->zipSave();
 
         } else {

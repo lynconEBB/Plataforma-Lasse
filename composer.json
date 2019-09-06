@@ -15,8 +15,7 @@
         "ext-json": "*",
         "ext-dom": "*",
       "ext-zip": "*",
-      "ext-xmlreader": "*",
-        "cybermonde/odtphp": "^1.7"
+      "ext-xmlreader": "*"
     },
     "autoload": {
         "psr-4": {
