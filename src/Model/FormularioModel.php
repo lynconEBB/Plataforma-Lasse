@@ -13,10 +13,12 @@ class FormularioModel
     private $nome;
     private $caminhoDocumento;
     private $caminhoHTML;
+    private $usuario;
 
-    public function __construct( $nome, $caminhoDocumento, $caminhoHTML,$id)
+    public function __construct( $nome,$usuario, $caminhoDocumento=null, $caminhoHTML=null,$id=null)
     {
         $this->setId($id);
+        $this->setUsuario($usuario);
         $this->setNome($nome);
         $this->setCaminhoDocumento($caminhoDocumento);
         $this->setCaminhoHTML($caminhoHTML);
@@ -38,7 +40,7 @@ class FormularioModel
         return $this->nome;
     }
 
-    public function setNome($nome): void
+    public function setNome($nome)
     {
         Validacao::validar('Nome do Formulário',$nome,'nomeArquivo');
         $this->nome = $nome;
@@ -51,8 +53,12 @@ class FormularioModel
 
     public function setCaminhoDocumento($caminhoDocumento)
     {
-        Validacao::validar('Documento Formulário',$caminhoDocumento,'documento');
-        $this->caminhoDocumento = $caminhoDocumento;
+        if (!is_null($caminhoDocumento)) {
+            Validacao::validar('Documento Formulário',$caminhoDocumento,'documento');
+            $this->caminhoDocumento = $caminhoDocumento;
+        } else {
+            $this->caminhoDocumento = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->id}/{$this->nome}/{$this->nome}.odt";
+        }
     }
 
     public function getCaminhoHTML()
@@ -60,12 +66,30 @@ class FormularioModel
         return $this->caminhoHTML;
     }
 
-    public function setCaminhoHTML($caminhoHTML): void
+    public function setCaminhoHTML($caminhoHTML)
     {
-        $extensao = pathinfo($caminhoHTML,PATHINFO_EXTENSION);
-        if ($extensao != 'html') {
-            throw new Exception("O caminho para arquivo HTML invalido");
+        if (!is_null($caminhoHTML)) {
+            $extensao = pathinfo($caminhoHTML,PATHINFO_EXTENSION);
+            if ($extensao != 'html') {
+                throw new Exception("O caminho para arquivo HTML invalido");
+            }
+            $this->caminhoHTML = $caminhoHTML;
+        } else {
+            $this->caminhoHTML = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->id}/{$this->nome}/{$this->nome}.html";
         }
-        $this->caminhoHTML = $caminhoHTML;
+
     }
+
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(UsuarioModel $usuario)
+    {
+        $this->usuario = $usuario;
+    }
+
+
+
 }

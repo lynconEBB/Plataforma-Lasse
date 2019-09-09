@@ -5,52 +5,50 @@ namespace Lasse\LPM\Services;
 
 
 use Exception;
+use SplFileObject;
 use XMLReader;
 use ZipArchive;
 
 class OdtManipulator
 {
-    public $arquivoODT;
-    public $pastaExtraida;
-    public $arquivoContentXML;
-    public $stylesXML;
     public $contentXML;
+    public $tempContent;
+    public $stylesXML;
+    public $tempStyles;
+    public $arquivoOdt;
 
-    public function __construct($arquivo,$pasta)
+    public function __construct($arquivoOdt)
     {
-        $this->arquivoODT = $arquivo;
-        $this->pastaExtraida = $pasta;
-        $this->arquivoContentXML = $pasta."/content.xml";
-        $this->stylesXML = $pasta."/styles.xml";
-    }
-
-    public function unzipODT()
-    {
-        $zip = new ZipArchive();
-        $res = $zip->open($this->arquivoODT);
-        if ( $res === true) {
-            $zip->extractTo($this->pastaExtraida);
-            $zip->close();
+        $this->arquivoOdt = new ZipArchive();
+        if ($this->arquivoOdt->open($arquivoOdt) === true) {
+            $this->contentXML = $this->arquivoOdt->getFromName("content.xml");
+            $this->stylesXML = $this->arquivoOdt->getFromName("styles.xml");
         } else {
-            throw new Exception("Não foi possivel abrir o arquivo odt");
+            throw new Exception("Erro durante Criação de arquivo");
         }
     }
 
-    public function setCampo($nome,$valor) {
-        if ($this->contentXML == "") {
-            $this->contentXML = fopen($this->arquivoContentXML,'rw');
-            $valor = readfile($this->arquivoContentXML);
-
-            echo $valor;
-        }
-
-        str_replace('{'.$nome.'}',$valor,$this->contentXML);
-    }
-
-    public function zipSave()
+    public function setCampo($nome,$valor)
     {
-        file_put_contents($this->arquivoContentXML,$this->contentXML);
-        echo $this->contentXML;
+        $this->contentXML = str_replace('{'.$nome.'}',$valor,$this->contentXML);
+        $this->stylesXML = str_replace('{'.$nome.'}',$valor,$this->stylesXML);
     }
+
+    public function __destruct()
+    {
+        $this->tempContent = tempnam(sys_get_temp_dir(),'');
+        $this->tempStyles = tempnam(sys_get_temp_dir(),'');
+
+        file_put_contents($this->tempStyles,$this->stylesXML);
+        file_put_contents($this->tempContent,$this->contentXML);
+
+        $this->arquivoOdt->deleteName("content.xml");
+        $this->arquivoOdt->deleteName("styles.xml");
+
+        $this->arquivoOdt->addFile($this->tempStyles,"styles.xml");
+        $this->arquivoOdt->addFile($this->tempContent,"content.xml");
+
+    }
+
 
 }

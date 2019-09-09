@@ -8,6 +8,7 @@ use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Services\OdtManipulator;
 use Odf;
+use ZipArchive;
 
 
 class FormularioControl extends CrudControl
@@ -74,6 +75,7 @@ class FormularioControl extends CrudControl
             if (move_uploaded_file($caminhoArquivoTemp,$formulario->getCaminhoDocumento())) {
                 $html = $this->converterParaHTML($formulario);
                 $this->DAO->cadastrar($formulario,$this->requisitor['id']);
+
             } else {
                 if (is_file($formulario->getCaminhoDocumento())) {
                     unlink($formulario->getCaminhoDocumento());
@@ -112,25 +114,31 @@ class FormularioControl extends CrudControl
     public function gerarRequisicaoViagem($idViagem) {
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
-        if (!is_dir($this->pastaUsuario)) {
-            mkdir($this->pastaUsuario);
-        }
-        if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
 
-            $arquivo = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
-            $pastaArquivo = $this->pastaUsuario."/requisicaoViagem".$viagem->getId();
 
-            /*if (!is_dir($pastaArquivo)) {
-                mkdir($pastaArquivo);
+        if ($this->DAO->listarPorUsuarioNome("requisicaoViagem".$viagem->getId(),$this->requisitor['id']) == false) {
+            if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
+
+                if (!is_dir($this->pastaUsuario)) {
+                    mkdir($this->pastaUsuario);
+                }
+                if (!is_dir($pastaRequisicao)) {
+                    mkdir($pastaRequisicao);
+                }
+
+                if (copy($caminhoOdtRequisicao,$caminhoNovoArquivo)) {
+                    $odtManipulator = new OdtManipulator($caminhoNovoArquivo);
+                    $odtManipulator->setCampo("nome",$viagem->getViajante()->getNomeCompleto());
+                    unset($odtManipulator);
+                }
+                else {
+                    throw new Exception("Erro ao tentar criar arquivo");
+                }
+            } else {
+                throw new Exception("Você não possui permissão para gerar um formulário desta viagem");
             }
-
-            $odtManipulator = new OdtManipulator($arquivo,$pastaArquivo);
-            $odtManipulator->unzipODT();
-            $odtManipulator->setCampo("viajante",$viagem->getViajante()->getNomeCompleto());*/
-            //$odtManipulator->zipSave();
-
         } else {
-            throw new Exception("Você não possui permissão para gerar um formulário desta viagem");
+            throw new Exception("Formulário já criado");
         }
     }
 
