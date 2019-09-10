@@ -43,10 +43,12 @@ class ProjetoControl extends CrudControl
                         }
                     // /api/projetos/{idProjeto}
                     } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        if ($this->procuraFuncionario($this->url[2],$this->requisitor['id'] || $this->requisitor['admin'] == "1")) {
+                        $this->listarPorId($this->url[2]);
+                        if ($this->procuraFuncionario($this->url[2],$this->requisitor['id']) || $this->requisitor['admin'] == "1") {
                             $projeto = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
                         } else {
+
                             throw new Exception("Você precisa participar deste projeto para ter acesso à suas informações");
                         }
                     }
@@ -85,10 +87,10 @@ class ProjetoControl extends CrudControl
 
     protected function cadastrar($info)
     {
-        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome)) {
+        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome) && isset($info->centroCusto)) {
             $usuarioControl = new UsuarioControl(null);
             $dono = $usuarioControl->listarPorId($this->requisitor['id']);
-            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, null, null, null, $dono);
+            $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome,$info->centroCusto, null, null, null, $dono);
             $this->DAO->cadastrar($projeto);
         } else {
             throw new Exception("Parametros insuficientes ou mal estruturados",401);
@@ -117,9 +119,9 @@ class ProjetoControl extends CrudControl
 
     protected function atualizar($info,$id)
     {
-        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome)) {
+        if (isset($info->dataFinalizacao) && isset($info->dataInicio) && isset($info->descricao) && isset($info->nome) && isset($info->centroCusto)) {
             if ($this->verificaDono($id, $this->requisitor['id'])) {
-                $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome, $id, null, null, null);
+                $projeto = new ProjetoModel($info->dataFinalizacao, $info->dataInicio, $info->descricao, $info->nome,$info->centroCusto, $id, null, null, null);
                 $this->DAO->alterar($projeto);
             } else {
                 throw new Exception("Permissão negada para alterar este projeto",401);

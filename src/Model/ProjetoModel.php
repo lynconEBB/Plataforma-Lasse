@@ -11,6 +11,7 @@ class ProjetoModel
 {
     private $id;
     private $dataFinalizacao;
+    private $centroCusto;
     private $dataInicio;
     private $totalGasto;
     private $descricao;
@@ -18,9 +19,10 @@ class ProjetoModel
     private $tarefas;
     private $participantes;
 
-    public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$id, $tarefas,$totalGasto,$participantes){
+    public function __construct($dataFinalizacao, $dataInicio, $descricao, $nome,$centroCusto,$id, $tarefas,$totalGasto,$participantes){
         $this->setId($id);
         $this->setDataInicio($dataInicio);
+        $this->setCentroCusto($centroCusto);
         $this->setDataFinalizacao($dataFinalizacao);
         $this->setDescricao($descricao);
         $this->setNome($nome);
@@ -53,6 +55,7 @@ class ProjetoModel
             "dataFinalizacao" => $this->dataFinalizacao->format("d/m/Y"),
             "nome" => $this->nome,
             "descricao" => $this->descricao,
+            "numCentroCusto" => $this->centroCusto,
             "tarefas" => $tarefas,
             "totalGasto" => $this->totalGasto,
             "participantes" => $participantes
@@ -163,4 +166,16 @@ class ProjetoModel
     {
         $this->tarefas = $tarefas;
     }
+
+    public function getCentroCusto()
+    {
+        return $this->centroCusto;
+    }
+
+    public function setCentroCusto($centroCusto)
+    {
+        Validacao::validar("numero centro de Custo",$centroCusto,'obrigatorio','texto');
+        $this->centroCusto = $centroCusto;
+    }
+
 }

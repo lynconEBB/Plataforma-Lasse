@@ -14,12 +14,14 @@ class FormularioModel
     private $caminhoDocumento;
     private $caminhoHTML;
     private $usuario;
+    private $pastaFormulario;
 
     public function __construct( $nome,$usuario, $caminhoDocumento=null, $caminhoHTML=null,$id=null)
     {
         $this->setId($id);
         $this->setUsuario($usuario);
         $this->setNome($nome);
+        $this->setPastaFormulario();
         $this->setCaminhoDocumento($caminhoDocumento);
         $this->setCaminhoHTML($caminhoHTML);
     }
@@ -57,7 +59,7 @@ class FormularioModel
             Validacao::validar('Documento Formulário',$caminhoDocumento,'documento');
             $this->caminhoDocumento = $caminhoDocumento;
         } else {
-            $this->caminhoDocumento = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->id}/{$this->nome}/{$this->nome}.odt";
+            $this->caminhoDocumento = $this->pastaFormulario."/{$this->nome}.odt";
         }
     }
 
@@ -75,12 +77,11 @@ class FormularioModel
             }
             $this->caminhoHTML = $caminhoHTML;
         } else {
-            $this->caminhoHTML = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->id}/{$this->nome}/{$this->nome}.html";
+            $this->caminhoHTML = $this->pastaFormulario."/{$this->nome}.html";
         }
-
     }
 
-    public function getUsuario()
+    public function getUsuario():UsuarioModel
     {
         return $this->usuario;
     }
@@ -89,6 +90,18 @@ class FormularioModel
     {
         $this->usuario = $usuario;
     }
+
+    public function getPastaFormulario() :string
+    {
+        return $this->pastaFormulario;
+    }
+
+    public function setPastaFormulario()
+    {
+        $this->pastaFormulario = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->getId()}/{$this->nome}";
+    }
+
+
 
 
 

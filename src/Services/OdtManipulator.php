@@ -34,7 +34,18 @@ class OdtManipulator
         $this->stylesXML = str_replace('{'.$nome.'}',$valor,$this->stylesXML);
     }
 
-    public function __destruct()
+    public function setCheckBox($valor,$posibilidades)
+    {
+        foreach ($posibilidades as $abr => $posibilidade) {
+            if ($valor == $posibilidade) {
+                $this->setCampo($abr,"X");
+            } else {
+                $this->setCampo($abr,"");
+            }
+        }
+    }
+
+    public function salvar()
     {
         $this->tempContent = tempnam(sys_get_temp_dir(),'');
         $this->tempStyles = tempnam(sys_get_temp_dir(),'');
@@ -47,8 +58,6 @@ class OdtManipulator
 
         $this->arquivoOdt->addFile($this->tempStyles,"styles.xml");
         $this->arquivoOdt->addFile($this->tempContent,"content.xml");
-
     }
-
 
 }

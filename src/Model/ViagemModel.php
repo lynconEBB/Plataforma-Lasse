@@ -11,12 +11,17 @@ class ViagemModel
 {
     private $id;
     private $viajante;
+    private $tipo;
+    private $meta;
+    private $atividade;
+    private $fonte;
     private $veiculo;
     private $origem;
     private $destino;
     private $dtIda;
     private $dtVolta;
     private $passagem;
+    private $tipoPassagem;
     private $justificativa;
     private $observacoes;
     private $EntradaHosp;
@@ -24,7 +29,7 @@ class ViagemModel
     private $gastos;
     private $totalGasto;
 
-    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp, $totalGasto,$id,$gastos){
+    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp,$fonte,$meta,$atividade,$tipoPassagem,$tipo, $totalGasto,$id,$gastos){
         $this->setViajante($viajante);
         $this->setVeiculo($veiculo);
         $this->setOrigem($origem);
@@ -38,6 +43,11 @@ class ViagemModel
         $this->setSaidaHosp($SaidaHosp);
         $this->setGastos($gastos);
         $this->setTotalGasto($totalGasto);
+        $this->setAtividade($atividade);
+        $this->setFonte($fonte);
+        $this->setMeta($meta);
+        $this->setTipo($tipo);
+        $this->setTipoPassagem($tipoPassagem);
         $this->setId($id);
     }
 
@@ -55,13 +65,18 @@ class ViagemModel
             "id" => $this->id,
             "origem" => $this->origem,
             "destino" => $this->destino,
+            "tipo" => $this->tipo,
             "dtIda" => $this->dtIda->format('d/m/Y'),
             "dtVolta" => $this->dtVolta->format('d/m/Y'),
             "passagem" => $this->passagem,
+            "tipoPassagem" => $this->tipoPassagem,
             "justificativa" => $this->justificativa,
             "obeservacoes" => $this->observacoes,
             "saidaHosp" => $this->SaidaHosp->format('d/m/Y h:i'),
             "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
+            "fonte" => $this->fonte,
+            "atividade" => $this->atividade,
+            "meta" => $this->meta,
             "totalGasto" => $this->totalGasto,
             "gastos" => $gastos,
             "viajante" => $this->viajante->toArray(),
@@ -142,7 +157,7 @@ class ViagemModel
         }
     }
 
-    public function getViajante(){
+    public function getViajante():UsuarioModel{
         return $this->viajante;
     }
 
@@ -150,7 +165,7 @@ class ViagemModel
         $this->viajante = $viajante;
     }
 
-    public function getVeiculo(){
+    public function getVeiculo():VeiculoModel{
         return $this->veiculo;
     }
 
@@ -185,7 +200,7 @@ class ViagemModel
         $this->dtIda = Formatacao::formataData($dtIda);
     }
 
-    public function getDtVolta(){
+    public function getDtVolta():DateTime{
         return $this->dtVolta;
     }
 
@@ -217,4 +232,58 @@ class ViagemModel
         Validacao::validar("Observações",$observacoes,'obrigatorio','texto');
         $this->observacoes = $observacoes;
     }
+
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    public function setTipo($tipo)
+    {
+        Validacao::validar("Tipo de Viagem",$tipo,'obrigatorio','texto');
+        $this->tipo = $tipo;
+    }
+
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    public function setMeta($meta)
+    {
+        Validacao::validar("Meta que rege a Viagem",$meta,'obrigatorio','texto');
+        $this->meta = $meta;
+    }
+
+    public function getAtividade()
+    {
+        return $this->atividade;
+    }
+
+    public function setAtividade($atividade)
+    {
+        $this->atividade = $atividade;
+    }
+
+    public function getFonte()
+    {
+        return $this->fonte;
+    }
+
+    public function setFonte($fonte)
+    {
+        $this->fonte = $fonte;
+    }
+
+    public function getTipoPassagem()
+    {
+        return $this->tipoPassagem;
+    }
+
+    public function setTipoPassagem($tipoPassagem)
+    {
+        $this->tipoPassagem = $tipoPassagem;
+    }
+
+
 }

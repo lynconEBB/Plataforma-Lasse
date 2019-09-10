@@ -8,13 +8,14 @@ use PDO;
 class ProjetoDao extends CrudDao {
 
     public function cadastrar(ProjetoModel $projeto){
-        $comando1 = "INSERT INTO tbProjeto (nome,descricao,dataFinalizacao,dataInicio) values (:nome, :descr, :dtFim,:dtInicio)";
+        $comando1 = "INSERT INTO tbProjeto (nome,descricao,dataFinalizacao,dataInicio,numCentroCusto) values (:nome, :descr, :dtFim,:dtInicio,:centroCusto)";
         $stm = $this->pdo->prepare($comando1);
 
         $stm->bindValue(':nome',$projeto->getNome());
         $stm->bindValue(':descr',$projeto->getDescricao());
         $stm->bindValue(':dtFim',$projeto->getDataFinalizacao()->format('Y-m-d'));
         $stm->bindValue(':dtInicio',$projeto->getDataInicio()->format('Y-m-d'));
+        $stm->bindValue(':centroCusto',$projeto->getCentroCusto());
 
         $stm->execute();
 
@@ -49,7 +50,7 @@ class ProjetoDao extends CrudDao {
             foreach ($linhas as $row) {
                 $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
                 $participantes = $usuarioDAO->listarPorIdProjeto($row['id']);
-                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
+                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['numCentroCusto'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
                 $result[] = $obj;
             }
             return $result;
@@ -73,7 +74,7 @@ class ProjetoDao extends CrudDao {
             foreach ($linhas as $row) {
                 $tarefas = $tarefaDAO->listarPorIdProjeto($row['id']);
                 $participantes = $usuarioDAO->listarPorIdProjeto($row['id']);
-                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
+                $obj = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['numCentroCusto'],$row['id'],$tarefas,$row['totalGasto'],$participantes);
                 $projetos[] = $obj;
             }
             return $projetos;
@@ -97,7 +98,7 @@ class ProjetoDao extends CrudDao {
             $usuarioDAO = new UsuarioDao();
             $usuarios = $usuarioDAO->listarPorIdProjeto($id);
 
-            $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['id'],$tarefas,null,$usuarios);
+            $projeto = new ProjetoModel($row['dataFinalizacao'],$row['dataInicio'],$row['descricao'],$row['nome'],$row['numCentroCusto'],$row['id'],$tarefas,null,$usuarios);
             return $projeto;
         }else{
             return false;
@@ -106,13 +107,14 @@ class ProjetoDao extends CrudDao {
 
     public function alterar(ProjetoModel $projeto){
 
-        $comando = "UPDATE tbProjeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini WHERE id = :id";
+        $comando = "UPDATE tbProjeto SET nome=:nome,descricao=:descr,dataFinalizacao=:dtfim, dataInicio=:dtini, numCentroCusto = :centroCusto WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':nome',$projeto->getNome());
         $stm->bindValue(':descr',$projeto->getDescricao());
         $stm->bindValue(':dtfim',$projeto->getDataFinalizacao()->format('Y-m-d'));
         $stm->bindValue(':dtini',$projeto->getDataInicio()->format('Y-m-d'));
+        $stm->bindValue(':centroCusto',$projeto->getCentroCusto());
         $stm->bindValue(':id',$projeto->getId());
 
         $stm->execute();

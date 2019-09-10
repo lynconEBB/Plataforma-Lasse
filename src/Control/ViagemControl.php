@@ -100,7 +100,8 @@ class ViagemControl extends CrudControl {
             //Cadastra viagem com total = 0
             $viagem = new ViagemModel($usuario,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,
                 $dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,
-                $dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,null,null,null);
+                $dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->meta,$dados->atividade,$dados->tipoPassagem,$dados->tipo,
+                null,null,null);
             $this->DAO->cadastrar($viagem,$dados->idTarefa);
 
             //Pega id da viagem inserida
@@ -141,7 +142,7 @@ class ViagemControl extends CrudControl {
             $funcDAO = new UsuarioControl(null);
             $viajante = $funcDAO->listarPorId($this->requisitor['id']);
 
-            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,null,$id,null);
+            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->meta,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);
             $this->DAO->atualizar($viagem);
         } else {
             throw new Exception("Você não possui permissão para atualizar esta viagem");
@@ -198,7 +199,8 @@ class ViagemControl extends CrudControl {
             if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
                 !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
                 !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->gastos) ||
-                !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos)) {
+                !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos) || !isset($dados->tipo) || !isset($dados->tipoPassagem) ||
+                !isset($dados->meta) || !isset($dados->fonte) || !isset($dados->atividade)) {
                 return false;
             } else {
                 foreach ($dados->gastos as $gasto) {
@@ -211,7 +213,8 @@ class ViagemControl extends CrudControl {
         if ($requisicao == 'atualizacao') {
             if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
                 !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
-                !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->veiculo)){
+                !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->veiculo) ||
+                !isset($dados->tipo) || !isset($dados->tipoPassagem) || !isset($dados->meta) || !isset($dados->fonte) || !isset($dados->atividade)){
                 return false;
             }
         }
