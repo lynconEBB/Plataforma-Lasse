@@ -10,11 +10,17 @@ class HtmlManipulator
 {
     public function __construct($arquivoHTML)
     {
-        $domDoc = new DOMDocument();
-        $conteudo = file_get_contents($arquivoHTML);
-        @$domDoc->loadHTML($conteudo);
 
-        var_dump($domDoc);
+        libxml_use_internal_errors(true);
+        $dom = new DOMDocument();
+        $dom->loadHTMLFile($arquivoHTML);
 
+        $imgs = $dom->getElementsByTagName("img");
+        foreach ($imgs as $img) {
+            if (!empty($img->getAttribute("width"))) {
+                $img->setAttribute("width","100%");
+            }
+        }
+        $dom->saveHTMLFile($arquivoHTML);
     }
 }

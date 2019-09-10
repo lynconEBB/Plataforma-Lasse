@@ -15,7 +15,8 @@
         "ext-json": "*",
         "ext-dom": "*",
       "ext-zip": "*",
-      "ext-xmlreader": "*"
+      "ext-xmlreader": "*",
+      "ext-libxml": "*"
     },
     "autoload": {
         "psr-4": {

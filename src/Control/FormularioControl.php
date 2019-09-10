@@ -104,10 +104,11 @@ class FormularioControl extends CrudControl
         putenv('HOME=' . $this->pastaUsuario);
         $comando = "soffice --headless --convert-to html:HTML:EmbedImages --outdir ";
         $comando .= $formulario->getPastaFormulario()." ";
-        $comando .= $formulario->getCaminhoDocumento();
+        $comando .= $_SERVER['DOCUMENT_ROOT']."/assets/files/default/prestacaoDeContas.odt";
 
         if (exec($comando)) {
-            //$htmlManipulator = new HtmlManipulator($formulario->getCaminhoHTML());
+            //$htmlMani = new HtmlManipulator($formulario->getCaminhoHTML());
+
         } else {
             throw new Exception("Erro durante conversão para exibição");
         }
@@ -119,6 +120,7 @@ class FormularioControl extends CrudControl
     }
 
     public function gerarRequisicaoViagem($idViagem) {
+
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
         $idProjeto = $viagemControl->DAO->descobrirIdProjeto($idViagem);
@@ -129,8 +131,9 @@ class FormularioControl extends CrudControl
 
         $caminhoOdtRequisicao = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
         $formulario = new FormularioModel("requisicaoViagem".$viagem->getId(),$usuario);
+        $this->converterParaHTML($formulario);
 
-        if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
+        /*if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
             if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
 
                 if (!is_dir($this->pastaUsuario)) {
@@ -143,8 +146,8 @@ class FormularioControl extends CrudControl
                 if (copy($caminhoOdtRequisicao,$formulario->getCaminhoDocumento())) {
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto);
                     $this->converterParaHTML($formulario);
-                    $html = file_get_contents($formulario->getCaminhoHTML());
-                    echo $html;
+                    //$html = file_get_contents($formulario->getCaminhoHTML());
+                    //echo $html;
                     //$this->DAO->cadastrar($formulario);
                 }
                 else {
@@ -158,7 +161,7 @@ class FormularioControl extends CrudControl
             }
         } else {
             throw new Exception("Formulário já criado");
-        }
+        }*/
     }
 
 
