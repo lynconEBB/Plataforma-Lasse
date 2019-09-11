@@ -91,7 +91,7 @@ CREATE TABLE `tbCondutor` (
   `cnh` varchar(45) NOT NULL,
   `validadeCNH` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,6 +100,7 @@ CREATE TABLE `tbCondutor` (
 
 LOCK TABLES `tbCondutor` WRITE;
 /*!40000 ALTER TABLE `tbCondutor` DISABLE KEYS */;
+INSERT INTO `tbCondutor` VALUES (1,'Arlindo','45435345','2004-04-23'),(2,'Motorestenho','4593948574','2004-03-23'),(3,'Motorestenho','4593948574','2004-03-23');
 /*!40000 ALTER TABLE `tbCondutor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +151,7 @@ CREATE TABLE `tbGasto` (
   PRIMARY KEY (`id`),
   KEY `fk_tbGasto_tbViagem` (`idViagem`),
   CONSTRAINT `fk_tbViagem_tbGasto` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,6 +160,7 @@ CREATE TABLE `tbGasto` (
 
 LOCK TABLES `tbGasto` WRITE;
 /*!40000 ALTER TABLE `tbGasto` DISABLE KEYS */;
+INSERT INTO `tbGasto` VALUES (4,20.03,'aluguel',4),(5,12.04,'despesas hotel',4),(6,20.03,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',5),(7,12.04,'Estacionamento',5),(8,12.54,'Aluguel de quarto',5);
 /*!40000 ALTER TABLE `tbGasto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,8 +206,9 @@ CREATE TABLE `tbProjeto` (
   `totalGasto` decimal(10,2) DEFAULT '0.00',
   `descricao` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
+  `numCentroCusto` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,6 +217,7 @@ CREATE TABLE `tbProjeto` (
 
 LOCK TABLES `tbProjeto` WRITE;
 /*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
+INSERT INTO `tbProjeto` VALUES (2,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 1','40503002');
 /*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,8 +239,8 @@ CREATE TABLE `tbTarefa` (
   `totalGasto` decimal(9,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
-  CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,6 +249,7 @@ CREATE TABLE `tbTarefa` (
 
 LOCK TABLES `tbTarefa` WRITE;
 /*!40000 ALTER TABLE `tbTarefa` DISABLE KEYS */;
+INSERT INTO `tbTarefa` VALUES (2,'2203-03-20','2250-05-12','pendente','terminar API','preciso terminar logo',2,0.00);
 /*!40000 ALTER TABLE `tbTarefa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +278,7 @@ CREATE TABLE `tbUsuario` (
   `admin` tinyint(1) DEFAULT NULL,
   `caminhoFoto` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +287,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njc3MjEyNTUsIm5iZiI6MTU2NzcyMTI1NSwiZXhwIjoxNTY3ODA3NjU1LCJkYXRhIjp7ImlkIjoiMTEifX0.eNO4jkHGOZEnzyeBoHecJtsJnT8T-BSQrQDAOTS1GYw',0,'/home/lyncon/Lasse-Project-Manager//assets/files/default/perfil.png');
+INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njc3OTU5MTQsIm5iZiI6MTU2Nzc5NTkxNCwiZXhwIjoxNTY3ODgyMzE0LCJkYXRhIjp7ImlkIjoiMTEifX0.72hq5OLQh2ODtwZpeYQUMZcn-CrbkCff_e3xca94MnU',0,'/home/lyncon/Lasse-Project-Manager//assets/files/default/perfil.png'),(12,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lyncon','$2y$10$35LVpTsCLrNUpECcb3Z1wu9KiHdGp0yozil69rzVGSUhI2MQM/m8W','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1NjgyMTg4NzMsIm5iZiI6MTU2ODIxODg3MywiZXhwIjoxNTY4MzA1MjczLCJkYXRhIjp7ImlkIjoiMTIifX0.ORkIU36c5jrZ1ecFELlrPtPqyx9xA8OseGfOjQj1X1Y',1,'/home/lasse/Lasse-Project-Manager/assets/files/default/perfil.png');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +305,7 @@ CREATE TABLE `tbUsuarioProjeto` (
   PRIMARY KEY (`idUsuario`,`idProjeto`),
   KEY `fk_tbUsuarioProjeto_tbProjeto` (`idProjeto`),
   CONSTRAINT `fk_tbUsuarioProjeto_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`),
-  CONSTRAINT `tbUsuarioProjeto_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE
+  CONSTRAINT `tbUsuarioProjeto_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -310,6 +315,7 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
+INSERT INTO `tbUsuarioProjeto` VALUES (2,12,1);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +336,7 @@ CREATE TABLE `tbVeiculo` (
   PRIMARY KEY (`id`),
   KEY `fk_tbVeiculo_tbCondutor` (`idCondutor`),
   CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbCondutor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,6 +345,7 @@ CREATE TABLE `tbVeiculo` (
 
 LOCK TABLES `tbVeiculo` WRITE;
 /*!40000 ALTER TABLE `tbVeiculo` DISABLE KEYS */;
+INSERT INTO `tbVeiculo` VALUES (1,2,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00'),(2,1,'Ferrari','alugado','2003-01-21 03:00:00','2005-01-25 06:00:00'),(3,3,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00');
 /*!40000 ALTER TABLE `tbVeiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,12 +371,17 @@ CREATE TABLE `tbViagem` (
   `idUsuario` int(11) NOT NULL,
   `entradaHosp` datetime NOT NULL,
   `saidaHosp` datetime NOT NULL,
+  `fonte` varchar(45) NOT NULL,
+  `meta` varchar(45) NOT NULL,
+  `atividade` varchar(45) NOT NULL,
+  `tipo` varchar(200) NOT NULL,
+  `tipoPassagem` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbViagem_tbVeiculo` (`idVeiculo`),
   KEY `fk_tbViagem_tbTarefa` (`idTarefa`),
-  CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
+  CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbVeiculo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,6 +390,7 @@ CREATE TABLE `tbViagem` (
 
 LOCK TABLES `tbViagem` WRITE;
 /*!40000 ALTER TABLE `tbViagem` DISABLE KEYS */;
+INSERT INTO `tbViagem` VALUES (4,3,2,'Foz do Iguacu','Cascavel','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,12,'2005-03-23 04:00:00','2007-04-12 02:00:00','08564588','FPTI-RC4376/RC4377','COPEL.001','Viagem a trabalho','Terrestre nacional'),(5,1,2,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',44.61,12,'2005-03-23 16:00:00','2007-04-12 02:00:00','0301011','FPTI-RC4376/RC4377','COPEL.001','Viagem a trabalho','Terrestre nacional');
 /*!40000 ALTER TABLE `tbViagem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -390,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-05 22:14:41
+-- Dump completed on 2019-09-11 16:59:24
