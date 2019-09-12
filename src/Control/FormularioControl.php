@@ -65,7 +65,15 @@ class FormularioControl extends CrudControl
                 }
                 break;
             case 'GET':
-
+                // /api/formularios/{idFormulario}
+                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                    $formulario = $this->listarPorId($this->url[2]);
+                    if ($formulario->getUsuario()->getId() ==  $this->requisitor['id'] || $this->requisitor['admin'] == "1") {
+                        $this->respostaSucesso("Listando formulario",$formulario,$this->requisitor);
+                    } else {
+                        throw new Exception("Você não possui acesso a este formulario",401);
+                    }
+                }
                 break;
         }
     }
@@ -76,14 +84,12 @@ class FormularioControl extends CrudControl
             if (!is_dir($this->pastaUsuario)){
                 mkdir($this->pastaUsuario);
             }
-            $caminhoArquivoTemp = $arquivo['tmp_name'];
-            $extensao = pathinfo($arquivo['name'],PATHINFO_EXTENSION);
-            $caminhoArquivoUpload = $this->pastaUsuario."/".$nome.".".$extensao;
-            $caminhoArquivoHTML = $this->pastaUsuario."/".$nome.".html";
+            $usuarioControl = new UsuarioControl(null);
+            $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
 
-            $formulario = new FormularioModel($nome,$caminhoArquivoUpload,$caminhoArquivoHTML,null);
+            $formulario = new FormularioModel($nome,$usuario);
 
-            if (move_uploaded_file($caminhoArquivoTemp,$formulario->getCaminhoDocumento())) {
+            if (move_uploaded_file($arquivo['tmp_name'],$formulario->getCaminhoDocumento())) {
                 $this->converterParaHTML($formulario);
                 $this->DAO->cadastrar($formulario,null,null);
 
@@ -97,6 +103,25 @@ class FormularioControl extends CrudControl
             throw new Exception("Nome de Formulário já utilizado");
         }
     }
+
+    public function excluir($id)
+    {
+        $formulario = $this->listarPorId($id);
+        $this->DAO->excluir($id);
+        array_map('unlink', glob("{$formulario->getPastaFormulario()}/*.*"));
+        rmdir($formulario->getPastaFormulario());
+    }
+
+    public function listarPorId($id)
+    {
+        $formulario = $this->DAO->listarPorId($id);
+        if ($formulario != false) {
+            return $formulario;
+        } else {
+            throw new Exception("Formulário não encontrado");
+        }
+    }
+
 
     private function converterParaHTML(FormularioModel $formulario)
     {
@@ -113,11 +138,6 @@ class FormularioControl extends CrudControl
         } else {
             throw new Exception("Erro durante conversão para exibição");
         }
-    }
-
-    public function excluir($id)
-    {
-
     }
 
     public function gerarRequisicaoViagem($idViagem) {

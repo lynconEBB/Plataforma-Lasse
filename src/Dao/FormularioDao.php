@@ -4,6 +4,7 @@
 namespace Lasse\LPM\Dao;
 
 
+use Lasse\LPM\Control\UsuarioControl;
 use Lasse\LPM\Model\FormularioModel;
 use PDO;
 
@@ -33,7 +34,29 @@ class FormularioDao extends CrudDao
 
     public function excluir($id)
     {
+        $comando = "DELETE FROM tbFormulario WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue('id',$id);
 
+        $stm->execute();
+    }
+
+    public function listarPorId($id)
+    {
+        $comando = "SELECT * FROM tbFormulario WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':id',$id);
+
+        $stm->execute();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+        $usuarioControl = new UsuarioControl(null);
+        if ($row != false) {
+            $usuario = $usuarioControl->listarPorId($row['idUsuario']);
+            $formulario = new FormularioModel($row['nome'],$usuario,$row['caminhoDocumento'],$row['caminhoHTML'],$row['id']);
+            return $formulario;
+        } else {
+            return false;
+        }
     }
 
     public function cadastrar(FormularioModel $formulario,$idViagem,$idCompra)
@@ -52,6 +75,6 @@ class FormularioDao extends CrudDao
 
     public function listar()
     {
-        // TODO: Implement listar() method.
+
     }
 }

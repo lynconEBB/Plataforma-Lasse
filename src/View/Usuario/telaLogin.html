@@ -3,15 +3,21 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Usuario/styleUsuario.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Login</title>
 </head>
 <body>
-    <article class="mensagem">
-
-    </article>
+    <div class="mensagem">
+        <div class="mensagem-texto">
+        </div>
+        <div class="botao-fechar-mensagem">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
     <main>
         <section class="ilustracao">
             <img src="/assets/images/login/ilustracao.svg">
@@ -28,7 +34,9 @@
             </form>
         </section>
     </main>
+
 <script src="/src/View/Default/js/requisicoes.js"></script>
+<script src="/src/View/Default/js/mensagem.js"></script>
 <script src="/src/View/Usuario/funcoesUsuario.js"></script>
 </body>
 </html>

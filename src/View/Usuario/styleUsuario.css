@@ -1,12 +1,6 @@
-body,html{
-    height: 1080px;
-    width: 100vw;
-    background: #CDD1D2 0 0 no-repeat padding-box;
+body{
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-family: 'Roboto', sans-serif;
 }
 
 main{
@@ -94,12 +88,6 @@ main{
     color: #67e69c;
     cursor: pointer;
     font-size: 20px;
+
 }
 
-.mensagem{
-    position: absolute;
-    right: 50px;
-    top: 20px;
-    font-size: 25px;
-    background-color: red;
-}

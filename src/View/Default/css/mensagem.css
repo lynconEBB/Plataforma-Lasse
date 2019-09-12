@@ -1,0 +1,51 @@
+.mensagem{
+    display: grid;
+    position: absolute;
+    right: 50px;
+    top: -500px;
+    grid-template-columns: auto 60px;
+    justify-content: space-between;
+    width: 25%;
+    min-width: 170px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 10px 30px;
+    transition: transform 300ms ease-in-out ;
+}
+
+.mensagem-erro{
+    background-color: #e45d5a;
+}
+
+.mensagem-sucesso {
+    background-color: #bbd070;
+}
+.mensagem-texto {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.botao-fechar-mensagem {
+    margin-left: auto;
+    color: #5a6268;
+    cursor: pointer;
+}
+.botao-fechar-mensagem:hover,.botao-fechar-mensagem:active {
+    color: black;
+}
+
+.mensagem-ativa{
+    transform: translateY(550px);
+}
+
+/**** Padrão Mensagem ******/
+/*
+ <div class="mensagem">
+        <div class="mensagem-texto">
+        </div>
+        <div class="botao-fechar-mensagem">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+ */
