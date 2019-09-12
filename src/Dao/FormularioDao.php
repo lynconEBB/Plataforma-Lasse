@@ -36,14 +36,16 @@ class FormularioDao extends CrudDao
 
     }
 
-    public function cadastrar(FormularioModel $formulario,$idUsuario)
+    public function cadastrar(FormularioModel $formulario,$idViagem,$idCompra)
     {
-        $comando = "INSERT INTO tbFormulario (nome, caminhoDocumento, caminhoHTML,idUsuario) VALUES (:nome,:caminhoDoc,:caminhoHtml,:idUsuario)";
+        $comando = "INSERT INTO tbFormulario (nome, caminhoDocumento, caminhoHTML,idUsuario,idCompra,idViagem) VALUES (:nome,:caminhoDoc,:caminhoHtml,:idUsuario,:idCompra,:idViagem)";
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':nome',$formulario->getNome());
         $stm->bindValue(':caminhoDoc',$formulario->getCaminhoDocumento());
         $stm->bindValue(':caminhoHtml',$formulario->getCaminhoHTML());
-        $stm->bindParam(':idUsuario',$idUsuario);
+        $stm->bindValue(':idUsuario',$formulario->getUsuario()->getId());
+        $stm->bindValue(':idCompra',$idCompra);
+        $stm->bindValue(':idViagem',$idViagem);
 
         $stm->execute();
     }

@@ -12,7 +12,6 @@ class ViagemModel
     private $id;
     private $viajante;
     private $tipo;
-    private $meta;
     private $atividade;
     private $fonte;
     private $veiculo;
@@ -29,7 +28,7 @@ class ViagemModel
     private $gastos;
     private $totalGasto;
 
-    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp,$fonte,$meta,$atividade,$tipoPassagem,$tipo, $totalGasto,$id,$gastos){
+    public function __construct($viajante, $veiculo, $origem, $destino, $dtIda, $dtVolta, $passagem, $justificativa, $observacoes, $EntradaHosp, $SaidaHosp,$fonte,$atividade,$tipoPassagem,$tipo, $totalGasto,$id,$gastos){
         $this->setViajante($viajante);
         $this->setVeiculo($veiculo);
         $this->setOrigem($origem);
@@ -45,7 +44,6 @@ class ViagemModel
         $this->setTotalGasto($totalGasto);
         $this->setAtividade($atividade);
         $this->setFonte($fonte);
-        $this->setMeta($meta);
         $this->setTipo($tipo);
         $this->setTipoPassagem($tipoPassagem);
         $this->setId($id);
@@ -76,7 +74,6 @@ class ViagemModel
             "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
             "fonte" => $this->fonte,
             "atividade" => $this->atividade,
-            "meta" => $this->meta,
             "totalGasto" => $this->totalGasto,
             "gastos" => $gastos,
             "viajante" => $this->viajante->toArray(),
@@ -242,17 +239,6 @@ class ViagemModel
     {
         Validacao::validar("Tipo de Viagem",$tipo,'obrigatorio','texto');
         $this->tipo = $tipo;
-    }
-
-    public function getMeta()
-    {
-        return $this->meta;
-    }
-
-    public function setMeta($meta)
-    {
-        Validacao::validar("Meta que rege a Viagem",$meta,'obrigatorio','texto');
-        $this->meta = $meta;
     }
 
     public function getAtividade()

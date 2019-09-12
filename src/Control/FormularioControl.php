@@ -7,6 +7,7 @@ use Exception;
 use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Model\ProjetoModel;
+use Lasse\LPM\Model\TarefaModel;
 use Lasse\LPM\Model\ViagemModel;
 use Lasse\LPM\Services\HtmlManipulator;
 use Lasse\LPM\Services\OdtManipulator;
@@ -53,7 +54,7 @@ class FormularioControl extends CrudControl
                 // /api/formularios/requisicaoViagem/{idViagem}
                 elseif (count($this->url) == 4 && $this->url[2] == "requisicaoViagem" && $this->url[3] == (int)$this->url[3]) {
                     $this->gerarRequisicaoViagem($this->url[3]);
-                    //$this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",null,$this->requisitor);
+                    $this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",null,$this->requisitor);
                 }
                 break;
             case 'DELETE':
@@ -83,8 +84,8 @@ class FormularioControl extends CrudControl
             $formulario = new FormularioModel($nome,$caminhoArquivoUpload,$caminhoArquivoHTML,null);
 
             if (move_uploaded_file($caminhoArquivoTemp,$formulario->getCaminhoDocumento())) {
-                $html = $this->converterParaHTML($formulario);
-                $this->DAO->cadastrar($formulario,$this->requisitor['id']);
+                $this->converterParaHTML($formulario);
+                $this->DAO->cadastrar($formulario,null,null);
 
             } else {
                 if (is_file($formulario->getCaminhoDocumento())) {
@@ -95,7 +96,6 @@ class FormularioControl extends CrudControl
         } else {
             throw new Exception("Nome de Formulário já utilizado");
         }
-
     }
 
     private function converterParaHTML(FormularioModel $formulario)
@@ -104,11 +104,12 @@ class FormularioControl extends CrudControl
         putenv('HOME=' . $this->pastaUsuario);
         $comando = "soffice --headless --convert-to html:HTML:EmbedImages --outdir ";
         $comando .= $formulario->getPastaFormulario()." ";
-        $comando .= $_SERVER['DOCUMENT_ROOT']."/assets/files/default/prestacaoDeContas.odt";
+        $comando .= $formulario->getCaminhoDocumento();
 
         if (exec($comando)) {
-            //$htmlMani = new HtmlManipulator($formulario->getCaminhoHTML());
-
+            $htmlManipulator = new HtmlManipulator($formulario->getCaminhoHTML());
+            $htmlManipulator->consertaHTML();
+            $htmlManipulator->salvar();
         } else {
             throw new Exception("Erro durante conversão para exibição");
         }
@@ -123,7 +124,10 @@ class FormularioControl extends CrudControl
 
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
-        $idProjeto = $viagemControl->DAO->descobrirIdProjeto($idViagem);
+        $idTarefa = $viagemControl->DAO->descobrirIdTarefa($idViagem);
+        $tarefaControl = new TarefaControl(null);
+        $tarefa = $tarefaControl->listarPorId($idTarefa);
+        $idProjeto = $tarefaControl->DAO->descobrirIdProjeto($idTarefa);
         $projetoControl = new ProjetoControl(null);
         $projeto = $projetoControl->listarPorId($idProjeto);
         $usuarioControl = new UsuarioControl(null);
@@ -131,9 +135,8 @@ class FormularioControl extends CrudControl
 
         $caminhoOdtRequisicao = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
         $formulario = new FormularioModel("requisicaoViagem".$viagem->getId(),$usuario);
-        $this->converterParaHTML($formulario);
 
-        /*if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
+        if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
             if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
 
                 if (!is_dir($this->pastaUsuario)) {
@@ -144,11 +147,9 @@ class FormularioControl extends CrudControl
                 }
 
                 if (copy($caminhoOdtRequisicao,$formulario->getCaminhoDocumento())) {
-                    $this->preencherCamposRequisicao($viagem,$formulario,$projeto);
+                    $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
                     $this->converterParaHTML($formulario);
-                    //$html = file_get_contents($formulario->getCaminhoHTML());
-                    //echo $html;
-                    //$this->DAO->cadastrar($formulario);
+                    $this->DAO->cadastrar($formulario,$idViagem,null);
                 }
                 else {
                     if (is_dir($formulario->getPastaFormulario())) {
@@ -161,11 +162,11 @@ class FormularioControl extends CrudControl
             }
         } else {
             throw new Exception("Formulário já criado");
-        }*/
+        }
     }
 
 
-    private function preencherCamposRequisicao(ViagemModel $viagem,FormularioModel $formulario,ProjetoModel $projeto)
+    private function preencherCamposRequisicao(ViagemModel $viagem,FormularioModel $formulario,ProjetoModel $projeto,TarefaModel $tarefa)
     {
         $odtManipulator = new OdtManipulator($formulario->getCaminhoDocumento());
         $odtManipulator->setCampo("nome",$viagem->getViajante()->getNomeCompleto());
@@ -191,7 +192,7 @@ class FormularioControl extends CrudControl
         $odtManipulator->setCampo("projeto",$projeto->getNome());
         $odtManipulator->setCampo("centroCusto",$projeto->getCentroCusto());
         $odtManipulator->setCampo("fonte",$viagem->getFonte());
-        $odtManipulator->setCampo("meta",$viagem->getMeta());
+        $odtManipulator->setCampo("tarefa",$tarefa->getNome());
         $odtManipulator->setCampo("atividade",$viagem->getAtividade());
         $odtManipulator->setCampo("veiculo",$viagem->getVeiculo()->getNome());
         $odtManipulator->setCheckBox($viagem->getViajante()->getAtuacao(),["col"=>"Colaborador","bol"=>"Bolsista/Voluntario","ter"=>"Terceiros"]);
@@ -213,7 +214,6 @@ class FormularioControl extends CrudControl
         foreach ($this->gastosPadroes as $gasto) {
             $odtManipulator->setCampo($gasto,"0,00");
         }
-
         $odtManipulator->salvar();
     }
 
