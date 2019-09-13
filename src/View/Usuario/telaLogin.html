@@ -2,10 +2,13 @@
 <html lang="pt">
 <head>
     <meta charset="utf-8"/>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
     <link rel="stylesheet" href="/src/View/Usuario/styleUsuario.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Login</title>
@@ -19,25 +22,32 @@
         </div>
     </div>
     <main>
-        <section class="ilustracao">
-
-            <img src="/assets/images/login/ilustracao.svg">
+        <section class="images">
+            <img id="ilustracao" src="/assets/images/ilustracao.svg">
+            <img id="detalhe" src="/assets/images/detalhe.png" alt="Detalhes do site">
         </section>
         <section class="container">
             <div class="container-logo">
-                <img src="/assets/images/login/logo.png" alt="Ilustração de pessoas trabalhando">
+                <img src="/assets/images/logo.png" alt="Ilustração de pessoas trabalhando">
             </div>
-            <form id="form-login">
-                <input type="text" placeholder="Usuário">
-                <input type="password" placeholder="Senha">
+            <form class="form-padrao">
+                <div class="form-group">
+                    <label for="usuario" class="form-label">Usuário</label>
+                    <input type="text" id="usuario" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="text" id="senha" class="form-input">
+                </div>
                 <span>Registre-se</span>
-                <button type="button" id="botao-entrar">Entrar</button>
+                <button type="button" class="botao-padrao">Entrar</button>
             </form>
         </section>
     </main>
 
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
+    <script src="/src/View/Default/js/formulario.js"></script>
 <script src="/src/View/Usuario/funcoesUsuario.js"></script>
 </body>
 </html>

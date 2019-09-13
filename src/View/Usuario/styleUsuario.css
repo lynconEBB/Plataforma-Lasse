@@ -2,22 +2,34 @@ main{
     display: flex;
     width: 70%;
     max-width: 1800px;
-    min-height: 800px;
     margin: 100px auto 0;
     height: 700px;
 }
 
-.ilustracao {
+/****** PARTE Imagens**************/
+.images {
     max-width: 1200px;
     height: 100%;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: 70%;
-    background-color: #0c7f99;
-    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.75);
+    background: #0c7f99;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+#ilustracao{
+    width: 100%;
+    z-index: 1;
+}
+#detalhe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
+/***************Parte Formulario*************************/
 .container {
     max-width: 380px;
     height:100%;
@@ -40,44 +52,15 @@ main{
     background-color: #06404d;
 }
 
-.container form {
+.form-padrao {
     width: 100%;
     height: 60%;
     background-color: #06404d;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-.container input {
-    width: 60%;
-    margin: 30px auto;
-    font-size: 20px;
-    color: white;
-    background-color: transparent;
-    border: none;
-    border-bottom: #ffffff solid 4px;
-}
-.container input:focus{
-    outline: none;
-}
-.container input::placeholder{
-    outline: none;
-    color: white;
-}
-.container button {
-    width: 45%;
-    font-size: 25px;
-    color: #06404d;
-    background-color: #67e69c;
-    margin: 30px auto;
-    border: none;
-    padding: 10px 0;
-    cursor: pointer;
-    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.25);
 }
 
-.container button:hover {
-    box-shadow: none;
+.botao-padrao {
+    width: 45%;
+    margin: 30px auto;
 }
 
 .container span {
@@ -85,5 +68,26 @@ main{
     color: #67e69c;
     cursor: pointer;
     font-size: 20px;
+}
+
+@media (max-height: 900px) {
+    main{
+        height: 600px;
+    }
+}
+
+@media (max-width: 900px) {
+    .images{
+        display: none;
+    }
+    .container{
+        width: 100%;
+        margin: 0 auto;
+    }
+    main{
+        margin: 0;
+        width: 100%;
+    }
+
 }
 

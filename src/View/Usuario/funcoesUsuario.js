@@ -1,5 +1,5 @@
 "use strict";
-var botaoEntrar = document.querySelector("#botao-entrar");
+/*var botaoEntrar = document.querySelector("#botao-entrar");
 
 botaoEntrar.addEventListener("click",function (event) {
     var inputs = document.querySelectorAll("input");
@@ -26,7 +26,7 @@ botaoEntrar.addEventListener("click",function (event) {
             }
         }
     };
-});
+});*/
 
 /*$(document).ready(function () {
     $('#modalAlterar').on('show.bs.modal', function (event) {
