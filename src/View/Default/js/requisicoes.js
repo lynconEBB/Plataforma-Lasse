@@ -1,13 +1,29 @@
-async function post(url,body) {
-    var xhr = new XMLHttpRequest();
+function getToken () {
+    var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+    if (match) {
+        return match[2];
+    } else {
+        return "";
+    }
+}
+
+function requisicao(metodo,url,body,response, autorizacao = true) {
+    let xhr = new XMLHttpRequest();
+    xhr.open(metodo, url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    if (autorizacao) {
+        xhr.setRequestHeader("Authorization","Bearer "+ getToken());
+    }
 
-    xhr.open("POST", url, true);
-    xhr.send(body);
+    xhr.send(JSON.stringify(body));
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            return  JSON.parse(xhr.responseText);
-        }
+    xhr.onload = function() {
+        response(JSON.parse(xhr.response));
     };
+
+    xhr.onerror = function () {
+        exibirMensagem("Servidor não respondendo",true);
+    };
+
+    return xhr.response;
 }

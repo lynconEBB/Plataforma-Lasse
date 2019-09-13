@@ -1,58 +1,61 @@
-"use strict";
-/*var botaoEntrar = document.querySelector("#botao-entrar");
-
-botaoEntrar.addEventListener("click",function (event) {
-    var inputs = document.querySelectorAll("input");
-    var data = {
-        login: inputs[0].value,
-        senha: inputs[1].value
-    };
-
-    data = JSON.stringify(data);
-
-    var response = post("http://localhost/api/users/login",data);
-
-    xhr.onreadystatechange =function () {
-        if (xhr.readyState === 4) {
-            var json = JSON.parse(xhr.responseText);
-            var mensagem = document.querySelector(".mensagem");
-            if (json.status === 'erro') {
-                mensagem.innerHTML = json.mensagem;
-            } else {
-                mensagem.style.backgroundColor = "green";
-                mensagem.innerHTML = json.mensagem;
-                document.cookie = "token="+json.dados.token;
-                console.log(document.cookie);
-            }
+window.onload= function() {
+    var elements = document.getElementsByTagName("input");
+    for (var ii=0; ii < elements.length; ii++) {
+        if (elements[ii].type === "text") {
+            elements[ii].value = "";
         }
-    };
-});*/
+    }
+};
 
-/*$(document).ready(function () {
-    $('#modalAlterar').on('show.bs.modal', function (event) {
-        let button = $(event.relatedTarget);
-
-        let nome = button.data('nome');
-        let login = button.data('login');
-        let email = button.data('email');
-        let dtNasc = button.data('dtnasc');
-        let rg = button.data('rg');
-        let cpf = button.data('cpf');
-        let dtEmissao = button.data('dtemissao');
-        let formacao = button.data('formacao');
-        let atuacao = button.data('atuacao');
-        let valorHora = button.data('valorhora');
-
-        let modal = $(this);
-        modal.find('#nome').val(nome);
-        modal.find('#usuario').val(login);
-        modal.find('#email').val(email);
-        modal.find('#dtNasc').val(dtNasc);
-        modal.find('#rg').val(rg);
-        modal.find('#cpf').val(cpf);
-        modal.find('#dtEmissao').val(dtEmissao);
-        modal.find('#formacao').val(formacao);
-        modal.find('#atuacao').val(atuacao);
-        modal.find('#valorHora').val(valorHora);
+/*
+Deixa campos vermelhos ou verdes
+ */
+inputs.forEach(function (input) {
+    input.addEventListener("blur",function () {
+        if (this.value.length >= 6) {
+            this.parentElement.className = "form-group certo";
+        } else if (this.value.length >0 && this.value.length < 6) {
+            this.parentElement.className = "form-group errado";
+        }
     })
-});*/
+});
+
+/*
+Login
+ */
+
+let botaoEnviar =  document.querySelector("#form-login");
+botaoEnviar.addEventListener("submit",logar);
+
+async function logar(event) {
+    event.preventDefault();
+    let request = {
+        senha: document.getElementById("senha").value,
+        login: document.getElementById("usuario").value
+    };
+
+    if (request.senha.length >= 6 && request.login.length >= 6) {
+        requisicao("POST","http://localhost/api/users/login",request,callbackLogar,false);
+    } else {
+        exibirMensagem("Os campos de Usuario e Senha precisam possuir mais de 6 caracteres",true);
+    }
+}
+
+function callbackLogar(resposta) {
+    if (resposta.status === "sucesso") {
+        window.location.href = "http://localhost/user/dashboard";
+    } else {
+        exibirMensagem(resposta.mensagem,true);
+    }
+}
+
+let botaoCadastrar = document.querySelector("#botao-cadastro");
+botaoCadastrar.onclick = function () {
+    mostrarModal("#modalCadastro")
+};
+let btnFechaModal = document.querySelector(".modal-header-close");
+btnFechaModal.onclick = function () {
+    fecharModal("#modalCadastro");
+};
+
+

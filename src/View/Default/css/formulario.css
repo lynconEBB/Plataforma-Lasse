@@ -10,10 +10,17 @@
     position: relative;
 }
 .form-label {
+    cursor: text;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     color: white;
+    transition: all ease-in-out 300ms;
+}
+.form-label.selecionado {
+    bottom: 1.7rem;
+    font-size: 0.8rem;
+    opacity: 0.5;
 }
 .form-input {
     font-size: 1.2rem;
@@ -24,22 +31,37 @@
     color: white;
 }
 .form-group::after {
-    bottom: 0;
+    bottom: -4px;
     content: "";
     position: absolute;
     display: block;
     width: 0;
     height: 5px;
     z-index: 10;
-    background: #67e69c;
+    background: #babaca;
     transition: all ease-in-out 300ms;
 
 }
-.form-group.clicado::after {
+.form-group.selecionado::after {
     width: 100%;
+}
+
+.form-group.errado::after {
+    width: 100%;
+    background: #e45d5a;
+}
+
+.form-group.certo::after {
+    width: 100%;
+    background: #67e69c;
 }
 
 .form-input:focus {
     outline: none;
-
 }
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus{
+    -webkit-text-fill-color: #06404d;
+}
+

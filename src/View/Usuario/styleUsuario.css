@@ -48,11 +48,11 @@ main{
 }
 
 .container-logo img {
-    width: 60%;
+    width: 70%;
     background-color: #06404d;
 }
 
-.form-padrao {
+#form-login {
     width: 100%;
     height: 60%;
     background-color: #06404d;
@@ -88,6 +88,18 @@ main{
         margin: 0;
         width: 100%;
     }
-
 }
 
+#form-modal {
+    justify-content: space-around;
+    flex-direction: row;
+    height: 100%;
+    flex-wrap: wrap;
+}
+.form-part {
+    width: 30%;
+    min-width: 200px ;
+}
+.form-part .form-group {
+    width: 100%;
+}
