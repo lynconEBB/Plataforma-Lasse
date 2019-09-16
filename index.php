@@ -37,11 +37,14 @@ class Router{
             }
         } else {
             if ($this->url[0] == "" && count($this->url) == 1) {
-                require 'src/View/Usuario/telaLogin.html';
+                require 'src/View/Usuario/telaLogin/telaLogin.html';
             }elseif ($this->url[0] == "testeApi" && count($this->url) == 1) {
                 require 'src/View/testeApi/test.html';
             }elseif ($this->url[0] == "testeFile" && count($this->url) == 1) {
                 require 'src/View/Formulario/formulario.html';
+            // /dashboard/user/{idUsuario}
+            }elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
+                require 'src/View/Usuario/telaDashboard/telaDashboard.html';
             }
         }
     }

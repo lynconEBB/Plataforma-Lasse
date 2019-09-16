@@ -59,9 +59,77 @@
 .form-input:focus {
     outline: none;
 }
-.form-input:-webkit-autofill,
-.form-input:-webkit-autofill:hover,
-.form-input:-webkit-autofill:focus{
-    -webkit-text-fill-color: #06404d;
+@-webkit-keyframes autofill {
+    to {
+        color: white;
+        font-size: 1.2rem;
+        background: transparent;
+    }
 }
 
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+.checkbox-label {
+    display: inline-block;
+    color: white;
+    top: -3px;
+    position: relative;
+}
+.form-checkbox {
+    bottom: 0;
+    position : relative ;
+    display : inline-block;
+    width : 40px;
+    cursor: pointer;
+    height : 20px;
+    background-color: #babaca;
+    border-radius: 20px;
+}
+.form-checkbox::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 1px;
+    left: 1px;
+    transition: all ease-in-out 0.3s;
+}
+.real-checkbox:checked + .form-checkbox::after {
+    left : 20px;
+}
+.real-checkbox:checked + .form-checkbox {
+    background-color: #67e69c;
+}
+
+.form-select{
+    width: 100%;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    border:none;
+    border-bottom: white solid 1px;
+    color: white;
+    font-size: 1.2rem;
+}
+.form-select:focus{
+    -moz-outline-color:transparent;
+    outline: none;
+}
+
+#select-seta{
+    font-size: 1.2rem;
+    color: white;
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+}
+
+.form-select option {
+    background-color: #06404d;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border: none;
+}

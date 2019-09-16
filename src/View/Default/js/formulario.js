@@ -17,6 +17,24 @@ inputs.forEach(function (input) {
    })
 });
 
+let selects = document.querySelectorAll(".form-select");
+
+selects.forEach(function (select) {
+    select.addEventListener("focus",function () {
+        this.parentElement.classList.add("selecionado");
+        this.previousElementSibling.classList.add("selecionado");
+    })
+});
+
+selects.forEach(function (select) {
+    select.addEventListener("blur",function () {
+        if (this.value === "") {
+            this.parentElement.className = " form-group";
+            this.previousElementSibling.classList.remove("selecionado");
+        }
+    })
+});
+
 
 
 

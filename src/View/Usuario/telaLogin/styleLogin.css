@@ -99,7 +99,51 @@ main{
 .form-part {
     width: 30%;
     min-width: 200px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+
 }
 .form-part .form-group {
     width: 100%;
+    margin: 20px 0;
 }
+.container-foto{
+    border: #67e69c solid 5px;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: contain;
+    width: 180px;
+    height: 180px;
+    position: relative;
+}
+.foto{
+    width: 100%;
+}
+#foto{
+    display: none;
+}
+#add-foto{
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    height: 40%;
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,3));
+    width: 100%;
+    transition: all ease-in-out 300ms;
+}
+#add-foto:hover{
+    height: 100%;
+}
+#form-admin{
+    display: none;
+}
+

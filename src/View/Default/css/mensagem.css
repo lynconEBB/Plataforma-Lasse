@@ -3,6 +3,7 @@
     position: absolute;
     right: 50px;
     top: -500px;
+    z-index: 10000;
     grid-template-columns: auto 60px;
     justify-content: space-between;
     width: 25%;

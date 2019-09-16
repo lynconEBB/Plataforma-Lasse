@@ -26,14 +26,14 @@ class UsuarioControl extends CrudControl {
                     if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
                         if (isset($info->login) && isset($info->senha)) {
                             $token = $this->logar($info);
-                            $this->respostaSucesso("Logado com Sucesso",$token);
+                            $this->respostaSucesso("Logado com Sucesso",$token,$this->requisitor);
                         } else {
                             throw new Exception("Parametros insuficientes ou mal estruturados");
                         }
                     } // /api/users
                     elseif (count($this->url) == 2) {
                         $this->cadastrar($info);
-                        $this->respostaSucesso("Usuario Registrado com Sucesso!",null,null);
+                        $this->respostaSucesso("Usuario Registrado com Sucesso!",null);
                     }
                     break;
                 case 'GET':
@@ -171,6 +171,9 @@ class UsuarioControl extends CrudControl {
                     $token = $this->criaToken($usuario);
                     $this->DAO->setToken($token,$usuario->getId());
                     header("Set-Cookie: token={$token}; Domain=localhost; Path=/");
+                    $decoded = JWT::decode($token,'SUPERSENHA123',array('HS256'));
+                    $usuario = $this->DAO->listarPorId($decoded->data->id);
+                    $this->requisitor = ["id" => $usuario->getId(), "login" => $usuario->getLogin(),"foto" => $usuario->getFoto(),"admin" => $usuario->getAdmin()];
                     return $token;
                 }else{
                     throw new Exception("Senha errada :(");

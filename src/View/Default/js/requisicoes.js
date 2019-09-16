@@ -27,3 +27,5 @@ function requisicao(metodo,url,body,response, autorizacao = true) {
 
     return xhr.response;
 }
+
+
