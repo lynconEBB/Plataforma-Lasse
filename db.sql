@@ -118,12 +118,15 @@ CREATE TABLE `tbFormulario` (
   `caminhoHTML` longtext NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idViagem` int(11) DEFAULT NULL,
+  `idCompra` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbFormulario_tbUsuario` (`idUsuario`),
   KEY `fk_tbFormulario_tbViagem` (`idViagem`),
+  KEY `tbFormulario_tbCompra__fk` (`idCompra`),
   CONSTRAINT `fk_tbFormulario_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`),
-  CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`),
+  CONSTRAINT `tbFormulario_tbCompra__fk` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +135,7 @@ CREATE TABLE `tbFormulario` (
 
 LOCK TABLES `tbFormulario` WRITE;
 /*!40000 ALTER TABLE `tbFormulario` DISABLE KEYS */;
-INSERT INTO `tbFormulario` VALUES (3,'formulario','/home/lyncon/Lasse-Project-Manager//assets/files/11/formulario.odt','/home/lyncon/Lasse-Project-Manager//assets/files/11/formulario.html',11,NULL);
+INSERT INTO `tbFormulario` VALUES (5,'requisicaoViagem4','/home/lasse/Lasse-Project-Manager/assets/files/12/requisicaoViagem4/requisicaoViagem4.odt','/home/lasse/Lasse-Project-Manager/assets/files/12/requisicaoViagem4/requisicaoViagem4.html',12,4,NULL);
 /*!40000 ALTER TABLE `tbFormulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,7 +281,7 @@ CREATE TABLE `tbUsuario` (
   `admin` tinyint(1) DEFAULT NULL,
   `caminhoFoto` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +290,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njc3OTU5MTQsIm5iZiI6MTU2Nzc5NTkxNCwiZXhwIjoxNTY3ODgyMzE0LCJkYXRhIjp7ImlkIjoiMTEifX0.72hq5OLQh2ODtwZpeYQUMZcn-CrbkCff_e3xca94MnU',0,'/home/lyncon/Lasse-Project-Manager//assets/files/default/perfil.png'),(12,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lyncon','$2y$10$35LVpTsCLrNUpECcb3Z1wu9KiHdGp0yozil69rzVGSUhI2MQM/m8W','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1NjgyMTg4NzMsIm5iZiI6MTU2ODIxODg3MywiZXhwIjoxNTY4MzA1MjczLCJkYXRhIjp7ImlkIjoiMTIifX0.ORkIU36c5jrZ1ecFELlrPtPqyx9xA8OseGfOjQj1X1Y',1,'/home/lasse/Lasse-Project-Manager/assets/files/default/perfil.png');
+INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ny4wLjM4NjUuNzUgU2FmYXJpXC81MzcuMzYiLCJpYXQiOjE1Njg3MzMxODYsIm5iZiI6MTU2ODczMzE4NiwiZXhwIjoxNTY4ODE5NTg2LCJkYXRhIjp7ImlkIjoiMTEifX0.EQiHWdGl29NPPlsegoOTq2McZicmxcb7hHog56L7KzY',0,'/assets/files/default/perfil.png'),(12,'Camila Gomes Ferreira','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Bolsista/VoluntÃ¡rio','lyncon.ebb@pti.org.br','LynconEBB','$2y$10$35LVpTsCLrNUpECcb3Z1wu9KiHdGp0yozil69rzVGSUhI2MQM/m8W','2001-05-24','ativado','NULL',1,'assets/files/12/perfil.png'),(13,'Camila Gomes Ferreira','121.128.809-93','12.611.282-3','2005-08-21',23.43,'Designer','Terceiros','camilagf2016@gmail.com','camilagf','$2y$10$zNkdwL1UvcGqwf4A.jj62.ZK7L.1Zd8C4gZ1g/5b0CKaU7hqbQpEa','2001-03-24','ativado','NULL',1,'/assets/files/default/perfil.png');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +375,6 @@ CREATE TABLE `tbViagem` (
   `entradaHosp` datetime NOT NULL,
   `saidaHosp` datetime NOT NULL,
   `fonte` varchar(45) NOT NULL,
-  `meta` varchar(45) NOT NULL,
   `atividade` varchar(45) NOT NULL,
   `tipo` varchar(200) NOT NULL,
   `tipoPassagem` varchar(200) NOT NULL,
@@ -390,7 +392,7 @@ CREATE TABLE `tbViagem` (
 
 LOCK TABLES `tbViagem` WRITE;
 /*!40000 ALTER TABLE `tbViagem` DISABLE KEYS */;
-INSERT INTO `tbViagem` VALUES (4,3,2,'Foz do Iguacu','Cascavel','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,12,'2005-03-23 04:00:00','2007-04-12 02:00:00','08564588','FPTI-RC4376/RC4377','COPEL.001','Viagem a trabalho','Terrestre nacional'),(5,1,2,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',44.61,12,'2005-03-23 16:00:00','2007-04-12 02:00:00','0301011','FPTI-RC4376/RC4377','COPEL.001','Viagem a trabalho','Terrestre nacional');
+INSERT INTO `tbViagem` VALUES (4,3,2,'Foz do Iguacu','Cascavel','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,12,'2005-03-23 04:00:00','2007-04-12 02:00:00','08564588','COPEL.001','Viagem a trabalho','Terrestre nacional'),(5,1,2,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',44.61,12,'2005-03-23 16:00:00','2007-04-12 02:00:00','0301011','COPEL.001','Viagem a trabalho','Terrestre nacional');
 /*!40000 ALTER TABLE `tbViagem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -403,4 +405,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-11 16:59:24
+-- Dump completed on 2019-09-17 12:18:17

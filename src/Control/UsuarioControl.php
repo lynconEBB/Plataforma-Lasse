@@ -148,14 +148,19 @@ class UsuarioControl extends CrudControl {
 
     protected function atualizar($dados) {
         $this->requisitor = self::autenticar();
+        $usuario = $this->listarPorId($this->requisitor['id']);
         if ($this->validaRequisicao($dados,'atualizacao')) {
-            $usuario = new UsuarioModel($dados->nomeCompleto, $dados->login, null, $dados->dtNasc, $dados->cpf, $dados->rg, $dados->dtEmissao, $dados->email, $dados->atuacao, $dados->formacao, $dados->valorHora, $this->requisitor['foto'], $this->requisitor['admin'], $this->requisitor['id']);
-            if (isset($dados->foto)) {
-                $caminhoFoto = $this->salvarFoto($this->requisitor['id'], $dados->foto);
-                $usuario->setFoto($caminhoFoto);
+            if (!$this->DAO->listarPorLogin($dados->login) || strcasecmp($usuario->getLogin(), $dados->login) == 0 ){
+                $usuario = new UsuarioModel($dados->nomeCompleto, $dados->login, null, $dados->dtNasc, $dados->cpf, $dados->rg, $dados->dtEmissao, $dados->email, $dados->atuacao, $dados->formacao, $dados->valorHora, $this->requisitor['foto'], $this->requisitor['admin'], $this->requisitor['id']);
+                if (isset($dados->foto)) {
+                    $caminhoFoto = $this->salvarFoto($this->requisitor['id'], $dados->foto);
+                    $usuario->setFoto($caminhoFoto);
+                }
+                $this->requisitor['login'] = $usuario->getLogin();
+                $this->DAO->alterar($usuario);
+            } else {
+                throw new Exception("Nome de Usuário já utilizado");
             }
-            $this->requisitor['login'] = $usuario->getLogin();
-            $this->DAO->alterar($usuario);
         } else {
             throw new Exception("Parametros invalidos ou mal estruturados");
         }
@@ -254,12 +259,12 @@ class UsuarioControl extends CrudControl {
     {
         $partes = explode(',',$imgBase64);
         if (count($partes) == 2) {
-            if (($partes[0] == "data:image/png;base64" || $partes[0] == "data:image/jpg;base64") && (base64_encode(base64_decode($partes[1], true)) === $partes[1])) {
+            if (($partes[0] == "data:image/png;base64" || $partes[0] == "data:image/jpeg;base64" || $partes[0] == "data:image/jpg;base64") && (base64_encode(base64_decode($partes[1], true)) === $partes[1])) {
                 $imgInfo = $partes[0];
                 $img = $partes[1];
                 preg_match('/\/(.*?);/', $imgInfo, $extensao);
                 $extensao = $extensao[1];
-                $pastaUsuario = "/assets/files/".$idUsuario;
+                $pastaUsuario = "assets/files/".$idUsuario;
                 $caminhoFoto = $pastaUsuario."/perfil.".$extensao;
                 if (!is_dir($pastaUsuario)) {
                     mkdir($pastaUsuario);

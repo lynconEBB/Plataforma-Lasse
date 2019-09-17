@@ -101,6 +101,7 @@ input[type="checkbox"] {
 .main-content {
     z-index: 1;
     top:60px;
+    box-sizing: border-box;
     width: calc(100% - 200px);
     left: 200px;
     position: absolute;

@@ -66,24 +66,82 @@
     <main class="main-content">
         <div id="container-img-perfil">
             <img src="" id="img-perfil">
+            <label for="foto" id="add-foto"><i class="material-icons">add_a_photo</i>Alterar foto</label>
+            <input type="file" id="foto" name="foto" accept="image/*">
         </div>
-        <section class="perfil-info">
-            <h3 id="login"></h3>
-            <h4 id="tipo"></h4>
-            <h5 id="atuacao"></h5>
+        <form class="perfil-info">
+            <button type="button" class="btn-excluir" id="ativaModal">Excluir</button>
+            <button type="submit" class="btn-alterar">Alterar</button>
+            <input class="perfil-title" id="login" type="text" placeholder="Nome de Usuário" autocomplete="off">
+            <span id="tipo"></span>
+            <select id="atuacao" class="form-select">
+                <option value="Colaborador">Colaborador </option>
+                <option value="Bolsista/Voluntário">Bolsista/Voluntário</option>
+                <option value="Terceiros">Terceiros</option>
+            </select>
             <hr>
-            <div class="part-form">
-
+            <div class="form-perfil">
+                <div class="part-form">
+                    <div class="form-group">
+                        <label for="nome" class="perfil-label">Nome Completo: </label>
+                        <input class="perfil-input" type="text" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="dtNasc" class="perfil-label">Data de Nascimento: </label>
+                        <input class="perfil-input" type="text" id="dtNasc">
+                    </div>
+                    <div class="form-group">
+                        <label for="formacao" class="perfil-label">Formação: </label>
+                        <input class="perfil-input" type="text" id="formacao">
+                    </div>
+                    <div class="form-group">
+                        <label for="valorHora" class="perfil-label">Valor Hora: </label>
+                        <input class="perfil-input" type="text" id="valorHora">
+                    </div>
+                </div>
+                <div class="part-form">
+                    <div class="form-group">
+                        <label for="email" class="perfil-label">E-mail: </label>
+                        <input class="perfil-input" type="text" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf" class="perfil-label">CPF: </label>
+                        <input class="perfil-input" type="text" id="cpf">
+                    </div>
+                    <div class="form-group">
+                        <label for="rg" class="perfil-label">RG: </label>
+                        <input class="perfil-input" type="text" id="rg">
+                    </div>
+                    <div class="form-group">
+                        <label for="dtEmissao" class="perfil-label">Data de Emissão:</label>
+                        <input class="perfil-input" type="text" id="dtEmissao">
+                    </div>
+                </div>
             </div>
-            <div class="part-form">
-
-            </div>
-        </section>
+        </form>
     </main>
+
+    <section class="modal-background">
+    </section>
+    <div class="modal" id="modalExcluir">
+        <div class="modal-header">
+            <div class="modal-header-title">
+                Exclusão
+            </div>
+            <div class="modal-header-close">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <div class="modal-conteudo">
+            <span>Tem certeza que deseja excluir sua conta?</span>
+            <span>Caso sim, digite <b>confirmar</b> e clique em excluir</span>
+            <input class="form-input" type="text" autocomplete="off" id="inputExcluir">
+            <button class="botao-padrao" id="excluir">Excluir</button>
+        </div>
+    </div>
 <script src="/src/View/Default/js/requisicoes.js"></script>
-<script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
-<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/modal.js"></script>
 <script src="/src/View/Usuario/telaPerfil/funcoesPerfil.js"></script>
 </body>
