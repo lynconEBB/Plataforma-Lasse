@@ -89,7 +89,7 @@ class UsuarioControl extends CrudControl {
             if(!$this->DAO->listarPorLogin($info->login)){
                 // Verifica se é um cadastro de administrador e valida a senha de administrador
                 $admin = 0;
-                $caminhoPadrao = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/perfil.png";
+                $caminhoPadrao = "/assets/files/default/perfil.png";
                 if (isset($info->senhaAdmin)) {
                     if (password_verify($info->senhaAdmin,'$2y$12$N82ObBFr3YTAgMqEck5arOTgpunRBKuUxYLK4w7x0RY35Ariwjg.O')){
                         $admin = 1;
@@ -170,7 +170,6 @@ class UsuarioControl extends CrudControl {
                 if( password_verify($senha,$usuario->getSenha())){
                     $token = $this->criaToken($usuario);
                     $this->DAO->setToken($token,$usuario->getId());
-                    header("Set-Cookie: token={$token}; Domain=localhost; Path=/");
                     $decoded = JWT::decode($token,'SUPERSENHA123',array('HS256'));
                     $usuario = $this->DAO->listarPorId($decoded->data->id);
                     $this->requisitor = ["id" => $usuario->getId(), "login" => $usuario->getLogin(),"foto" => $usuario->getFoto(),"admin" => $usuario->getAdmin()];
@@ -260,7 +259,7 @@ class UsuarioControl extends CrudControl {
                 $img = $partes[1];
                 preg_match('/\/(.*?);/', $imgInfo, $extensao);
                 $extensao = $extensao[1];
-                $pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$idUsuario;
+                $pastaUsuario = "/assets/files/".$idUsuario;
                 $caminhoFoto = $pastaUsuario."/perfil.".$extensao;
                 if (!is_dir($pastaUsuario)) {
                     mkdir($pastaUsuario);

@@ -2,10 +2,14 @@ body{
     background-color: #cdd1d2;
     font-family: 'Roboto', sans-serif;
 }
+input[type="checkbox"] {
+    display: none;
+}
 /*********header*******************/
 .main-header {
     top: 0;
     left: 0;
+    z-index: 3;
     position: fixed;
     width: 100%;
     background: #67e69c;
@@ -45,23 +49,65 @@ body{
     .header-logo{
         display: none;
     }
-    .user-name{
-        display: none;
-    }
     .main-header{
         justify-content: flex-end;
-
     }
 }
 /**************sidebar********************/
 .sidebar{
+    z-index: 2;
     left: 0;
     top: 0;
     position: fixed;
-    height: 1300px;
-    width: 5%;
+    height: 100vh;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background: #06404d;
 }
+.sidebar-item {
+    color: white;
+    display: block;
+    padding: 20px 20px 10px 30px;
+    cursor: pointer;
+}
+.sidebar-item-text{
+    position: relative;
+    margin-left: 4px;
+    top: -6px;
+}
+.sidebar-item:first-of-type {
+    margin-top: 80px;
+}
+.sidebar-item.selecionado{
+    background: #275a66;
+}
+.sidebar-item:hover, .sidebar-item:active{
+    background: #275a66;
+}
+.btn-sair {
+    font-size: 1.2rem;
+    position: relative;
+    top: -4px;
+}
+.container-sair {
+    display: block;
+    padding: 20px 20px 40px 30px;
+    cursor: pointer;
+    color: #e45d5a;
+}
+/**Container de Conteudo*/
+.main-content {
+    z-index: 1;
+    top:60px;
+    width: calc(100% - 200px);
+    left: 200px;
+    position: absolute;
+    padding: 40px;
+}
+
+
 
 
 

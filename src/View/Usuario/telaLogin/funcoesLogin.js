@@ -1,7 +1,7 @@
 /*****mostrar input quando checkbox estiver selecionada******/
 var checkAdmin = document.querySelector("#admin");
 checkAdmin.onclick = function () {
-    if (checkAdmin.checked == true) {
+    if (checkAdmin.checked === true) {
         document.getElementById("form-admin").style.display = "block";
     } else {
         document.getElementById("form-admin").style.display = "none";
@@ -66,17 +66,16 @@ async function logar(event) {
     };
 
     if (request.senha.length >= 6 && request.login.length >= 6) {
-        requisicao("POST","http://localhost/api/users/login",request,callbackLogar,false);
+        requisicao("POST","/api/users/login",request,false,function (resposta) {
+            if (resposta.status === "sucesso") {
+                setCookie('token',resposta.dados,1);
+                window.location.href = "/dashboard/user/"+resposta.requisitor.id;
+            } else {
+                exibirMensagem(resposta.mensagem,true);
+            }
+        });
     } else {
         exibirMensagem("Os campos de Usuario e Senha precisam possuir mais de 6 caracteres",true);
-    }
-}
-
-function callbackLogar(resposta) {
-    if (resposta.status === "sucesso") {
-        window.location.href = "http://localhost/dashboard/user/"+resposta.requisitor.id;
-    } else {
-        exibirMensagem(resposta.mensagem,true);
     }
 }
 
@@ -101,27 +100,26 @@ botaoCadastrar.onclick = function(event) {
         formacao: document.getElementById("formacao").value,
         valorHora: document.getElementById("valorHora").value,
     };
-    if (checkAdmin.checked == true) {
+    if (checkAdmin.checked === true) {
       request.senhaAdmin = document.getElementById("senhaAdmin").value
     }
     if(fotoMudou) {
         request.foto = foto.src;
     }
     if (senhaConfirm === request.senha) {
-        requisicao("POST","http://localhost/api/users",request,callbackCadastro,false);
+        requisicao("POST","/api/users",request,false,function (resposta) {
+            if (resposta.status === "erro") {
+                exibirMensagem(resposta.mensagem,true);
+            } else {
+                fecharModal("#modalCadastro");
+                exibirMensagem(resposta.mensagem,false);
+            }
+        });
     } else {
         exibirMensagem("As senhas devem coincidir",true);
     }
 };
 
-function callbackCadastro(resposta) {
-    if (resposta.status == "erro") {
-        exibirMensagem(resposta.mensagem,true);
-    } else {
-        fecharModal("#modalCadastro");
-        exibirMensagem(resposta.mensagem,false);
-    }
-}
 
 /*** modal***/
 let botaoCadastro = document.querySelector("#botao-cadastro");

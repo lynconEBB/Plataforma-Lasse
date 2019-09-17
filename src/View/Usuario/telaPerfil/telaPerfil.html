@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
     <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
-    <link rel="stylesheet" href="/src/View/Usuario/telaDashboard/styleDashboard.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <link rel="stylesheet" href="/src/View/Usuario/telaPerfil/stylePerfil.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title>Dashboard</title>
+    <title>Perfil Usuário</title>
 </head>
 <body>
     <div class="mensagem">
@@ -22,11 +24,11 @@
     </div>
     <nav class="sidebar">
         <div class="container-itens">
-            <div class="sidebar-item selecionado" id="dashboards">
+            <div class="sidebar-item" id="dashboards">
                 <i class="material-icons">dashboard</i>
                 <span class="sidebar-item-text">Dashboard</span>
             </div>
-            <div class="sidebar-item" id="perfil">
+            <div class="sidebar-item selecionado" id="perfil">
                 <i class="material-icons">person</i>
                 <span class="sidebar-item-text">Perfil</span>
             </div>
@@ -62,12 +64,27 @@
         </div>
     </header>
     <main class="main-content">
+        <div id="container-img-perfil">
+            <img src="" id="img-perfil">
+        </div>
+        <section class="perfil-info">
+            <h3 id="login"></h3>
+            <h4 id="tipo"></h4>
+            <h5 id="atuacao"></h5>
+            <hr>
+            <div class="part-form">
 
+            </div>
+            <div class="part-form">
+
+            </div>
+        </section>
     </main>
-
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
-<script src="/src/View/Usuario/telaDashboard/funcoesDashboard.js"></script>
+<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Default/js/modal.js"></script>
+<script src="/src/View/Usuario/telaPerfil/funcoesPerfil.js"></script>
 </body>
 </html>

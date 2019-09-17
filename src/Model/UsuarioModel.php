@@ -53,7 +53,9 @@ class UsuarioModel
             "email" => $this->getEmail(),
             "atuacao" => $this->getAtuacao(),
             "formacao" => $this->getFormacao(),
-            "valorHora" => $this->getValorHora()
+            "valorHora" => $this->getValorHora(),
+            "admin" => $this->getAdmin(),
+            "foto" => $this->getFoto()
         ];
         return $array;
     }

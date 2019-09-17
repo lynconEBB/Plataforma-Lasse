@@ -46,6 +46,17 @@ class Router{
             }elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
                 require 'src/View/Usuario/telaDashboard/telaDashboard.html';
             }
+            // /erro/permissao
+            elseif ($this->url[0] == "erro" && $this->url[1] == "permissao" && count($this->url) == 2) {
+                require "src/View/errorPages/erroSemAcesso.html";
+            }
+            // /perfil/user/{idUsuario}
+            elseif ($this->url[0] == "perfil" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
+                require "src/View/Usuario/telaPerfil/telaPerfil.html";
+            }
+            else{
+                require "src/View/errorPages/erro404.html";
+            }
         }
     }
 
