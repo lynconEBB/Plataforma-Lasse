@@ -57,9 +57,15 @@ class ProjetoControl extends CrudControl
                         if ($this->requisitor['id'] == $this->url[3] || $this->requisitor['admin'] == "1") {
                             $projetos = $this->listarPorIdUsuario($this->url[3]);
                             if ($projetos != false) {
+                                $serDono = array();
+                                foreach ($projetos as $projeto) {
+                                    $dono = $this->verificaDono($projeto->getId(),$this->url[2]);
+                                    $serDono[$projeto->getId()] = $dono;
+                                }
+                                $this->requisitor["infoAdd"] = $serDono;
                                 $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
                             } else {
-                                $this->respostaSucesso("Nenhum projeto encontrado",null,$this->requisitor);
+                                $this->respostaSucesso("Nenhum projeto encontrado!",null,$this->requisitor);
                             }
                         } else {
                             throw new Exception("Você não possui acesso aos projetos deste usuario");

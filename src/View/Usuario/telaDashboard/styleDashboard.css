@@ -1,0 +1,77 @@
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 80px;
+}
+.itens{
+    width: 500px;
+    box-sizing: border-box;
+    padding-right:100px;
+}
+.graficos1 {
+    box-sizing: border-box;
+    max-width: 1300px;
+    min-width: 500px;
+    width: calc(100% - 500px);
+    margin-bottom: 40px;
+    height: 600px;
+    background-color: #275a66;
+}
+.graficos2 {
+    margin-top: 40px;
+    max-width: 1800px;
+    height: 800px;
+    width: 100%;
+    background-color: #275a66;
+}
+.dash-item{
+    display: block;
+    background-color: #275a66;
+    margin: 0 auto 40px;
+    max-width: 500px;
+    padding: 0 40px 60px 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.item-in {
+    position: relative;
+    top: -10px;
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.item-title{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.projetos .item-in {
+    background: #12bfe5;
+}
+.formularios .item-in {
+    background-color: #ffdf69;
+}
+.imprevistos .item-in {
+    background-color: #bbd070;
+}
+.dash-item i{
+    cursor: pointer;
+    float: right;
+    color: white;
+    font-size: 3rem;
+}
+.item-detail {
+    display: block;
+    margin: 10px 0 ;
+}
+@media (max-width: 1300px ) {
+    .graficos1 {
+        width: 100%;
+        min-width: 0;
+    }
+    .itens {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+}

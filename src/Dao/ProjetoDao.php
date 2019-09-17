@@ -60,7 +60,7 @@ class ProjetoDao extends CrudDao {
     }
 
     public function listarPorIdUsuario($id){
-        $comando1 = "select tbProjeto.dataFinalizacao, tbProjeto.dataInicio, tbProjeto.descricao, tbProjeto.nome, tbProjeto.id, tbProjeto.totalGasto from tbProjeto inner join tbUsuarioProjeto on tbProjeto.id = tbUsuarioProjeto.idProjeto where tbUsuarioProjeto.idUsuario = :id";
+        $comando1 = "select tbProjeto.numCentroCusto, tbProjeto.dataFinalizacao, tbProjeto.dataInicio, tbProjeto.descricao, tbProjeto.nome, tbProjeto.id, tbProjeto.totalGasto from tbProjeto inner join tbUsuarioProjeto on tbProjeto.id = tbUsuarioProjeto.idProjeto where tbUsuarioProjeto.idUsuario = :id";
         $stm = $this->pdo->prepare($comando1);
         $stm->bindValue(':id',$id);
         $stm->execute();

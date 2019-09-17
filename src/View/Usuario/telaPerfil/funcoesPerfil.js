@@ -1,14 +1,24 @@
 /**Coloca Informações no lugar****/
 window.onload = function () {
     verificaMensagem();
-    var idUsuario = window.location.pathname.split("/").pop();
-    requisicao("GET","/api/users/"+idUsuario,null,true,function (resposta) {
-        if (resposta.status === "sucesso") {
-            document.querySelector(".user-name").textContent = resposta.dados.login;
-            document.querySelector(".user-img").src = "/"+resposta.requisitor.foto;
-            document.querySelector("#img-perfil").src = "/"+resposta.requisitor.foto;
-            var usuario = resposta.dados;
 
+    var idUserListado = window.location.pathname.split("/").pop();
+
+    requisicao("GET","/api/users/"+idUserListado,null,true,function (resposta) {
+        if (resposta.status === "sucesso") {
+            var requisitor = resposta.requisitor;
+            var usuario = resposta.dados;
+            setLinks(requisitor.id);
+
+            document.querySelector(".user-name").textContent = resposta.requisitor.login;
+            document.querySelector(".user-img").src = "/"+resposta.requisitor.foto;
+
+            if (requisitor.id !== idUserListado) {
+                document.querySelector(".btn-alterar").style.display = "none";
+                document.querySelector("#ativaModal").style.display = "none";
+            }
+
+            document.querySelector("#img-perfil").src = "/"+usuario.foto;
             document.querySelector("#login").value = usuario.login;
             if (usuario.admin === "1") {
                 document.querySelector("#tipo").textContent = "Administrador";
@@ -25,7 +35,7 @@ window.onload = function () {
             document.querySelector("#dtEmissao").value = usuario.dtEmissao;
             document.querySelector("#valorHora").value = usuario.valorHora;
 
-            setLinks(usuario.id);
+
         } else {
             window.location.href = "/erro/permissao";
         }
@@ -70,7 +80,6 @@ formAlterar.onsubmit = function (event) {
     if (fotoMudou) {
         body.foto = foto.src;
     }
-
     requisicao("PUT","/api/users",body,true,function (resposta) {
         if (resposta.status === "sucesso") {
             addMensagem("sucesso=Dados-Atualizados-com-sucesso");
@@ -79,6 +88,7 @@ formAlterar.onsubmit = function (event) {
             exibirMensagem(resposta.mensagem,true);
         }
     })
+
 };
 
 /****modalExcluir*****/
