@@ -13,8 +13,10 @@ window.onload = function () {
             var usuario = resposta.dados;
             /****Mostra quantidade projetos******/
             requisicao("GET","/api/projetos/user/"+usuario.id,null,true,function (resposta) {
+                console.log(resposta);
+                console.log(resposta.hasOwnProperty("dados"));
                 if (resposta.status == "sucesso") {
-                    if (resposta.mensagem == "Nenhum formulário encontrado") {
+                    if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdProjetos").textContent = resposta.mensagem;
                     } else {
                         let projetos = resposta.dados;
@@ -35,7 +37,7 @@ window.onload = function () {
             /****Mostra quantidade de Projetos****/
             requisicao("GET", "/api/formularios/users/"+usuario.id,null,true,function (resposta) {
                 if (resposta.status == "sucesso") {
-                    if (resposta.mensagem == "Nenhum formulário encontrado!") {
+                    if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdFormularios").textContent = resposta.mensagem;
                     } else {
                         let formularios = resposta.dados;
@@ -49,7 +51,7 @@ window.onload = function () {
             /*****Mostra quantidade de imprevistos******/
             requisicao("GET", "/api/atividades/user/"+usuario.id,null,true,function (resposta) {
                 if (resposta.status == "sucesso") {
-                    if (resposta.mensagem == "Nenhum imprevisto encontrado!") {
+                    if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdImprevistos").textContent = resposta.mensagem;
                     } else {
                         let imprevistos = resposta.dados;

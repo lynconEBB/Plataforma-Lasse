@@ -44,7 +44,7 @@ class Router{
             require 'src/View/testeApi/test.html';
         }elseif ($this->url[0] == "testeFile" && count($this->url) == 1) {
             require 'src/View/Formulario/formulario.html';
-            // /dashboard/user/{idUsuario}
+        // /dashboard/user/{idUsuario}
         }elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
             require 'src/View/Usuario/telaDashboard/telaDashboard.html';
         }
@@ -55,6 +55,10 @@ class Router{
         // /perfil/user/{idUsuario}
         elseif ($this->url[0] == "perfil" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
             require "src/View/Usuario/telaPerfil/telaPerfil.html";
+        }
+        // /projetos/user/{idUsuario}
+        elseif ($this->url[0] == "projetos" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
+            require "src/View/Projeto/telaProjetos.html";
         }
         else{
             require "src/View/errorPages/erro404.html";

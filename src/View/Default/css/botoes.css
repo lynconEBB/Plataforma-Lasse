@@ -17,3 +17,31 @@
     outline: none;
 }
 
+.botao-adicionar{
+    background-color: #ffdf69;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bolder;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    transition: all ease-in-out 150ms;
+    transform: scale(1.005);
+    display: inline;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.botao-adicionar i{
+    position: relative;
+    bottom: -4px;
+    font-size: 1rem;
+    margin-right: 1px;
+}
+
+.botao-adicionar:hover {
+    transform: scale(1);
+    box-shadow: none;
+}
+.botao-adicionar:focus, .botao-adicionar:active {
+    transform: scale(0.98);
+    outline: none;
+}
+

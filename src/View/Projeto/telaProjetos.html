@@ -5,6 +5,7 @@
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/modal.css">
@@ -27,11 +28,11 @@
             <i class="material-icons">dashboard</i>
             <span class="sidebar-item-text">Dashboard</span>
         </div>
-        <div class="sidebar-item selecionado" id="perfil">
+        <div class="sidebar-item" id="perfil">
             <i class="material-icons">person</i>
             <span class="sidebar-item-text">Perfil</span>
         </div>
-        <div class="sidebar-item" id="projetos">
+        <div class="sidebar-item selecionado" id="projetos">
             <i class="material-icons">work</i>
             <span class="sidebar-item-text">Projetos</span>
         </div>
@@ -63,14 +64,62 @@
     </div>
 </header>
 <main class="main-content">
-    <table>
+    <header class="cabecalho">
+        <span id="titulo-cabecalho">Projetos</span>
+        <button id="abreModal" class="botao-adicionar"><i class="material-icons">library_add</i>Novo</button>
+        <hr class="cabecalho-divisoria">
+    </header>
+    <div id="container-aviso">
+        <img src="/assets/images/not-found.svg" class="aviso-img">
+        <span class="aviso"><b>Nenhum Projeto encontrado!</b></span>
+        <span>Você pode criar um agora mesmo ou pedir para outro usuário adiciona-lo em seu projeto</span>
+    </div>
+    <div id="dash-projetos">
 
-    </table>
+    </div>
 </main>
+<section class="modal-background">
+</section>
+<div class="modal" id="modalCadastro">
+    <div class="modal-header">
+        <div class="modal-header-title">
+            Cadastrar Projeto
+        </div>
+        <div class="modal-header-close">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="form-label" for="nome">Nome</label>
+                <input type="text" class="form-input" id="nome">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="descricao">Descrição</label>
+                <input type="text" class="form-input" id="descricao">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="numCentroCusto">Número Centro de Custo</label>
+                <input type="text" class="form-input" id="numCentroCusto">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="dataCriacao">Data de Criação</label>
+                <input type="text" class="form-input" id="dataCriacao">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="dataFinalizacao">Data de Finalização</label>
+                <input type="text" class="form-input" id="dataFinalizacao">
+            </div>
+            <button class="botao-padrao" id="cadastrarProjeto">Cadastrar</button>
+        </form>
+    </div>
+</div>
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/modal.js"></script>
 <script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Projeto/funcoesProjeto.js"></script>
 </body>
 </html>

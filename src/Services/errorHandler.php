@@ -19,7 +19,6 @@ function errorToException( $code, $message, $file, $line )
 }
 
 function handleExceptionTypes($exception) {
-    $mensagem = "";
     $exceptionClass = get_class($exception);
 
     switch ($exceptionClass) {
