@@ -74,6 +74,15 @@ class FormularioControl extends CrudControl
                         throw new Exception("Você não possui acesso a este formulario",401);
                     }
                 }
+                // /api/formularios/users/{idUsuario}
+                elseif ($this->url[2] == "users" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
+                    $formularios = $this->listarPorIdUsuario($this->url[3]);
+                    if ($formularios) {
+                        $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
+                    } else {
+                        $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                    }
+                }
                 break;
         }
     }
@@ -120,6 +129,14 @@ class FormularioControl extends CrudControl
         } else {
             throw new Exception("Formulário não encontrado");
         }
+    }
+
+    public function listarPorIdUsuario($idUsuario)
+    {
+        $usuarioControl = new UsuarioControl(null);
+        $usuarioControl->listarPorId($idUsuario);
+        $formularios = $this->DAO->listarPorIdUsuario($idUsuario);
+        return $formularios;
     }
 
 

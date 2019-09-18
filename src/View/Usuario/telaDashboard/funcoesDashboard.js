@@ -11,35 +11,67 @@ window.onload = function () {
             document.querySelector(".user-name").textContent = resposta.requisitor.login;
 
             var usuario = resposta.dados;
-
-            requisicao("GET", "/api/projetos/user/"+usuario.id,null,true,function (resposta) {
+            /****Mostra quantidade projetos******/
+            requisicao("GET","/api/projetos/user/"+usuario.id,null,true,function (resposta) {
                 if (resposta.status == "sucesso") {
-                    if (resposta.mensagem == "Nenhum projeto encontrado") {
+                    if (resposta.mensagem == "Nenhum formulário encontrado") {
                         document.querySelector("#qtdProjetos").textContent = resposta.mensagem;
                     } else {
                         let projetos = resposta.dados;
                         let ehDono = resposta.requisitor.infoAdd;
-                        let sendoDono = 0;
-                        ehDono.forEach(function (dono) {
-                            if (dono == true) {
-                                sendoDono += 1;
+                        let qtdDono = 0;
+                        for( let key in ehDono) {
+                            if(ehDono[key] == true) {
+                                qtdDono += 1;
                             }
-                        });
-                        document.querySelector("#qtdProjetos").textContent = "Participando de: "+projetos.length+" projeto(s)<br>" +
-                            "Sendo dono de :"+sendoDono+" projeto(s)";
+                        }
+                        document.querySelector("#qtdProjetos").innerHTML = "Participando de: "+projetos.length+" projeto(s)<br>" + "Sendo dono de :"+qtdDono+" projeto(s)";
                     }
                 } else {
-                    exibirMensagem()
+                    exibirMensagem(resposta.mensagem);
                 }
-            })
+            });
 
+            /****Mostra quantidade de Projetos****/
+            requisicao("GET", "/api/formularios/users/"+usuario.id,null,true,function (resposta) {
+                if (resposta.status == "sucesso") {
+                    if (resposta.mensagem == "Nenhum formulário encontrado!") {
+                        document.querySelector("#qtdFormularios").textContent = resposta.mensagem;
+                    } else {
+                        let formularios = resposta.dados;
+                        document.querySelector("#qtdFormularios").textContent = "Foram encontrados "+formularios.length+" formulários no sistema";
+                    }
+                } else {
+                    exibirMensagem(resposta.mensagem);
+                }
+            });
+
+            /*****Mostra quantidade de imprevistos******/
+            requisicao("GET", "/api/atividades/user/"+usuario.id,null,true,function (resposta) {
+                if (resposta.status == "sucesso") {
+                    if (resposta.mensagem == "Nenhum imprevisto encontrado!") {
+                        document.querySelector("#qtdImprevistos").textContent = resposta.mensagem;
+                    } else {
+                        let imprevistos = resposta.dados;
+                        document.querySelector("#qtdImprevistos").textContent = "Foram encontrados "+imprevistos.length+" imprevistos no sistema";
+                    }
+                } else {
+                    exibirMensagem(resposta.mensagem);
+                }
+            });
+
+            let telaFormularios = document.querySelector("#telaFormularios");
+            telaFormularios.onclick = () => window.location.href = "/formularios/user/"+usuario.id;
+            let telaProjetos = document.querySelector("#telaProjetos");
+            telaProjetos.onclick = () => window.location.href = "/projetos/user/"+usuario.id;
+            let telaImprevistos = document.querySelector("#telaImprevistos");
+            telaImprevistos.onclick = () => window.location.href = "/imprevistos/user/"+usuario.id;
 
         } else {
             window.location.href = "/erro/permissao";
         }
     });
 
-    //requisicao("GET","/api/projetos/user"+idUsuario,bod)
 };
 
 

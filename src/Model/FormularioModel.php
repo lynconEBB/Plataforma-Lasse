@@ -26,6 +26,18 @@ class FormularioModel
         $this->setCaminhoHTML($caminhoHTML);
     }
 
+    public function toArray()
+    {
+        $array = [
+            "id" => $this->getId(),
+            "nome" => $this->getNome(),
+            "caminhoDocumento" => $this->getCaminhoDocumento(),
+            "caminhoHTML" => $this->getCaminhoHTML(),
+            "usuario" => $this->getUsuario()->toArray(),
+        ];
+        return $array;
+    }
+
     public function getId()
     {
         return $this->id;

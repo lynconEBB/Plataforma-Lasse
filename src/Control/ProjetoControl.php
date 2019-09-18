@@ -59,7 +59,7 @@ class ProjetoControl extends CrudControl
                             if ($projetos != false) {
                                 $serDono = array();
                                 foreach ($projetos as $projeto) {
-                                    $dono = $this->verificaDono($projeto->getId(),$this->url[2]);
+                                    $dono = $this->verificaDono($projeto->getId(),$this->url[3]);
                                     $serDono[$projeto->getId()] = $dono;
                                 }
                                 $this->requisitor["infoAdd"] = $serDono;

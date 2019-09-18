@@ -77,4 +77,27 @@ class FormularioDao extends CrudDao
     {
 
     }
+
+    public function listarPorIdUsuario($idUsuario)
+    {
+        $comando = "SELECT * FROM tbFormulario WHERE idUsuario = :idUsuario";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':idUsuario',$idUsuario);
+
+        $stm->execute();
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($rows) > 0) {
+            $objs = array();
+            $usuarioDao = new UsuarioDao();
+            $usuario = $usuarioDao->listarPorId($idUsuario);
+            foreach ($rows as $row) {
+                $formulario = new FormularioModel($row['nome'],$usuario,$row['caminhoDocumento'],$row['caminhoHTML'],$row['id']);
+                $objs[] = $formulario;
+            }
+            return $objs;
+        } else {
+            return false;
+        }
+    }
 }

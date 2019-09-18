@@ -59,7 +59,7 @@ class AtividadeControl extends CrudControl {
                             if ($atividades) {
                                 $this->respostaSucesso("Listando atividades do usuário",$atividades,$this->requisitor);
                             } else {
-                                $this->respostaSucesso("Nenhuma atividade encontrada",null,$this->requisitor);
+                                $this->respostaSucesso("Nenhum imprevisto encontrado!",null,$this->requisitor);
                             }
                         } else {
                             throw new Exception("Você não possui acesso as atividades deste usuário",401);

@@ -15,7 +15,7 @@ var foto = document.querySelector(".foto");
 inputFoto.addEventListener("change",function () {
     let files = this.files;
     if (FileReader && files && files.length) {
-        if (files[0].type === "image/png" || files[0].type === "image.jpg") {
+        if (files[0].type === "image/png" || files[0].type === "image/jpg" || files[0].type === "image/jpeg") {
             var reader = new FileReader();
             reader.onload = function () {
                 fotoMudou = true;
