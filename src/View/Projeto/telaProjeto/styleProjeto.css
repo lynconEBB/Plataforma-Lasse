@@ -1,0 +1,100 @@
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    width: 100%;
+    max-width: 2800px;
+}
+#projeto-detalhes {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background: #275a66;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+
+}
+#nome{
+    background: transparent;
+    font-size: 2rem;
+    color: white;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+#descricao {
+    background: transparent;
+    font-size: 1.5rem;
+    color: #8a938e;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    resize: none;
+    font-family: 'Roboto', sans-serif !important;
+}
+.group-projeto {
+    width: 25%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.input-projeto {
+    font-size: 1.2rem;
+    background: transparent;
+    color: white;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.label-projeto {
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 100%;
+    color: white;
+    display: block;
+}
+@media (max-width: 1200px) {
+    .group-projeto{
+        width: 50%;
+    }
+}
+@media (max-width: 600px) {
+    .group-projeto{
+        width: 100%;
+    }
+}
+#botaoExcluir {
+    position: absolute;
+    padding: 10px 20px;
+    background: #e45d5a;
+    color: #06404d;
+    border: none;
+    top: 10px;
+    right: -10px;
+    font-size: 1.5rem;
+}
+
+#botaoAlterar{
+    font-size: 1.5rem;
+    top: 10px;
+    left: -10px;
+    border: none;
+    position: absolute;
+    padding: 10px 20px;
+    color: #06404d;
+    background: #12bfe5;
+}
+
+#nome:focus, #descricao:focus, .input-projeto:focus {
+    outline: none;
+}

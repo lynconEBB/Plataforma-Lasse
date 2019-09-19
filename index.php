@@ -58,7 +58,11 @@ class Router{
         }
         // /projetos/user/{idUsuario}
         elseif ($this->url[0] == "projetos" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
-            require "src/View/Projeto/telaProjetos.html";
+            require "src/View/Projeto/telaDashProjetos/telaProjetos.html";
+        }
+        // /projeto/{idUsuario}
+        elseif ($this->url[0] == "projeto" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
+            require "src/View/Projeto/telaProjeto/telaProjeto.html";
         }
         else{
             require "src/View/errorPages/erro404.html";

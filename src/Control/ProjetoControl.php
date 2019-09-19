@@ -46,6 +46,8 @@ class ProjetoControl extends CrudControl
                         $this->listarPorId($this->url[2]);
                         if ($this->procuraFuncionario($this->url[2],$this->requisitor['id']) || $this->requisitor['admin'] == "1") {
                             $projeto = $this->listarPorId($this->url[2]);
+                            $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
+                            $this->requisitor["dono"] = $dono;
                             $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
                         } else {
 

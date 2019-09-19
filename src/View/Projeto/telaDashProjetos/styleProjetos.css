@@ -52,7 +52,8 @@ hr.projeto-divisoria {
     margin-bottom: 50px;
 }
 #titulo-cabecalho {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 hr.cabecalho-divisoria{
     border: 1px black solid;
