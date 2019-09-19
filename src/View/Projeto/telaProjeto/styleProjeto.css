@@ -5,6 +5,9 @@
 .container {
     width: 100%;
     max-width: 2800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 #projeto-detalhes {
     width: 100%;
@@ -14,7 +17,7 @@
     padding: 20px;
     box-sizing: border-box;
     position: relative;
-
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 #nome{
     background: transparent;
@@ -31,7 +34,7 @@
 #descricao {
     background: transparent;
     font-size: 1.5rem;
-    color: #8a938e;
+    color: #c5cec9;
     border: none;
     display: block;
     width: 100%;
@@ -63,16 +66,7 @@
     color: white;
     display: block;
 }
-@media (max-width: 1200px) {
-    .group-projeto{
-        width: 50%;
-    }
-}
-@media (max-width: 600px) {
-    .group-projeto{
-        width: 100%;
-    }
-}
+
 #botaoExcluir {
     position: absolute;
     padding: 10px 20px;
@@ -82,9 +76,11 @@
     top: 10px;
     right: -10px;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 #botaoAlterar{
+    cursor: pointer;
     font-size: 1.5rem;
     top: 10px;
     left: -10px;
@@ -98,3 +94,133 @@
 #nome:focus, #descricao:focus, .input-projeto:focus {
     outline: none;
 }
+
+#participantes {
+    width: 100%;
+    background-color: #275a66;
+    color: white;
+    cursor: pointer;
+}
+#seta {
+    font-size: 3rem;
+    text-align: center;
+    display: block;
+}
+#participantes-dropdown {
+    padding: 20px 50px 50px;
+    display: none;
+    cursor: auto;
+}
+#participantes-dropdown hr {
+    border: #babaca solid 1px;
+    max-width: 1000px;
+}
+
+.botao-adicionar {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.participante {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+.tarefas {
+    width: 30%;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    background-color: #275a66;
+    display: inline-block;
+    margin: 1%;
+}
+.cabecalho-tarefa {
+    position: relative;
+    top: 10px;
+    margin-bottom: 30px;
+    left: -10px;
+    width: calc(100% + 20px);
+    background-color: #ffdf69;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.detalhe {
+    position: absolute;
+    background-color: black;
+    width: 10px;
+    height: 20px;
+    bottom: -13px;
+    z-index: -10;
+    right: 6px;
+    transform: rotate(45deg);
+}
+
+.tarefa {
+    margin: 10px 30px;
+    padding: 20px 30px;
+    background-color: #babaca;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    cursor: pointer;
+    transition: box-shadow ease-in-out 100ms;
+}
+.tarefa:active {
+    box-shadow: none;
+}
+.tarefa-title {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    margin-bottom: 4px;
+}
+
+.tarefa-gasto {
+    display: block;
+    margin-left: 5px;
+}
+
+#cabecalho-a-fazer {
+    background-color: #12bfe5;
+}
+#cabecalho-fazendo{
+    background-color: #ffdf69;
+}
+#cabecalho-concluidas {
+    background-color: #67e69c;
+}
+@media (max-width: 1200px) {
+    .group-projeto{
+        width: 50%;
+    }
+    .tarefas {
+        width: 100%;
+        margin: 2%;
+        max-width: 250px;
+    }
+}
+@media (max-width: 600px) {
+    .group-projeto{
+        width: 100%;
+    }
+    .tarefas {
+        max-width: none;
+    }
+}
+
+.aviso {
+    width: 100%;
+    text-align: center;
+}
+.aviso-vazio {
+    color: #cdd1d2;
+}
+.img-vazio {
+    width: 20%;
+    display: block;
+    margin: 10px auto;
+}
+
+

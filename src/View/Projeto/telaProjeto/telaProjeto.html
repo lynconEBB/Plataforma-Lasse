@@ -28,11 +28,11 @@
             <i class="material-icons">dashboard</i>
             <span class="sidebar-item-text">Dashboard</span>
         </div>
-        <div class="sidebar-item selecionado" id="perfil">
+        <div class="sidebar-item " id="perfil">
             <i class="material-icons">person</i>
             <span class="sidebar-item-text">Perfil</span>
         </div>
-        <div class="sidebar-item" id="projetos">
+        <div class="sidebar-item selecionado" id="projetos">
             <i class="material-icons">work</i>
             <span class="sidebar-item-text">Projetos</span>
         </div>
@@ -69,34 +69,73 @@
 
         </form>
         <section id="participantes">
+            <i class="material-icons" id="seta">keyboard_arrow_down</i>
+            <div id="participantes-dropdown" style="display: none">
 
+            </div>
         </section>
-        <div id="tarefas-a-fazer">
+        <div class="tarefas" id="tarefas-a-fazer">
             <header class="cabecalho-tarefa" id="cabecalho-a-fazer">
+                Á fazer
                 <div class="detalhe"></div>
             </header>
-            <div>
-
-            </div>
         </div>
-        <div id="tarefas-fazendo">
+        <div class="tarefas" id="tarefas-fazendo">
             <header class="cabecalho-tarefa" id="cabecalho-fazendo">
+                Em andamento
                 <div class="detalhe"></div>
             </header>
-            <div>
 
-            </div>
         </div>
-        <div id="tarefas-concluidas">
+        <div class="tarefas" id="tarefas-concluidas">
             <header class="cabecalho-tarefa" id="cabecalho-concluidas">
+                Concluída
                 <div class="detalhe"></div>
             </header>
-            <div>
-
-            </div>
         </div>
     </div>
 </main>
+
+<section class="modal-background">
+</section>
+<div class="modal" id="modalTarefa">
+    <div class="modal-header">
+        <div class="modal-header-title">
+            Cadastro Tarefa
+        </div>
+        <div class="modal-header-close">
+            <i class="material-icons" id="fechaModalTarefa">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label for="nomeTarefa" class="form-label">Nome</label>
+                <input class="form-input" type="text" id="nomeTarefa">
+            </div>
+            <div class="form-group">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input class="form-input" type="text" id="descricao">
+            </div>
+            <div class="form-group">
+                <label for="dtInicio" class="form-label">Data Início</label>
+                <input class="form-input" type="text" id="dtInicio">
+            </div>
+            <div class="form-group">
+                <label for="dtConclusao" class="form-label">Data Conclusão</label>
+                <input class="form-input" type="text" id="dtConclusao">
+            </div>
+            <div class="form-group">
+                <label for="estado" class="form-label">Nome</label>
+                <select class="form-select" id="estado">
+                    <option value="Á fazer">Á fazer</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Concluida">Concluida</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
