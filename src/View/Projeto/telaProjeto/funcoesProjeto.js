@@ -38,7 +38,7 @@ window.onload = function () {
                     <button id="botaoExcluir" type="button">Excluir</button>
                     <button id="botaoAlterar" type="submit">Alterar</button>`;
 
-                    participanteDropdown.insertAdjacentHTML("afterbegin","<button class=\"botao-adicionar\"><i class=\"material-icons\">library_add</i>Novo</button><hr>");
+                    participanteDropdown.insertAdjacentHTML("afterbegin","<button class='botao-adicionar' id='abreModalAdicionar'><i class='material-icons'>library_add</i>Novo</button><hr>");
             } else {
                 template = `
                     <span id="nome">${projeto.nome}</span>
@@ -81,17 +81,19 @@ window.onload = function () {
 
             /*********Mostra botoes caso usuario esta inserido********/
             if (requisitorParticipa) {
-                tarefaConluida.insertAdjacentHTML("beforeend", "<button  class=\"botao-adicionar btn-tarefa\" data-tipo='concluida'>Adicionar Tarefa</button>");
-                tarefaAndamento.insertAdjacentHTML("beforeend", "<button  class=\"botao-adicionar btn-tarefa\" data-tipo='andamento'>Adicionar Tarefa</button>");
-                tarefaFazer.insertAdjacentHTML("beforeend", "<button  class='botao-adicionar btn-tarefa' data-tipo='afazer'>Adicionar Tarefa</button>");
+                tarefaConluida.insertAdjacentHTML("beforeend", "<button  class=\"botao-adicionar btn-tarefa\" data-tipo='Concluída'>Adicionar Tarefa</button>");
+                tarefaAndamento.insertAdjacentHTML("beforeend", "<button  class=\"botao-adicionar btn-tarefa\" data-tipo='Em andamento'>Adicionar Tarefa</button>");
+                tarefaFazer.insertAdjacentHTML("beforeend", "<button  class='botao-adicionar btn-tarefa' data-tipo='Á fazer'>Adicionar Tarefa</button>");
             }
             let botoesAbreModalTarefa = document.getElementsByClassName("btn-tarefa");
-            botoesAbreModalTarefa.forEach(function (botao) {
+            for (let botao of botoesAbreModalTarefa) {
                 botao.addEventListener("click",function () {
                     mostrarModal("#modalTarefa");
                     document.getElementById("estado").value = botao.dataset.tipo
                 })
-            });
+            }
+            document.getElementById("fechaModalTarefa").onclick = () => fecharModal("#modalTarefa");
+
 
             /*************Exibe tarefas e aviso caso nenhuma tarefa exista****************/
             if (projeto.tarefas != null) {
@@ -131,6 +133,69 @@ window.onload = function () {
                 tarefaFazer.insertAdjacentHTML("beforeend", templateAviso);
             }
 
+
+            /******Cadastrar Tarefa***********/
+            let botaoCadastrarTarefa = document.getElementById("cadastrarTarefa");
+            botaoCadastrarTarefa.onclick = function (event) {
+                event.preventDefault();
+                let bodyTarefa = {
+                    nome: document.getElementById("nomeTarefa").value,
+                    descricao: document.getElementById("descricaoTarefa").value,
+                    estado: document.getElementById("estado").value,
+                    dataInicio: document.getElementById("dtInicioTarefa").value,
+                    dataConclusao: document.getElementById("dtConclusaoTarefa").value,
+                    idProjeto: projeto.id,
+                };
+                requisicao("POST","/api/tarefas",bodyTarefa,true,function (resposta) {
+                    if (resposta.status === "sucesso") {
+                        addMensagem("sucesso=Tarefa-cadastrada-com-sucesso!");
+                    } else {
+                        exibirMensagem(resposta.mensagem,true);
+                    }
+                });
+            };
+
+            /********Excluir Projeto*********/
+            document.getElementById("botaoExcluir").onclick = () => mostrarModal("#modalExcluirProjeto");
+            document.getElementById("fechaModalExcluirProjeto").onclick = () => fecharModal("#modalExcluirProjeto");
+            let botaoExcluirProjeto = document.getElementById("excluirProjeto");
+            botaoExcluirProjeto.onclick = function () {
+                requisicao("DELETE","/api/projetos/"+projeto.id,null,true,function (resposta) {
+                    if (resposta.status == "sucesso") {
+                        window.location.href = "/projetos/user/"+requisitor.id+"?sucesso=Projeto-excluido-com-sucesso";
+                    } else {
+                        fecharModal("#modalExcluirProjeto");
+                        exibirMensagem(resposta.mensagem,true);
+                    }
+                });
+            };
+
+
+
+            /******Adicionar Funcionário*************/
+
+            requisicao("GET","/api/users/naoProjeto/"+projeto.id,null,true,function (resposta) {
+                if (resposta.status === "sucesso") {
+                    if (resposta.hasOwnProperty("dados")) {
+                        let funcionarios = resposta.dados;
+                        let select = document.getElementById("funcionario");
+                        funcionarios.forEach(function (funcionario) {
+                            select.insertAdjacentHTML("beforeend",`<option value="${funcionario.id}">${funcionario.login}</option>`)
+                        });
+
+                        document.getElementById("abreModalAdicionar").onclick = () => mostrarModal("#modalAdicionarFuncionario");
+                        document.getElementById("fechaModalAdicionarFuncionario").onclick = () => fecharModal("#modalAdicionarFuncionario");
+                    } else {
+                        document.getElementById("abreModalAdicionar").onclick = () => exibirMensagem(resposta.mensagem,true);
+                    }
+
+                } else {
+                    fecharModal("#modalAdicionarFuncionario");
+                    exibirMensagem(resposta.mensagem,true);
+                }
+
+
+            });
         } else {
             exibirMensagem(resposta.mensagem,true);
         }
@@ -147,6 +212,8 @@ abreDropDown.onclick = function () {
         abreDropDown.textContent = "keyboard_arrow_down";
     }
 };
+
+
 
 
 

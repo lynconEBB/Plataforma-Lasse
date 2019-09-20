@@ -143,4 +143,18 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         $delete->bindValue(':token',$token);
         $delete->execute();
     }
+
+    public function listarUsuariosForaProjeto($idProjeto)
+    {
+        $busca = $this->pdo->prepare("select login,id from tbUsuario where id not in (select distinct idUsuario from tbUsuarioProjeto where idProjeto = :idProjeto)");
+        $busca->bindParam(':idProjeto',$idProjeto);
+        $busca->execute();
+
+        $linhas = $busca->fetchAll(PDO::FETCH_ASSOC);
+        if (count($linhas) > 0) {
+            return $linhas;
+        }else{
+            return false;
+        }
+    }
 }

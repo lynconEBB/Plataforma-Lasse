@@ -22,7 +22,7 @@
     opacity: 0;
     pointer-events: none;
     top: -1000px;
-    position: absolute;
+    position: fixed;
     margin: 0 auto;
     width: 95%;
     max-width: 1000px;

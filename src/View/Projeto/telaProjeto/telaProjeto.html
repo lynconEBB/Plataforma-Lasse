@@ -114,26 +114,61 @@
                 <input class="form-input" type="text" id="nomeTarefa">
             </div>
             <div class="form-group">
-                <label for="descricao" class="form-label">Descrição</label>
-                <input class="form-input" type="text" id="descricao">
+                <label for="descricaoTarefa" class="form-label">Descrição</label>
+                <input class="form-input" type="text" id="descricaoTarefa">
             </div>
             <div class="form-group">
-                <label for="dtInicio" class="form-label">Data Início</label>
-                <input class="form-input" type="text" id="dtInicio">
+                <label for="dtInicioTarefa" class="form-label">Data Início</label>
+                <input class="form-input" type="text" id="dtInicioTarefa">
             </div>
             <div class="form-group">
-                <label for="dtConclusao" class="form-label">Data Conclusão</label>
-                <input class="form-input" type="text" id="dtConclusao">
+                <label for="dtConclusaoTarefa" class="form-label">Data Conclusão</label>
+                <input class="form-input" type="text" id="dtConclusaoTarefa">
             </div>
             <div class="form-group">
-                <label for="estado" class="form-label">Nome</label>
+                <label for="estado" class="form-label selecionado">Estado</label>
                 <select class="form-select" id="estado">
                     <option value="Á fazer">Á fazer</option>
                     <option value="Em andamento">Em andamento</option>
-                    <option value="Concluida">Concluida</option>
+                    <option value="Concluída">Concluída</option>
                 </select>
             </div>
+            <button class="botao-padrao" id="cadastrarTarefa">Cadastrar</button>
         </form>
+    </div>
+</div>
+
+<div class="modal" id="modalExcluirProjeto">
+    <div class="modal-header" id="header-excluir">
+        <div class="modal-header-title">
+            Excluir Projeto
+        </div>
+        <div class="modal-header-close">
+            <i class="material-icons" id="fechaModalExcluirProjeto">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+        <span class="mensagemExcluir">Tem certeza que deseja mesmo excluir este projeto?</span>
+        <span class="mensagemExcluir">Todas as informações contidas nele serão apagadas <b>para sempre</b>.</span>
+        <button class="botao-padrao" id="excluirProjeto">Excluir</button>
+    </div>
+</div>
+
+<div class="modal" id="modalAdicionarFuncionario">
+    <div class="modal-header">
+        <div class="modal-header-title">
+            Adicionar Funcionário
+        </div>
+        <div class="modal-header-close">
+            <i class="material-icons" id="fechaModalAdicionarFuncionario">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+        <span class="mensagemExcluir">Escolha um usuario para adicionar ao projeto.</span>
+        <select class="form-select" id="funcionario">
+
+        </select>
+        <button class="botao-padrao" id="adicionarFuncionario">Adicionar</button>
     </div>
 </div>
 <script src="/src/View/Default/js/requisicoes.js"></script>

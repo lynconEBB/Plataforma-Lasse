@@ -57,6 +57,16 @@ class UsuarioControl extends CrudControl {
                             throw new Exception("Você precisa ser administrador para ter acesso aos dados de todos os usuários");
                         }
                     }
+                    // /api/users/naoProjeto/{idProjeto}
+                    elseif (count($this->url) == 4 && $this->url[2] == "naoProjeto" && $this->url[3] == (int)$this->url[3]) {
+                        $this->requisitor = self::autenticar();
+                        $usuarios = $this->listarUsuariosForaProjeto($this->url[3]);
+                        if ($usuarios) {
+                            $this->respostaSucesso("Listando Usuarios",$usuarios,$this->requisitor);
+                        } else {
+                            $this->respostaSucesso("Todos usuários do sistemas estão no projeto",null,$this->requisitor);
+                        }
+                    }
                     break;
                 case 'PUT':
                     $info = json_decode(file_get_contents("php://input"));
@@ -146,6 +156,11 @@ class UsuarioControl extends CrudControl {
         }
     }
 
+    public function listarUsuariosForaProjeto($idProjeto){
+        $usuarios = $this->DAO->listarUsuariosForaProjeto($idProjeto);
+        return $usuarios;
+    }
+
     protected function atualizar($dados) {
         $this->requisitor = self::autenticar();
         $usuario = $this->listarPorId($this->requisitor['id']);
@@ -174,6 +189,7 @@ class UsuarioControl extends CrudControl {
             if ($usuario = $this->DAO->listarPorLogin($login)) {
                 if( password_verify($senha,$usuario->getSenha())){
                     $token = $this->criaToken($usuario);
+                    header("Set-Cookie: token={$token}; Domain=localhost; Path=/");
                     $this->DAO->setToken($token,$usuario->getId());
                     $decoded = JWT::decode($token,'SUPERSENHA123',array('HS256'));
                     $usuario = $this->DAO->listarPorId($decoded->data->id);

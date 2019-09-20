@@ -29,9 +29,15 @@ abstract class CrudControl{
         }
         if (!is_null($dados)) {
             if (is_array($dados)) {
+
                 $array = array();
                 foreach ($dados as $obj) {
-                    $array[] = $obj->toArray();
+                    if (!is_array($obj)) {
+                        $array[] = $obj->toArray();
+                    } else {
+                        $array = $dados;
+                        continue;
+                    }
                 }
                 $resposta["dados"] = $array;
             } elseif (is_bool($dados) || is_string($dados)) {
