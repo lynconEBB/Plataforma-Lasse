@@ -114,8 +114,9 @@ window.onload = function () {
                         <span class="tarefa-title">${tarefa.nome}</span>
                         <span class="tarefa-gasto">${tarefa.totalGasto}</span>
                     </div>
-                `;
-                    divColocar.insertAdjacentHTML("beforeend",templateTarefa)
+                    `;
+                    divColocar.insertAdjacentHTML("beforeend",templateTarefa);
+                    document.getElementById("tarefa"+tarefa.id).onclick = () => window.location.href = "/tarefa/"+tarefa.id;
                 });
             }
             let templateAviso = `
@@ -170,10 +171,7 @@ window.onload = function () {
                 });
             };
 
-
-
             /******Adicionar Funcionário*************/
-
             requisicao("GET","/api/users/naoProjeto/"+projeto.id,null,true,function (resposta) {
                 if (resposta.status === "sucesso") {
                     if (resposta.hasOwnProperty("dados")) {
@@ -182,22 +180,52 @@ window.onload = function () {
                         funcionarios.forEach(function (funcionario) {
                             select.insertAdjacentHTML("beforeend",`<option value="${funcionario.id}">${funcionario.login}</option>`)
                         });
-
                         document.getElementById("abreModalAdicionar").onclick = () => mostrarModal("#modalAdicionarFuncionario");
                         document.getElementById("fechaModalAdicionarFuncionario").onclick = () => fecharModal("#modalAdicionarFuncionario");
+
+                        document.getElementById("adicionarFuncionario").onclick = () => {
+                            let bodyAdicionar = {
+                                idProjeto: projeto.id,
+                                idUsuario: select.value
+                            };
+                            requisicao("POST","/api/projetos/adicionar",bodyAdicionar,true, function (resposta) {
+                                if (resposta.status === "sucesso") {
+                                    addMensagem("sucesso=Funcionario-adicionado!");
+                                } else {
+                                    exibirMensagem(resposta.mensagem,true);
+                                }
+                            });
+                        };
                     } else {
                         document.getElementById("abreModalAdicionar").onclick = () => exibirMensagem(resposta.mensagem,true);
                     }
-
                 } else {
                     fecharModal("#modalAdicionarFuncionario");
                     exibirMensagem(resposta.mensagem,true);
                 }
 
-
+                /******Alterar Projeto*************/
+                document.getElementById("botaoAlterar").onclick = (event) => {
+                    event.preventDefault();
+                    let bodyAlterar = {
+                        nome: document.getElementById("nome").value,
+                        dataInicio: document.getElementById("dtInicio").value,
+                        dataFinalizacao: document.getElementById("dtFinalizacao").value,
+                        centroCusto: document.getElementById("centroCusto").value,
+                        descricao: document.getElementById("descricao").textContent
+                    };
+                    requisicao("PUT","/api/projetos/"+projeto.id,bodyAlterar,true,function (resposta) {
+                        if (resposta.status == "sucesso") {
+                            addMensagem("sucesso=Projeto-alterado-com-sucesso!");
+                        } else {
+                            exibirMensagem(resposta.mensagem,true);
+                        }
+                    });
+                }
             });
         } else {
             exibirMensagem(resposta.mensagem,true);
+            console.log(resposta);
         }
     });
 };

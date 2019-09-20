@@ -226,6 +226,8 @@
 }
 .botao-padrao {
     margin-bottom: 20px;
+    text-align: center;
+    display: block;
 }
 #header-excluir {
     background: #e45d5a;
@@ -243,5 +245,11 @@
     display: block;
     margin: 30px auto;
 }
-
+#funcionario {
+    max-width: 300px;
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+    text-align-last:center;
+}
 

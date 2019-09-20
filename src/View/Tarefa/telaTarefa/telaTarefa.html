@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <link rel="stylesheet" href="/src/View/Tarefa/telaTarefa/styleTarefa.css">
+    <title>Tarefa</title>
+</head>
+<body>
+<div class="mensagem">
+    <div class="mensagem-texto">
+    </div>
+    <div class="botao-fechar-mensagem">
+        <i class="material-icons">close</i>
+    </div>
+</div>
+<nav class="sidebar">
+    <div class="container-itens">
+        <div class="sidebar-item" id="dashboards">
+            <i class="material-icons">dashboard</i>
+            <span class="sidebar-item-text">Dashboard</span>
+        </div>
+        <div class="sidebar-item" id="perfil">
+            <i class="material-icons">person</i>
+            <span class="sidebar-item-text">Perfil</span>
+        </div>
+        <div class="sidebar-item" id="projetos">
+            <i class="material-icons">work</i>
+            <span class="sidebar-item-text">Projetos</span>
+        </div>
+        <div class="sidebar-item" id="imprevistos">
+            <i class="material-icons">book</i>
+            <span class="sidebar-item-text">Imprevistos</span>
+        </div>
+        <div class="sidebar-item" id="formularios">
+            <i class="material-icons">assignment</i>
+            <span class="sidebar-item-text">Formulários</span>
+        </div>
+        <div class="sidebar-item" id="graficos">
+            <i class="material-icons">assessment</i>
+            <span class="sidebar-item-text">Gráficos</span>
+        </div>
+    </div>
+    <div class="container-sair">
+        <i class="material-icons">cancel</i>
+        <span class="btn-sair">Sair</span>
+    </div>
+</nav>
+<header class="main-header">
+    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo LPM">
+    <div class="user-info">
+        <span class="user-name"></span>
+        <div class="container-user-img">
+            <img src="/assets/files/default/perfil.png" class="user-img" alt="foto-perfil">
+        </div>
+    </div>
+</header>
+<main class="main-content">
+    <div class="container">
+        <div id="tarefa-detalhes">
+            <form id="detalhe-conteudo">
+                <input id="nome" type="text">
+                <textarea id="descricao"></textarea>
+                <hr>
+                <input class="detalhe-input" type="text" id="dtInicio">
+                <input class="detalhe-input" type="text" id="dtConclusao">
+                <input class="detalhe-input" type="text" id="totalGasto">
+                <input class="detalhe-input" type="text" id="estado">
+            </form>
+            <nav id="detalhe-itens">
+                <span class="item" id="abreViagens">Viagens</span>
+                <span class="item" id="abreCompras">Compras</span>
+                <span class="item" id="abreAtividades">Atividades</span>
+            </nav>
+        </div>
+        <div class="itens" id="viagens">
+
+        </div>
+        <div class="itens" id="compras">
+
+        </div>
+        <div class="itens" id="atividades">
+
+        </div>
+    </div>
+</main>
+<script src="/src/View/Default/js/requisicoes.js"></script>
+<script src="/src/View/Default/js/mensagem.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Default/js/modal.js"></script>
+<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Tarefa/telaTarefa/funcoesTarefa.js"></script>
+</body>
+</html>

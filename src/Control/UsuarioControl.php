@@ -228,9 +228,9 @@ class UsuarioControl extends CrudControl {
                     throw new Exception("Usuário deslogado");
                 }
             } else
-                throw new SignatureInvalidException();
+                throw new Exception("Você precisa estar logado");
         } else
-            throw new SignatureInvalidException();
+            throw new Exception("Você precisa estar logado");
     }
 
     private function criaToken(UsuarioModel $usuario) {

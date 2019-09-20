@@ -40,12 +40,9 @@ class Router{
     {
         if ($this->url[0] == "" && count($this->url) == 1) {
             require 'src/View/Usuario/telaLogin/telaLogin.html';
-        }elseif ($this->url[0] == "testeApi" && count($this->url) == 1) {
-            require 'src/View/testeApi/test.html';
-        }elseif ($this->url[0] == "testeFile" && count($this->url) == 1) {
-            require 'src/View/Formulario/formulario.html';
+        }
         // /dashboard/user/{idUsuario}
-        }elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
+        elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
             require 'src/View/Usuario/telaDashboard/telaDashboard.html';
         }
         // /erro/permissao
@@ -63,6 +60,10 @@ class Router{
         // /projeto/{idUsuario}
         elseif ($this->url[0] == "projeto" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Projeto/telaProjeto/telaProjeto.html";
+        }
+        // /tarefa/{idTarefa}
+        elseif ($this->url[0] == "tarefa" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
+            require "src/View/Tarefa/telaTarefa/telaTarefa.html";
         }
         else{
             require "src/View/errorPages/erro404.html";
