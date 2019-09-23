@@ -4,8 +4,6 @@
 }
 #tarefa-detalhes {
     width: 100%;
-    max-width: 700px;
-    height: 800px;
     background-color: #275a66;
 }
 #detalhe-conteudo{
@@ -21,21 +19,20 @@
     text-align: center;
     color: white;
 }
-
-
-#detalhe-itens {
-    box-sizing: border-box;
+#descricao {
+    background: transparent;
+    resize: none;
+    border: none;
     width: 100%;
-    background-color: #06404d;
-    border-left: black 1px solid;
-    display: flex;
-    justify-content: space-around;
-}
-.item {
-    border-right: #052732 5px solid;
-    cursor: pointer;
-    padding: 20px 0;
+    text-align-last: center;
     text-align: center;
-    color: white;
+}
+.detalhe-input {
+    background: transparent;
+    border: none;
+}
+
+#nome:focus, #descricao:focus, .detalhe-input:focus {
+    outline: none;
 }
 

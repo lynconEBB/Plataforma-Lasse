@@ -58,7 +58,6 @@ class TarefaControl extends CrudControl {
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $tarefa = $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Tarefa atualizada com sucesso",$tarefa,$this->requisitor);
-
                     }
                     break;
                 case 'DELETE':

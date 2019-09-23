@@ -98,7 +98,7 @@ botaoCadastrar.onclick = function(event) {
         email: document.getElementById("email").value,
         atuacao: document.getElementById("atuacao").value,
         formacao: document.getElementById("formacao").value,
-        valorHora: document.getElementById("valorHora").value,
+        valorHora: document.getElementById("valorHora").value
     };
     if (checkAdmin.checked === true) {
       request.senhaAdmin = document.getElementById("senhaAdmin").value

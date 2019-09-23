@@ -69,26 +69,25 @@
             <form id="detalhe-conteudo">
                 <input id="nome" type="text">
                 <textarea id="descricao"></textarea>
-                <hr>
-                <input class="detalhe-input" type="text" id="dtInicio">
-                <input class="detalhe-input" type="text" id="dtConclusao">
-                <input class="detalhe-input" type="text" id="totalGasto">
-                <input class="detalhe-input" type="text" id="estado">
+                <div class="tarefa-group">
+                    <label class="tarefa-label" for="dtInicio">Data de Início</label>
+                    <input class="detalhe-input" type="text" id="dtInicio">
+                </div>
+                <div class="tarefa-group">
+                    <label class="tarefa-label" for="dtConclusao">Data de Conlusão</label>
+                    <input class="detalhe-input" type="text" id="dtConclusao">
+                </div>
+                <div class="tarefa-group">
+                    <label class="tarefa-label" for="estado">Estado</label>
+                    <input class="detalhe-input" type="text" id="estado">
+                </div>
+                <div class="tarefa-group">
+                    <label class="tarefa-label" for="totalGasto">Total Gasto</label>
+                    <input class="detalhe-input" type="text" id="totalGasto">
+                </div>
+                <button id="botaoAlterarTarefa">Alterar</button>
+                <button id="botaoExcluirTarefa">Excluir</button>
             </form>
-            <nav id="detalhe-itens">
-                <span class="item" id="abreViagens">Viagens</span>
-                <span class="item" id="abreCompras">Compras</span>
-                <span class="item" id="abreAtividades">Atividades</span>
-            </nav>
-        </div>
-        <div class="itens" id="viagens">
-
-        </div>
-        <div class="itens" id="compras">
-
-        </div>
-        <div class="itens" id="atividades">
-
         </div>
     </div>
 </main>
