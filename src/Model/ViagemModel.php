@@ -139,7 +139,8 @@ class ViagemModel
         return $this->totalGasto;
     }
 
-    public function setTotalGasto($totalGasto){
+    public function setTotalGasto($totalGasto)
+    {
         if(is_null($this->gastos) && is_null($totalGasto)){
             $this->totalGasto = 0.00;
         }elseif (is_array($this->gastos) && is_null($totalGasto)){

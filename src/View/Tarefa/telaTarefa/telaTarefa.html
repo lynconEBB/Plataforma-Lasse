@@ -67,30 +67,44 @@
     <div class="container">
         <div id="tarefa-detalhes">
             <form id="detalhe-conteudo">
-                <input id="nome" type="text">
-                <textarea id="descricao"></textarea>
-                <div class="tarefa-group">
-                    <label class="tarefa-label" for="dtInicio">Data de Início</label>
-                    <input class="detalhe-input" type="text" id="dtInicio">
-                </div>
-                <div class="tarefa-group">
-                    <label class="tarefa-label" for="dtConclusao">Data de Conlusão</label>
-                    <input class="detalhe-input" type="text" id="dtConclusao">
-                </div>
-                <div class="tarefa-group">
-                    <label class="tarefa-label" for="estado">Estado</label>
-                    <input class="detalhe-input" type="text" id="estado">
-                </div>
-                <div class="tarefa-group">
-                    <label class="tarefa-label" for="totalGasto">Total Gasto</label>
-                    <input class="detalhe-input" type="text" id="totalGasto">
-                </div>
-                <button id="botaoAlterarTarefa">Alterar</button>
-                <button id="botaoExcluirTarefa">Excluir</button>
+
             </form>
         </div>
+        <div id="itens-tarefa">
+            <h2><i class="material-icons">airplanemode_active</i>Viagens</h2>
+            <button class="botao-adicionar">Novo</button>
+            <hr>
+            <div id="viagens">
+                <div class="aviso" id="aviso-viagem">
+                    <img src="/assets/images/not-found.svg" id="semItens" alt="icone sem itens">
+                    <h4>Nenhuma Viagem encontrada!</h4>
+                    <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                </div>
+
+            </div>
+            <div id="viagens-botoes">
+                <i class="material-icons" id="esquerda">keyboard_arrow_left</i>
+                <i class="material-icons" id="direita">keyboard_arrow_right</i>
+            </div>
+        </div>
+
     </div>
 </main>
+<section class="modal-background">
+</section>
+<div class="modal" id="modalExcluirTarefa">
+    <div class="modal-header">
+        <div class="modal-header-title">
+
+        </div>
+        <div class="modal-header-close" >
+            <i class="material-icons" id="fechaModalExcluirTarefa">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+
+    </div>
+</div>
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>

@@ -35,6 +35,7 @@ function requisicao(metodo,url,body,autorizacao,response) {
     }
 
     xhr.onload = function() {
+        console.log(xhr.response);
         response(JSON.parse(xhr.response));
     };
 

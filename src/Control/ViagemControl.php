@@ -100,7 +100,7 @@ class ViagemControl extends CrudControl {
             //Cadastra viagem com total = 0
             $viagem = new ViagemModel($usuario,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,
                 $dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,
-                $dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->meta,$dados->atividade,$dados->tipoPassagem,$dados->tipo,
+                $dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,
                 null,null,null);
             $this->DAO->cadastrar($viagem,$dados->idTarefa);
 
@@ -142,7 +142,7 @@ class ViagemControl extends CrudControl {
             $funcDAO = new UsuarioControl(null);
             $viajante = $funcDAO->listarPorId($this->requisitor['id']);
 
-            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->meta,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);
+            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);
             $this->DAO->atualizar($viagem);
         } else {
             throw new Exception("Você não possui permissão para atualizar esta viagem");

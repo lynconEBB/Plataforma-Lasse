@@ -44,10 +44,17 @@ class TarefaControl extends CrudControl {
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $idProjeto = $this->descobrirIdProjeto($this->url[2]);
                         $projetoControl = new ProjetoControl(null);
-                        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id']) || $this->requisitor['admin'] ==  "1") {
+                        if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
+                            $this->requisitor['participa'] = true;
                             $tarefa = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
-                        } else {
+                        }
+                        else if ($this->requisitor['admin'] ==  "1") {
+                            $this->requisitor['participa'] = false;
+                            $tarefa = $this->listarPorId($this->url[2]);
+                            $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
+                        }
+                        else {
                             throw new Exception("Você não tem permissão para acessar esta tarefa");
                         }
                     }
