@@ -59,7 +59,7 @@
     left: -10px;
 }
 
-#botaoExcluirTarefa {
+#botaoAbreExcluirTarefa {
     top: 8px;
     right: -10px;
 }
@@ -168,5 +168,22 @@ h2 {
 .aviso h4 {
     margin: 5px 0;
     font-weight: normal;
+}
+#modalExcluirTarefa .modal-header{
+    background: #e45d5a;
+}
+#excluirTarefa {
+    position: relative;
+    display: block;
+    margin: 40px auto;
+}
+.texto-excluir {
+    color: white;
+    display: block;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.info-viagem {
+    pointer-events: none;
 }
 

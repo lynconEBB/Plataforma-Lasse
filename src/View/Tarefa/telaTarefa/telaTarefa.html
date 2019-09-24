@@ -71,8 +71,8 @@
             </form>
         </div>
         <div id="itens-tarefa">
-            <h2><i class="material-icons">airplanemode_active</i>Viagens</h2>
-            <button class="botao-adicionar">Novo</button>
+            <h2 id="tabViagens"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+
             <hr>
             <div id="viagens">
                 <div class="aviso" id="aviso-viagem">
@@ -80,11 +80,32 @@
                     <h4>Nenhuma Viagem encontrada!</h4>
                     <h4>Clique em novo para cadastrar uma nova viagem</h4>
                 </div>
-
             </div>
             <div id="viagens-botoes">
                 <i class="material-icons" id="esquerda">keyboard_arrow_left</i>
                 <i class="material-icons" id="direita">keyboard_arrow_right</i>
+            </div>
+            <div id="compras">
+                <div class="aviso" id="aviso-compra">
+                    <img src="/assets/images/not-found.svg" id="semItens" alt="icone sem itens">
+                    <h4>Nenhuma Viagem encontrada!</h4>
+                    <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                </div>
+            </div>
+            <div id="compras-botoes">
+                <i class="material-icons" id="esquerda-compra">keyboard_arrow_left</i>
+                <i class="material-icons" id="direita-compra">keyboard_arrow_right</i>
+            </div>
+            <div id="atividades">
+                <div class="aviso" id="aviso-atividade">
+                    <img src="/assets/images/not-found.svg" id="semItens" alt="icone sem itens">
+                    <h4>Nenhuma Viagem encontrada!</h4>
+                    <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                </div>
+            </div>
+            <div id="atividades-botoes">
+                <i class="material-icons" id="esquerda-atividade">keyboard_arrow_left</i>
+                <i class="material-icons" id="direita-atividade">keyboard_arrow_right</i>
             </div>
         </div>
 
@@ -95,14 +116,80 @@
 <div class="modal" id="modalExcluirTarefa">
     <div class="modal-header">
         <div class="modal-header-title">
-
+            Excluir Tarefa
         </div>
         <div class="modal-header-close" >
             <i class="material-icons" id="fechaModalExcluirTarefa">close</i>
         </div>
     </div>
     <div class="modal-conteudo">
+        <span class="texto-excluir">Deseja mesmo excluir esta tarefa?</span>
+        <span class="texto-excluir">Todos os dados presentes nesta tarefa serão excluidos <b>para sempre</b></span>
+        <button class="botao-excluir" id="excluirTarefa">Excluir</button>
+    </div>
+</div>
 
+<div class="modal" id="modalCadastrarViagem">
+    <div class="modal-header">
+        <div class="modal-header-title">
+            Cadastrar Viagem
+        </div>
+        <div class="modal-header-close" >
+            <i class="material-icons" id="fechaModalCadastrarViagem">close</i>
+        </div>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="info-viagem">
+                <h3>Dados:</h3>
+                <hr>
+                <div class="form-group">
+                    <label class="form-label" for="origem">Origem</label>
+                    <input class="form-input" id="origem" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="destino">Destino</label>
+                    <input class="form-input" id="destino" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dataIda">Data de Ida</label>
+                    <input class="form-input" id="dataIda" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dataVolta">Data de Volta</label>
+                    <input class="form-input" id="dataVolta" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="tipo">Tipo de Viagem</label>
+                    <select id="tipo" class="form-select">
+                        <option value="" disabled selected></option>
+                        <option value="Viagem a trabalho">Viagem a trabalho</option>
+                        <option value="Evento/Congresso">Evento/Congresso</option>
+                        <option value="Viagem treinamento/aprimoramento">Viagem treinamento/aprimoramento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fonte">Fonte de Recurso</label>
+                    <input class="form-input" id="fonte" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="atividade">Atividade</label>
+                    <input class="form-input" id="atividade" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="justificativa">Justificativa</label>
+                    <input class="form-input" id="justificativa" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="observacoes">Observações</label>
+                    <input class="form-input" id="observacoes" type="text">
+                </div>
+                <button class="botao-padrao" id="irPaginaHospVeiculo">Próximo ></button>
+            </div>
+            <div class="info-hospVeiculo">
+
+            </div>
+        </form>
     </div>
 </div>
 <script src="/src/View/Default/js/requisicoes.js"></script>

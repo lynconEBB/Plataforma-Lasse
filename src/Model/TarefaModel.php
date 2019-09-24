@@ -86,7 +86,7 @@ class TarefaModel
                 $total += $compra->getTotalGasto();
             }
         }
-        if (is_array($this->compras)){
+        if (is_array($this->viagens)){
             foreach ($this->viagens as $viagem){
                 $total += $viagem->getTotalGasto();
             }
@@ -100,7 +100,7 @@ class TarefaModel
         return $this->totalGasto;
     }
 
-    public function setTotalGasto($totalGasto): void
+    public function setTotalGasto($totalGasto)
     {
         if(is_null($totalGasto)){
             $this->calculaTotal();

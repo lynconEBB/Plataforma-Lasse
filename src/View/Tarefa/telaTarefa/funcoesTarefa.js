@@ -17,6 +17,48 @@ window.onload = function () {
             } else {
                 mostrarTarefaNaoParticipando(tarefa);
             }
+
+            /****Alterar Tarefa*********/
+            if (requisitor.participa) {
+                document.getElementById("botaoAlterarTarefa").onclick =  function (event) {
+                    event.preventDefault();
+                    let bodyTarefa = {
+                        nome: document.getElementById("nome").value,
+                        descricao: document.getElementById("descricao").value,
+                        estado: document.getElementById("estado").value,
+                        dataInicio: document.getElementById("dtInicio").value,
+                        dataConclusao: document.getElementById("dtConclusao").value,
+                    };
+                    requisicao("PUT","/api/tarefas/"+tarefa.id,bodyTarefa,true,function (resposta) {
+                        if (resposta.status == "sucesso") {
+                            addMensagem("sucesso=Tarefa-alterada-com-sucesso!");
+                        } else {
+                            exibirMensagem(resposta.mensagem,true);
+                        }
+                    });
+                }
+            }
+
+            /***** Excluir tarefa**********/
+            if (requisitor.participa) {
+                document.getElementById("botaoAbreExcluirTarefa").onclick = () => mostrarModal("#modalExcluirTarefa");
+                document.getElementById("fechaModalExcluirTarefa").onclick = () => fecharModal("#modalExcluirTarefa");
+
+                let botaoExcluirTarefa = document.getElementById("excluirTarefa");
+                botaoExcluirTarefa.onclick = function () {
+                    requisicao("DELETE","/api/tarefas/"+tarefa.id,null,true,function (resposta) {
+                        if (resposta.status == "sucesso") {
+                            fecharModal("#modalExcluirTarefa");
+                            window.location.href = "/projetos/user/"+requisitor.id+"?sucesso=Tarefa-excluida-com-sucesso";
+                        } else {
+                            fecharModal("#modalExcluirTarefa");
+                            exibirMensagem(resposta.mensagem,true);
+                        }
+                    });
+                };
+            }
+
+
             /*****Coloca Viagens************/
             if (tarefa.viagens.length > 0 ){
                 tarefa.viagens.forEach(function (viagem) {
@@ -59,33 +101,15 @@ window.onload = function () {
                 }
             });
 
-
-            /****Alterar Tarefa*********/
+            /*****Cadastrar Viagem*********/
             if (requisitor.participa) {
-                document.getElementById("botaoAlterarTarefa").onclick =  function (event) {
-                    event.preventDefault();
-                    let bodyTarefa = {
-                        nome: document.getElementById("nome").value,
-                        descricao: document.getElementById("descricao").value,
-                        estado: document.getElementById("estado").value,
-                        dataInicio: document.getElementById("dtInicio").value,
-                        dataConclusao: document.getElementById("dtConclusao").value,
-                    };
-                    requisicao("PUT","/api/tarefas/"+tarefa.id,bodyTarefa,true,function (resposta) {
-                        if (resposta.status == "sucesso") {
-                            addMensagem("sucesso=Tarefa-alterada-com-sucesso!");
-                        } else {
-                            exibirMensagem(resposta.mensagem,true);
-                        }
-                    });
-                }
+                document.getElementById("tabViagens").insertAdjacentHTML("afterend","<button class='botao-adicionar' id='abreModalCadastrarViagem'>Novo</button>");
+                document.getElementById('abreModalCadastrarViagem').onclick = () => mostrarModal("#modalCadastrarViagem");
+                document.getElementById("fechaModalCadastrarViagem").onclick = () => fecharModal("#modalCadastrarViagem");
             }
 
-            /***** Excluir tarefa**********/
-
-
         } else {
-
+            exibirMensagem(resposta.mensagem,true);
         }
     });
 };
@@ -116,7 +140,7 @@ function mostrarTarefaParticipando(tarefa) {
                             <label class="detalhe-input" id="totalGasto">${tarefa.totalGasto}</label>
                         </div>
                         <button id="botaoAlterarTarefa" class="botao-alterar">Alterar</button>
-                        <button id="botaoExcluirTarefa" class="botao-excluir">Excluir</button>`;
+                        <button id="botaoAbreExcluirTarefa" type="button" class="botao-excluir">Excluir</button>`;
     containerTarefa.insertAdjacentHTML("afterbegin",templateTarefa);
     document.getElementById("estado").value = tarefa.estado;
 }

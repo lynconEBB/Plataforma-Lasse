@@ -26,7 +26,7 @@ class ViagemControl extends CrudControl {
                     if (count($this->url) == 2) {
                         if ($this->verificaDados($info,'cadastro')) {
                             $this->cadastrar($info);
-                            $this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
+                            //$this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
                         } else {
                             throw new Exception("Requisição com parâmetros faltando ou mal estruturados");
                         }
@@ -112,6 +112,7 @@ class ViagemControl extends CrudControl {
             foreach ($dados->gastos as $gasto) {
                 $gastoControl->cadastrar($gasto,$idViagem);
             }
+
         } else {
             throw new Exception("Você não possui permissão para cadastrar viagens nessa tarefa");
         }
@@ -199,8 +200,8 @@ class ViagemControl extends CrudControl {
             if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
                 !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
                 !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->gastos) ||
-                !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos) || !isset($dados->tipo) || !isset($dados->tipoPassagem) ||
-                !isset($dados->meta) || !isset($dados->fonte) || !isset($dados->atividade)) {
+                !isset($dados->veiculo) || !isset($dados->idTarefa) || !is_array($dados->gastos) || !isset($dados->tipo) || !isset($dados->tipoPassagem)
+                || !isset($dados->fonte) || !isset($dados->atividade)) {
                 return false;
             } else {
                 foreach ($dados->gastos as $gasto) {
@@ -214,7 +215,7 @@ class ViagemControl extends CrudControl {
             if (!isset($dados->dataIda) || !isset($dados->dataVolta) || !isset($dados->origem) || !isset($dados->destino) ||
                 !isset($dados->passagem) || !isset($dados->justificativa) || !isset($dados->observacoes) || !isset($dados->dtEntradaHosp) ||
                 !isset($dados->dtSaidaHosp) || !isset($dados->horaEntradaHosp) || !isset($dados->horaSaidaHosp) || !isset($dados->veiculo) ||
-                !isset($dados->tipo) || !isset($dados->tipoPassagem) || !isset($dados->meta) || !isset($dados->fonte) || !isset($dados->atividade)){
+                !isset($dados->tipo) || !isset($dados->tipoPassagem) || !isset($dados->fonte) || !isset($dados->atividade)){
                 return false;
             }
         }
