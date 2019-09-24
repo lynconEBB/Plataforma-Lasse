@@ -22,8 +22,8 @@
     opacity: 0;
     pointer-events: none;
     top: -1000px;
-    position: fixed;
-    margin: 0 auto;
+    position: absolute;
+    margin: 40px auto;
     width: 95%;
     max-width: 1000px;
     background-color: #06404d;

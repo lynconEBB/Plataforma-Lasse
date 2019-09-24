@@ -183,7 +183,40 @@ h2 {
     font-size: 1.5rem;
     text-align: center;
 }
-.info-viagem {
+.form-padrao {
+    box-sizing: border-box;
+    padding: 20px;
+}
+.form-group {
+    max-width: 600px;
+    width: 100%;
+}
+.form-padrao h3, .form-padrao hr {
+    display: block;
+    max-width: 650px;
+}
+.botao-padrao {
+    display: block;
+    margin: 0 auto;
+}
+.label-select {
     pointer-events: none;
 }
+#container-veiculo, .container-condutor {
+    display: none;
+}
+#abreVeiculo, #fechaVeiculo, #abreCondutor, #fechaCondutor {
+    margin: 10px auto;
+    display: block;
+}
+.info {
+    position: absolute;
+    opacity: 0;
+}
 
+.info.ativado {
+    opacity: 1;
+    position: relative;
+    bottom: auto;
+    transition: all ease-in-out 300ms;
+}
