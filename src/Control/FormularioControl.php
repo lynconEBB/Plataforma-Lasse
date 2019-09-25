@@ -30,7 +30,7 @@ class FormularioControl extends CrudControl
     {
         $this->DAO = new FormularioDao();
         $this->requisitor = UsuarioControl::autenticar();
-        $this->pastaUsuario = $_SERVER['DOCUMENT_ROOT']."/assets/files/".$this->requisitor['id'];
+        $this->pastaUsuario = "assets/files/".$this->requisitor['id'];
         parent::__construct($url);
     }
 
@@ -53,8 +53,15 @@ class FormularioControl extends CrudControl
                 }
                 // /api/formularios/requisicaoViagem/{idViagem}
                 elseif (count($this->url) == 4 && $this->url[2] == "requisicaoViagem" && $this->url[3] == (int)$this->url[3]) {
-                    $this->gerarRequisicaoViagem($this->url[3]);
-                    $this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",null,$this->requisitor);
+                    $viagemControl = new ViagemControl(null);
+                    $viagem = $viagemControl->listarPorId($this->url[3]);
+                    if ($this->requisitor['id'] == $viagem->getViajante()->getId()) {
+                        $formulario = $this->gerarRequisicaoViagem($this->url[3]);
+                        $this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",$formulario,$this->requisitor);
+                    } else {
+                        throw new Exception("Você não possui permissão para gerar o formulario desta viagem");
+                    }
+
                 }
                 break;
             case 'DELETE':
@@ -170,7 +177,7 @@ class FormularioControl extends CrudControl
         $usuarioControl = new UsuarioControl(null);
         $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
 
-        $caminhoOdtRequisicao = $_SERVER['DOCUMENT_ROOT']."/assets/files/default/requisicaoViagem.odt";
+        $caminhoOdtRequisicao = "assets/files/default/requisicaoViagem.odt";
         $formulario = new FormularioModel("requisicaoViagem".$viagem->getId(),$usuario);
 
         if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
@@ -187,6 +194,8 @@ class FormularioControl extends CrudControl
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
                     $this->converterParaHTML($formulario);
                     $this->DAO->cadastrar($formulario,$idViagem,null);
+                    $formulario->setId($this->DAO->pdo->lastInsertId());
+                    return $formulario;
                 }
                 else {
                     if (is_dir($formulario->getPastaFormulario())) {

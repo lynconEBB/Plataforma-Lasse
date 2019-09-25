@@ -13,7 +13,7 @@
 .botao-padrao:hover {
     box-shadow: none;
 }
-.botao-padrao:active, .botao-padrao:focus {
+.botao-padrao:active, .botao-padrao:focus{
     outline: none;
 }
 
@@ -49,6 +49,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     position: absolute;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
 }
 
 .botao-alterar {
@@ -59,8 +60,19 @@
     border: none;
     cursor: pointer;
     position: absolute;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
 }
-.botao-adicionar:focus, .botao-adicionar:active {
+.botao-especial {
+    color: #06404d;
+    background-color: #c97bff;
+    border: none;
+    font-size: 1.2rem;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.botao-adicionar:focus, .botao-adicionar:active, .botao-especial:active {
     transform: scale(0.98);
     outline: none;
 }

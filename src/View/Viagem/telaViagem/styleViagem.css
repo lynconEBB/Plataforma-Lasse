@@ -1,0 +1,115 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container-viagem {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #275a66;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    padding-bottom: 40px;
+    z-index: 2;
+}
+.container-botoes {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-around;
+}
+h2 {
+    width: 100%;
+    background-color: #06404d;
+    color: white;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-bottom: #06232e solid 5px;
+    margin: 0 0 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+.container-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(0,400px));
+    column-gap: 20px;
+    justify-content: space-around;
+}
+.viagem-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.viagem-label {
+    font-size: 1.2rem;
+    color: white;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.viagem-span {
+    font-size: 1.2rem;
+    color: white;
+    display: none;
+    text-align: center;
+}
+.viagem-input {
+    text-align: center;
+    text-align-last: center;
+    display: block;
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+.viagem-input:focus, .viagem-textarea:focus, .viagem-select:focus {
+    outline: none;
+}
+.viagem-textarea {
+    text-align: center;
+    text-align-last: center;
+    display: block;
+    width: 100%;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1.2rem;
+    color: white;
+    resize: none;
+    background-color: transparent;
+    border: none;
+}
+.viagem-select {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+    text-align-last: center;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+}
+.viagem-select option {
+    font-size: 1.2rem;
+    background-color: #06404d;
+    color: white;
+}
+h4 {
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+}
+#container-gastos {
+    color: white;
+    text-align: center;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto 200px;
+}
+hr.divisoria {
+    margin: 0 20px;
+}
+#abreModalExcluir {
+    position: relative;
+}
+#alterar {
+    position: relative;
+}

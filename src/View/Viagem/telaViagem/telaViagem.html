@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <link rel="stylesheet" href="/src/View/Viagem/telaViagem/styleViagem.css">
+    <title>LPM - Viagem</title>
+</head>
+<body>
+<div class="mensagem">
+    <div class="mensagem-texto">
+    </div>
+    <div class="botao-fechar-mensagem">
+        <i class="material-icons">close</i>
+    </div>
+</div>
+<nav class="sidebar">
+    <div class="container-itens">
+        <div class="sidebar-item" id="dashboards">
+            <i class="material-icons">dashboard</i>
+            <span class="sidebar-item-text">Dashboard</span>
+        </div>
+        <div class="sidebar-item" id="perfil">
+            <i class="material-icons">person</i>
+            <span class="sidebar-item-text">Perfil</span>
+        </div>
+        <div class="sidebar-item" id="projetos">
+            <i class="material-icons">work</i>
+            <span class="sidebar-item-text">Projetos</span>
+        </div>
+        <div class="sidebar-item" id="imprevistos">
+            <i class="material-icons">book</i>
+            <span class="sidebar-item-text">Imprevistos</span>
+        </div>
+        <div class="sidebar-item" id="formularios">
+            <i class="material-icons">assignment</i>
+            <span class="sidebar-item-text">Formulários</span>
+        </div>
+        <div class="sidebar-item" id="graficos">
+            <i class="material-icons">assessment</i>
+            <span class="sidebar-item-text">Gráficos</span>
+        </div>
+    </div>
+    <div class="container-sair">
+        <i class="material-icons">cancel</i>
+        <span class="btn-sair">Sair</span>
+    </div>
+</nav>
+<header class="main-header">
+    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo LPM">
+    <div class="user-info">
+        <span class="user-name"></span>
+        <div class="container-user-img">
+            <img src="/assets/files/default/perfil.png" class="user-img" alt="Perfil Usuário">
+        </div>
+    </div>
+</header>
+<main class="main-content">
+    <div class="container-botoes">
+        <button class="botao-alterar" id="alterar"><i class="material-icons">edit</i></button>
+        <button class="botao-especial" id="gerarFormulario"><i class="material-icons">assignment</i></button>
+        <button class="botao-excluir" id="abreModalExcluir"><i class="material-icons">delete</i></button>
+    </div>
+    <form class="container-viagem">
+        <h2 class="dados-title">Dados:</h2>
+        <div class="viagem-group">
+            <label for="tipo" class="viagem-label">Tipo</label>
+            <select id="tipo" class="viagem-select">
+                <option value="Viagem a trabalho">Viagem a trabalho</option>
+                <option value="Evento/Congresso">Evento/Congresso</option>
+                <option value="Viagem treinamento/aprimoramento">Viagem treinamento/aprimoramento</option>
+            </select>
+            <span class="viagem-span" id="span-tipo"></span>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="origem" class="viagem-label">Origem: </label>
+                <input class="viagem-input" id="origem" type="text">
+                <span class="viagem-span" id="span-origem"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="destino" class="viagem-label">Destino: </label>
+                <input class="viagem-input" id="destino" type="text">
+                <span class="viagem-span" id="span-destino"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="dataIda" class="viagem-label">Data Ida</label>
+                <input class="viagem-input" id="dataIda" type="text">
+                <span class="viagem-span" id="span-dataIda"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="dataVolta" class="viagem-label">Data Volta</label>
+                <input class="viagem-input" id="dataVolta" type="text">
+                <span class="viagem-span" id="span-dataVolta"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="fonte" class="viagem-label">Fonte de Recurso</label>
+                <input class="viagem-input" id="fonte" type="text">
+                <span class="viagem-span" id="span-fonte"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="atividade" class="viagem-label">Atividade</label>
+                <input class="viagem-input" id="atividade" type="text">
+                <span class="viagem-span" id="span-atividade"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="justificativa" class="viagem-label">Justificativa</label>
+                <textarea class="viagem-textarea" id="justificativa" rows="5"></textarea>
+                <span class="viagem-span" id="span-justificativa"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="observacoes" class="viagem-label">Observações</label>
+                <textarea class="viagem-textarea" id="observacoes" rows="5"></textarea>
+                <span class="viagem-span" id="span-observacoes"></span>
+            </div>
+        </div>
+
+        <h2>Transporte: </h2>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="passagem" class="viagem-label">Passagem</label>
+                <input class="viagem-input"  id="passagem" type="text">
+                <span class="viagem-span" id="span-passagem"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="tipoPassagem" class="viagem-label">Tipo de Passagem</label>
+                <select id="tipoPassagem" class="viagem-select">
+                    <option value="Aérea nacional (com franquia de bagagem)">Aérea nacional (com franquia de bagagem)</option>
+                    <option value="Aérea nacional (sem franquia de bagagem)">Aérea nacional (sem franquia de bagagem)</option>
+                    <option value="Aérea internacional">Aérea internacional</option>
+                    <option value="Terrestre nacional">Terrestre nacional</option>
+                    <option value="Terrestre internacional">Terrestre internacional</option>
+                </select>
+                <span class="viagem-span" id="span-tipoPassagem"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="veiculo" class="viagem-label">Veículo</label>
+                <input class="viagem-input"  id="veiculo" type="text">
+                <span class="viagem-span" id="span-veiculo"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="tipoVeiculo" class="viagem-label">Tipo de Veículo</label>
+                <select id="tipoVeiculo" class="viagem-select">
+                    <option value="Veículo locado">Veículo locado</option>
+                    <option value="Transporte com parceiros/terceiros">Transporte com parceiros/terceiros</option>
+                    <option value="Veículo Fundação PTI-BR">Veículo Fundação PTI-BR</option>
+                </select>
+                <span class="viagem-span" id="span-tipoVeiculo"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="dtRetirada" class="viagem-label">Data de Retirada</label>
+                <input class="viagem-input" id="dtRetirada" type="text">
+                <span class="viagem-span" id="span-dtRetirada"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="dtDevolucao" class="viagem-label">Data de Devolução</label>
+                <input class="viagem-input" id="dtDevolucao" type="text">
+                <span class="viagem-span" id="span-dtDevolucao"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="horaRetirada" class="viagem-label">Hora de Retirada</label>
+                <input class="viagem-input" id="horaRetirada" type="text">
+                <span class="viagem-span" id="span-horaRetirada"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="horaDevolucao" class="viagem-label">Hora de Devolução</label>
+                <input class="viagem-input" id="horaDevolucao" type="text">
+                <span class="viagem-span" id="span-horaDevolucao"></span>
+            </div>
+        </div>
+        <div class="viagem-group">
+            <label for="condutor" class="viagem-label">Nome do Condutor</label>
+            <input class="viagem-input" id="condutor" type="text">
+            <span class="viagem-span" id="span-condutor"></span>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="cnh" class="viagem-label">CNH do Condutor</label>
+                <input class="viagem-input" id="cnh" type="text">
+                <span class="viagem-span" id="span-cnh"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="validadeCNH" class="viagem-label">Validade CNH</label>
+                <input class="viagem-input" id="validadeCNH" type="text">
+                <span class="viagem-span" id="span-validadeCNH"></span>
+            </div>
+        </div>
+        <h2>Hospedagem: </h2>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="dtEntradaHosp" class="viagem-label">Data de Entrada</label>
+                <input class="viagem-input" id="dtEntradaHosp" type="text">
+                <span class="viagem-span" id="span-dtEntradaHosp"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="dtSaidaHosp" class="viagem-label">Data de Saída</label>
+                <input class="viagem-input" id="dtSaidaHosp" type="text">
+                <span class="viagem-span" id="span-dtSaidaHosp"></span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="viagem-group">
+                <label for="horaEntradaHosp" class="viagem-label">Hora de Entrada</label>
+                <input class="viagem-input" id="horaEntradaHosp" type="text">
+                <span class="viagem-span" id="span-horaEntradaHosp"></span>
+            </div>
+            <div class="viagem-group">
+                <label for="horaSaidaHosp" class="viagem-label">Hora de Saída</label>
+                <input class="viagem-input" id="horaSaidaHosp" type="text">
+                <span class="viagem-span" id="span-horaSaidaHosp"></span>
+            </div>
+        </div>
+        <h2>Gastos: <button class="botao-adicionar">Novo</button></h2>
+        <div id="container-gastos">
+            <h4>Gasto</h4>
+            <h4>Valor</h4>
+        </div>
+        <hr class="divisoria">
+        <input class="viagem-input" type="text" id="totalGasto">
+        <span class="viagem-span" id="span-totalGasto"></span>
+    </form>
+</main>
+<script src="/src/View/Default/js/requisicoes.js"></script>
+<script src="/src/View/Default/js/mensagem.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Default/js/modal.js"></script>
+<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Viagem/telaViagem/funcoesViagem.js"></script>
+</body>
+</html>

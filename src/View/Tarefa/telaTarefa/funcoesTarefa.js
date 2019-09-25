@@ -221,7 +221,7 @@ window.onload = function () {
                         dataVolta: document.getElementById("dataVolta").value,
                         passagem: document.getElementById("passagem").value,
                         justificativa: document.getElementById("justificativa").value,
-                        observacoes: document.getElementById("origem").value,
+                        observacoes: document.getElementById("observacoes").value,
                         dtEntradaHosp: document.getElementById("dtEntradaHosp").value,
                         dtSaidaHosp: document.getElementById("dtSaidaHosp").value,
                         horaEntradaHosp: document.getElementById("horaEntradaHosp").value,

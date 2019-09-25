@@ -5,6 +5,7 @@ namespace Lasse\LPM\Model;
 
 
 use Exception;
+use Lasse\LPM\Control\UsuarioControl;
 use Lasse\LPM\Services\Validacao;
 
 class FormularioModel
@@ -100,6 +101,7 @@ class FormularioModel
 
     public function setUsuario(UsuarioModel $usuario)
     {
+        var_dump($usuario);
         $this->usuario = $usuario;
     }
 
