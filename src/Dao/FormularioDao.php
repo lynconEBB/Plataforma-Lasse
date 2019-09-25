@@ -19,11 +19,12 @@ class FormularioDao extends CrudDao
 
         $stm->execute();
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-
+        $usuarioControl = new UsuarioControl(null);
+        $usuario = $usuarioControl->listarPorId($idUsuario);
         if (count($rows) > 0) {
             $objs = array();
             foreach ($rows as $row) {
-                $formulario = new FormularioModel($row['nome'],$row['caminhoDocumento'],$row['caminhoHTML'],$row['id']);
+                $formulario = new FormularioModel($row['nome'],$usuario,$row['caminhoDocumento'],$row['caminhoHTML'],$row['id']);
                 $objs[] = $formulario;
             }
             return $objs;

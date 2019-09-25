@@ -26,7 +26,7 @@ class ViagemControl extends CrudControl {
                     if (count($this->url) == 2) {
                         if ($this->verificaDados($info,'cadastro')) {
                             $this->cadastrar($info);
-                            //$this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
+                            $this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
                         } else {
                             throw new Exception("Requisição com parâmetros faltando ou mal estruturados");
                         }
