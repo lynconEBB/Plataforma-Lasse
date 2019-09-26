@@ -127,7 +127,7 @@ CREATE TABLE `tbFormulario` (
   CONSTRAINT `fk_tbFormulario_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tbFormulario_tbCompra__fk` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `tbGasto` (
   PRIMARY KEY (`id`),
   KEY `fk_tbGasto_tbViagem` (`idViagem`),
   CONSTRAINT `fk_tbViagem_tbGasto` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,6 +163,7 @@ CREATE TABLE `tbGasto` (
 
 LOCK TABLES `tbGasto` WRITE;
 /*!40000 ALTER TABLE `tbGasto` DISABLE KEYS */;
+INSERT INTO `tbGasto` VALUES (1,20.03,'aluguel',1),(2,12.04,'despesas hotel',1),(3,20.03,'aluguel',2),(4,12.04,'despesas hotel',2),(5,20.03,'aluguel',3),(6,12.04,'despesas hotel',3),(7,20.03,'aluguel',4),(8,12.04,'despesas hotel',4),(9,34.00,'Aluguel de veÃ­culos (locado fora de Foz)',5),(10,546.00,'CombustÃ­vel',5),(11,76.00,'Estacionamento',5),(12,867.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',5),(13,98.00,'Passagens rodoviÃ¡rias internacionais',5),(14,66.00,'PedÃ¡gio',5),(15,65.00,'Seguro internacional (obrigatÃ³rio)',5),(16,87.00,'TÃ¡xi',5),(17,54.00,'Outros',5),(18,34.00,'Aluguel de veÃ­culos (locado fora de Foz)',6),(19,546.00,'CombustÃ­vel',6),(20,76.00,'Estacionamento',6),(21,867.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',6),(22,98.00,'Passagens rodoviÃ¡rias internacionais',6),(23,66.00,'PedÃ¡gio',6),(24,65.00,'Seguro internacional (obrigatÃ³rio)',6),(25,87.00,'TÃ¡xi',6),(26,54.00,'Outros',6),(27,12.00,'Aluguel de veÃ­culos (locado fora de Foz)',7),(28,23.00,'CombustÃ­vel',7),(29,45.00,'Estacionamento',7),(30,45.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',7),(31,12.00,'Aluguel de veÃ­culos (locado fora de Foz)',8),(32,23.00,'CombustÃ­vel',8),(33,45.00,'Estacionamento',8),(34,45.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',8),(35,12.00,'Passagens rodoviÃ¡rias internacionais',8),(36,54.00,'PedÃ¡gio',8),(37,54.00,'Seguro internacional (obrigatÃ³rio)',8),(38,34.00,'TÃ¡xi',8),(39,34.00,'Outros',8),(40,34.00,'Aluguel de veÃ­culos (locado fora de Foz)',9),(41,546.00,'CombustÃ­vel',9),(42,76.00,'Estacionamento',9),(43,45.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',9),(44,98.00,'Passagens rodoviÃ¡rias internacionais',9),(45,66.00,'PedÃ¡gio',9),(46,54.00,'Seguro internacional (obrigatÃ³rio)',9),(47,87.00,'TÃ¡xi',9),(48,54.00,'Outros',9);
 /*!40000 ALTER TABLE `tbGasto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +211,7 @@ CREATE TABLE `tbProjeto` (
   `nome` varchar(45) NOT NULL,
   `numCentroCusto` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +220,7 @@ CREATE TABLE `tbProjeto` (
 
 LOCK TABLES `tbProjeto` WRITE;
 /*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
-INSERT INTO `tbProjeto` VALUES (3,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 1','895746965'),(4,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 2','895746965'),(6,'2003-03-21','2001-03-12',0.00,'fdgdfgfd','Lyncon','46445645'),(7,'2005-05-25','2003-03-23',0.00,'Jrhsiahe','Rita de Cassia Baez','626e74'),(8,'2008-03-21','2005-03-22',0.00,'porjeto muito massa que eu tenho que escrever pra aumentar','Projeto projetoso','4873543');
+INSERT INTO `tbProjeto` VALUES (3,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 1','895746965'),(4,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 2','895746965'),(6,'2003-03-21','2001-03-12',0.00,'fdgdfgfd','Entre rios','46445645'),(8,'2008-03-21','2005-03-22',5284.00,'porjeto muito massa que eu tenho que escrever pra aumentar','Projeto projetoso','4873543'),(9,'2300-05-21','2201-03-24',0.00,'projeto projetoso para projetar','Projeto 2','895746965'),(10,'2300-05-21','2201-03-24',128.28,'projeto projetoso para projetar','Projeto SQN','895746965');
 /*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +243,7 @@ CREATE TABLE `tbTarefa` (
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
   CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +252,7 @@ CREATE TABLE `tbTarefa` (
 
 LOCK TABLES `tbTarefa` WRITE;
 /*!40000 ALTER TABLE `tbTarefa` DISABLE KEYS */;
-INSERT INTO `tbTarefa` VALUES (10,'2006-03-02','2006-09-03','Em andamento','gfdgdfg','gfdgdf',8,0.00);
+INSERT INTO `tbTarefa` VALUES (10,'2006-03-02','2006-09-03','Em andamento','gfdgdfg','gfdgdf',8,5284.00),(12,'2203-03-20','2250-05-12','pendente','Fluctligth','preciso terminar logo',10,128.28);
 /*!40000 ALTER TABLE `tbTarefa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +281,7 @@ CREATE TABLE `tbUsuario` (
   `admin` tinyint(1) DEFAULT NULL,
   `caminhoFoto` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +290,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njg5NDA4NzIsIm5iZiI6MTU2ODk0MDg3MiwiZXhwIjoxNTY5MDI3MjcyLCJkYXRhIjp7ImlkIjoiMTEifX0.TiJ1EM71Tu02o2CPZALhmYGJ6dVnXbWVezkh6CKW-Ls',0,'assets/files/11/perfil.png'),(12,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lyncon','$2y$10$35LVpTsCLrNUpECcb3Z1wu9KiHdGp0yozil69rzVGSUhI2MQM/m8W','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ni4wLjM4MDkuMTAwIFNhZmFyaVwvNTM3LjM2IiwiaWF0IjoxNTY4OTQzODYyLCJuYmYiOjE1Njg5NDM4NjIsImV4cCI6MTU2OTAzMDI2MiwiZGF0YSI6eyJpZCI6IjEyIn19.T09yMd0UaHNjLoeyIZ6desrLovN6yacUcWBCsoY7jhw',1,'assets/files/12/perfil.png'),(13,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','fjkdgfd','$2y$10$zh4tkpLZd2ixibADnBWgp.3uunt2KHgs8ZAIROwqawOLK0/GsaXlm','2001-05-24','ativado',NULL,0,'assets/files/13/perfil.png'),(14,'Rita de Cassia Baez','121.128.809-93','12.611.282-3','2005-04-26',23.89,'Professora','Bolsista/VoluntÃ¡rio','titinhaheart@hotmail.com','ritabaez','$2y$10$z2MKnqLfqrs/fNkyne0chuHFX.W7b9nASMpqKJ04eNFYRTbl2qaSO','1977-09-19','ativado','NULL',0,'assets/files/default/perfil.png'),(15,'Camila Gomes Ferreira','112.900.339-60','123456789','2018-02-01',50.00,'TI','Bolsista/VoluntÃ¡rio','camilagf2016@gmail.com','Camila','$2y$10$eCzS5ea7QRKfsARmgQofsehZ2c0hNdvBfd6RMZJgQ1yXf/D744oxC','1999-10-07','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXRcLzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZVwvNzYuMC4zODA5LjEzMiBTYWZhcmlcLzUzNy4zNiIsImlhdCI6MTU2ODc2MzU0MywibmJmIjoxNTY4NzYzNTQzLCJleHAiOjE1Njg4NDk5NDMsImRhdGEiOnsiaWQiOiIxNSJ9fQ.zvyaCRcTm8R-sZ7c5q4XMOdjuM9C4HhegUEYHQ0L3DA',0,'assets/files/15/perfil.jpeg');
+INSERT INTO `tbUsuario` VALUES (11,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lynconebb','$2y$10$hoSWvnClQ9MtJ66M8cJsXe/ZIZ/HK9ztrNMOPGyWQM4vhIluqdzEu','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njg5NDA4NzIsIm5iZiI6MTU2ODk0MDg3MiwiZXhwIjoxNTY5MDI3MjcyLCJkYXRhIjp7ImlkIjoiMTEifX0.TiJ1EM71Tu02o2CPZALhmYGJ6dVnXbWVezkh6CKW-Ls',0,'assets/files/11/perfil.png'),(12,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','lyncon','$2y$10$35LVpTsCLrNUpECcb3Z1wu9KiHdGp0yozil69rzVGSUhI2MQM/m8W','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJpbnNvbW5pYVwvNi42LjIiLCJpYXQiOjE1Njk0NTUxMTUsIm5iZiI6MTU2OTQ1NTExNSwiZXhwIjoxNTY5NTQxNTE1LCJkYXRhIjp7ImlkIjoiMTIifX0.2c6vMxwzsdOGVQwN6yR2WEgag55-LexxY7IvJd6J9Gc',1,'assets/files/12/perfil.png'),(13,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','fjkdgfd','$2y$10$zh4tkpLZd2ixibADnBWgp.3uunt2KHgs8ZAIROwqawOLK0/GsaXlm','2001-05-24','ativado',NULL,0,'assets/files/13/perfil.png'),(14,'Rita de Cassia Baez','121.128.809-93','12.611.282-3','2005-04-26',23.89,'Professora','Bolsista/VoluntÃ¡rio','titinhaheart@hotmail.com','ritabaez','$2y$10$z2MKnqLfqrs/fNkyne0chuHFX.W7b9nASMpqKJ04eNFYRTbl2qaSO','1977-09-19','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ni4wLjM4MDkuMTMyIFNhZmFyaVwvNTM3LjM2IiwiaWF0IjoxNTY5Mjc3MzEyLCJuYmYiOjE1NjkyNzczMTIsImV4cCI6MTU2OTM2MzcxMiwiZGF0YSI6eyJpZCI6IjE0In19.JT6fNwAEXh7Sqt4hfb9fy95IEUq9yKPwSSPWl4-0Mls',0,'assets/files/default/perfil.png'),(15,'Camila Gomes Ferreira','112.900.339-60','123456789','2018-02-01',50.00,'TI','Bolsista/VoluntÃ¡rio','camilagf2016@gmail.com','Camila','$2y$10$eCzS5ea7QRKfsARmgQofsehZ2c0hNdvBfd6RMZJgQ1yXf/D744oxC','1999-10-07','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXRcLzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZVwvNzYuMC4zODA5LjEzMiBTYWZhcmlcLzUzNy4zNiIsImlhdCI6MTU2ODc2MzU0MywibmJmIjoxNTY4NzYzNTQzLCJleHAiOjE1Njg4NDk5NDMsImRhdGEiOnsiaWQiOiIxNSJ9fQ.zvyaCRcTm8R-sZ7c5q4XMOdjuM9C4HhegUEYHQ0L3DA',0,'assets/files/15/perfil.jpeg'),(16,'Lyncon Baez','121.128.809-93','12.611.282-3','2006-03-24',100.32,'Programador','Colaborador','lyncon.ebb@pti.org.br','kirito','$2y$10$CwD8L.cp4SD7s.qYbIHOEumt2sX6LZR0Mqhv4NPARHOhBIo.9Q2ly','2001-05-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ni4wLjM4MDkuMTAwIFNhZmFyaVwvNTM3LjM2IiwiaWF0IjoxNTY5Mjc4OTczLCJuYmYiOjE1NjkyNzg5NzMsImV4cCI6MTU2OTM2NTM3MywiZGF0YSI6eyJpZCI6IjE2In19.EyDakp5K49azLeDuFTt453pAQim6yBcTJMZ_gUmr3X8',1,'assets/files/16/perfil.png');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +318,7 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
-INSERT INTO `tbUsuarioProjeto` VALUES (3,11,1),(4,11,1),(8,12,1),(6,14,1),(7,14,1),(8,15,0);
+INSERT INTO `tbUsuarioProjeto` VALUES (3,11,1),(4,11,1),(6,11,0),(6,12,0),(8,12,1),(9,12,1),(6,14,1),(6,15,0),(8,15,0),(10,16,1);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +339,7 @@ CREATE TABLE `tbVeiculo` (
   PRIMARY KEY (`id`),
   KEY `fk_tbVeiculo_tbCondutor` (`idCondutor`),
   CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbCondutor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +348,7 @@ CREATE TABLE `tbVeiculo` (
 
 LOCK TABLES `tbVeiculo` WRITE;
 /*!40000 ALTER TABLE `tbVeiculo` DISABLE KEYS */;
-INSERT INTO `tbVeiculo` VALUES (1,2,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00'),(2,1,'Ferrari','alugado','2003-01-21 03:00:00','2005-01-25 06:00:00'),(3,3,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00');
+INSERT INTO `tbVeiculo` VALUES (1,2,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00'),(2,1,'Ferrari','alugado','2003-01-21 03:00:00','2005-01-25 06:00:00'),(3,3,'kombi','Transporte com parceiros/terceiros','2003-01-21 03:00:00','2003-01-25 06:00:00'),(4,2,'fdgjkh','Transporte com parceiros/terceiros','2103-02-01 12:00:00','2201-02-03 12:00:00'),(5,2,'fdgjkh','Transporte com parceiros/terceiros','2103-02-01 12:00:00','2201-02-03 12:00:00');
 /*!40000 ALTER TABLE `tbVeiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -382,7 +383,7 @@ CREATE TABLE `tbViagem` (
   KEY `fk_tbViagem_tbTarefa` (`idTarefa`),
   CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbVeiculo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,6 +392,7 @@ CREATE TABLE `tbViagem` (
 
 LOCK TABLES `tbViagem` WRITE;
 /*!40000 ALTER TABLE `tbViagem` DISABLE KEYS */;
+INSERT INTO `tbViagem` VALUES (1,1,12,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,16,'2005-03-23 16:00:00','2007-04-12 02:00:00','4589347','kjhgkfd','a trabalho','aerea'),(2,1,12,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,16,'2005-03-23 16:00:00','2007-04-12 02:00:00','4589347','kjhgkfd','a trabalho','aerea'),(3,1,12,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,16,'2005-03-23 16:00:00','2007-04-12 02:00:00','4589347','kjhgkfd','a trabalho','aerea'),(4,1,12,'Foz do Iguacu','Medianeira','2005-04-26','2007-04-14','pq sim','foi massa','235435345',32.07,16,'2005-03-23 16:00:00','2007-04-12 02:00:00','4589347','kjhgkfd','a trabalho','aerea'),(5,1,10,'dfhfgh','fghfghf','2019-03-02','2020-03-02','gfdgdfgdfgdfgdf','dfhfgh','3424234',1893.00,12,'2019-03-02 12:00:00','2020-03-01 15:00:00','2342343','gfdgfdgdf','Viagem a trabalho','Terrestre nacional'),(6,1,10,'dfhfgh','fghfghf','2019-03-02','2020-03-02','gfdgdfgdfgdfgdf','dfhfgh','3424234',1893.00,12,'2019-03-02 12:00:00','2020-03-01 15:00:00','2342343','gfdgfdgdf','Viagem a trabalho','Terrestre nacional'),(7,4,10,'dfhfgh','fghfghf','2019-03-02','2020-03-02','gfdgdfgdfgdfgdf','dfhfgh','3424234',125.00,12,'2019-03-02 12:00:00','2020-03-01 15:00:00','2342343','gfdgfdgdf','Evento/Congresso','AÃ©rea nacional (sem franquia de bagagem)'),(8,5,10,'dfhfgh','fghfghf','2019-03-02','2020-03-02','gfdgdfgdfgdfgdf','dfhfgh','3424234',313.00,12,'2019-03-02 12:00:00','2020-03-01 15:00:00','2342343','gfdgfdgdf','Evento/Congresso','AÃ©rea nacional (sem franquia de bagagem)'),(9,4,10,'dfhfgh','fghfghf','2019-03-02','2020-03-02','gfdgdfgdfgdfgdf','dfhfgh','3424234',1060.00,12,'2019-03-02 12:00:00','2020-03-01 15:00:00','2342343','gfdgfdgdf','Evento/Congresso','Terrestre nacional');
 /*!40000 ALTER TABLE `tbViagem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -403,4 +405,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-19 22:46:10
+-- Dump completed on 2019-09-25 21:31:23
