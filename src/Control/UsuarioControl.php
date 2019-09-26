@@ -28,7 +28,7 @@ class UsuarioControl extends CrudControl {
                             $token = $this->logar($info);
                             $this->respostaSucesso("Logado com Sucesso",$token,$this->requisitor);
                         } else {
-                            throw new Exception("Parametros insuficientes ou mal estruturados");
+                            throw new Exception("Parametros insuficientes ou mal estruturados",400);
                         }
                     } // /api/users
                     elseif (count($this->url) == 2) {
@@ -44,7 +44,7 @@ class UsuarioControl extends CrudControl {
                             $usuario = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listando Usuário.",$usuario,$this->requisitor);
                         } else {
-                            throw new Exception("Você não tem acesso as informações desse usuário");
+                            throw new Exception("Você não tem acesso as informações desse usuário",401);
                         }
 
                     } // /api/users
@@ -54,7 +54,7 @@ class UsuarioControl extends CrudControl {
                             $usuarios = $this->listar();
                             $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$this->requisitor);
                         } else {
-                            throw new Exception("Você precisa ser administrador para ter acesso aos dados de todos os usuários");
+                            throw new Exception("Você precisa ser administrador para ter acesso aos dados de todos os usuários",401);
                         }
                     }
                     // /api/users/naoProjeto/{idProjeto}
@@ -104,7 +104,7 @@ class UsuarioControl extends CrudControl {
                     if (password_verify($info->senhaAdmin,'$2y$12$N82ObBFr3YTAgMqEck5arOTgpunRBKuUxYLK4w7x0RY35Ariwjg.O')){
                         $admin = 1;
                     } else {
-                        throw new Exception("Senha para ser administrador errada");
+                        throw new Exception("Senha para ser administrador errada",400);
                     }
                 }
                 // Encripta a senha e cria objeto validando
@@ -119,10 +119,10 @@ class UsuarioControl extends CrudControl {
                     $this->DAO->alterar($usuario);
                 }
             }else {
-                throw new Exception("Nome de Usuário já registrado");
+                throw new Exception("Nome de Usuário já registrado",400);
             }
         } else {
-            throw new Exception("Parametros faltando ou requisição mal estrurada");
+            throw new Exception("Parametros faltando ou requisição mal estrurada",400);
         }
     }
 
@@ -133,7 +133,7 @@ class UsuarioControl extends CrudControl {
         if ($projetos != false) {
             foreach ($projetos as $projeto){
                 if ($projetoControl->verificaDono($projeto->getId(),$this->requisitor['id'])) {
-                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário");
+                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário",401);
                 }
             }
         }
@@ -152,7 +152,7 @@ class UsuarioControl extends CrudControl {
         if ($usuario != false ) {
             return $usuario;
         } else {
-            throw new Exception("Usuário não encontrado no sistema");
+            throw new Exception("Usuário não encontrado no sistema",400);
         }
     }
 
@@ -174,10 +174,10 @@ class UsuarioControl extends CrudControl {
                 $this->requisitor['login'] = $usuario->getLogin();
                 $this->DAO->alterar($usuario);
             } else {
-                throw new Exception("Nome de Usuário já utilizado");
+                throw new Exception("Nome de Usuário já utilizado",400);
             }
         } else {
-            throw new Exception("Parametros invalidos ou mal estruturados");
+            throw new Exception("Parametros invalidos ou mal estruturados",400);
         }
     }
 
@@ -196,13 +196,13 @@ class UsuarioControl extends CrudControl {
                     $this->requisitor = ["id" => $usuario->getId(), "login" => $usuario->getLogin(),"foto" => $usuario->getFoto(),"admin" => $usuario->getAdmin()];
                     return $token;
                 }else{
-                    throw new Exception("Senha errada :(");
+                    throw new Exception("Senha errada :(",400);
                 }
             } else {
-                throw new Exception("Usuário não registrado :(");
+                throw new Exception("Usuário não registrado :(",400);
             }
         } else {
-            throw new Exception("Os Campos devem ser preenchidos :X");
+            throw new Exception("Os Campos devem ser preenchidos :X",400);
         }
     }
 
@@ -225,12 +225,12 @@ class UsuarioControl extends CrudControl {
                     $userInfo = ["id" => $usuario->getId(), "login" => $usuario->getLogin(),"foto" => $usuario->getFoto(),"admin" => $usuario->getAdmin()];
                     return $userInfo;
                 } else {
-                    throw new Exception("Usuário deslogado");
+                    throw new Exception("Logue no sistema para ter aceso a está funcionalidade",405);
                 }
             } else
-                throw new Exception("Você precisa estar logado");
+                throw new Exception("Logue no sistema para ter aceso a está funcionalidade",405);
         } else
-            throw new Exception("Você precisa estar logado");
+            throw new Exception("Logue no sistema para ter aceso a está funcionalidade",405);
     }
 
     private function criaToken(UsuarioModel $usuario) {
@@ -293,10 +293,10 @@ class UsuarioControl extends CrudControl {
                 fclose($arquivoFoto);
                 return $caminhoFoto;
             } else {
-                throw new Exception("Imagem inválida");
+                throw new Exception("Imagem inválida",400);
             }
         } else {
-            throw new Exception("Imagem inválida");
+            throw new Exception("Imagem inválida",400);
         }
     }
 }

@@ -1,5 +1,11 @@
 window.onload = function () {
-    verificaMensagem();
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
+
 
     var idUserRequisitado = window.location.pathname.split("/").pop();
 
@@ -13,8 +19,7 @@ window.onload = function () {
             var usuario = resposta.dados;
             /****Mostra quantidade projetos******/
             requisicao("GET","/api/projetos/user/"+usuario.id,null,true,function (resposta) {
-                console.log(resposta);
-                console.log(resposta.hasOwnProperty("dados"));
+
                 if (resposta.status == "sucesso") {
                     if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdProjetos").textContent = resposta.mensagem;
@@ -27,10 +32,10 @@ window.onload = function () {
                                 qtdDono += 1;
                             }
                         }
-                        document.querySelector("#qtdProjetos").innerHTML = "Participando de: "+projetos.length+" projeto(s)<br>" + "Sendo dono de :"+qtdDono+" projeto(s)";
+                        document.querySelector("#qtdProjetos").innerHTML = "Participando de: "+projetos.length+" projeto(s)<br>" + "Sendo dono de: "+qtdDono+" projeto(s)";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem);
+                    exibirMensagem(resposta.mensagem,true);
                 }
             });
 
@@ -44,7 +49,7 @@ window.onload = function () {
                         document.querySelector("#qtdFormularios").textContent = "Foram encontrados "+formularios.length+" formulários no sistema";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem);
+                    exibirMensagem(resposta.mensagem,true);
                 }
             });
 
@@ -58,7 +63,7 @@ window.onload = function () {
                         document.querySelector("#qtdImprevistos").textContent = "Foram encontrados "+imprevistos.length+" imprevistos no sistema";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem);
+                    exibirMensagem(resposta.mensagem,true);
                 }
             });
 
@@ -70,7 +75,7 @@ window.onload = function () {
             telaImprevistos.onclick = () => window.location.href = "/imprevistos/user/"+usuario.id;
 
         } else {
-            window.location.href = "/erro/permissao";
+            decideErros(resposta);
         }
     });
 

@@ -1,5 +1,10 @@
 window.onload = function () {
-    verificaMensagem();
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
 
     var idTarefaRequisitada = window.location.pathname.split("/").pop();
 
@@ -298,7 +303,7 @@ window.onload = function () {
                 };
             }
         } else {
-            exibirMensagem(resposta.mensagem,true);
+            decideErros(resposta);
         }
     });
 };

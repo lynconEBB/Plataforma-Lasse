@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.container-aviso {
+    background-color: #275a66;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+    padding: 50px ;
+    color: white;
+    max-width: 800px;
+}
+.aviso-img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+.aviso-img-404 {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 400px;
+}
+h1 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 3rem;
+}
+.botao-voltar {
+    padding: 10px 20px;
+    background-color: #67e69c;
+    font-weight: bolder;
+    color: #06404d;
+    text-decoration: none;
+    font-size: 1.2rem;
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+}

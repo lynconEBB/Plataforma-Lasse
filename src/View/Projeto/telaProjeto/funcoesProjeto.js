@@ -1,6 +1,11 @@
 window.onload = function () {
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
 
-    verificaMensagem();
     var idProjetoRequisitado = window.location.pathname.split("/").pop();
 
     requisicao("GET", "/api/projetos/"+idProjetoRequisitado, null, true, function (resposta) {
@@ -53,7 +58,7 @@ window.onload = function () {
                     </div>
                     <div class="group-projeto">
                         <label class="label-projeto">N° centro de custo</label>
-                        <label class="label-projeto">${projeto.totalGasto}</label>
+                        <label class="label-projeto">${projeto.numCentroCusto}</label>
                     </div>
                     <div class="group-projeto">
                         <label class="label-projeto">Gasto Total</label>
@@ -224,8 +229,7 @@ window.onload = function () {
                 }
             });
         } else {
-            exibirMensagem(resposta.mensagem,true);
-            console.log(resposta);
+            decideErros(resposta);
         }
     });
 };

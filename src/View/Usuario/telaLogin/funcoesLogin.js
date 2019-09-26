@@ -1,3 +1,5 @@
+verificaMensagem();
+
 /*****mostrar input quando checkbox estiver selecionada******/
 var checkAdmin = document.querySelector("#admin");
 checkAdmin.onclick = function () {

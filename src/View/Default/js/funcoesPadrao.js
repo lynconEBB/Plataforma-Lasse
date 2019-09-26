@@ -2,7 +2,7 @@ let btnSair = document.querySelector(".container-sair");
 btnSair.onclick = function () {
     requisicao("DELETE","/api/users/deslogar",null,true,function (resposta) {
         if (resposta.status === "erro") {
-            window.location.href = "/erro/permissao";
+            decideErros(resposta)
         } else {
             eraseCookie('token');
             window.location.href = "/"
@@ -27,7 +27,8 @@ function setLinks(idUsuario) {
 }
 
 function verificaMensagem() {
-    let url = location.href;
+    let url = window.location.href;
+    console.log(url);
     if (url.indexOf("?") !== -1) {
         let variavel = url.substring(url.indexOf("?")+1,url.length);
         let partes = variavel.split("=");
@@ -48,4 +49,17 @@ function addMensagem(mensagem) {
     }
     url = url+"?"+mensagem;
     window.location.href = url;
+}
+
+function decideErros(resposta) {
+    let erro = resposta.dados;
+    if (erro.codigo == 405) {
+        window.location.href = "/?erro=Logue-no-sistema-para-ter-acesso!";
+    }
+    else if (erro.codigo == 401) {
+        window.location.href = "/erro/permissao";
+    }
+    else if (erro.codigo == 400 || erro.codigo == 404) {
+        window.location.href = "/erro/naoEncontrado";
+    }
 }

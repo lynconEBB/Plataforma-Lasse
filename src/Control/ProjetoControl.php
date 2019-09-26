@@ -50,8 +50,7 @@ class ProjetoControl extends CrudControl
                             $this->requisitor["dono"] = $dono;
                             $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);
                         } else {
-
-                            throw new Exception("Você precisa participar deste projeto para ter acesso à suas informações");
+                            throw new Exception("Você precisa participar deste projeto para ter acesso à suas informações",401);
                         }
                     }
                     // /api/projetos/user/{idUsuario}
@@ -61,7 +60,7 @@ class ProjetoControl extends CrudControl
                             if ($projetos != false) {
                                 $serDono = array();
                                 foreach ($projetos as $projeto) {
-                                    $dono = $this->verificaDono($projeto->getId(),$this->url[3]);
+                                    $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
                                     $serDono[$projeto->getId()] = $dono;
                                 }
                                 $this->requisitor["infoAdd"] = $serDono;
@@ -70,7 +69,7 @@ class ProjetoControl extends CrudControl
                                 $this->respostaSucesso("Nenhum projeto encontrado!",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você não possui acesso aos projetos deste usuario");
+                            throw new Exception("Você não possui acesso aos projetos deste usuario",401);
                         }
                     }
                     break;
@@ -111,7 +110,7 @@ class ProjetoControl extends CrudControl
         if ($this->verificaDono($id,$this->requisitor['id'])) {
             $this->DAO->excluir($id);
         } else {
-            throw new Exception("Você precisa ser dono deste projeto para deleta-lo.");
+            throw new Exception("Você precisa ser dono deste projeto para deleta-lo.",401);
         }
     }
 
@@ -121,7 +120,7 @@ class ProjetoControl extends CrudControl
             $projetos = $this->DAO->listar();
             return $projetos;
         } else {
-            throw new Exception("Você precisa ser administrador para acessar essa funcionalidade");
+            throw new Exception("Você precisa ser administrador para acessar essa funcionalidade",401);
         }
     }
 
@@ -151,7 +150,7 @@ class ProjetoControl extends CrudControl
         if ($projeto != false) {
             return $projeto;
         } else {
-            throw new Exception("Projeto não encontrado no sistema");
+            throw new Exception("Projeto não encontrado no sistema",404);
         }
     }
 
@@ -190,10 +189,10 @@ class ProjetoControl extends CrudControl
             if (!$this->procuraFuncionario($idProjeto,$idUsuario)) {
                 $this->DAO->adicionarFuncionario($idUsuario, $idProjeto);
             } else {
-                throw new Exception('Funcionário já inserido');
+                throw new Exception('Funcionário já inserido',400);
             }
         } else {
-            throw new Exception("Você não possui permissão para adicionar funcionários nesse projeto.");
+            throw new Exception("Você não possui permissão para adicionar funcionários nesse projeto.",401);
         }
 
     }

@@ -1,6 +1,11 @@
 /**Coloca Informações no lugar****/
 window.onload = function () {
-    verificaMensagem();
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
 
     var idUserListado = window.location.pathname.split("/").pop();
 
@@ -37,7 +42,7 @@ window.onload = function () {
 
 
         } else {
-            window.location.href = "/erro/permissao";
+            decideErros(resposta);
         }
     });
 };
@@ -109,6 +114,8 @@ btnExcluir.onclick = function () {
           if (resposta.status == "sucesso") {
               eraseCookie('token');
               window.location.href = "/";
+          } else {
+              exibirMensagem(resposta.mensagem,true);
           }
       })
   } else {

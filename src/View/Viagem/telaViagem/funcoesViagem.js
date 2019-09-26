@@ -1,5 +1,11 @@
 window.onload = function () {
-    verificaMensagem();
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
+
     var idViagemRequisitada = window.location.pathname.split("/").pop();
 
     requisicao("GET", "/api/viagens/"+idViagemRequisitada, null, true, function (resposta) {
@@ -16,15 +22,12 @@ window.onload = function () {
                 let botaoFormulario = document.getElementById("gerarFormulario");
                 botaoFormulario.onclick = function () {
                     requisicao("POST","/api/formularios/requisicaoViagem/"+idViagemRequisitada,null,true,function (resposta) {
-                        console.log(resposta);
                         if (resposta.status === "sucesso") {
-                            xhr = new XMLHttpRequest();
-                            console.log("/"+resposta.dados.caminhoDocumento);
-                            xhr.open("GET","/"+resposta.dados.caminhoDocumento);
-                            xhr.send();
-                            xhr.onload = function () {
-                                console.log(xhr.response);
-                            }
+                            let formulario = resposta.dados;
+                            var link = document.createElement('a');
+                            link.href = "/"+formulario.caminhoDocumento;
+                            link.download = "vaiporra.odt";
+                            link.click();
                         } else {
                             exibirMensagem(resposta.mensagem,true);
                         }
@@ -36,10 +39,11 @@ window.onload = function () {
             }
 
         } else {
-            exibirMensagem(resposta.mensagem,true)
+            decideErros(resposta);
         }
     });
 };
+
 
 function templateDono(viagem) {
     let saidaHosp = viagem.saidaHosp.split(" ");
@@ -68,7 +72,7 @@ function templateDono(viagem) {
     document.getElementById("condutor").value = viagem.veiculo.condutor.nome;
     document.getElementById("cnh").value = viagem.veiculo.condutor.cnh;
     document.getElementById("validadeCNH").value = viagem.veiculo.condutor.validadeCNH;
-    document.getElementById("totalGasto").value = "R$ "+viagem.totalGasto;
+    document.getElementById("totalGasto").textContent = "R$ "+viagem.totalGasto;
 
     let containerGastos = document.getElementById("container-gastos");
     viagem.gastos.forEach(function (gasto) {
@@ -106,7 +110,7 @@ function templateAdmin(viagem) {
     document.getElementById("span-condutor").textContent = viagem.veiculo.condutor.nome;
     document.getElementById("span-cnh").textContent = viagem.veiculo.condutor.cnh;
     document.getElementById("span-validadeCNH").textContent = viagem.veiculo.condutor.validadeCNH;
-    document.getElementById("span-totalGasto").textContent = viagem.totalGasto;
+    document.getElementById("totalGasto").textContent = viagem.totalGasto;
 
     let containerGastos = document.getElementById("container-gastos");
     viagem.gastos.forEach(function (gasto) {

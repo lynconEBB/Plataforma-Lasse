@@ -1,5 +1,10 @@
 window.onload = function () {
-    verificaMensagem();
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+    if (performance.navigation.type !== 1) {
+        verificaMensagem();
+    }
 
     var idUserRequisitado = window.location.pathname.split("/").pop();
 
@@ -37,11 +42,7 @@ window.onload = function () {
                 document.getElementById("container-aviso").style.display = "flex";
             }
         } else {
-            if (resposta.dados.codigo == 401) {
-                window.location.href = "/";
-            } else {
-                exibirMensagem(resposta.mensagem,true);
-            }
+            decideErros(resposta);
         }
     });
 };

@@ -45,10 +45,6 @@ class Router{
         elseif ($this->url[0] == "dashboard" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3) {
             require 'src/View/Usuario/telaDashboard/telaDashboard.html';
         }
-        // /erro/permissao
-        elseif ($this->url[0] == "erro" && $this->url[1] == "permissao" && count($this->url) == 2) {
-            require "src/View/errorPages/erroSemAcesso.html";
-        }
         // /perfil/user/{idUsuario}
         elseif ($this->url[0] == "perfil" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
             require "src/View/Usuario/telaPerfil/telaPerfil.html";
@@ -68,6 +64,14 @@ class Router{
         // /viagem/{idViagem}
         elseif ($this->url[0] == "viagem" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Viagem/telaViagem/telaViagem.html";
+        }
+        // /erro/permissao
+        elseif ($this->url[0] == "erro" && $this->url[1] == "permissao" && count($this->url) == 2) {
+            require "src/View/errorPages/erroSemAcesso.html";
+        }
+        // /erro/permissao
+        elseif ($this->url[0] == "erro" && $this->url[1] == "naoEncontrado" && count($this->url) == 2) {
+            require "src/View/errorPages/erro404.html";
         }
         else{
             require "src/View/errorPages/erro404.html";
@@ -116,7 +120,10 @@ class Router{
     private function formataURL(string $url):array
     {
         $url = trim($url,'/');
-        if (strpos($url,"?")){
+
+        if (strpos($url,"?") === 0) {
+            $url = "";
+        } elseif (strpos($url,"?") ){
             $url = substr($url,0,strpos($url,"?"));
         }
 

@@ -28,7 +28,7 @@ class ViagemControl extends CrudControl {
                             $this->cadastrar($info);
                             $this->respostaSucesso("Viagem cadastrada com sucesso",null,$this->requisitor);
                         } else {
-                            throw new Exception("Requisição com parâmetros faltando ou mal estruturados");
+                            throw new Exception("Requisição com parâmetros faltando ou mal estruturados",400);
                         }
                     }
                     break;
@@ -45,7 +45,7 @@ class ViagemControl extends CrudControl {
                             }
 
                         } else {
-                            throw new Exception("Você precisa ser administrador para ter acesso a todas as viagens");
+                            throw new Exception("Você precisa ser administrador para ter acesso a todas as viagens",401);
                         }
                     }
                     // /api/viagens/{idViagem}
@@ -54,7 +54,7 @@ class ViagemControl extends CrudControl {
                         if ($this->requisitor['id'] == $viagem->getViajante()->getId() || $this->requisitor['admin'] == "1") {
                             $this->respostaSucesso("Listando Viagem",$viagem,$this->requisitor);
                         } else {
-                            throw new Exception("Você não possui acesso aos detalhes desta viagem");
+                            throw new Exception("Você não possui acesso aos detalhes desta viagem",401);
                         }
                     }
                     break;
@@ -66,7 +66,7 @@ class ViagemControl extends CrudControl {
                             $this->atualizar($info,$this->url[2]);
                             $this->respostaSucesso("Viagem atualizada com sucesso",null,$this->requisitor);
                         } else {
-                            throw new Exception("Requisição com parâmetros faltando ou mal estruturados na viagem");
+                            throw new Exception("Requisição com parâmetros faltando ou mal estruturados na viagem",400);
                         }
                     }
                     break;
@@ -114,7 +114,7 @@ class ViagemControl extends CrudControl {
             }
 
         } else {
-            throw new Exception("Você não possui permissão para cadastrar viagens nessa tarefa");
+            throw new Exception("Você não possui permissão para cadastrar viagens nessa tarefa",401);
         }
     }
 
@@ -146,7 +146,7 @@ class ViagemControl extends CrudControl {
             $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);
             $this->DAO->atualizar($viagem);
         } else {
-            throw new Exception("Você não possui permissão para atualizar esta viagem");
+            throw new Exception("Você não possui permissão para atualizar esta viagem",401);
         }
 
     }
@@ -160,7 +160,7 @@ class ViagemControl extends CrudControl {
             $tarefaControl = new TarefaControl(null);
             $tarefaControl->atualizaTotal($idTarefa);
         } else {
-            throw new Exception("Você não possui permissão para excluir esta viagem");
+            throw new Exception("Você não possui permissão para excluir esta viagem",401);
         }
     }
 
@@ -176,7 +176,7 @@ class ViagemControl extends CrudControl {
         if ($viagem != false) {
             return $viagem;
         } else {
-            throw new Exception('Viagem não encontrada no sistema');
+            throw new Exception('Viagem não encontrada no sistema',404);
         }
     }
 

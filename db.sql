@@ -126,7 +126,7 @@ CREATE TABLE `tbFormulario` (
   CONSTRAINT `fk_tbFormulario_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE,
   CONSTRAINT `tbFormulario_tbCompra__fk` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `tbFormulario` (
 
 LOCK TABLES `tbFormulario` WRITE;
 /*!40000 ALTER TABLE `tbFormulario` DISABLE KEYS */;
-INSERT INTO `tbFormulario` VALUES (12,'requisicaoViagem10','assets/files/19/requisicaoViagem10/requisicaoViagem10.odt','assets/files/19/requisicaoViagem10/requisicaoViagem10.html',19,10,NULL);
+INSERT INTO `tbFormulario` VALUES (24,'requisicaoViagem10','assets/files/19/requisicaoViagem10/requisicaoViagem10.odt','assets/files/19/requisicaoViagem10/requisicaoViagem10.html',19,10,NULL);
 /*!40000 ALTER TABLE `tbFormulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +211,7 @@ CREATE TABLE `tbProjeto` (
   `nome` varchar(45) NOT NULL,
   `numCentroCusto` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +220,7 @@ CREATE TABLE `tbProjeto` (
 
 LOCK TABLES `tbProjeto` WRITE;
 /*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
-INSERT INTO `tbProjeto` VALUES (11,'2100-09-25','2001-03-21',340.00,'Projeto para estabelecer um base de reconhecimento na cidade de Entre RIos - Minas Gerias','Entre rios','1243546');
+INSERT INTO `tbProjeto` VALUES (11,'2100-09-25','2001-03-21',340.00,'Projeto para estabelecer um base de reconhecimento na cidade de Entre RIos - Minas Gerias','Entre rios','1243546'),(12,'2006-09-12','1980-07-12',0.00,'Projeto para criar uma impressora 3d auto replicante com o menor custo possivel','Impressora 3D','12376554'),(13,'2019-06-27','2005-10-23',0.00,'Desenvolver frota de carros eletricos para uso na Itaipu','Carro ElÃ©trico','854974');
 /*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +281,7 @@ CREATE TABLE `tbUsuario` (
   `admin` tinyint(1) DEFAULT NULL,
   `caminhoFoto` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +290,7 @@ CREATE TABLE `tbUsuario` (
 
 LOCK TABLES `tbUsuario` WRITE;
 /*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
-INSERT INTO `tbUsuario` VALUES (17,'Lyncon Estevan Baez','121.128.809-93','12.611.223-3','2008-05-21',10.99,'Programador','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','LynconBaez','$2y$10$EP5Vdq.rG/toA102wiwdPOi7.FtWJ7lESs0TSohVu9nLvlrQP.b/a','2001-03-24','ativado','NULL',1,'assets/files/17/perfil.jpeg'),(19,'Daneil da Silva Pereira','180.047.480-66','12.611.223-3','2008-05-21',12.94,'Analista de Sistemas','Bolsista/VoluntÃ¡rio','dan.iel@gmail.com','daniel','$2y$10$/7IejjwyisLsucypxTE5pevm8AXOKo4XwHQa3np6f/P6GgT.QP9Lq','1999-06-21','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ni4wLjM4MDkuMTMyIFNhZmFyaVwvNTM3LjM2IiwiaWF0IjoxNTY5NDU5NTk5LCJuYmYiOjE1Njk0NTk1OTksImV4cCI6MTU2OTU0NTk5OSwiZGF0YSI6eyJpZCI6IjE5In19.Y37h-EiFK_QJMGdl_-HRB2Qqw23uKNMUNCQ0w1-AoU4',0,'assets/files/19/perfil.png');
+INSERT INTO `tbUsuario` VALUES (17,'Lyncon Estevan Baez','121.128.809-93','12.611.223-3','2008-05-21',10.99,'Programador','Bolsista/VoluntÃ¡rio','lynconlyn@gmail.com','LynconBaez','$2y$10$EP5Vdq.rG/toA102wiwdPOi7.FtWJ7lESs0TSohVu9nLvlrQP.b/a','2001-03-24','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdFwvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lXC83Ny4wLjM4NjUuNzUgU2FmYXJpXC81MzcuMzYiLCJpYXQiOjE1Njk1MjYxNjEsIm5iZiI6MTU2OTUyNjE2MSwiZXhwIjoxNTY5NjEyNTYxLCJkYXRhIjp7ImlkIjoiMTcifX0.qlJskQ4lEqnNl0Akz3WvegkL6vHVabMaoDdLTp7rxr0',1,'assets/files/17/perfil.jpeg'),(19,'Daniel da Silva Pereira','180.047.480-66','12.611.223-3','2008-05-21',12.94,'Analista de Sistemas','Bolsista/VoluntÃ¡rio','dan.iel@gmail.com','Daniel','$2y$10$/7IejjwyisLsucypxTE5pevm8AXOKo4XwHQa3np6f/P6GgT.QP9Lq','1999-06-21','ativado','NULL',0,'assets/files/19/perfil.png'),(20,'Camila Gomes Ferreira','946.202.990-30','40.448.574-1','2005-08-21',9.54,'Designer','Terceiros','camilagf2016@gmail.com','Camiggf','$2y$10$i/ywwFtj0HXLRsfC/IVGnOBgYtiK4VXWeWepTaBx0pKJ44rMrkPdy','1999-10-07','ativado','NULL',0,'assets/files/default/perfil.png');
 /*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +318,7 @@ CREATE TABLE `tbUsuarioProjeto` (
 
 LOCK TABLES `tbUsuarioProjeto` WRITE;
 /*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
-INSERT INTO `tbUsuarioProjeto` VALUES (11,19,1);
+INSERT INTO `tbUsuarioProjeto` VALUES (13,17,1),(11,19,1),(12,19,0),(12,20,1);
 /*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,4 +405,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-25 22:51:29
+-- Dump completed on 2019-09-26 16:50:59

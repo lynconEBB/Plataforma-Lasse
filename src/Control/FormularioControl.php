@@ -2,7 +2,6 @@
 
 namespace Lasse\LPM\Control;
 
-
 use Exception;
 use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Model\FormularioModel;
@@ -12,11 +11,11 @@ use Lasse\LPM\Model\ViagemModel;
 use Lasse\LPM\Services\HtmlManipulator;
 use Lasse\LPM\Services\OdtManipulator;
 
-
 class FormularioControl extends CrudControl
 {
     private $pastaUsuario;
-    private $gastosPadroes = ["Aluguel de veículos (locado fora de Foz)",
+    private $gastosPadroes = [
+        "Aluguel de veículos (locado fora de Foz)",
         "Combustível",
         "Estacionamento",
         "Passagens rodoviárias (metrô/ônibus)",
@@ -88,6 +87,19 @@ class FormularioControl extends CrudControl
                         $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
                     } else {
                         $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                    }
+                }
+                // /api/formularios/download/{idFormulário}
+                elseif ($this->url[2] == "download" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
+                    $formulario = $this->listarPorId($this->url[3]);
+                    if ($formulario) {
+                        if ($formulario->getUsuario()->getId() == $this->requisitor['id']) {
+                            echo file_get_contents($formulario->getCaminhoDocumento());
+                        } else {
+                            throw new Exception("Você não possui permissão para fazer o download deste formulário",401);
+                        }
+                    } else {
+                        throw new Exception("Formulário não encontrado!",400);
                     }
                 }
                 break;
@@ -241,7 +253,7 @@ class FormularioControl extends CrudControl
         $odtManipulator->setCampo("tarefa",$tarefa->getNome());
         $odtManipulator->setCampo("atividade",$viagem->getAtividade());
         $odtManipulator->setCampo("veiculo",$viagem->getVeiculo()->getNome());
-        $odtManipulator->setCheckBox($viagem->getViajante()->getAtuacao(),["col"=>"Colaborador","bol"=>"Bolsista/Voluntario","ter"=>"Terceiros"]);
+        $odtManipulator->setCheckBox($viagem->getViajante()->getAtuacao(),["col"=>"Colaborador","bol"=>"Bolsista/Voluntário","ter"=>"Terceiros"]);
         $odtManipulator->setCheckBox($viagem->getTipo(),["trab"=>"Viagem a trabalho","eve"=>"Evento/Congresso","trei" => "Viagem treinamento/aprimoramento"]);
         $odtManipulator->setCheckBox($viagem->getTipoPassagem(),["anf" => "Aérea nacional (com franquia de bagagem)","an" => "Aérea nacional (sem franquia de bagagem)", "ai" => "Aérea internacional", "tn" => "Terrestre nacional","ti" => "Terrestre internacional"]);
 

@@ -2,15 +2,21 @@
 <html lang="pt">
 <head>
     <meta charset="utf-8"/>
-    <title>Perfil Usuario</title>
+    <title>LPM - Erro Sem Acesso</title>
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../Usuario/telaLogin/styleLogin.css" />
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" media="screen" href="/src/View/errorPages/styleSemAcesso.css"/>
 </head>
 <body>
 
-<img style="float: left" src="/assets/images/mascote/RaioBarrado.png">
-<h1>Você não possui acesso a essa tarefa<br>Selecione um projeto <a href="/">aqui</a></h1>
-
+<div class="container-aviso">
+    <img class="aviso-img" src="/assets/images/mascote/RaioBarrado.png" alt="Personagem impedido de entrar por fita de segurança. Ilustração">
+    <h1>Você não possui acesso a esta página </h1>
+    <a class="botao-voltar" href="#" onclick="history.go(-2)">Voltar</a>
+</div>
 
 </body>
 </html>

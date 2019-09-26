@@ -37,7 +37,7 @@ class TarefaControl extends CrudControl {
                                 $this->respostaSucesso("Nenhuma Tarefa Encontrada",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você não possui permissão para utilziar essa funcionalidade");
+                            throw new Exception("Você não possui permissão para utilziar essa funcionalidade",401);
                         }
                     }
                     // /api/tarefas/{idTarefa}
@@ -55,7 +55,7 @@ class TarefaControl extends CrudControl {
                             $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
                         }
                         else {
-                            throw new Exception("Você não tem permissão para acessar esta tarefa");
+                            throw new Exception("Você não tem permissão para acessar esta tarefa",401);
                         }
                     }
                     break;
@@ -88,10 +88,10 @@ class TarefaControl extends CrudControl {
                 if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
                     $this->DAO->cadastrar($tarefa,$info->idProjeto);
                 } else {
-                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
+                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',400);
                 }
             } else {
-                throw new Exception("Você não tem permissao para adicionar uma tarefa neste projeto");
+                throw new Exception("Você não tem permissao para adicionar uma tarefa neste projeto",401);
             }
         } else {
             throw new Exception("Parametros insuficientes ou mal estruturados",400);
@@ -106,7 +106,7 @@ class TarefaControl extends CrudControl {
             $this->DAO->excluir($id);
             $projetoControl->atualizaTotal($idProjeto);
         } else {
-            throw new Exception("Você não tem permissão para excluir esta tarefa");
+            throw new Exception("Você não tem permissão para excluir esta tarefa",401);
         }
     }
 
@@ -126,10 +126,10 @@ class TarefaControl extends CrudControl {
                 if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
                     $this->DAO->atualizar($tarefa);
                 } else {
-                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',401);
+                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',400);
                 }
             } else {
-                throw new Exception("Você não tem permissão para atualizar esta tarefa");
+                throw new Exception("Você não tem permissão para atualizar esta tarefa",401);
             }
         } else {
             throw new Exception("Parametros insuficientes ou mal estruturados",400);
@@ -142,14 +142,14 @@ class TarefaControl extends CrudControl {
         if ($tarefa) {
             return $tarefa;
         } else {
-            throw new Exception("Tarefa não encontrada");
+            throw new Exception("Tarefa não encontrada",404);
         }
     }
 
     public function descobrirIdProjeto($id){
         $idProjeto = $this->DAO->descobrirIdProjeto($id);
         if (is_null($idProjeto)) {
-            throw new Exception("Tarefa não encontrada");
+            throw new Exception("Tarefa não encontrada",404);
         } else {
             return $idProjeto;
         }
