@@ -101,7 +101,6 @@ class FormularioModel
 
     public function setUsuario(UsuarioModel $usuario)
     {
-        var_dump($usuario);
         $this->usuario = $usuario;
     }
 
@@ -112,7 +111,7 @@ class FormularioModel
 
     public function setPastaFormulario()
     {
-        $this->pastaFormulario = $_SERVER['DOCUMENT_ROOT']."/assets/files/{$this->usuario->getId()}/{$this->nome}";
+        $this->pastaFormulario = "assets/files/{$this->usuario->getId()}/{$this->nome}";
     }
 
 

@@ -150,10 +150,10 @@ class FormularioControl extends CrudControl
     private function converterParaHTML(FormularioModel $formulario)
     {
         putenv('PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin');
-        putenv('HOME=' . $this->pastaUsuario);
+        putenv('HOME='.$_SERVER["DOCUMENT_ROOT"]."/".$formulario->getPastaFormulario());
         $comando = "soffice --headless --convert-to html:HTML:EmbedImages --outdir ";
-        $comando .= $formulario->getPastaFormulario()." ";
-        $comando .= $formulario->getCaminhoDocumento();
+        $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getPastaFormulario()." ";
+        $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getCaminhoDocumento();
 
         if (exec($comando)) {
             $htmlManipulator = new HtmlManipulator($formulario->getCaminhoHTML());

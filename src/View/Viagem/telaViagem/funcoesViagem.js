@@ -15,7 +15,20 @@ window.onload = function () {
                 templateDono(viagem);
                 let botaoFormulario = document.getElementById("gerarFormulario");
                 botaoFormulario.onclick = function () {
-
+                    requisicao("POST","/api/formularios/requisicaoViagem/"+idViagemRequisitada,null,true,function (resposta) {
+                        console.log(resposta);
+                        if (resposta.status === "sucesso") {
+                            xhr = new XMLHttpRequest();
+                            console.log("/"+resposta.dados.caminhoDocumento);
+                            xhr.open("GET","/"+resposta.dados.caminhoDocumento);
+                            xhr.send();
+                            xhr.onload = function () {
+                                console.log(xhr.response);
+                            }
+                        } else {
+                            exibirMensagem(resposta.mensagem,true);
+                        }
+                    })
                 };
             } else {
                 templateAdmin(viagem);

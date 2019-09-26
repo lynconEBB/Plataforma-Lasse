@@ -99,7 +99,7 @@ class UsuarioControl extends CrudControl {
             if(!$this->DAO->listarPorLogin($info->login)){
                 // Verifica se é um cadastro de administrador e valida a senha de administrador
                 $admin = 0;
-                $caminhoPadrao = "/assets/files/default/perfil.png";
+                $caminhoPadrao = "assets/files/default/perfil.png";
                 if (isset($info->senhaAdmin)) {
                     if (password_verify($info->senhaAdmin,'$2y$12$N82ObBFr3YTAgMqEck5arOTgpunRBKuUxYLK4w7x0RY35Ariwjg.O')){
                         $admin = 1;
@@ -114,7 +114,8 @@ class UsuarioControl extends CrudControl {
                 // verifica se uma foto foi mandada, caso sim, o arquivo é colocado no servidor
                 if (isset($info->foto)) {
                     $usuario->setId($this->DAO->pdo->lastInsertId());
-                    $this->salvarFoto($usuario->getId(),$info->foto);
+                    $caminhoFoto = $this->salvarFoto($usuario->getId(),$info->foto);
+                    $usuario->setFoto($caminhoFoto);
                     $this->DAO->alterar($usuario);
                 }
             }else {
@@ -132,8 +133,7 @@ class UsuarioControl extends CrudControl {
         if ($projetos != false) {
             foreach ($projetos as $projeto){
                 if ($projetoControl->verificaDono($projeto->getId(),$this->requisitor['id'])) {
-                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.
-                    Exclua seus projetos ou transfira o dominio para outro funcionário");
+                    throw new Exception("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário");
                 }
             }
         }
