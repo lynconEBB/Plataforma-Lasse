@@ -12,7 +12,7 @@
 .graficos1 {
     box-sizing: border-box;
     max-width: 1300px;
-    min-width: 500px;
+    min-width: 380px;
     width: calc(100% - 500px);
     margin-bottom: 40px;
     height: 600px;

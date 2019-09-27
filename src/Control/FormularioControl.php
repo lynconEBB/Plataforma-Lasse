@@ -116,6 +116,9 @@ class FormularioControl extends CrudControl
             $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
 
             $formulario = new FormularioModel($nome,$usuario);
+            if (!is_dir($formulario->getPastaFormulario())) {
+                mkdir($formulario->getPastaFormulario());
+            }
 
             if (move_uploaded_file($arquivo['tmp_name'],$formulario->getCaminhoDocumento())) {
                 $this->converterParaHTML($formulario);
@@ -124,6 +127,9 @@ class FormularioControl extends CrudControl
             } else {
                 if (is_file($formulario->getCaminhoDocumento())) {
                     unlink($formulario->getCaminhoDocumento());
+                }
+                if (is_dir($formulario->getPastaFormulario())) {
+                    rmdir($formulario->getPastaFormulario());
                 }
                 throw new Exception("Não foi possível upar o arquivo");
             }

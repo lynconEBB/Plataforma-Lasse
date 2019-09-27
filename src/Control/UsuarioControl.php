@@ -289,7 +289,7 @@ class UsuarioControl extends CrudControl {
                     unlink($caminhoFoto);
                 }
                 $arquivoFoto = fopen($caminhoFoto,"wb");
-                fwrite($arquivoFoto,base64_decode($partes[1]));
+                fwrite($arquivoFoto,base64_decode($img));
                 fclose($arquivoFoto);
                 return $caminhoFoto;
             } else {

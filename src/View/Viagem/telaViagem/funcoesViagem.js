@@ -26,7 +26,7 @@ window.onload = function () {
                             let formulario = resposta.dados;
                             var link = document.createElement('a');
                             link.href = "/"+formulario.caminhoDocumento;
-                            link.download = "vaiporra.odt";
+                            link.download = formulario.nome+".odt";
                             link.click();
                         } else {
                             exibirMensagem(resposta.mensagem,true);
