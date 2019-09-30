@@ -61,15 +61,11 @@ input[type="checkbox"] {
     background: #06404d;
 }
 .sidebar-item {
+    font-size: 1.2rem;
     color: white;
     display: block;
     padding: 20px 20px 10px 30px;
     cursor: pointer;
-}
-.sidebar-item-text{
-    position: relative;
-    margin-left: 4px;
-    top: -6px;
 }
 .sidebar-item:first-of-type {
     margin-top: 80px;
@@ -80,9 +76,11 @@ input[type="checkbox"] {
 .sidebar-item:hover, .sidebar-item:active{
     background: #275a66;
 }
+
 .btn-sair {
     font-size: 1.2rem;
     position: relative;
+    vertical-align: bottom;
     top: -4px;
 }
 .container-sair {
@@ -124,6 +122,11 @@ input[type="checkbox"] {
         width: calc(100% - 80px);
         left: 80px;
         padding: 20px 5px !important;
+    }
+}
+@media (max-height: 490px) {
+    .sidebar {
+        overflow-y: scroll;
     }
 }
 

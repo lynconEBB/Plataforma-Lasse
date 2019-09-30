@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+    <link rel="stylesheet" href="/src/View/Default/css/reset.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/material-icons.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <!--<link rel="stylesheet" href="/src/View/">-->
+    <title>Teste</title>
+</head>
+<body>
+
+<aside class="mensagem">
+    <p class="mensagem-texto"></p>
+    <i class="material-icons botao-fechar-mensagem">close</i>
+</aside>
+
+<nav class="sidebar">
+    <ul class="container-itens">
+        <li class="sidebar-item" id="dashboards"><i class="material-icons">dashboard</i>Dashboard</li>
+        <li class="sidebar-item selecionado" id="perfil"><i class="material-icons">person</i>Perfil</li>
+        <li class="sidebar-item" id="projetos"><i class="material-icons">work</i>Projetos</li>
+        <li class="sidebar-item" id="imprevistos"><i class="material-icons">book</i>Imprevistos</li>
+        <li class="sidebar-item" id="formularios"><i class="material-icons">assignment</i>Formulários</li>
+        <li class="sidebar-item" id="graficos"><i class="material-icons">assessment</i>Gráficos</li>
+    </ul>
+    <div class="container-sair">
+        <i class="material-icons">cancel</i>
+        <span class="btn-sair">Sair</span>
+    </div>
+</nav>
+<header class="main-header">
+    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo LPM">
+    <div class="user-info">
+        <span class="user-name"></span>
+        <div class="container-user-img">
+            <img src="/assets/files/default/perfil.png" class="user-img">
+        </div>
+    </div>
+</header>
+<main class="main-content">
+    <button id="btn1" class="botao alerta" type="button">Testar</button>
+    <button class="botao aviso" type="button">Testar</button>
+    <button class="botao center sucesso" type="button">Testar</button>
+    <button class="botao info" type="button">testar</button>
+
+    <hr>
+</main>
+<script src="/src/View/Default/js/requisicoes.js"></script>
+<script src="/src/View/Default/js/mensagem.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Default/js/modal.js"></script>
+<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Default/teste.js"></script>
+</body>
+</html>

@@ -13,7 +13,6 @@ class AtividadeControl extends CrudControl {
         $this->DAO = new AtividadeDao();
         parent::__construct($url);
     }
-
     public function processaRequisicao()
     {
         if (!is_null($this->url)) {
@@ -165,6 +164,7 @@ class AtividadeControl extends CrudControl {
         $atividades = $this->DAO->listarPorIdUsuario($idUsuario);
         return $atividades;
     }
+
     //  Verifica se o requisitor esta presente no projeto
     public function verificaPermissao($idTarefa)
     {

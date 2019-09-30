@@ -73,6 +73,10 @@ class Router{
         elseif ($this->url[0] == "erro" && $this->url[1] == "naoEncontrado" && count($this->url) == 2) {
             require "src/View/errorPages/erro404.html";
         }
+        // /erro/permissao
+        elseif ($this->url[0] == "teste" && count($this->url) == 1) {
+            require "src/View/Default/teste.html";
+        }
         else{
             require "src/View/errorPages/erro404.html";
         }

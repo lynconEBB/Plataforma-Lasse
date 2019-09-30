@@ -1,20 +1,16 @@
-function exibirMensagem(texto,erro) {
-    let mensagem = document.querySelector(".mensagem");
-    let textoMensagem = document.querySelector(".mensagem-texto");
+var botaoMensagem = document.querySelector(".botao-fechar-mensagem");
+var mensagem = document.querySelector(".mensagem");
+var textoMensagem = document.querySelector(".mensagem-texto");
 
+function exibirMensagem(texto,erro) {
     textoMensagem.textContent = texto;
     if (erro === true) {
-        mensagem.className = "mensagem mensagem-erro mensagem-ativa";
+        mensagem.className = "mensagem erro ativa";
     } else {
-        mensagem.className = "mensagem mensagem-sucesso mensagem-ativa";
+        mensagem.className = "mensagem sucesso ativa";
     }
 }
 
-let botaoMensagem = document.querySelector(".botao-fechar-mensagem");
-let mensagem = document.querySelector(".mensagem");
-
-botaoMensagem.addEventListener("click",function () {
-    mensagem.classList.remove("mensagem-ativa");
-});
+botaoMensagem.onclick = () => mensagem.classList.remove("ativa");
 
 

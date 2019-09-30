@@ -1,79 +1,35 @@
-.botao-padrao {
-    font-size: 1.5rem;
-    color: #06404d;
-    background-color: #67e69c;
-    margin: 0 auto;
-    border: none;
-    padding: 10px 0;
+.botao {
     cursor: pointer;
-    min-width: 120px;
-    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.25);
-}
-
-.botao-padrao:hover {
-    box-shadow: none;
-}
-.botao-padrao:active, .botao-padrao:focus{
-    outline: none;
-}
-
-.botao-adicionar{
-    background-color: #ffdf69;
-    padding: 10px 20px;
-    border: none;
-    font-weight: bolder;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
-    transition: all ease-in-out 150ms;
-    transform: scale(1.005);
-    display: inline;
-    cursor: pointer;
-    margin-left: 10px;
-}
-.botao-adicionar i{
-    position: relative;
-    bottom: -4px;
-    font-size: 1rem;
-    margin-right: 1px;
-}
-
-.botao-adicionar:hover {
-    transform: scale(1);
-    box-shadow: none;
-}
-
-.botao-excluir {
-    background-color: #e45d5a;
-    color: #06404d;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: absolute;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-}
-
-.botao-alterar {
-    font-size: 1.5rem;
-    background-color: #12bfe5;
-    color: #06404d;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-}
-.botao-especial {
-    color: #06404d;
-    background-color: #c97bff;
-    border: none;
     font-size: 1.2rem;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
+    border: none;
     padding: 10px 20px;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+    transition: transform ease-in-out 100ms, box-shadow ease-in-out 100ms;
 }
-
-.botao-adicionar:focus, .botao-adicionar:active, .botao-especial:active {
-    transform: scale(0.98);
+.botao:active {
     outline: none;
+    transform: scale(0.98);
+    box-shadow: none;
+}
+.botao:focus {
+    outline: none;
+}
+.botao.alerta {
+    background-color: #e45d5a;
+    color: white;
+}
+.botao.sucesso {
+    background-color: #67e69c;
+}
+.botao.info {
+    background-color: #12bfe5;
+    color: white;
+}
+.botao.aviso {
+    background-color: #ffdf69;
+}
+.botao.center {
+    display: block;
+    margin: 0 auto;
 }
 
