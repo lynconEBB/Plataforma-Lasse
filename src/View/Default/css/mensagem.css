@@ -22,7 +22,7 @@
     background-color: #bbd070;
 }
 
-.mensagem-texto {
+#mensagem-texto {
     font-size: 1.1rem;
     display: flex;
     align-items: center;
@@ -32,6 +32,8 @@
     margin-left: auto;
     color: #5a6268;
     cursor: pointer;
+    background: transparent;
+    border: none;
 }
 .botao-fechar-mensagem:hover,.botao-fechar-mensagem:active {
     color: black;

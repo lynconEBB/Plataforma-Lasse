@@ -1,34 +1,23 @@
-let btnSair = document.querySelector(".container-sair");
-btnSair.onclick = function () {
-    requisicao("DELETE","/api/users/deslogar",null,true,function (resposta) {
-        if (resposta.status === "erro") {
-            decideErros(resposta)
-        } else {
-            eraseCookie('token');
-            window.location.href = "/"
-        }
-    })
-};
+
 
 function setLinks(idUsuario) {
     let btnProjetos = document.querySelector("#projetos");
-    btnProjetos.onclick = () => window.location.href = "/projetos/user/"+idUsuario;
+    btnProjetos.href = "/projetos/user/"+idUsuario;
     let btnGraficos = document.querySelector("#graficos");
-    btnGraficos.onclick = () => window.location.href = "/graficos/user/"+idUsuario;
+    btnGraficos.href = "/graficos/user/"+idUsuario;
     let btnFormularios = document.querySelector("#formularios");
-    btnFormularios.onclick = () => window.location.href = "/formularios/user/"+idUsuario;
+    btnFormularios.href = "/formularios/user/"+idUsuario;
     let btnPerfil = document.querySelector("#perfil");
-    btnPerfil.onclick = () => window.location.href = "/perfil/user/"+idUsuario;
+    btnPerfil.href = "/perfil/user/"+idUsuario;
     let btnDashboard = document.querySelector("#dashboards");
-    btnDashboard.onclick = () => window.location.href = "/dashboard/user/"+idUsuario;
+    btnDashboard.href = "/dashboard/user/"+idUsuario;
     let btnImprevistos = document.querySelector("#imprevistos");
-    btnImprevistos.onclick = () => window.location.href = "/imprevistos/user/"+idUsuario;
-
+    btnImprevistos.href = "/imprevistos/user/"+idUsuario;
 }
 
 function verificaMensagem() {
     let url = window.location.href;
-    console.log(url);
+
     if (url.indexOf("?") !== -1) {
         let variavel = url.substring(url.indexOf("?")+1,url.length);
         let partes = variavel.split("=");
@@ -63,3 +52,6 @@ function decideErros(resposta) {
         window.location.href = "/erro/naoEncontrado";
     }
 }
+
+
+

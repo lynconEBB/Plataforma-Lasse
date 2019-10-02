@@ -5,6 +5,16 @@ body{
 input[type="checkbox"] {
     display: none;
 }
+.escondeVisualmente {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
 /*********header*******************/
 .main-header {
     top: 0;
@@ -14,7 +24,7 @@ input[type="checkbox"] {
     width: 100%;
     background: #67e69c;
     height: 60px;
-    padding: 10px 50px;
+    padding: 0 50px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -28,11 +38,16 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     height: 100%;
+    padding: 0 10px;
+}
+.user-info:focus,.user-info:hover {
+    background: #509f59;
+    outline: none;
 }
 .user-name {
     color: #06404d;
     font-size: 1.2rem;
-    margin-right: 50px;
+    margin-right: 10px;
 }
 .container-user-img {
     position: relative;
@@ -45,7 +60,9 @@ input[type="checkbox"] {
     width: 100%;
     object-fit: cover;
 }
-#hamburguer {
+#botao-menu {
+    border: none;
+    background: transparent;
     vertical-align: bottom;
     cursor: pointer;
     display: none;
@@ -53,7 +70,21 @@ input[type="checkbox"] {
 #check:checked ~ .sidebar {
     transform: translateX(200px);
 }
+.user-menu {
+    display: none;
+    position: absolute;
+    padding: 20px;
+    right: 50px;
+}
+.user-menu.ativo {
+    display: block;
+    background: #5a6268;
+}
+.user-menu-item {
+    text-decoration: none;
+    color: white;
 
+}
 /**************sidebar********************/
 .sidebar{
     z-index: 2;
@@ -71,30 +102,24 @@ input[type="checkbox"] {
 .sidebar-item {
     font-size: 1.2rem;
     color: white;
-    display: block;
     padding: 20px 20px 10px 30px;
     cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
 }
-.sidebar-item:first-of-type {
+
+.container-itens li:first-child {
     margin-top: 80px;
 }
 .sidebar-item.selecionado{
     background: #275a66;
 }
-.sidebar-item:hover, .sidebar-item:active{
-    background: #275a66;
+.sidebar-item:hover, .sidebar-item:active,.sidebar-item:focus{
+    background: #1b6f76;
 }
-
-.btn-sair {
-    font-size: 1.2rem;
-    position: relative;
-    vertical-align: bottom;
-    top: -4px;
-}
-.container-sair {
-    display: block;
-    padding: 20px 20px 40px 30px;
-    cursor: pointer;
+.sidebar-item.sair {
     color: #e45d5a;
 }
 /**Container de Conteudo*/
@@ -112,16 +137,22 @@ input[type="checkbox"] {
     .header-logo{
         display: none;
     }
+    .user-name {
+        display: none;
+    }
     .main-content{
         width: 100%;
         left: 5px;
         padding: 20px 5px !important;
     }
-    #hamburguer {
+    #botao-menu {
         display: block;
     }
     .sidebar {
         left: -200px;
+    }
+    .sidebar.ativa {
+        transform: translateX(200px);
     }
 }
 @media (max-height: 490px) {

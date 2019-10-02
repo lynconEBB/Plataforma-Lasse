@@ -17,43 +17,89 @@
 </head>
 <body>
 
-<aside class="mensagem">
-    <p class="mensagem-texto"></p>
-    <i class="material-icons botao-fechar-mensagem">close</i>
-</aside>
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto">
+    </span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">
+            close
+        </i>
+    </button>
+</div>
+<header class="main-header">
+    <button id="botao-menu" aria-hidden="true">
+        <i class="material-icons md-25">menu</i>
+    </button>
+
+    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo Lasse Project Manager">
+    <div class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de" aria-labelledby="name">
+        <span class="user-name" id="name"><span class="escondeVisualmente">Ações de</span></span>
+        <div class="container-user-img">
+            <img src="/assets/files/default/perfil.png" class="user-img" alt="Foto de perfil do usuário">
+        </div>
+    </div>
+
+    <ul role="menu" tabindex="-1" class="user-menu ativo">
+        <li>
+            <a class="user-menu-item" id="perfil" href="#">
+                <i class="material-icons" aria-hidden="true">person</i>
+                Perfil
+            </a>
+        </li>
+        <li>
+            <a href="#" class="user-menu-item" id="sair">
+                <i class="material-icons" aria-hidden="true">cancel</i>
+                Sair
+            </a>
+        </li>
+    </ul>
+
+</header>
 
 <nav class="sidebar">
     <ul class="container-itens">
-        <li class="sidebar-item" id="dashboards"><i class="material-icons">dashboard</i>Dashboard</li>
-        <li class="sidebar-item selecionado" id="perfil"><i class="material-icons">person</i>Perfil</li>
-        <li class="sidebar-item" id="projetos"><i class="material-icons">work</i>Projetos</li>
-        <li class="sidebar-item" id="imprevistos"><i class="material-icons">book</i>Imprevistos</li>
-        <li class="sidebar-item" id="formularios"><i class="material-icons">assignment</i>Formulários</li>
-        <li class="sidebar-item" id="graficos"><i class="material-icons">assessment</i>Gráficos</li>
+        <li>
+            <a href="#" class="sidebar-item" id="dashboards">
+                <i class="material-icons" aria-hidden="true">dashboard</i>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="#" class="sidebar-item" id="projetos">
+                <i class="material-icons" aria-hidden="true">work</i>
+                Projetos
+            </a>
+        </li>
+        <li>
+            <a href="#" class="sidebar-item" id="imprevistos">
+                <i class="material-icons" aria-hidden="true">book</i>
+                Imprevistos
+            </a>
+        </li>
+        <li>
+            <a href="#" id="formularios" class="sidebar-item">
+                <i class="material-icons" aria-hidden="true">assignment</i>
+                Formulários
+            </a>
+        </li>
+        <li  >
+            <a href="#" class="sidebar-item" id="graficos">
+                <i class="material-icons" aria-hidden="true">assessment</i>
+                Gráficos
+            </a>
+        </li>
     </ul>
-    <div class="container-sair">
-        <i class="material-icons">cancel</i>
-        <span class="btn-sair">Sair</span>
-    </div>
 </nav>
-<header class="main-header">
-    <input type="checkbox" id="check">
-    <label id="hamburguer" for="check"><i class="material-icons md-25">menu</i></label>
-    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo LPM">
-    <div class="user-info">
-        <span class="user-name"></span>
-        <div class="container-user-img">
-            <img src="/assets/files/default/perfil.png" class="user-img">
-        </div>
-    </div>
-</header>
+
 <main class="main-content">
-    <button id="btn1" class="botao alerta" type="button">Testar</button>
-    <button class="botao aviso" type="button">Testar</button>
-    <button class="botao center sucesso" type="button">Testar</button>
-    <button class="botao info" type="button">testar</button>
+    <button class="botao aviso" type="button">botao1</button>
+    <button class="botao center sucesso" type="button">boatao2</button>
+    <button id="btn1" class="botao alerta" type="button">boatao3</button>
+    <button class="botao info" type="button">botao4</button>
     <hr>
 </main>
+
+<script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/requisicoes.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
