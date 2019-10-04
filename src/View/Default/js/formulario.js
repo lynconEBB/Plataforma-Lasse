@@ -1,4 +1,18 @@
 let inputs = document.querySelectorAll(".form-input");
+let selects = document.querySelectorAll(".form-select");
+
+for( let input of inputs) {
+    if (input.value !== "") {
+        input.parentElement.classList.add("selecionado");
+        input.previousElementSibling.classList.add("selecionado");
+    }
+}
+for( let select of selects) {
+    if (select.value !== "") {
+        select.parentElement.classList.add("selecionado");
+        select.previousElementSibling.classList.add("selecionado");
+    }
+}
 
 inputs.forEach(function (input) {
     input.addEventListener("focus",function () {
@@ -16,8 +30,6 @@ inputs.forEach(function (input) {
        }
    })
 });
-
-let selects = document.querySelectorAll(".form-select");
 
 selects.forEach(function (select) {
     select.addEventListener("focus",function () {

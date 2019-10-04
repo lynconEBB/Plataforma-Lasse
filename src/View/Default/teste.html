@@ -5,18 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+
     <link rel="stylesheet" href="/src/View/Default/css/reset.css">
-    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/material-icons.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
-    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
-    <link rel="stylesheet" href="/src/View/Default/css/material-icons.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
     <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
-    <!--<link rel="stylesheet" href="/src/View/">-->
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+
     <title>Teste</title>
 </head>
 <body>
-
+<!--------- Mensagem ----------->
 <div class="mensagem" role="alert" tabindex="-1">
     <span id="mensagem-texto">
     </span>
@@ -26,28 +27,30 @@
         </i>
     </button>
 </div>
+
+<!-------- Header -------------->
 <header class="main-header">
-    <button id="botao-menu" aria-hidden="true">
+    <button id="botao-menu" aria-hidden="true" tabindex="-1">
         <i class="material-icons md-25">menu</i>
     </button>
-
     <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo Lasse Project Manager">
-    <div class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de" aria-labelledby="name">
+
+    <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de" aria-labelledby="name">
         <span class="user-name" id="name"><span class="escondeVisualmente">Ações de</span></span>
         <div class="container-user-img">
-            <img src="/assets/files/default/perfil.png" class="user-img" alt="Foto de perfil do usuário">
+                <img src="/assets/files/default/perfil.png" class="user-img" alt="Foto de perfil do usuário">
         </div>
-    </div>
-
-    <ul role="menu" tabindex="-1" class="user-menu ativo">
+    </button>
+    <ul tabindex="-1" class="user-menu">
         <li>
-            <a class="user-menu-item" id="perfil" href="#">
+            <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
                 <i class="material-icons" aria-hidden="true">person</i>
                 Perfil
             </a>
         </li>
+        <hr aria-hidden="true">
         <li>
-            <a href="#" class="user-menu-item" id="sair">
+            <a href="#" class="user-menu-item sair" id="sair" tabindex="-1">
                 <i class="material-icons" aria-hidden="true">cancel</i>
                 Sair
             </a>
@@ -56,6 +59,7 @@
 
 </header>
 
+<!--------- Side Bar ----------->
 <nav class="sidebar">
     <ul class="container-itens">
         <li>
@@ -92,11 +96,51 @@
 </nav>
 
 <main class="main-content">
-    <button class="botao aviso" type="button">botao1</button>
-    <button class="botao center sucesso" type="button">boatao2</button>
-    <button id="btn1" class="botao alerta" type="button">boatao3</button>
-    <button class="botao info" type="button">botao4</button>
-    <hr>
+    <h1> Funcionaliaddes</h1>
+
+    <form class="form-padrao" style="background-color: #06404d">
+        <div class="form-group">
+            <label class="form-label" for="nome">Nome Do Usuario Logado</label>
+            <input type="text" id="nome" class="form-input">
+        </div>
+        <div class="form-group">
+            <i class="material-icons select-seta">arrow_drop_down</i>
+            <label class="form-label" for="formacao">Formação</label>
+            <select id="formacao" class="form-select">
+                <option value="" disabled selected></option>
+                <option>Designer</option>
+                <option>Programador</option>
+                <option>Diretor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" class="real-checkbox" id="admin">
+            <label class="form-checkbox" for="admin"></label>
+            <label class="checkbox-label" for="admin">Administrador</label>
+        </div>
+    </form>
+    <br>
+    <form class="form-padrao" style="background-color: #275a66">
+        <input type="text" id="naosei" class="alterar-titulo">
+        <textarea class="alterar-area">lkfdkgjdflkgjdfl</textarea>
+        <div class="form-group">
+            <label class="alterar-label" for="sobrenome">Sobrenome Do Usuario Logado</label>
+            <input type="text" id="sobrenome" class="alterar-input">
+        </div>
+        <div class="form-group">
+            <i class="material-icons select-seta alterar">arrow_drop_down</i>
+            <label class="alterar-label" for="atuacao">Atuação</label>
+            <select id="atuacao" class="alterar-select">
+                <option value="" disabled selected></option>
+                <option>Designer</option>
+                <option>Programador</option>
+                <option>Diretor</option>
+            </select>
+        </div>
+        <button class="botao sucesso center" id="btn">Concluido</button>
+
+    </form>
+
 </main>
 
 <script src="/src/View/Default/js/body.js"></script>

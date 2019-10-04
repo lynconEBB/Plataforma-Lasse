@@ -1,9 +1,7 @@
 body{
     background-color: #cdd1d2;
+    min-width: 150px;
     font-family: 'Roboto', sans-serif;
-}
-input[type="checkbox"] {
-    display: none;
 }
 .escondeVisualmente {
     border: 0;
@@ -24,7 +22,7 @@ input[type="checkbox"] {
     width: 100%;
     background: #67e69c;
     height: 60px;
-    padding: 0 50px;
+    padding: 0 30px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -38,10 +36,13 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     height: 100%;
+    background: transparent;
+    border: none;
     padding: 0 10px;
+    cursor: pointer;
 }
-.user-info:focus,.user-info:hover {
-    background: #509f59;
+.user-info:focus, .user-info:hover {
+    background: #99F8C1;
     outline: none;
 }
 .user-name {
@@ -70,20 +71,43 @@ input[type="checkbox"] {
 #check:checked ~ .sidebar {
     transform: translateX(200px);
 }
+
 .user-menu {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
     padding: 20px;
-    right: 50px;
+    top: 74px;
+    right: 10px;
+    background: #203440;
+    max-width: 200px;
+    width: 90%;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+    box-sizing: border-box;
+    transition: opacity ease-in-out 300ms;
+}
+.user-menu::before {
+    content:"";
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #203440;
+    position: absolute;
+    top: -13px;
+    right: 60px;
 }
 .user-menu.ativo {
-    display: block;
-    background: #5a6268;
+    opacity: 1;
+    pointer-events: all;
 }
 .user-menu-item {
     text-decoration: none;
     color: white;
-
+    font-size: 1.2rem;
+}
+.user-menu-item.sair{
+    color: #e45d5a;
 }
 /**************sidebar********************/
 .sidebar{
@@ -142,7 +166,7 @@ input[type="checkbox"] {
     }
     .main-content{
         width: 100%;
-        left: 5px;
+        left: 0;
         padding: 20px 5px !important;
     }
     #botao-menu {

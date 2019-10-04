@@ -1,18 +1,24 @@
 .form-padrao {
     width: 100%;
     display: flex;
+    padding: 0 20px;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
 }
 .form-group {
-    width: 60%;
+    box-sizing: border-box;
+    max-width: 500px;
+    min-width: 50px;
+    width: 100%;
     margin: 30px auto;
     position: relative;
 }
 .form-label {
     cursor: text;
     position: absolute;
-    bottom: 0;
+    word-break: break-word;
+    bottom: 2px;
     left: 0;
     color: white;
     transition: all ease-in-out 300ms;
@@ -55,7 +61,6 @@
     width: 100%;
     background: #67e69c;
 }
-
 .form-input:focus {
     outline: none;
 }
@@ -66,10 +71,14 @@
         background: transparent;
     }
 }
-
 input:-webkit-autofill {
     -webkit-animation-name: autofill;
     -webkit-animation-fill-mode: both;
+}
+
+.real-checkbox {
+    position: absolute;
+    left: -9999px;
 }
 .checkbox-label {
     display: inline-block;
@@ -98,12 +107,21 @@ input:-webkit-autofill {
     left: 1px;
     transition: all ease-in-out 0.3s;
 }
+.real-checkbox:focus + .form-checkbox {
+    border: #12bfe5 solid 2px;
+}
+.real-checkbox:focus ~ .checkbox-label {
+    color: #12bfe5;
+    font-weight: bolder;
+}
 .real-checkbox:checked + .form-checkbox::after {
     left : 20px;
 }
 .real-checkbox:checked + .form-checkbox {
     background-color: #67e69c;
 }
+
+
 
 .form-select{
     width: 100%;
@@ -115,21 +133,82 @@ input:-webkit-autofill {
     color: white;
     font-size: 1.2rem;
 }
+
 .form-select:focus{
     -moz-outline-color:transparent;
     outline: none;
 }
-
-#select-seta{
-    font-size: 1.2rem;
+.select-seta{
+    font-size: 2rem;
     color: white;
     position: absolute;
     right: 0;
     pointer-events: none;
 }
-
 .form-select option {
     background-color: #06404d;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     border: none;
+}
+
+.alterar-titulo {
+    font-size: 3rem;
+    text-align: center;
+    background: #06404d;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.33);
+    padding: 10px;
+    margin-top: 10px;
+    border: 6px solid #06404d;
+    color: white;
+}
+.alterar-label{
+    color: white;
+    text-align: center;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.alterar-input {
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    background: #06404d;
+    border: 4px solid #06404d;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.33);
+}
+.alterar-area {
+    resize: none;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #06404d;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.33);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Roboto', sans-serif !important;
+    border: 6px solid #06404d;
+    color: #c9c9c9;
+}
+
+.alterar-select {
+    appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    background: #06404d;
+    border: 4px solid #06404d;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.33);
+}
+.select-seta.alterar {
+    bottom:7px;
+    right: 5px;
 }
