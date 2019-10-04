@@ -1,4 +1,10 @@
 var modalBack = document.querySelector(".modal-background");
+let modais = document.getElementsByClassName(".modal");
+
+for (let modal in modais) {
+
+}
+
 
 function mostrarModal(idModal) {
     let modal = document.querySelector(idModal);

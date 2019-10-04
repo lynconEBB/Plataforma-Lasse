@@ -3,8 +3,13 @@
     font-size: 1.2rem;
     border: none;
     padding: 10px 20px;
+    position: relative;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
     transition: transform ease-in-out 100ms, box-shadow ease-in-out 100ms;
+}
+.botao:focus {
+    border: #12bfe5 solid 3px;
 }
 .botao:active {
     outline: none;
