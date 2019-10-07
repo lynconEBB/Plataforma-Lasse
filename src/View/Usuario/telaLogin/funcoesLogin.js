@@ -14,7 +14,7 @@ checkAdmin.onclick = function () {
 var fotoMudou = false;
 let inputFoto = document.querySelector("#foto");
 var foto = document.querySelector(".foto");
-inputFoto.addEventListener("change",function () {
+inputFoto.addEventListener("change",function (event) {
     let files = this.files;
     if (FileReader && files && files.length) {
         if (files[0].type === "image/png" || files[0].type === "image/jpg" || files[0].type === "image/jpeg") {
@@ -25,7 +25,7 @@ inputFoto.addEventListener("change",function () {
             };
             reader.readAsDataURL(files[0]);
         } else {
-            exibirMensagem("Formato de arquivo não suportado",true)
+            exibirMensagem("Formato de arquivo não suportado",true,event.target)
         }
     }
 });
@@ -57,10 +57,10 @@ loginInputs.forEach(function (input) {
 /*
 Login
  */
-let botaoEnviar =  document.querySelector("#form-login");
-botaoEnviar.addEventListener("submit",logar);
+let botaoEnviar =  document.querySelector("#botao-enviar");
+botaoEnviar.addEventListener("click",logar);
 
-async function logar(event) {
+function logar(event) {
     event.preventDefault();
     let request = {
         senha: document.getElementById("senha").value,
@@ -73,11 +73,11 @@ async function logar(event) {
                 setCookie('token',resposta.dados,1);
                 window.location.href = "/dashboard/user/"+resposta.requisitor.id;
             } else {
-                exibirMensagem(resposta.mensagem,true);
+                exibirMensagem(resposta.mensagem,true,event.target);
             }
         });
     } else {
-        exibirMensagem("Os campos de Usuario e Senha precisam possuir mais de 6 caracteres",true);
+        exibirMensagem("Os campos de Usuario e Senha precisam possuir mais de 6 caracteres",true,event.target);
     }
 }
 
@@ -111,14 +111,14 @@ botaoCadastrar.onclick = function(event) {
     if (senhaConfirm === request.senha) {
         requisicao("POST","/api/users",request,false,function (resposta) {
             if (resposta.status === "erro") {
-                exibirMensagem(resposta.mensagem,true);
+                exibirMensagem(resposta.mensagem,true,event.target);
             } else {
                 fecharModal("#modalCadastro");
-                exibirMensagem(resposta.mensagem,false);
+                exibirMensagem(resposta.mensagem,false,event.target);
             }
         });
     } else {
-        exibirMensagem("As senhas devem coincidir",true);
+        exibirMensagem("As senhas devem coincidir",true,event.target);
     }
 };
 
@@ -126,11 +126,7 @@ botaoCadastrar.onclick = function(event) {
 /*** modal***/
 let botaoCadastro = document.querySelector("#botao-cadastro");
 botaoCadastro.onclick = function () {
-    exibeModal("#modalCadastro")
-};
-let btnFechaModal = document.querySelector(".modal-header-close");
-btnFechaModal.onclick = function () {
-    fecharModal("#modalCadastro");
+    exibeModal("modalCadastro",this)
 };
 
 

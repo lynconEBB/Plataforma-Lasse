@@ -46,8 +46,13 @@
 
 /**** Padrão Mensagem ******/
 /*
-<aside class="mensagem">
-    <p class="mensagem-texto"></p>
-    <i class="material-icons botao-fechar-mensagem">close</i>
-</aside>
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto">
+    </span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">
+            close
+        </i>
+    </button>
+</div>
  */
