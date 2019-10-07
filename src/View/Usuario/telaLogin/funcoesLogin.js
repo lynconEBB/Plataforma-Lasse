@@ -126,7 +126,7 @@ botaoCadastrar.onclick = function(event) {
 /*** modal***/
 let botaoCadastro = document.querySelector("#botao-cadastro");
 botaoCadastro.onclick = function () {
-    mostrarModal("#modalCadastro")
+    exibeModal("#modalCadastro")
 };
 let btnFechaModal = document.querySelector(".modal-header-close");
 btnFechaModal.onclick = function () {

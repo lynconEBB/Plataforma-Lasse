@@ -46,7 +46,7 @@ window.onload = function () {
 
             /***** Excluir tarefa**********/
             if (requisitor.participa) {
-                document.getElementById("botaoAbreExcluirTarefa").onclick = () => mostrarModal("#modalExcluirTarefa");
+                document.getElementById("botaoAbreExcluirTarefa").onclick = () => exibeModal("#modalExcluirTarefa");
                 document.getElementById("fechaModalExcluirTarefa").onclick = () => fecharModal("#modalExcluirTarefa");
 
                 let botaoExcluirTarefa = document.getElementById("excluirTarefa");
@@ -193,7 +193,7 @@ window.onload = function () {
             /*****Cadastrar Viagem*********/
             if (requisitor.participa) {
                 document.getElementById("tabViagens").insertAdjacentHTML("afterend","<button class='botao-adicionar' id='abreModalCadastrarViagem'>Novo</button>");
-                document.getElementById('abreModalCadastrarViagem').onclick = () => mostrarModal("#modalCadastrarViagem");
+                document.getElementById('abreModalCadastrarViagem').onclick = () => exibeModal("#modalCadastrarViagem");
                 document.getElementById("fechaModalCadastrarViagem").onclick = () => fecharModal("#modalCadastrarViagem");
 
                 let pagViagem = document.getElementById("info-viagem");

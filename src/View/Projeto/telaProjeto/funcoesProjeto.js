@@ -93,7 +93,7 @@ window.onload = function () {
             let botoesAbreModalTarefa = document.getElementsByClassName("btn-tarefa");
             for (let botao of botoesAbreModalTarefa) {
                 botao.addEventListener("click",function () {
-                    mostrarModal("#modalTarefa");
+                    exibeModal("#modalTarefa");
                     document.getElementById("estado").value = botao.dataset.tipo
                 })
             }
@@ -162,7 +162,7 @@ window.onload = function () {
             };
 
             /********Excluir Projeto*********/
-            document.getElementById("botaoExcluir").onclick = () => mostrarModal("#modalExcluirProjeto");
+            document.getElementById("botaoExcluir").onclick = () => exibeModal("#modalExcluirProjeto");
             document.getElementById("fechaModalExcluirProjeto").onclick = () => fecharModal("#modalExcluirProjeto");
             let botaoExcluirProjeto = document.getElementById("excluirProjeto");
             botaoExcluirProjeto.onclick = function () {
@@ -185,7 +185,7 @@ window.onload = function () {
                         funcionarios.forEach(function (funcionario) {
                             select.insertAdjacentHTML("beforeend",`<option value="${funcionario.id}">${funcionario.login}</option>`)
                         });
-                        document.getElementById("abreModalAdicionar").onclick = () => mostrarModal("#modalAdicionarFuncionario");
+                        document.getElementById("abreModalAdicionar").onclick = () => exibeModal("#modalAdicionarFuncionario");
                         document.getElementById("fechaModalAdicionarFuncionario").onclick = () => fecharModal("#modalAdicionarFuncionario");
 
                         document.getElementById("adicionarFuncionario").onclick = () => {

@@ -69,7 +69,7 @@ document.getElementById("cadastrarProjeto").onclick = function(event) {
 
 let btnAbreModal = document.getElementById("abreModal");
 btnAbreModal.onclick = function () {
-    mostrarModal("#modalCadastro");
+    exibeModal("#modalCadastro");
 };
 
 let btnFechaModal = document.querySelector(".modal-header-close");

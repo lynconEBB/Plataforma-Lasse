@@ -13,7 +13,9 @@
 
 .modal-background.ativo {
     opacity: 0.7;
+    pointer-events: all;
 }
+
 .modal {
     z-index: 100;
     right: 0;
@@ -27,6 +29,7 @@
     max-width: 1000px;
     background-color: #06404d;
     transition: all ease-in-out 300ms 300ms;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 }
 .modal.ativo {
     pointer-events: all;
@@ -45,6 +48,9 @@
     padding: 20px 0 ;
     align-items: center;
 }
+.modal-header.alerta {
+    background: #e45d5a;
+}
 .modal-header-title {
     padding: 10px;
     margin: 0 auto;
@@ -56,7 +62,15 @@
     margin-right: 20px;
     cursor: pointer;
     font-size: 2rem;
+    background: transparent;
+    border: none;
     color: #5a6268;
+    transition: transform ease-in-out 300ms;
+}
+.modal-close:focus {
+    transform: scale(1.2);
+    color: #06232e;
+    outline: none;
 }
 
 .modal-header-close:hover, .modal-header-close:active {
@@ -69,19 +83,18 @@
 }
 
 /*
-    <section class="modal-background">
-    </section>
-    <div class="modal" id="">
-        <div class="modal-header">
-            <div class="modal-header-title">
-
-            </div>
-            <div class="modal-header-close">
-                <i class="material-icons">close</i>
-            </div>
-        </div>
-        <div class="modal-conteudo">
-
-        </div>
+<div class="modal-background">
+</div>
+<div class="modal" id="" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title"></h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
+    <div class="modal-conteudo">
+
+    </div>
+</div>
+
  */

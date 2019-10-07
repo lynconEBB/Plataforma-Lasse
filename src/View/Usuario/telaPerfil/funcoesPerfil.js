@@ -99,7 +99,7 @@ formAlterar.onsubmit = function (event) {
 /****modalExcluir*****/
 let modalAbrir = document.querySelector("#ativaModal");
 modalAbrir.onclick = function () {
-    mostrarModal("#modalExcluir");
+    exibeModal("#modalExcluir");
 };
 let modalFechar = document.querySelector(".modal-header-close");
 modalFechar.onclick = function () {
