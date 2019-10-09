@@ -1,7 +1,6 @@
 <?php
 
-use Firebase\JWT\ExpiredException;
-use Firebase\JWT\SignatureInvalidException;
+use Lasse\LPM\Services\ApiException;
 
 class ErroException extends Exception
 {
@@ -22,24 +21,17 @@ function handleExceptionTypes($exception) {
     $exceptionClass = get_class($exception);
 
     switch ($exceptionClass) {
-        case SignatureInvalidException::class:
-            http_response_code(401);
-            $mensagem = "Token de Authenticação invalido ou não encontrado";
+        case ApiException::class:
+            http_response_code($exception->getCode());
+            $mensagem = $exception->getMessage();
             break;
-        case Exception::class:
+        case InvalidArgumentException::class:
             http_response_code(400);
             $mensagem = $exception->getMessage();
             break;
         case PDOException::class:
             http_response_code(500);
             $mensagem = "Erro durante transação com Banco de dados";
-            break;
-        case ExpiredException::class:
-            http_response_code(401);
-            $mensagem = "Tempo de sessão expirado.";
-            if(isset($_COOKIE['token'])) {
-                unset($_COOKIE['token']);
-            }
             break;
         case ErroException::class:
         default:
@@ -58,6 +50,11 @@ function handleExceptionTypes($exception) {
             "linha" => $exception->getLine(),
         ]
     ];
+
+    if (isset($_SESSION) && isset($_SESSION['usuario']) && is_array($_SESSION['usuario'])) {
+        $response['requistor'] = $_SESSION['usuario'];
+    }
+
     echo json_encode($response);
 }
 

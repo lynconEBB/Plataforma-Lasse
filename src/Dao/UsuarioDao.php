@@ -104,6 +104,36 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         }
     }
 
+    public function listarPorCpf($cpf) {
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE cpf = :cpf AND estado = :estado");
+        $stm->bindValue(':cpf',$cpf);
+        $stm->bindValue(':estado','ativado');
+        $stm->execute();
+
+        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+        if ($linha != false) {
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['caminhoFoto'],$linha['admin'],$linha['id']);
+            return $fun;
+        }else {
+            return false;
+        }
+    }
+
+    public function listarPorEmail($email) {
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE email = :email AND estado = :estado");
+        $stm->bindValue(':email',$email);
+        $stm->bindValue(':estado','ativado');
+        $stm->execute();
+
+        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+        if ($linha != false) {
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['caminhoFoto'],$linha['admin'],$linha['id']);
+            return $fun;
+        }else {
+            return false;
+        }
+    }
+
     public function listarPorId($id){
         $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE id= :id");
         $stm->bindValue(':id',$id);
@@ -118,30 +148,11 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         }
     }
 
-    public function deslogar($id)
-    {
-        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenValido = :token WHERE id=:id");
-        $delete->bindValue(':id',$id);
-        $delete->bindValue(':token',"NULL");
-        $delete->execute();
-    }
-
-    public function getTokenPorId($id)
-    {
-        $stm = $this->pdo->prepare("SELECT tokenValido FROM tbUsuario WHERE id = :id");
-        $stm->bindValue(':id',$id);
+    public function reativar($idUsuario) {
+        $comando = "UPDATE tbUsuario SET estado = 'ativado' WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam("id",$idUsuario);
         $stm->execute();
-
-        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
-        return $linha['tokenValido'];
-    }
-
-    public function setToken($token,$id)
-    {
-        $delete = $this->pdo->prepare("UPDATE tbUsuario SET  tokenValido = :token WHERE id=:id");
-        $delete->bindValue(':id',$id);
-        $delete->bindValue(':token',$token);
-        $delete->execute();
     }
 
     public function listarUsuariosForaProjeto($idProjeto)

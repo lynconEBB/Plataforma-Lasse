@@ -106,7 +106,9 @@ class UsuarioModel
 
     public function setDtNascimento($dtNascimento){
         Validacao::validar('Data de Nascimento',$dtNascimento,'data');
-        $this->dtNascimento = Formatacao::formataData($dtNascimento);
+        $dataFormatada = Formatacao::formataData($dtNascimento);
+        Validacao::validar("Data de Nascimento",$dataFormatada,'nascimento');
+        $this->dtNascimento = $dataFormatada;
     }
 
     public function getCpf(){

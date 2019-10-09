@@ -11,12 +11,12 @@
     ],
     "require": {
         "ext-pdo": "*",
-        "firebase/php-jwt": "^5.0",
         "ext-json": "*",
         "ext-dom": "*",
-      "ext-zip": "*",
-      "ext-xmlreader": "*",
-      "ext-libxml": "*"
+        "ext-zip": "*",
+        "ext-xmlreader": "*",
+        "ext-libxml": "*",
+        "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
         "psr-4": {
