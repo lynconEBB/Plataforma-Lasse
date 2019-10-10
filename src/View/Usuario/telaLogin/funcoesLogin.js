@@ -68,9 +68,8 @@ function logar(event) {
     };
 
     if (request.senha.length >= 6 && request.login.length >= 6) {
-        requisicao("POST","/api/users/login",request,false,function (resposta) {
+        requisicao("POST","/api/users/login",request,function (resposta) {
             if (resposta.status === "sucesso") {
-                setCookie('token',resposta.dados,1);
                 window.location.href = "/dashboard/user/"+resposta.requisitor.id;
             } else {
                 exibirMensagem(resposta.mensagem,true,event.target);
@@ -109,7 +108,7 @@ botaoCadastrar.onclick = function(event) {
         request.foto = foto.src;
     }
     if (senhaConfirm === request.senha) {
-        requisicao("POST","/api/users",request,false,function (resposta) {
+        requisicao("POST","/api/users",request,function (resposta) {
             if (resposta.status === "erro") {
                 exibirMensagem(resposta.mensagem,true,event.target);
             } else {

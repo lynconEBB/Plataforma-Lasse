@@ -151,7 +151,7 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
     public function reativar($idUsuario) {
         $comando = "UPDATE tbUsuario SET estado = 'ativado' WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
-        $stm->bindParam("id",$idUsuario);
+        $stm->bindParam(":id",$idUsuario);
         $stm->execute();
     }
 
@@ -167,5 +167,45 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         }else{
             return false;
         }
+    }
+
+    public function setTokenRecuperacao($token,$idUsuario) {
+        $comando = "UPDATE tbUsuario SET tokenValido = :token WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(":token",$token);
+        $stm->bindParam(":id",$idUsuario);
+        $stm->execute();
+    }
+
+    public function getTokenRecuperacao($idUsuario) {
+        $comando = "SELECT tokenValido FROM tbUsuario WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(":id",$idUsuario);
+        $stm->execute();
+        $linha = $stm->fetch(PDO::FETCH_ASSOC);
+        return $linha['tokenValido'];
+    }
+
+    public function verificaTokenRecuperacao($token,$idUsuario) {
+        $comando = "SELECT * FROM tbUsuario WHERE tokenValido = :token AND id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(":token",$token);
+        $stm->bindParam(":id",$idUsuario);
+        $stm->execute();
+        $linhas = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($linhas != false){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function alterarSenha ($novaSenha,$idUsuario) {
+        $comando = "UPDATE tbUsuario SET senha = :senha WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam("senha",$novaSenha);
+        $stm->bindParam(":id",$idUsuario);
+        $stm->execute();
     }
 }

@@ -42,7 +42,9 @@ class UsuarioControl extends CrudControl {
                     elseif (count($this->url) == 3 && $this->url[2] == "geraRecuperacao") {
                         if (isset($body->email)) {
                             $this->enviaEmail($body->email);
-                            $this->respostaSucesso("Um link de recuperação de senha foi enviado para seu email",null,$_SESSION['usuario']);
+                            $this->respostaSucesso("Um link de recuperação de senha foi enviado para seu email",null,null);
+                        } else {
+                            throw new ApiException("Parametros insuficientes ou mal estruturados",400);
                         }
                     }
                     break;
@@ -95,6 +97,15 @@ class UsuarioControl extends CrudControl {
                             throw new ApiException("Você precisa ser administrador para ter acesso aos dados de todos os usuários",401);
                         }
                     }
+                    // /api/users/alterarSenha
+                    elseif (count($this->url) == 3 && $this->url[2] == "alterarSenha") {
+                        if (isset($body->novaSenha) && isset($body->token)) {
+                            $this->alterarSenha($body);
+                            $this->respostaSucesso("Senha Alterada com sucesso",null,null);
+                        } else {
+                            throw new ApiException("Parametros insuficientes ou mal estruturados",400);
+                        }
+                    }
                     break;
                 case 'DELETE':
                     // /api/users
@@ -114,7 +125,8 @@ class UsuarioControl extends CrudControl {
 
     public function enviaEmail($email) {
         if ($usuario = $this->DAO->listarPorEmail($email)) {
-            $token = uniqid($usuario->getId());
+            $token = uniqid($usuario->getId()."-");
+            $this->DAO->setTokenRecuperacao($token,$usuario->getId());
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
@@ -127,9 +139,10 @@ class UsuarioControl extends CrudControl {
             $mail->From = 'lasseprojectmanager@gmail.com';
             $mail->FromName = 'LASSE Manager';
             $mail->addAddress($email);
-            $mail->Subject = utf8_decode('Recuperação de Senha');
-            $mail->Body = "<h1>Clique no botão abaixo para alterar sua senha</h1><a href='http://localhost/senhaAlterar?token={$token}'>Alterar Senha</a>";
-
+            $mail->Subject = utf8_decode('Alteração de Senha');
+            $mail->Body = "
+                <h1>Clique no botão abaixo para alterar sua senha</h1>
+                <a href='http://localhost/senhaAlterar?{$token}'>Alterar Senha</a>";
             if($mail->Send()):
                 return;
             else:
@@ -138,7 +151,24 @@ class UsuarioControl extends CrudControl {
         } else {
             throw new ApiException("E-mail não cadastrado no sistema.",400);
         }
+    }
 
+    public function alterarSenha($body){
+        $partes = explode("-",$body->token);
+        if (count($partes) == 2) {
+            $idUsuario = $partes[0];
+            $usuario = $this->listarPorId($idUsuario);
+            if ($this->DAO->verificaTokenRecuperacao($body->token,$idUsuario) && $this->DAO->getTokenRecuperacao($idUsuario) != null) {
+                Validacao::validar("Nova senha",$body->novaSenha,'semEspaco','obrigatorio','texto',['minimo',6]);
+                $hash = password_hash($body->novaSenha,PASSWORD_BCRYPT);
+                $this->DAO->alterarSenha($hash,$idUsuario);
+                $this->DAO->setTokenRecuperacao(null,$idUsuario);
+            } else {
+                throw new ApiException("Codigo de recuperação para {$usuario->getLogin()} incorreto",400);
+            }
+        } else {
+            throw new ApiException("Codigo de recuperação inválido",400);
+        }
     }
 
     protected function cadastrar($body)

@@ -65,11 +65,15 @@ class Router{
         elseif ($this->url[0] == "viagem" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Viagem/telaViagem/telaViagem.html";
         }
+        // /senhaAlterar
+        elseif ($this->url[0] == "senhaAlterar" && count($this->url) == 1){
+            require "src/View/Usuario/telaAlterarSenha/telaAlterarSenha.html";
+        }
         // /erro/permissao
         elseif ($this->url[0] == "erro" && $this->url[1] == "permissao" && count($this->url) == 2) {
             require "src/View/errorPages/erroSemAcesso.html";
         }
-        // /erro/permissao
+        // /erro/naoEncontrado
         elseif ($this->url[0] == "erro" && $this->url[1] == "naoEncontrado" && count($this->url) == 2) {
             require "src/View/errorPages/erro404.html";
         }

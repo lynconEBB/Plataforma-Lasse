@@ -1,5 +1,3 @@
-
-
 function setLinks(idUsuario) {
     let btnProjetos = document.querySelector("#projetos");
     btnProjetos.href = "/projetos/user/"+idUsuario;
@@ -23,10 +21,10 @@ function verificaMensagem() {
         let partes = variavel.split("=");
         if (partes.length == 2 && partes[0] === "sucesso") {
             let mensagem = partes[1].replace(/-/g," ");
-            exibirMensagem(mensagem,false);
+            exibirMensagemInicio(mensagem,false);
         } else if (partes.length == 2 && partes[0] === "erro") {
             let mensagem = partes[1].replace(/-/g," ");
-            exibirMensagem(mensagem,true);
+            exibirMensagemInicio(mensagem,true,null);
         }
     }
 }
@@ -42,28 +40,19 @@ function addMensagem(mensagem) {
 
 function decideErros(resposta) {
     let erro = resposta.dados;
-    if (erro.codigo == 405) {
+    if (erro.codigo === 405) {
         window.location.href = "/?erro=Logue-no-sistema-para-ter-acesso!";
     }
-    else if (erro.codigo == 401) {
+    else if (erro.codigo === 401) {
         window.location.href = "/erro/permissao";
     }
-    else if (erro.codigo == 400 || erro.codigo == 404) {
+    else if (erro.codigo === 400 || erro.codigo === 404) {
         window.location.href = "/erro/naoEncontrado";
     }
 }
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
 
 
-function requisicao(metodo,url,body,autorizacao,response) {
+function requisicao(metodo,url,body,response) {
     let xhr = new XMLHttpRequest();
     xhr.open(metodo, url, true);
     xhr.setRequestHeader("Content-Type", "application/json");

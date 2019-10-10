@@ -39,8 +39,3 @@ No perfil do adiministrador poderá ser visualizado todos os projetos em uma das
 Ao final da inserção de uma viagem ou de uma compra o funcionário poderá gerar um documento odt com os dados cadastrados utilizando um modelo predefinido ou fornecido pelo mesmo.
 
 Todos os usuários terão acesso a uma funcionalidade em que o sistema deve receber um formulário em formato odt e converter para html exibindo para o usuario e identificando os campos, permitindo que o usuário preencha esses campos. Durante o preenchimento o sistema deve disponibilizar os dados de um projeto selecionado e do usuário, autopreenchendo campos com nomes parecidos com informações já cadastradas no banco de dados. Por fim, o sistema deve disponibilizar para download um arquivo odt com base formulário agora preenchido.
-
-### Diagramas
-
-#### Diagrama Entidade-Relacionamento
-![alt text](https://github.com/lynconEBB/Plataforma-Lasse/blob/master/Diagramas/DiagramaER.png)

@@ -112,7 +112,6 @@ btnExcluir.onclick = function () {
   if (document.getElementById("inputExcluir").value === "confirmar") {
       requisicao("DELETE","/api/users",null,true,function (resposta) {
           if (resposta.status == "sucesso") {
-              eraseCookie('token');
               window.location.href = "/";
           } else {
               exibirMensagem(resposta.mensagem,true);

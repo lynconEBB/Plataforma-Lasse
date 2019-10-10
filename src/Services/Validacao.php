@@ -8,6 +8,7 @@ use InvalidArgumentException;
 
 class Validacao
 {
+
     public static function validar($nomeParametro,$valor, ...$validacoes)
     {
         foreach ($validacoes as $validacao){

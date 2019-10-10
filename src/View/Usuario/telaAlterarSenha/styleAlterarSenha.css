@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.container {
+    width: 95%;
+    max-width: 500px;
+    background: #06404d;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+    padding-bottom: 10px;
+}
+.container form {
+    padding: 20px;
+
+}
+.container-header {
+    position: relative;
+    bottom: -15px;
+    width: calc(100% + 30px);
+    left: -15px;
+    background: #99F8C1;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+.container-titulo {
+    margin: 0;
+    text-align: center;
+    color: #06404d;
+    font-size: 2.5rem;
+}
