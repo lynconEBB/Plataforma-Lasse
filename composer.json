@@ -16,13 +16,12 @@
         "ext-zip": "*",
         "ext-xmlreader": "*",
         "ext-libxml": "*",
-        "phpmailer/phpmailer": "^6.1",
-        "google/apiclient": "^2.4"
+        "phpmailer/phpmailer": "^6.1"
     },
     "autoload": {
         "psr-4": {
             "Lasse\\LPM\\": "src/"
         },
-        "files": ["src/Services/errorHandler.php"]
+        "files": ["src/Services/errorHandler.php","src/Services/sessionHandler.php"]
     }
 }

@@ -6,6 +6,7 @@ use Exception;
 use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Model\UsuarioModel;
 use Lasse\LPM\Services\ApiException;
+use Lasse\LPM\Services\Logger;
 use Lasse\LPM\Services\Validacao;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -288,6 +289,8 @@ class UsuarioControl extends CrudControl {
                         "admin" => $usuario->getAdmin(),
                         "foto" => $usuario->getFoto()
                     ];
+                    $logger = new Logger();
+                    $logger->logEntrada($usuario);
                 } else {
                     throw new ApiException("Senha errada",400);
                 }
