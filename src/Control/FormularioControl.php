@@ -167,12 +167,12 @@ class FormularioControl extends CrudControl
 
     private function converterParaHTML(FormularioModel $formulario)
     {
-        putenv('PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin');
-        putenv('HOME='.$_SERVER["DOCUMENT_ROOT"]."/".$formulario->getPastaFormulario());
         $comando = "soffice --headless --convert-to html:HTML:EmbedImages --outdir ";
         $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getPastaFormulario()." ";
         $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getCaminhoDocumento();
 
+        //$comando = "whoami";
+        echo exec($comando);
         if (exec($comando)) {
             $htmlManipulator = new HtmlManipulator($formulario->getCaminhoHTML());
             $htmlManipulator->consertaHTML();
@@ -210,7 +210,7 @@ class FormularioControl extends CrudControl
 
                 if (copy($caminhoOdtRequisicao,$formulario->getCaminhoDocumento())) {
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
-                    $this->converterParaHTML($formulario);
+                    //$this->converterParaHTML($formulario);
                     $this->DAO->cadastrar($formulario,$idViagem,null);
                     $formulario->setId($this->DAO->pdo->lastInsertId());
                     return $formulario;

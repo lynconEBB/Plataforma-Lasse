@@ -2,6 +2,7 @@
 
 use Lasse\LPM\Services\ApiException;
 
+
 class ErroException extends Exception
 {
     public function __construct( $code, $message, $file, $line)

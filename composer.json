@@ -22,6 +22,6 @@
         "psr-4": {
             "Lasse\\LPM\\": "src/"
         },
-        "files": ["src/Services/errorHandler.php","src/Services/sessionHandler.php"]
+        "files": ["src/Services/sessionHandler.php","src/Services/errorHandler.php"]
     }
 }

@@ -11,23 +11,23 @@ use SplFileObject;
 class Logger
 {
     private $arquivoLog;
+    private $data;
 
     public function __construct()
     {
+        $this->data = new DateTime();
         $this->arquivoLog = new SplFileObject($_SERVER['DOCUMENT_ROOT']."/assets/log.txt","a");
     }
     
     public function logEntrada(UsuarioModel $usuario):void
     {
-        $dataAgora = new DateTime();
-        $this->arquivoLog->fwrite("[{$dataAgora->format("d/m/Y - h:i:s")}]: Usuário {$usuario->getLogin()} logou no sistema através de {$_SERVER['HTTP_USER_AGENT']}\n");
+        $this->arquivoLog->fwrite("[{$this->data->format("d/m/Y - h:i:s")}]: Usuário {$usuario->getLogin()} logou no sistema através de {$_SERVER['HTTP_USER_AGENT']}\n");
     }
 
-    public function logSaida()
+    public function logSaida(string $login)
     {
-
+        $this->arquivoLog->fwrite("[{$this->data->format("d/m/Y - h:i:s")}]: Usuário {$login} logou no sistema através de {$_SERVER['HTTP_USER_AGENT']}\n");
     }
-
 
     public function __destruct()
     {

@@ -1,2 +1,2 @@
-[11/10/2019 - 05:28:10]: Usuário LynconBaez logou no sistema através de insomnia/7.0.1
-
+[14/10/2019 - 05:36:42]: Usuário Daniel logou no sistema através de insomnia/6.6.2
+[14/10/2019 - 05:36:46]: Usuário Daniel deslogou no sistema em insomnia/6.6.2
