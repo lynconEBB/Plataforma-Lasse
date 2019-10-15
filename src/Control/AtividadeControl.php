@@ -3,7 +3,9 @@
 namespace Lasse\LPM\Control;
 
 use Exception;
+use http\Exception\UnexpectedValueException;
 use Lasse\LPM\Dao\AtividadeDao;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\AtividadeModel;
 
 class AtividadeControl extends CrudControl {
@@ -36,7 +38,7 @@ class AtividadeControl extends CrudControl {
                                 $this->respostaSucesso("Nenhuma atividade foi encontrada",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você precisa ser administrador para ter acesso a esta funcionalidade",401);
+                            throw new PermissionException("Você precisa ser administrador para ter acesso a esta funcionalidade");
                         }
                     }
                     // /api/atividades/{idAtividade}
@@ -46,7 +48,7 @@ class AtividadeControl extends CrudControl {
                             $atividade = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listando atividaede",$atividade,$this->requisitor);
                         } else {
-                            throw new Exception("Você não tem acesso a essa atividade");
+                            throw new PermissionException("Você não tem acesso a essa atividade");
                         }
                     }
                     // /api/atividades/user/{idusuario}
@@ -61,7 +63,7 @@ class AtividadeControl extends CrudControl {
                                 $this->respostaSucesso("Nenhum imprevisto encontrado!",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você não possui acesso as atividades deste usuário",401);
+                            throw new PermissionException("Você não possui acesso as atividades deste usuário");
                         }
                     }
                     break;
@@ -97,13 +99,13 @@ class AtividadeControl extends CrudControl {
                     $tarefaControl = new TarefaControl(null);
                     $tarefaControl->atualizaTotal($info->idTarefa);
                 } else {
-                    throw new Exception("Usuário não possui permissão para cadastrar atividades neste projeto");
+                    throw new PermissionException("Usuário não possui permissão para cadastrar atividades neste projeto");
                 }
             }else{
                 $this->DAO->cadastrar($atividade,null);
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados",400);
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
 
     }

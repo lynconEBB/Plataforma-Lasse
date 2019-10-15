@@ -15,11 +15,4 @@ class ApiException extends Exception
         $this->requisitor = $requisitor;
         parent::__construct($message, $code, $previous);
     }
-
-
-    public function getRequisitor()
-    {
-        return $this->requisitor;
-    }
-
 }
