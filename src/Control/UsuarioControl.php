@@ -2,20 +2,27 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+
+use InvalidArgumentException;
 use Lasse\LPM\Dao\UsuarioDao;
+use Lasse\LPM\Erros\AuthenticationException;
+use Lasse\LPM\Erros\MailException;
+use Lasse\LPM\Erros\NotFoundException;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\UsuarioModel;
-use Lasse\LPM\Services\ApiException;
 use Lasse\LPM\Services\Logger;
 use Lasse\LPM\Services\Validacao;
 use PHPMailer\PHPMailer\PHPMailer;
+use UnexpectedValueException;
 
 
 class UsuarioControl extends CrudControl {
 
     public function __construct($url)
     {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $this->DAO = new UsuarioDao();
         parent::__construct($url);
     }
@@ -23,55 +30,62 @@ class UsuarioControl extends CrudControl {
     public function processaRequisicao()
     {
         if ($this->url != null) {
+            $requisicaoEncontrada = false;
             switch ($this->metodo) {
                 case 'POST':
                     $body = json_decode(@file_get_contents("php://input"));
                     // /api/users/login
                     if (isset($this->url[2]) && $this->url[2] == 'login' && count($this->url) == 3) {
+                        $requisicaoEncontrada = true;
                         if (isset($body->login) && isset($body->senha)) {
                             $this->logar($body);
                             $this->respostaSucesso("Logado com Sucesso",null,$_SESSION['usuario']);
                         } else {
-                            throw new ApiException("Parametros insuficientes ou mal estruturados",400);
+                            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
                         }
                     } // /api/users
                     elseif (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($body);
                         $this->respostaSucesso("Usuario Registrado com Sucesso!",null);
                     }
                     // /api/users/geraRecuperacao/
                     elseif (count($this->url) == 3 && $this->url[2] == "geraRecuperacao") {
+                        $requisicaoEncontrada = true;
                         if (isset($body->email)) {
                             $this->enviaEmail($body->email);
                             $this->respostaSucesso("Um link de recuperação de senha foi enviado para seu email",null,null);
                         } else {
-                            throw new ApiException("Parametros insuficientes ou mal estruturados",400);
+                            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
                         }
                     }
                     break;
                 case 'GET':
                     // /api/users/{idUsuario}
                     if (isset($this->url[2]) && is_numeric($this->url[2]) && count($this->url) == 3) {
+                        $requisicaoEncontrada = true;
                         self::autenticar();
                         if ($_SESSION['usuario']['id'] == $this->url[2] || $_SESSION['usuario']['admin'] == "1") {
                             $usuario = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listando Usuário: ".$usuario->getLogin(),$usuario,$_SESSION['usuario']);
                         } else {
-                            throw new ApiException("Você não tem acesso as informações desse usuário",401);
+                            throw new PermissionException("Você não tem acesso as informações desse usuário","Acessar informações não pertencentes ao mesmo");
                         }
 
                     } // /api/users
                     elseif (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         self::autenticar();
                         if ($_SESSION['usuario']['admin'] == "1") {
                             $usuarios = $this->listar();
                             $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$_SESSION['usuario']);
                         } else {
-                            throw new ApiException("Você precisa ser administrador para ter acesso aos dados de todos os usuários",401);
+                            throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Acessar informações de todos os usuários");
                         }
                     }
                     // /api/users/naoProjeto/{idProjeto}
                     elseif (count($this->url) == 4 && $this->url[2] == "naoProjeto" && $this->url[3] == (int)$this->url[3]) {
+                        $requisicaoEncontrada = true;
                         self::autenticar();
                         $usuarios = $this->listarUsuariosForaProjeto($this->url[3]);
                         if ($usuarios) {
@@ -85,41 +99,49 @@ class UsuarioControl extends CrudControl {
                     $body = json_decode(file_get_contents("php://input"));
                     // /api/users/
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->atualizar($body);
                         $this->respostaSucesso("Dados de Usuário alterados com sucesso, logue novamente para atualizar completamente",null,$_SESSION['usuario']);
                     }
                     // /api/users/reativar/{idUsuario}
                     elseif (count($this->url) == 4 && $this->url[2] == "reativar" && $this->url[3] == (int)$this->url[3])  {
+                        $requisicaoEncontrada = true;
                         self::autenticar();
                         if ($_SESSION['usuario']['admin'] == "1") {
                             $this->reativar($this->url[3]);
                             $this->respostaSucesso("Usuário reativado com sucesso",null,$_SESSION['usuario']);
                         } else {
-                            throw new ApiException("Você precisa ser administrador para ter acesso aos dados de todos os usuários",401);
+                            throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Reativar um usuário");
                         }
                     }
                     // /api/users/alterarSenha
                     elseif (count($this->url) == 3 && $this->url[2] == "alterarSenha") {
+                        $requisicaoEncontrada = true;
                         if (isset($body->novaSenha) && isset($body->token)) {
                             $this->alterarSenha($body);
                             $this->respostaSucesso("Senha Alterada com sucesso",null,null);
                         } else {
-                            throw new ApiException("Parametros insuficientes ou mal estruturados",400);
+                            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
                         }
                     }
                     break;
                 case 'DELETE':
                     // /api/users
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->excluir();
                         $this->respostaSucesso("Usuario Excluido com sucesso",null,$_SESSION['usuario']);
                     }
                     // /api/users/deslogar
                     elseif (count($this->url) == 3 && $this->url[2] == 'deslogar') {
+                        $requisicaoEncontrada = true;
                         $this->deslogar();
                         $this->respostaSucesso("Deslogado com sucesso!",null,$_SESSION['usuario']);
                     }
                     break;
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
@@ -147,14 +169,15 @@ class UsuarioControl extends CrudControl {
             if($mail->Send()):
                 return;
             else:
-                throw new ApiException("Erro ao tentar enviar e-mail",400);
+                throw new MailException("Erro durante envio do E-mail");
             endif;
         } else {
-            throw new ApiException("E-mail não cadastrado no sistema.",400);
+            throw new NotFoundException("E-mail não cadastrado no sistema.");
         }
     }
 
-    public function alterarSenha($body){
+    public function alterarSenha($body)
+    {
         $partes = explode("-",$body->token);
         if (count($partes) == 2) {
             $idUsuario = $partes[0];
@@ -165,10 +188,10 @@ class UsuarioControl extends CrudControl {
                 $this->DAO->alterarSenha($hash,$idUsuario);
                 $this->DAO->setTokenRecuperacao(null,$idUsuario);
             } else {
-                throw new ApiException("Codigo de recuperação para {$usuario->getLogin()} incorreto",400);
+                throw new PermissionException("Codigo de recuperação para {$usuario->getLogin()} incorreto","Redefinir senha de acesso de {$usuario->getLogin()}");
             }
         } else {
-            throw new ApiException("Codigo de recuperação inválido",400);
+            throw new UnexpectedValueException("Codigo de recuperação inválido");
         }
     }
 
@@ -186,7 +209,7 @@ class UsuarioControl extends CrudControl {
                             if (password_verify($body->senhaAdmin,'$2y$12$N82ObBFr3YTAgMqEck5arOTgpunRBKuUxYLK4w7x0RY35Ariwjg.O')){
                                 $admin = 1;
                             } else {
-                                throw new ApiException("Senha de administrador errada",400);
+                                throw new InvalidArgumentException("Senha de administrador errada");
                             }
                         }
                         // Encripta a senha e cria objeto validando
@@ -201,13 +224,13 @@ class UsuarioControl extends CrudControl {
                             $this->DAO->alterar($usuario);
                         }
                     } else
-                        throw new ApiException("CPF já registrado",400);
+                        throw new InvalidArgumentException("CPF já registrado");
                 }else
-                    throw new ApiException("Nome de Usuário já registrado",400);
+                    throw new InvalidArgumentException("Nome de Usuário já registrado");
             } else
-                throw new ApiException("E-mail já registrado",400);
+                throw new InvalidArgumentException("E-mail já registrado");
         } else {
-            throw new ApiException("Parâmetros faltando ou requisição mal estrurada",400);
+            throw new UnexpectedValueException("Parâmetros faltando ou requisição mal estrurada");
         }
     }
 
@@ -218,7 +241,7 @@ class UsuarioControl extends CrudControl {
         if ($projetos != false) {
             foreach ($projetos as $projeto){
                 if ($projetoControl->verificaDono($projeto->getId(),$_SESSION['usuario']['id'])) {
-                    throw new ApiException("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário",401);
+                    throw new PermissionException("Você não pode excluir sua conta sendo dono de um projeto.Exclua seus projetos ou transfira o dominio para outro funcionário","Excluir perfil de usuário");
                 }
             }
         }
@@ -237,7 +260,7 @@ class UsuarioControl extends CrudControl {
         if ($usuario != false ) {
             return $usuario;
         } else {
-            throw new ApiException("Usuário não encontrado no sistema",400);
+            throw new NotFoundException("Usuário não encontrado no sistema");
         }
     }
 
@@ -261,13 +284,13 @@ class UsuarioControl extends CrudControl {
                     $_SESSION['usuario']['login'] = $usuario->getLogin();
                     $this->DAO->alterar($usuario);
                 } else {
-                    throw new ApiException("CPF já Utilizado",400);
+                    throw new InvalidArgumentException("CPF já Utilizado",400);
                 }
             } else {
-                throw new ApiException("Nome de Usuário já utilizado",400);
+                throw new InvalidArgumentException("Nome de Usuário já utilizado");
             }
         } else {
-            throw new ApiException("Parâmetros invalidos ou mal estruturados",400);
+            throw new UnexpectedValueException("Parâmetros invalidos ou mal estruturados");
         }
     }
 
@@ -292,13 +315,13 @@ class UsuarioControl extends CrudControl {
                     $logger = new Logger();
                     $logger->logEntrada($usuario);
                 } else {
-                    throw new ApiException("Senha errada",400);
+                    throw new InvalidArgumentException("Senha errada");
                 }
             } else {
-                throw new ApiException("Usuário não registrado",400);
+                throw new InvalidArgumentException("Usuário não registrado");
             }
         } else {
-            throw new ApiException("Preencha os campos para fazer o login",400);
+            throw new InvalidArgumentException("Preencha os campos para fazer o login");
         }
     }
 
@@ -309,10 +332,13 @@ class UsuarioControl extends CrudControl {
 
     public static function autenticar()
     {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         if (isset($_SESSION) &&  isset($_SESSION['usuario']) && is_array($_SESSION['usuario'])) {
-            return;   
+            return $_SESSION['usuario'];
         } else {
-            throw new ApiException("Logue no sistema para ter acesso",401);
+            throw new AuthenticationException("Logue no sistema para ter acesso");
         }
     }
 
@@ -357,10 +383,10 @@ class UsuarioControl extends CrudControl {
                 fclose($arquivoFoto);
                 return $caminhoFoto;
             } else {
-                throw new ApiException("Imagem inválida",400);
+                throw new InvalidArgumentException("Imagem inválida");
             }
         } else {
-            throw new ApiException("Imagem inválida",400);
+            throw new InvalidArgumentException("Imagem inválida");
         }
     }
 }

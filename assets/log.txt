@@ -1,2 +1,13 @@
-[14/10/2019 - 05:36:42]: Usuário Daniel logou no sistema através de insomnia/6.6.2
-[14/10/2019 - 05:36:46]: Usuário Daniel deslogou no sistema em insomnia/6.6.2
+[15/10/2019 - 15:05:20] Usuário Daniel logou no sistema através de insomnia/7.0.1
+[15/10/2019 - 15:05:49] Usuário Daniel logou no sistema através de insomnia/7.0.1
+[15/10/2019 - 15:14:05] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[15/10/2019 - 15:14:55] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[15/10/2019 - 15:16:25] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[15/10/2019 - 15:16:28] Usuário Daniel logou no sistema através de insomnia/7.0.1
+[15/10/2019 - 06:17:03]: Usuário Daniel deslogou no sistema em insomnia/7.0.1
+[15/10/2019 - 15:17:41] Usuário Daniel logou no sistema através de insomnia/7.0.1
+[15/10/2019 - 15:23:46] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[15/10/2019 - 15:24:13] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Reativar um usuário
+[15/10/2019 - 15:26:26] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Listar todos projetos
+[15/10/2019 - 15:30:10] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Atualizar projeto que não é dono
+[15/10/2019 - 15:30:33] Usuário LynconBaez logou no sistema através de insomnia/7.0.1

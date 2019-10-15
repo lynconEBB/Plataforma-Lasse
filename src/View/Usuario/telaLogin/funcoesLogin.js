@@ -80,7 +80,6 @@ function logar(event) {
     }
 }
 
-
 /*
 Cadastro
  */

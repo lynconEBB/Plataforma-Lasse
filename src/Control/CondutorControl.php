@@ -2,9 +2,12 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+
+use InvalidArgumentException;
 use Lasse\LPM\Dao\CondutorDao;
+use Lasse\LPM\Erros\NotFoundException;
 use Lasse\LPM\Model\CondutorModel;
+use UnexpectedValueException;
 
 class CondutorControl extends CrudControl {
 
@@ -17,11 +20,13 @@ class CondutorControl extends CrudControl {
     public function processaRequisicao()
     {
         if ($this->url != null) {
+            $requisicaoEncontrada = false;
             switch ($this->metodo){
                 case 'POST':
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/condutores
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($info);
                         $this->respostaSucesso("Condutor cadastrado com sucesso",null,$this->requisitor);
                     }
@@ -29,6 +34,7 @@ class CondutorControl extends CrudControl {
                 case 'GET':
                     // /api/condutores
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $condutores = $this->listar();
                         if ($condutores != false) {
                             $this->respostaSucesso("Listando condutores",$condutores,$this->requisitor);
@@ -38,6 +44,7 @@ class CondutorControl extends CrudControl {
                     }
                     // /api/condutores/{idCondutor}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $condutor = $this->listarPorId($this->url[2]);
                         $this->respostaSucesso("Listando condutor de id: ".$this->url[2],$condutor,$this->requisitor);
                     }
@@ -46,6 +53,7 @@ class CondutorControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/condutores/{idCondutor}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Condutor atualizado com sucesso",null,$this->requisitor);
                     }
@@ -53,11 +61,14 @@ class CondutorControl extends CrudControl {
                 case 'DELETE':
                     // /api/condutores/{idCondutor}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Condutor excluido com sucesso",null,$this->requisitor);
                     }
                     break;
-
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
@@ -67,7 +78,7 @@ class CondutorControl extends CrudControl {
             $condutor = new CondutorModel($dados->nome,$dados->cnh,$dados->validadeCNH);
             $this->DAO->cadastrar($condutor);
         } else {
-            throw new Exception("Paramentros Insuficentes ou mal estruturados");
+            throw new UnexpectedValueException("Paramentros Insuficentes ou mal estruturados");
         }
     }
 
@@ -77,7 +88,7 @@ class CondutorControl extends CrudControl {
         if ($veiculoControl->listarPorIdCondutor($id) == false) {
             $this->DAO->excluir($id);
         } else {
-            throw new Exception("Não é possivel excluir este condutor pois já está em uso");
+            throw new InvalidArgumentException("Não é possivel excluir este condutor pois já está em uso");
         }
     }
 
@@ -91,7 +102,7 @@ class CondutorControl extends CrudControl {
         if ($condutor != false) {
             return $condutor;
         } else {
-            throw new Exception("Condutor não encontrado no sistema");
+            throw new NotFoundException("Condutor não encontrado no sistema");
         }
     }
 
@@ -104,10 +115,10 @@ class CondutorControl extends CrudControl {
                 $condutor = new CondutorModel($info->nome,$info->cnh,$info->validadeCNH,$id);
                 $this->DAO->atualizar($condutor);
             } else {
-                throw new Exception("Não é possivel atualizar este condutor pois já está em uso");
+                throw new InvalidArgumentException("Não é possivel atualizar este condutor pois já está em uso");
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados");
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
     }
 }

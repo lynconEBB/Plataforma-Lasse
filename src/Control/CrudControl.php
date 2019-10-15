@@ -10,6 +10,7 @@ abstract class CrudControl{
 
     public function __construct($url)
     {
+        header("Accept: application/json");
         $this->metodo = $_SERVER['REQUEST_METHOD'];
         $this->url = $url;
         $this->processaRequisicao();
@@ -20,7 +21,6 @@ abstract class CrudControl{
     public function respostaSucesso($mensagem,$dados= null,$requisitor = null)
     {
         header("Content-type: application/json; charset=utf-8");
-        header("Accept: application/json");
         http_response_code(200);
         $resposta = ["status" => "sucesso" , "mensagem" => $mensagem];
 

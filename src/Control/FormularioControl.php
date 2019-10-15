@@ -8,7 +8,6 @@ use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Model\ProjetoModel;
 use Lasse\LPM\Model\TarefaModel;
 use Lasse\LPM\Model\ViagemModel;
-use Lasse\LPM\Services\HtmlManipulator;
 use Lasse\LPM\Services\OdtManipulator;
 
 class FormularioControl extends CrudControl

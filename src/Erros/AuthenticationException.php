@@ -7,7 +7,7 @@ namespace Lasse\LPM\Erros;
 use Exception;
 use Throwable;
 
-class NotFoundException extends Exception
+class AuthenticationException extends Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {

@@ -2,10 +2,12 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Dao\VeiculoDao;
+use Lasse\LPM\Erros\NotFoundException;
 use Lasse\LPM\Model\VeiculoModel;
 use stdClass;
+use UnexpectedValueException;
 
 class VeiculoControl extends CrudControl {
 
@@ -18,11 +20,13 @@ class VeiculoControl extends CrudControl {
     public function processaRequisicao()
     {
         if ($this->url != null) {
+            $requisicaoEncontrada = false;
             switch ($this->metodo){
                 case 'POST':
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/veiculos
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($info);
                         $this->respostaSucesso("Veiculo cadastrado com sucesso",null,$this->requisitor);
                     }
@@ -30,11 +34,13 @@ class VeiculoControl extends CrudControl {
                 case 'GET':
                     // /api/veiculos
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $veiculos = $this->listar();
                         $this->respostaSucesso("Listando todos veiculos",$veiculos,$this->requisitor);
                     }
                     // /api/veiculos/{idVeiculo}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                        $requisicaoEncontrada = true;
                         $veiculo = $this->listarPorId($this->url[2]);
                         $this->respostaSucesso("Listando veiculo de id: ".$this->url[2],$veiculo,$this->requisitor);
                     }
@@ -43,6 +49,7 @@ class VeiculoControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/veiculos/{idVeiculo}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                        $requisicaoEncontrada = true;
                         $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Veiculo atualizado com sucesso",null,$this->requisitor);
                     }
@@ -50,10 +57,14 @@ class VeiculoControl extends CrudControl {
                 case 'DELETE':
                     // /api/veiculos/{idVeiculo}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {
+                        $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Veiculo excluido com sucesso",null,$this->requisitor);
                     }
                     break;
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
@@ -71,7 +82,7 @@ class VeiculoControl extends CrudControl {
             $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor);
             $this->DAO->cadastrar($veiculo);
         } else {
-            throw new Exception("Parâmetros insuficientes ou mal estruturados");
+            throw new UnexpectedValueException("Parâmetros insuficientes ou mal estruturados");
         }
     }
 
@@ -81,7 +92,7 @@ class VeiculoControl extends CrudControl {
         if ($viagemControl->listarPorIdVeiculo($id) == false) {
             $this->DAO->excluir($id);
         } else {
-            throw new Exception("Não foi possível excluir este veiculo pois já está em uso");
+            throw new InvalidArgumentException("Não foi possível excluir este veiculo pois já está em uso");
         }
     }
 
@@ -106,10 +117,10 @@ class VeiculoControl extends CrudControl {
                 $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor,$id);
                 $this->DAO->atualizar($veiculo);
             } else {
-                throw new Exception("Não é possível atualizar este veiculo pois já está em uso");
+                throw new InvalidArgumentException("Não é possível atualizar este veiculo pois já está em uso");
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados",400);
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
     }
 
@@ -118,7 +129,7 @@ class VeiculoControl extends CrudControl {
         if ($veiculo != false) {
             return $veiculo;
         } else {
-            throw new Exception("Veículo não encotrado");
+            throw new NotFoundException("Veículo não encotrado");
         }
     }
 

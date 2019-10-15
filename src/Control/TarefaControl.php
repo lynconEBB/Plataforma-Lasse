@@ -2,9 +2,12 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Dao\TarefaDao;
+use Lasse\LPM\Erros\NotFoundException;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\TarefaModel;
+use UnexpectedValueException;
 
 class TarefaControl extends CrudControl {
 
@@ -17,11 +20,13 @@ class TarefaControl extends CrudControl {
     public function processaRequisicao()
     {
         if (!is_null($this->url)) {
+            $requisicaoEncontrada = false;
             switch ($this->metodo){
                 case 'POST':
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/tarefas
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($info);
                         $this->respostaSucesso("Tarefas Cadastrada com sucesso",null, $this->requisitor);
                     }
@@ -29,6 +34,7 @@ class TarefaControl extends CrudControl {
                 case 'GET':
                     // /api/tarefas
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         if ($this->requisitor['admin'] == "1") {
                             $tarefas = $this->listar();
                             if ($tarefas) {
@@ -37,11 +43,12 @@ class TarefaControl extends CrudControl {
                                 $this->respostaSucesso("Nenhuma Tarefa Encontrada",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você não possui permissão para utilziar essa funcionalidade",401);
+                            throw new PermissionException("Você não possui permissão para utilziar essa funcionalidade","Acessar todas as tarefas");
                         }
                     }
                     // /api/tarefas/{idTarefa}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $idProjeto = $this->descobrirIdProjeto($this->url[2]);
                         $projetoControl = new ProjetoControl(null);
                         if ($projetoControl->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
@@ -55,7 +62,7 @@ class TarefaControl extends CrudControl {
                             $this->respostaSucesso("Listado tarefa",$tarefa,$this->requisitor);
                         }
                         else {
-                            throw new Exception("Você não tem permissão para acessar esta tarefa",401);
+                            throw new PermissionException("Você não tem permissão para acessar esta tarefa","Acessar tarefas de projeto que não está inserido");
                         }
                     }
                     break;
@@ -63,6 +70,7 @@ class TarefaControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/tarefas/{idTarefa}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $tarefa = $this->atualizar($info,$this->url[2]);
                         $this->respostaSucesso("Tarefa atualizada com sucesso",$tarefa,$this->requisitor);
                     }
@@ -70,10 +78,14 @@ class TarefaControl extends CrudControl {
                 case 'DELETE':
                     // /api/tarefas/{idTarefa}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Tarefa excluida com sucesso",null, $this->requisitor);
                     }
                     break;
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
@@ -88,13 +100,13 @@ class TarefaControl extends CrudControl {
                 if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
                     $this->DAO->cadastrar($tarefa,$info->idProjeto);
                 } else {
-                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',400);
+                    throw new InvalidArgumentException('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
                 }
             } else {
-                throw new Exception("Você não tem permissao para adicionar uma tarefa neste projeto",401);
+                throw new PermissionException("Você não tem permissao para adicionar uma tarefa neste projeto","Cadastrar tarefa em projeto que não está inserido");
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados",400);
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
     }
 
@@ -106,7 +118,7 @@ class TarefaControl extends CrudControl {
             $this->DAO->excluir($id);
             $projetoControl->atualizaTotal($idProjeto);
         } else {
-            throw new Exception("Você não tem permissão para excluir esta tarefa",401);
+            throw new PermissionException("Você não tem permissão para excluir esta tarefa","Excluir Tarefa em projeto que não está inserido");
         }
     }
 
@@ -126,13 +138,13 @@ class TarefaControl extends CrudControl {
                 if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ){
                     $this->DAO->atualizar($tarefa);
                 } else {
-                    throw new Exception('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto',400);
+                    throw new InvalidArgumentException('O periodo de duração da tarefa precisa estar entre o periodo de duração do projeto');
                 }
             } else {
-                throw new Exception("Você não tem permissão para atualizar esta tarefa",401);
+                throw new PermissionException("Você não tem permissão para atualizar esta tarefa","Atulizar dados de tarefa em projeto que não está inserido");
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados",400);
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
 
     }
@@ -142,14 +154,14 @@ class TarefaControl extends CrudControl {
         if ($tarefa) {
             return $tarefa;
         } else {
-            throw new Exception("Tarefa não encontrada",404);
+            throw new NotFoundException("Tarefa não encontrada");
         }
     }
 
     public function descobrirIdProjeto($id){
         $idProjeto = $this->DAO->descobrirIdProjeto($id);
         if (is_null($idProjeto)) {
-            throw new Exception("Tarefa não encontrada",404);
+            throw new NotFoundException("Tarefa não encontrada");
         } else {
             return $idProjeto;
         }

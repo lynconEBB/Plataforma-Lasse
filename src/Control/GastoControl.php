@@ -2,13 +2,15 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+
 use Lasse\LPM\Dao\GastoDao;
+use Lasse\LPM\Erros\NotFoundException;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\GastoModel;
+use UnexpectedValueException;
 
 class GastoControl extends CrudControl
 {
-
     public function __construct($url){
         $this->requisitor = UsuarioControl::autenticar();
         $this->DAO = new GastoDao();
@@ -18,20 +20,23 @@ class GastoControl extends CrudControl
     public function processaRequisicao()
     {
         if (!is_null($this->url)) {
+            $requisicaoEncontrada = false;
             switch ($this->metodo){
                 case 'POST':
                     $info = json_decode(file_get_contents('php://input'));
                     // /api/gastos
                     if (isset($info->idViagem))  {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($info,$info->idViagem);
                         $this->respostaSucesso("Gasto Cadastrado com sucesso");
                     } else {
-                        throw new Exception("Parametros faltando ou mal estruturados");
+                        throw new UnexpectedValueException("Parametros faltando ou mal estruturados");
                     }
                     break;
                 case 'GET':
                     // /api/gastos
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         if ($this->requisitor['admin'] == "1") {
                             $gastos = $this->listar();
                             if ($gastos != false) {
@@ -41,11 +46,12 @@ class GastoControl extends CrudControl
                                 http_response_code(201);
                             }
                         } else {
-                            throw new Exception("Você precisa ser administrador para ter acesso a todos os gastos",401);
+                            throw new PermissionException("Você precisa ser administrador para ter acesso a todos os gastos","Acessar todos os gastos");
                         }
                     }
                     // /api/gastos/{idGasto}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $gasto = $this->listarPorId($this->url[2]);
                         $idViagem = $this->DAO->descobrirIdViagem($this->url[2]);
                         $viagemControl = new ViagemControl(null);
@@ -54,7 +60,7 @@ class GastoControl extends CrudControl
                         if ($this->requisitor['id'] == $viagem->getViajante()->getId() || $this->requisitor['admin'] == "1") {
                             $this->respostaSucesso("Gasto excluido com sucesso",$gasto, $this->requisitor);
                         } else {
-                            throw new Exception("Você não possui acesso aos detalhes deste gasto");
+                            throw new PermissionException("Você não possui acesso aos detalhes deste gasto","Acessar gastos de viagem realizada por outra pessoa");
                         }
                     }
                     break;
@@ -62,21 +68,26 @@ class GastoControl extends CrudControl
                     $info = json_decode(file_get_contents('php://input'));
                     // /api/gastos/{idGasto}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         if (isset($info->valor) && isset($info->tipo)) {
                             $this->atualizar($info,$this->url[2]);
                             $this->respostaSucesso("Gasto atualizado com sucesso",null, $this->requisitor);
                         } else {
-                            throw new Exception("Parametros faltando ou mal estruturados");
+                            throw new UnexpectedValueException("Parametros faltando ou mal estruturados");
                         }
                     }
                     break;
                 case 'DELETE':
                     // /api/gastos/{idGasto}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Gasto excluido com sucesso",null, $this->requisitor);
                     }
                     break;
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
@@ -90,10 +101,10 @@ class GastoControl extends CrudControl
                 $this->DAO->cadastrar($gasto,$idViagem);
                 $viagemControl->atualizaTotal($idViagem);
             }else {
-                throw new Exception("Parametros faltando ou mal estruturados no cadastramento de Gastos");
+                throw new UnexpectedValueException("Parametros faltando ou mal estruturados no cadastramento de Gastos");
             }
         } else {
-            throw new Exception("Você não possui permissão para cadastrar gastos nesta viagem");
+            throw new PermissionException("Você não possui permissão para cadastrar gastos nesta viagem","Cadastrar gasto em uma viagem realizada por outro usuário");
         }
     }
 
@@ -107,7 +118,7 @@ class GastoControl extends CrudControl
             $this -> DAO -> excluir($id);
             $viagemControl->atualizaTotal($idViagem);
         } else {
-            throw new Exception("Você não possui permissão para excluir gastos desta viagem");
+            throw new PermissionException("Você não possui permissão para excluir gastos desta viagem","Excluir gasto de viagem realizada por outro usuário");
         }
     }
 
@@ -123,7 +134,7 @@ class GastoControl extends CrudControl
         if ($gasto != false) {
             return $gasto;
         } else {
-            throw new Exception("Gasto não encontrado");
+            throw new NotFoundException("Gasto não encontrado");
         }
     }
 
@@ -140,7 +151,7 @@ class GastoControl extends CrudControl
             $viagemControl = new ViagemControl(null);
             $viagemControl->atualizaTotal($idViagem);
         } else {
-            throw new Exception("Você não possui permissão para excluir gastos desta viagem");
+            throw new PermissionException("Você não possui permissão para atualizar gastos desta viagem","Atualizar gasto de viagem realizada por outro usuário");
         }
     }
 }

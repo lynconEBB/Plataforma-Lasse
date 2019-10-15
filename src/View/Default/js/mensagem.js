@@ -1,11 +1,11 @@
-var botaoMensagem = document.querySelector(".botao-fechar-mensagem");
-var mensagem = document.querySelector(".mensagem");
-var textoMensagem = document.querySelector("#mensagem-texto");
+let botaoMensagem = document.querySelector(".botao-fechar-mensagem");
+let mensagem = document.querySelector(".mensagem");
+let textoMensagem = document.querySelector("#mensagem-texto");
 
 function exibirMensagem(texto,erro,target) {
 
     textoMensagem.textContent = texto;
-
+    console.log(mensagem);
     mensagem.focus();
     target.focus();
 
@@ -14,11 +14,10 @@ function exibirMensagem(texto,erro,target) {
     } else {
         mensagem.className = "mensagem sucesso ativa";
     }
-
-    botaoMensagem.onclick = () => {
-        mensagem.classList.remove("ativa");
-    };
 }
+botaoMensagem.onclick = () => {
+    mensagem.classList.remove("ativa");
+};
 
 
 function exibirMensagemInicio(texto,erro) {
@@ -32,10 +31,6 @@ function exibirMensagemInicio(texto,erro) {
     } else {
         mensagem.className = "mensagem sucesso ativa";
     }
-
-    botaoMensagem.onclick = () => {
-        mensagem.classList.remove("ativa");
-    };
 }
 /*
 <div class="mensagem" role="alert" tabindex="-1">

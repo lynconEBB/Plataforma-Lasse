@@ -9,7 +9,6 @@ require 'vendor/autoload.php';
 use Lasse\LPM\Control\AtividadeControl;
 use Lasse\LPM\Control\CompraControl;
 use Lasse\LPM\Control\CondutorControl;
-use Lasse\LPM\Control\CrudControl;
 use Lasse\LPM\Control\FormularioControl;
 use Lasse\LPM\Control\GastoControl;
 use Lasse\LPM\Control\ItemControl;
@@ -18,6 +17,7 @@ use Lasse\LPM\Control\TarefaControl;
 use Lasse\LPM\Control\UsuarioControl;
 use Lasse\LPM\Control\VeiculoControl;
 use Lasse\LPM\Control\ViagemControl;
+use Lasse\LPM\Erros\NotFoundException;
 
 class Router{
 
@@ -118,6 +118,8 @@ class Router{
             case 'formularios':
                 $controler = new FormularioControl($this->url);
                 break;
+            default:
+                throw new NotFoundException("URL não encontrada");
         }
     }
 

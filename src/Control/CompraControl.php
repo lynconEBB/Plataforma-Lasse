@@ -2,9 +2,12 @@
 
 namespace Lasse\LPM\Control;
 
-use Exception;
+
 use Lasse\LPM\Dao\CompraDao;
+use Lasse\LPM\Erros\NotFoundException;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\CompraModel;
+use UnexpectedValueException;
 
 class CompraControl extends CrudControl {
 
@@ -17,11 +20,13 @@ class CompraControl extends CrudControl {
     public function processaRequisicao()
     {
         if (!is_null($this->url)) {
-            switch ($this->metodo){
+            $requisicaoEncontrada = false;
+            switch ($this->metodo) {
                 case 'POST':
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/compras/
-                    if (count($this->url) == 2) {;
+                    if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         $this->cadastrar($info);
                         $this->respostaSucesso("Compra cadastrada com sucesso",null, $this->requisitor);
                     }
@@ -29,6 +34,7 @@ class CompraControl extends CrudControl {
                 case 'GET':
                     // /api/compras/
                     if (count($this->url) == 2) {
+                        $requisicaoEncontrada = true;
                         if ($this->requisitor['admin'] == "1") {
                             $compras = $this->listar();
                             if ($compras != false ) {
@@ -37,17 +43,18 @@ class CompraControl extends CrudControl {
                                 $this->respostaSucesso("Nenhuma compra encontrada no sistema",null,$this->requisitor);
                             }
                         } else {
-                            throw new Exception("Você precisa ser administrador para acessar todas as compras");
+                            throw new PermissionException("Você precisa ser administrador para acessar todas as compras","Listar todas as compras");
                         }
                     }
                     // /api/compras/{idCompra}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $compra = $this->listarPorId($this->url[2]);
                         if ($compra->getComprador()->getId() == $this->requisitor['id'] || $this->requisitor['admin'] == "1") {
                             $compras = $this->listarPorId($this->url[2]);
                             $this->respostaSucesso("Listando compra de id: {$this->url[2]}",$compras, $this->requisitor);
                         } else {
-                            throw new Exception("Você não possui acesso aos detalhes desta compra");
+                            throw new PermissionException("Você não possui acesso aos detalhes desta compra","Acessar dados de compra feita por outro usuário");
                         }
                     }
                     break;
@@ -55,6 +62,7 @@ class CompraControl extends CrudControl {
                     $info = json_decode(@file_get_contents("php://input"));
                     // /api/compras/{idCompra}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->atualizar($info->proposito,$this->url[2]);
                         $this->respostaSucesso("Compra atualizada com sucesso",null,$this->requisitor);
                     }
@@ -62,18 +70,22 @@ class CompraControl extends CrudControl {
                 case 'DELETE':
                     // /api/compras/{idCompra}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Compra excluida com sucesso",null,$this->requisitor);
                     }
                     break;
+            }
+            if (!$requisicaoEncontrada) {
+                throw new NotFoundException("URL não encontrada");
             }
         }
     }
 
     public function cadastrar($info)
     {
-        if (isset($info->proposito) && isset($info->idTarefa) && isset($info->intens)) {
-            if (is_array($info->itens) && $this->verificaPermissao($info->idTarefa)) {
+        if (isset($info->proposito) && isset($info->idTarefa) && isset($info->itens) && is_array($info->itens)) {
+            if ($this->verificaPermissao($info->idTarefa)) {
                 $usuarioControl = new UsuarioControl(null);
                 $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
                 //Cadastra no banco de dados com Total = 0
@@ -87,43 +99,37 @@ class CompraControl extends CrudControl {
                     $itemControl->cadastrar($item->valor,$item->nome,$item->quantidade,$idCompra);
                 }
             } else {
-                throw new Exception("Requisição mal estruturada ou com valores inválidos");
+                throw new PermissionException("Você não possui permissão para cadastrar compras neste projeto","Cadastrar compra em projeto que não está inserido");
             }
         } else {
-            throw new Exception("Parametros insuficientes ou mal estruturados",400);
+            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
     }
 
     protected function excluir($id)
     {
         $compra = $this->listarPorId($id);
-        if ($compra != false) {
-            if ($compra->getComprador()->getId() == $this->requisitor['id'] ) {
-                $idTarefa = $this->DAO->descobreIdTarefa($id);
-                $this->DAO->excluir($id);
-                $tarefaControl = new TarefaControl(null);
-                $tarefaControl->atualizaTotal($idTarefa);
-            } else {
-                throw new Exception("Usuário não possui permissão para excluir esta compra");
-            }
+
+        if ($compra->getComprador()->getId() == $this->requisitor['id'] ) {
+            $idTarefa = $this->DAO->descobreIdTarefa($id);
+            $this->DAO->excluir($id);
+            $tarefaControl = new TarefaControl(null);
+            $tarefaControl->atualizaTotal($idTarefa);
         } else {
-            throw new Exception("Compra não encontrada no sistema");
+            throw new PermissionException("Usuário não possui permissão para excluir esta compra","Excluir compra feita por outra pessoa");
         }
     }
 
     public function atualizar($proposito,$id)
     {
         $compra = $this->listarPorId($id);
-        if ($compra != false) {
-            if ($compra->getComprador()->getId() == $this->requisitor['id']) {
-                $compraNova = new CompraModel($proposito,null,null,$id,null);
-                $this->DAO->atualizar($compraNova);
-            } else {
-                    throw new Exception("Usuário não possui permissão para Atualizar esta compra");
-            }
+        if ($compra->getComprador()->getId() == $this->requisitor['id']) {
+            $compraNova = new CompraModel($proposito,null,null,$id,null);
+            $this->DAO->atualizar($compraNova);
         } else {
-            throw new Exception("Compra não encontrada no sistema");
+                throw new PermissionException("Usuário não possui permissão para Atualizar esta compra","Atualizar compra feita por outra pessoa");
         }
+
     }
 
     public function listar()
@@ -140,10 +146,10 @@ class CompraControl extends CrudControl {
                 $compra = $this->DAO->listarPorId($id);
                 return $compra;
             } else {
-                throw new Exception("Permissão de acesso a Compra Negada");
+                throw new PermissionException("Permissão de acesso a Compra Negada","Acessar compra realizada por outro usuário");
             }
         } else {
-            throw new Exception("Compra não encontrada no sistema");
+            throw new NotFoundException("Compra não encontrada no sistema");
         }
     }
 
@@ -171,7 +177,7 @@ class CompraControl extends CrudControl {
         if ($idTarefa != false ) {
             return $idTarefa;
         } else {
-            throw new Exception("Compra não encontrada no sistema");
+            throw new NotFoundException("Compra não encontrada no sistema");
         }
     }
 }

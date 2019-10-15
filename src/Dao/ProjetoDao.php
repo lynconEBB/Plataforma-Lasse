@@ -33,7 +33,6 @@ class ProjetoDao extends CrudDao {
         $stm = $this->pdo->prepare($comando2);
         $stm->bindParam(':id',$id);
         $stm->execute();
-
     }
 
     public function listar(){
@@ -163,5 +162,23 @@ class ProjetoDao extends CrudDao {
         $stm->bindParam('idUsuario',$idUsuario);
 
         $stm->execute();
+    }
+
+    public function transferirDominio($idProjeto,$idNovoDono,$idAntigoDono)
+    {
+        $comando1 = "UPDATE tbUsuarioProjeto set dono = '1' where idProjeto = :idProjeto and idUsuario = :idNovoDono";
+        $comando2 = "UPDATE tbUsuarioProjeto set dono = '0' where idProjeto = :idProjeto and idUsuario = :idAntigoDono";
+
+        $stm1 = $this->pdo->prepare($comando1);
+        $stm2 = $this->pdo->prepare($comando2);
+
+        $stm1->bindParam(":idProjeto",$idProjeto);
+        $stm2->bindParam(":idProjeto",$idProjeto);
+
+        $stm1->bindParam(":idNovoDono",$idNovoDono);
+        $stm2->bindParam(":idAntigoDono",$idAntigoDono);
+
+        $stm1->execute();
+        $stm2->execute();
     }
 }
