@@ -11,3 +11,14 @@
 [15/10/2019 - 15:26:26] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Listar todos projetos
 [15/10/2019 - 15:30:10] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Atualizar projeto que não é dono
 [15/10/2019 - 15:30:33] Usuário LynconBaez logou no sistema através de insomnia/7.0.1
+[16/10/2019 - 14:07:37] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:11:55] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:12:06] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:12:25] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:12:45] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:13:43] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:33:55] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 14:55:22] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+[16/10/2019 - 15:09:14] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 15:11:44] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[16/10/2019 - 16:02:27] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0

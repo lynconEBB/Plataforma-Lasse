@@ -1,4 +1,5 @@
-function setLinks(idUsuario) {
+function setLinks(requisitor) {
+    let idUsuario = requisitor.id;
     let btnProjetos = document.querySelector("#projetos");
     btnProjetos.href = "/projetos/user/"+idUsuario;
     let btnGraficos = document.querySelector("#graficos");
@@ -11,18 +12,31 @@ function setLinks(idUsuario) {
     btnDashboard.href = "/dashboard/user/"+idUsuario;
     let btnImprevistos = document.querySelector("#imprevistos");
     btnImprevistos.href = "/imprevistos/user/"+idUsuario;
+
+    document.querySelector(".container-user-img").style.backgroundImage = "url('/"+requisitor.foto+"')";
+    document.querySelector(".user-name").textContent = requisitor.login;
 }
 
 function verificaMensagem() {
+    if (window.performance) {
+        if (window.performance.navigation.type === 0) {
+            criaMensagemURL();
+        }
+    } else {
+        criaMensagemURL();
+    }
+}
+
+function criaMensagemURL() {
     let url = window.location.href;
 
     if (url.indexOf("?") !== -1) {
         let variavel = url.substring(url.indexOf("?")+1,url.length);
         let partes = variavel.split("=");
-        if (partes.length == 2 && partes[0] === "sucesso") {
+        if (partes.length === 2 && partes[0] === "sucesso") {
             let mensagem = partes[1].replace(/-/g," ");
             exibirMensagemInicio(mensagem,false);
-        } else if (partes.length == 2 && partes[0] === "erro") {
+        } else if (partes.length === 2 && partes[0] === "erro") {
             let mensagem = partes[1].replace(/-/g," ");
             exibirMensagemInicio(mensagem,true,null);
         }
@@ -38,19 +52,28 @@ function addMensagem(mensagem) {
     window.location.href = url;
 }
 
-function decideErros(resposta) {
+function decideErros(resposta,codigo) {
+
     let erro = resposta.dados;
-    if (erro.codigo === 405) {
+
+    if (codigo === 405) {
         window.location.href = "/?erro=Logue-no-sistema-para-ter-acesso!";
     }
-    else if (erro.codigo === 401) {
+    else if (codigo === 401) {
+        setLinks(resposta.requistor);
         window.location.href = "/erro/permissao";
     }
-    else if (erro.codigo === 400 || erro.codigo === 404) {
+    else if (codigo === 404) {
+        setLinks(resposta.requistor);
+        template = criaTemplateNaoEncontrado(erro);
+        //document.getElementsByClassName("main-content")[0].innerHTML = template;
+        //window.location.href = "/erro/naoEncontrado";
+    }
+    else if (codigo ===  500) {
+        setLinks(resposta.requistor);
         window.location.href = "/erro/naoEncontrado";
     }
 }
-
 
 function requisicao(metodo,url,body,response) {
     let xhr = new XMLHttpRequest();
@@ -64,8 +87,8 @@ function requisicao(metodo,url,body,response) {
     }
 
     xhr.onload = function() {
-
-        response(JSON.parse(xhr.response));
+        console.log(xhr.response);
+        response(JSON.parse(xhr.response),xhr.status);
     };
 
     xhr.onerror = function () {
@@ -73,6 +96,13 @@ function requisicao(metodo,url,body,response) {
     };
 
     return xhr.response;
+}
+
+function criaTemplateNaoEncontrado(erro) {
+    let templateErroNaoEncontrado = `
+   
+`;
+    return templateErroNaoEncontrado;
 }
 
 

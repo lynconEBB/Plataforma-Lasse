@@ -133,10 +133,11 @@ main{
     width: 180px;
     height: 180px;
     position: relative;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.foto{
-    width: 100%;
-}
+
 #add-foto{
     cursor: pointer;
     position: absolute;

@@ -1,8 +1,18 @@
 .main-content {
+    padding: 0;
+
+}
+.container-titulo {
+    padding-top:60px ;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 2rem;
+}
+.dashboard {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 80px;
+    padding: 50px 80px 80px;
 }
 .itens{
     width: 500px;

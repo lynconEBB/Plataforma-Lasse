@@ -1,26 +1,26 @@
 window.onload = function () {
-    if(performance.navigation.type == 2){
-        location.reload(true);
-    }
-    if (performance.navigation.type !== 1) {
-        verificaMensagem();
-    }
+    verificaMensagem();
+    requisitaDadosUsuario();
+};
 
+function requisitaDadosUsuario() {
+    let idUserRequisitado = window.location.pathname.split("/").pop();
 
-    var idUserRequisitado = window.location.pathname.split("/").pop();
+    // /api/users/{idUsuario}
+    requisicao("GET","/api/users/"+idUserRequisitado,null,function (resposta,codigo) {
 
-    requisicao("GET","/api/users/"+idUserRequisitado,null,true,function (resposta) {
         if (resposta.status === "sucesso") {
-            var requisitor = resposta.requisitor;
-            setLinks(requisitor.id);
-            document.querySelector(".user-img").src = "/"+resposta.requisitor.foto;
-            document.querySelector(".user-name").textContent = resposta.requisitor.login;
 
-            var usuario = resposta.dados;
+            let usuario = resposta.dados;
+            let requisitor = resposta.requisitor;
+
+            setLinks(requisitor);
+
+            document.getElementsByClassName('titulo')[0].textContent = "Dashboard de "+usuario.login;
             /****Mostra quantidade projetos******/
-            requisicao("GET","/api/projetos/user/"+usuario.id,null,true,function (resposta) {
+            requisicao("GET","/api/projetos/user/"+usuario.id,null,function (resposta,codigo) {
 
-                if (resposta.status == "sucesso") {
+                if (resposta.status === "sucesso") {
                     if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdProjetos").textContent = resposta.mensagem;
                     } else {
@@ -28,20 +28,20 @@ window.onload = function () {
                         let ehDono = resposta.requisitor.infoAdd;
                         let qtdDono = 0;
                         for( let key in ehDono) {
-                            if(ehDono[key] == true) {
+                            if(ehDono[key] === true) {
                                 qtdDono += 1;
                             }
                         }
                         document.querySelector("#qtdProjetos").innerHTML = "Participando de: "+projetos.length+" projeto(s)<br>" + "Sendo dono de: "+qtdDono+" projeto(s)";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem,true);
+                    exibirMensagemInicio(resposta.mensagem,true);
                 }
             });
 
             /****Mostra quantidade de Projetos****/
-            requisicao("GET", "/api/formularios/users/"+usuario.id,null,true,function (resposta) {
-                if (resposta.status == "sucesso") {
+            requisicao("GET", "/api/formularios/users/"+usuario.id,null,function (resposta,codigo) {
+                if (resposta.status === "sucesso") {
                     if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdFormularios").textContent = resposta.mensagem;
                     } else {
@@ -49,13 +49,13 @@ window.onload = function () {
                         document.querySelector("#qtdFormularios").textContent = "Foram encontrados "+formularios.length+" formulários no sistema";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem,true);
+                    exibirMensagemInicio(resposta.mensagem,true);
                 }
             });
 
             /*****Mostra quantidade de imprevistos******/
-            requisicao("GET", "/api/atividades/user/"+usuario.id,null,true,function (resposta) {
-                if (resposta.status == "sucesso") {
+            requisicao("GET", "/api/atividades/user/"+usuario.id,null,function (resposta,codigo) {
+                if (resposta.status === "sucesso") {
                     if (!resposta.hasOwnProperty("dados")) {
                         document.querySelector("#qtdImprevistos").textContent = resposta.mensagem;
                     } else {
@@ -63,7 +63,7 @@ window.onload = function () {
                         document.querySelector("#qtdImprevistos").textContent = "Foram encontrados "+imprevistos.length+" imprevistos no sistema";
                     }
                 } else {
-                    exibirMensagem(resposta.mensagem,true);
+                    exibirMensagemInicio(resposta.mensagem,true);
                 }
             });
 
@@ -75,11 +75,10 @@ window.onload = function () {
             telaImprevistos.onclick = () => window.location.href = "/imprevistos/user/"+usuario.id;
 
         } else {
-            decideErros(resposta);
+            decideErros(resposta,codigo);
         }
     });
-
-};
+}
 
 
 

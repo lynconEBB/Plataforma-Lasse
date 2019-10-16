@@ -120,9 +120,6 @@ input:-webkit-autofill {
 .real-checkbox:checked + .form-checkbox {
     background-color: #67e69c;
 }
-
-
-
 .form-select{
     width: 100%;
     background: transparent;
