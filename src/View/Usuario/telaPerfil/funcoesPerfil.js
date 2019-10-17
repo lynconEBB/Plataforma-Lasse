@@ -1,30 +1,24 @@
 /**Coloca Informações no lugar****/
 window.onload = function () {
-    if(performance.navigation.type == 2){
-        location.reload(true);
-    }
-    if (performance.navigation.type !== 1) {
-        verificaMensagem();
-    }
+    verificaMensagem();
 
-    var idUserListado = window.location.pathname.split("/").pop();
+    let idUserListado = window.location.pathname.split("/").pop();
 
-    requisicao("GET","/api/users/"+idUserListado,null,true,function (resposta) {
+    requisicao("GET","/api/users/"+idUserListado,null,function (resposta) {
         if (resposta.status === "sucesso") {
-            var requisitor = resposta.requisitor;
-            var usuario = resposta.dados;
-            setLinks(requisitor.id);
+            let requisitor = resposta.requisitor;
+            let usuario = resposta.dados;
 
-            document.querySelector(".user-name").textContent = resposta.requisitor.login;
-            document.querySelector(".user-img").src = "/"+resposta.requisitor.foto;
+            setLinks(requisitor);
 
-            if (requisitor.id !== idUserListado) {
+            if (requisitor.id !== usuario.id) {
                 document.querySelector(".btn-alterar").style.display = "none";
                 document.querySelector("#ativaModal").style.display = "none";
             }
 
-            document.querySelector("#img-perfil").src = "/"+usuario.foto;
+            document.querySelector("#container-img-perfil").style.backgroundImage = "url('/"+usuario.foto+"')";
             document.querySelector("#login").value = usuario.login;
+
             if (usuario.admin === "1") {
                 document.querySelector("#tipo").textContent = "Administrador";
             } else {

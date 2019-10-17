@@ -1,8 +1,10 @@
 #container-img-perfil{
     overflow: hidden;
     border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 200px;
-    background: #275a66;
+    background-color: #275a66;
     height: 200px;
     border: #275a66 10px solid;
     margin: 0 auto;
