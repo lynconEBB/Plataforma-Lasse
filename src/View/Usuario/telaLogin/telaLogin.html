@@ -47,7 +47,10 @@
                     <label for="senha" class="form-label">Senha</label>
                     <input type="password" id="senha" class="form-input">
                 </div>
-                <a href="#" id="botao-cadastro">Registre-se</a>
+                <div class="links">
+                    <button id="botao-senha"><u>Esqueci minha senha</u></button>
+                    <button id="botao-cadastro"><u>Registrar-se</u></button>
+                </div>
                 <button type="submit" id="botao-enviar" class="botao sucesso center">Entrar</button>
             </form>
         </section>
@@ -142,6 +145,28 @@
                 </div>
                 <button type="submit" id="botao-cadastrar" class="botao sucesso">Cadastrar</button>
             </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="modalRecSenha" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <div id="ola">
+
+        </div>
+        <h2 class="modal-header-title">Recuperação de Senha</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo" id="conteudo-senha">
+        <h3 class="titulo-modal">Insira seu e-mail para definir uma nova senha</h3>
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="form-label" for="emailRecSenha">E-mail</label>
+                <input type="email" class="form-input" id="emailRecSenha">
+            </div>
+            <button class="botao sucesso center" id="envia-email">Confirmar</button>
         </form>
     </div>
 </div>

@@ -22,3 +22,19 @@
 [16/10/2019 - 15:09:14] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [16/10/2019 - 15:11:44] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [16/10/2019 - 16:02:27] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[17/10/2019 - 13:22:03] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[17/10/2019 - 13:35:30] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[17/10/2019 - 13:35:36] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/10/2019 - 13:36:03] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/10/2019 - 13:37:29] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/10/2019 - 13:43:00] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/10/2019 - 13:43:06] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/10/2019 - 13:59:57] Erro ocorrido com usuário Daniel: Erro durante transação com Banco de dados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd' in 'where clause'
+[17/10/2019 - 14:00:17] Erro ocorrido com usuário Daniel: Erro durante transação com Banco de dados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd' in 'where clause'
+[17/10/2019 - 14:00:58] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
+[17/10/2019 - 14:01:28] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
+[17/10/2019 - 14:01:30] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
+[17/10/2019 - 14:03:22] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
+[17/10/2019 - 14:03:27] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
+[17/10/2019 - 15:42:50] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[17/10/2019 - 16:30:17] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0

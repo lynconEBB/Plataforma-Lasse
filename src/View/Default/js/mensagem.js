@@ -25,9 +25,6 @@ function exibirMensagem(texto,erro,target) {
         }
     }
 
-    setTimeout(function () {
-        mensagem.classList.remove("ativa");
-    },10000);
 }
 
 function exibirMensagemInicio(texto,erro) {

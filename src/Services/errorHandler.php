@@ -43,7 +43,8 @@ function handleExceptionTypes($exception) {
             $logger = new Logger();
             $logger->logErro("Permissão negada ao tentar {$exception->getEvento()}");
             break;
-        case InvalidArgumentException::class || UnexpectedValueException::class:
+        case UnexpectedValueException::class:
+        case InvalidArgumentException::class:
             http_response_code(400);
             break;
         case PDOException::class:
@@ -52,7 +53,6 @@ function handleExceptionTypes($exception) {
             $mensagem = "Erro durante transação com Banco de dados";
             $logger->logErro($mensagem.": ".$exception->getMessage());
             break;
-        case ErroException::class:
         default:
             http_response_code(500);
             $logger = new Logger();

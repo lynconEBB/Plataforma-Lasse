@@ -53,7 +53,7 @@ function addMensagem(mensagem) {
 }
 
 function decideErros(resposta,codigo) {
-
+    console.log(codigo);
     let erro = resposta.dados;
 
     if (codigo === 405) {
@@ -61,17 +61,17 @@ function decideErros(resposta,codigo) {
     }
     else if (codigo === 401) {
         setLinks(resposta.requistor);
-        window.location.href = "/erro/permissao";
+        document.getElementsByClassName("main-content")[0].innerHTML = criaTemplateSemPermissao(erro);
     }
     else if (codigo === 404) {
         setLinks(resposta.requistor);
-        template = criaTemplateNaoEncontrado(erro);
-        //document.getElementsByClassName("main-content")[0].innerHTML = template;
-        //window.location.href = "/erro/naoEncontrado";
+        document.getElementsByClassName("main-content")[0].innerHTML = criaTemplateNaoEncontrado(erro);
     }
-    else if (codigo ===  500) {
-        setLinks(resposta.requistor);
-        window.location.href = "/erro/naoEncontrado";
+    else if (codigo === 500) {
+        if (resposta.hasOwnProperty("requisitor")) {
+            setLinks(resposta.requistor);
+        }
+        document.getElementsByClassName("main-content")[0].innerHTML = criaTemplateErroInterno(erro);
     }
 }
 
@@ -94,15 +94,45 @@ function requisicao(metodo,url,body,response) {
     xhr.onerror = function () {
         exibirMensagem("Servidor não respondendo",true);
     };
-
-    return xhr.response;
 }
 
 function criaTemplateNaoEncontrado(erro) {
-    let templateErroNaoEncontrado = `
-   
+    return templateErroNaoEncontrado = `
+        <div class="container-erro">
+            <figure class="container-img-erro">
+                <img alt="Icone indicando um erro de que algo não foi encontrado. Ilustração" src="/assets/images/mascote/RaioSozinho.png">
+            </figure>
+
+            <h1>Ops! Não encontramos o que você estava procurando</h1>
+            <h2>${erro.mensagem}</h2>
+        </div>
 `;
-    return templateErroNaoEncontrado;
+}
+
+function criaTemplateSemPermissao(erro) {
+    return templateErroPermisso = `
+        <div class="container-erro">
+            <figure class="container-img-erro-permissao">
+                <img alt="Icone indicando um erro de que o usuário não possui acesso à está página. Ilustração" src="/assets/images/mascote/RaioBarrado.png">
+            </figure>
+
+            <h1>Parece que você está entrando em lugares que não deveria!</h1>
+            <h2>${erro.mensagem}</h2>
+        </div>
+`;
+}
+
+function criaTemplateErroInterno(erro) {
+    return templateErroInterno = `
+        <div class="container-erro">
+            <figure class="container-img-erro">
+                <img alt="Icone indicando um erro de que o usuário não possui acesso à está página. Ilustração" src="/assets/images/mascote/RaioDuvida.png">
+            </figure>
+
+            <h1>Opa! Parece que houve um erro inesperado em nossos servidores</h1>
+            <h2>Tente novamente mais tarde</h2>
+        </div>
+`;
 }
 
 

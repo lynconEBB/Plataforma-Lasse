@@ -186,6 +186,7 @@ body{
     }
 }
 
+/********** Erro Container ****************/
 .container-erro {
     width: 100%;
     height: 600px;
@@ -199,15 +200,24 @@ body{
     width: 100%;
     max-width: 200px;
 }
+.container-img-erro-permissao {
+    width: 100%;
+    max-width: 400px;
+}
+.container-img-erro-permissao img {
+    width: 100%;
+}
 .container-img-erro img {
     width: 100%;
 }
-.container-img-erro h1 {
-
+.container-erro h1 {
+    font-size: 2rem;
+    font-weight: bolder;
 }
-.container-img-erro h2 {
-
+.container-erro h2 {
+    font-size: 1.5rem;
 }
+
 
 
 

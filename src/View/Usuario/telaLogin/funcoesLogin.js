@@ -58,8 +58,6 @@ window.onload = function() {
         })
     });
 
-
-
     /* Login */
 
     let botaoEnviar =  document.querySelector("#botao-enviar");
@@ -84,6 +82,44 @@ window.onload = function() {
         } else {
             exibirMensagem("Os campos de Usuario e Senha precisam possuir mais de 6 caracteres",true,event.target);
         }
+    }
+
+    /* Recupera Senha */
+    let botaoSenha = document.getElementById("envia-email");
+    botaoSenha.addEventListener("click",function (event) {
+        event.preventDefault();
+        let email = document.getElementById("emailRecSenha").value;
+        if (validaEmail(email)) {
+            let body = {
+                "email": email
+            };
+            document.querySelector("#modalRecSenha .modal-conteudo").insertAdjacentHTML("beforeend","<div class='lds-ring' aria-label='Carregando... Aguarde' role='alert' tabindex='-1'><div></div><div></div><div></div><div></div></div>");
+            document.getElementsByClassName("lds-ring")[0].focus();
+            document.getElementById("emailRecSenha").inert = true;
+            this.inert = true;
+            document.getElementsByClassName("modal-close")[1].inert = true;
+
+            requisicao("POST", "/api/users/geraRecuperacao",body,function (resposta,codigo) {
+                document.getElementById("emailRecSenha").inert = false;
+                document.getElementById("envia-email").inert = false;
+                document.getElementsByClassName("lds-ring")[0].remove();
+                document.getElementsByClassName("modal-close")[1].inert = false;
+
+                if (resposta.status === "sucesso") {
+                    fechaModal(document.getElementById("modalRecSenha"),document.querySelector("#botao-senha"));
+                    exibirMensagem(resposta.mensagem,false,document.querySelector("#botao-senha"));
+                } else {
+                    exibirMensagem(resposta.mensagem,true,event.target);
+                }
+            });
+        } else {
+            exibirMensagem("E-mail inválido",true,event.target);
+        }
+    });
+
+    function validaEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 
     /* Cadastro */
@@ -127,8 +163,14 @@ window.onload = function() {
 
 
     /*** modal***/
-    document.querySelector("#botao-cadastro").onclick = function () {
+    document.querySelector("#botao-cadastro").onclick = function (event) {
+        event.preventDefault();
         exibeModal("modalCadastro",this)
+    };
+
+    document.querySelector("#botao-senha").onclick = function (event) {
+        event.preventDefault();
+        exibeModal("modalRecSenha",this)
     };
 
 };
