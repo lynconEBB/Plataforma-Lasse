@@ -65,3 +65,17 @@
 
 [18/10/2019 - 13:23:50] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [18/10/2019 - 13:52:07] Erro ocorrido com usuário LYNCON: Permissão negada ao tentar Excluir perfil de usuário
+[18/10/2019 - 05:30:54]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 14:31:22] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 05:31:31]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 14:34:51] Usuário lynconbaez logou no sistema através de insomnia/7.0.1
+[18/10/2019 - 14:41:00] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 05:41:11]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 14:42:26] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 05:54:46]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 14:54:55] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 14:55:59] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Excluir perfil de usuário
+[18/10/2019 - 15:15:39] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
+[18/10/2019 - 15:15:47] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
+[18/10/2019 - 06:23:51]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 15:24:03] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0

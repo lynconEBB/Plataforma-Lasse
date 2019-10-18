@@ -53,7 +53,6 @@ function addMensagem(mensagem) {
 }
 
 function decideErros(resposta,codigo) {
-    console.log(codigo);
     let erro = resposta.dados;
 
     if (codigo === 405) {

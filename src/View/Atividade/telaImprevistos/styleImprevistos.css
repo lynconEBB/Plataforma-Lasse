@@ -1,0 +1,48 @@
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+.main-container {
+    width: 90%;
+    max-width: 1800px;
+}
+#titulo {
+    font-size: 2rem;
+    font-weight: bolder;
+    display: inline-block;
+    margin-right: 5px;
+}
+.botao.aviso {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+.botao.aviso i {
+    position: relative;
+    bottom: -2px;
+}
+.imprevisto {
+    background-color: #1c575f;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+.imprevistos-part {
+    min-width: 514px;
+    width: 50%;
+    box-sizing: border-box;
+}
+.botao.alerta {
+    position: absolute;
+    top: -10px;
+}
+.botao.info {
+    position: absolute;
+    top: -10px;
+}
+.imprevisto-info {
+    display: block;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+}

@@ -26,6 +26,16 @@ document.querySelector(".user-info").addEventListener("click",function () {
     }
 });
 
+document.getElementById("sair").onclick = function () {
+    requisicao("DELETE","/api/users/deslogar",null,function (resposta,codigo) {
+        if (resposta.status === "sucesso") {
+            window.location.href = "/";
+        } else {
+            decideErros();
+        }
+    });
+};
+
 
 
 
