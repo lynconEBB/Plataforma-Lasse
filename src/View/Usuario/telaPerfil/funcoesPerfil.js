@@ -24,6 +24,8 @@ window.onload = function () {
             } else {
                 document.querySelector("#tipo").textContent = "Funcionário";
             }
+            console.log(usuario.atuacao);
+
             document.querySelector("#atuacao").value = usuario.atuacao;
             document.querySelector("#nome").value = usuario.nomeCompleto;
             document.querySelector("#dtNasc").value = usuario.dtNasc;
@@ -34,7 +36,6 @@ window.onload = function () {
             document.querySelector("#dtEmissao").value = usuario.dtEmissao;
             document.querySelector("#valorHora").value = usuario.valorHora;
 
-
         } else {
             decideErros(resposta);
         }
@@ -43,7 +44,7 @@ window.onload = function () {
 /*** mudar foto*****/
 var fotoMudou = false;
 let inputFoto = document.querySelector("#foto");
-var foto = document.querySelector("#img-perfil");
+var foto = document.querySelector("#container-img-perfil");
 inputFoto.addEventListener("change",function () {
     let files = this.files;
     if (FileReader && files && files.length) {
@@ -52,7 +53,7 @@ inputFoto.addEventListener("change",function () {
             var reader = new FileReader();
             reader.onload = function () {
                 fotoMudou = true;
-                foto.src = reader.result;
+                foto.style.backgroundImage = "url('"+reader.result+"')";
             };
             reader.readAsDataURL(files[0]);
         } else {
@@ -61,8 +62,8 @@ inputFoto.addEventListener("change",function () {
     }
 });
 /*** atualizar*******/
-let formAlterar = document.querySelector(".perfil-info");
-formAlterar.onsubmit = function (event) {
+let formAlterar = document.querySelector("#alteraUsuario");
+formAlterar.onclick = function (event) {
     event.preventDefault();
     let body = {
         nomeCompleto: document.getElementById("nome").value,
@@ -77,42 +78,37 @@ formAlterar.onsubmit = function (event) {
         valorHora: document.getElementById("valorHora").value,
     };
     if (fotoMudou) {
-        body.foto = foto.src;
+        body.foto = foto.style.backgroundImage.slice(4, -1).replace(/"/g, "");
     }
-    requisicao("PUT","/api/users",body,true,function (resposta) {
+
+    requisicao("PUT","/api/users",body,function (resposta,codigo) {
         if (resposta.status === "sucesso") {
             addMensagem("sucesso=Dados-Atualizados-com-sucesso");
         } else {
-            console.log(resposta);
-            exibirMensagem(resposta.mensagem,true);
+            exibirMensagem(resposta.mensagem,true,event.target);
         }
     })
 
 };
 
 /****modalExcluir*****/
-let modalAbrir = document.querySelector("#ativaModal");
-modalAbrir.onclick = function () {
-    exibeModal("#modalExcluir");
-};
-let modalFechar = document.querySelector(".modal-header-close");
-modalFechar.onclick = function () {
-    fecharModal("#modalExcluir");
+document.querySelector("#ativaModal").onclick = function (event) {
+    exibeModal("modalExcluir",event.target);
 };
 
 /*****Excluir******/
 let btnExcluir = document.querySelector("#excluir");
-btnExcluir.onclick = function () {
+btnExcluir.onclick = function (event) {
   if (document.getElementById("inputExcluir").value === "confirmar") {
-      requisicao("DELETE","/api/users",null,true,function (resposta) {
-          if (resposta.status == "sucesso") {
-              window.location.href = "/";
+      requisicao("DELETE","/api/users",null,function (resposta,codigo) {
+          if (resposta.status === "sucesso") {
+              window.location.href = "/?sucesso=Usuario-deletado-com-sucesso";
           } else {
-              exibirMensagem(resposta.mensagem,true);
+              exibirMensagem(resposta.mensagem,true,event.target);
           }
-      })
+      });
   } else {
-      exibirMensagem("Digite confirmar na caixa de texto",true);
+      exibirMensagem("Digite confirmar na caixa de texto",true,event.target);
   }
 };
 

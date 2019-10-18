@@ -274,7 +274,7 @@ class UsuarioControl extends CrudControl {
         $usuario = $this->listarPorId($_SESSION['usuario']['id']);
         if ($this->validaRequisicao($dados,'atualizacao')) {
             if (!$this->DAO->listarPorLogin($dados->login) || strcasecmp($usuario->getLogin(), $dados->login) == 0 ){
-                if (!$this->DAO->listarPorCpf($dados->cpf)) {
+                if (!$this->DAO->listarPorCpf($dados->cpf) || $dados->cpf == $usuario->getCpf()) {
                     $usuario = new UsuarioModel($dados->nomeCompleto, $dados->login, null, $dados->dtNasc, $dados->cpf, $dados->rg, $dados->dtEmissao, $dados->email, $dados->atuacao, $dados->formacao, $dados->valorHora, $_SESSION['usuario']['foto'], $_SESSION['usuario']['admin'], $_SESSION['usuario']['id']);
                     if (isset($dados->foto)) {
                         $caminhoFoto = $this->salvarFoto($_SESSION['usuario']['id'], $dados->foto);

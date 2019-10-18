@@ -144,8 +144,7 @@ window.onload = function() {
             request.senhaAdmin = document.getElementById("senhaAdmin").value
         }
         if(fotoMudou) {
-            request.foto = foto.style.backgroundImage;
-            console.log(foto.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
+            request.foto = foto.style.backgroundImage.slice(4, -1).replace(/"/g, "");
         }
         if (senhaConfirm === request.senha) {
             requisicao("POST","/api/users",request,function (resposta,codigo) {

@@ -9,7 +9,7 @@
     transition: transform ease-in-out 100ms, box-shadow ease-in-out 100ms;
 }
 .botao:focus {
-    border: #12bfe5 solid 3px;
+    border: #1285a9 solid 3px;
 }
 .botao:active {
     outline: none;

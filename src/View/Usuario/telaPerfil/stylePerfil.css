@@ -2,6 +2,7 @@
     overflow: hidden;
     border-radius: 50%;
     background-repeat: no-repeat;
+    background-position: center center;
     background-size: cover;
     width: 200px;
     background-color: #275a66;
@@ -38,34 +39,6 @@
     min-width: 400px ;
     display: inline-block;
 }
-.perfil-title{
-    background: transparent;
-    font-size: 3rem;
-    width: 100%;
-    font-weight: bold;
-    color: white;
-    border: none;
-    margin: 0 auto;
-    text-align: center;
-    cursor: text;
-}
-.perfil-title:focus, .perfil-input:focus {
-    outline: none;
-}
-.perfil-input{
-    cursor: text;
-    width: 100%;
-    background: transparent;
-    font-size: 1.2rem;
-    display: inline;
-    color: white;
-    border: none;
-}
-#atuacao {
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-}
 #tipo{
     display: block;
     text-align: center;
@@ -81,38 +54,16 @@ hr{
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.perfil-label{
-    display: inline-block;
-    color: white;
-    font-size: 1.2rem;
-}
 
-.btn-excluir {
+#ativaModal {
     position: absolute;
-    cursor: pointer;
-    font-size: 1.5rem;
-    border: none;
-    background-color: #e45d5a;
-    padding: 10px 20px;
-    color: white;
     top: 30px;
     right: -10px;
-    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.25);
 }
-.btn-alterar {
+#alteraUsuario {
     position: absolute;
-    cursor: pointer;
-    font-size: 1.5rem;
-    border: none;
-    background-color: #12bfe5;
-    padding: 10px 20px;
-    color: white;
     top: 30px;
     left: -10px;
-    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.25);
-}
-.btn-alterar:hover, .btn-excluir:hover {
-    box-shadow: none;
 }
 .form-select {
     width: auto;
@@ -121,9 +72,6 @@ hr{
     text-align-last: center;
     text-align: center;
 }
-
-
-
 #foto{
     display: none;
 }
@@ -170,5 +118,13 @@ hr{
     background-color: #e45d5a;
     margin: 20px auto;
     display: block;
+}
+.container-apre {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+}
+.botao.alerta {
+    margin-bottom: 20px;
 }
 

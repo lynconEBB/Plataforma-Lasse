@@ -93,17 +93,19 @@
             <input type="file" id="foto" name="foto" accept="image/*">
         </div>
         <form class="perfil-info">
-            <button type="button" class="btn-excluir" id="ativaModal">Excluir</button>
-            <button type="submit" class="btn-alterar">Alterar</button>
-            <label class="escondeVisualmente" for="login">Login</label>
-            <input class="alterar-titulo" id="login" type="text" placeholder="Nome de Usuário" autocomplete="off">
-            <span id="tipo"></span>
-            <label class="escondeVisualmente" for="atuacao">Login</label>
-            <select id="atuacao" class="alterar-select">
-                <option value="Colaborador">Colaborador </option>
-                <option value="Bolsista/Voluntário">Bolsista/Voluntário</option>
-                <option value="Terceiros">Terceiros</option>
-            </select>
+            <button type="submit" class="botao info" id="alteraUsuario">Alterar</button>
+            <button type="button" class="botao alerta" id="ativaModal">Excluir</button>
+            <div class="container-apre">
+                <label class="escondeVisualmente" for="login">Login</label>
+                <input class="alterar-titulo" id="login" type="text" placeholder="Nome de Usuário" autocomplete="off">
+                <span id="tipo"></span>
+                <label class="escondeVisualmente" for="atuacao">Login</label>
+                <select id="atuacao" class="alterar-select">
+                    <option value="Colaborador">Colaborador </option>
+                    <option value="Bolsista/Voluntário">Bolsista/Voluntário</option>
+                    <option value="Terceiros">Terceiros</option>
+                </select>
+            </div>
             <hr>
             <div class="form-perfil">
                 <div class="part-form">
@@ -147,22 +149,23 @@
     </main>
 </div>
 
-<section class="modal-background">
-</section>
-<div class="modal" id="modalExcluir">
-    <div class="modal-header">
-        <div class="modal-header-title">
-            Exclusão
-        </div>
-        <div class="modal-header-close">
+<div class="modal-background">
+</div>
+<div class="modal" id="modalExcluir" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Exclusão</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
             <i class="material-icons">close</i>
-        </div>
+        </button>
     </div>
     <div class="modal-conteudo">
         <span>Tem certeza que deseja excluir sua conta?</span>
         <span>Caso sim, digite <b>confirmar</b> e clique em excluir</span>
-        <input class="form-input" type="text" autocomplete="off" id="inputExcluir">
-        <button class="botao-padrao" id="excluir">Excluir</button>
+        <div class="form-group">
+            <label class="escondeVisualmente" for="inputExcluir">Digite Confirmar</label>
+            <input class="form-input" type="text" autocomplete="off" id="inputExcluir">
+        </div>
+        <button class="botao alerta center" id="excluir">Excluir</button>
     </div>
 </div>
 <script src="/src/View/Default/js/inert.js"></script>

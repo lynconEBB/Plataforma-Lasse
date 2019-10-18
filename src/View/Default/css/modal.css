@@ -31,6 +31,9 @@
     transition: all ease-in-out 300ms 300ms;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 }
+.modal:focus {
+    outline: none;
+}
 .modal.ativo {
     pointer-events: all;
     opacity: 1;

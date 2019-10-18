@@ -38,3 +38,30 @@
 [17/10/2019 - 14:03:27] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$this' (T_VARIABLE)
 [17/10/2019 - 15:42:50] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [17/10/2019 - 16:30:17] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 12:31:26] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 13:02:00] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:02:01] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:02:01] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:02:02] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:02:02] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:02:05] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:11] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:13] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:15] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:17] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:19] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:04:22] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[HY000] [2002] Nenhuma conex�o p�de ser feita porque a m�quina de destino as recusou ativamente.
+
+[18/10/2019 - 13:23:50] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[18/10/2019 - 13:52:07] Erro ocorrido com usuário LYNCON: Permissão negada ao tentar Excluir perfil de usuário
