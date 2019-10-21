@@ -20,29 +20,103 @@
     position: relative;
     bottom: -2px;
 }
-.imprevisto {
-    background-color: #1c575f;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 30px;
+
+.imprevistos-table {
+    margin-top: 40px;
+    width: 100%;
 }
-.imprevistos-part {
-    min-width: 514px;
-    width: 50%;
-    box-sizing: border-box;
-}
-.botao.alerta {
-    position: absolute;
-    top: -10px;
-}
-.botao.info {
-    position: absolute;
-    top: -10px;
-}
-.imprevisto-info {
-    display: block;
-    text-align: center;
+
+.imprevistos-header {
+    background-color: #183d44;
     color: white;
-    font-size: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    text-align: center;
+    z-index: 10;
+    font-weight: bold;
+    font-size: 1.1rem;
+    -webkit-box-shadow: 0 3px 2px #000;
+    -moz-box-shadow: 0 3px 2px #000;
+    box-shadow: 0 3px 2px #000;
 }
+.imprevistos-body {
+    padding: 0 20px 20px;
+    background-color: #1b5b62;
+}
+.imprevisto {
+    color: white;
+    text-align: center;
+    display: grid;
+    padding: 20px 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    border-bottom: black solid 2px;
+}
+.imprevisto span {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    justify-content: center;
+}
+.imprevisto-detalhes {
+    margin-top: 20px;
+    grid-column: 1/4 ;
+    width: 100%;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.imprevisto-detalhes.expandido {
+    display: flex;
+}
+.detalhe-group {
+    box-sizing: border-box;
+    margin: 10px;
+    max-width: 700px;
+    display: inline-block;
+}
+.detalhe-nome {
+    display: block;
+    font-weight: bold;
+}
+.detalhe-valor {
+
+    display: block;
+}
+.detalhe-group.total {
+    display: none;
+}
+.detalhe-botoes{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.detalhe-botoes .botao {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+@media (max-width: 520px) {
+    .total {
+        display: none;
+    }
+    .imprevisto {
+        grid-template-columns: 1fr 1fr;
+    }
+    .imprevistos-header {
+        grid-template-columns: 1fr 1fr;
+    }
+    .detalhe-group.total {
+        display: block;
+    }
+}
+.alterar-select {
+    margin: 0;
+}
+.imprevisto-group {
+    margin: 0 10px;
+}
+
+
