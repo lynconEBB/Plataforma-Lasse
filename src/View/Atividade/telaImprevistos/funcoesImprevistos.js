@@ -12,7 +12,22 @@ window.onload = function () {
                 let imprevistos = resposta.dados;
                 for (let imprevisto of imprevistos) {
                     preparaImprevisto(imprevisto,requisitor.id,idUserRequisitado);
+                }
+                document.getElementById("abreModalCadastro").onclick = function (event) {
+                    exibeModal("modalCadastroImprevisto",event.target);
+                };
+                document.getElementById("cadastraImprevisto").onclick = function (event) {
+                    let body = {
+                        comentario: document.getElementById("comentarioCadastro").value,
 
+                    };
+                    requisicao("POST","/api/atividades",body,function (resposta,codigo) {
+                        if (resposta.status === "sucesso") {
+
+                        } else {
+                            exibirMensagem(resposta.mensagem,true,event.target);
+                        }
+                    });
                 }
             }
         } else {
@@ -158,5 +173,7 @@ function preparaImprevisto(imprevisto,idRequisitor,idUser) {
         }
     };
 }
+
+
 
 

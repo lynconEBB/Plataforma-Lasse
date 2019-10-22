@@ -90,7 +90,7 @@
     <main class="main-content">
         <div class="main-container">
             <h1 id="titulo">Imprevistos de LynBaez</h1>
-            <button class="botao aviso" type="button">
+            <button class="botao aviso" type="button" id="abreModalCadastro">
                 <i class="material-icons md-12" aria-hidden="true">add_box</i>Novo
             </button>
             <hr>
@@ -105,43 +105,49 @@
 
                 </div>
             </div>
-            <!--<div class="imprevisto">
-                <div class="imprevistos-part">
-                    <div class="form-group">
-                        <label class="escondeVisualmente" for="tipo">Tipo</label>
-                        <select class="alterar-select" id="tipo">
-                            <option value="Atraso">Atraso</option>
-                            <option value="Atestado">Atestado</option>
-                            <option value="Viagem">Viagem</option>
-                            <option value="Acidente">Acidente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="escondeVisualmente" for="comentario">Comentário</label>
-                        <textarea rows="4" id="comentario" class="alterar-area"></textarea>
-                    </div>
-                </div>
-                <div class="imprevistos-part">
-                    <div class="form-group">
-                        <label class="alterar-label" for="data">Data</label>
-                        <input class="alterar-input" id="data" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="alterar-label" for="tempoGasto">Tempo Gasto</label>
-                        <input class="alterar-input" id="tempoGasto" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="alterar-label">Total Gasto</label>
-                        <span class="imprevisto-info">R$ 12,54</span>
-                    </div>
-                </div>
-                <button class="botao info">Alterar</button>
-                <button class="botao alerta">Excluir</button>
-
-            </div>-->
         </div>
     </main>
 </div>
+
+<div class="modal-background">
+</div>
+<div class="modal" id="modalCadastroImprevisto" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Imprevisto</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <i class="material-icons select-seta">arrow_drop_down</i>
+                <label class="form-label" for="tipoCadastro">Tipo</label>
+                <select class="form-select" id="tipoCadastro">
+                    <option selected value=""></option>
+                    <option value="Atraso">Atraso</option>
+                    <option value="Atestado">Atestado</option>
+                    <option value="Viagem">Viagem</option>
+                    <option value="Acidente">Acidente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="cometarioCadastro">Comentário</label>
+                <input class="form-input" type="text" id="cometarioCadastro">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="dataCadastro">Data de Realizacao</label>
+                <input class="form-input" type="text" id="dataCadastro">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="tempoCadastro">Tempo Gasto</label>
+                <input class="form-input" type="text" id="tempoCadastro">
+            </div>
+
+            <button class="botao sucesso center" id="cadastraImprevisto">Cadastrar</button>
+        </form>
+    </div>
+
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
