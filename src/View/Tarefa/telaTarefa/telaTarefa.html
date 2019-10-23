@@ -5,108 +5,135 @@
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
-    <link rel="stylesheet" href="/src/View/Default/css/body.css">
-    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/reset.css">
+    <link rel="stylesheet" href="/src/View/Default/css/material-icons.css">
     <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
     <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Tarefa/telaTarefa/styleTarefa.css">
     <title>Tarefa</title>
 </head>
 <body>
-<div class="mensagem">
-    <div class="mensagem-texto">
-    </div>
-    <div class="botao-fechar-mensagem">
-        <i class="material-icons">close</i>
-    </div>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
 </div>
-<nav class="sidebar">
-    <div class="container-itens">
-        <div class="sidebar-item" id="dashboards">
-            <i class="material-icons">dashboard</i>
-            <span class="sidebar-item-text">Dashboard</span>
-        </div>
-        <div class="sidebar-item" id="perfil">
-            <i class="material-icons">person</i>
-            <span class="sidebar-item-text">Perfil</span>
-        </div>
-        <div class="sidebar-item" id="projetos">
-            <i class="material-icons">work</i>
-            <span class="sidebar-item-text">Projetos</span>
-        </div>
-        <div class="sidebar-item" id="imprevistos">
-            <i class="material-icons">book</i>
-            <span class="sidebar-item-text">Imprevistos</span>
-        </div>
-        <div class="sidebar-item" id="formularios">
-            <i class="material-icons">assignment</i>
-            <span class="sidebar-item-text">Formulários</span>
-        </div>
-        <div class="sidebar-item" id="graficos">
-            <i class="material-icons">assessment</i>
-            <span class="sidebar-item-text">Gráficos</span>
-        </div>
-    </div>
-    <div class="container-sair">
-        <i class="material-icons">cancel</i>
-        <span class="btn-sair">Sair</span>
-    </div>
-</nav>
-<header class="main-header">
-    <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo LPM">
-    <div class="user-info">
-        <span class="user-name"></span>
-        <div class="container-user-img">
-            <img src="/assets/files/default/perfil.png" class="user-img" alt="foto-perfil">
-        </div>
-    </div>
-</header>
-<main class="main-content">
-    <div class="container">
-        <div id="tarefa-detalhes">
-            <form id="detalhe-conteudo">
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo Lasse Project Manager">
 
-            </form>
-        </div>
-        <div id="itens-tarefa">
-            <h2 id="tabViagens"><i class="material-icons">airplanemode_active</i>Viagens</h2>
-            <hr>
-            <div id="viagens">
-                <div class="aviso" id="aviso-viagem">
-                    <img src="/assets/images/not-found.svg" id="semItens" alt="icone sem itens">
-                    <h4>Nenhuma Viagem encontrada!</h4>
-                    <h4>Clique em novo para cadastrar uma nova viagem</h4>
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="#" class="sidebar-item" id="dashboards">
+                    <i class="material-icons" aria-hidden="true">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="projetos">
+                    <i class="material-icons" aria-hidden="true">work</i>
+                    Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="imprevistos">
+                    <i class="material-icons" aria-hidden="true">book</i>
+                    Imprevistos
+                </a>
+            </li>
+            <li>
+                <a href="#" id="formularios" class="sidebar-item">
+                    <i class="material-icons" aria-hidden="true">assignment</i>
+                    Formulários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficos">
+                    <i class="material-icons" aria-hidden="true">assessment</i>
+                    Gráficos
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="container">
+            <div id="tarefa-detalhes">
+                <form id="detalhe-conteudo">
+
+                </form>
+            </div>
+            <div id="itens-tarefa">
+                <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+                <hr>
+                <div id="viagens">
+                    <div class="aviso-container" id="aviso-viagem">
+                        <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                        <h4>Nenhuma Viagem encontrada!</h4>
+                        <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                    </div>
+                </div>
+                <div class="botoes-container">
+                    <button class="esquerda">
+                        <i class="material-icons md-3">keyboard_arrow_left</i>
+                    </button>
+                    <button class="direita">
+                        <i class="material-icons md-3">keyboard_arrow_right</i>
+                    </button>
                 </div>
             </div>
-            <div id="viagens-botoes">
-                <i class="material-icons" id="esquerda">keyboard_arrow_left</i>
-                <i class="material-icons" id="direita">keyboard_arrow_right</i>
-            </div>
+        </div>
+    </main>
+</div>
 
-        </div>
-
-    </div>
-</main>
-<section class="modal-background">
-</section>
-<div class="modal" id="modalExcluirTarefa">
-    <div class="modal-header">
-        <div class="modal-header-title">
-            Excluir Tarefa
-        </div>
-        <div class="modal-header-close" >
-            <i class="material-icons" id="fechaModalExcluirTarefa">close</i>
-        </div>
+<div class="modal-background"></div>
+<!--------------------- Modal Exclusao Tarefa ----------------------------->
+<div class="modal" id="modalExcluirTarefa" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Excluir Tarefa</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
     <div class="modal-conteudo">
         <span class="texto-excluir">Deseja mesmo excluir esta tarefa?</span>
         <span class="texto-excluir">Todos os dados presentes nesta tarefa serão excluidos <b>para sempre</b></span>
-        <button class="botao-excluir" id="excluirTarefa">Excluir</button>
+        <button class="botao alerta center" id="excluirTarefa">Excluir</button>
     </div>
 </div>
 
+<!--------------------- Modal Cadastro Viagem ----------------------------->
 <div class="modal" id="modalCadastrarViagem">
     <div class="modal-header">
         <div class="modal-header-title">
@@ -303,11 +330,14 @@
         </form>
     </div>
 </div>
-<script src="/src/View/Default/js/requisicoes.js"></script>
+
+<script src="/src/View/Default/js/inert.js"></script>
+<script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
-<script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/modal.js"></script>
 <script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Tarefa/telaTarefa/funcoesTarefaViagem.js"></script>
 <script src="/src/View/Tarefa/telaTarefa/funcoesTarefa.js"></script>
 </body>
 </html>

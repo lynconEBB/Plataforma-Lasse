@@ -20,77 +20,23 @@
     flex-wrap: wrap;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-#nome {
-    background-color: #275a66;
-    border: none;
-    width: 100%;
-    font-size: 2rem;
-    text-align: center;
-    color: white;
-    margin-top:30px;
-}
-#descricao {
-    background: transparent;
-    resize: none;
-    border: none;
-    width: 100%;
-    text-align-last: center;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #c5cec9;
-    margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif !important;
-}
-.detalhe-input {
-    background: transparent;
-    border: none;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-    color: white;
-    font-size: 1.2rem;
-}
 
-.tarefa-select:focus,#nome:focus, #descricao:focus, .detalhe-input:focus {
-    outline: none;
-}
 #botaoAlterarTarefa {
-    top: 8px;
+    position: absolute;
+    top: 10px;
     left: -10px;
 }
-
 #botaoAbreExcluirTarefa {
-    top: 8px;
+    position: absolute;
+    top: 10px;
     right: -10px;
 }
 .tarefa-group {
     width: 25%;
+    padding: 0 10px;
     box-sizing: border-box;
     text-align: center;
     margin-bottom: 20px;
-}
-.tarefa-label {
-    display: block;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: bold;
-    width: 100%;
-}
-.tarefa-select {
-    width: 100%;
-    text-align: center;
-    text-align-last: center;
-    background-color: transparent;
-    border: none;
-    appearance: none;
-    -webkit-appearance: none;
-    font-size: 1.2rem;
-    color: white;
-}
-.tarefa-select option {
-    background-color: #06404d;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    border: none;
 }
 
 @media (max-width: 1200px) {
@@ -103,23 +49,37 @@
         width: 100%;
     }
 }
+.alterar-titulo {
+    margin-top: 50px;
+}
+.alterar-area {
+    margin-bottom: 20px;
+}
+.alterar-select {
+    margin: 0 ;
+}
+.tabTitulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin:10px 0;
+    display: inline-block;
+}
 #viagens {
     width: 100%;
     overflow-x: scroll;
     white-space: nowrap;
     padding-bottom: 10px;
+    scrollbar-color: #323232 #cdd1d2;
+    scrollbar-width: thin;
 }
-
 #viagens::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: transparent;
 }
-
 #viagens::-webkit-scrollbar {
     height: 10px;
     background-color: transparent;
 }
-
 #viagens::-webkit-scrollbar-thumb
 {
     border-radius: 10px;
@@ -136,10 +96,6 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
     cursor: pointer;
 }
-h2 {
-    margin:10px 0;
-    display: inline-block;
-}
 .viagem-label {
     display: block;
     margin-bottom: 5px;
@@ -147,35 +103,23 @@ h2 {
 .viagem hr{
     border: solid white 1px;
 }
-#viagens-botoes {
+.botoes-container {
     display: flex;
     justify-content: space-between;
 }
-#viagens-botoes i {
-    font-size: 4rem;
-    cursor: pointer;
-}
-#semItens {
+.ImgSemItens {
     width: 50%;
     max-width: 50px;
     display: block;
     margin: 10px auto;
 }
-.aviso {
+.aviso-container {
     text-align: center;
     display: none;
 }
-.aviso h4 {
+.aviso-container h4 {
     margin: 5px 0;
     font-weight: normal;
-}
-#modalExcluirTarefa .modal-header{
-    background: #e45d5a;
-}
-#excluirTarefa {
-    position: relative;
-    display: block;
-    margin: 40px auto;
 }
 .texto-excluir {
     color: white;
@@ -199,24 +143,26 @@ h2 {
     display: block;
     margin: 0 auto;
 }
-.label-select {
-    pointer-events: none;
-}
 #container-veiculo, .container-condutor {
     display: none;
 }
-#abreVeiculo, #fechaVeiculo, #abreCondutor, #fechaCondutor {
-    margin: 10px auto;
-    display: block;
-}
-.info {
+
+.info-container {
     position: absolute;
     opacity: 0;
 }
-
 .info.ativado {
     opacity: 1;
     position: relative;
     bottom: auto;
     transition: all ease-in-out 300ms;
+}
+
+#excluirTarefa {
+    margin-top: 20px;
+}
+.esquerda, .direita {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
 }
