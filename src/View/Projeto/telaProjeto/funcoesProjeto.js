@@ -1,79 +1,33 @@
 window.onload = function () {
-    if(performance.navigation.type == 2){
-        location.reload(true);
-    }
-    if (performance.navigation.type !== 1) {
-        verificaMensagem();
-    }
+    verificaMensagem();
 
     var idProjetoRequisitado = window.location.pathname.split("/").pop();
 
-    requisicao("GET", "/api/projetos/"+idProjetoRequisitado, null, true, function (resposta) {
+    requisicao("GET", "/api/projetos/"+idProjetoRequisitado, null, function (resposta,codigo) {
 
         if (resposta.status === "sucesso") {
             var requisitor = resposta.requisitor;
-            setLinks(requisitor.id);
-            document.querySelector(".user-img").src = "/" + requisitor.foto;
-            document.querySelector(".user-name").textContent = requisitor.login;
+
+            setLinks(requisitor);
+
 
             /******Ajusta detalhes caso funciorio ou dono*************/
-            let template = ``;
             let projeto = resposta.dados;
             let participanteDropdown = document.getElementById("participantes-dropdown");
-            if (requisitor.dono === true) {
-                template = `
-                    <input type="text" id="nome" value="${projeto.nome}">
-                    <textarea  spellcheck="false" id="descricao">${projeto.descricao}</textarea>
-                    <div class="group-projeto">
-                        <label class="label-projeto">Data de Inicio </label>
-                        <input type="text" class="input-projeto" id="dtInicio" value="${projeto.dataInicio}">
-                    </div>
-                   <div class="group-projeto">
-                        <label class="label-projeto">Data de Finalização</label>
-                        <input type="text" class="input-projeto" id="dtFinalizacao" value="${projeto.dataFinalizacao}">
-                   </div>
-                    <div class="group-projeto">
-                        <label class="label-projeto">N° centro de custo</label>
-                        <input type="text" class="input-projeto" id="centroCusto" value="${projeto.numCentroCusto}">
-                    </div>
-                    <div class="group-projeto">
-                        <label class="label-projeto">Gasto Total</label>
-                        <label class="label-projeto">${projeto.totalGasto}</label>
-                    </div>
-                    <button id="botaoExcluir" type="button">Excluir</button>
-                    <button id="botaoAlterar" type="submit">Alterar</button>`;
 
-                    participanteDropdown.insertAdjacentHTML("afterbegin","<button class='botao-adicionar' id='abreModalAdicionar'><i class='material-icons'>library_add</i>Novo</button><hr>");
+            if (requisitor.dono === true) {
+                setTemplateDono(projeto);
             } else {
-                template = `
-                    <span id="nome">${projeto.nome}</span>
-                    <span id="descricao">${projeto.descricao}</span>
-                    <div class="group-projeto">
-                        <label class="label-projeto">Data de Início</label>
-                        <label class="label-projeto">${projeto.dataInicio}</label>
-                    </div>
-                    <div class="group-projeto">
-                        <label class="label-projeto">Data de Finalizacao</label>
-                        <label class="label-projeto">${projeto.dataFinalizacao}</label>
-                    </div>
-                    <div class="group-projeto">
-                        <label class="label-projeto">N° centro de custo</label>
-                        <label class="label-projeto">${projeto.numCentroCusto}</label>
-                    </div>
-                    <div class="group-projeto">
-                        <label class="label-projeto">Gasto Total</label>
-                        <label class="label-projeto">${projeto.totalGasto}</label>
-                    </div>`;
+                setTemplateNaoDono(projeto);
             }
+
             let requisitorParticipa = false;
-            projeto.participantes.forEach(function (participante) {
+            for (let participante of projeto.participantes) {
                 if (participante.id === requisitor.id) {
                     requisitorParticipa = true;
                 }
                 participanteDropdown.insertAdjacentHTML("beforeend",`<span class="participante">${participante.login}</span><hr>`)
-            });
-            document.getElementById("projeto-detalhes").insertAdjacentHTML("afterbegin",template);
-
+            }
 
             let countTarefas = {
                 afazer:0,
@@ -129,13 +83,13 @@ window.onload = function () {
                 <img class="img-vazio" src="/assets/images/vazio.png" alt="Icone sem Tarefas">
                 <span class="aviso-vazio"> Nenhuma Tarefa Encontrada! </span>
             </div>`;
-            if (countTarefas.concluida ==0) {
+            if (countTarefas.concluida === 0) {
                 tarefaConluida.insertAdjacentHTML("beforeend", templateAviso);
             }
-            if (countTarefas.fazendo == 0) {
+            if (countTarefas.fazendo === 0) {
                 tarefaAndamento.insertAdjacentHTML("beforeend", templateAviso);
             }
-            if (countTarefas.afazer == 0 ) {
+            if (countTarefas.afazer === 0 ) {
                 tarefaFazer.insertAdjacentHTML("beforeend", templateAviso);
             }
 
@@ -167,7 +121,7 @@ window.onload = function () {
             let botaoExcluirProjeto = document.getElementById("excluirProjeto");
             botaoExcluirProjeto.onclick = function () {
                 requisicao("DELETE","/api/projetos/"+projeto.id,null,true,function (resposta) {
-                    if (resposta.status == "sucesso") {
+                    if (resposta.status === "sucesso") {
                         window.location.href = "/projetos/user/"+requisitor.id+"?sucesso=Projeto-excluido-com-sucesso";
                     } else {
                         fecharModal("#modalExcluirProjeto");
@@ -229,7 +183,7 @@ window.onload = function () {
                 }
             });
         } else {
-            decideErros(resposta);
+            decideErros(resposta,codigo);
         }
     });
 };
@@ -244,6 +198,57 @@ abreDropDown.onclick = function () {
         abreDropDown.textContent = "keyboard_arrow_down";
     }
 };
+
+function setTemplateDono(projeto) {
+    let template = `
+    <input type="text" id="nome" class="alterar-titulo" value="${projeto.nome}">
+    <textarea  spellcheck="false" class="alterar-area" id="descricao">${projeto.descricao}</textarea>
+    <div class="group-projeto">
+        <label class="alterar-label" for="dtInicio">Data de Inicio </label>
+        <input type="text" class="alterar-input" id="dtInicio" value="${projeto.dataInicio}">
+    </div>
+   <div class="group-projeto">
+        <label class="alterar-label">Data de Finalização</label>
+        <input type="text" class="alterar-input" id="dtFinalizacao" value="${projeto.dataFinalizacao}">
+   </div>
+    <div class="group-projeto">
+        <label class="alterar-label">N° centro de custo</label>
+        <input type="text" class="alterar-input" id="centroCusto" value="${projeto.numCentroCusto}">
+    </div>
+    <div class="group-projeto">
+        <label class="alterar-label">Gasto Total</label>
+        <label class="alterar-label">${projeto.totalGasto}</label>
+    </div>
+    <button id="botaoExcluir" class="bo" type="button">Excluir</button>
+    <button id="botaoAlterar" type="submit">Alterar</button>`;
+
+    document.getElementById("participantes-dropdown").insertAdjacentHTML("afterbegin","<button class='botao-adicionar' id='abreModalAdicionar'><i class='material-icons'>library_add</i>Novo</button><hr>");
+    document.getElementById("projeto-detalhes").insertAdjacentHTML("afterbegin",template);
+}
+
+function setTemplateNaoDono(projeto) {
+    let template = `
+        <span id="nome">${projeto.nome}</span>
+        <span id="descricao">${projeto.descricao}</span>
+        <div class="group-projeto">
+            <label class="label-projeto">Data de Início</label>
+            <label class="label-projeto">${projeto.dataInicio}</label>
+        </div>
+        <div class="group-projeto">
+            <label class="label-projeto">Data de Finalizacao</label>
+            <label class="label-projeto">${projeto.dataFinalizacao}</label>
+        </div>
+        <div class="group-projeto">
+            <label class="label-projeto">N° centro de custo</label>
+            <label class="label-projeto">${projeto.numCentroCusto}</label>
+        </div>
+        <div class="group-projeto">
+            <label class="label-projeto">Gasto Total</label>
+            <label class="label-projeto">${projeto.totalGasto}</label>
+        </div>`;
+
+    document.getElementById("projeto-detalhes").insertAdjacentHTML("afterbegin",template);
+}
 
 
 

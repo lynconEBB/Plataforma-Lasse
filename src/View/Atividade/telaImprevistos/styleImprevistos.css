@@ -13,6 +13,7 @@
     margin-right: 5px;
 }
 .botao.aviso {
+    display: none;
     font-size: 1rem;
     margin-bottom: 5px;
 }
@@ -45,19 +46,29 @@
     background-color: #1b5b62;
 }
 .imprevisto {
+    padding: 20px 0 0;
+    border-bottom: black solid 2px;
+}
+.imprevisto:last-of-type {
+    border: none;
+}
+.imprevisto-info {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
     color: white;
     text-align: center;
     display: grid;
-    padding: 20px 0;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    border-bottom: black solid 2px;
 }
+
 .imprevisto span {
     display: flex;
     align-items: center;
     font-size: 1.2rem;
     justify-content: center;
+}
+
+.imprevisto-form {
+    display: none;
 }
 .imprevisto-detalhes {
     margin-top: 20px;
@@ -81,7 +92,6 @@
     font-weight: bold;
 }
 .detalhe-valor {
-
     display: block;
 }
 .detalhe-group.total {
@@ -95,14 +105,27 @@
     justify-content: center;
 }
 .detalhe-botoes .botao {
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 20px;
 }
+.expande {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    grid-column: 1/4;
+    color: white;
+}
+.expande:focus {
+    background-color: #1c8b92
+}
+.expande i {
+    font-size: 2rem;
+}
 @media (max-width: 520px) {
-    .total {
-        display: none;
-    }
-    .imprevisto {
+    .imprevisto-info {
         grid-template-columns: 1fr 1fr;
     }
     .imprevistos-header {
@@ -111,12 +134,35 @@
     .detalhe-group.total {
         display: block;
     }
+    .imprevisto .total {
+        display: none;
+    }
 }
 .alterar-select {
     margin: 0;
 }
 .imprevisto-group {
     margin: 0 10px;
+}
+
+.erro-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 0 ;
+    margin: 0 auto;
+}
+.erro-container figure {
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
+}
+.erro-container img {
+    width: 100%;
+}
+.erro-texto {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
 }
 
 

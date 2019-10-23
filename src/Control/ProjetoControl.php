@@ -76,6 +76,7 @@ class ProjetoControl extends CrudControl
                                 $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
                             } else {
                                 $this->respostaSucesso("Nenhum projeto encontrado!",null,$this->requisitor);
+                                http_response_code(201);
                             }
                         } else {
                             throw new PermissionException("Você não possui acesso aos projetos deste usuario","Acessar projetos de outro usuário");

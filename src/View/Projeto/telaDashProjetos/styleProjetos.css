@@ -9,6 +9,8 @@
     word-wrap: break-word;
 }
 .container-projeto {
+    text-decoration: none;
+    color: black;
     background-color: #12bfe5;
     margin-bottom: 40px;
     margin-left: 20px;
@@ -66,4 +68,7 @@ hr.cabecalho-divisoria{
 }
 .form-padrao{
     margin-bottom: 50px;
+}
+#abreModal {
+    display: none;
 }

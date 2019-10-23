@@ -1,48 +1,52 @@
 window.onload = function () {
-    if(performance.navigation.type == 2){
-        location.reload(true);
-    }
-    if (performance.navigation.type !== 1) {
-        verificaMensagem();
-    }
+    verificaMensagem();
 
-    var idUserRequisitado = window.location.pathname.split("/").pop();
+    let idUserRequisitado = window.location.pathname.split("/").pop();
 
-    requisicao("GET", "/api/projetos/user/"+idUserRequisitado, null, true, function (resposta) {
+    requisicao("GET", "/api/projetos/user/"+idUserRequisitado, null, function (resposta,codigo) {
 
         if (resposta.status === "sucesso") {
-            var requisitor = resposta.requisitor;
+            let requisitor = resposta.requisitor;
+            let projetos = resposta.dados;
 
-            setLinks(requisitor.id);
-            document.querySelector(".user-img").src = "/"+requisitor.foto;
-            document.querySelector(".user-name").textContent = requisitor.login;
+            setLinks(requisitor);
 
-            if (resposta.hasOwnProperty("dados")) {
+            requisicao("GET","/api/users/"+idUserRequisitado,null,function (resposta,codigo) {
+                if (resposta.status === "sucesso") {
+                    let usuario = resposta.dados;
+                    document.getElementById("titulo-cabecalho").textContent = "Projetos de "+usuario.login;
+                }
+            });
+
+            if (requisitor.id == idUserRequisitado) {
+                document.getElementById("abreModal").style.display = "inline-block";
+            }
+
+            if (codigo === 200) {
+
                 let main = document.querySelector("#dash-projetos");
-                resposta.dados.forEach(function (projeto) {
+                for (let projeto of projetos) {
                     let template = ` 
-                    <div class="container-projeto" id="projeto${projeto.id}">
-                        <span class="projeto-title">${projeto.nome}</span>
-                        <hr class="projeto-divisoria">
-                        <span class="projeto-criacao">Data de Criação: ${projeto.dataInicio}</span>
-                        <span class="projeto-finalizacao">Data de Finalização: ${projeto.dataFinalizacao}</span>
-                        <span class="projeto-participantes">Participantes: ${projeto.participantes.length}</span>
-                    </div>
-                    `;
+                        <a href="/projeto/${projeto.id}" class="container-projeto" id="projeto${projeto.id}">
+                            <span class="projeto-title">${projeto.nome}</span>
+                            <hr class="projeto-divisoria">
+                            <span class="projeto-criacao">Data de Criação: ${projeto.dataInicio}</span>
+                            <span class="projeto-finalizacao">Data de Finalização: ${projeto.dataFinalizacao}</span>
+                            <span class="projeto-participantes">Participantes: ${projeto.participantes.length}</span>
+                        </a>`;
 
                     main.insertAdjacentHTML("beforeend",template);
+
                     if (requisitor.infoAdd[projeto.id] === true) {
-                        container =document.getElementById("projeto"+projeto.id);
-                        divisoria = container.querySelector(".projeto-divisoria");
+                        let divisoria = document.getElementById("projeto"+projeto.id).querySelector(".projeto-divisoria");
                         divisoria.insertAdjacentHTML("afterend","<i class='material-icons'>star</i>")
                     }
-                    document.getElementById("projeto"+projeto.id).onclick = () => window.location.href = "/projeto/"+projeto.id;
-                })
+                }
             } else {
                 document.getElementById("container-aviso").style.display = "flex";
             }
         } else {
-            decideErros(resposta);
+            decideErros(resposta,codigo);
         }
     });
 };
@@ -56,24 +60,18 @@ document.getElementById("cadastrarProjeto").onclick = function(event) {
         dataFinalizacao :document.getElementById("dataFinalizacao").value,
         centroCusto :document.getElementById("numCentroCusto").value
     };
-    requisicao("POST","/api/projetos",body,true,function (response) {
-        console.log(response);
-        if (response.status == "sucesso") {
-            fecharModal("#modalCadastro");
+    requisicao("POST","/api/projetos",body,function (response,codigo) {
+
+        if (response.status === "sucesso") {
             addMensagem("sucesso=Projeto-cadastrado-com-sucesso!");
         } else {
-            exibirMensagem(response.mensagem,true);
+            exibirMensagem(response.mensagem,true,event.target);
         }
     });
 };
 
-let btnAbreModal = document.getElementById("abreModal");
-btnAbreModal.onclick = function () {
-    exibeModal("#modalCadastro");
+document.getElementById("abreModal").onclick = function (event) {
+    exibeModal("modalCadastro",event.target);
 };
 
-let btnFechaModal = document.querySelector(".modal-header-close");
-btnFechaModal.onclick = function () {
-    fecharModal("#modalCadastro");
-};
 
