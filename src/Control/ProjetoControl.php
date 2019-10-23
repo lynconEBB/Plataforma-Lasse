@@ -34,8 +34,12 @@ class ProjetoControl extends CrudControl
                     // /api/projetos/adicionar
                     elseif (count($this->url) == 3 && $this->url[2] == "adicionar") {
                         $requisicaoEncontrada = true;
-                        $this->addFuncionario($body->idProjeto,$body->idUsuario);
-                        $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
+                        if (isset($body->idProjeto) && isset($body->idUsuario)) {
+                            $this->addFuncionario($body->idProjeto,$body->idUsuario);
+                            $this->respostaSucesso("Usuario adicionado",null,$this->requisitor);
+                        } else {
+                            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
+                        }
                     }
                     break;
                 case 'GET':

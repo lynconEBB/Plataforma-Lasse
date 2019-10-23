@@ -85,3 +85,17 @@
 [22/10/2019 - 12:49:40] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [22/10/2019 - 07:21:57]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [22/10/2019 - 16:22:08] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 13:07:44] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 04:54:11]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 13:54:15] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 13:54:32] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar Projeto que não está inserido
+[23/10/2019 - 13:54:35] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar Projeto que não está inserido
+[23/10/2019 - 14:39:38] Erro ocorrido com usuário Daniel: Erro Interno Inesperado: Undefined property: stdClass::$idProjeto
+[23/10/2019 - 14:41:34] Erro ocorrido com usuário Daniel: Erro Interno Inesperado: Undefined property: stdClass::$idProjeto
+[23/10/2019 - 14:42:19] Erro ocorrido com usuário Daniel: Erro Interno Inesperado: Undefined property: stdClass::$idProjeto
+[23/10/2019 - 05:49:10]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 14:49:16] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 06:18:39]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 15:18:45] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 06:19:23]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[23/10/2019 - 15:19:34] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0

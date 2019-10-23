@@ -10,14 +10,12 @@
 }
 .botao:focus {
     border: #1285a9 solid 3px;
+    outline: none;
 }
 .botao:active {
     outline: none;
     transform: scale(0.98);
     box-shadow: none;
-}
-.botao:focus {
-    outline: none;
 }
 .botao.alerta {
     background-color: #e45d5a;

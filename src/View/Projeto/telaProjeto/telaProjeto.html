@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Projeto/telaProjeto/styleProjeto.css">
-    <title>Projeto</title>
+    <title>LPM - Projeto</title>
 </head>
 <body>
 
@@ -94,7 +94,9 @@
 
             </form>
             <section id="participantes">
-                <i class="material-icons" id="seta">keyboard_arrow_down</i>
+                <button id="seta">
+                    <i class="material-icons md-25">keyboard_arrow_down</i>
+                </button>
                 <div id="participantes-dropdown" style="display: none">
 
                 </div>
@@ -124,17 +126,13 @@
 
 <div class="modal-background">
 </div>
-
-<section class="modal-background">
-</section>
-<div class="modal" id="modalTarefa">
+<!-------------- Modal Cadastro Tarefa ------------------------>
+<div class="modal" id="modalTarefa" role="dialog" tabindex="-1">
     <div class="modal-header">
-        <div class="modal-header-title">
-            Cadastro Tarefa
-        </div>
-        <div class="modal-header-close">
-            <i class="material-icons" id="fechaModalTarefa">close</i>
-        </div>
+        <h2 class="modal-header-title">Cadastro Tarefa</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
     <div class="modal-conteudo">
         <form class="form-padrao">
@@ -162,44 +160,70 @@
                     <option value="Concluída">Concluída</option>
                 </select>
             </div>
-            <button class="botao-padrao" id="cadastrarTarefa">Cadastrar</button>
+            <button class="botao sucesso center" id="cadastrarTarefa">Cadastrar</button>
         </form>
     </div>
 </div>
 
-<div class="modal" id="modalExcluirProjeto">
-    <div class="modal-header" id="header-excluir">
-        <div class="modal-header-title">
-            Excluir Projeto
-        </div>
-        <div class="modal-header-close">
-            <i class="material-icons" id="fechaModalExcluirProjeto">close</i>
-        </div>
+<!---------------- Modal Excluir Projeto --------------------------------->
+<div class="modal" id="modalExcluirProjeto" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Excluir Projeto</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
     <div class="modal-conteudo">
         <span class="mensagemExcluir">Tem certeza que deseja mesmo excluir este projeto?</span>
         <span class="mensagemExcluir">Todas as informações contidas nele serão apagadas <b>para sempre</b>.</span>
-        <button class="botao-padrao" id="excluirProjeto">Excluir</button>
+        <button class="botao alerta center" id="excluirProjeto">Excluir</button>
     </div>
 </div>
 
-<div class="modal" id="modalAdicionarFuncionario">
+<!-------------------- Modal Adicionar Projeto ---------------------------------->
+<div class="modal" id="modalAdicionarFuncionario" role="dialog" tabindex="-1">
     <div class="modal-header">
-        <div class="modal-header-title">
-            Adicionar Funcionário
-        </div>
-        <div class="modal-header-close">
-            <i class="material-icons" id="fechaModalAdicionarFuncionario">close</i>
-        </div>
+        <h2 class="modal-header-title">Adicionar Funcionário</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
     <div class="modal-conteudo">
         <span class="mensagemExcluir">Escolha um usuario para adicionar ao projeto.</span>
-        <select class="form-select" id="funcionario">
-            <option disabled selected value> Selecione </option>
-        </select>
-        <button class="botao-padrao" id="adicionarFuncionario">Adicionar</button>
+        <div class="form-group">
+            <i class="material-icons select-seta">arrow_drop_down</i>
+            <label class="escondeVisualmente" for="funcionario">Funcionário</label>
+            <select class="form-select" id="funcionario">
+                <option selected value></option>
+            </select>
+        </div>
+
+        <button class="botao sucesso center" id="adicionarFuncionario">Adicionar</button>
     </div>
 </div>
+
+<!-------------------- Modal Transferir Dominio --------------------------------->
+<div class="modal" id="modalTransferirDominio" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Adicionar Funcionário</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <span class="mensagemExcluir">Escolha um usuario para Transferir o dominio do Projeto.</span>
+        <div class="form-group">
+            <i class="material-icons select-seta">arrow_drop_down</i>
+            <label class="escondeVisualmente" for="novoFuncionario">Funcionário</label>
+            <select class="form-select" id="novoFuncionario">
+                <option selected value></option>
+            </select>
+        </div>
+
+        <button class="botao sucesso center" id="transferirDominio">Adicionar</button>
+    </div>
+</div>
+
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
