@@ -16,96 +16,16 @@ window.onload = function () {
                 mostrarTarefaParticipando(tarefa);
                 setAlteracaoTarefa(tarefa);
                 setExclusaoTarefa(tarefa,requisitor);
+                setBotaoAbreModalViagem();
+                setFuncionamentoModalViagem();
             } else {
                 mostrarTarefaNaoParticipando(tarefa);
             }
 
-            exibeViagens(tarefa);
-
-
-            /*****Mostrar Veiculos e condutores**********/
-            /*if (requisitor.participa) {
-                let selectCondutor = document.getElementById("idCondutor");
-                let groupCondutor = document.getElementById("group-condutor");
-                let containerCondutor = document.getElementById("container-condutor");
-                let botaoAbreCondutor = document.getElementById("abreCondutor");
-                let botaoFechaCondutor = document.getElementById("fechaCondutor");
-                requisicao("GET","/api/condutores",null,true,function (resposta) {
-                    if (resposta.status === "sucesso") {
-                        if (resposta.hasOwnProperty("dados")) {
-                            let condutores = resposta.dados;
-                            condutores.forEach(function (condutor) {
-                                selectCondutor.insertAdjacentHTML("beforeend",`<option value="${condutor.id}">${condutor.nome}</option>`);
-                            })
-                        } else {
-                            groupCondutor.style.display = "none";
-                            botaoAbreCondutor.style.display = "none";
-                            containerCondutor.style.display = "block";
-                        }
-                    } else {
-                        exibirMensagem(resposta.mensagem,true);
-                    }
-                });
-                botaoAbreCondutor.onclick = function () {
-                    if (groupCondutor.style.display === "block") {
-                        selectCondutor.value = "novo";
-                        groupCondutor.style.display = "none";
-                        botaoAbreCondutor.style.display = "none";
-                        containerCondutor.style.display = "block";
-                    }
-                };
-                botaoFechaCondutor.onclick = function () {
-                    if (groupCondutor.style.display === "none") {
-                        selectCondutor.value = "selecione";
-                        groupCondutor.style.display = "block";
-                        botaoAbreCondutor.style.display = "block";
-                        containerCondutor.style.display = "none";
-                    }
-                };
-
-
-                let selectVeiculo = document.getElementById("idVeiculo");
-                let groupVeiculo = document.getElementById("group-veiculo");
-                let containerVeiculo = document.getElementById("container-veiculo");
-                let botaoAbreVeiculo = document.getElementById("abreVeiculo");
-                let botaoFechaVeiculo = document.getElementById("fechaVeiculo");
-                requisicao("GET","/api/veiculos",null,true,function (resposta) {
-                    if (resposta.status === "sucesso") {
-                        if (resposta.hasOwnProperty("dados")) {
-                            let veiculos = resposta.dados;
-                            veiculos.forEach(function (veiculo) {
-                                selectVeiculo.insertAdjacentHTML("beforeend",`<option value="${veiculo.id}">${veiculo.nome}</option>`);
-                            })
-                        } else {
-                            groupVeiculo.style.display = "none";
-                            botaoAbreVeiculo.style.display = "none";
-                            containerVeiculo.style.display = "block";
-                        }
-                    } else {
-                        exibirMensagem(resposta.mensagem,true);
-                    }
-                });
-                botaoAbreVeiculo.onclick = function () {
-                    if (groupVeiculo.style.display === "block") {
-                        selectVeiculo.value = "novo";
-                        groupVeiculo.style.display = "none";
-                        botaoAbreVeiculo.style.display = "none";
-                        containerVeiculo.style.display = "block";
-                    }
-                };
-                botaoFechaVeiculo.onclick = function () {
-                    if (groupVeiculo.style.display === "none") {
-                        selectVeiculo.value = "selecione";
-                        groupVeiculo.style.display = "block";
-                        botaoAbreVeiculo.style.display = "block";
-                        containerVeiculo.style.display = "none";
-                    }
-                };
-
-
-            }*/
-
-
+            exibeViagens(tarefa,requisitor);
+            //exibeCompras(tarefa,requisitor);
+            //exibeAtividades(tarefa,requisitor);
+            setBotoesScroll();
         } else {
             decideErros(resposta,codigo);
         }
@@ -113,29 +33,38 @@ window.onload = function () {
 };
 
 function setBotoesScroll() {
-    let containerViagens = document.getElementById("viagens");
-    let botaoDireta = document.getElementById("direita");
-    let botaoEsquerda = document.getElementById("esquerda");
+    let botoesDireita = document.getElementsByClassName("direita");
+    let botoesEsquerda = document.getElementsByClassName("esquerda");
 
-    botaoDireta.addEventListener("mousedown",function () {
-        if (containerViagens.parentElement.offsetWidth !== containerViagens.scrollWidth) {
-            let posDesejada = containerViagens.scrollLeft + 390;
-            if (posDesejada < containerViagens.scrollWidth) {
-                containerViagens.scrollTo({left: posDesejada, behavior: "smooth"});
-            }
-        }
-    });
+    for (let botaoDireita of botoesDireita) {
+        botaoDireita.addEventListener("mousedown",function () {
+            let containerGeral = botaoDireita.parentElement.parentElement;
+            let containerItens = containerGeral.querySelector(".container-itens");
 
-    botaoEsquerda.addEventListener("mousedown",function () {
-        if (containerViagens.parentElement.offsetWidth !== containerViagens.scrollWidth) {
-            let posDesejada = containerViagens.scrollLeft - 390;
-            if (posDesejada > 0) {
-                containerViagens.scrollTo({left:posDesejada,behavior:"smooth"});
-            } else {
-                containerViagens.scrollTo({left:0,behavior:"smooth"});
+            if (containerGeral.offsetWidth !== containerItens.scrollWidth) {
+                let posDesejada = containerItens.scrollLeft + 390;
+                if (posDesejada < containerItens.scrollWidth) {
+                    containerItens.scrollTo({left: posDesejada, behavior: "smooth"});
+                }
             }
-        }
-    });
+        });
+    }
+
+    for (let botaoEsquerda of botoesEsquerda) {
+        botaoEsquerda.addEventListener("mousedown",function () {
+            let containerGeral = botaoEsquerda.parentElement.parentElement;
+            let containerItens = containerGeral.querySelector(".container-itens");
+
+            if (containerGeral.offsetWidth !== containerItens.scrollWidth) {
+                let posDesejada = containerItens.scrollLeft - 390;
+                if (posDesejada > 0) {
+                    containerItens.scrollTo({left:posDesejada,behavior:"smooth"});
+                } else {
+                    containerItens.scrollTo({left:0,behavior:"smooth"});
+                }
+            }
+        });
+    }
 }
 
 function setExclusaoTarefa(tarefa,requisitor) {

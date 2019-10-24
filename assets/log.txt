@@ -1,2 +1,10 @@
 [23/10/2019 - 15:27:12] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
 [23/10/2019 - 15:32:10] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36
+[24/10/2019 - 13:04:54] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[24/10/2019 - 13:17:07] Usuário lynconbaez logou no sistema através de insomnia/7.0.3
+[24/10/2019 - 13:29:09] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+[24/10/2019 - 13:40:06] Usuário Daniel logou no sistema através de insomnia/7.0.3
+[24/10/2019 - 04:40:46]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[24/10/2019 - 13:40:58] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+[24/10/2019 - 13:59:28] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134
+[24/10/2019 - 14:01:48] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36 OPR/64.0.3417.73

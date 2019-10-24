@@ -95,29 +95,51 @@
                 </form>
             </div>
             <div id="itens-tarefa">
-                <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
-                <hr>
-                <div id="viagens">
-                    <div class="aviso-container" id="aviso-viagem">
-                        <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
-                        <h4>Nenhuma Viagem encontrada!</h4>
-                        <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                <div id="container-viagens">
+                    <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+                    <button class='botao aviso' id='abreModalCadastroViagem'>Novo</button>
+                    <hr>
+                    <div id="viagens" class="container-itens">
+                        <div class="aviso-container" id="aviso-viagem">
+                            <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Viagem encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
                     </div>
                 </div>
-                <div class="botoes-container">
-                    <button class="esquerda">
-                        <i class="material-icons md-3">keyboard_arrow_left</i>
-                    </button>
-                    <button class="direita">
-                        <i class="material-icons md-3">keyboard_arrow_right</i>
-                    </button>
+                <div id="container-compras">
+                    <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+                    <hr>
+                    <div id="compras" class="container-itens">
+                        <div class="aviso-container" id="aviso-compra">
+                            <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Compra encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova compra</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
 
-<div class="modal-background"></div>
+<div class="modal-background ativo"></div>
 <!--------------------- Modal Exclusao Tarefa ----------------------------->
 <div class="modal" id="modalExcluirTarefa" role="dialog" tabindex="-1">
     <div class="modal-header alerta">
@@ -134,18 +156,17 @@
 </div>
 
 <!--------------------- Modal Cadastro Viagem ----------------------------->
-<div class="modal" id="modalCadastrarViagem">
+<div class="modal ativo" id="modalCadastroViagem" role="dialog" tabindex="-1">
     <div class="modal-header">
-        <div class="modal-header-title">
-            Cadastrar Viagem
-        </div>
-        <div class="modal-header-close" >
-            <i class="material-icons" id="fechaModalCadastrarViagem">close</i>
-        </div>
+        <h2 class="modal-header-title">Cadastrar Viagem</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
     </div>
     <div class="modal-conteudo">
         <form class="form-padrao">
-            <div id="info-viagem" class="info ativado">
+            <div id="info-viagem" class="info-container">
+                <h2>Informações da Viagem</h2>
                 <div class="form-group">
                     <label class="form-label" for="origem">Origem</label>
                     <input class="form-input" id="origem" type="text">
@@ -163,6 +184,7 @@
                     <input class="form-input" id="dataVolta" type="text">
                 </div>
                 <div class="form-group">
+                    <i class="material-icons select-seta">arrow_drop_down</i>
                     <label class="form-label label-select" for="tipo">Tipo de Viagem</label>
                     <select id="tipo" class="form-select">
                         <option value="" disabled selected></option>
@@ -192,6 +214,7 @@
                     <input class="form-input" id="passagem" type="text">
                 </div>
                 <div class="form-group">
+                    <i class="material-icons select-seta">arrow_drop_down</i>
                     <label class="form-label label-select" for="tipoPassagem">Tipo de Passagem</label>
                     <select id="tipoPassagem" class="form-select">
                         <option value="" disabled selected></option>
@@ -202,25 +225,45 @@
                         <option value="Terrestre internacional">Terrestre internacional</option>
                     </select>
                 </div>
-                <button class="botao-padrao" type="button" id="irPaginaHospVeiculo">Próximo</button>
+                <button class="botao sucesso center" type="button" id="irPaginaHosp">Avançar</button>
             </div>
-            <div id="info-hospVeiculo"  class="info">
-                <button class="botao-padrao" type="button" id="voltarPaginaViagem">Voltar</button>
-                <div class="form-group" id="group-veiculo" style="display:block;">
-                    <label class="form-label label-select" for="idVeiculo">Veículo</label>
-                    <select id="idVeiculo" class="form-select">
-                        <option hidden value="novo"></option>
-                        <option value="selecione" selected></option>
-                    </select>
+            <div class="info-container" id="info-hosp">
+                <h2>Informações Hospedagem</h2>
+                <div class="form-group">
+                    <label class="form-label" for="dtEntradaHosp">Data Entrada Hospedagem</label>
+                    <input class="form-input" id="dtEntradaHosp" type="text">
                 </div>
-                <button type="button" id="abreVeiculo" class="botao-adicionar">Novo</button>
-                <div id="container-veiculo">
-                    <button id="fechaVeiculo" type="button" class="botao-adicionar">Escolher</button>
+                <div class="form-group">
+                    <label class="form-label" for="dtSaidaHosp">Data Saida Hospedagem</label>
+                    <input class="form-input" id="dtSaidaHosp" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaEntradaHosp">Hora de Entrada Hospedagem</label>
+                    <input class="form-input" id="horaEntradaHosp" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaSaidaHosp">Hora de Saida na Hospedagem</label>
+                    <input class="form-input" id="horaSaidaHosp" type="text">
+                </div>
+                <div class="botoes">
+                    <button class="botao alerta" type="button" id="voltaPagViagem">Voltar</button>
+                    <button class="botao sucesso" type="button" id="irPagVeiculo">Avançar</button>
+                </div>
+
+            </div>
+            <div id="info-veiculo"  class="info-container  ativado">
+                <h2>Selecione um Veículo ou Cadastre um novo</h2>
+                <button class="botao aviso center" id="novoVeiculo">Novo</button>
+                <div id="veiculos">
+
+                </div>
+                <div id="form-veiculo">
                     <div class="form-group">
                         <label class="form-label" for="veiculo">Nome do Veículo</label>
                         <input class="form-input" id="veiculo" type="text">
                     </div>
                     <div class="form-group">
+                        <i class="material-icons select-seta">arrow_drop_down</i>
                         <label class="form-label label-select" for="tipoVeiculo">Tipo de Veículo</label>
                         <select id="tipoVeiculo" class="form-select">
                             <option value="" disabled selected></option>
@@ -245,49 +288,16 @@
                         <label class="form-label" for="horaDevolucao">Hora de Devolução</label>
                         <input class="form-input" id="horaDevolucao" type="text">
                     </div>
-                    <div class="form-group" id="group-condutor" style="display:block;">
-                        <label class="form-label label-select" for="idCondutor">Condutor</label>
-                        <select id="idCondutor" class="form-select">
-                            <option hidden value="novo"></option>
-                            <option value="selecione" disabled selected></option>
-                        </select>
-                    </div>
-                    <button type="button" id="abreCondutor" class="botao-adicionar">Novo</button>
-                    <div id="container-condutor" style="display: none;">
-                        <button id="fechaCondutor" type="button" class="botao-adicionar">Escolher</button>
-                        <div class="form-group">
-                            <label class="form-label" for="nomeCondutor">Nome do Condutor</label>
-                            <input class="form-input" id="nomeCondutor" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cnh">Número CNH</label>
-                            <input class="form-input" id="cnh" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="validadeCNH">Validade da CNH</label>
-                            <input class="form-input" id="validadeCNH" type="text">
-                        </div>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="dtEntradaHosp">Data Entrada Hospedagem</label>
-                    <input class="form-input" id="dtEntradaHosp" type="text">
+                <div class="botoes">
+                    <button class="botao alerta" type="button" id="voltarPaginaViagem">Voltar</button>
+                    <button class="botao sucesso" type="button" style="display: none" id="irPaginaCondutor">Avançar</button>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="dtSaidaHosp">Data Saida Hospedagem</label>
-                    <input class="form-input" id="dtSaidaHosp" type="text">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="horaEntradaHosp">Hora de Entrada Hospedagem</label>
-                    <input class="form-input" id="horaEntradaHosp" type="text">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="horaSaidaHosp">Hora de Saida na Hospedagem</label>
-                    <input class="form-input" id="horaSaidaHosp" type="text">
-                </div>
-                <button class="botao-padrao" type="button" id="irPaginaGastos">Próximo</button>
             </div>
-            <div id="info-gastos"  class="info ">
+            <div id="info-condutor" class="info-container">
+                <h2>Selecione um condutor ou cadastre um novo</h2>
+            </div>
+            <div id="info-gastos"  class="info-container">
                 <button class="botao-padrao" id="voltarPaginaHospVeiculo" type="button">Voltar</button>
                 <div class="form-group">
                     <label class="form-label" for="aluguel">Aluguel de veículos (locado fora de Foz)</label>
@@ -330,6 +340,7 @@
         </form>
     </div>
 </div>
+
 
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
