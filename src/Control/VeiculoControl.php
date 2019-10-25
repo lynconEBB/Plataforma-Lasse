@@ -36,7 +36,12 @@ class VeiculoControl extends CrudControl {
                     if (count($this->url) == 2) {
                         $requisicaoEncontrada = true;
                         $veiculos = $this->listar();
-                        $this->respostaSucesso("Listando todos veiculos",$veiculos,$this->requisitor);
+                        if ($veiculos != false) {
+                            $this->respostaSucesso("Listando todos veiculos",$veiculos,$this->requisitor);
+                        } else {
+                            $this->respostaSucesso("Nenhum Veiculo Encontrado",null,$this->requisitor);
+                        }
+
                     }
                     // /api/veiculos/{idVeiculo}
                     elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2] ) {

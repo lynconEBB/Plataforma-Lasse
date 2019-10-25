@@ -35,155 +35,204 @@ function setBotaoAbreModalViagem() {
 }
 
 function setBotoesNavegacaoModal() {
-    let pagHosp = document.getElementById("info-hosp");
-    let pagViagem = document.getElementById("info-viagem");
-    let pagGastos =  document.getElementById("info-gastos");
-    let pagVeiculo = document.getElementById("info-veiculo");
+    let botoesProximo = document.getElementsByClassName("proximo");
+    let botoesAnterior = document.getElementsByClassName("anterior");
 
-    document.getElementById("irPaginaHosp").onclick = function() {
-        pagViagem.classList.remove("ativado");
-        pagHosp.classList.add("ativado");
-    };
+    for (let botaoProximo of botoesProximo) {
+        let containerBotao = botaoProximo.parentElement.parentElement;
+        let proximoContainer = containerBotao.nextElementSibling;
+        botaoProximo.onclick = function () {
+            containerBotao.classList.remove("ativado");
+            proximoContainer.classList.add("ativado");
+        }
+    }
+    for (let botaoAnterior of botoesAnterior) {
+        let containerBotao = botaoAnterior.parentElement.parentElement;
+        let anteriorContainer = containerBotao.previousElementSibling;
 
-    document.getElementById("voltaPagViagem").onclick = function() {
-        pagHosp.classList.remove("ativado");
-        pagViagem.classList.add("ativado");
-    };
-
-    document.getElementById("irPagVeiculo").onclick = function() {
-        pagHosp.classList.remove("ativado");
-        pagVeiculo.classList.add("ativado");
-    };
+        botaoAnterior.onclick = function () {
+            containerBotao.classList.remove("ativado");
+            anteriorContainer.classList.add("ativado");
+        }
+    }
 }
 
 function setFuncionamentoModalViagem() {
     setBotoesNavegacaoModal();
-    requisicao("GET","/api/veiculos",null,function (resposta) {
+    exibeVeiculos();
+    exibeCondutores();
+    setBotaoNovoGasto();
+    document.getElementById("irPaginaGastos").onclick = function () {
+        document.getElementById("info-condutor").classList.remove("ativado");
+        document.getElementById("info-gastos").classList.add("ativado");
+        setVoltarGastos("info-condutor");
+    };
+}
+
+function setBotaoNovoGasto() {
+    let count = 0;
+    let containerGastos = document.getElementById("gastos");
+    document.getElementById("novoGasto").onclick = function () {
+        containerGastos.insertAdjacentHTML("afterbegin",`
+            <div class="container-gasto">
+                <div class="form-group">
+                    <label class="form-label" for="tipoGasto${count}">Gasto</label>
+                    <input class="form-input tipoGasto" id="tipoGasto${count}"  type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="valorGasto${count}">Valor</label>
+                    <input class="form-input valorGasto" id="valorGasto${count}" type="text">
+                </div>
+                <button type="button" class="botao alerta" id="gasto${count}"><i class="material-icons">delete</i></button>
+            </div>
+        `);
+        document.getElementById("gasto"+count).addEventListener("click",function () {
+           this.parentElement.remove();
+        });
+        setInputs();
+        count++;
+    }
+}
+
+function exibeCondutores() {
+    requisicao("GET","/api/condutores",null,function (resposta,codigo) {
         if (resposta.status === "sucesso") {
             if (resposta.hasOwnProperty("dados")) {
-                let veiculos = resposta.dados;
-                for (let veiculo of veiculos) {
-                    document.getElementById("veiculos").insertAdjacentHTML("beforeend",`
-                        <div class="veiculo-container">
-                        <div class="veiculo-dados">
-                            <h3>${veiculo.nome}</h3>
-                            <h4>${veiculo.tipo}</h4>
-                            
-                            <hr>
-                            <span><b>Retirada:</b> ${veiculo.dataRetirada}</span>
-                            <span><b>Devolução:</b> ${veiculo.dataDevolucao}</span>
-                            <span><b>Condutor:</b> ${veiculo.condutor.nome}</span>
-                            <span><b>CNH condutor:</b> ${veiculo.condutor.cnh}</span>
+                let condutores = resposta.dados;
+                let containerCondutores = document.getElementById("condutores");
+                for (let condutor of condutores) {
+                    containerCondutores.insertAdjacentHTML("beforeend",`
+                        <div class="condutor-container">
+                            <div class="veiculo-dados">
+                                <h3>${condutor.nome}</h3>
+                                <span><b>CNH:</b> ${condutor.cnh}</span>
+                                <span><b>Validade CNH:</b> ${condutor.validadeCNH}</span>
+                            </div>
+                            <button class="selecionaVeiculo" id="selecionaCondutor${condutor.id}" title="Escolher Condutor">
+                                <i class="material-icons md-15">keyboard_arrow_right</i>
+                            </button>
                         </div>
-                        <button class="selecionaVeiculo" title="Escolher Veículo">
-                            <i class="material-icons md-15">keyboard_arrow_right</i>
-                        </button>
-                    </div>
                     `);
+                    document.getElementById("selecionaCondutor"+condutor.id).onclick = function (event) {
+                        event.preventDefault();
+                        setVoltarGastos("info-condutor");
+                        document.getElementById("idCondutor").value = condutor.id;
+                        document.getElementById("info-condutor").classList.remove("ativado");
+                        document.getElementById("info-gastos").classList.add("ativado");
+                    };
                 }
             } else {
-                // TODO: Implementar aviso sem veiculos
+                document.getElementById("novoCondutor").style.display = "none";
+                document.getElementById("form-condutor").style.display = "block";
+                document.querySelector("#info-condutor>h2").textContent = "Informações do Condutor";
+                document.getElementById("irPaginaGastos").style.display = "inline-block";
             }
         } else {
             exibirMensagemInicio(resposta.mensagem,true);
         }
     });
 
-    document.getElementById("novoVeiculo").onclick = function (event) {
-        event.preventDefault();
-
-        document.getElementById("veiculos").style.display = "none";
-        document.getElementById("form-veiculo").style.display = "block";
+    let condutores = document.getElementById("condutores");
+    let formCondutor = document.getElementById("form-condutor");
+    let btnNovo = document.getElementById("novoCondutor");
+    btnNovo.onclick = function () {
+        if (formCondutor.style.display === "none") {
+            condutores.style.display = "none";
+            formCondutor.style.display = "block";
+            document.getElementById("idCondutor").value = "novo";
+            btnNovo.textContent = "Escolher";
+            document.getElementById("irPaginaGastos").style.display = "inline-block";
+        } else {
+            document.getElementById("irPaginaGastos").style.display = "none";
+            btnNovo.textContent = "Novo";
+            condutores.style.display = "grid";
+            formCondutor.style.display = "none";
+        }
     };
+}
 
-    /*let selectCondutor = document.getElementById("idCondutor");
-    let groupCondutor = document.getElementById("group-condutor");
-    let containerCondutor = document.getElementById("container-condutor");
-    let botaoAbreCondutor = document.getElementById("abreCondutor");
-    let botaoFechaCondutor = document.getElementById("fechaCondutor");
-
-    requisicao("GET","/api/condutores",null,function (resposta) {
+function exibeVeiculos() {
+    requisicao("GET","/api/veiculos",null,function (resposta) {
         if (resposta.status === "sucesso") {
+            console.log(resposta.hasOwnProperty("dados"));
             if (resposta.hasOwnProperty("dados")) {
-                let condutores = resposta.dados;
-                condutores.forEach(function (condutor) {
-                    selectCondutor.insertAdjacentHTML("beforeend",`<option value="${condutor.id}">${condutor.nome}</option>`);
-                })
+                let veiculos = resposta.dados;
+                for (let veiculo of veiculos) {
+                    document.getElementById("veiculos").insertAdjacentHTML("beforeend",`
+                        <div class="veiculo-container">
+                            <div class="veiculo-dados">
+                                <h3>${veiculo.nome}</h3>
+                                <h4>${veiculo.tipo}</h4>
+                                
+                                <hr>
+                                <span><b>Retirada:</b> ${veiculo.dataRetirada}</span>
+                                <span><b>Devolução:</b> ${veiculo.dataDevolucao}</span>
+                                <span><b>Condutor:</b> ${veiculo.condutor.nome}</span>
+                                <span><b>CNH condutor:</b> ${veiculo.condutor.cnh}</span>
+                            </div>
+                            <button class="selecionaVeiculo" id="selecionaVeiculo${veiculo.id}" title="Escolher Veiculo">
+                                <i class="material-icons md-15">keyboard_arrow_right</i>
+                            </button>
+                        </div>
+                    `);
+                    document.getElementById("selecionaVeiculo"+veiculo.id).onclick = function (event) {
+                        event.preventDefault();
+                        setVoltarGastos("info-veiculo");
+                        document.getElementById("idVeiculo").value = veiculo.id;
+                        document.getElementById("info-veiculo").classList.remove("ativado");
+                        document.getElementById("info-gastos").classList.add("ativado");
+                    };
+                }
             } else {
-                groupCondutor.style.display = "none";
-                botaoAbreCondutor.style.display = "none";
-                containerCondutor.style.display = "block";
+                document.getElementById("novoVeiculo").style.display = "none";
+                document.getElementById("form-veiculo").style.display = "block";
+                document.querySelector("#info-veiculo>h2").textContent = "Informações do Veículo";
+                document.getElementById("irPaginaCondutor").style.display = "inline-block";
             }
         } else {
-            exibirMensagem(resposta.mensagem,true);
+            exibirMensagemInicio(resposta.mensagem,true);
         }
     });
-    botaoAbreCondutor.onclick = function () {
-        if (groupCondutor.style.display === "block") {
-            selectCondutor.value = "novo";
-            groupCondutor.style.display = "none";
-            botaoAbreCondutor.style.display = "none";
-            containerCondutor.style.display = "block";
+
+    let veiculos = document.getElementById("veiculos");
+    let formVeiculo = document.getElementById("form-veiculo");
+    let btnNovo = document.getElementById("novoVeiculo");
+    btnNovo.onclick = function (event) {
+        event.preventDefault();
+        if (formVeiculo.style.display === "none") {
+            veiculos.style.display = "none";
+            formVeiculo.style.display = "block";
+            btnNovo.textContent = "Escolher";
+            document.getElementById("idVeiculo").value = "novo";
+            document.getElementById("irPaginaCondutor").style.display = "inline-block";
+        } else {
+            document.getElementById("irPaginaCondutor").style.display = "none";
+            btnNovo.textContent = "Novo";
+            veiculos.style.display = "grid";
+            formVeiculo.style.display = "none";
         }
     };
-    botaoFechaCondutor.onclick = function () {
-        if (groupCondutor.style.display === "none") {
-            selectCondutor.value = "selecione";
-            groupCondutor.style.display = "block";
-            botaoAbreCondutor.style.display = "block";
-            containerCondutor.style.display = "none";
-        }
-    };
-
-
-    let selectVeiculo = document.getElementById("idVeiculo");
-    let groupVeiculo = document.getElementById("group-veiculo");
-    let containerVeiculo = document.getElementById("container-veiculo");
-    let botaoAbreVeiculo = document.getElementById("abreVeiculo");
-    let botaoFechaVeiculo = document.getElementById("fechaVeiculo");
-
-    botaoAbreVeiculo.onclick = function () {
-        if (groupVeiculo.style.display === "block") {
-            selectVeiculo.value = "novo";
-            groupVeiculo.style.display = "none";
-            botaoAbreVeiculo.style.display = "none";
-            containerVeiculo.style.display = "block";
-        }
-    };
-    botaoFechaVeiculo.onclick = function () {
-        if (groupVeiculo.style.display === "none") {
-            selectVeiculo.value = "selecione";
-            groupVeiculo.style.display = "block";
-            botaoAbreVeiculo.style.display = "block";
-            containerVeiculo.style.display = "none";
-        }
-    };*/
-
 }
-function setCadastroViagem() {
-    let pagViagem = document.getElementById("info-viagem");
-    let pagHospVeiculo = document.getElementById("info-hospVeiculo");
-    let pagGastos = document.getElementById("info-gastos");
 
-    document.getElementById("irPaginaHospVeiculo").onclick = () => {
-        pagViagem.className = "info";
-        pagHospVeiculo.className = "info ativado";
-    };
-    document.getElementById("voltarPaginaViagem").onclick = () => {
-        pagHospVeiculo.className = "info";
-        pagViagem.className = "info ativado";
-    };
-    document.getElementById("irPaginaGastos").onclick = () => {
-        pagHospVeiculo.className = "info";
-        pagGastos.className = "info ativado";
-    };
-    document.getElementById("voltarPaginaHospVeiculo").onclick = () => {
-        pagGastos.className = "info";
-        pagHospVeiculo.className = "info ativado";
-    };
+function setVoltarGastos(pagVolta) {
+    document.getElementById("voltarPagina").onclick = function () {
+        if (pagVolta === "info-veiculo") {
+            document.getElementById("idVeiculo").value = "novo";
+        } else {
+            document.getElementById("idCondutor").value = "novo";
+        }
+        document.getElementById("info-gastos").classList.remove("ativado");
+        document.getElementById(pagVolta).classList.add("ativado");
+    }
+}
+
+function setCadastroViagem(tarefa) {
 
     let botaoCadastraViagem = document.getElementById("cadastrarViagem");
-    botaoCadastraViagem.onclick = () => {
+    botaoCadastraViagem.onclick = function(event) {
+        document.getElementById("lds-ring").style.display = "block";
+        document.getElementById("cadastrarViagem").disabled = true;
+        document.getElementById("voltarPagina").disabled = true;
         let bodyViagem = {
             origem: document.getElementById("origem").value,
             destino: document.getElementById("destino").value,
@@ -201,40 +250,12 @@ function setCadastroViagem() {
             tipo: document.getElementById("tipo").value,
             tipoPassagem: document.getElementById("tipoPassagem").value,
             idTarefa: tarefa.id,
-            gastos: [
-                {
-                    tipo: document.getElementById("aluguel").previousElementSibling.textContent,
-                    valor: document.getElementById("aluguel").value
-                }, {
-                    tipo: document.getElementById("combustivel").previousElementSibling.textContent,
-                    valor: document.getElementById("combustivel").value
-                }, {
-                    tipo: document.getElementById("estacionamento").previousElementSibling.textContent,
-                    valor: document.getElementById("estacionamento").value
-                }, {
-                    tipo: document.getElementById("passagemRodMetro").previousElementSibling.textContent,
-                    valor: document.getElementById("passagemRodMetro").value
-                }, {
-                    tipo: document.getElementById("passagemRodInter").previousElementSibling.textContent,
-                    valor: document.getElementById("passagemRodInter").value
-                }, {
-                    tipo: document.getElementById("pedagio").previousElementSibling.textContent,
-                    valor: document.getElementById("pedagio").value
-                }, {
-                    tipo: document.getElementById("seguro").previousElementSibling.textContent,
-                    valor: document.getElementById("seguro").value
-                }, {
-                    tipo: document.getElementById("taxi").previousElementSibling.textContent,
-                    valor: document.getElementById("taxi").value
-                }, {
-                    tipo: document.getElementById("outros").previousElementSibling.textContent,
-                    valor: document.getElementById("outros").value
-                },
-            ]
+            gastos : adicionaGastosBody()
         };
-        var veiculo;
+
+        let veiculo;
         if (document.getElementById("idVeiculo").value !== "novo") {
-            veiculo =  document.getElementById("idVeiculo").value;
+            veiculo = document.getElementById("idVeiculo").value;
         } else {
             veiculo = {
                 nome: document.getElementById("veiculo").value,
@@ -244,7 +265,8 @@ function setCadastroViagem() {
                 dtDevolucao: document.getElementById("dataDevolucao").value,
                 horaDevolucao: document.getElementById("horaDevolucao").value
             };
-            var condutor;
+
+            let condutor;
             if (document.getElementById("idCondutor").value !== "novo") {
                 condutor = document.getElementById("idCondutor").value;
             } else {
@@ -257,13 +279,46 @@ function setCadastroViagem() {
             veiculo["condutor"] = condutor;
         }
         bodyViagem["veiculo"] =  veiculo;
-        requisicao("POST","/api/viagens",bodyViagem,function (resposta) {
+        requisicao("POST","/api/viagens",bodyViagem,function (resposta,codigo) {
+            document.getElementById("lds-ring").style.display = "none";
+            document.getElementById("cadastrarViagem").disabled = false;
+            document.getElementById("voltarPagina").disabled = false;
             if (resposta.status === "sucesso") {
                 addMensagem("sucesso=Viagem-cadastrada-com-sucesso!");
             } else {
-                exibirMensagem(resposta.mensagem,true);
+                exibirMensagem(resposta.mensagem,true,event.target);
             }
         });
     };
+}
 
+function adicionaGastosBody() {
+    let gastos = [];
+    let containerGastos = document.getElementsByClassName("container-gasto");
+    for (let containerGasto of containerGastos) {
+        gastos.push({
+            tipo: containerGasto.getElementsByClassName("tipoGasto")[0].value,
+            valor: containerGasto.getElementsByClassName("valorGasto")[0].value
+        })
+    }
+
+    let container = document.getElementById("gastosPadroes");
+    let gastosPadroes = container.getElementsByClassName("form-group");
+    for (let gastoPadrao of gastosPadroes) {
+        gastos.push({
+            tipo: gastoPadrao.getElementsByClassName("form-label")[0].textContent,
+            valor: decideGasto(gastoPadrao)
+        });
+    }
+
+    return gastos;
+}
+
+function decideGasto(gastoPadrao) {
+    let valor = gastoPadrao.getElementsByClassName("form-input")[0].value;
+    if (valor == "") {
+        return 0.00
+    } else {
+        return valor;
+    }
 }

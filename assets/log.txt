@@ -8,3 +8,5 @@
 [24/10/2019 - 13:40:58] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
 [24/10/2019 - 13:59:28] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134
 [24/10/2019 - 14:01:48] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36 OPR/64.0.3417.73
+[25/10/2019 - 16:01:16] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar todas as viagens
+[25/10/2019 - 16:01:30] Usuário lynconbaez logou no sistema através de insomnia/7.0.3

@@ -116,7 +116,8 @@
                     </div>
                 </div>
                 <div id="container-compras">
-                    <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+                    <h2 class="tabTitulo"><i class="material-icons">shop</i>Compras</h2>
+                    <button class='botao aviso' id='abreModalCadastroCompra'>Novo</button>
                     <hr>
                     <div id="compras" class="container-itens">
                         <div class="aviso-container" id="aviso-compra">
@@ -139,7 +140,7 @@
     </main>
 </div>
 
-<div class="modal-background ativo"></div>
+<div class="modal-background"></div>
 <!--------------------- Modal Exclusao Tarefa ----------------------------->
 <div class="modal" id="modalExcluirTarefa" role="dialog" tabindex="-1">
     <div class="modal-header alerta">
@@ -156,7 +157,7 @@
 </div>
 
 <!--------------------- Modal Cadastro Viagem ----------------------------->
-<div class="modal ativo" id="modalCadastroViagem" role="dialog" tabindex="-1">
+<div class="modal" id="modalCadastroViagem" role="dialog" tabindex="-1">
     <div class="modal-header">
         <h2 class="modal-header-title">Cadastrar Viagem</h2>
         <button class="modal-close" type="button" aria-label="Fechar Modal">
@@ -165,7 +166,10 @@
     </div>
     <div class="modal-conteudo">
         <form class="form-padrao">
-            <div id="info-viagem" class="info-container">
+            <input type="hidden" id="idCondutor" value="novo">
+            <input type="hidden" id="idVeiculo" value="novo">
+            <!------- Página Viagem ----------------->
+            <fieldset id="info-viagem" class="info-container ativado">
                 <h2>Informações da Viagem</h2>
                 <div class="form-group">
                     <label class="form-label" for="origem">Origem</label>
@@ -225,9 +229,12 @@
                         <option value="Terrestre internacional">Terrestre internacional</option>
                     </select>
                 </div>
-                <button class="botao sucesso center" type="button" id="irPaginaHosp">Avançar</button>
-            </div>
-            <div class="info-container" id="info-hosp">
+                <div>
+                    <button class="botao sucesso center proximo" type="button" id="irPaginaHosp">Avançar</button>
+                </div>
+            </fieldset>
+            <!------- Página Hospedagem ----------------->
+            <fieldset class="info-container" id="info-hosp">
                 <h2>Informações Hospedagem</h2>
                 <div class="form-group">
                     <label class="form-label" for="dtEntradaHosp">Data Entrada Hospedagem</label>
@@ -246,18 +253,18 @@
                     <input class="form-input" id="horaSaidaHosp" type="text">
                 </div>
                 <div class="botoes">
-                    <button class="botao alerta" type="button" id="voltaPagViagem">Voltar</button>
-                    <button class="botao sucesso" type="button" id="irPagVeiculo">Avançar</button>
+                    <button class="botao alerta anterior" type="button" id="voltaPagViagem">Voltar</button>
+                    <button class="botao sucesso proximo" type="button" id="irPagVeiculo">Avançar</button>
                 </div>
-
-            </div>
-            <div id="info-veiculo"  class="info-container  ativado">
+            </fieldset>
+            <!------- Página Veiculo ----------------->
+            <fieldset id="info-veiculo"  class="info-container">
                 <h2>Selecione um Veículo ou Cadastre um novo</h2>
-                <button class="botao aviso center" id="novoVeiculo">Novo</button>
+                <button type="button" class="botao aviso center" id="novoVeiculo">Novo</button>
                 <div id="veiculos">
-
+                    <!------ Veiculos Aqui ---------------->
                 </div>
-                <div id="form-veiculo">
+                <div id="form-veiculo" style="display: none">
                     <div class="form-group">
                         <label class="form-label" for="veiculo">Nome do Veículo</label>
                         <input class="form-input" id="veiculo" type="text">
@@ -290,56 +297,87 @@
                     </div>
                 </div>
                 <div class="botoes">
-                    <button class="botao alerta" type="button" id="voltarPaginaViagem">Voltar</button>
-                    <button class="botao sucesso" type="button" style="display: none" id="irPaginaCondutor">Avançar</button>
+                    <button class="botao alerta anterior" type="button" id="voltarPaginaViagem">Voltar</button>
+                    <button class="botao sucesso proximo" type="button" style="display: none" id="irPaginaCondutor">Avançar</button>
                 </div>
-            </div>
-            <div id="info-condutor" class="info-container">
+            </fieldset>
+            <!------- Página Condutor ----------------->
+            <fieldset id="info-condutor" class="info-container">
                 <h2>Selecione um condutor ou cadastre um novo</h2>
-            </div>
-            <div id="info-gastos"  class="info-container">
-                <button class="botao-padrao" id="voltarPaginaHospVeiculo" type="button">Voltar</button>
-                <div class="form-group">
-                    <label class="form-label" for="aluguel">Aluguel de veículos (locado fora de Foz)</label>
-                    <input class="form-input" id="aluguel" type="text">
+                <button type="button" class="botao aviso center" id="novoCondutor">Novo</button>
+                <div id="condutores">
+                    <!-------- Condutores Aqui ---------->
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="combustivel">Combustível</label>
-                    <input class="form-input" id="combustivel" type="text">
+                <div id="form-condutor" style="display: none">
+                    <div class="form-group">
+                        <label class="form-label" for="nomeCondutor">Nome do Condutor</label>
+                        <input class="form-input" id="nomeCondutor" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cnh">Número CNH</label>
+                        <input class="form-input" id="cnh" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="validadeCNH">Validade da CNH</label>
+                        <input class="form-input" id="validadeCNH" type="text">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="estacionamento">Estacionamento</label>
-                    <input class="form-input" id="estacionamento" type="text">
+                <div class="botoes">
+                    <button type="button" class="botao alerta anterior">Voltar</button>
+                    <button type="button" class="botao sucesso proximo" id="irPaginaGastos" style="display: none">Avançar</button>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="passagemRodMetro">Passagens rodoviárias (metrô/ônibus)</label>
-                    <input class="form-input" id="passagemRodMetro" type="text">
+            </fieldset>
+            <!------- Página Gastos ----------------->
+            <fieldset id="info-gastos"  class="info-container">
+                <h2>Gastos da Viagem</h2>
+                <button type="button" class="botao aviso center" id="novoGasto">Novo</button>
+                <div id="gastos">
+
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="passagemRodInter">Passagens rodoviárias internacionais</label>
-                    <input class="form-input" id="passagemRodInter" type="text">
+                <div id="gastosPadroes">
+                    <div class="form-group">
+                        <label class="form-label" for="aluguel">Aluguel de veículos (locado fora de Foz)</label>
+                        <input class="form-input" id="aluguel" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="combustivel">Combustível</label>
+                        <input class="form-input" id="combustivel" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="estacionamento">Estacionamento</label>
+                        <input class="form-input" id="estacionamento" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="passagemRodMetro">Passagens rodoviárias (metrô/ônibus)</label>
+                        <input class="form-input" id="passagemRodMetro" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="passagemRodInter">Passagens rodoviárias internacionais</label>
+                        <input class="form-input" id="passagemRodInter" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pedagio">Pedágio</label>
+                        <input class="form-input" id="pedagio" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="seguro">Seguro internacional (obrigatório)</label>
+                        <input class="form-input" id="seguro" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="taxi">Táxi</label>
+                        <input class="form-input" id="taxi" type="text">
+                    </div>
+                    <div id='lds-ring'></div>
+                    <div class="botoes">
+                        <button class="botao alerta anterior" id="voltarPagina" type="button">Voltar</button>
+                        <button class="botao sucesso" id="cadastrarViagem" type="button">Finalizar</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="pedagio">Pedágio</label>
-                    <input class="form-input" id="pedagio" type="text">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="seguro">Seguro internacional (obrigatório)</label>
-                    <input class="form-input" id="seguro" type="text">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="taxi">Táxi</label>
-                    <input class="form-input" id="taxi" type="text">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="outros">Outros</label>
-                    <input class="form-input" id="outros" type="text">
-                </div>
-                <button class="botao-padrao" id="cadastrarViagem" type="button">Cadastrar</button>
-            </div>
+            </fieldset>
         </form>
     </div>
 </div>
+
 
 
 <script src="/src/View/Default/js/inert.js"></script>

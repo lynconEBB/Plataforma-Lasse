@@ -18,6 +18,7 @@ window.onload = function () {
                 setExclusaoTarefa(tarefa,requisitor);
                 setBotaoAbreModalViagem();
                 setFuncionamentoModalViagem();
+                setCadastroViagem(tarefa);
             } else {
                 mostrarTarefaNaoParticipando(tarefa);
             }

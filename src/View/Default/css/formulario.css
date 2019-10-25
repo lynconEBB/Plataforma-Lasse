@@ -27,6 +27,7 @@
     bottom: 1.7rem;
     font-size: 0.8rem;
     opacity: 0.5;
+    pointer-events: none;
 }
 .form-input {
     font-size: 1.2rem;
