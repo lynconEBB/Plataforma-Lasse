@@ -63,8 +63,12 @@ class CompraControl extends CrudControl {
                     // /api/compras/{idCompra}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
-                        $this->atualizar($info->proposito,$this->url[2]);
-                        $this->respostaSucesso("Compra atualizada com sucesso",null,$this->requisitor);
+                        if (isset($info->proposito) && isset($info->fonte) && isset($info->natOrcamentaria)) {
+                            $this->atualizar($info,$this->url[2]);
+                            $this->respostaSucesso("Compra atualizada com sucesso",null,$this->requisitor);
+                        } else {
+                            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
+                        }
                     }
                     break;
                 case 'DELETE':
@@ -72,7 +76,7 @@ class CompraControl extends CrudControl {
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
                         $this->excluir($this->url[2]);
-                        $this->respostaSucesso("Compra excluida com sucesso",null,$this->requisitor);
+                        $this->respostaSucesso("Compra excluída com sucesso",null,$this->requisitor);
                     }
                     break;
             }
@@ -84,12 +88,12 @@ class CompraControl extends CrudControl {
 
     public function cadastrar($info)
     {
-        if (isset($info->proposito) && isset($info->idTarefa) && isset($info->itens) && is_array($info->itens)) {
+        if (isset($info->proposito) && isset($info->idTarefa) && isset($info->itens) && is_array($info->itens) && isset($info->fonte) && isset($info->natOrcamentaria) ) {
             if ($this->verificaPermissao($info->idTarefa)) {
                 $usuarioControl = new UsuarioControl(null);
                 $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
                 //Cadastra no banco de dados com Total = 0
-                $compra = new CompraModel($info->proposito,null,null,null,$usuario);
+                $compra = new CompraModel($info->proposito,null,null,null,$usuario,$info->fonte,$info->natOrcamentaria);
                 $this->DAO->cadastrar($compra,$info->idTarefa);
                 //Pega id da Compra Inserida
                 $idCompra = $this->DAO->pdo->lastInsertId();
@@ -120,16 +124,15 @@ class CompraControl extends CrudControl {
         }
     }
 
-    public function atualizar($proposito,$id)
+    public function atualizar($body,$id)
     {
         $compra = $this->listarPorId($id);
         if ($compra->getComprador()->getId() == $this->requisitor['id']) {
-            $compraNova = new CompraModel($proposito,null,null,$id,null);
+            $compraNova = new CompraModel($body->proposito,null,null,$id,null,$body->fonte,$body->natOrcamentaria);
             $this->DAO->atualizar($compraNova);
         } else {
                 throw new PermissionException("Usuário não possui permissão para Atualizar esta compra","Atualizar compra feita por outra pessoa");
         }
-
     }
 
     public function listar()

@@ -63,7 +63,7 @@
     margin:10px 0;
     display: inline-block;
 }
-#viagens {
+.container-padrao{
     width: 100%;
     overflow-x: scroll;
     white-space: nowrap;
@@ -71,15 +71,15 @@
     scrollbar-color: #323232 #cdd1d2;
     scrollbar-width: thin;
 }
-#viagens::-webkit-scrollbar-track {
+.container-padrao::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: transparent;
 }
-#viagens::-webkit-scrollbar {
+.container-padrao::-webkit-scrollbar {
     height: 10px;
     background-color: transparent;
 }
-#viagens::-webkit-scrollbar-thumb
+.container-padrao::-webkit-scrollbar-thumb
 {
     border-radius: 10px;
     background-color: #babaca;
@@ -104,10 +104,10 @@
     display: block;
     margin-bottom: 5px;
 }
-.viagem hr{
+.viagem hr, .compra hr, .atividade hr{
     border: solid white 1px;
 }
-.viagem h2 {
+.viagem h2 , .compra h2, .atividade h2{
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -170,7 +170,7 @@
     background-color: transparent;
 }
 
-#abreModalCadastroViagem, #abreModalCadastroCompra {
+#abreModalCadastroViagem, #abreModalCadastroCompra, #abreModalCadastroAtividade {
     display: none;
 }
 .botoes {
@@ -276,5 +276,89 @@
     100% {
         transform: rotate(360deg);
     }
+}
+#modalCadastroCompra hr{
+    width: 100%;
+    max-width: 800px;
+    border: solid 3px white;
+}
+#modalCadastroCompra h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 5px;
+    color: white;
+}
+#modalCadastroCompra .aviso {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+#cabecalho-itens {
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0 auto;
+    max-width: 800px;
+    display: flex;
+}
+.container-item{
+    max-width: 800px;
+    display: grid;
+    grid-column-gap: 10px;
+    background-color: #074a56;
+    padding: 0 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    grid-template-columns: auto 90px 80px 50px;
+    margin: 0 auto 10px;
+}
+.container-item .botao {
+    align-self: center;
+    color: white;
+    background-color: #e45d5a;
+    text-decoration: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-item .form-group {
+    max-width: 1000px;
+}
+@media (max-width: 450px) {
+    .container-item {
+        grid-template-columns: auto auto;
+        justify-content: center;
+    }
+    .container-item .form-group:first-of-type {
+        grid-column: 1/4;
+    }
+    .container-item .botao {
+        grid-column: 1/4;
+        max-width: 50px;
+        margin: 0 auto 10px;
+    }
+}
+.compra {
+    box-sizing: border-box;
+    width: 350px;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    background-color: #57b498;
+    margin: 0 20px;
+    display: inline-block;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    cursor: pointer;
+}
+.atividade {
+    box-sizing: border-box;
+    width: 350px;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    background-color: #b45323;
+    margin: 0 20px;
+    display: inline-block;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    cursor: pointer;
 }
 

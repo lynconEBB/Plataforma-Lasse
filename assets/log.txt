@@ -10,3 +10,14 @@
 [24/10/2019 - 14:01:48] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36 OPR/64.0.3417.73
 [25/10/2019 - 16:01:16] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar todas as viagens
 [25/10/2019 - 16:01:30] Usuário lynconbaez logou no sistema através de insomnia/7.0.3
+[26/10/2019 - 14:22:11] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[27/10/2019 - 15:47:11] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[27/10/2019 - 06:48:45]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[27/10/2019 - 16:18:26] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[27/10/2019 - 07:21:30]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[28/10/2019 - 14:15:42] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[28/10/2019 - 17:27:51] Erro ocorrido com usuário LynconBaez: Permissão negada ao tentar Excluir perfil de usuário
+[28/10/2019 - 17:55:52] Usuário Daniel logou no sistema através de insomnia/7.0.3
+[28/10/2019 - 17:56:04] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar projetos de outro usuário
+[28/10/2019 - 17:56:22] Erro ocorrido com usuário Daniel: Erro Interno Inesperado: Too few arguments to function Lasse\LPM\Model\CompraModel::__construct(), 5 passed in C:\Lasse-Project-Manager\src\Dao\CompraDao.php on line 111 and exactly 7 expected
+[28/10/2019 - 19:39:08] Usuário LynconBaez logou no sistema através de insomnia/7.0.3

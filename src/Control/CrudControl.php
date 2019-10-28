@@ -2,7 +2,8 @@
 
 namespace Lasse\LPM\Control;
 
-abstract class CrudControl{
+abstract class CrudControl
+{
     protected $DAO;
     protected $metodo;
     protected $url;

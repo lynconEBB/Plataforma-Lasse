@@ -11,7 +11,6 @@ window.onload = function () {
 
             setLinks(requisitor);
 
-            /******Coloca informações da tarefa**********/
             if (requisitor.participa) {
                 mostrarTarefaParticipando(tarefa);
                 setAlteracaoTarefa(tarefa);
@@ -19,19 +18,76 @@ window.onload = function () {
                 setBotaoAbreModalViagem();
                 setFuncionamentoModalViagem();
                 setCadastroViagem(tarefa);
+                setBotaoAbreModalCompra(tarefa);
+                setCadastroCompra(tarefa);
+                setCadastroAtividade(tarefa);
             } else {
                 mostrarTarefaNaoParticipando(tarefa);
             }
 
             exibeViagens(tarefa,requisitor);
-            //exibeCompras(tarefa,requisitor);
-            //exibeAtividades(tarefa,requisitor);
+            exibeCompras(tarefa,requisitor);
+            exibeAtividades(tarefa,requisitor);
             setBotoesScroll();
         } else {
             decideErros(resposta,codigo);
         }
     });
 };
+
+function exibeAtividades(tarefa,requisitor) {
+    let atividades = tarefa.atividades;
+    if (atividades != null) {
+        for (let atividade of atividades) {
+            let templateAtividade = ` 
+                <a href="#" class="atividade" id="atividade${atividade.id}">
+                    <h2>${atividade.tipo}</h2>
+                    <hr>
+                    <span class="viagem-label">Usuário: ${atividade.usuario.nomeCompleto}</span>
+                    <span class="viagem-label">Total Gasto: R$ ${atividade.totalGasto}</span>
+                </a>
+            `;
+            document.getElementById("atividades").insertAdjacentHTML("afterbegin",templateAtividade);
+            let viagemExibida = document.getElementById("atividade"+atividade.id);
+            if (requisitor.admin === "1" || requisitor.id === atividade.usuario.id) {
+                viagemExibida.setAttribute("href","/atividade/"+atividade.id);
+            } else {
+                viagemExibida.onclick = function(event) {
+                    event.preventDefault();
+                    exibirMensagem("Você não possui permissão para visualizar esta viagem",true,event.target);
+                }
+            }
+        }
+    } else {
+        document.getElementById("aviso-atividade").style.display = "block";
+    }
+}
+
+function setCadastroAtividade(tarefa) {
+    let botaoAtividade = document.getElementById("abreModalCadastroAtividade");
+    botaoAtividade.style.display = "inline-block";
+    document.getElementById("abreModalCadastroAtividade").onclick = function (event) {
+        exibeModal("modalCadastroAtividade",event.target);
+    };
+
+    document.getElementById("cadastrarAtividade").onclick = function (event) {
+        event.preventDefault();
+        let body = {
+            tipo: document.getElementById("tipoAtividade").value,
+            comentario: document.getElementById("comentario").value,
+            dataRealizacao: document.getElementById("data").value,
+            tempoGasto: document.getElementById("tempo").value,
+            idTarefa: tarefa.id
+        };
+        requisicao("POST","/api/atividades",body,function (resposta,codigo) {
+           if (resposta.status === "sucesso") {
+               addMensagem("sucesso=Atividade-cadastrada-com-sucesso");
+           } else {
+               exibirMensagem(resposta.mensagem,true,event.target);
+           }
+        });
+    };
+}
 
 function setBotoesScroll() {
     let botoesDireita = document.getElementsByClassName("direita");
@@ -40,7 +96,7 @@ function setBotoesScroll() {
     for (let botaoDireita of botoesDireita) {
         botaoDireita.addEventListener("mousedown",function () {
             let containerGeral = botaoDireita.parentElement.parentElement;
-            let containerItens = containerGeral.querySelector(".container-itens");
+            let containerItens = containerGeral.querySelector(".container-padrao");
 
             if (containerGeral.offsetWidth !== containerItens.scrollWidth) {
                 let posDesejada = containerItens.scrollLeft + 390;
@@ -54,7 +110,7 @@ function setBotoesScroll() {
     for (let botaoEsquerda of botoesEsquerda) {
         botaoEsquerda.addEventListener("mousedown",function () {
             let containerGeral = botaoEsquerda.parentElement.parentElement;
-            let containerItens = containerGeral.querySelector(".container-itens");
+            let containerItens = containerGeral.querySelector(".container-padrao");
 
             if (containerGeral.offsetWidth !== containerItens.scrollWidth) {
                 let posDesejada = containerItens.scrollLeft - 390;

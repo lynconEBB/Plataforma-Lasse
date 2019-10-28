@@ -9,17 +9,20 @@ class CompraModel
     private $id;
     private $proposito;
     private $totalGasto = 0;
+    private $naturezaOrcamentaria;
+    private $fonteRecurso;
     private $itens;
     private $comprador;
 
-    public function __construct($proposito,$totalGasto, $itens, $id,$comprador)
+    public function __construct($proposito,$totalGasto, $itens, $id,$comprador,$fonteRecurso,$naturezaOrcamentaria)
     {
         $this->setId($id);
         $this->setProposito($proposito);
         $this->setItens($itens);
         $this->setComprador($comprador);
+        $this->setFonteRecurso($fonteRecurso);
+        $this->setNaturezaOrcamentaria($naturezaOrcamentaria);
         $this->setTotalGasto($totalGasto);
-
     }
 
     public function toArray()
@@ -35,9 +38,11 @@ class CompraModel
         $array = [
             "id" => $this->id,
             "proposito" => $this->proposito,
+            "naturezaOrcamentaria" => $this->naturezaOrcamentaria,
+            "fonte" => $this->fonteRecurso,
             "totalGasto" => $this->totalGasto,
             "itens" => $itens,
-            "comprador" => $this->comprador->toArray()
+            "comprador" => $this->getComprador()->toArray()
         ];
         return $array;
     }
@@ -52,7 +57,31 @@ class CompraModel
         $this->totalGasto = $total;
     }
 
-    public function getComprador():UsuarioModel
+    public function getNaturezaOrcamentaria()
+    {
+        return $this->naturezaOrcamentaria;
+    }
+
+    public function setNaturezaOrcamentaria($naturezaOrcamentaria)
+    {
+        Validacao::validar("Natureza Orçamentária",$naturezaOrcamentaria,"texto","obrigatorio");
+        $this->naturezaOrcamentaria = $naturezaOrcamentaria;
+    }
+
+    public function getFonteRecurso()
+    {
+        return $this->fonteRecurso;
+    }
+
+    public function setFonteRecurso($fonteRecurso)
+    {
+        Validacao::validar("Fonte de Recurso",$fonteRecurso,"texto","obrigatorio");
+        $this->fonteRecurso = $fonteRecurso;
+    }
+
+
+
+    public function getComprador(): UsuarioModel
     {
         return $this->comprador;
     }

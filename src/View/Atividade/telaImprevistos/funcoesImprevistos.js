@@ -8,7 +8,7 @@ window.onload = function () {
             let requisitor = resposta.requisitor;
 
             setLinks(requisitor);
-            if (requisitor.id == idUserRequisitado) {
+            if (requisitor.id === idUserRequisitado) {
                 document.getElementById("abreModalCadastro").style.display = "inline-block";
                 document.getElementById("abreModalCadastro").onclick = function (event) {
                     exibeModal("modalCadastroImprevisto",event.target);

@@ -95,11 +95,12 @@
                 </form>
             </div>
             <div id="itens-tarefa">
+                <!------------ Viagens --------------------->
                 <div id="container-viagens">
                     <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
                     <button class='botao aviso' id='abreModalCadastroViagem'>Novo</button>
                     <hr>
-                    <div id="viagens" class="container-itens">
+                    <div id="viagens" class="container-padrao">
                         <div class="aviso-container" id="aviso-viagem">
                             <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
                             <h4>Nenhuma Viagem encontrada!</h4>
@@ -115,15 +116,37 @@
                         </button>
                     </div>
                 </div>
+                <!----------------------- Compras ------------------>
                 <div id="container-compras">
                     <h2 class="tabTitulo"><i class="material-icons">shop</i>Compras</h2>
                     <button class='botao aviso' id='abreModalCadastroCompra'>Novo</button>
                     <hr>
-                    <div id="compras" class="container-itens">
+                    <div id="compras" class="container-padrao">
                         <div class="aviso-container" id="aviso-compra">
                             <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
                             <h4>Nenhuma Compra encontrada!</h4>
                             <h4>Clique em novo para cadastrar uma nova compra</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </div>
+                <!-------------------------- Atividades ----------------------------->
+                <div id="container-atividades">
+                    <h2 class="tabTitulo"><i class="material-icons">book</i>Atividades</h2>
+                    <button class='botao aviso' id='abreModalCadastroAtividade'>Novo</button>
+                    <hr>
+                    <div id="atividades" class="container-padrao">
+                        <div class="aviso-container" id="aviso-atividade">
+                            <img src="/assets/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Atividade encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova Atividade</h4>
                         </div>
                     </div>
                     <div class="botoes-container">
@@ -153,6 +176,95 @@
         <span class="texto-excluir">Deseja mesmo excluir esta tarefa?</span>
         <span class="texto-excluir">Todos os dados presentes nesta tarefa serão excluidos <b>para sempre</b></span>
         <button class="botao alerta center" id="excluirTarefa">Excluir</button>
+    </div>
+</div>
+
+<!--------------------- Modal Cadastro Atividade ---------------------------->
+<div class="modal" id="modalCadastroAtividade" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Atividade</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <i class="material-icons select-seta">arrow_drop_down</i>
+                <label class="form-label" for="tipoAtividade">Tipo</label>
+                <select class="form-select" id="tipoAtividade">
+                    <option selected value=""></option>
+                    <option value="Atraso">Atraso</option>
+                    <option value="Atestado">Atestado</option>
+                    <option value="Viagem">Viagem</option>
+                    <option value="Acidente">Acidente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="comentario">Comentário</label>
+                <input class="form-input" type="text" id="comentario">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="data">Data de Realizacao</label>
+                <input class="form-input" type="text" id="data">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="tempo">Tempo Gasto</label>
+                <input class="form-input" type="text" id="tempo">
+            </div>
+            <button class="botao sucesso center" id="cadastrarAtividade">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+<!--------------------- Modal Cadastro Compra ----------------------------->
+<div class="modal" id="modalCadastroCompra" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Compra</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label for="proposito" class="form-label">Propósito</label>
+                <input type="text" id="proposito" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="fonteCompra" class="form-label">Fonte de Recurso</label>
+                <input type="text" id="fonteCompra" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="natOrcamentaria" class="form-label">Natureza Orçamentária</label>
+                <input type="text" id="natOrcamentaria" class="form-input">
+            </div>
+            <div id="cabecalho-itens">
+                <h3>Itens</h3>
+                <button class="botao aviso" id="novoItem">Novo</button>
+            </div>
+            <hr>
+            <div id="itens">
+                <div class="container-item">
+                    <div class="form-group">
+                        <label for="nomeItem" class="form-label">Item</label>
+                        <input type="text" id="nomeItem" class="form-input itemNome">
+                    </div>
+                    <div class="form-group">
+                        <label for="item" class="form-label ">Quantidade</label>
+                        <input type="text" id="item" class="form-input itemQtd">
+                    </div>
+                    <div class="form-group">
+                        <label for="qtdItem" class="form-label ">Valor</label>
+                        <input type="text" id="qtdItem" class="form-input itemValor">
+                    </div>
+                    <button class="botao alerta" id="excluiItem">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="botao sucesso center" id="cadastrarCompra">Cadastrar</button>
+        </form>
     </div>
 </div>
 
@@ -377,9 +489,6 @@
         </form>
     </div>
 </div>
-
-
-
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>
@@ -387,6 +496,7 @@
 <script src="/src/View/Default/js/formulario.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Tarefa/telaTarefa/funcoesTarefaViagem.js"></script>
+<script src="/src/View/Tarefa/telaTarefa/funcoesTarefaCompra.js"></script>
 <script src="/src/View/Tarefa/telaTarefa/funcoesTarefa.js"></script>
 </body>
 </html>

@@ -9,12 +9,14 @@ use PDO;
 class CompraDao extends CrudDao {
 
     function cadastrar(CompraModel $compra,$idTarefa){
-        $comando = "INSERT INTO tbCompra (proposito,idTarefa,idComprador) values (:proposito, :idTarefa, :idComprador)";
+        $comando = "INSERT INTO tbCompra (proposito,idTarefa,idComprador,fonte,naturezaOrcamentaria) values (:proposito, :idTarefa, :idComprador,:fonte,:natOrcamentaria)";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':proposito',$compra->getProposito());
         $stm->bindValue(':idTarefa',$idTarefa);
         $stm->bindValue(':idComprador',$compra->getComprador()->getId());
+        $stm->bindValue(":fonte",$compra->getFonteRecurso());
+        $stm->bindValue(":natOrcamentaria",$compra->getNaturezaOrcamentaria());
         $stm->execute();
     }
 
@@ -38,7 +40,7 @@ class CompraDao extends CrudDao {
             foreach ($rows as $row){
                 $itens = $itemControl->listarPorIdCompra($row['id']);
                 $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
+                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador,$row['fonte'],$row['naturezaOrcamentaria']);
                 $result[] = $obj;
             }
             return $result;
@@ -49,10 +51,12 @@ class CompraDao extends CrudDao {
 
     function atualizar(CompraModel $compra){
 
-        $comando = "UPDATE tbCompra SET proposito = :proposito WHERE id = :id";
+        $comando = "UPDATE tbCompra SET proposito = :proposito, fonte = :fonte, naturezaOrcamentaria = :natOrcamentaria WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
         $stm->bindValue(':proposito',$compra->getProposito());
+        $stm->bindValue(":fonte",$compra->getFonteRecurso());
+        $stm->bindValue(":natOrcamentaria",$compra->getNaturezaOrcamentaria());
         $stm->bindValue(':id',$compra->getId());
 
         $stm->execute();
@@ -84,7 +88,7 @@ class CompraDao extends CrudDao {
             foreach ($rows as $row){
                 $itens = $itemDAO->listarPorIdCompra($row['id']);
                 $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador);
+                $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador,$row['fonte'],$row['naturezaOrcamentaria']);
                 $result[] = $obj;
             }
             return $result;
@@ -106,7 +110,7 @@ class CompraDao extends CrudDao {
             $itens = $itemDAO->listarPorIdCompra($id);
             $usuarioDAO = new UsuarioDao();
             $comprador = $usuarioDAO->listarPorId($row['idComprador']);
-            $obj = new CompraModel($row['proposito'],null,$itens,$row['id'],$comprador);
+            $obj = new CompraModel($row['proposito'],null,$itens,$row['id'],$comprador,$row['fonte'],$row['naturezaOrcamentaria']);
             return $obj;
         } else {
             return false;
