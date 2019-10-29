@@ -32,12 +32,10 @@ class Formatacao
 
     public static function formataMonetario($valor)
     {
-        $valorFormatado = $valor;
-        if (substr_count($valor,',') > 0) {
-            $valorFormatado = str_replace(',','.',$valor);
-        } elseif (substr_count($valor,'.') == 0){
-           $valorFormatado = $valor.'.00';
+        if (strpos($valor,",")) {
+            $valor = str_replace(",",".",$valor);
         }
-        return $valorFormatado;
+
+        return number_format($valor,2);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Lasse\LPM\Model;
 
+use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
 class CompraModel
@@ -54,7 +55,7 @@ class CompraModel
                 $total += $item->getValorParcial();
             }
         }
-        $this->totalGasto = $total;
+        $this->totalGasto = number_format($total,2);
     }
 
     public function getNaturezaOrcamentaria()
@@ -78,8 +79,6 @@ class CompraModel
         Validacao::validar("Fonte de Recurso",$fonteRecurso,"texto","obrigatorio");
         $this->fonteRecurso = $fonteRecurso;
     }
-
-
 
     public function getComprador(): UsuarioModel
     {
@@ -106,7 +105,8 @@ class CompraModel
         return $this->proposito;
     }
 
-    public function setProposito($proposito){
+    public function setProposito($proposito)
+    {
         Validacao::validar('Proprósito',$proposito,'obrigatorio','texto');
         $this->proposito = $proposito;
     }
@@ -120,7 +120,7 @@ class CompraModel
             $this->calculaTotal();
         }else{
             Validacao::validar('Total Gasto',$totalGasto,'monetario');
-            $this->totalGasto = $totalGasto;
+            $this->totalGasto = Formatacao::formataMonetario($totalGasto);
         }
     }
 

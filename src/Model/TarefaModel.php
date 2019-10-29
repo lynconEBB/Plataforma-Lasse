@@ -68,7 +68,7 @@ class TarefaModel
             "atividades" => $atividades,
             "compras" => $compras,
             "viagens" => $viagens,
-            "totalGasto" => $this->totalGasto,
+            "totalGasto" => $this->totalGasto
         ];
         return $array;
     }
@@ -91,8 +91,7 @@ class TarefaModel
                 $total += $viagem->getTotalGasto();
             }
         }
-
-        $this->totalGasto = $total;
+        $this->totalGasto = number_format($total,2);
     }
 
     public function getTotalGasto()
@@ -106,7 +105,7 @@ class TarefaModel
             $this->calculaTotal();
         }else{
             Validacao::validar('Total Gasto',$totalGasto,'monetario');
-            $this->totalGasto = $totalGasto;
+            $this->totalGasto = Formatacao::formataMonetario($totalGasto);
         }
     }
 

@@ -132,11 +132,8 @@ class Validacao
 
     private static function monetario($nomeParametro,$valor)
     {
-        if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal',1);
-        }
-        if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal',1);
+        if(!preg_match('/^\d+[.,]?\d*$/', $valor)){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um valor numérico',1);
         }
     }
 
@@ -145,11 +142,8 @@ class Validacao
         if(is_null($valor)){
             return;
         }
-        if(substr_count($valor,',') > 1 || !is_numeric(str_replace(',','',$valor)) || str_replace(',','',$valor) < 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo',1);
-        }
-        if(substr_count($valor,',') > 0 && substr_count($valor,'.') > 0){
-            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um numero decimal ou nulo',1);
+        if(!preg_match('/^\d+[.,]?\d*$/', $valor)){
+            throw new InvalidArgumentException('O campo '.$nomeParametro.' deve ser um valor numérico ou nulo',1);
         }
     }
 

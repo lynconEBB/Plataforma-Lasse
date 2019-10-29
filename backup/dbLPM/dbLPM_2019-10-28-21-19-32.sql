@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbatividade`
+-- Table structure for table `tbAtividade`
 --
 
-DROP TABLE IF EXISTS `tbatividade`;
+DROP TABLE IF EXISTS `tbAtividade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbatividade` (
+CREATE TABLE `tbAtividade` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuario` int(11) NOT NULL,
   `idTarefa` int(11) DEFAULT NULL,
@@ -34,28 +34,28 @@ CREATE TABLE `tbatividade` (
   PRIMARY KEY (`id`),
   KEY `fk_tbAtividade_tbUsuario` (`idUsuario`),
   KEY `fk_tbAtividade_tbTarefa` (`idTarefa`),
-  CONSTRAINT `fk_tbAtividade_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbtarefa` (`id`),
-  CONSTRAINT `fk_tbAtividade_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`id`)
+  CONSTRAINT `fk_tbAtividade_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`),
+  CONSTRAINT `fk_tbAtividade_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbatividade`
+-- Dumping data for table `tbAtividade`
 --
 
-LOCK TABLES `tbatividade` WRITE;
-/*!40000 ALTER TABLE `tbatividade` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbatividade` ENABLE KEYS */;
+LOCK TABLES `tbAtividade` WRITE;
+/*!40000 ALTER TABLE `tbAtividade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbcompra`
+-- Table structure for table `tbCompra`
 --
 
-DROP TABLE IF EXISTS `tbcompra`;
+DROP TABLE IF EXISTS `tbCompra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbcompra` (
+CREATE TABLE `tbCompra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `proposito` varchar(60) NOT NULL,
   `totalGasto` decimal(6,2) DEFAULT '0.00',
@@ -66,29 +66,29 @@ CREATE TABLE `tbcompra` (
   PRIMARY KEY (`id`),
   KEY `fk_tbTarefa_tbCompra` (`idTarefa`),
   KEY `fk_tbCompra_tbUsuario` (`idComprador`),
-  CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`idComprador`) REFERENCES `tbusuario` (`id`),
-  CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbtarefa` (`id`)
+  CONSTRAINT `fk_tbCompra_tbUsuario` FOREIGN KEY (`idComprador`) REFERENCES `tbUsuario` (`id`),
+  CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbcompra`
+-- Dumping data for table `tbCompra`
 --
 
-LOCK TABLES `tbcompra` WRITE;
-/*!40000 ALTER TABLE `tbcompra` DISABLE KEYS */;
-INSERT INTO `tbcompra` VALUES (1,'Melhorar Vida',0.00,13,19,'86945654','86576495'),(2,'Melhorar Vida',209.88,13,19,'86945654','86576495'),(3,'Melhorar Vida',209.88,13,19,'86945654','86576495'),(4,'Melhorar Vida',0.00,13,19,'86945654','86576495');
-/*!40000 ALTER TABLE `tbcompra` ENABLE KEYS */;
+LOCK TABLES `tbCompra` WRITE;
+/*!40000 ALTER TABLE `tbCompra` DISABLE KEYS */;
+INSERT INTO `tbCompra` VALUES (1,'Melhorar Vida',0.00,13,19,'86945654','86576495'),(2,'Melhorar Vida',209.88,13,19,'86945654','86576495'),(3,'Melhorar Vida',209.88,13,19,'86945654','86576495'),(4,'Melhorar Vida',0.00,13,19,'86945654','86576495');
+/*!40000 ALTER TABLE `tbCompra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbcondutor`
+-- Table structure for table `tbCondutor`
 --
 
-DROP TABLE IF EXISTS `tbcondutor`;
+DROP TABLE IF EXISTS `tbCondutor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbcondutor` (
+CREATE TABLE `tbCondutor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   `cnh` varchar(45) NOT NULL,
@@ -98,23 +98,23 @@ CREATE TABLE `tbcondutor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbcondutor`
+-- Dumping data for table `tbCondutor`
 --
 
-LOCK TABLES `tbcondutor` WRITE;
-/*!40000 ALTER TABLE `tbcondutor` DISABLE KEYS */;
-INSERT INTO `tbcondutor` VALUES (4,'Arlindo','43543654','2022-08-21'),(5,'Arlindo','43543654','2022-08-21'),(6,'Arlindo','43543654','2022-08-21');
-/*!40000 ALTER TABLE `tbcondutor` ENABLE KEYS */;
+LOCK TABLES `tbCondutor` WRITE;
+/*!40000 ALTER TABLE `tbCondutor` DISABLE KEYS */;
+INSERT INTO `tbCondutor` VALUES (4,'Arlindo','43543654','2022-08-21'),(5,'Arlindo','43543654','2022-08-21'),(6,'Arlindo','43543654','2022-08-21');
+/*!40000 ALTER TABLE `tbCondutor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbformulario`
+-- Table structure for table `tbFormulario`
 --
 
-DROP TABLE IF EXISTS `tbformulario`;
+DROP TABLE IF EXISTS `tbFormulario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbformulario` (
+CREATE TABLE `tbFormulario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `caminhoDocumento` longtext NOT NULL,
@@ -126,58 +126,58 @@ CREATE TABLE `tbformulario` (
   KEY `fk_tbFormulario_tbUsuario` (`idUsuario`),
   KEY `fk_tbFormulario_tbViagem` (`idViagem`),
   KEY `tbFormulario_tbCompra__fk` (`idCompra`),
-  CONSTRAINT `fk_tbFormulario_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbviagem` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `tbFormulario_tbCompra__fk` FOREIGN KEY (`idCompra`) REFERENCES `tbcompra` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_tbFormulario_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tbFormulario_tbViagem` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tbFormulario_tbCompra__fk` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbformulario`
+-- Dumping data for table `tbFormulario`
 --
 
-LOCK TABLES `tbformulario` WRITE;
-/*!40000 ALTER TABLE `tbformulario` DISABLE KEYS */;
-INSERT INTO `tbformulario` VALUES (27,'requisicaoViagem10','assets/files/19/requisicaoViagem10/requisicaoViagem10.odt','assets/files/19/requisicaoViagem10/requisicaoViagem10.html',19,10,NULL);
-/*!40000 ALTER TABLE `tbformulario` ENABLE KEYS */;
+LOCK TABLES `tbFormulario` WRITE;
+/*!40000 ALTER TABLE `tbFormulario` DISABLE KEYS */;
+INSERT INTO `tbFormulario` VALUES (27,'requisicaoViagem10','assets/files/19/requisicaoViagem10/requisicaoViagem10.odt','assets/files/19/requisicaoViagem10/requisicaoViagem10.html',19,10,NULL);
+/*!40000 ALTER TABLE `tbFormulario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbgasto`
+-- Table structure for table `tbGasto`
 --
 
-DROP TABLE IF EXISTS `tbgasto`;
+DROP TABLE IF EXISTS `tbGasto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbgasto` (
+CREATE TABLE `tbGasto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `valor` decimal(9,2) NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `idViagem` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbGasto_tbViagem` (`idViagem`),
-  CONSTRAINT `fk_tbViagem_tbGasto` FOREIGN KEY (`idViagem`) REFERENCES `tbviagem` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_tbViagem_tbGasto` FOREIGN KEY (`idViagem`) REFERENCES `tbViagem` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbgasto`
+-- Dumping data for table `tbGasto`
 --
 
-LOCK TABLES `tbgasto` WRITE;
-/*!40000 ALTER TABLE `tbgasto` DISABLE KEYS */;
-INSERT INTO `tbgasto` VALUES (49,12.00,'Aluguel de veÃ­culos (locado fora de Foz)',10),(50,65.00,'CombustÃ­vel',10),(51,78.00,'Estacionamento',10),(52,10.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',10),(53,24.00,'Passagens rodoviÃ¡rias internacionais',10),(54,53.00,'PedÃ¡gio',10),(55,32.00,'Seguro internacional (obrigatÃ³rio)',10),(56,43.00,'TÃ¡xi',10),(57,23.00,'Outros',10);
-/*!40000 ALTER TABLE `tbgasto` ENABLE KEYS */;
+LOCK TABLES `tbGasto` WRITE;
+/*!40000 ALTER TABLE `tbGasto` DISABLE KEYS */;
+INSERT INTO `tbGasto` VALUES (49,12.00,'Aluguel de veÃ­culos (locado fora de Foz)',10),(50,65.00,'CombustÃ­vel',10),(51,78.00,'Estacionamento',10),(52,10.00,'Passagens rodoviÃ¡rias (metrÃ´/Ã´nibus)',10),(53,24.00,'Passagens rodoviÃ¡rias internacionais',10),(54,53.00,'PedÃ¡gio',10),(55,32.00,'Seguro internacional (obrigatÃ³rio)',10),(56,43.00,'TÃ¡xi',10),(57,23.00,'Outros',10);
+/*!40000 ALTER TABLE `tbGasto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbitem`
+-- Table structure for table `tbItem`
 --
 
-DROP TABLE IF EXISTS `tbitem`;
+DROP TABLE IF EXISTS `tbItem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbitem` (
+CREATE TABLE `tbItem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCompra` int(11) NOT NULL,
   `valor` decimal(9,2) NOT NULL,
@@ -185,28 +185,28 @@ CREATE TABLE `tbitem` (
   `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbProduto_tbCompra` (`idCompra`),
-  CONSTRAINT `fk_tbCompra_tbItem` FOREIGN KEY (`idCompra`) REFERENCES `tbcompra` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_tbCompra_tbItem` FOREIGN KEY (`idCompra`) REFERENCES `tbCompra` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbitem`
+-- Dumping data for table `tbItem`
 --
 
-LOCK TABLES `tbitem` WRITE;
-/*!40000 ALTER TABLE `tbitem` DISABLE KEYS */;
-INSERT INTO `tbitem` VALUES (1,2,23.32,3.00,'carro'),(2,2,23.32,6.00,'carro'),(3,3,23.32,3.00,'carro'),(4,3,23.32,6.00,'carro');
-/*!40000 ALTER TABLE `tbitem` ENABLE KEYS */;
+LOCK TABLES `tbItem` WRITE;
+/*!40000 ALTER TABLE `tbItem` DISABLE KEYS */;
+INSERT INTO `tbItem` VALUES (1,2,23.32,3.00,'carro'),(2,2,23.32,6.00,'carro'),(3,3,23.32,3.00,'carro'),(4,3,23.32,6.00,'carro');
+/*!40000 ALTER TABLE `tbItem` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbprojeto`
+-- Table structure for table `tbProjeto`
 --
 
-DROP TABLE IF EXISTS `tbprojeto`;
+DROP TABLE IF EXISTS `tbProjeto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbprojeto` (
+CREATE TABLE `tbProjeto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dataFinalizacao` date NOT NULL,
   `dataInicio` date NOT NULL,
@@ -219,23 +219,23 @@ CREATE TABLE `tbprojeto` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbprojeto`
+-- Dumping data for table `tbProjeto`
 --
 
-LOCK TABLES `tbprojeto` WRITE;
-/*!40000 ALTER TABLE `tbprojeto` DISABLE KEYS */;
-INSERT INTO `tbprojeto` VALUES (11,'2100-09-25','2001-03-21',759.76,'Projeto para estabelecer um base de reconhecimento na cidade de Entre RIos - Minas Gerias','Entre rios','1243546'),(12,'2006-09-12','1980-07-12',0.00,'Projeto para criar uma impressora 3d auto replicante com o menor custo possivel','Impressora 3D','12376554'),(13,'2019-06-27','2005-10-23',0.00,'Desenvolver frota de carros eletricos para uso na Itaipu','Carro ElÃ©trico','854974');
-/*!40000 ALTER TABLE `tbprojeto` ENABLE KEYS */;
+LOCK TABLES `tbProjeto` WRITE;
+/*!40000 ALTER TABLE `tbProjeto` DISABLE KEYS */;
+INSERT INTO `tbProjeto` VALUES (11,'2100-09-25','2001-03-21',759.76,'Projeto para estabelecer um base de reconhecimento na cidade de Entre RIos - Minas Gerias','Entre rios','1243546'),(12,'2006-09-12','1980-07-12',0.00,'Projeto para criar uma impressora 3d auto replicante com o menor custo possivel','Impressora 3D','12376554'),(13,'2019-06-27','2005-10-23',0.00,'Desenvolver frota de carros eletricos para uso na Itaipu','Carro ElÃ©trico','854974');
+/*!40000 ALTER TABLE `tbProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbtarefa`
+-- Table structure for table `tbTarefa`
 --
 
-DROP TABLE IF EXISTS `tbtarefa`;
+DROP TABLE IF EXISTS `tbTarefa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbtarefa` (
+CREATE TABLE `tbTarefa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dataInicio` date NOT NULL,
   `dataConclusao` date DEFAULT NULL,
@@ -246,28 +246,28 @@ CREATE TABLE `tbtarefa` (
   `totalGasto` decimal(9,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `fk_tbProjeto_tbTarefa` (`idProjeto`),
-  CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbprojeto` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_tbProjeto_tbTarefa` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbtarefa`
+-- Dumping data for table `tbTarefa`
 --
 
-LOCK TABLES `tbtarefa` WRITE;
-/*!40000 ALTER TABLE `tbtarefa` DISABLE KEYS */;
-INSERT INTO `tbtarefa` VALUES (13,'2003-03-21','2005-06-21','Em andamento','Instalacao de Antenas','Fazer instalaÃ§ao de antenas nas casas dos moradores da cidade',11,759.76),(14,'2006-03-20','2006-03-21','Á fazer','gfdjlkfdjg','klgjfdlkgjdflkgj',13,0.00);
-/*!40000 ALTER TABLE `tbtarefa` ENABLE KEYS */;
+LOCK TABLES `tbTarefa` WRITE;
+/*!40000 ALTER TABLE `tbTarefa` DISABLE KEYS */;
+INSERT INTO `tbTarefa` VALUES (13,'2003-03-21','2005-06-21','Em andamento','Instalacao de Antenas','Fazer instalaÃ§ao de antenas nas casas dos moradores da cidade',11,759.76),(14,'2006-03-20','2006-03-21','Á fazer','gfdjlkfdjg','klgjfdlkgjdflkgj',13,0.00);
+/*!40000 ALTER TABLE `tbTarefa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbusuario`
+-- Table structure for table `tbUsuario`
 --
 
-DROP TABLE IF EXISTS `tbusuario`;
+DROP TABLE IF EXISTS `tbUsuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbusuario` (
+CREATE TABLE `tbUsuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nomeCompleto` varchar(45) NOT NULL,
   `cpf` varchar(40) NOT NULL,
@@ -289,51 +289,51 @@ CREATE TABLE `tbusuario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbusuario`
+-- Dumping data for table `tbUsuario`
 --
 
-LOCK TABLES `tbusuario` WRITE;
-/*!40000 ALTER TABLE `tbusuario` DISABLE KEYS */;
-INSERT INTO `tbusuario` VALUES (17,'Lyncon Estevan Baez','121.128.809-93','12.611.223-3','2008-05-21',10.99,'Programador','Colaborador','lynconlyn@gmail.com','LynconBaez','$2y$10$F08VHpeT0J3oDOqDxY7F/.zBjOmd1TPA51srp2nwiIUJ6bqqTcVKi','2001-03-24','ativado',NULL,1,'assets/files/17/perfil.jpeg'),(19,'Daniel da Silva Pereira','180.047.480-66','12.611.223-3','2008-05-21',12.94,'Analista de Sistemas','Bolsista/VoluntÃ¡rio','dan.iel@gmail.com','Daniel','$2y$10$/7IejjwyisLsucypxTE5pevm8AXOKo4XwHQa3np6f/P6GgT.QP9Lq','1999-06-21','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjkuMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY5LjAiLCJpYXQiOjE1Njk4ODQ0NzAsIm5iZiI6MTU2OTg4NDQ3MCwiZXhwIjoxNTY5OTcwODcwLCJkYXRhIjp7ImlkIjoiMTkifX0.P2zUwaqoV8MBcDLmD5L9QWycSO0MH1NQuyfRNbmttxA',0,'assets/files/19/perfil.png'),(20,'Camila Gomes Ferreira','946.202.990-30','40.448.574-1','2005-08-21',9.54,'Designer','Terceiros','camilagf2016@gmail.com','Camiggf','$2y$10$i/ywwFtj0HXLRsfC/IVGnOBgYtiK4VXWeWepTaBx0pKJ44rMrkPdy','1999-10-07','ativado','20-5db5e6a162e86',0,'assets/files/default/perfil.png');
-/*!40000 ALTER TABLE `tbusuario` ENABLE KEYS */;
+LOCK TABLES `tbUsuario` WRITE;
+/*!40000 ALTER TABLE `tbUsuario` DISABLE KEYS */;
+INSERT INTO `tbUsuario` VALUES (17,'Lyncon Estevan Baez','121.128.809-93','12.611.223-3','2008-05-21',10.99,'Programador','Colaborador','lynconlyn@gmail.com','LynconBaez','$2y$10$F08VHpeT0J3oDOqDxY7F/.zBjOmd1TPA51srp2nwiIUJ6bqqTcVKi','2001-03-24','ativado',NULL,1,'assets/files/17/perfil.jpeg'),(19,'Daniel da Silva Pereira','180.047.480-66','12.611.223-3','2008-05-21',12.94,'Analista de Sistemas','Bolsista/VoluntÃ¡rio','dan.iel@gmail.com','Daniel','$2y$10$/7IejjwyisLsucypxTE5pevm8AXOKo4XwHQa3np6f/P6GgT.QP9Lq','1999-06-21','ativado','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMYXNzZS1Qcm9qZWN0LU1hbmFnZXIiLCJhdWQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjkuMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY5LjAiLCJpYXQiOjE1Njk4ODQ0NzAsIm5iZiI6MTU2OTg4NDQ3MCwiZXhwIjoxNTY5OTcwODcwLCJkYXRhIjp7ImlkIjoiMTkifX0.P2zUwaqoV8MBcDLmD5L9QWycSO0MH1NQuyfRNbmttxA',0,'assets/files/19/perfil.png'),(20,'Camila Gomes Ferreira','946.202.990-30','40.448.574-1','2005-08-21',9.54,'Designer','Terceiros','camilagf2016@gmail.com','Camiggf','$2y$10$i/ywwFtj0HXLRsfC/IVGnOBgYtiK4VXWeWepTaBx0pKJ44rMrkPdy','1999-10-07','ativado','20-5db5e6a162e86',0,'assets/files/default/perfil.png');
+/*!40000 ALTER TABLE `tbUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbusuarioprojeto`
+-- Table structure for table `tbUsuarioProjeto`
 --
 
-DROP TABLE IF EXISTS `tbusuarioprojeto`;
+DROP TABLE IF EXISTS `tbUsuarioProjeto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbusuarioprojeto` (
+CREATE TABLE `tbUsuarioProjeto` (
   `idProjeto` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `dono` tinyint(1) NOT NULL,
   PRIMARY KEY (`idUsuario`,`idProjeto`),
   KEY `fk_tbUsuarioProjeto_tbProjeto` (`idProjeto`),
-  CONSTRAINT `fk_tbUsuarioProjeto_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`id`),
-  CONSTRAINT `tbUsuarioProjeto_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `tbprojeto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_tbUsuarioProjeto_tbUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tbUsuario` (`id`),
+  CONSTRAINT `tbUsuarioProjeto_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `tbProjeto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbusuarioprojeto`
+-- Dumping data for table `tbUsuarioProjeto`
 --
 
-LOCK TABLES `tbusuarioprojeto` WRITE;
-/*!40000 ALTER TABLE `tbusuarioprojeto` DISABLE KEYS */;
-INSERT INTO `tbusuarioprojeto` VALUES (13,17,1),(11,19,1),(12,19,0),(12,20,1);
-/*!40000 ALTER TABLE `tbusuarioprojeto` ENABLE KEYS */;
+LOCK TABLES `tbUsuarioProjeto` WRITE;
+/*!40000 ALTER TABLE `tbUsuarioProjeto` DISABLE KEYS */;
+INSERT INTO `tbUsuarioProjeto` VALUES (13,17,1),(11,19,1),(12,19,0),(12,20,1);
+/*!40000 ALTER TABLE `tbUsuarioProjeto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbveiculo`
+-- Table structure for table `tbVeiculo`
 --
 
-DROP TABLE IF EXISTS `tbveiculo`;
+DROP TABLE IF EXISTS `tbVeiculo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbveiculo` (
+CREATE TABLE `tbVeiculo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCondutor` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
@@ -342,28 +342,28 @@ CREATE TABLE `tbveiculo` (
   `devolucao` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbVeiculo_tbCondutor` (`idCondutor`),
-  CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbcondutor` (`id`)
+  CONSTRAINT `fk_tbVeiculo_tbCondutor` FOREIGN KEY (`idCondutor`) REFERENCES `tbCondutor` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbveiculo`
+-- Dumping data for table `tbVeiculo`
 --
 
-LOCK TABLES `tbveiculo` WRITE;
-/*!40000 ALTER TABLE `tbveiculo` DISABLE KEYS */;
-INSERT INTO `tbveiculo` VALUES (6,6,'santana','VeÃ­culo locado','2009-08-12 12:09:00','2010-07-12 12:09:00');
-/*!40000 ALTER TABLE `tbveiculo` ENABLE KEYS */;
+LOCK TABLES `tbVeiculo` WRITE;
+/*!40000 ALTER TABLE `tbVeiculo` DISABLE KEYS */;
+INSERT INTO `tbVeiculo` VALUES (6,6,'santana','VeÃ­culo locado','2009-08-12 12:09:00','2010-07-12 12:09:00');
+/*!40000 ALTER TABLE `tbVeiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tbviagem`
+-- Table structure for table `tbViagem`
 --
 
-DROP TABLE IF EXISTS `tbviagem`;
+DROP TABLE IF EXISTS `tbViagem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbviagem` (
+CREATE TABLE `tbViagem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idVeiculo` int(11) NOT NULL,
   `idTarefa` int(11) NOT NULL,
@@ -385,19 +385,19 @@ CREATE TABLE `tbviagem` (
   PRIMARY KEY (`id`),
   KEY `fk_tbViagem_tbVeiculo` (`idVeiculo`),
   KEY `fk_tbViagem_tbTarefa` (`idTarefa`),
-  CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbtarefa` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbveiculo` (`id`)
+  CONSTRAINT `fk_tbViagem_tbTarefa` FOREIGN KEY (`idTarefa`) REFERENCES `tbTarefa` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tbViagem_tbVeiculo` FOREIGN KEY (`idVeiculo`) REFERENCES `tbVeiculo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbviagem`
+-- Dumping data for table `tbViagem`
 --
 
-LOCK TABLES `tbviagem` WRITE;
-/*!40000 ALTER TABLE `tbviagem` DISABLE KEYS */;
-INSERT INTO `tbviagem` VALUES (10,6,13,'Foz do IguaÃ§u','Entre Rios','2007-03-21','2009-04-21','Viagem com o intuito de estabelecer antenas nas casas das pessoas','viagem necessitarÃ¡ de muitos dinheiros','32546667',340.00,19,'2004-08-12 12:05:00','2005-07-15 13:09:00','1244546','CMS-09','Viagem a trabalho','Terrestre nacional');
-/*!40000 ALTER TABLE `tbviagem` ENABLE KEYS */;
+LOCK TABLES `tbViagem` WRITE;
+/*!40000 ALTER TABLE `tbViagem` DISABLE KEYS */;
+INSERT INTO `tbViagem` VALUES (10,6,13,'Foz do IguaÃ§u','Entre Rios','2007-03-21','2009-04-21','Viagem com o intuito de estabelecer antenas nas casas das pessoas','viagem necessitarÃ¡ de muitos dinheiros','32546667',340.00,19,'2004-08-12 12:05:00','2005-07-15 13:09:00','1244546','CMS-09','Viagem a trabalho','Terrestre nacional');
+/*!40000 ALTER TABLE `tbViagem` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

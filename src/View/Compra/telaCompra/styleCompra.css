@@ -1,0 +1,89 @@
+.container {
+    max-width: 1800px;
+    width: 100%;
+    margin: 0 auto;
+}
+.span-compra {
+    display: none;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.info-compra {
+    margin-top: 20px;
+    background-color: #275a66;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: auto auto auto;
+    padding: 40px 10px 0;
+    position: relative;
+    -webkit-box-shadow: 0 3px 2px #111;
+    -moz-box-shadow: 0 3px 2px #111;
+    box-shadow: 0 3px 2px #111;
+}
+#group-proposito {
+    max-width: 1000px;
+    grid-column: 1/4;
+}
+#alterarCompra {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+}
+#abreModalExcluirCompra{
+    position: absolute;
+    top: 10px;
+    right: -10px;
+}
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.itens {
+    padding: 20px 10px;
+    background-color: #275a66;
+    margin: 0 20px;
+}
+.itens hr {
+    border: white solid 2px;
+    max-width: 1600px;
+}
+.item {
+    position: relative;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: auto auto auto;
+}
+.item .alerta {
+    position: absolute;
+    top:45px;
+    right: -40px;
+}
+.item .info {
+    top: 45px;
+    left: -40px;
+    position: absolute;
+}
+#novoItem {
+    margin-bottom: 20px;
+}
+@media (max-width: 1000px) {
+    .form-group {
+        grid-column: 1/4;
+    }
+    #group-proposito {
+        max-width: 500px;
+    }
+    .item .alerta {
+        position: absolute;
+        top:115px;
+        right: -20px;
+    }
+    .item .info {
+        top: 115px;
+        left: -20px;
+        position: absolute;
+    }
+}
+

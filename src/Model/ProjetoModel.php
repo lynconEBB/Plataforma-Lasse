@@ -71,7 +71,7 @@ class ProjetoModel
                 $total += $tarefa->getTotalGasto();
             }
         }
-        $this->totalGasto = $total;
+        $this->totalGasto = number_format($total,2);
     }
 
     public function getParticipantes()

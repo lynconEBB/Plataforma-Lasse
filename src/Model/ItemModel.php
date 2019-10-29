@@ -43,7 +43,6 @@ class ItemModel
         $this->id = $id;
     }
 
-
     public function getValor(){
         return $this->valor;
     }
@@ -68,8 +67,8 @@ class ItemModel
 
     public function setQuantidade($quantidade)
     {
-        Validacao::validar('Quantidade de Itens',$quantidade,'monetario');
-        $this->quantidade = $quantidade;
+        Validacao::validar('Quantidade de Itens',$quantidade,'inteiro');
+        $this->quantidade = (int)$quantidade;
     }
 
     public function getValorParcial()

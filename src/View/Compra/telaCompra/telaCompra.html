@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/src/View/Default/css/reset.css">
+    <link rel="stylesheet" href="/src/View/Default/css/material-icons.css">
+    <link rel="stylesheet" href="/src/View/Default/css/botoes.css">
+    <link rel="stylesheet" href="/src/View/Default/css/formulario.css">
+    <link rel="stylesheet" href="/src/View/Default/css/modal.css">
+    <link rel="stylesheet" href="/src/View/Default/css/body.css">
+    <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/src/View/Compra/telaCompra/styleCompra.css">
+    <title>LPM - Compra</title>
+</head>
+<body>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
+</div>
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/assets/images/logo2.png" alt="logotipo Lasse Project Manager">
+
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="#" class="sidebar-item" id="dashboards">
+                    <i class="material-icons" aria-hidden="true">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="projetos">
+                    <i class="material-icons" aria-hidden="true">work</i>
+                    Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="imprevistos">
+                    <i class="material-icons" aria-hidden="true">book</i>
+                    Imprevistos
+                </a>
+            </li>
+            <li>
+                <a href="#" id="formularios" class="sidebar-item">
+                    <i class="material-icons" aria-hidden="true">assignment</i>
+                    Formulários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficos">
+                    <i class="material-icons" aria-hidden="true">assessment</i>
+                    Gráficos
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="container">
+            <h1 id="titulo">Compra realizada por gjdfhkg</h1>
+            <hr>
+            <form class="info-compra">
+                <div class="form-group">
+                    <label class="alterar-label" for="natOrcamentaria">Natureza Orçamentária</label>
+                    <input type="text" id="natOrcamentaria" class="alterar-input">
+                    <span class="span-compra" id="span-nat"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alterar-label" for="fonte">Fonte de Recurso</label>
+                    <input type="text" id="fonte" class="alterar-input">
+                    <span class="span-compra" id="span-fonte"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alterar-label" for="totalGasto">Total Gasto</label>
+                    <span class="span-compra" id="totalGasto">R$ 23,54</span>
+                </div>
+                <div class="form-group" id="group-proposito">
+                    <label class="alterar-label" for="proposito">Propósito</label>
+                    <textarea id="proposito" class="alterar-area"></textarea>
+                    <span class="span-compra" id="span-proposito"></span>
+                </div>
+                <button class="botao info" id="alterarCompra">Alterar</button>
+                <button class="botao alerta" id="abreModalExcluirCompra">Excluir</button>
+            </form>
+            <div class="itens">
+                <button class="botao aviso center" id="novoItem">Novo Item</button>
+                <hr>
+                <div class="item">
+                    <div class="form-group">
+                        <label class="alterar-label" for="nomeItem">Item</label>
+                        <input type="text" id="nomeItem" class="alterar-input">
+                        <span class="span-compra" id="span-item"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="alterar-label" for="qtdItem">Quantidade</label>
+                        <input type="text" id="qtdItem" class="alterar-input">
+                        <span class="span-compra" id="span-qtdItem"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="alterar-label" for="valorItem">Valor</label>
+                        <input type="text" id="valorItem" class="alterar-input">
+                        <span class="span-compra" id="span-valorItem"></span>
+                    </div>
+                    <button class="botao alerta"><i class="material-icons">delete</i></button>
+                    <button class="botao info"><i class="material-icons">edit</i></button>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-background">
+</div>
+<!------------------ Modal Cadastro Item --------------------------->
+<div class="modal" id="modalCadastroItem" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Item</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="alterar-label" for="nomeCadastro">Nome</label>
+                <input type="text" id="nomeCadastro" class="alterar-input">
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="qtdCadastro">Quantidade</label>
+                <input type="text" id="qtdCadastro" class="alterar-input">
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="valorCadastro">Valor</label>
+                <input type="text" id="valorCadastro" class="alterar-input">
+            </div>
+        </form>
+        <button class="botao sucesso center" id="cadastrarItem">Cadastrar</button>
+    </div>
+</div>
+
+<script src="/src/View/Default/js/inert.js"></script>
+<script src="/src/View/Default/js/body.js"></script>
+<script src="/src/View/Default/js/mensagem.js"></script>
+<script src="/src/View/Default/js/modal.js"></script>
+<script src="/src/View/Default/js/formulario.js"></script>
+<script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Compra/telaCompra/funcoesCompra.js"></script>
+</body>
+</html>

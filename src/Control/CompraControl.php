@@ -159,6 +159,7 @@ class CompraControl extends CrudControl {
     public function atualizarTotal($idCompra)
     {
         $compra = $this->DAO->listarPorId($idCompra);
+
         $this->DAO->atualizarTotal($compra);
         $idTarefa = $this->DAO->descobreIdTarefa($idCompra);
         $tarefaControl = new TarefaControl(null);

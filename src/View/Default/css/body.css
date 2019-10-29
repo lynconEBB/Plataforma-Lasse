@@ -104,12 +104,14 @@ body{
 }
 .user-menu-item {
     background: none;
+    cursor: pointer;
     border: none;
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
 }
 .user-menu-item.sair{
+    font-size: 1.4rem;
     color: #e45d5a;
 }
 /**************sidebar********************/

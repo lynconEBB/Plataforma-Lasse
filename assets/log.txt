@@ -21,3 +21,18 @@
 [28/10/2019 - 17:56:04] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar projetos de outro usuário
 [28/10/2019 - 17:56:22] Erro ocorrido com usuário Daniel: Erro Interno Inesperado: Too few arguments to function Lasse\LPM\Model\CompraModel::__construct(), 5 passed in C:\Lasse-Project-Manager\src\Dao\CompraDao.php on line 111 and exactly 7 expected
 [28/10/2019 - 19:39:08] Usuário LynconBaez logou no sistema através de insomnia/7.0.3
+[29/10/2019 - 13:50:43] Erro ocorrido com usuário desconhecido: Erro durante transação com Banco de dados: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbLPM.tbUsuario' doesn't exist
+[29/10/2019 - 13:55:22] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 15:11:58] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 15:16:19] Usuário LynconBaez logou no sistema através de insomnia/6.6.2
+[29/10/2019 - 03:57:40]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 15:57:47] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 03:58:08]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 15:58:14] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 04:41:35]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 16:41:42] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[29/10/2019 - 16:42:09] Erro ocorrido com usuário Daniel: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,494.49' for column 'totalGasto' at row 1
+[29/10/2019 - 16:46:27] Usuário LynconBaez logou no sistema através de insomnia/6.6.2
+[29/10/2019 - 16:46:33] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,564.45' for column 'totalGasto' at row 1
+[29/10/2019 - 16:48:57] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,634.41' for column 'totalGasto' at row 1
+[29/10/2019 - 16:49:48] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,704.37' for column 'totalGasto' at row 1
