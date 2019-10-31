@@ -36,3 +36,26 @@
 [29/10/2019 - 16:46:33] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,564.45' for column 'totalGasto' at row 1
 [29/10/2019 - 16:48:57] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,634.41' for column 'totalGasto' at row 1
 [29/10/2019 - 16:49:48] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1,704.37' for column 'totalGasto' at row 1
+[30/10/2019 - 13:59:59] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 02:20:51]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 14:20:59] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 14:43:41] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '69,96' for column 'totalGasto' at row 1
+[30/10/2019 - 14:45:03] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[HY000]: General error: 1366 Incorrect decimal value: '1704,37' for column 'totalGasto' at row 1
+[30/10/2019 - 14:45:29] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:46:40] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 02:47:12]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 14:47:24] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 14:47:27] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:47:51] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:48:30] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:50:09] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:51:16] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:51:24] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:51:39] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:51:51] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 14:52:21] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: A non well formed numeric value encountered
+[30/10/2019 - 15:59:08] Usuário LynconBaez logou no sistema através de insomnia/6.6.2
+[30/10/2019 - 15:59:10] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Call to undefined method Lasse\LPM\Control\ItemControl::listarPorIdCompra()
+[30/10/2019 - 04:08:02]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[30/10/2019 - 16:08:19] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[31/10/2019 - 11:20:43] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0

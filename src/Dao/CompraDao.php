@@ -6,9 +6,10 @@ use Lasse\LPM\Control\ItemControl;
 use Lasse\LPM\Model\CompraModel;
 use PDO;
 
-class CompraDao extends CrudDao {
-
-    function cadastrar(CompraModel $compra,$idTarefa){
+class CompraDao extends CrudDao
+{
+    function cadastrar(CompraModel $compra,$idTarefa)
+    {
         $comando = "INSERT INTO tbCompra (proposito,idTarefa,idComprador,fonte,naturezaOrcamentaria) values (:proposito, :idTarefa, :idComprador,:fonte,:natOrcamentaria)";
         $stm = $this->pdo->prepare($comando);
 
@@ -20,7 +21,8 @@ class CompraDao extends CrudDao {
         $stm->execute();
     }
 
-    function excluir($id){
+    function excluir($id)
+    {
         $comando = "DELETE FROM tbCompra WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
@@ -28,7 +30,8 @@ class CompraDao extends CrudDao {
         $stm->execute();
     }
 
-    public function listar(){
+    public function listar()
+    {
         $comando = "SELECT * FROM tbCompra";
         $stm = $this->pdo->prepare($comando);
         $stm->execute();
@@ -36,9 +39,9 @@ class CompraDao extends CrudDao {
         if (count($rows) > 0) {
             $result =array();
             $usuarioDAO = new UsuarioDao();
-            $itemControl = new ItemControl();
+            $itemDAO= new ItemDao();
             foreach ($rows as $row){
-                $itens = $itemControl->listarPorIdCompra($row['id']);
+                $itens = $itemDAO->listarPorIdCompra($row['id']);
                 $comprador = $usuarioDAO->listarPorId($row['idComprador']);
                 $obj = new CompraModel($row['proposito'],$row['totalGasto'],$itens,$row['id'],$comprador,$row['fonte'],$row['naturezaOrcamentaria']);
                 $result[] = $obj;
@@ -49,8 +52,8 @@ class CompraDao extends CrudDao {
         }
     }
 
-    function atualizar(CompraModel $compra){
-
+    function atualizar(CompraModel $compra)
+    {
         $comando = "UPDATE tbCompra SET proposito = :proposito, fonte = :fonte, naturezaOrcamentaria = :natOrcamentaria WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 
@@ -63,8 +66,8 @@ class CompraDao extends CrudDao {
 
     }
 
-    function atualizarTotal(CompraModel $compra){
-
+    function atualizarTotal(CompraModel $compra)
+    {
         $comando = "UPDATE tbCompra SET totalGasto = :totalGasto WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
 

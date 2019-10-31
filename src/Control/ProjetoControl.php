@@ -55,9 +55,9 @@ class ProjetoControl extends CrudControl
                     // /api/projetos/{idProjeto}
                     } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
-                        $this->listarPorId($this->url[2]);
+                       $projeto = $this->listarPorId($this->url[2]);
+
                         if ($this->procuraFuncionario($this->url[2],$this->requisitor['id']) || $this->requisitor['admin'] == "1") {
-                            $projeto = $this->listarPorId($this->url[2]);
                             $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
                             $this->requisitor["dono"] = $dono;
                             $this->respostaSucesso("Listando Projeto",$projeto,$this->requisitor);

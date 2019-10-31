@@ -55,7 +55,7 @@ class CompraModel
                 $total += $item->getValorParcial();
             }
         }
-        $this->totalGasto = number_format($total,2);
+        $this->totalGasto = number_format($total,2,".","");
     }
 
     public function getNaturezaOrcamentaria()

@@ -65,9 +65,13 @@ class Router{
         elseif ($this->url[0] == "viagem" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Viagem/telaViagem/telaViagem.html";
         }
-        // /comrpa/{idCompra}
+        // /compra/{idCompra}
         elseif ($this->url[0] == "compra" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Compra/telaCompra/telaCompra.html";
+        }
+        // /atividade/{idAtividade}
+        elseif ($this->url[0] == "atividade" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
+            require "src/View/Atividade/telaAtividade/telaAtividade.html";
         }
         // /senhaAlterar
         elseif ($this->url[0] == "senhaAlterar" && count($this->url) == 1){

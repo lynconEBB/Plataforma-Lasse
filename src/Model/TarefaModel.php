@@ -91,7 +91,8 @@ class TarefaModel
                 $total += $viagem->getTotalGasto();
             }
         }
-        $this->totalGasto = number_format($total,2);
+
+        $this->totalGasto = number_format($total,2,".","");
     }
 
     public function getTotalGasto()

@@ -28,7 +28,7 @@ class ProjetoModel
         $this->setNome($nome);
         $this->setTarefas($tarefas);
         $this->setParticipantes($participantes);
-        $this->settotalGasto($totalGasto);
+        $this->setTotalGasto($totalGasto);
     }
 
     public function toArray()
@@ -71,7 +71,7 @@ class ProjetoModel
                 $total += $tarefa->getTotalGasto();
             }
         }
-        $this->totalGasto = number_format($total,2);
+        $this->totalGasto = number_format($total,2,".","");
     }
 
     public function getParticipantes()
@@ -130,6 +130,7 @@ class ProjetoModel
 
     public function setTotalGasto($totalGasto)
     {
+
         if(is_null($totalGasto)){
             $this->calculaTotal();
         }else{
