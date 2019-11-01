@@ -88,7 +88,40 @@
     </nav>
     <!-------------------- Main Content ------------------->
     <main class="main-content">
-
+        <h1 id="titulo">Atividade realizada por</h1>
+        <hr>
+        <form class="atividade">
+            <div class="form-group">
+                <label class="alterar-label" for="tipo">Tipo</label>
+                <select id="tipo" class="alterar-select">
+                    <option value="Aprimoramento">Aprimoramento</option>
+                    <option value="Desenvolvimento">Desenvolvimento</option>
+                    <option value="Palestra">Palestra</option>
+                </select>
+                <span class="alterar-span" id="span-tipo"></span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="data">Data Realização</label>
+                <input class="alterar-input" type="text" id="data">
+                <span class="alterar-span" id="span-data"></span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="tempo">Tempo Gasto</label>
+                <input class="alterar-input" type="text" id="tempo">
+                <span class="alterar-span" id="span-tempo"></span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="data">Total Gasto</label>
+                <span class="alterar-span" id="totalGasto" style="display: block"></span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label" for="comentario">Comentário</label>
+                <textarea class="alterar-area" id="comentario"></textarea>
+                <span class="alterar-span" id="span-comentario"></span>
+            </div>
+            <button class="botao alerta" id="excluirAtividade" type="button">Excluir</button>
+            <button class="botao info" id="alterarAtividade" type="submit">Alterar</button>
+        </form>
     </main>
 </div>
 <script src="/src/View/Default/js/inert.js"></script>

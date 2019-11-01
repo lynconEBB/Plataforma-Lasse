@@ -3,6 +3,25 @@
     flex-direction: column;
     align-items: center;
 }
+#titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+    max-width: 1800px;
+}
+#titulo h1 {
+    display: inline-block;
+}
+#titulo .botao {
+    background-color: #c97bff;
+    color: white;
+}
+#titulo hr {
+    width: 100%;
+    margin-bottom: 15px;
+    max-width: 1800px;
+}
 .container-viagem {
     width: 100%;
     max-width: 1000px;
@@ -12,15 +31,11 @@
     padding-bottom: 40px;
     z-index: 2;
 }
-.container-botoes {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    justify-content: space-around;
-}
 h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
     width: 100%;
-    background-color: #06404d;
+    background-color: #062d39;
     color: white;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -34,82 +49,25 @@ h2 {
     column-gap: 20px;
     justify-content: space-around;
 }
-.viagem-group {
-    width: 100%;
-    margin-bottom: 20px;
-}
-.viagem-label {
-    font-size: 1.2rem;
-    color: white;
-    display: block;
-    text-align: center;
-    font-weight: bold;
-}
 .viagem-span {
     font-size: 1.2rem;
     color: white;
     display: none;
     text-align: center;
 }
-.viagem-input {
-    text-align: center;
-    text-align-last: center;
-    display: block;
-    width: 100%;
-    font-size: 1.2rem;
-    color: white;
-    background-color: transparent;
-    border: none;
-}
-.viagem-input:focus, .viagem-textarea:focus, .viagem-select:focus {
-    outline: none;
-}
-.viagem-textarea {
-    text-align: center;
-    text-align-last: center;
-    display: block;
-    width: 100%;
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 1.2rem;
-    color: white;
-    resize: none;
-    background-color: transparent;
-    border: none;
-}
-.viagem-select {
-    width: 100%;
-    max-width: 400px;
-    display: block;
-    margin: 0 auto;
-    background-color: transparent;
-    border: none;
-    text-align-last: center;
-    text-align: center;
-    color: white;
-    font-size: 1.2rem;
-}
-.viagem-select option {
-    font-size: 1.2rem;
-    background-color: #06404d;
-    color: white;
-}
-h4 {
-    font-size: 1.5rem;
-    margin: 0 0 20px;
-}
-#container-gastos {
-    color: white;
-    text-align: center;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: auto 200px;
-}
-hr.divisoria {
-    margin: 0 20px;
-}
-#abreModalExcluir {
+#info-viagem {
     position: relative;
 }
-#alterar {
-    position: relative;
+#info-viagem .alerta {
+    position: absolute;
+    top: -50px;
+    right: -10px;
+}
+#info-viagem .info {
+    top: -50px;
+    left: -10px;
+    position: absolute;
+}
+#primeiro-grupo {
+    margin-top: 60px;
 }

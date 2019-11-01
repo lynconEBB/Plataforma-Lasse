@@ -1,45 +1,26 @@
 window.onload = function () {
-    if(performance.navigation.type == 2){
-        location.reload(true);
-    }
-    if (performance.navigation.type !== 1) {
-        verificaMensagem();
-    }
+    verificaMensagem();
 
-    var idViagemRequisitada = window.location.pathname.split("/").pop();
+    let idViagemRequisitada = window.location.pathname.split("/").pop();
 
-    requisicao("GET", "/api/viagens/"+idViagemRequisitada, null, true, function (resposta) {
+    requisicao("GET", "/api/viagens/"+idViagemRequisitada, null, function (resposta,codigo) {
         if (resposta.status === "sucesso") {
-            var requisitor = resposta.requisitor;
-            setLinks(requisitor.id);
-            document.querySelector(".user-img").src = "/" + requisitor.foto;
-            document.querySelector(".user-name").textContent = requisitor.login;
+            let requisitor = resposta.requisitor;
 
-            var viagem = resposta.dados;
+            setLinks(requisitor);
+
+            let viagem = resposta.dados;
 
             if (requisitor.id === viagem.viajante.id) {
                 templateDono(viagem);
-                let botaoFormulario = document.getElementById("gerarFormulario");
-                botaoFormulario.onclick = function () {
-                    requisicao("POST","/api/formularios/requisicaoViagem/"+idViagemRequisitada,null,true,function (resposta) {
-                        if (resposta.status === "sucesso") {
-                            let formulario = resposta.dados;
-                            var link = document.createElement('a');
-                            link.href = "/"+formulario.caminhoDocumento;
-                            link.download = formulario.nome+".odt";
-                            link.click();
-                        } else {
-                            exibirMensagem(resposta.mensagem,true);
-                        }
-                    })
-                };
+
             } else {
                 templateAdmin(viagem);
                 document.querySelector(".container-botoes").style.display = "none";
             }
 
         } else {
-            decideErros(resposta);
+            decideErros(resposta,codigo);
         }
     });
 };

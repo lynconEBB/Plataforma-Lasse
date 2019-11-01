@@ -88,6 +88,7 @@ class AtividadeControl extends CrudControl {
                     // /api/atividades/{idAtividade}
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
+                        $this->requisitor["idTarefa"] = $this->DAO->descobrirIdTarefa($this->url[2]);
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Atividade excluida com sucesso",null,$this->requisitor);
                     }

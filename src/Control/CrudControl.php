@@ -30,7 +30,6 @@ abstract class CrudControl
         }
         if (!is_null($dados)) {
             if (is_array($dados)) {
-
                 $array = array();
                 foreach ($dados as $obj) {
                     if (!is_array($obj)) {

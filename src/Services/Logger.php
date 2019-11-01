@@ -22,7 +22,7 @@ class Logger
         $this->arquivoLog = new SplFileObject($_SERVER['DOCUMENT_ROOT']."/assets/log.txt","a");
     }
     
-    public function logEntrada(UsuarioModel $usuario):void
+    public function logEntrada(UsuarioModel $usuario)
     {
         $this->arquivoLog->fwrite("[{$this->data->format("d/m/Y - H:i:s")}] Usuário {$usuario->getLogin()} logou no sistema através de {$_SERVER['HTTP_USER_AGENT']}\n");
     }
@@ -32,7 +32,8 @@ class Logger
         $this->arquivoLog->fwrite("[{$this->data->format("d/m/Y - H:i:s")}] Usuário {$login} logou no sistema através de {$_SERVER['HTTP_USER_AGENT']}\n");
     }
 
-    public function logErro(string $msgErro) {
+    public function logErro(string $msgErro)
+    {
         if (isset($_SESSION) && isset($_SESSION['usuario']) && isset($_SESSION['usuario']['login'])) {
             $usuario = $_SESSION['usuario']['login'];
         } else {
