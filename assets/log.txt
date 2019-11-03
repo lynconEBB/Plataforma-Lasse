@@ -86,3 +86,28 @@
 [01/11/2019 - 12:43:23] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '{'
 [01/11/2019 - 12:43:52]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
 [01/11/2019 - 12:44:02] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[01/11/2019 - 17:58:09] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Undefined property: stdClass::$idVeiculo
+[01/11/2019 - 18:02:33] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Cannot modify header information - headers already sent by (output started at C:\Lasse-Project-Manager\src\Control\ViagemControl.php:159)
+[01/11/2019 - 18:02:48] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Cannot modify header information - headers already sent by (output started at C:\Lasse-Project-Manager\src\Control\ViagemControl.php:159)
+[01/11/2019 - 09:17:45]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[01/11/2019 - 18:17:51] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[01/11/2019 - 09:18:05]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[01/11/2019 - 18:18:16] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[01/11/2019 - 18:30:40] Usuário LynconBaez logou no sistema através de insomnia/7.0.3
+[01/11/2019 - 18:40:12] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: O horario e data de devolução devem ser posteiores a retirada
+[01/11/2019 - 19:48:33] Usuário LynconBaez logou no sistema através de insomnia/7.0.3
+[02/11/2019 - 12:38:26] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:48:38] Usuário LynconBaez logou no sistema através de insomnia/7.0.3
+[02/11/2019 - 03:55:11]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:55:17] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 03:55:21]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:55:30] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:55:43] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[02/11/2019 - 03:56:35]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:56:42] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:56:49] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar Projeto que não está inserido
+[02/11/2019 - 03:57:29]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:57:59] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 03:58:29]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 12:58:39] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[02/11/2019 - 13:31:31] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`dblpm`.`tbcompra`, CONSTRAINT `fk_tbTarefa_tbCompra` FOREIGN KEY (`idTarefa`) REFERENCES `tbtarefa` (`id`))

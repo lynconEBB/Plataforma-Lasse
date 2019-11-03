@@ -67,15 +67,15 @@ class ViagemControl extends CrudControl {
                     break;
                 case 'PUT':
                     $info = json_decode(file_get_contents("php://input"));
-                    // /api/viagens/{idViagem}
-                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                        $requisicaoEncontrada = true;
-                        if ($this->verificaDados($info,'atualizacao')){
-                            $this->atualizar($info,$this->url[2]);
-                            $this->respostaSucesso("Viagem atualizada com sucesso",null,$this->requisitor);
-                        } else {
-                            throw new UnexpectedValueException("Requisição com parâmetros faltando ou mal estruturados na viagem");
-                        }
+                        // /api/viagens/{idViagem}
+                        if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                            $requisicaoEncontrada = true;
+                            if ($this->verificaDados($info,'atualizacao')){
+                                $this->atualizar($info,$this->url[2]);
+                                $this->respostaSucesso("Viagem atualizada com sucesso",null,$this->requisitor);
+                            } else {
+                                throw new UnexpectedValueException("Requisição com parâmetros faltando ou mal estruturados na viagem");
+                            }
                     }
                     break;
                 case 'DELETE':
@@ -144,18 +144,21 @@ class ViagemControl extends CrudControl {
         $viagem = $this->listarPorId($id);
         if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
             $veiculoControl = new VeiculoControl(null);
-            if ($dados->veiculo instanceof stdClass){
+            if ($dados->veiculo instanceof stdClass) {
                 $veiculoControl->cadastrar($dados->veiculo);
                 $idVeiculo = $veiculoControl->DAO->pdo->lastInsertId();
                 $veiculo = $veiculoControl->listarPorId($idVeiculo);
+                if (!$this->listarPorIdVeiculo($viagem->getVeiculo()->getId())) {
+
+                }
             }else{
-                $veiculo = $veiculoControl->listarPorId($dados->idVeiculo);
+                $veiculo = $veiculoControl->listarPorId($dados->veiculo);
             }
 
             $funcDAO = new UsuarioControl(null);
             $viajante = $funcDAO->listarPorId($this->requisitor['id']);
 
-            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);
+            $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);;
             $this->DAO->atualizar($viagem);
         } else {
             throw new PermissionException("Você não possui permissão para atualizar esta viagem","Atualizar viagem realizada por outro usuário");
@@ -168,7 +171,12 @@ class ViagemControl extends CrudControl {
         $viagem = $this->listarPorId($id);
         if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
             $idTarefa = $this->DAO->descobrirIdTarefa($id);
+            $this->requisitor["idTarefa"] = $idTarefa;
             $this->DAO->excluir($id);
+            if (!$this->listarPorIdVeiculo($viagem->getVeiculo()->getId())) {
+                $veiculoControl = new VeiculoControl(null);
+                $veiculoControl->excluir($viagem->getVeiculo()->getId());
+            }
             $tarefaControl = new TarefaControl(null);
             $tarefaControl->atualizaTotal($idTarefa);
         } else {

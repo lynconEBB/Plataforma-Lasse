@@ -122,6 +122,7 @@ function exibeCondutores() {
                     };
                 }
             } else {
+                document.getElementById("idCondutor").value = "novo";
                 document.getElementById("novoCondutor").style.display = "none";
                 document.getElementById("form-condutor").style.display = "block";
                 document.querySelector("#info-condutor>h2").textContent = "Informações do Condutor";
@@ -154,7 +155,6 @@ function exibeCondutores() {
 function exibeVeiculos() {
     requisicao("GET","/api/veiculos",null,function (resposta) {
         if (resposta.status === "sucesso") {
-            console.log(resposta.hasOwnProperty("dados"));
             if (resposta.hasOwnProperty("dados")) {
                 let veiculos = resposta.dados;
                 for (let veiculo of veiculos) {
@@ -184,6 +184,7 @@ function exibeVeiculos() {
                     };
                 }
             } else {
+                document.getElementById("idVeiculo").value = "novo";
                 document.getElementById("novoVeiculo").style.display = "none";
                 document.getElementById("form-veiculo").style.display = "block";
                 document.querySelector("#info-veiculo>h2").textContent = "Informações do Veículo";

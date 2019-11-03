@@ -3,7 +3,7 @@
 namespace Lasse\LPM\Model;
 
 use DateTime;
-use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
@@ -70,8 +70,8 @@ class ViagemModel
             "tipoPassagem" => $this->tipoPassagem,
             "justificativa" => $this->justificativa,
             "obeservacoes" => $this->observacoes,
-            "saidaHosp" => $this->SaidaHosp->format('d/m/Y h:i'),
-            "entradaHosp" => $this->EntradaHosp->format('d/m/Y h:i'),
+            "saidaHosp" => $this->SaidaHosp->format('d/m/Y H:i'),
+            "entradaHosp" => $this->EntradaHosp->format('d/m/Y H:i'),
             "fonte" => $this->fonte,
             "atividade" => $this->atividade,
             "totalGasto" => $this->totalGasto,
@@ -123,7 +123,7 @@ class ViagemModel
         if ($saidaFormat > $this->EntradaHosp) {
             $this->SaidaHosp = $saidaFormat;
         } else {
-            throw new Exception("A data e Hora de saida necessitam ser posteriores a entrada");
+            throw new InvalidArgumentException("A data e Hora de saida necessitam ser posteriores a entrada");
         }
     }
 
@@ -208,7 +208,7 @@ class ViagemModel
         if ($voltaFormatada > $this->dtIda) {
             $this->dtVolta = $voltaFormatada;
         } else {
-            throw new Exception("A data de Volta deve ser posterior a data de Ida");
+            throw new InvalidArgumentException("A data de Volta deve ser posterior a data de Ida");
         }
     }
 

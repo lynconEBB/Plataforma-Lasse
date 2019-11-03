@@ -14,8 +14,13 @@
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Viagem/telaViagem/styleViagem.css">
     <title>LPM - Viagem</title>
+    <style type="text/css">
+        #passagem {
+        }
+    </style>
 </head>
 <body>
+<!--------------- Mensagem ------------------>
 <div class="mensagem" role="alert" tabindex="-1">
     <span id="mensagem-texto"></span>
     <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
@@ -138,6 +143,22 @@
                 </div>
                 <div class="container-row">
                     <div class="form-group">
+                        <label for="passagem" class="alterar-label">Passagem</label>
+                        <input class="alterar-input"  id="passagem" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoPassagem" class="alterar-label">Tipo de Passagem</label>
+                        <select id="tipoPassagem" class="alterar-select">
+                            <option value="Aérea nacional (com franquia de bagagem)">Aérea nacional (com franquia de bagagem)</option>
+                            <option value="Aérea nacional (sem franquia de bagagem)">Aérea nacional (sem franquia de bagagem)</option>
+                            <option value="Aérea internacional">Aérea internacional</option>
+                            <option value="Terrestre nacional">Terrestre nacional</option>
+                            <option value="Terrestre internacional">Terrestre internacional</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="container-row">
+                    <div class="form-group">
                         <label for="justificativa" class="alterar-label">Justificativa</label>
                         <textarea class="alterar-area" id="justificativa" rows="5"></textarea>
                     </div>
@@ -171,72 +192,53 @@
 
             <!---------------------------------- Dados Transporte ---------------------------->
             <h2>Transporte </h2>
-            <button class="botao info" id="abreModalAlterarTransporte">Alterar</button>
+            <button class="botao info center" type="button" id="abreModalAlterarTransporte">Alterar</button>
             <div class="container-row">
                 <div class="form-group">
-                    <label for="passagem" class="alterar-label">Passagem</label>
-                    <input class="alterar-input"  id="passagem" type="text">
+                    <label class="alterar-label">Veículo</label>
+                    <span class="viagem-span" id="span-veiculo"></span>
                 </div>
                 <div class="form-group">
-                    <label for="tipoPassagem" class="alterar-label">Tipo de Passagem</label>
-                    <select id="tipoPassagem" class="alterar-select">
-                        <option value="Aérea nacional (com franquia de bagagem)">Aérea nacional (com franquia de bagagem)</option>
-                        <option value="Aérea nacional (sem franquia de bagagem)">Aérea nacional (sem franquia de bagagem)</option>
-                        <option value="Aérea internacional">Aérea internacional</option>
-                        <option value="Terrestre nacional">Terrestre nacional</option>
-                        <option value="Terrestre internacional">Terrestre internacional</option>
-                    </select>
+                    <label class="alterar-label">Tipo de Veículo</label>
+                    <span class="viagem-span" id="span-tipoVeiculo"></span>
                 </div>
             </div>
             <div class="container-row">
                 <div class="form-group">
-                    <label for="veiculo" class="alterar-label">Veículo</label>
-                    <input class="alterar-input"  id="veiculo" type="text">
+                    <label  class="alterar-label">Data de Retirada</label>
+                    <span class="viagem-span" id="span-dtRetirada"></span>
                 </div>
                 <div class="form-group">
-                    <label for="tipoVeiculo" class="alterar-label">Tipo de Veículo</label>
-                    <select id="tipoVeiculo" class="alterar-select">
-                        <option value="Veículo locado">Veículo locado</option>
-                        <option value="Transporte com parceiros/terceiros">Transporte com parceiros/terceiros</option>
-                        <option value="Veículo Fundação PTI-BR">Veículo Fundação PTI-BR</option>
-                    </select>
+                    <label class="alterar-label">Data de Devolução</label>
+                    <span class="viagem-span" id="span-dtDevolucao"></span>
                 </div>
             </div>
             <div class="container-row">
                 <div class="form-group">
-                    <label for="dtRetirada" class="alterar-label">Data de Retirada</label>
-                    <input class="alterar-input" id="dtRetirada" type="text">
+                    <label  class="alterar-label">Hora de Retirada</label>
+                    <span class="viagem-span" id="span-horaRetirada"></span>
                 </div>
                 <div class="form-group">
-                    <label for="dtDevolucao" class="alterar-label">Data de Devolução</label>
-                    <input class="alterar-input" id="dtDevolucao" type="text">
-                </div>
-            </div>
-            <div class="container-row">
-                <div class="form-group">
-                    <label for="horaRetirada" class="alterar-label">Hora de Retirada</label>
-                    <input class="alterar-input" id="horaRetirada" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="horaDevolucao" class="alterar-label">Hora de Devolução</label>
-                    <input class="alterar-input" id="horaDevolucao" type="text">
+                    <label  class="alterar-label">Hora de Devolução</label>
+                    <span class="viagem-span" id="span-horaDevolucao"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="condutor" class="alterar-label">Nome do Condutor</label>
-                <input class="alterar-input" id="condutor" type="text">
+                <label  class="alterar-label">Nome do Condutor</label>
+                <span class="viagem-span" id="span-condutor"></span>
             </div>
             <div class="container-row">
                 <div class="form-group">
-                    <label for="cnh" class="alterar-label">CNH do Condutor</label>
-                    <input class="alterar-input" id="cnh" type="text">
+                    <label class="alterar-label">CNH do Condutor</label>
+                    <span class="viagem-span" id="span-cnh"></span>
                 </div>
                 <div class="form-group">
-                    <label for="validadeCNH" class="alterar-label">Validade CNH</label>
-                    <input class="alterar-input" id="validadeCNH" type="text">
+                    <label class="alterar-label">Validade CNH</label>
+                    <span class="viagem-span" id="span-validadeCNH"></span>
                 </div>
             </div>
 
+            <!------------------------ Dados Gastos ---------------------------->
             <h2>Gastos <button class="botao-adicionar">Novo</button></h2>
             <div id="container-gastos">
                 <h4>Gasto</h4>
@@ -247,6 +249,103 @@
         </form>
     </main>
 </div>
+
+
+<div class="modal-background"></div>
+<!----------------- Modal Exclusao Viagem ---------------------->
+<div class="modal" id="modalExclusaoViagem" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Excluir Viagem</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <h3>Tem certeza que deseja excluir esta viagem?</h3>
+        <h3>O formulário gerado por esta viagem também será excluido</h3>
+        <button class="botao alerta center" id="excluirViagem">Excluir</button>
+    </div>
+</div>
+<!----------------- Modal Alteracao Transporte ---------------------->
+<div class="modal" id="modalAlteracaoTransporte" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Excluir Viagem</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <fieldset id="info-veiculo"  class="info-container ativado">
+            <h2>Altere os dados do veiculo ou selecione um veiculo cadastrado</h2>
+            <button type="button" class="botao aviso center" id="novoVeiculo">Escolher</button>
+            <div id="veiculos" style="display: none">
+                <!------ Veiculos Aqui ---------------->
+            </div>
+            <div id="form-veiculo">
+                <div class="form-group">
+                    <label class="form-label" for="veiculo">Nome do Veículo</label>
+                    <input class="form-input" id="veiculo" type="text">
+                </div>
+                <div class="form-group">
+                    <i class="material-icons select-seta">arrow_drop_down</i>
+                    <label class="form-label label-select" for="tipoVeiculo">Tipo de Veículo</label>
+                    <select id="tipoVeiculo" class="form-select">
+                        <option value="" disabled selected></option>
+                        <option value="Veículo locado">Veículo locado</option>
+                        <option value="Transporte com parceiros/terceiros">Transporte com parceiros/terceiros</option>
+                        <option value="Veículo Fundação PTI-BR">Veículo Fundação PTI-BR</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dtRetirada">Data de Retirada</label>
+                    <input class="form-input" id="dtRetirada" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaRetirada">Hora de Retirada</label>
+                    <input class="form-input" id="horaRetirada" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dtDevolucao">Data de Devolução</label>
+                    <input class="form-input" id="dtDevolucao" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaDevolucao">Hora de Devolução</label>
+                    <input class="form-input" id="horaDevolucao" type="text">
+                </div>
+            </div>
+            <div class="botoes">
+                <button class="botao sucesso proximo" type="button" id="irPaginaCondutor">Avançar</button>
+            </div>
+        </fieldset>
+        <!------- Página Condutor ----------------->
+        <fieldset id="info-condutor" class="info-container">
+            <h2>Altere os dados do condutor ou escolha um condutor cadastrado</h2>
+            <button type="button" class="botao aviso center" id="novoCondutor">Novo</button>
+            <div id="condutores" style="display: none">
+                <!-------- Condutores Aqui ---------->
+            </div>
+            <div id="form-condutor">
+                <div class="form-group">
+                    <label class="form-label" for="nomeCondutor">Nome do Condutor</label>
+                    <input class="form-input" id="nomeCondutor" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cnh">Número CNH</label>
+                    <input class="form-input" id="cnh" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="validadeCNH">Validade da CNH</label>
+                    <input class="form-input" id="validadeCNH" type="text">
+                </div>
+            </div>
+            <div class="botoes">
+                <button type="button" class="botao alerta anterior" id="voltarPaginaVeiculo">Voltar</button>
+                <button type="button" class="botao sucesso proximo" id="atualizarTransporte">Atualizar</button>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
 <script src="/src/View/Default/js/mensagem.js"></script>

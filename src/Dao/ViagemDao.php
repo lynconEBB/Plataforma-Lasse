@@ -86,8 +86,8 @@ idUsuario,totalGasto,fonte,atividade,tipo,tipoPassagem) values (:idVeiculo, :idT
         $stm->bindValue(':justificativa',$viagem->getJustificativa());
         $stm->bindValue(':observacoes',$viagem->getObservacoes());
         $stm->bindValue(':passagem',$viagem->getPassagem());
-        $stm->bindValue(':entradaHosp',$viagem->getEntradaHosp()->format('Y-m-d h:i:s'));
-        $stm->bindValue(':saidaHosp',$viagem->getSaidaHosp()->format('Y-m-d h:i:s'));
+        $stm->bindValue(':entradaHosp',$viagem->getEntradaHosp()->format('Y-m-d H:i:s'));
+        $stm->bindValue(':saidaHosp',$viagem->getSaidaHosp()->format('Y-m-d H:i:s'));
         $stm->bindValue(':idUsuario',$viagem->getViajante()->getId());
         $stm->bindValue(':fonte',$viagem->getFonte());
         $stm->bindValue(':atividade',$viagem->getAtividade());

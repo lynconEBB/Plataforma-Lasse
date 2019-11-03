@@ -31,7 +31,7 @@
     padding-bottom: 40px;
     z-index: 2;
 }
-h2 {
+.container-viagem h2 {
     font-size: 1.2rem;
     font-weight: bold;
     width: 100%;
@@ -52,7 +52,7 @@ h2 {
 .viagem-span {
     font-size: 1.2rem;
     color: white;
-    display: none;
+    display: block;
     text-align: center;
 }
 #info-viagem {
@@ -70,4 +70,94 @@ h2 {
 }
 #primeiro-grupo {
     margin-top: 60px;
+}
+#modalExclusaoViagem h3 {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+}
+#modalExclusaoViagem .botao {
+    margin-top: 20px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+}
+.botoes .botao{
+    margin: 0 10px;
+}
+#novoVeiculo, #novoCondutor, #novoGasto {
+    margin-top: 10px;
+}
+
+#veiculos, #condutores {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: grid;
+    justify-content: center;
+    margin: 20px 0;
+    grid-gap: 10px;
+}
+.veiculo-container, .condutor-container {
+    justify-self: center;
+    box-sizing: border-box;
+    max-width: 300px;
+    padding: 10px;
+    color: white;
+    background-color: #183d44;
+    -webkit-box-shadow: 0 3px 2px #000;
+    -moz-box-shadow: 0 3px 2px #000;
+    box-shadow: 0 3px 2px #000;
+    width: 100%;
+}
+.selecionaVeiculo {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    background-color: #1b5057;
+    border: none;
+    color: white;
+    margin-top: 5px;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+.veiculo-container h3, .condutor-container h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.veiculo-container h4 {
+    font-size: 0.9em;
+    color: #9c9c9c;
+    margin-bottom: 5px;
+}
+.veiculo-container b, .condutor-container b {
+    font-weight: bold;
+}
+.veiculo-container span, .condutor-container span {
+    display: block;
+    margin-bottom: 3px;
+}
+@media (max-width: 390px ) {
+    #veiculos, #condutores {
+        grid-template-columns: 1fr;
+    }
+}
+.info-container h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bolder;
+    box-sizing: border-box;
+}
+.info-container {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.info-container.ativado {
+    pointer-events: all;
+    opacity: 1;
+    position: relative;
+    bottom: auto;
+    transition: all ease-in-out 300ms;
 }

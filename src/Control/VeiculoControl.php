@@ -91,11 +91,15 @@ class VeiculoControl extends CrudControl {
         }
     }
 
-    protected function excluir($id){
-        $this->listarPorId($id);
+    public function excluir($id){
+        $veiculo = $this->listarPorId($id);
         $viagemControl = new ViagemControl(null);
         if ($viagemControl->listarPorIdVeiculo($id) == false) {
             $this->DAO->excluir($id);
+            if (!$this->listarPorIdCondutor($veiculo->getCondutor()->getId())) {
+                $condutorControl = new CondutorControl(null);
+                $condutorControl->excluir($veiculo->getCondutor()->getId());
+            }
         } else {
             throw new InvalidArgumentException("Não foi possível excluir este veiculo pois já está em uso");
         }

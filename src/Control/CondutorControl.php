@@ -82,7 +82,7 @@ class CondutorControl extends CrudControl {
         }
     }
 
-    protected function excluir($id){
+    public function excluir($id){
         $this->listarPorId($id);
         $veiculoControl = new VeiculoControl(null);
         if ($veiculoControl->listarPorIdCondutor($id) == false) {
