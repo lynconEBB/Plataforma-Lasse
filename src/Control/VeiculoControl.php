@@ -110,23 +110,23 @@ class VeiculoControl extends CrudControl {
         return $veiculos;
     }
 
-    protected function atualizar($info,$id){
-        $this->listarPorId($id);
+    protected function atualizar($info,$id) {
+        $escolheu = false;
+        $veiculoAntigo = $this->listarPorId($id);
         if (isset($info->nome) && isset($info->tipo) && isset($info->dtRetirada) && isset($info->horaRetirada) && isset($info->dtDevolucao) && isset($info->horaDevolucao) && isset($info->condutor) ) {
-            $viagemControl = new ViagemControl(null);
-            if ($viagemControl->listarPorIdVeiculo($id) == false) {
-                $condControl = new CondutorControl(null);
-                if ($info->condutor instanceof stdClass) {
-                    $condControl->cadastrar($info->condutor);
-                    $idCondutor = $condControl->DAO->pdo->lastInsertId();
-                    $condutor = $condControl->listarPorId($idCondutor);
-                } else {
-                    $condutor = $condControl->listarPorId($info->condutor);
-                }
-                $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor,$id);
-                $this->DAO->atualizar($veiculo);
+            $condControl = new CondutorControl(null);
+            if ($info->condutor instanceof stdClass) {
+                $condControl->cadastrar($info->condutor);
+                $idCondutor = $condControl->DAO->pdo->lastInsertId();
+                $condutor = $condControl->listarPorId($idCondutor);
             } else {
-                throw new InvalidArgumentException("Não é possível atualizar este veiculo pois já está em uso");
+                $escolheu = true;
+                $condutor = $condControl->listarPorId($info->condutor);
+            }
+            $veiculo = new VeiculoModel($info->nome,$info->tipo,$info->dtRetirada.' '.$info->horaRetirada,$info->dtDevolucao.' '.$info->horaDevolucao,$condutor,$id);
+            $this->DAO->atualizar($veiculo);
+            if (!$this->listarPorIdCondutor($veiculoAntigo->getCondutor()->getId()) && $escolheu === false) {
+                $condControl->excluir($veiculoAntigo->getCondutor()->getId());
             }
         } else {
             throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");

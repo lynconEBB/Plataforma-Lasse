@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
     <link rel="stylesheet" href="/src/View/Viagem/telaViagem/styleViagem.css">
     <title>LPM - Viagem</title>
-    <style type="text/css">
-        #passagem {
-        }
-    </style>
 </head>
 <body>
 <!--------------- Mensagem ------------------>
@@ -93,11 +89,13 @@
     <!-------------------- Main Content ------------------->
     <main class="main-content">
         <div id="titulo">
-            <h1>Viagem realizada por djlgf</h1>
+            <h1 id="titulo-text">Viagem realizada por djlgf</h1>
             <button class="botao">Gerar Formulário</button>
             <hr class="divisoria-cabecalho">
         </div>
         <form class="container-viagem">
+            <input id="idVeiculo" type="hidden">
+            <input id="idCondutor" type="hidden" value="novo">
             <!-------------- Dados Viagem e Hospedagem -------------------------------->
             <h2 class="dados-title">Dados</h2>
             <div id="info-viagem">
@@ -192,7 +190,7 @@
 
             <!---------------------------------- Dados Transporte ---------------------------->
             <h2>Transporte </h2>
-            <button class="botao info center" type="button" id="abreModalAlterarTransporte">Alterar</button>
+            <button class="botao info center" type="button" id="abreModalAlterarTransporte">Editar</button>
             <div class="container-row">
                 <div class="form-group">
                     <label class="alterar-label">Veículo</label>
@@ -239,13 +237,28 @@
             </div>
 
             <!------------------------ Dados Gastos ---------------------------->
-            <h2>Gastos <button class="botao-adicionar">Novo</button></h2>
+            <h2>Gastos <button class="botao aviso" id="abreModalCadastroGasto" type="button">Novo</button></h2>
             <div id="container-gastos">
-                <h4>Gasto</h4>
-                <h4>Valor</h4>
+                <div class="gasto-row">
+                    <h3 class="alterar-label">Gasto</h3>
+                    <h3 class="alterar-label">Valor</h3>
+                </div>
+
+                <div class="gasto-row">
+                    <span class="viagem-span">Aluguel de veículos (locado fora de Foz)</span>
+                    <input type="text" class="alterar-input">
+                </div>
+
+                <div class="gasto-row">
+                    <span class="viagem-span">Passagens rodoviárias (metrô/ônibus)</span>
+                    <input type="text" class="alterar-input">
+                </div>
+                <div class="gasto-row">
+                    <input type="text" class="alterar-input">
+                    <input type="text" class="alterar-input">
+                </div>
             </div>
-            <hr class="divisoria">
-            <span class="alterar-input" id="totalGasto"></span>
+
         </form>
     </main>
 </div>
@@ -282,13 +295,13 @@
                 <!------ Veiculos Aqui ---------------->
             </div>
             <div id="form-veiculo">
-                <div class="form-group">
-                    <label class="form-label" for="veiculo">Nome do Veículo</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="veiculo">Nome do Veículo</label>
                     <input class="form-input" id="veiculo" type="text">
                 </div>
-                <div class="form-group">
+                <div class="form-group selecionado">
                     <i class="material-icons select-seta">arrow_drop_down</i>
-                    <label class="form-label label-select" for="tipoVeiculo">Tipo de Veículo</label>
+                    <label class="form-label label-select selecionado" for="tipoVeiculo">Tipo de Veículo</label>
                     <select id="tipoVeiculo" class="form-select">
                         <option value="" disabled selected></option>
                         <option value="Veículo locado">Veículo locado</option>
@@ -296,20 +309,20 @@
                         <option value="Veículo Fundação PTI-BR">Veículo Fundação PTI-BR</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="dtRetirada">Data de Retirada</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="dtRetirada">Data de Retirada</label>
                     <input class="form-input" id="dtRetirada" type="text">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="horaRetirada">Hora de Retirada</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="horaRetirada">Hora de Retirada</label>
                     <input class="form-input" id="horaRetirada" type="text">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="dtDevolucao">Data de Devolução</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="dtDevolucao">Data de Devolução</label>
                     <input class="form-input" id="dtDevolucao" type="text">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="horaDevolucao">Hora de Devolução</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="horaDevolucao">Hora de Devolução</label>
                     <input class="form-input" id="horaDevolucao" type="text">
                 </div>
             </div>
@@ -325,16 +338,16 @@
                 <!-------- Condutores Aqui ---------->
             </div>
             <div id="form-condutor">
-                <div class="form-group">
-                    <label class="form-label" for="nomeCondutor">Nome do Condutor</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="nomeCondutor">Nome do Condutor</label>
                     <input class="form-input" id="nomeCondutor" type="text">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="cnh">Número CNH</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="cnh">Número CNH</label>
                     <input class="form-input" id="cnh" type="text">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="validadeCNH">Validade da CNH</label>
+                <div class="form-group selecionado">
+                    <label class="form-label selecionado" for="validadeCNH">Validade da CNH</label>
                     <input class="form-input" id="validadeCNH" type="text">
                 </div>
             </div>
@@ -343,6 +356,18 @@
                 <button type="button" class="botao sucesso proximo" id="atualizarTransporte">Atualizar</button>
             </div>
         </fieldset>
+    </div>
+</div>
+<!----------------- Modal Cadastro Gasto --------------------------->
+<div class="modal" id="modalCadastroGasto" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Cadastrar Gasto</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+
     </div>
 </div>
 

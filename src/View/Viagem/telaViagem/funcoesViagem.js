@@ -10,12 +10,12 @@ window.onload = function () {
             setLinks(requisitor);
 
             let viagem = resposta.dados;
-
+            document.getElementById("idVeiculo").value = viagem.veiculo.id;
+            document.getElementById("titulo-text").textContent = "Viagem realizada por "+viagem.viajante.login;
             if (requisitor.id === viagem.viajante.id) {
                 templateDono(viagem);
                 setAlteracaoViagem(viagem);
                 setExclusaoViagem(viagem);
-                setDetalhesTransporte(viagem.veiculo);
                 setAlteracaoTransporte(viagem);
             } else {
                 templateAdmin(viagem);
@@ -29,10 +29,13 @@ window.onload = function () {
 
 function setAlteracaoTransporte(viagem) {
     document.getElementById("abreModalAlterarTransporte").onclick = function (event) {
+        setDetalhesTransporte(viagem.veiculo);
         exibeModal("modalAlteracaoTransporte",event.target);
     };
-    exibeVeiculos(viagem.veiculo);
-    exibeCondutores(viagem.veiculo.condutor);
+
+    exibeVeiculos(viagem.veiculo,viagem);
+    exibeCondutores(viagem.veiculo.condutor,viagem);
+
     document.getElementById("irPaginaCondutor").onclick = function () {
         document.getElementById("info-veiculo").classList.remove("ativado");
         document.getElementById("info-condutor").classList.add("ativado");
@@ -43,37 +46,21 @@ function setAlteracaoTransporte(viagem) {
     };
 
     document.getElementById("atualizarTransporte").onclick = function (event) {
-        let novoVeiculo = {
-            nome: document.getElementById("veiculo").value,
-            tipo: document.getElementById("tipoVeiculo").value,
-            dtRetirada: document.getElementById("dtRetirada").value,
-            horaRetirada: document.getElementById("horaRetirada").value,
-            dtDevolucao: document.getElementById("dtDevolucao").value,
-            horaDevolucao: document.getElementById("horaDevolucao").value,
-            condutor:  {
-                nome: document.getElementById("nomeCondutor").value,
-                cnh: document.getElementById("cnh").value,
-                validadeCNH: document.getElementById("validadeCNH").value,
-            }
-        };
-        let body = viagem;
-        delete body.id;
-        delete body.veiculo;
-        body["veiculo"] = novoVeiculo;
+        document.getElementById("idVeiculo").value = "novo";
+        let body = criaViagemAtualizada(viagem);
 
-        requisicao("PUT","/api/viagens"+viagem.id,body,function (resposta,codigo) {
+        requisicao("PUT","/api/viagens/"+viagem.id,body,function (resposta,codigo) {
             if (resposta.status === "sucesso") {
-
+                addMensagem("sucesso=Viagem-atualizada-com-sucesso");
             } else {
+                document.getElementById("idVeiculo").value = viagem.veiculo.id;
                 exibirMensagem(resposta.mensagem,true,event.target);
             }
-        })
-
+        });
     }
 }
 
-
-function exibeCondutores(condutorUsado) {
+function exibeCondutores(condutorUsado,viagem) {
     requisicao("GET","/api/condutores",null,function (resposta,codigo) {
         if (resposta.status === "sucesso") {
             let condutores = resposta.dados;
@@ -102,6 +89,19 @@ function exibeCondutores(condutorUsado) {
                 `);
                     document.getElementById("selecionaCondutor"+condutor.id).onclick = function (event) {
                         event.preventDefault();
+                        document.getElementById("idVeiculo").value = "novo";
+                        document.getElementById("idCondutor").value = condutor.id;
+                        let body = criaViagemAtualizada();
+
+                        requisicao("PUT","/api/viagens/"+viagem.id,body,function (resposta,codigo) {
+                            if (resposta.status === "sucesso") {
+                                addMensagem("sucesso=Viagem-atualizada-com-sucesso");
+                            } else {
+                                document.getElementById("idVeiculo").value = viagem.veiculo.id;
+                                document.getElementById("idCondutor").value = "novo";
+                                exibirMensagem(resposta.mensagem,true,event.target);
+                            }
+                        });
                     };
                 }
             } else {
@@ -132,7 +132,7 @@ function exibeCondutores(condutorUsado) {
     };
 }
 
-function exibeVeiculos(veiculoUsado) {
+function exibeVeiculos(veiculoUsado,viagem) {
     requisicao("GET","/api/veiculos",null,function (resposta) {
         if (resposta.status === "sucesso") {
             let veiculos = resposta.dados;
@@ -162,6 +162,16 @@ function exibeVeiculos(veiculoUsado) {
                     `);
                     document.getElementById("selecionaVeiculo"+veiculo.id).onclick = function (event) {
                         event.preventDefault();
+                        document.getElementById("idVeiculo").value = veiculo.id;
+                        let body = criaViagemAtualizada();
+                        requisicao("PUT","/api/viagens/"+viagem.id,body,function (resposta,codigo) {
+                            if (resposta.status === "sucesso") {
+                                addMensagem("sucesso=Viagem-atualizada-com-sucesso");
+                            } else {
+                                document.getElementById("idVeiculo").value = viagem.veiculo.id;
+                                exibirMensagem(resposta.mensagem,true,event.target);
+                            }
+                        });
                     };
                 }
             } else {
@@ -193,7 +203,6 @@ function exibeVeiculos(veiculoUsado) {
         }
     };
 }
-
 
 function setExclusaoViagem(viagem) {
     document.getElementById("abreModalExclusaoViagem").onclick = function (event) {
@@ -258,8 +267,8 @@ function templateDono(viagem) {
 
 }
 
-function criaViagemAtualizada(viagem) {
-    return {
+function criaViagemAtualizada() {
+    let body = {
         origem: document.getElementById("origem").value,
         destino: document.getElementById("destino").value,
         dataIda: document.getElementById("dataIda").value,
@@ -275,20 +284,42 @@ function criaViagemAtualizada(viagem) {
         atividade: document.getElementById("atividade").value,
         tipo: document.getElementById("tipo").value,
         tipoPassagem: document.getElementById("tipoPassagem").value,
-        veiculo: viagem.veiculo.id
+        veiculo: document.getElementById("idVeiculo").value
+    };
+
+    if (document.getElementById("idVeiculo").value === "novo") {
+        let veiculo = {
+            nome: document.getElementById("veiculo").value,
+            tipo: document.getElementById("tipoVeiculo").value,
+            dtRetirada: document.getElementById("dtRetirada").value,
+            dtDevolucao: document.getElementById("dtDevolucao").value,
+            horaDevolucao: document.getElementById("horaDevolucao").value,
+            horaRetirada: document.getElementById("horaRetirada").value,
+        };
+        if (document.getElementById("idCondutor").value === "novo") {
+            veiculo["condutor"] = {
+                nome: document.getElementById("nomeCondutor").value,
+                cnh: document.getElementById("cnh").value,
+                validadeCNH: document.getElementById("validadeCNH").value
+            }
+        } else {
+            veiculo["condutor"] = document.getElementById("idCondutor").value
+        }
+        body["veiculo"] = veiculo;
     }
+    return body;
 }
 
-function setDetalhesTransporte(veiculo) {
-    document.getElementById("veiculo").value = veiculo.nome;
-    document.getElementById("tipoVeiculo").value = veiculo.tipo;
-    document.getElementById("dtRetirada").value = veiculo.dataRetirada;
-    document.getElementById("dtDevolucao").value = veiculo.dataDevolucao;
-    document.getElementById("horaDevolucao").value = veiculo.horarioDevolucao;
-    document.getElementById("horaRetirada").value = veiculo.horarioRetirada;
-    document.getElementById("nomeCondutor").value = veiculo.condutor.nome;
-    document.getElementById("cnh").value = veiculo.condutor.cnh;
-    document.getElementById("validadeCNH").value = veiculo.condutor.validadeCNH;
+function setDetalhesTransporte() {
+    document.getElementById("veiculo").value = document.getElementById("span-veiculo").textContent;
+    document.getElementById("tipoVeiculo").value = document.getElementById("span-tipoVeiculo").textContent;
+    document.getElementById("dtRetirada").value = document.getElementById("span-dtRetirada").textContent;
+    document.getElementById("dtDevolucao").value = document.getElementById("span-dtDevolucao").textContent;
+    document.getElementById("horaDevolucao").value = document.getElementById("span-horaDevolucao").textContent;
+    document.getElementById("horaRetirada").value = document.getElementById("span-horaRetirada").textContent;
+    document.getElementById("nomeCondutor").value = document.getElementById("span-condutor").textContent;
+    document.getElementById("cnh").value = document.getElementById("span-cnh").textContent;
+    document.getElementById("validadeCNH").value = document.getElementById("span-validadeCNH").textContent;
 }
 
 function templateAdmin(viagem) {

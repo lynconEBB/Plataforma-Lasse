@@ -141,17 +141,16 @@ class ViagemControl extends CrudControl {
 
     protected function atualizar($dados,$id)
     {
-        $viagem = $this->listarPorId($id);
-        if ($viagem->getViajante()->getId() == $this->requisitor['id']) {
+        $escolheu = false;
+        $viagemAntiga = $this->listarPorId($id);
+        if ($viagemAntiga->getViajante()->getId() == $this->requisitor['id']) {
             $veiculoControl = new VeiculoControl(null);
             if ($dados->veiculo instanceof stdClass) {
                 $veiculoControl->cadastrar($dados->veiculo);
                 $idVeiculo = $veiculoControl->DAO->pdo->lastInsertId();
                 $veiculo = $veiculoControl->listarPorId($idVeiculo);
-                if (!$this->listarPorIdVeiculo($viagem->getVeiculo()->getId())) {
-
-                }
             }else{
+                $escolheu = true;
                 $veiculo = $veiculoControl->listarPorId($dados->veiculo);
             }
 
@@ -160,6 +159,10 @@ class ViagemControl extends CrudControl {
 
             $viagem = new ViagemModel($viajante,$veiculo,$dados->origem,$dados->destino,$dados->dataIda,$dados->dataVolta,$dados->passagem,$dados->justificativa,$dados->observacoes,$dados->dtEntradaHosp.' '.$dados->horaEntradaHosp,$dados->dtSaidaHosp.' '.$dados->horaSaidaHosp,$dados->fonte,$dados->atividade,$dados->tipoPassagem,$dados->tipo,null,$id,null);;
             $this->DAO->atualizar($viagem);
+
+            if (!$this->listarPorIdVeiculo($viagemAntiga->getVeiculo()->getId()) && $escolheu === false) {
+                $veiculoControl->excluir($viagemAntiga->getVeiculo()->getId());
+            }
         } else {
             throw new PermissionException("Você não possui permissão para atualizar esta viagem","Atualizar viagem realizada por outro usuário");
         }
