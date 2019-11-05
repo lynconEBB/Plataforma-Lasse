@@ -12,20 +12,132 @@ window.onload = function () {
             let viagem = resposta.dados;
             document.getElementById("idVeiculo").value = viagem.veiculo.id;
             document.getElementById("titulo-text").textContent = "Viagem realizada por "+viagem.viajante.login;
+
             if (requisitor.id === viagem.viajante.id) {
                 templateDono(viagem);
                 setAlteracaoViagem(viagem);
                 setExclusaoViagem(viagem);
                 setAlteracaoTransporte(viagem);
+                exibeGastosProprietario(viagem);
+                setCadastroGasto(viagem.id);
             } else {
                 templateAdmin(viagem);
-                document.querySelector(".container-botoes").style.display = "none";
             }
         } else {
             decideErros(resposta,codigo);
         }
     });
 };
+
+function exibeGastosProprietario(viagem) {
+    let gastosPadroes = ["Aluguel de veículos (locado fora de Foz)", "Combustível", "Estacionamento", "Passagens rodoviárias (metrô/ônibus)", "Passagens rodoviárias internacionais", "Pedágio", "Seguro internacional (obrigatório)", "Táxi"];
+    let container = document.getElementById("container-gastos");
+    let gastos = viagem.gastos;
+
+    for (let gasto of gastos) {
+        if (gastosPadroes.includes(gasto.tipo)) {
+            container.insertAdjacentHTML("afterbegin",`
+                <div class="gasto-row">
+                    <span class="viagem-span">${gasto.tipo}</span>
+                    <input type="text" class="alterar-input" id="valorGasto${gasto.id}" value="${gasto.valor}" >
+                    <button class="botao info" id="alterarGasto${gasto.id}" title="Salvar Alterações">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </div>
+            `);
+            document.getElementById("alterarGasto"+gasto.id).onclick = function (event) {
+                event.preventDefault();
+                let body = {
+                    tipo: gasto.tipo,
+                    valor: getGastoPadrao(gasto.id)
+                };
+                requisicao("PUT","/api/gastos/"+gasto.id,body,function (resposta,codigo) {
+                    if (resposta.status === "sucesso") {
+                        addMensagem("sucesso=Gasto-alterado-com-sucesso");
+                    } else {
+                        exibirMensagem(resposta.mensagem,true,event.target)
+                    }
+                });
+            };
+        } else {
+            container.insertAdjacentHTML("afterbegin",`
+                <div class="gasto-row">
+                    <input type="text" class="alterar-input" id="tipoGasto${gasto.id}" value="${gasto.tipo}">
+                    <input type="text" class="alterar-input" id="valorGasto${gasto.id}" value="${gasto.valor}">
+                    <button class="botao alerta" id="excluirGasto${gasto.id}">
+                        <i class="material-icons">delete</i>
+                    </button>
+                    <button class="botao info" id="alterarGasto${gasto.id}" title="Salvar Alterações">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </div>
+            `);
+            document.getElementById("alterarGasto"+gasto.id).onclick = function (event) {
+                event.preventDefault();
+                let body = {
+                    tipo: document.getElementById("tipoGasto"+gasto.id).value,
+                    valor: getGastoPadrao(gasto.id)
+                };
+                requisicao("PUT","/api/gastos/"+gasto.id,body,function (resposta,codigo) {
+                    if (resposta.status === "sucesso") {
+                        addMensagem("sucesso=Gasto-alterado-com-sucesso");
+                    } else {
+                        exibirMensagem(resposta.mensagem,true,event.target)
+                    }
+                });
+            };
+            document.getElementById("excluirGasto"+gasto.id).onclick = function (event) {
+                event.preventDefault();
+                requisicao("DELETE","/api/gastos/"+gasto.id,null,function (resposta,codigo) {
+                    if (resposta.status === "sucesso") {
+                        addMensagem("sucesso=Gasto-excluido-com-sucesso");
+                    } else {
+                        exibirMensagem(resposta.mensagem,true,event.target)
+                    }
+                });
+            };
+        }
+
+    }
+
+    container.insertAdjacentHTML("afterbegin",`
+        <div class="gasto-row">
+            <h3 class="alterar-label">Gasto</h3>
+            <h3 class="alterar-label">Valor</h3>
+        </div>
+    `);
+}
+
+function getGastoPadrao(idGasto) {
+    let valorGasto = document.getElementById("valorGasto"+idGasto).value;
+    if (valorGasto !== "") {
+        return valorGasto;
+    } else {
+        return 0;
+    }
+}
+
+function setCadastroGasto(idViagem) {
+    document.getElementById("abreModalCadastroGasto").onclick = function (event) {
+        exibeModal("modalCadastroGasto",event.target);
+    };
+
+    document.getElementById("cadastrarGasto").onclick = function (event) {
+        event.preventDefault();
+        let body = {
+            tipo: document.getElementById("tipoGasto").value,
+            valor: document.getElementById("valorGasto").value,
+            idViagem: idViagem,
+        };
+        requisicao("POST","/api/gastos",body,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                addMensagem("sucesso=Gasto-cadastrado-com-sucesso");
+            } else {
+                exibirMensagem(resposta.mensagem,true,event.target)
+            }
+        });
+    }
+}
 
 function setAlteracaoTransporte(viagem) {
     document.getElementById("abreModalAlterarTransporte").onclick = function (event) {
@@ -264,7 +376,6 @@ function templateDono(viagem) {
     document.getElementById("span-cnh").textContent = viagem.veiculo.condutor.cnh;
     document.getElementById("span-validadeCNH").textContent = viagem.veiculo.condutor.validadeCNH;
     document.getElementById("totalGasto").textContent = "R$ "+viagem.totalGasto;
-
 }
 
 function criaViagemAtualizada() {

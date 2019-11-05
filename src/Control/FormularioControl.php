@@ -3,7 +3,9 @@
 namespace Lasse\LPM\Control;
 
 use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Dao\FormularioDao;
+use Lasse\LPM\Erros\PermissionException;
 use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Model\ProjetoModel;
 use Lasse\LPM\Model\TarefaModel;
@@ -34,106 +36,69 @@ class FormularioControl extends CrudControl
 
     public function processaRequisicao()
     {
-        switch ($this->metodo) {
-            case 'POST':
-                // /api/formularios
-                if (count($this->url) == 2) {
-                    if (isset($_POST['nome']) && isset($_FILES['formulario'])) {
-                        if (is_string($_FILES['formulario']['name'])) {
-                            $this->cadastrar($_FILES['formulario'],$_POST['nome']);
-                            $this->respostaSucesso("Formulario Cadastrado com sucesso",null,$this->requisitor);
+        if (!is_null($this->url)) {
+            switch ($this->metodo) {
+                case 'POST':
+                    // /api/formularios/viagem/{idViagem}
+                    if (count($this->url) == 4 && $this->url[2] == "viagem" && $this->url[3] == (int)$this->url[3]) {
+                        $viagemControl = new ViagemControl(null);
+                        $viagem = $viagemControl->listarPorId($this->url[3]);
+                        if ($this->requisitor['id'] == $viagem->getViajante()->getId()) {
+                            $this->cadastrarFormularioViagem($this->url[3]);
+                            $this->respostaSucesso("Formulário de Requisicao de Viagem cadastrado com sucesso",null,$this->requisitor);
                         } else {
-                            throw new Exception("Apenas 1 arquivo é permitido");
+                            throw new PermissionException("Você não possui permissão para gerar o formulario desta viagem");
                         }
-                    } else {
-                        throw new Exception("Parâmetros insuficientes ou mal estruturados");
                     }
-                }
-                // /api/formularios/requisicaoViagem/{idViagem}
-                elseif (count($this->url) == 4 && $this->url[2] == "requisicaoViagem" && $this->url[3] == (int)$this->url[3]) {
-                    $viagemControl = new ViagemControl(null);
-                    $viagem = $viagemControl->listarPorId($this->url[3]);
-                    if ($this->requisitor['id'] == $viagem->getViajante()->getId()) {
-                        $formulario = $this->gerarRequisicaoViagem($this->url[3]);
-                        $this->respostaSucesso("Formulario de Requisicao de Viagem criado com sucesso",$formulario,$this->requisitor);
-                    } else {
-                        throw new Exception("Você não possui permissão para gerar o formulario desta viagem");
+                    break;
+                case 'DELETE':
+                    // /api/formularios/{idFormulario}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $this->excluir($this->url[2]);
+                        $this->respostaSucesso("Excluido com sucesso",null,$this->requisitor);
                     }
-
-                }
-                break;
-            case 'DELETE':
-                // /api/formularios/{idFormulario}
-                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                    $this->excluir($this->url[2]);
-                    $this->respostaSucesso("Excluido com sucesso",null,$this->requisitor);
-                }
-                break;
-            case 'GET':
-                // /api/formularios/{idFormulario}
-                if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
-                    $formulario = $this->listarPorId($this->url[2]);
-                    if ($formulario->getUsuario()->getId() ==  $this->requisitor['id'] || $this->requisitor['admin'] == "1") {
-                        $this->respostaSucesso("Listando formulario",$formulario,$this->requisitor);
-                    } else {
-                        throw new Exception("Você não possui acesso a este formulario",401);
-                    }
-                }
-                // /api/formularios/users/{idUsuario}
-                elseif ($this->url[2] == "users" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
-                    $formularios = $this->listarPorIdUsuario($this->url[3]);
-                    if ($formularios) {
-                        $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
-                    } else {
-                        $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
-                    }
-                }
-                // /api/formularios/download/{idFormulário}
-                elseif ($this->url[2] == "download" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
-                    $formulario = $this->listarPorId($this->url[3]);
-                    if ($formulario) {
-                        if ($formulario->getUsuario()->getId() == $this->requisitor['id']) {
-                            echo file_get_contents($formulario->getCaminhoDocumento());
+                    break;
+                case 'GET':
+                    // /api/formularios/users/{idUsuario}
+                    if ($this->url[2] == "users" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
+                        $formularios = $this->listarPorIdUsuario($this->url[3]);
+                        if ($formularios) {
+                            $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
                         } else {
-                            throw new Exception("Você não possui permissão para fazer o download deste formulário",401);
+                            $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
                         }
-                    } else {
-                        throw new Exception("Formulário não encontrado!",400);
                     }
-                }
-                break;
-        }
-    }
+                    // /api/formularios/download/{idFormulario}
+                    elseif (count($this->url) == 4 && $this->url[2] == "download" && $this->url[3] == (int)$this->url[3]) {
+                        $formulario = $this->listarPorId($this->url[3]);
+                        if ($formulario->getUsuario()->getId() == $this->requisitor["id"]) {
+                            header("Content-Type: application/vnd.oasis.opendocument.text");
+                            header("Content-Transfer-Encoding: Binary");
+                            header("Content-disposition: attachment; filename='Requsisicao.odt'");
+                            echo readfile($formulario->getCaminhoDocumento());
+                        } else {
+                            throw new PermissionException("Você não possui permissão para fazer o download deste formulario","Fazer download de um formulário de outro usuário");
+                        }
+                    }
+                    break;
+                case "PUT":
+                    // /api/formularios/{idFormulario}
+                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                        $formulario = $this->listarPorId($this->url[2]);
+                        if ($formulario->getUsuario()->getId() == $this->requisitor['id'] ) {
+                            $this->excluir($formulario->getId());
+                            if ($formulario->getCompra() != null) {
 
-    public function cadastrar($arquivo,$nome)
-    {
-        if ($this->DAO->listarPorUsuarioNome($nome,$this->requisitor['id']) == false) {
-            if (!is_dir($this->pastaUsuario)){
-                mkdir($this->pastaUsuario);
+                            } else {
+                                $this->cadastrarFormularioViagem($formulario->getViagem()->getId());
+                            }
+                            $this->respostaSucesso("Dados Atualizados no formulário com sucesso",null,$this->requisitor);
+                        } else {
+                            throw new PermissionException("Você não possui permissão para atualizar este formulário","Atualizar formulário de outro usuário");
+                        }
+                    }
+                    break;
             }
-            $usuarioControl = new UsuarioControl(null);
-            $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
-
-            $formulario = new FormularioModel($nome,$usuario);
-            if (!is_dir($formulario->getPastaFormulario())) {
-                mkdir($formulario->getPastaFormulario());
-            }
-
-            if (move_uploaded_file($arquivo['tmp_name'],$formulario->getCaminhoDocumento())) {
-                $this->converterParaHTML($formulario);
-                $this->DAO->cadastrar($formulario,null,null);
-
-            } else {
-                if (is_file($formulario->getCaminhoDocumento())) {
-                    unlink($formulario->getCaminhoDocumento());
-                }
-                if (is_dir($formulario->getPastaFormulario())) {
-                    rmdir($formulario->getPastaFormulario());
-                }
-                throw new Exception("Não foi possível upar o arquivo");
-            }
-        } else {
-            throw new Exception("Nome de Formulário já utilizado");
         }
     }
 
@@ -141,11 +106,10 @@ class FormularioControl extends CrudControl
     {
         $formulario = $this->listarPorId($id);
         $this->DAO->excluir($id);
-        array_map('unlink', glob("{$formulario->getPastaFormulario()}/*.*"));
-        rmdir($formulario->getPastaFormulario());
+        unlink($formulario->getCaminhoDocumento());
     }
 
-    public function listarPorId($id)
+    public function listarPorId($id):FormularioModel
     {
         $formulario = $this->DAO->listarPorId($id);
         if ($formulario != false) {
@@ -163,25 +127,7 @@ class FormularioControl extends CrudControl
         return $formularios;
     }
 
-
-    private function converterParaHTML(FormularioModel $formulario)
-    {
-        $comando = "soffice --headless --convert-to html:HTML:EmbedImages --outdir ";
-        $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getPastaFormulario()." ";
-        $comando .= $_SERVER["DOCUMENT_ROOT"]."/".$formulario->getCaminhoDocumento();
-
-        //$comando = "whoami";
-        echo exec($comando);
-        if (exec($comando)) {
-            $htmlManipulator = new HtmlManipulator($formulario->getCaminhoHTML());
-            $htmlManipulator->consertaHTML();
-            $htmlManipulator->salvar();
-        } else {
-            throw new Exception("Erro durante conversão para exibição");
-        }
-    }
-
-    public function gerarRequisicaoViagem($idViagem) {
+    public function cadastrarFormularioViagem($idViagem) {
 
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
@@ -195,7 +141,7 @@ class FormularioControl extends CrudControl
         $usuario = $usuarioControl->listarPorId($this->requisitor['id']);
 
         $caminhoOdtRequisicao = "assets/files/default/requisicaoViagem.odt";
-        $formulario = new FormularioModel("requisicaoViagem".$viagem->getId(),$usuario);
+        $formulario = new FormularioModel("Requisição de Viagem {$viagem->getId()}",$usuario,date("d/m/Y"),null,null,$viagem);
 
         if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
             if ($viagem->getViajante()->getId() ==  $this->requisitor['id']) {
@@ -203,28 +149,21 @@ class FormularioControl extends CrudControl
                 if (!is_dir($this->pastaUsuario)) {
                     mkdir($this->pastaUsuario);
                 }
-                if (!is_dir($formulario->getPastaFormulario())) {
-                    mkdir($formulario->getPastaFormulario());
-                }
 
                 if (copy($caminhoOdtRequisicao,$formulario->getCaminhoDocumento())) {
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
-                    //$this->converterParaHTML($formulario);
-                    $this->DAO->cadastrar($formulario,$idViagem,null);
+                    $this->DAO->cadastrar($formulario);
                     $formulario->setId($this->DAO->pdo->lastInsertId());
                     return $formulario;
                 }
                 else {
-                    if (is_dir($formulario->getPastaFormulario())) {
-                        rmdir($formulario->getPastaFormulario());
-                    }
                     throw new Exception("Erro ao tentar criar arquivo");
                 }
             } else {
-                throw new Exception("Você não possui permissão para gerar um formulário desta viagem");
+                throw new PermissionException("Você não possui permissão para gerar um formulário desta viagem");
             }
         } else {
-            throw new Exception("Formulário já criado");
+            throw new InvalidArgumentException("Formulário já criado");
         }
     }
 

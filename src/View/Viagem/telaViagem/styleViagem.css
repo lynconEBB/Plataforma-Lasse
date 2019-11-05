@@ -163,12 +163,23 @@
 }
 
 .gasto-row {
+    position: relative;
     display: grid;
-    padding: 0 20px;
-    margin-bottom: 10px;
+    padding: 0 60px;
+    margin-bottom: 40px;
     grid-template-columns: auto 200px;
     column-gap: 10px;
     line-height: 40px;
+}
+.gasto-row .alerta {
+    position: absolute;
+    top:-5px;
+    right: -20px;
+}
+.gasto-row .info {
+    top: -5px;
+    left: -20px;
+    position: absolute;
 }
 
 

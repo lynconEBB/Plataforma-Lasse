@@ -101,14 +101,21 @@
             <div id="info-viagem">
                 <button class="botao info" id="alterarViagem">Alterar</button>
                 <button class="botao alerta" id="abreModalExclusaoViagem">Excluir</button>
-                <div class="form-group" id="primeiro-grupo">
-                    <label for="tipo" class="alterar-label">Tipo</label>
-                    <select id="tipo" class="alterar-select">
-                        <option value="Viagem a trabalho">Viagem a trabalho</option>
-                        <option value="Evento/Congresso">Evento/Congresso</option>
-                        <option value="Viagem treinamento/aprimoramento">Viagem treinamento/aprimoramento</option>
-                    </select>
+                <div class="container-row" id="primeiro-grupo">
+                    <div class="form-group" >
+                        <label for="tipo" class="alterar-label">Tipo</label>
+                        <select id="tipo" class="alterar-select">
+                            <option value="Viagem a trabalho">Viagem a trabalho</option>
+                            <option value="Evento/Congresso">Evento/Congresso</option>
+                            <option value="Viagem treinamento/aprimoramento">Viagem treinamento/aprimoramento</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="alterar-label">Total Gasto</label>
+                        <span class="viagem-span" id="totalGasto"></span>
+                    </div>
                 </div>
+
                 <div class="container-row">
                     <div class="form-group">
                         <label for="origem" class="alterar-label">Origem: </label>
@@ -239,24 +246,6 @@
             <!------------------------ Dados Gastos ---------------------------->
             <h2>Gastos <button class="botao aviso" id="abreModalCadastroGasto" type="button">Novo</button></h2>
             <div id="container-gastos">
-                <div class="gasto-row">
-                    <h3 class="alterar-label">Gasto</h3>
-                    <h3 class="alterar-label">Valor</h3>
-                </div>
-
-                <div class="gasto-row">
-                    <span class="viagem-span">Aluguel de veículos (locado fora de Foz)</span>
-                    <input type="text" class="alterar-input">
-                </div>
-
-                <div class="gasto-row">
-                    <span class="viagem-span">Passagens rodoviárias (metrô/ônibus)</span>
-                    <input type="text" class="alterar-input">
-                </div>
-                <div class="gasto-row">
-                    <input type="text" class="alterar-input">
-                    <input type="text" class="alterar-input">
-                </div>
             </div>
 
         </form>
@@ -360,14 +349,24 @@
 </div>
 <!----------------- Modal Cadastro Gasto --------------------------->
 <div class="modal" id="modalCadastroGasto" role="dialog" tabindex="-1">
-    <div class="modal-header alerta">
+    <div class="modal-header">
         <h2 class="modal-header-title">Cadastrar Gasto</h2>
         <button class="modal-close" type="button" aria-label="Fechar Modal">
             <i class="material-icons">close</i>
         </button>
     </div>
     <div class="modal-conteudo">
-
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="form-label" for="tipoGasto">Tipo</label>
+                <input type="text" class="form-input" id="tipoGasto">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="valorGasto">Valor</label>
+                <input type="text" class="form-input" id="valorGasto">
+            </div>
+            <button class="botao sucesso center" id="cadastrarGasto">Cadastrar</button>
+        </form>
     </div>
 </div>
 

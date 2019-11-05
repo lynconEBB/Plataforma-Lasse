@@ -3,9 +3,8 @@
 
 namespace Lasse\LPM\Model;
 
-
-use Exception;
-use Lasse\LPM\Control\UsuarioControl;
+use DateTime;
+use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
 class FormularioModel
@@ -13,18 +12,20 @@ class FormularioModel
     private $id;
     private $nome;
     private $caminhoDocumento;
-    private $caminhoHTML;
     private $usuario;
-    private $pastaFormulario;
+    private $compra;
+    private $viagem;
+    private $dataModificacao;
 
-    public function __construct( $nome,$usuario, $caminhoDocumento=null, $caminhoHTML=null,$id=null)
+    public function __construct($nome,$usuario,$dataCriacao,$caminhoDocumento=null,$id=null,$viagem=null,$compra=null)
     {
         $this->setId($id);
         $this->setUsuario($usuario);
+        $this->setDataModificacao($dataCriacao);
         $this->setNome($nome);
-        $this->setPastaFormulario();
         $this->setCaminhoDocumento($caminhoDocumento);
-        $this->setCaminhoHTML($caminhoHTML);
+        $this->setCompra($compra);
+        $this->setViagem($viagem);
     }
 
     public function toArray()
@@ -33,10 +34,40 @@ class FormularioModel
             "id" => $this->getId(),
             "nome" => $this->getNome(),
             "caminhoDocumento" => $this->getCaminhoDocumento(),
-            "caminhoHTML" => $this->getCaminhoHTML(),
             "usuario" => $this->getUsuario()->toArray(),
         ];
         return $array;
+    }
+
+    public function getDataModificacao():DateTime
+    {
+        return $this->dataModificacao;
+    }
+
+    public function setDataModificacao($dataModificacao)
+    {
+        Validacao::validar("Data de Criação",$dataModificacao,"data");
+        $this->dataModificacao = Formatacao::formataData($dataModificacao);
+    }
+
+    public function getCompra()
+    {
+        return $this->compra;
+    }
+
+    public function setCompra($compra)
+    {
+        $this->compra = $compra;
+    }
+
+    public function getViagem()
+    {
+        return $this->viagem;
+    }
+
+    public function setViagem($viagem)
+    {
+        $this->viagem = $viagem;
     }
 
     public function getId()
@@ -72,25 +103,8 @@ class FormularioModel
             Validacao::validar('Documento Formulário',$caminhoDocumento,'documento');
             $this->caminhoDocumento = $caminhoDocumento;
         } else {
-            $this->caminhoDocumento = $this->pastaFormulario."/{$this->nome}.odt";
-        }
-    }
-
-    public function getCaminhoHTML()
-    {
-        return $this->caminhoHTML;
-    }
-
-    public function setCaminhoHTML($caminhoHTML)
-    {
-        if (!is_null($caminhoHTML)) {
-            $extensao = pathinfo($caminhoHTML,PATHINFO_EXTENSION);
-            if ($extensao != 'html') {
-                throw new Exception("O caminho para arquivo HTML invalido");
-            }
-            $this->caminhoHTML = $caminhoHTML;
-        } else {
-            $this->caminhoHTML = $this->pastaFormulario."/{$this->nome}.html";
+            $nomeFormatado = str_replace(" ","",$this->nome);
+            $this->caminhoDocumento = "assets/files/{$this->getUsuario()->getId()}/{$nomeFormatado}.odt";
         }
     }
 
@@ -103,19 +117,4 @@ class FormularioModel
     {
         $this->usuario = $usuario;
     }
-
-    public function getPastaFormulario() :string
-    {
-        return $this->pastaFormulario;
-    }
-
-    public function setPastaFormulario()
-    {
-        $this->pastaFormulario = "assets/files/{$this->usuario->getId()}/{$this->nome}";
-    }
-
-
-
-
-
 }

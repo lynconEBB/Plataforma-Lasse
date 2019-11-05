@@ -148,7 +148,7 @@ class ViagemModel
             foreach ($this->gastos as $gasto){
                 $total += $gasto->getValor();
             }
-            $this->totalGasto = $total;
+            $this->totalGasto = number_format($total,2,".","");
         } else {
             Validacao::validar("Total Gasto",$totalGasto,'monetario');
             $this->totalGasto = Formatacao::formataMonetario($totalGasto);
