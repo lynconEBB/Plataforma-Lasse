@@ -79,6 +79,7 @@ class FormularioControl extends CrudControl
                             $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
                         } else {
                             $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                            http_response_code(202);
                         }
                     }
                     // /api/formularios/viagem/{idViagem}

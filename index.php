@@ -53,6 +53,10 @@ class Router{
         elseif ($this->url[0] == "projetos" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
             require "src/View/Projeto/telaDashProjetos/telaProjetos.html";
         }
+        // /formularios/user/{idUsuario}
+        elseif ($this->url[0] == "formularios" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
+            require "src/View/Formulario/telaFormularios/telaFormularios.html";
+        }
         // /projeto/{idUsuario}
         elseif ($this->url[0] == "projeto" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Projeto/telaProjeto/telaProjeto.html";
