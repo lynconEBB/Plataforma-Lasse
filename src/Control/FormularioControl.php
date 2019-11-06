@@ -6,11 +6,13 @@ use Exception;
 use InvalidArgumentException;
 use Lasse\LPM\Dao\FormularioDao;
 use Lasse\LPM\Erros\PermissionException;
+use Lasse\LPM\Model\CompraModel;
 use Lasse\LPM\Model\FormularioModel;
 use Lasse\LPM\Model\ProjetoModel;
 use Lasse\LPM\Model\TarefaModel;
 use Lasse\LPM\Model\ViagemModel;
 use Lasse\LPM\Services\OdtManipulator;
+use UnexpectedValueException;
 
 class FormularioControl extends CrudControl
 {
@@ -50,6 +52,17 @@ class FormularioControl extends CrudControl
                             throw new PermissionException("Você não possui permissão para gerar o formulario desta viagem");
                         }
                     }
+                    // /api/formularios/compra/{idCompra}
+                    elseif (count($this->url) == 4 && $this->url[2] == "compra" && $this->url[3] == (int)$this->url[3]) {
+                        $compraControl = new CompraControl(null);
+                        $compra = $compraControl->listarPorId($this->url[3]);
+                        if ($this->requisitor['id'] == $compra->getComprador()->getId()) {
+                            $this->cadastrarFormularioCompra($compra);
+                            $this->respostaSucesso("Formulário de Aquisição de Materiais cadastrado com sucesso",null,$this->requisitor);
+                        } else {
+                            throw new PermissionException("Você não possui permissão para gerar o formulario desta compra");
+                        }
+                    }
                     break;
                 case 'DELETE':
                     // /api/formularios/{idFormulario}
@@ -86,9 +99,10 @@ class FormularioControl extends CrudControl
                     if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $formulario = $this->listarPorId($this->url[2]);
                         if ($formulario->getUsuario()->getId() == $this->requisitor['id'] ) {
+
                             $this->excluir($formulario->getId());
                             if ($formulario->getCompra() != null) {
-
+                                $this->cadastrarFormularioCompra($formulario->getCompra());
                             } else {
                                 $this->cadastrarFormularioViagem($formulario->getViagem()->getId());
                             }
@@ -115,7 +129,7 @@ class FormularioControl extends CrudControl
         if ($formulario != false) {
             return $formulario;
         } else {
-            throw new Exception("Formulário não encontrado");
+            throw new UnexpectedValueException("Formulário não encontrado");
         }
     }
 
@@ -128,7 +142,6 @@ class FormularioControl extends CrudControl
     }
 
     public function cadastrarFormularioViagem($idViagem) {
-
         $viagemControl = new ViagemControl(null);
         $viagem = $viagemControl->listarPorId($idViagem);
         $idTarefa = $viagemControl->DAO->descobrirIdTarefa($idViagem);
@@ -154,7 +167,6 @@ class FormularioControl extends CrudControl
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
                     $this->DAO->cadastrar($formulario);
                     $formulario->setId($this->DAO->pdo->lastInsertId());
-                    return $formulario;
                 }
                 else {
                     throw new Exception("Erro ao tentar criar arquivo");
@@ -216,6 +228,53 @@ class FormularioControl extends CrudControl
         foreach ($this->gastosPadroes as $gasto) {
             $odtManipulator->setCampo($gasto,"0,00");
         }
+        $odtManipulator->salvar();
+    }
+
+    public function cadastrarFormularioCompra(CompraModel $compra) {
+
+        $compraControl = new CompraControl(null);
+        $idTarefa = $compraControl->DAO->descobreIdTarefa($compra->getId());
+        $tarefaControl = new TarefaControl(null);
+        $tarefa = $tarefaControl->listarPorId($idTarefa);
+        $idProjeto = $tarefaControl->DAO->descobrirIdProjeto($idTarefa);
+        $projetoControl = new ProjetoControl(null);
+        $projeto = $projetoControl->listarPorId($idProjeto);
+
+        $caminhoOdtRequisicao = "assets/files/default/aquisicaoMateriais.odt";
+        $formulario = new FormularioModel("Aquisição de Materiais {$compra->getId()}",$compra->getComprador(),date("d/m/Y"),null,null,null,$compra);
+
+        if ($this->DAO->listarPorUsuarioNome($formulario->getNome(),$this->requisitor['id']) == false) {
+            if ($compra->getComprador()->getId() ==  $this->requisitor['id']) {
+
+                if (!is_dir($this->pastaUsuario)) {
+                    mkdir($this->pastaUsuario);
+                }
+
+                if (copy($caminhoOdtRequisicao,$formulario->getCaminhoDocumento())) {
+                    $this->preencherCamposCompra($compra,$formulario,$projeto,$tarefa);
+                    $this->DAO->cadastrar($formulario);
+                    $formulario->setId($this->DAO->pdo->lastInsertId());
+                }
+                else {
+                    throw new Exception("Erro ao tentar criar arquivo");
+                }
+            } else {
+                throw new PermissionException("Você não possui permissão para gerar um formulário desta compra");
+            }
+        } else {
+            throw new InvalidArgumentException("Formulário já criado");
+        }
+    }
+
+    public function preencherCamposCompra(CompraModel $compra,FormularioModel $formulario,ProjetoModel $projeto,TarefaModel $tarefa) {
+        $odtManipulator = new OdtManipulator($formulario->getCaminhoDocumento());
+        $odtManipulator->setCampo("proposito",$compra->getProposito());
+        $odtManipulator->setCampo("centroCusto",$projeto->getCentroCusto());
+        $odtManipulator->setCampo("fonte",$compra->getFonteRecurso());
+        $odtManipulator->setCampo("natOrcamentaria",$compra->getNaturezaOrcamentaria());
+        $odtManipulator->setCampo("projeto",$projeto->getNome());
+        $odtManipulator->setCampo("tarefa",$tarefa->getNome());
         $odtManipulator->salvar();
     }
 

@@ -64,8 +64,9 @@ class FormularioDao extends CrudDao
         $usuarioControl = new UsuarioControl(null);
         $viagemControl = new ViagemControl(null);
         $compraControl = new CompraControl(null);
-        $usuario = $usuarioControl->listarPorId($row['idUsuario']);
+
         if ($row != false) {
+            $usuario = $usuarioControl->listarPorId($row['idUsuario']);
             if ($row['idViagem'] != null) {
                 $viagem = $viagemControl->listarPorId($row['idViagem']);
                 $formulario = new FormularioModel($row['nome'],$usuario,$row['dataModificacao'],$row['caminhoDocumento'],$row['id'],$viagem,$row['idCompra']);

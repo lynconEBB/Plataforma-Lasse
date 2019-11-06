@@ -256,6 +256,7 @@ class UsuarioControl extends CrudControl {
     }
 
     public function listarPorId($id){
+
         $usuario = $this->DAO->listarPorId($id);
         if ($usuario != false ) {
             return $usuario;

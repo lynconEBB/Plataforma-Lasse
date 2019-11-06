@@ -17,3 +17,19 @@
 [05/11/2019 - 16:24:37] Erro ocorrido com usuário lynconbaez: Erro Interno Inesperado: count(): Parameter must be an array or an object that implements Countable
 [05/11/2019 - 16:26:25] Erro ocorrido com usuário lynconbaez: Erro Interno Inesperado: count(): Parameter must be an array or an object that implements Countable
 [05/11/2019 - 16:28:11] Erro ocorrido com usuário lynconbaez: Erro Interno Inesperado: count(): Parameter must be an array or an object that implements Countable
+[05/11/2019 - 19:24:50] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[05/11/2019 - 19:28:05] Usuário LynconBaez logou no sistema através de insomnia/7.0.3
+[05/11/2019 - 19:28:17] Erro ocorrido com usuário LynconBaez: Erro durante transação com Banco de dados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dataModificacao' in 'field list'
+[05/11/2019 - 20:04:11] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Insomnia/7.0.3 Chrome/66.0.3359.181 Electron/3.1.13 Safari/537.36
+[05/11/2019 - 20:06:03] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Formulário não encontrado
+[05/11/2019 - 20:13:18] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: readfile(assets/files/17/RequisicaodeViagem14.odt): failed to open stream: No such file or directory
+[05/11/2019 - 20:28:43] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: readfile(assets/files/17/RequisiçãodeViagem14.odt): failed to open stream: No such file or directory
+[05/11/2019 - 20:38:30] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: readfile(assets/files/17/RequisiçãodeViagem14.odt): failed to open stream: No such file or directory
+[05/11/2019 - 20:39:42] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[05/11/2019 - 11:39:45]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[05/11/2019 - 21:17:11] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[05/11/2019 - 21:17:30] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Call to undefined method Lasse\LPM\Dao\CompraDao::descobrirIdTarefa()
+[05/11/2019 - 21:19:38] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Argument 1 passed to Lasse\LPM\Control\FormularioControl::cadastrarFormularioCompra() must be an instance of Lasse\LPM\Model\CompraModel, string given, called in C:\Lasse-Project-Manager\src\Control\FormularioControl.php on line 103
+[05/11/2019 - 21:24:12] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$formulario' (T_VARIABLE), expecting ',' or ';'
+[05/11/2019 - 21:25:00] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Formulário não encontrado
+[05/11/2019 - 21:26:43] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Formulário não encontrado
