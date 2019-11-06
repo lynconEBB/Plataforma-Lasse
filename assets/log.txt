@@ -33,3 +33,10 @@
 [05/11/2019 - 21:24:12] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected '$formulario' (T_VARIABLE), expecting ',' or ';'
 [05/11/2019 - 21:25:00] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Formulário não encontrado
 [05/11/2019 - 21:26:43] Erro ocorrido com usuário LynconBaez: Erro Interno Inesperado: Formulário não encontrado
+[06/11/2019 - 10:48:17] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:15:26]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:15:37] Usuário Camiggf logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:15:44]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:15:50] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:16:17]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 11:16:28] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36

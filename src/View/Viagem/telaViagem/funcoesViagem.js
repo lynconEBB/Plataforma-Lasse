@@ -12,7 +12,7 @@ window.onload = function () {
             let viagem = resposta.dados;
             document.getElementById("idVeiculo").value = viagem.veiculo.id;
             document.getElementById("titulo-text").textContent = "Viagem realizada por "+viagem.viajante.login;
-
+    
             if (requisitor.id === viagem.viajante.id) {
                 templateDono(viagem);
                 setAlteracaoViagem(viagem);
@@ -22,12 +22,34 @@ window.onload = function () {
                 setCadastroGasto(viagem.id);
             } else {
                 templateAdmin(viagem);
+                exibeGastosNaoProprietario(viagem);
             }
         } else {
             decideErros(resposta,codigo);
         }
     });
 };
+
+function exibeGastosNaoProprietario(viagem) {
+    let gastosPadroes = ["Aluguel de veículos (locado fora de Foz)", "Combustível", "Estacionamento", "Passagens rodoviárias (metrô/ônibus)", "Passagens rodoviárias internacionais", "Pedágio", "Seguro internacional (obrigatório)", "Táxi"];
+    let container = document.getElementById("container-gastos");
+    let gastos = viagem.gastos;
+
+    for (let gasto of gastos) {
+        container.insertAdjacentHTML("afterbegin",`
+            <div class="gasto-row">
+                <span class="viagem-span">${gasto.tipo}</span>
+                <span class=viagem-span>R$ ${gasto.valor}</span> 
+            </div>
+        `);
+    }   
+    container.insertAdjacentHTML("afterbegin",`
+        <div class="gasto-row">
+            <h3 class="alterar-label">Gasto</h3>
+            <h3 class="alterar-label">Valor</h3>
+        </div>
+    `);
+}
 
 function exibeGastosProprietario(viagem) {
     let gastosPadroes = ["Aluguel de veículos (locado fora de Foz)", "Combustível", "Estacionamento", "Passagens rodoviárias (metrô/ônibus)", "Passagens rodoviárias internacionais", "Pedágio", "Seguro internacional (obrigatório)", "Táxi"];
@@ -434,7 +456,154 @@ function setDetalhesTransporte() {
 }
 
 function templateAdmin(viagem) {
+    let entrada = viagem.entradaHosp.split(" ");
+    let saida = viagem.saidaHosp.split(" ");
 
+    document.getElementsByClassName("main-content")[0].innerHTML = `
+    <div id="titulo">
+        <h1 id="titulo-text">Viagem realizada por ${viagem.viajante.login}</h1>
+        <hr class="divisoria-cabecalho">
+    </div>
+    <form class="container-viagem">
+        <h2 class="dados-title">Dados</h2>
+        <div id="info-viagem">
+            <div class="container-row" id="primeiro-grupo">
+                <div class="form-group" >
+                    <label for="tipo" class="alterar-label">Tipo</label>
+                    <span class="viagem-span" >${viagem.tipo}</span>
+                </div>
+                <div class="form-group">
+                    <label class="alterar-label">Total Gasto</label>
+                    <span class="viagem-span" id="totalGasto">R$ ${viagem.totalGasto}</span>
+                </div>
+            </div>
+
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="origem" class="alterar-label">Origem: </label>
+                    <span class="viagem-span" >${viagem.origem}</span>
+                </div>
+                <div class="form-group">
+                    <label for="destino" class="alterar-label">Destino: </label>
+                    <span class="viagem-span" >${viagem.destino}</span>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="dataIda" class="alterar-label">Data Ida</label>
+                    <span class="viagem-span" >${viagem.dtIda}</span>
+                </div>
+                <div class="form-group">
+                    <label for="dataVolta" class="alterar-label">Data Volta</label>
+                    <span class="viagem-span" >${viagem.dtVolta}</span>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="fonte" class="alterar-label">Fonte de Recurso</label>
+                    <span class="viagem-span" >${viagem.fonte}</span>
+                </div>
+                <div class="form-group">
+                    <label for="atividade" class="alterar-label">Atividade</label>
+                    <span class="viagem-span" >${viagem.atividade}</span>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="passagem" class="alterar-label">Passagem</label>
+                    <span class="viagem-span" >${viagem.passagem}</span>
+                </div>
+                <div class="form-group">
+                    <label for="tipoPassagem" class="alterar-label">Tipo de Passagem</label>
+                    <span class="viagem-span" >${viagem.tipoPassagem}</span>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="justificativa" class="alterar-label">Justificativa</label>
+                    <span class="viagem-span" >${viagem.justificativa}</span>
+                </div>
+                <div class="form-group">
+                    <label for="observacoes" class="alterar-label">Observações</label>
+                    <span class="viagem-span" >${viagem.obeservacoes}</span>
+                </div>
+            </div>
+            <h2>Hospedagem </h2>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="dtEntradaHosp" class="alterar-label">Data de Entrada</label>
+                    <span class="viagem-span" >${entrada[0]}</span>
+                </div>
+                <div class="form-group">
+                    <label for="dtSaidaHosp" class="alterar-label">Data de Saída</label>
+                    <span class="viagem-span" >${saida[0]}</span>
+                </div>
+            </div>
+            <div class="container-row">
+                <div class="form-group">
+                    <label for="horaEntradaHosp" class="alterar-label">Hora de Entrada</label>
+                    <span class="viagem-span" >${entrada[1]}</span>
+                </div>
+                <div class="form-group">
+                    <label for="horaSaidaHosp" class="alterar-label">Hora de Saída</label>
+                    <span class="viagem-span" >${saida[1]}</span>
+            </div>
+        </div>
+
+        <!---------------------------------- Dados Transporte ---------------------------->
+        <h2>Transporte </h2>
+        <div class="container-row">
+            <div class="form-group">
+                <label class="alterar-label">Veículo</label>
+                <span class="viagem-span" id="span-veiculo">${viagem.veiculo.nome}</span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label">Tipo de Veículo</label>
+                <span class="viagem-span" id="span-tipoVeiculo">${viagem.veiculo.tipo}</span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="form-group">
+                <label  class="alterar-label">Data de Retirada</label>
+                <span class="viagem-span" id="span-dtRetirada">${viagem.veiculo.dataRetirada}</span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label">Data de Devolução</label>
+                <span class="viagem-span" id="span-dtDevolucao">${viagem.veiculo.dataDevolucao}</span>
+            </div>
+        </div>
+        <div class="container-row">
+            <div class="form-group">
+                <label  class="alterar-label">Hora de Retirada</label>
+                <span class="viagem-span" id="span-horaRetirada">${viagem.veiculo.horarioRetirada}</span>
+            </div>
+            <div class="form-group">
+                <label  class="alterar-label">Hora de Devolução</label>
+                <span class="viagem-span" id="span-horaDevolucao">${viagem.veiculo.horarioDevolucao}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="alterar-label">Nome do Condutor</label>
+            <span class="viagem-span" id="span-condutor">${viagem.veiculo.condutor.nome}</span>
+        </div>
+        <div class="container-row">
+            <div class="form-group">
+                <label class="alterar-label">CNH do Condutor</label>
+                <span class="viagem-span" id="span-cnh">${viagem.veiculo.condutor.cnh}</span>
+            </div>
+            <div class="form-group">
+                <label class="alterar-label">Validade CNH</label>
+                <span class="viagem-span" id="span-validadeCNH">${viagem.veiculo.condutor.validadeCNH}</span>
+            </div>
+        </div>
+
+        <!------------------------ Dados Gastos ---------------------------->
+        <h2>Gastos</h2>
+        <div id="container-gastos">
+
+        </div>
+    </form>
+    `;
 }
 
 

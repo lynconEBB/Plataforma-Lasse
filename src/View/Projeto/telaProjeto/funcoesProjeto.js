@@ -169,7 +169,7 @@ function exibeTarefas(tarefas,tarefaFazer,tarefaAndamento,tarefaConluida) {
             let templateTarefa = `
                 <a href="/tarefa/${tarefa.id}" class="tarefa" id="tarefa${tarefa.id}">
                     <span class="tarefa-title">${tarefa.nome}</span>
-                    <span class="tarefa-gasto">${tarefa.totalGasto}</span>
+                    <span class="tarefa-gasto">R$ ${tarefa.totalGasto}</span>
                 </a>
             `;
             divColocar.insertAdjacentHTML("beforeend",templateTarefa);
