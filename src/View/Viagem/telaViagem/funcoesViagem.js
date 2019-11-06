@@ -14,6 +14,7 @@ window.onload = function () {
             document.getElementById("titulo-text").textContent = "Viagem realizada por "+viagem.viajante.login;
     
             if (requisitor.id === viagem.viajante.id) {
+                setGeracaoFormulario(viagem);
                 templateDono(viagem);
                 setAlteracaoViagem(viagem);
                 setExclusaoViagem(viagem);
@@ -30,8 +31,62 @@ window.onload = function () {
     });
 };
 
+function setGeracaoFormulario(viagem) {
+    requisicao("GET","/api/formularios/viagem/"+viagem.id,null,function (resposta,codigo) {
+        if (resposta.status === "sucesso") {
+            if (codigo === 202) {
+                requisicaoCadastroFormulario(viagem);
+            } else {
+                requisicaoAtulizarFormulario(resposta.dados.id);
+            }
+        } else {
+            exibirMensagemInicio(resposta.mensagem,true)
+        }
+    });
+}
+
+function requisicaoCadastroFormulario(viagem) {
+    document.getElementById("gerarFormulario").onclick = function (event) {
+        requisicao("POST","/api/formularios/viagem/"+viagem.id,null,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                requisicaoDownloadFormulario(resposta.dados.id);
+                requisicaoAtulizarFormulario(resposta.dados.id);
+            } else {
+                exibirMensagem(resposta.mensagem,true,event.target)
+            }
+        });
+    }
+}
+
+function requisicaoDownloadFormulario(idFormulario) {
+    let requisicaoDownload = "/api/formularios/download/"+idFormulario;
+    let iframe = document.getElementById("hiddenDownloader");
+
+    if (iframe != null) {
+        iframe.remove();
+    }
+
+    iframe = document.createElement('iframe');
+    iframe.id = "hiddenDownloader";
+    iframe.style.visibility = 'none';
+    document.body.appendChild(iframe);
+    iframe.src = requisicaoDownload;
+}
+
+function requisicaoAtulizarFormulario(idFormulario) {
+    document.getElementById("gerarFormulario").textContent = "Atualizar e gerar formulário";
+    document.getElementById("gerarFormulario").onclick = function (event) {
+        requisicao("PUT","/api/formularios/"+idFormulario,null,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                requisicaoDownloadFormulario(resposta.dados.id);
+            } else {
+                exibirMensagem(resposta.mensagem,true,event.target)
+            }
+        });
+    }
+}
+
 function exibeGastosNaoProprietario(viagem) {
-    let gastosPadroes = ["Aluguel de veículos (locado fora de Foz)", "Combustível", "Estacionamento", "Passagens rodoviárias (metrô/ônibus)", "Passagens rodoviárias internacionais", "Pedágio", "Seguro internacional (obrigatório)", "Táxi"];
     let container = document.getElementById("container-gastos");
     let gastos = viagem.gastos;
 

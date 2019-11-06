@@ -18,9 +18,11 @@ window.onload = function () {
                 setCadastroItem(idCompraRequisitada);
                 setExclusaoCompra(idCompraRequisitada,requisitor.id);
                 setAlteracaoCompra(idCompraRequisitada);
+                setGeracaoFormulario(compra);
             } else {
                 exibeItensNaoProprietario(compra.itens);
                 exibeDetalhesNaoProprietario(compra);
+                document.getElementById("gerarFormulario").style.display = "none";
                 document.getElementById("novoItem").style.display = "none";
                 document.getElementById("alterarCompra").style.display = "none";
                 document.getElementById("abreModalExcluirCompra").style.display = "none";
@@ -30,6 +32,60 @@ window.onload = function () {
         }
     });
 };
+
+function setGeracaoFormulario(compra) {
+    requisicao("GET","/api/formularios/compra/"+compra.id,null,function (resposta,codigo) {
+        if (resposta.status === "sucesso") {
+            if (codigo === 202) {
+                requisicaoCadastroFormulario(compra);
+            } else {
+                requisicaoAtulizarFormulario(resposta.dados.id);
+            }
+        } else {
+            exibirMensagemInicio(resposta.mensagem,true)
+        }
+    });
+}
+
+function requisicaoCadastroFormulario(compra) {
+    document.getElementById("gerarFormulario").onclick = function (event) {
+        requisicao("POST","/api/formularios/compra/"+compra.id,null,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                requisicaoDownloadFormulario(resposta.dados.id);
+                requisicaoAtulizarFormulario(resposta.dados.id);
+            } else {
+                exibirMensagem(resposta.mensagem,true,event.target)
+            }
+        });
+    }
+}
+
+function requisicaoDownloadFormulario(idFormulario) {
+    let requisicaoDownload = "/api/formularios/download/"+idFormulario;
+    let iframe = document.getElementById("hiddenDownloader");
+    if (iframe != null) {
+        iframe.remove();
+    }
+    iframe = document.createElement('iframe');
+    iframe.id = "hiddenDownloader";
+    iframe.style.visibility = 'none';
+    document.body.appendChild(iframe);
+    iframe.src = requisicaoDownload;
+}
+
+function requisicaoAtulizarFormulario(idFormulario) {
+    document.getElementById("gerarFormulario").textContent = "Atualizar e gerar formulário";
+    document.getElementById("gerarFormulario").onclick = function (event) {
+        requisicao("PUT","/api/formularios/"+idFormulario,null,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                requisicaoDownloadFormulario(resposta.dados.id);
+            } else {
+                exibirMensagem(resposta.mensagem,true,event.target)
+            }
+        });
+    }
+}
+
 function exibeItensNaoProprietario(itens) {
     let containerItens = document.getElementById("itens");
     for (let item of itens) {
@@ -137,8 +193,7 @@ function setExclusaoItem(item) {
     }
 }
 
-function setCadastroItem(idCompraRequisitada)
-{
+function setCadastroItem(idCompraRequisitada) {
     document.getElementById("novoItem").onclick = function (event) {
         exibeModal("modalCadastroItem",event.target);
     };
@@ -160,8 +215,7 @@ function setCadastroItem(idCompraRequisitada)
     };
 }
 
-function setExclusaoCompra(idCompra,idRequisitor)
-{
+function setExclusaoCompra(idCompra,idRequisitor) {
     document.getElementById("abreModalExcluirCompra").onclick = function (event) {
         event.preventDefault();
         exibeModal("modalExclusaoCompra",event.target);
@@ -178,8 +232,7 @@ function setExclusaoCompra(idCompra,idRequisitor)
     };
 }
 
-function setAlteracaoCompra(idCompra)
-{
+function setAlteracaoCompra(idCompra) {
     document.getElementById("alterarCompra").onclick = function (event) {
         event.preventDefault();
         let body = {

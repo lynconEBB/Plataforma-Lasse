@@ -158,4 +158,46 @@ class FormularioDao extends CrudDao
             return false;
         }
     }
+
+    public function listarPorIdViagem($idViagem)
+    {
+        $comando = "SELECT * FROM tbFormulario WHERE idViagem = :idViagem";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':idViagem',$idViagem);
+
+        $stm->execute();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+        $usuarioControl = new UsuarioControl(null);
+        $viagemControl = new ViagemControl(null);
+
+        if ($row != false) {
+            $usuario= $usuarioControl->listarPorId($row['idUsuario']);
+            $viagem = $viagemControl->listarPorId($row['idViagem']);
+            $formulario = new FormularioModel($row['nome'],$usuario,$row['dataModificacao'],$row['caminhoDocumento'],$row['id'],$viagem,$row['idCompra']);
+            return $formulario;
+        } else {
+            return false;
+        }
+    }
+
+    public function listarPorIdCompra($idCompra)
+    {
+        $comando = "SELECT * FROM tbFormulario WHERE idCompra = :idCompra";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':idCompra',$idCompra);
+
+        $stm->execute();
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+        $usuarioControl = new UsuarioControl(null);
+        $compraControl = new CompraControl(null);
+
+        if ($row != false) {
+            $usuario= $usuarioControl->listarPorId($row['idUsuario']);
+            $compra = $compraControl->listarPorId($row['idCompra']);
+            $formulario = new FormularioModel($row['nome'],$usuario,$row['dataModificacao'],$row['caminhoDocumento'],$row['id'],$row['idViagem'],$compra);
+            return $formulario;
+        } else {
+            return false;
+        }
+    }
 }

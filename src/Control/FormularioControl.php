@@ -46,8 +46,8 @@ class FormularioControl extends CrudControl
                         $viagemControl = new ViagemControl(null);
                         $viagem = $viagemControl->listarPorId($this->url[3]);
                         if ($this->requisitor['id'] == $viagem->getViajante()->getId()) {
-                            $this->cadastrarFormularioViagem($this->url[3]);
-                            $this->respostaSucesso("Formulário de Requisicao de Viagem cadastrado com sucesso",null,$this->requisitor);
+                            $formulario = $this->cadastrarFormularioViagem($this->url[3]);
+                            $this->respostaSucesso("Formulário de Requisicao de Viagem cadastrado com sucesso",$formulario,$this->requisitor);
                         } else {
                             throw new PermissionException("Você não possui permissão para gerar o formulario desta viagem");
                         }
@@ -57,8 +57,8 @@ class FormularioControl extends CrudControl
                         $compraControl = new CompraControl(null);
                         $compra = $compraControl->listarPorId($this->url[3]);
                         if ($this->requisitor['id'] == $compra->getComprador()->getId()) {
-                            $this->cadastrarFormularioCompra($compra);
-                            $this->respostaSucesso("Formulário de Aquisição de Materiais cadastrado com sucesso",null,$this->requisitor);
+                            $formulario = $this->cadastrarFormularioCompra($compra);
+                            $this->respostaSucesso("Formulário de Aquisição de Materiais cadastrado com sucesso",$formulario,$this->requisitor);
                         } else {
                             throw new PermissionException("Você não possui permissão para gerar o formulario desta compra");
                         }
@@ -81,13 +81,33 @@ class FormularioControl extends CrudControl
                             $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
                         }
                     }
+                    // /api/formularios/viagem/{idViagem}
+                    elseif ($this->url[2] == "viagem" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
+                        $formularios = $this->listarPorIdViagem($this->url[3]);
+                        if ($formularios) {
+                            $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
+                        } else {
+                            $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                            http_response_code(202);
+                        }
+                    }
+                    // /api/formularios/viagem/{idViagem}
+                    elseif ($this->url[2] == "compra" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
+                        $formularios = $this->listarPorIdCompra($this->url[3]);
+                        if ($formularios) {
+                            $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
+                        } else {
+                            $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                            http_response_code(202);
+                        }
+                    }
                     // /api/formularios/download/{idFormulario}
                     elseif (count($this->url) == 4 && $this->url[2] == "download" && $this->url[3] == (int)$this->url[3]) {
                         $formulario = $this->listarPorId($this->url[3]);
                         if ($formulario->getUsuario()->getId() == $this->requisitor["id"]) {
                             header("Content-Type: application/vnd.oasis.opendocument.text");
                             header("Content-Transfer-Encoding: Binary");
-                            header("Content-disposition: attachment; filename='Requsisicao.odt'");
+                            header("Content-disposition: attachment; filename='".basename($formulario->getCaminhoDocumento())."'");
                             echo readfile($formulario->getCaminhoDocumento());
                         } else {
                             throw new PermissionException("Você não possui permissão para fazer o download deste formulario","Fazer download de um formulário de outro usuário");
@@ -102,11 +122,11 @@ class FormularioControl extends CrudControl
 
                             $this->excluir($formulario->getId());
                             if ($formulario->getCompra() != null) {
-                                $this->cadastrarFormularioCompra($formulario->getCompra());
+                                $formulario = $this->cadastrarFormularioCompra($formulario->getCompra());
                             } else {
-                                $this->cadastrarFormularioViagem($formulario->getViagem()->getId());
+                                $formulario = $this->cadastrarFormularioViagem($formulario->getViagem()->getId());
                             }
-                            $this->respostaSucesso("Dados Atualizados no formulário com sucesso",null,$this->requisitor);
+                            $this->respostaSucesso("Dados Atualizados no formulário com sucesso",$formulario,$this->requisitor);
                         } else {
                             throw new PermissionException("Você não possui permissão para atualizar este formulário","Atualizar formulário de outro usuário");
                         }
@@ -131,6 +151,22 @@ class FormularioControl extends CrudControl
         } else {
             throw new UnexpectedValueException("Formulário não encontrado");
         }
+    }
+
+    public function listarPorIdViagem($idViagem)
+    {
+        $viagemControl = new ViagemControl(null);
+        $viagemControl->listarPorId($idViagem);
+        $formulario = $this->DAO->listarPorIdViagem($idViagem);
+        return $formulario;
+    }
+
+    public function listarPorIdCompra($idCompra)
+    {
+        $compraControl = new CompraControl(null);
+        $compraControl->listarPorId($idCompra);
+        $formulario = $this->DAO->listarPorIdCompra($idCompra);
+        return $formulario;
     }
 
     public function listarPorIdUsuario($idUsuario)
@@ -167,6 +203,7 @@ class FormularioControl extends CrudControl
                     $this->preencherCamposRequisicao($viagem,$formulario,$projeto,$tarefa);
                     $this->DAO->cadastrar($formulario);
                     $formulario->setId($this->DAO->pdo->lastInsertId());
+                    return $formulario;
                 }
                 else {
                     throw new Exception("Erro ao tentar criar arquivo");
@@ -178,7 +215,6 @@ class FormularioControl extends CrudControl
             throw new InvalidArgumentException("Formulário já criado");
         }
     }
-
 
     private function preencherCamposRequisicao(ViagemModel $viagem,FormularioModel $formulario,ProjetoModel $projeto,TarefaModel $tarefa)
     {
@@ -255,6 +291,7 @@ class FormularioControl extends CrudControl
                     $this->preencherCamposCompra($compra,$formulario,$projeto,$tarefa);
                     $this->DAO->cadastrar($formulario);
                     $formulario->setId($this->DAO->pdo->lastInsertId());
+                    return $formulario;
                 }
                 else {
                     throw new Exception("Erro ao tentar criar arquivo");
@@ -277,5 +314,4 @@ class FormularioControl extends CrudControl
         $odtManipulator->setCampo("tarefa",$tarefa->getNome());
         $odtManipulator->salvar();
     }
-
 }

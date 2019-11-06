@@ -40,3 +40,12 @@
 [06/11/2019 - 11:15:50] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
 [06/11/2019 - 11:16:17]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
 [06/11/2019 - 11:16:28] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[06/11/2019 - 13:11:24] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 13:27:00] Erro ocorrido com usuário lynconbaez: Permissão negada ao tentar Excluir perfil de usuário
+[06/11/2019 - 13:30:38] Usuário lynconbaez logou no sistema através de insomnia/6.6.2
+[06/11/2019 - 01:41:38]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 13:41:50] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 01:42:45]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 13:42:50] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 02:06:31]: Usuário lynconbaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[06/11/2019 - 14:06:57] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
