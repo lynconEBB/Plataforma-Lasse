@@ -86,7 +86,6 @@ function requisicao(metodo,url,body,response) {
     }
 
     xhr.onload = function() {
-        console.log(xhr.response);
         response(JSON.parse(xhr.response),xhr.status);
     };
 
@@ -96,6 +95,7 @@ function requisicao(metodo,url,body,response) {
 }
 
 function criaTemplateNaoEncontrado(erro) {
+    let templateErroNaoEncontrado;
     return templateErroNaoEncontrado = `
         <div class="container-erro">
             <figure class="container-img-erro">
@@ -105,7 +105,7 @@ function criaTemplateNaoEncontrado(erro) {
             <h1>Ops! Não encontramos o que você estava procurando</h1>
             <h2>${erro.mensagem}</h2>
         </div>
-`;
+    `;
 }
 
 function criaTemplateSemPermissao(erro) {
