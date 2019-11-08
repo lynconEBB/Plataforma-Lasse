@@ -83,6 +83,18 @@ class UsuarioControl extends CrudControl {
                             throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Acessar informações de todos os usuários");
                         }
                     }
+                    // /api/users/tempoGastoDiario/{idUsuario}
+                    elseif (count($this->url) == 4 && $this->url[2] == "tempoGastoDiario" && $this->url[3] == (int)$this->url[3]) {
+                        $requisicaoEncontrada = true;
+                        $body = json_decode(@file_get_contents("php://input"));
+                        self::autenticar();
+                        if ($_SESSION['usuario']['admin'] == "1" || $_SESSION['usuario']['id'] == $this->url[3]) {
+                            $usuarios = $this->listar();
+                            $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$_SESSION['usuario']);
+                        } else {
+                            throw new PermissionException("Você precisa ser administrador para ter acesso aos dados deste usuário","Acessar informações de outro o usuários");
+                        }
+                    }
                     // /api/users/naoProjeto/{idProjeto}
                     elseif (count($this->url) == 4 && $this->url[2] == "naoProjeto" && $this->url[3] == (int)$this->url[3]) {
                         $requisicaoEncontrada = true;
@@ -395,4 +407,5 @@ class UsuarioControl extends CrudControl {
             throw new InvalidArgumentException("Imagem inválida");
         }
     }
+
 }
