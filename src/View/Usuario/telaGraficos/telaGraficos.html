@@ -99,23 +99,19 @@
             </div>
             <canvas id="graficoTempoGastoTotal"></canvas>
         </div>
-        <h2>Horas gastas por projeto em um período</h2>
+        <h2>Horas gastas por projeto em um mês</h2>
         <form id="opcoes-grafico">
-            <div>
+            <div class="form-group">
+                <i class="material-icons select-seta">arrow_drop_down</i>
+                <label for="mesAno" class="form-label">Mês</label>
+                <select id="mesAno" class="form-select">
 
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="dataInicio">De:</label>
-                <input type="text" class="form-input" id="dataInicio">
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="dataFim">Até:</label>
-                <input type="text" class="form-input" id="dataFim">
+                </select>
             </div>
             <button type="button" class="botao sucesso center" id="gerarGraficoTempoPorProjeto">Gerar</button>
         </form>
         <div class="container1">
-            <div class="aviso-sem-dados">
+            <div class="aviso-sem-dados" id="aviso2">
                 <img src="/assets/images/vazio.png" alt="Icone vazio">
                 <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
                 <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>

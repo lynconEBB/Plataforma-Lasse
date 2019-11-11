@@ -3,7 +3,11 @@
 namespace Lasse\LPM\Control;
 
 
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use InvalidArgumentException;
+use Lasse\LPM\Dao\AtividadeDao;
 use Lasse\LPM\Dao\UsuarioDao;
 use Lasse\LPM\Erros\AuthenticationException;
 use Lasse\LPM\Erros\MailException;
@@ -59,6 +63,22 @@ class UsuarioControl extends CrudControl {
                             throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
                         }
                     }
+                    // /api/users/tempoGastoDiario/{idUsuario}
+                    elseif (count($this->url) == 4 && $this->url[2] == "tempoGastoDiario" && $this->url[3] == (int)$this->url[3]) {
+                        $requisicaoEncontrada = true;
+                        self::autenticar();
+                        if ($_SESSION['usuario']['admin'] == "1" || $_SESSION['usuario']['id'] == $this->url[3]) {
+                            $dados = $this->dadosTempoDiario($this->url[3],$body);
+                            if ($dados != false) {
+                                $this->respostaSucesso("Listando dados para construção do gráfico",$dados,$_SESSION['usuario']);
+                            } else {
+                                $this->respostaSucesso("Nenhum dado encontrado",null,$_SESSION['usuario']);
+                                http_response_code(202);
+                            }
+                        } else {
+                            throw new PermissionException("Você não possui acesso aos gráficos deste usuário","Gerar Gráfico de outro usuário");
+                        }
+                    }
                     break;
                 case 'GET':
                     // /api/users/{idUsuario}
@@ -81,18 +101,6 @@ class UsuarioControl extends CrudControl {
                             $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$_SESSION['usuario']);
                         } else {
                             throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Acessar informações de todos os usuários");
-                        }
-                    }
-                    // /api/users/tempoGastoDiario/{idUsuario}
-                    elseif (count($this->url) == 4 && $this->url[2] == "tempoGastoDiario" && $this->url[3] == (int)$this->url[3]) {
-                        $requisicaoEncontrada = true;
-                        $body = json_decode(@file_get_contents("php://input"));
-                        self::autenticar();
-                        if ($_SESSION['usuario']['admin'] == "1" || $_SESSION['usuario']['id'] == $this->url[3]) {
-                            $usuarios = $this->listar();
-                            $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$_SESSION['usuario']);
-                        } else {
-                            throw new PermissionException("Você precisa ser administrador para ter acesso aos dados deste usuário","Acessar informações de outro o usuários");
                         }
                     }
                     // /api/users/naoProjeto/{idProjeto}
@@ -408,4 +416,45 @@ class UsuarioControl extends CrudControl {
         }
     }
 
+    private function dadosTempoDiario($idUsuario,$body) {
+        if (isset($body->mes) && isset($body->ano)) {
+            if ($body->mes >= 1 && $body->mes <=12 && $body->ano >= 2005 && $body->ano <= date("Y")) {
+                $primeiroDia = new DateTime("$body->ano-$body->mes-01");
+                $ultimoDia = new DateTime($primeiroDia->format("Y-m-t"));
+                $ultimoDia = $ultimoDia->modify("+1 day");
+
+                $intervalo = new DateInterval("P1D");
+                $periodo = new DatePeriod($primeiroDia,$intervalo,$ultimoDia);
+
+                $atividadeDao = new AtividadeDao();
+                $atividadesProjeto = $atividadeDao->listarAtividadesPeriodo($idUsuario,$primeiroDia->format("Y-m-d"));
+                $projetoControl = new ProjetoControl(null);
+                $projetos = $projetoControl->listarPorIdUsuario($idUsuario);
+
+                if ($atividadesProjeto != false) {
+                    $dadosFormatados = [];
+                    foreach ($projetos as $projeto) {
+                        foreach ($periodo as $data) {
+                            $dadosFormatados[$projeto->getNome()][$data->format("d/m/Y")] = 0;
+                        }
+                    }
+                    foreach ($atividadesProjeto as $atividade) {
+                        $projeto = $atividade["nome"];
+                        $dia = $atividade[0];
+                        $tempoGasto = $atividade["tempoGasto"];
+
+                        $dadosFormatados[$projeto][$dia] += $tempoGasto;
+                    }
+
+                    return $dadosFormatados;
+                } else {
+                    return false;
+                }
+            } else {
+                throw new InvalidArgumentException("Ano ou mês inválido");
+            }
+        } else {
+            throw new UnexpectedValueException("Parâmentros mal estruturados ou inexistentes");
+        }
+    }
 }
