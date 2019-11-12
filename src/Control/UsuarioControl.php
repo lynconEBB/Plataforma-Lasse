@@ -397,12 +397,19 @@ class UsuarioControl extends CrudControl {
                 preg_match('/\/(.*?);/', $imgInfo, $extensao);
                 $extensao = $extensao[1];
                 $pastaUsuario = "assets/files/".$idUsuario;
-                $caminhoFoto = $pastaUsuario."/perfil.".$extensao;
+
+                $caminhoFoto = $pastaUsuario."/perfil".time().".".$extensao;
                 if (!is_dir($pastaUsuario)) {
                     mkdir($pastaUsuario);
                 }
-                if (is_file($caminhoFoto)) {
-                    unlink($caminhoFoto);
+                foreach(glob($pastaUsuario."/*.jpg") as $file) {
+                    unlink($file);
+                }
+                foreach(glob($pastaUsuario."/*.png") as $file) {
+                    unlink($file);
+                }
+                foreach(glob($pastaUsuario."/*.jpeg") as $file) {
+                    unlink($file);
                 }
                 $arquivoFoto = fopen($caminhoFoto,"wb");
                 fwrite($arquivoFoto,base64_decode($img));

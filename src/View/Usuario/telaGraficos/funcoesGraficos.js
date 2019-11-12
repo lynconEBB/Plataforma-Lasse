@@ -11,7 +11,7 @@ window.onload = function () {
             setLinks(requisitor);
 
             if (requisitor.admin === "1" || requisitor.id === requisitado) {
-                let cores = gerarGraficoTempoGastoTodosProjetos(projetos, requisitor);
+                let cores = gerarGraficoTempoGastoTodosProjetos(projetos, requisitado);
                 
                 if (cores !== false) {
                     populaSelect();
@@ -30,9 +30,9 @@ window.onload = function () {
     });
 };
 
-function gerarGraficoTempoGastoTodosProjetos(projetos,requisitor) {
+function gerarGraficoTempoGastoTodosProjetos(projetos,idUsuario) {
     let graficoElement = document.getElementById("graficoTempoGastoTotal").getContext('2d');
-    let data = gerarDataTempoGastoTodosProjetos(projetos,requisitor);
+    let data = gerarDataTempoGastoTodosProjetos(projetos,idUsuario);
     if (data !== false) {
         new Chart(graficoElement, {
             type:'pie',
@@ -58,7 +58,7 @@ function gerarGraficoTempoGastoTodosProjetos(projetos,requisitor) {
     }
 
 }
-function gerarDataTempoGastoTodosProjetos(projetos,requisitor) {
+function gerarDataTempoGastoTodosProjetos(projetos,idUsuario) {
     let labels = [];
     let qtdTempo = [];
 
@@ -69,7 +69,7 @@ function gerarDataTempoGastoTodosProjetos(projetos,requisitor) {
             for (let tarefa of projeto.tarefas) {
                 if (tarefa.atividades != null) {
                     for (let atividade of tarefa.atividades) {
-                        if (atividade.usuario.id === requisitor.id) {
+                        if (atividade.usuario.id === idUsuario) {
                             tempoGasto += parseFloat(atividade.tempoGasto);
                         }
                     }

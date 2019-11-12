@@ -74,12 +74,16 @@ class FormularioControl extends CrudControl
                 case 'GET':
                     // /api/formularios/users/{idUsuario}
                     if ($this->url[2] == "users" && $this->url[3] == (int)$this->url[3] && count($this->url) == 4) {
-                        $formularios = $this->listarPorIdUsuario($this->url[3]);
-                        if ($formularios) {
-                            $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
+                        if ($this->requisitor['id'] == $this->url[3] || $this->requisitor['admin'] == "1") {
+                            $formularios = $this->listarPorIdUsuario($this->url[3]);
+                            if ($formularios) {
+                                $this->respostaSucesso("Listando formulários",$formularios,$this->requisitor);
+                            } else {
+                                $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
+                                http_response_code(202);
+                            }
                         } else {
-                            $this->respostaSucesso("Nenhum formulário encontrado!",null,$this->requisitor);
-                            http_response_code(202);
+                            throw new PermissionException("Você não possui permissão para acessar os formulários deste usuário","Acessar formulários de outro usuário");
                         }
                     }
                     // /api/formularios/viagem/{idViagem}

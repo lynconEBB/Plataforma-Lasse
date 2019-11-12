@@ -3,53 +3,34 @@ window.onload = function () {
 
     let requisitado = window.location.pathname.split("/").pop();
 
-    if (requisitado !== "todos") {
-        requisicao("GET", "/api/formularios/users/"+requisitado, null, function (resposta, codigo) {
-            if (resposta.status === "sucesso") {
-                let requisitor = resposta.requisitor;
-                setLinks(requisitor);
+    requisicao("GET", "/api/formularios/users/"+requisitado, null, function (resposta, codigo) {
+        if (resposta.status === "sucesso") {
+            let requisitor = resposta.requisitor;
+            setLinks(requisitor);
 
-                if (codigo === 202) {
-                    document.getElementById("aviso-viagem").style.display = "block";
-                    document.getElementById("aviso-compra").style.display = "block";
-                } else {
-                    let formularios = resposta.dados;
-                    let formViagens = [];
-                    let formCompras = [];
+            if (codigo === 202) {
+                document.getElementById("aviso-viagem").style.display = "block";
+                document.getElementById("aviso-compra").style.display = "block";
+            } else {
+                let formularios = resposta.dados;
+                let formViagens = [];
+                let formCompras = [];
 
-                    for (let formulario of formularios) {
-                        if (formulario.viagem === null) {
-                            formCompras.push(formulario);
-                        } else {
-                            formViagens.push(formulario);
-                        }
+                for (let formulario of formularios) {
+                    if (formulario.viagem === null) {
+                        formCompras.push(formulario);
+                    } else {
+                        formViagens.push(formulario);
                     }
-
-                    exibeFormularios(formViagens,formCompras);
-
                 }
-            } else {
-                decideErros(resposta, codigo);
+
+                exibeFormularios(formViagens,formCompras);
+
             }
-        });
-    } else {
-        requisicao("GET", "/api/formularios/", null, function (resposta, codigo) {
-            if (resposta.status === "sucesso") {
-                let requisitor = resposta.requisitor;
-
-                setLinks(requisitor);
-
-                if (codigo === 202) {
-                    document.getElementById("aviso-viagem").style.display = "block";
-                    document.getElementById("aviso-compra").style.display = "block";
-                } else {
-
-                }
-            } else {
-                decideErros(resposta, codigo);
-            }
-        });
-    }
+        } else {
+            decideErros(resposta, codigo);
+        }
+    });
 };
 
 function exibeFormularios(formViagens,formCompras) {
@@ -59,8 +40,8 @@ function exibeFormularios(formViagens,formCompras) {
             containerCompras.insertAdjacentHTML("beforeend",`
                 <div class="formulario">
                 <div class="info-formulario">
-                    <h2>Aquisiçao de materiais 12</h2>
-                    <span><b>Ultima Modificação:</b> 23/04/2004</span>
+                    <h2>${formCompra.nome}</h2>
+                    <span><b>Ultima Modificação:</b></span>
                 </div>
                 <div class="botoes">
                     <button class="botao alerta md-1" title="Excluir Formulário">

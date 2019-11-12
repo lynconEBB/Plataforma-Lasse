@@ -90,7 +90,7 @@
 
     <main class="main-content">
         <div class="container-titulo">
-            <h1 class="titulo">Dashboard de: </h1>
+            <h1 class="titulo">Dashboard de </h1>
             <hr>
         </div>
         <div class="dashboard">
@@ -100,30 +100,50 @@
                         <span class="item-title">Projetos</span>
                         <span class="item-detail" id="qtdProjetos"></span>
                     </div>
-                    <i class="material-icons" id="telaProjetos">arrow_forward</i>
+                    <a href="#" id="telaProjetos">
+                        <i class="material-icons" >arrow_forward</i>
+                    </a>
                 </div>
                 <div class="dash-item formularios">
                     <div class="item-in">
                         <span class="item-title">Formulários</span>
                         <span class="item-detail" id="qtdFormularios"></span>
                     </div>
-                    <i class="material-icons" id="telaFormularios">arrow_forward</i>
-
-
+                    <a href="#" id="telaFormularios">
+                        <i class="material-icons">arrow_forward</i>
+                    </a>
                 </div>
                 <div class="dash-item imprevistos">
                     <div class="item-in">
                         <span class="item-title">Imprevistos</span>
                         <span class="item-detail" id="qtdImprevistos"></span>
                     </div>
-                    <i class="material-icons" id="telaImprevistos">arrow_forward</i>
+                    <a href="#" id="telaImprevistos" >
+                        <i class="material-icons">arrow_forward</i>
+                    </a>
                 </div>
             </div>
-            <div class="graficos1">
-
+            <div>
+                <h2>Horas totais gastas por projeto</h2>
+                <div class="container-graficos1">
+                    <div class="aviso-sem-dados" id="aviso1">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                    <canvas id="grafico1"></canvas>
+                </div>
             </div>
-            <div class="graficos2">
-
+            <div id="graf">
+                <h2>Horas gastas por projeto no ultimo mês</h2>
+                <div class="container-grafico2">
+                    <canvas id="grafico2"></canvas>
+                    <div class="aviso-sem-dados" id="aviso2">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -134,6 +154,7 @@
 <script src="/src/View/Default/js/modal.js"></script>
 <script src="/src/View/Default/js/formulario.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
+<script src="/src/View/Default/js/chart.js"></script>
 <script src="/src/View/Usuario/telaDashboard/funcoesDashboard.js"></script>
 </body>
 </html>

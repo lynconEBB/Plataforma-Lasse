@@ -135,5 +135,29 @@ function criaTemplateErroInterno(erro) {
 `;
 }
 
+window.onbeforeunload =  function () {
+    let cookie = document.cookie;
+    if (cookie !== "") {
+        deslogar();
+    }
+    let erro = localStorage.getItem("erro");
+    if (erro !== null) {
+        document.cookie = "PHPSESSID="+erro;
+        deslogar();
+    }
+};
 
+function deslogar() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("DELETE","/api/users/deslogar");
+    xhr.send();
+    xhr.onload = function () {
+        let resposta = JSON.parse(xhr.response);
+    };
+
+    xhr.onerror = function () {
+        let partes = document.cookie.split("=");
+        localStorage.setItem("erro",partes[1]);
+    };
+}
 

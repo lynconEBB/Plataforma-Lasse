@@ -22,11 +22,10 @@
 h2 {
     max-width: 1800px;
     width: 100%;
-    margin: 0 auto;
     font-size: 1.2rem;
     background-color: #062d39;
     color: white;
-    margin-top: 20px;
+    margin: 20px auto 0;
     padding: 10px 20px;
     box-sizing: border-box;
     border-bottom: #06232e solid 5px;
@@ -62,8 +61,7 @@ h2 {
 }
 #opcoes-grafico .form-group{
     max-width: 400px;
-    margin: 30px 0;
-    margin-right: 60px;
+    margin: 30px 60px 30px 0;
 }
 #opcoes-grafico .botao {
     justify-self: center;
