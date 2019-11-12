@@ -77,3 +77,8 @@
 [11/11/2019 - 16:40:08] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
 [11/11/2019 - 04:40:26]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
 [11/11/2019 - 16:40:33] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[12/11/2019 - 09:16:44] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[12/11/2019 - 11:09:03]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[12/11/2019 - 11:09:12] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[12/11/2019 - 11:09:23]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+[12/11/2019 - 11:09:58] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36

@@ -430,7 +430,7 @@ class UsuarioControl extends CrudControl {
                 $atividadesProjeto = $atividadeDao->listarAtividadesPeriodo($idUsuario,$primeiroDia->format("Y-m-d"));
                 $projetoControl = new ProjetoControl(null);
                 $projetos = $projetoControl->listarPorIdUsuario($idUsuario);
-
+                
                 if ($atividadesProjeto != false) {
                     $dadosFormatados = [];
                     foreach ($projetos as $projeto) {

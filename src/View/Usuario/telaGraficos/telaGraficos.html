@@ -101,16 +101,14 @@
         </div>
         <h2>Horas gastas por projeto em um mês</h2>
         <form id="opcoes-grafico">
-            <div class="form-group">
+            <div class="form-group selecionado">
                 <i class="material-icons select-seta">arrow_drop_down</i>
-                <label for="mesAno" class="form-label">Mês</label>
-                <select id="mesAno" class="form-select">
-
-                </select>
+                <label for="mesAno" class="form-label selecionado">Mês</label>
+                <select id="mesAno" class="form-select"></select>
             </div>
-            <button type="button" class="botao sucesso center" id="gerarGraficoTempoPorProjeto">Gerar</button>
+            <button type="button" class="botao sucesso" id="gerarGraficoTempoPorProjeto">Gerar</button>
         </form>
-        <div class="container1">
+        <div class="container1" id="container-canvas">
             <div class="aviso-sem-dados" id="aviso2">
                 <img src="/assets/images/vazio.png" alt="Icone vazio">
                 <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
