@@ -15,6 +15,13 @@ function setLinks(requisitor) {
 
     document.querySelector(".container-user-img").style.backgroundImage = "url('/"+requisitor.foto+"')";
     document.querySelector(".user-name").textContent = requisitor.login;
+
+    if (requisitor.admin === "1") {
+        document.querySelector(".container-itens-admin").style.display = "block";
+        document.getElementById("graficosAdmin").href = "/graficos/admin";
+        document.getElementById("todosProjetos").href = "/projetos/todos";
+        document.getElementById("usuarios").href = "/users";
+    }
 }
 
 function verificaMensagem() {
@@ -133,7 +140,8 @@ function criaTemplateErroInterno(erro) {
         </div>
 `;
 }
-window.onbeforeunload = function () {
+
+/*window.onbeforeunload = function () {
     if (window.performance) {
         if (window.performance.navigation.type !== 1 ) {
             let cookie = document.cookie;
@@ -142,7 +150,7 @@ window.onbeforeunload = function () {
             }
         }
     }
-};
+};*/
 
 function deslogar() {
     let xhr = new XMLHttpRequest();

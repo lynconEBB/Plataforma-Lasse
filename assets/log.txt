@@ -54,3 +54,37 @@
 [13/11/2019 - 21:32:36] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [14/11/2019 - 12:53:55]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [13/11/2019 - 21:54:06] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 13:02:39] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:02:46] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 01:02:46]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:03:00] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 01:03:04]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:03:10] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:03:24] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 01:03:57]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:04:24] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 13:27:41] Erro ocorrido com usuário desconhecido: Erro durante envio do E-mail
+[14/11/2019 - 13:36:18] Erro ocorrido com usuário desconhecido: Erro durante envio do E-mail
+[14/11/2019 - 13:37:15] Erro ocorrido com usuário desconhecido: Erro durante envio do E-mail
+[14/11/2019 - 14:02:40] Erro ocorrido com usuário desconhecido: Permissão negada ao tentar Redefinir senha de acesso de kdhlghG
+[14/11/2019 - 14:43:51] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 02:47:36]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 14:47:41] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 14:54:44] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Redefinir senha de acesso de LynconBaez
+[14/11/2019 - 02:55:14]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 14:59:07] Usuário kdhlghG logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 03:00:42]: Usuário kdhlghG deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 15:23:06] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 03:27:11]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 15:27:21] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 03:57:27]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 15:57:33] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 03:57:37]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 15:57:43] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 04:32:53]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 16:32:58] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 04:36:22]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 16:36:29] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 16:42:43] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 04:43:13]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 16:43:18] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0

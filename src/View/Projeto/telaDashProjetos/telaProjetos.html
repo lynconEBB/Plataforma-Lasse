@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="sidebar-item" id="projetos">
+                <a href="#" class="sidebar-item selecionado" id="projetos">
                     <i class="material-icons" aria-hidden="true">work</i>
                     Projetos
                 </a>
@@ -85,6 +85,28 @@
                 </a>
             </li>
         </ul>
+        <ul class="container-itens-admin">
+            <span class="titulo-admin">Opções Admin</span>
+            <hr class="hr-admin">
+            <li>
+                <a href="#" class="sidebar-item" id="usuarios">
+                    <i class="material-icons" aria-hidden="true">people</i>
+                     Usuários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="todosProjetos">
+                    <i class="material-icons" aria-hidden="true">group_work</i>
+                    Todos Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficosAdmin">
+                    <i class="material-icons" aria-hidden="true">pie_chart</i>
+                    Gráficos Gerais
+                </a>
+            </li>
+        </ul>
     </nav>
     <!-------------------- Main Content ------------------->
     <main class="main-content">
@@ -94,7 +116,7 @@
             <hr class="cabecalho-divisoria">
         </header>
         <div id="container-aviso">
-            <img src="/assets/images/not-found.svg" class="aviso-img">
+            <img alt="Icone lupa com X no meio" src="/assets/images/not-found.svg" class="aviso-img">
             <span class="aviso"><b>Nenhum Projeto encontrado!</b></span>
             <span>Você pode criar um agora mesmo ou pedir para outro usuário adiciona-lo em seu projeto</span>
         </div>
@@ -104,8 +126,7 @@
     </main>
 </div>
 
-<div class="modal-background">
-</div>
+<div class="modal-background"></div>
 
 <div class="modal" id="modalCadastro" role="dialog" tabindex="-1">
     <div class="modal-header">

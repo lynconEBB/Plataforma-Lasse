@@ -51,13 +51,13 @@ class UsuarioControl extends CrudControl {
                     elseif (count($this->url) == 2) {
                         $requisicaoEncontrada = true;
                         $this->cadastrar($body);
-                        $this->respostaSucesso("Usuario Registrado com Sucesso!",null);
+                        $this->respostaSucesso("Registrado com sucesso, para ter acesso ao sistema ative sua conta através do link enviado ao seu e-mail!",null);
                     }
                     // /api/users/geraRecuperacao/
                     elseif (count($this->url) == 3 && $this->url[2] == "geraRecuperacao") {
                         $requisicaoEncontrada = true;
                         if (isset($body->email)) {
-                            $this->enviaEmail($body->email);
+                            $this->enviaEmailRecuperacao($body->email);
                             $this->respostaSucesso("Um link de recuperação de senha foi enviado para seu email",null,null);
                         } else {
                             throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
@@ -92,7 +92,8 @@ class UsuarioControl extends CrudControl {
                             throw new PermissionException("Você não tem acesso as informações desse usuário","Acessar informações não pertencentes ao mesmo");
                         }
 
-                    } // /api/users
+                    }
+                    // /api/users
                     elseif (count($this->url) == 2) {
                         $requisicaoEncontrada = true;
                         self::autenticar();
@@ -134,6 +135,12 @@ class UsuarioControl extends CrudControl {
                             throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Reativar um usuário");
                         }
                     }
+                    // /api/users/confirmar/{token}
+                    elseif (count($this->url) == 4 && $this->url[2] == "confirmar")  {
+                        $requisicaoEncontrada = true;
+                        $this->confirmarConta($this->url[3]);
+                        $this->respostaSucesso("Conta de usuário confirmada com sucesso!",null,null);
+                    }
                     // /api/users/alterarSenha
                     elseif (count($this->url) == 3 && $this->url[2] == "alterarSenha") {
                         $requisicaoEncontrada = true;
@@ -166,24 +173,29 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-    public function enviaEmail($email) {
+    public function enviaEmailConfirmacao(UsuarioModel $usuario){
+        $token = uniqid($usuario->getId()."-");
+        $this->DAO->setTokenConfirmacao($token,$usuario->getId());
+        $mail = $this->presetEmail();
+        $mail->addAddress($usuario->getEmail());
+        $mail->Subject = utf8_decode('Confirmação de cadastro');
+        $mail->Body = "<h1>Clique no link abaixo para Confirmar seu cadastro</h1>
+                       <a href='{$_SERVER['HTTP_HOST']}/confirmar?{$token}'>Confirmar cadastro</a>";
+        if($mail->Send()):
+            return;
+        else:
+            throw new MailException("Erro durante envio do E-mail");
+        endif;
+    }
+
+    public function enviaEmailRecuperacao($email) {
         if ($usuario = $this->DAO->listarPorEmail($email)) {
             $token = uniqid($usuario->getId()."-");
             $this->DAO->setTokenRecuperacao($token,$usuario->getId());
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'lasseprojectmanager@gmail.com';
-            $mail->Password = 'lasse123';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-            $mail->IsHTML(true);
-            $mail->From = 'lasseprojectmanager@gmail.com';
-            $mail->FromName = 'LASSE Manager';
+            $mail = $this->presetEmail();
             $mail->addAddress($email);
             $mail->Subject = utf8_decode('Alteração de Senha');
-            $mail->Body = "
+            $mail->Body = "<meta charset='utf-8'>
                 <h1>Clique no botão abaixo para alterar sua senha</h1>
                 <a href='http://localhost/senhaAlterar?{$token}'>Alterar Senha</a>";
             if($mail->Send()):
@@ -196,13 +208,46 @@ class UsuarioControl extends CrudControl {
         }
     }
 
+    public function presetEmail() {
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'lasseprojectmanager@gmail.com';
+        $mail->Password = 'lasse123';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+        $mail->IsHTML(true);
+        $mail->From = 'lasseprojectmanager@gmail.com';
+        $mail->FromName = 'LASSE Manager';
+        return $mail;
+    }
+
+    public function confirmarConta($token){
+        $partes = explode("-",$token);
+        if (count($partes) == 2) {
+            $idUsuario = $partes[0];
+            $usuario = $this->listarPorId($idUsuario);
+            $tokenReal = $this->DAO->getTokenConfirmacao($idUsuario);
+            if ($tokenReal === $token && $tokenReal != null) {
+               $this->reativar($idUsuario);
+               $this->DAO->setTokenConfirmacao(null,$idUsuario);
+            } else {
+                throw new PermissionException("Codigo de confirmação para {$usuario->getLogin()} incorreto","Redefinir senha de acesso de {$usuario->getLogin()}");
+            }
+        } else {
+            throw new UnexpectedValueException("Codigo de confirmação inválido");
+        }
+    }
+
     public function alterarSenha($body)
     {
         $partes = explode("-",$body->token);
         if (count($partes) == 2) {
             $idUsuario = $partes[0];
             $usuario = $this->listarPorId($idUsuario);
-            if ($this->DAO->verificaTokenRecuperacao($body->token,$idUsuario) && $this->DAO->getTokenRecuperacao($idUsuario) != null) {
+            $tokenReal = $this->DAO->getTokenRecuperacao($idUsuario);
+            if ($tokenReal === $body->token && $tokenReal != null) {
                 Validacao::validar("Nova senha",$body->novaSenha,'semEspaco','obrigatorio','texto',['minimo',6]);
                 $hash = password_hash($body->novaSenha,PASSWORD_BCRYPT);
                 $this->DAO->alterarSenha($hash,$idUsuario);
@@ -236,13 +281,14 @@ class UsuarioControl extends CrudControl {
                         $hash = password_hash($body->senha,PASSWORD_BCRYPT);
                         $usuario = new UsuarioModel($body->nomeCompleto,$body->login,$hash,$body->dtNasc,$body->cpf,$body->rg,$body->dtEmissao,$body->email,$body->atuacao,$body->formacao, $body->valorHora,$caminhoPadrao,$admin,null);
                         $this->DAO->cadastrar($usuario);
+                        $usuario->setId($this->DAO->pdo->lastInsertId());
                         // verifica se uma foto foi mandada, caso sim, o arquivo é colocado no servidor
                         if (isset($body->foto)) {
-                            $usuario->setId($this->DAO->pdo->lastInsertId());
                             $caminhoFoto = $this->salvarFoto($usuario->getId(),$body->foto);
                             $usuario->setFoto($caminhoFoto);
                             $this->DAO->alterar($usuario);
                         }
+                        $this->enviaEmailConfirmacao($usuario);
                     } else
                         throw new InvalidArgumentException("CPF já registrado");
                 }else
@@ -254,7 +300,8 @@ class UsuarioControl extends CrudControl {
         }
     }
 
-    protected function excluir(){
+    protected function excluir()
+    {
         self::autenticar();
         $projetoControl = new ProjetoControl(null);
         $projetos = $projetoControl->listarPorIdUsuario($_SESSION['usuario']['id']);
@@ -275,8 +322,8 @@ class UsuarioControl extends CrudControl {
         return $usuarios;
     }
 
-    public function listarPorId($id){
-
+    public function listarPorId($id)
+    {
         $usuario = $this->DAO->listarPorId($id);
         if ($usuario != false ) {
             return $usuario;
@@ -352,7 +399,6 @@ class UsuarioControl extends CrudControl {
         if ( isset( $_COOKIE[session_name()] ) ) {
             setcookie(session_name(),"",time()-3600,"/");
         }
-
         session_destroy();
     }
 

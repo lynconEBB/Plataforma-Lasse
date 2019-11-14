@@ -85,6 +85,10 @@ class Router{
         elseif ($this->url[0] == "senhaAlterar" && count($this->url) == 1){
             require "src/View/Usuario/telaAlterarSenha/telaAlterarSenha.html";
         }
+        // /confirmar
+        elseif ($this->url[0] == "confirmar" && count($this->url) == 1){
+            require "src/View/Usuario/telaConfirmarConta/telaConfirmarConta.html";
+        }
         // /imprevistos/user/{idUsuario}
         elseif ($this->url[0] == "imprevistos" && $this->url[1] == "user" && $this->url[2] == (int)$this->url[2] && count($this->url) == 3){
             require "src/View/Atividade/telaImprevistos/telaImprevistos.html";

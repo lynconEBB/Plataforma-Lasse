@@ -9,8 +9,8 @@ use PDOException;
 class UsuarioDao extends CrudDao {
 
     public function cadastrar(UsuarioModel $usuario){
-        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (senha,login,nomeCompleto,cpf,rg,dataDeEmissao,email,valorHora,formacao,atuacao,dtNascimento,admin,caminhoFoto) VALUES 
-            (:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :email, :valorHora, :formacao, :atuacao,:dtNasc,:tipo,:foto)");
+        $insert = $this->pdo->prepare("INSERT INTO tbUsuario (estado,senha,login,nomeCompleto,cpf,rg,dataDeEmissao,email,valorHora,formacao,atuacao,dtNascimento,admin,caminhoFoto) VALUES 
+            ('desativado',:senha, :login, :nomeCompleto, :cpf, :rg, :dataDeEmissao, :email, :valorHora, :formacao, :atuacao,:dtNasc,:tipo,:foto)");
         $insert->bindValue(':senha',$usuario->getSenha());
         $insert->bindValue(':login',$usuario->getLogin());
         $insert->bindValue(':nomeCompleto',$usuario->getNomeCompleto());
@@ -169,6 +169,14 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         }
     }
 
+    public function setTokenConfirmacao($token,$idUsuario) {
+        $comando = "UPDATE tbUsuario SET tokenConfirmacao = :token WHERE id = :id";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(":token",$token);
+        $stm->bindParam(":id",$idUsuario);
+        $stm->execute();
+    }
+
     public function setTokenRecuperacao($token,$idUsuario) {
         $comando = "UPDATE tbUsuario SET tokenValido = :token WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
@@ -186,19 +194,13 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         return $linha['tokenValido'];
     }
 
-    public function verificaTokenRecuperacao($token,$idUsuario) {
-        $comando = "SELECT * FROM tbUsuario WHERE tokenValido = :token AND id = :id";
+    public function getTokenConfirmacao($idUsuario) {
+        $comando = "SELECT tokenConfirmacao FROM tbUsuario WHERE id = :id";
         $stm = $this->pdo->prepare($comando);
-        $stm->bindParam(":token",$token);
         $stm->bindParam(":id",$idUsuario);
         $stm->execute();
-        $linhas = $stm->fetch(PDO::FETCH_ASSOC);
-
-        if ($linhas != false){
-            return true;
-        } else {
-            return false;
-        }
+        $linha = $stm->fetch(PDO::FETCH_ASSOC);
+        return $linha['tokenConfirmacao'];
     }
 
     public function alterarSenha ($novaSenha,$idUsuario) {

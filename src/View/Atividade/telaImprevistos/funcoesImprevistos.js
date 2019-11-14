@@ -151,10 +151,18 @@ function exibeInputs(imprevistoElemento,imprevisto) {
         <div class="imprevisto-group">
             <label class="escondeVisualmente" for="tipo">Tipo</label>
             <select class="alterar-select" id="tipo">
-                <option value="Atraso">Atraso</option>
-                <option value="Consulta">Consulta</option>
-                <option value="Viagem">Viagem</option>
-                <option value="Acidente">Acidente</option>
+                <option value="Reunião Interna">Reunião Interna</option>
+                <option value="Reunião Externa">Reunião Externa</option>
+                <option value="Atividade Acadêmica">Atividade Acadêmica</option>
+                <option value="Workshop Interno">Workshop Interno</option>
+                <option value="Workshop Externo">Workshop Externo</option>
+                <option value="Trabalho em Campo">Trabalho em Campo</option>
+                <option value="Operacional">Operacional</option>
+                <option value="Treinamento Externo">Treinamento Externo</option>
+                <option value="Orientação">Orientação</option>
+                <option value="Compensação">Compensação</option>
+                <option value="Projeto Interno">Projeto Interno</option>
+                <option value="Atestado Médico">Atestado Médico</option>
             </select>
         </div>
         <div class="imprevisto-group" >
