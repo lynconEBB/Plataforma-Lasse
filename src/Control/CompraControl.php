@@ -145,7 +145,7 @@ class CompraControl extends CrudControl {
     {
         $idTarefa = $this->DAO->descobreIdTarefa($id);
         if (!is_null($idTarefa)) {
-            if ($this->verificaPermissao($idTarefa)) {
+            if ($this->verificaPermissao($idTarefa) || $this->requisitor['admin'] == "1") {
                 $compra = $this->DAO->listarPorId($id);
                 return $compra;
             } else {

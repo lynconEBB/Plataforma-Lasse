@@ -1,7 +1,5 @@
 window.onload = function() {
     verificaMensagem();
-    console.log(document.cookie);
-
 
     /*****mostrar input quando checkbox estiver selecionada******/
 

@@ -86,7 +86,6 @@ function requisicao(metodo,url,body,response) {
     }
 
     xhr.onload = function() {
-        console.log(xhr.response);
         response(JSON.parse(xhr.response),xhr.status);
     };
 
@@ -134,16 +133,14 @@ function criaTemplateErroInterno(erro) {
         </div>
 `;
 }
-
-window.onbeforeunload =  function () {
-    let cookie = document.cookie;
-    if (cookie !== "") {
-        deslogar();
-    }
-    let erro = localStorage.getItem("erro");
-    if (erro !== null) {
-        document.cookie = "PHPSESSID="+erro;
-        deslogar();
+window.onbeforeunload = function () {
+    if (window.performance) {
+        if (window.performance.navigation.type !== 1 ) {
+            let cookie = document.cookie;
+            if (cookie !== "") {
+                deslogar(cookie);
+            }
+        }
     }
 };
 
@@ -151,13 +148,5 @@ function deslogar() {
     let xhr = new XMLHttpRequest();
     xhr.open("DELETE","/api/users/deslogar");
     xhr.send();
-    xhr.onload = function () {
-        let resposta = JSON.parse(xhr.response);
-    };
-
-    xhr.onerror = function () {
-        let partes = document.cookie.split("=");
-        localStorage.setItem("erro",partes[1]);
-    };
 }
 

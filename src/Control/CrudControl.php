@@ -11,6 +11,7 @@ abstract class CrudControl
 
     public function __construct($url)
     {
+        header("Access-Control-Allow-Origin: *");
         header("Accept: application/json");
         $this->metodo = $_SERVER['REQUEST_METHOD'];
         $this->url = $url;
