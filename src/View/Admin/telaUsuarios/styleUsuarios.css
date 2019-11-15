@@ -1,0 +1,100 @@
+.titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    max-width: 1800px;
+}
+hr{
+    max-width: 1800px;
+}
+.aviso-img {
+    width: 50%;
+    max-width: 70px;
+    display: block;
+    margin-bottom: 10px;
+}
+#container-aviso1, #container-aviso2 {
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+.usuarios-ativos, .usuarios-inativos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(0,350px));
+    grid-gap: 20px;
+    max-width: 1800px;
+    margin-bottom: 20px;
+}
+.usuario {
+    margin-top: 60px;
+    position: relative;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    background-color: #275a66;
+}
+.usuario span{
+    color: white;
+    display: block;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+.usuario span:first-of-type {
+    margin-top: 60px;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.container-img {
+    position: absolute;
+    left: 115px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("/assets/files/17/perfil1573679754.jpeg");
+    overflow: hidden;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100px;
+    background-color: #275a66;
+    height: 100px;
+    border: #275a66 10px solid;
+    z-index: 5;
+    top: -60px;
+}
+.botoes {
+    width: 100%;
+    background-color: #062d39;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    border-top: #06232e solid 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+.botao {
+    color: #06232e;
+    padding: 5px 10px;
+}
+.botao i{
+    color: #06232e;
+}
+@media (max-width: 300px) {
+    .container-img {
+        left: 75px;
+    }
+}
+@media (max-width: 250px) {
+    .container-img {
+        left: 60px;
+    }
+}
+@media (max-width: 200px) {
+    .container-img {
+        left: 35px;
+    }
+}
+@media (max-width: 160px) {
+    .container-img {
+        left: 10px;
+    }
+}

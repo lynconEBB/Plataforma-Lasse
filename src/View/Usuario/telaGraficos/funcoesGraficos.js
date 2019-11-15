@@ -9,6 +9,14 @@ window.onload = function () {
             let projetos = resposta.dados;
 
             setLinks(requisitor);
+            requisicao("GET","/api/users/"+requisitado,null,function (resposta,codigo) {
+                if (resposta.status === "sucesso") {
+                    document.getElementById("titulo").textContent = "Gráficos de "+resposta.dados.login;
+                } else {
+                    decideErros(resposta,codigo);
+                }
+            });
+
 
             if (requisitor.admin === "1" || requisitor.id === requisitado) {
                 let cores = gerarGraficoTempoGastoTodosProjetos(projetos, requisitado);

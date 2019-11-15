@@ -2,17 +2,52 @@ window.onload = function () {
     verificaMensagem();
 
     let idUserRequisitado = window.location.pathname.split("/").pop();
-    if (idUserRequisitado === "todos") {
-        requisicao("GET","/api/projetos/user/todos",null,function (resposta,codigo) {
 
+    if (idUserRequisitado === "todos") {
+        requisicao("GET","/api/projetos",null,function (resposta,codigo) {
+            if (resposta.status === "sucesso") {
+                let requisitor = resposta.requisitor;
+                setLinks(requisitor);
+                document.getElementById("todosProjetos").classList.add("selecionado");
+
+                if (codigo === 200) {
+                    document.getElementById("titulo-cabecalho").textContent = "Todos Projetos";
+                    let projetos = resposta.dados;
+
+                    let main = document.querySelector("#dash-projetos");
+
+                    for (let projeto of projetos) {
+                        let template = ` 
+                        <a href="/projeto/${projeto.id}" class="container-projeto" id="projeto${projeto.id}">
+                            <span class="projeto-title">${projeto.nome}</span>
+                            <hr class="projeto-divisoria">
+                            <span class="projeto-criacao"><b>Data de Criação:</b> ${projeto.dataInicio}</span>
+                            <span class="projeto-finalizacao"><b>Data de Finalização:</b> ${projeto.dataFinalizacao}</span>
+                            <span class="projeto-participantes"><b>Total Gasto:</b> R$ ${projeto.totalGasto}</span>
+                            <span class="projeto-participantes"><b>Participantes:</b> ${projeto.participantes.length}</span>
+                        </a>`;
+
+                        main.insertAdjacentHTML("beforeend",template);
+
+                        if (requisitor.infoAdd[projeto.id] === true) {
+                            let projetoContainer = document.getElementById("projeto"+projeto.id);
+                            projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>build</i></div>")
+                        }
+                    }
+                } else {
+                    document.getElementById("container-aviso").style.display = "flex";
+                }
+            } else {
+                decideErros(resposta,codigo);
+            }
         });
     } else {
         requisicao("GET", "/api/projetos/user/"+idUserRequisitado, null, function (resposta,codigo) {
-
             if (resposta.status === "sucesso") {
                 let requisitor = resposta.requisitor;
                 let projetos = resposta.dados;
 
+                document.getElementById("projetos").classList.add("selecionado");
                 setLinks(requisitor);
 
                 requisicao("GET","/api/users/"+idUserRequisitado,null,function (resposta,codigo) {
@@ -34,16 +69,17 @@ window.onload = function () {
                         <a href="/projeto/${projeto.id}" class="container-projeto" id="projeto${projeto.id}">
                             <span class="projeto-title">${projeto.nome}</span>
                             <hr class="projeto-divisoria">
-                            <span class="projeto-criacao">Data de Criação: ${projeto.dataInicio}</span>
-                            <span class="projeto-finalizacao">Data de Finalização: ${projeto.dataFinalizacao}</span>
-                            <span class="projeto-participantes">Participantes: ${projeto.participantes.length}</span>
+                            <span class="projeto-criacao"><b>Data de Criação:</b> ${projeto.dataInicio}</span>
+                            <span class="projeto-finalizacao"><b>Data de Finalização:</b> ${projeto.dataFinalizacao}</span>
+                            <span class="projeto-participantes"><b>Total Gasto:</b> R$ ${projeto.totalGasto}</span>
+                            <span class="projeto-participantes"><b>Participantes:</b> ${projeto.participantes.length}</span>
                         </a>`;
 
                         main.insertAdjacentHTML("beforeend",template);
 
                         if (requisitor.infoAdd[projeto.id] === true) {
-                            let divisoria = document.getElementById("projeto"+projeto.id).querySelector(".projeto-divisoria");
-                            divisoria.insertAdjacentHTML("afterend","<i class='material-icons'>star</i>")
+                            let projetoContainer = document.getElementById("projeto"+projeto.id);
+                            projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>supervisor_account</i></div>")
                         }
                     }
                 } else {

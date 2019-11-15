@@ -19,7 +19,7 @@ function setLinks(requisitor) {
     if (requisitor.admin === "1") {
         document.querySelector(".container-itens-admin").style.display = "block";
         document.getElementById("graficosAdmin").href = "/graficos/admin";
-        document.getElementById("todosProjetos").href = "/projetos/todos";
+        document.getElementById("todosProjetos").href = "/projetos/user/todos";
         document.getElementById("usuarios").href = "/users";
     }
 }

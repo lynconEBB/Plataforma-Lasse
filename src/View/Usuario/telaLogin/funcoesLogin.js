@@ -105,7 +105,6 @@ window.onload = function() {
                 document.getElementsByClassName("modal-close")[1].inert = false;
 
                 if (resposta.status === "sucesso") {
-                    fechaModal(document.getElementById("modalRecSenha"),document.querySelector("#botao-senha"));
                     exibirMensagem(resposta.mensagem,false,document.querySelector("#botao-senha"));
                 } else {
                     exibirMensagem(resposta.mensagem,true,event.target);

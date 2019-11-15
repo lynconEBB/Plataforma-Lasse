@@ -91,7 +91,6 @@ class UsuarioControl extends CrudControl {
                         } else {
                             throw new PermissionException("Você não tem acesso as informações desse usuário","Acessar informações não pertencentes ao mesmo");
                         }
-
                     }
                     // /api/users
                     elseif (count($this->url) == 2) {
@@ -100,6 +99,22 @@ class UsuarioControl extends CrudControl {
                         if ($_SESSION['usuario']['admin'] == "1") {
                             $usuarios = $this->listar();
                             $this->respostaSucesso("Listando todos Usuários do banco de dados",$usuarios,$_SESSION['usuario']);
+                        } else {
+                            throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Acessar informações de todos os usuários");
+                        }
+                    }
+                    // /api/users/desativados
+                    elseif (count($this->url) == 3 && $this->url[2] == "desativados") {
+                        $requisicaoEncontrada = true;
+                        self::autenticar();
+                        if ($_SESSION['usuario']['admin'] == "1") {
+                            $usuarios = $this->listarDesativados();
+                            if ($usuarios != false) {
+                                $this->respostaSucesso("Listando todos usuários desativados do banco de dados",$usuarios,$_SESSION['usuario']);
+                            } else {
+                                $this->respostaSucesso("Nenhum usuário desativado encontrado",null,$_SESSION['usuario']);
+                                http_response_code(202);
+                            }
                         } else {
                             throw new PermissionException("Você precisa ser administrador para ter acesso aos dados de todos os usuários","Acessar informações de todos os usuários");
                         }
@@ -319,6 +334,12 @@ class UsuarioControl extends CrudControl {
     public function listar()
     {
         $usuarios = $this->DAO->listar();
+        return $usuarios;
+    }
+
+    public function listarDesativados()
+    {
+        $usuarios = $this->DAO->listarDesativados();
         return $usuarios;
     }
 

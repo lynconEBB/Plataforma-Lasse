@@ -88,3 +88,29 @@
 [14/11/2019 - 16:42:43] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
 [14/11/2019 - 04:43:13]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
 [14/11/2019 - 16:43:18] Usuário Daniel logou no sistema através de Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0
+[14/11/2019 - 17:40:41] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 08:40:41]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 17:40:58] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 10:49:36]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 19:49:41] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 19:49:49] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Listar todos projetos
+[14/11/2019 - 10:49:57]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 19:50:03] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 11:01:49]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 20:01:54] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 20:02:02] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Listar todos projetos
+[14/11/2019 - 20:02:06] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar projetos de outro usuário
+[14/11/2019 - 20:02:09] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar projetos de outro usuário
+[14/11/2019 - 20:02:18] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
+[14/11/2019 - 20:02:22] Erro ocorrido com usuário Daniel: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
+[14/11/2019 - 11:25:50]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 20:25:59] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[15/11/2019 - 01:38:56]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 22:39:02] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[15/11/2019 - 01:39:23]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 22:39:46] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[15/11/2019 - 01:54:24]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 22:54:29] Usuário Daniel logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[15/11/2019 - 01:56:18]: Usuário Daniel deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[14/11/2019 - 22:56:37] Usuário LynconBaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[15/11/2019 - 01:59:59]: Usuário LynconBaez deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0

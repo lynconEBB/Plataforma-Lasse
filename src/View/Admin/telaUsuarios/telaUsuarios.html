@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="/src/View/Default/css/modal.css">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
-    <link rel="stylesheet" href="/src/View/Usuario/telaPerfil/stylePerfil.css">
-    <title>LPM - Perfil Usuário</title>
+    <link rel="stylesheet" href="/src/View/Admin/telaUsuarios/styleUsuarios.css">
+    <title>LPM - Usuários</title>
 </head>
 <body>
 <!--------- Mensagem ---------------->
@@ -78,7 +78,7 @@
                     Formulários
                 </a>
             </li>
-            <li  >
+            <li>
                 <a href="#" class="sidebar-item" id="graficos">
                     <i class="material-icons" aria-hidden="true">assessment</i>
                     Gráficos
@@ -110,85 +110,21 @@
     </nav>
     <!-------------------- Main Content ------------------->
     <main class="main-content">
-        <div id="container-img-perfil">
-            <input type="file" id="foto" class="escondeVisualmente" name="foto" accept="image/*">
-            <label for="foto" id="add-foto"><i class="material-icons">add_a_photo</i>Alterar foto</label>
-        </div>
-        <form class="perfil-info">
-            <button type="submit" class="botao info" id="alteraUsuario">Alterar</button>
-            <button type="button" class="botao alerta" id="ativaModal">Excluir</button>
-            <div class="container-apre">
-                <label class="escondeVisualmente" for="login">Nome de Usuário(Login)</label>
-                <input class="alterar-titulo" id="login" type="text" placeholder="Nome de Usuário" autocomplete="off">
-                <span id="tipo"><span class="escondeVisualmente">Tipo: </span></span>
-                <label class="escondeVisualmente" for="atuacao">Login</label>
-                <select id="atuacao" class="alterar-select">
-                    <option value="Colaborador">Colaborador </option>
-                    <option value="Bolsista/Voluntário">Bolsista/Voluntário</option>
-                    <option value="Terceiros">Terceiros</option>
-                </select>
-            </div>
-            <hr>
-            <div class="form-perfil">
-                <div class="part-form">
-                    <div class="form-group">
-                        <label for="nome" class="alterar-label">Nome Completo: </label>
-                        <input class="alterar-input" type="text" id="nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="dtNasc" class="alterar-label">Data de Nascimento: </label>
-                        <input class="alterar-input" type="text" id="dtNasc">
-                    </div>
-                    <div class="form-group">
-                        <label for="formacao" class="alterar-label">Formação: </label>
-                        <input class="alterar-input" type="text" id="formacao">
-                    </div>
-                    <div class="form-group">
-                        <label for="valorHora" class="alterar-label">Valor Hora: </label>
-                        <input class="alterar-input" type="text" id="valorHora">
-                    </div>
-                </div>
-                <div class="part-form">
-                    <div class="form-group">
-                        <label for="email" class="alterar-label">E-mail: </label>
-                        <input class="alterar-input" type="text" id="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="cpf" class="alterar-label">CPF: </label>
-                        <input class="alterar-input" type="text" id="cpf">
-                    </div>
-                    <div class="form-group">
-                        <label for="rg" class="alterar-label">RG: </label>
-                        <input class="alterar-input" type="text" id="rg">
-                    </div>
-                    <div class="form-group">
-                        <label for="dtEmissao" class="alterar-label">Data de Emissão:</label>
-                        <input class="alterar-input" type="text" id="dtEmissao">
-                    </div>
-                </div>
-            </div>
-        </form>
-    </main>
-</div>
+        <h1 class="titulo">Usuariários ativados</h1>
+        <hr>
+        <div class="usuarios-ativos">
 
-<div class="modal-background">
-</div>
-<div class="modal" id="modalExcluir" role="dialog" tabindex="-1">
-    <div class="modal-header alerta">
-        <h2 class="modal-header-title">Exclusão</h2>
-        <button class="modal-close" type="button" aria-label="Fechar Modal">
-            <i class="material-icons">close</i>
-        </button>
-    </div>
-    <div class="modal-conteudo">
-        <span>Tem certeza que deseja excluir sua conta?</span>
-        <span>Caso sim, digite <b>confirmar</b> e clique em excluir</span>
-        <div class="form-group">
-            <label class="escondeVisualmente" for="inputExcluir">Digite Confirmar</label>
-            <input class="form-input" type="text" autocomplete="off" id="inputExcluir">
         </div>
-        <button class="botao alerta center" id="excluir">Excluir</button>
-    </div>
+        <h1 class="titulo">Usuários destivados</h1>
+        <hr>
+        <div class="usuarios-inativos">
+
+        </div>
+        <div id="container-aviso2">
+            <img alt="Icone lupa com X no meio" src="/assets/images/not-found.svg" class="aviso-img">
+            <span class="aviso"><b>Nenhum Usuário encontrado!</b></span>
+        </div>
+    </main>
 </div>
 <script src="/src/View/Default/js/inert.js"></script>
 <script src="/src/View/Default/js/body.js"></script>
@@ -196,6 +132,6 @@
 <script src="/src/View/Default/js/modal.js"></script>
 <script src="/src/View/Default/js/formulario.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
-<script src="/src/View/Usuario/telaPerfil/funcoesPerfil.js"></script>
+<script src="/src/View/Admin/telaUsuarios/funcoesUsuarios.js"></script>
 </body>
 </html>
