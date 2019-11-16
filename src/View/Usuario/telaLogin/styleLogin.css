@@ -11,18 +11,17 @@ body {
     align-items: center;
     height: 100%;
 }
-@media (max-height: 630px) {
+@media (max-height: 750px) {
     body {
-        overflow: auto;
+        overflow-y: scroll ;
     }
 }
-
 main{
     display: flex;
     width: 70%;
     max-width: 1800px;
     margin: 30px auto 0;
-    height: 700px;
+    height: 600px;
 }
 
 /****** Parte Imagens**************/

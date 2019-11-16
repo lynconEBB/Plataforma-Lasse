@@ -393,7 +393,7 @@ class UsuarioControl extends CrudControl {
         if ($body->login != "" && $body->senha != "") {
             $login = $body->login;
             $senha = $body->senha;
-            if ($usuario = $this->DAO->listarPorLogin($login)) {
+            if ($usuario = $this->DAO->listarPorLoginAtivados($login)) {
                 if (password_verify($senha,$usuario->getSenha())) {
                     $_SESSION['usuario'] = [
                         "id" => $usuario->getId(),

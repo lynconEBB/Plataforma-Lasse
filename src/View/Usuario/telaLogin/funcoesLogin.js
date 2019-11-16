@@ -149,8 +149,8 @@ window.onload = function() {
                 if (resposta.status === "erro") {
                     exibirMensagem(resposta.mensagem,true,event.target);
                 } else {
-                    fecharModal("#modalCadastro");
                     exibirMensagem(resposta.mensagem,false,event.target);
+                    fechaModal(document.getElementById("modalCadastro"),event.target);
                 }
             });
         } else {

@@ -31,6 +31,11 @@
     transition: all ease-in-out 300ms 300ms;
     box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
 }
+@media (max-width: 750px) {
+    .modal.ativo {
+        transform: translateY(900px);
+    }
+}
 .modal:focus {
     outline: none;
 }

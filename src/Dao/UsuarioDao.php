@@ -105,10 +105,23 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
         }
     }
 
-    public function listarPorLogin($login){
-        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login = :login AND estado = :estado");
+    public function listarPorLoginAtivados($login) {
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login = :login AND estado = 'ativado'");
         $stm->bindValue(':login',$login);
-        $stm->bindValue(':estado','ativado');
+        $stm->execute();
+
+        $linha =  $stm->fetch(PDO::FETCH_ASSOC);
+        if ($linha != false) {
+            $fun = new UsuarioModel($linha['nomeCompleto'],$linha['login'],$linha['senha'],$linha['dtNascimento'],$linha['cpf'],$linha['rg'],$linha['dataDeEmissao'],$linha['email'],$linha['atuacao'],$linha['formacao'],$linha['valorHora'],$linha['caminhoFoto'],$linha['admin'],$linha['id']);
+            return $fun;
+        }else {
+            return false;
+        }
+    }
+
+    public function listarPorLogin($login){
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE login = :login");
+        $stm->bindValue(':login',$login);
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
@@ -121,9 +134,8 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
     }
 
     public function listarPorCpf($cpf) {
-        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE cpf = :cpf AND estado = :estado");
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE cpf = :cpf");
         $stm->bindValue(':cpf',$cpf);
-        $stm->bindValue(':estado','ativado');
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);
@@ -136,9 +148,8 @@ tbUsuario.valorHora,tbUsuario.id,tbUsuario.admin,tbUsuario.caminhoFoto FROM tbUs
     }
 
     public function listarPorEmail($email) {
-        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE email = :email AND estado = :estado");
+        $stm = $this->pdo->prepare("SELECT * FROM tbUsuario WHERE email = :email");
         $stm->bindValue(':email',$email);
-        $stm->bindValue(':estado','ativado');
         $stm->execute();
 
         $linha =  $stm->fetch(PDO::FETCH_ASSOC);

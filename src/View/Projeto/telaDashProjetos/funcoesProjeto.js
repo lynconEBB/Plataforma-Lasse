@@ -31,7 +31,7 @@ window.onload = function () {
 
                         if (requisitor.infoAdd[projeto.id] === true) {
                             let projetoContainer = document.getElementById("projeto"+projeto.id);
-                            projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>build</i></div>")
+                            projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>supervisor_account</i></div>")
                         }
                     }
                 } else {
