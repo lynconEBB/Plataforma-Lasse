@@ -2,7 +2,11 @@
 
 namespace Lasse\LPM\Control;
 
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use InvalidArgumentException;
+use Lasse\LPM\Dao\AtividadeDao;
 use UnexpectedValueException;
 use Lasse\LPM\Dao\ProjetoDao;
 use Lasse\LPM\Erros\NotFoundException;
@@ -96,8 +100,27 @@ class ProjetoControl extends CrudControl
                     break;
                 case 'PUT':
                     $body = json_decode(@file_get_contents("php://input"));
+                    // /api/projetos/gerarGrafico
+                    if (count($this->url) == 3 && $this->url[2] == "gerarGrafico") {
+                        $requisicaoEncontrada = true;
+                        if ($this->requisitor["admin"] == "1") {
+                            if (isset($body->mes) && isset($body->ano) && isset($body->idProjeto)) {
+                                $dados = $this->gerarGrafico($body);
+                                if ($dados != false) {
+                                    $this->respostaSucesso("Dados para geração de gráfico",$dados,$this->requisitor);
+                                } else {
+                                    $this->respostaSucesso("Nenhum dado encontrado",null,$this->requisitor);
+                                    http_response_code(202);
+                                }
+                            } else {
+                                throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
+                            }
+                        } else {
+                            throw new PermissionException("Você precisa ser Administrador para ter acesso a esta funcionalidade","Gerar Graficos de administrador");
+                        }
+                    }
                     // /api/projetos/{idProjeto}
-                    if (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
+                    elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
                         $projeto = $this->atualizar($body,$this->url[2]);
                         $this->respostaSucesso("Projeto atualizado com sucesso",null,$this->requisitor);
@@ -126,6 +149,46 @@ class ProjetoControl extends CrudControl
             if (!$requisicaoEncontrada) {
                 throw new NotFoundException("URL não encontrada");
             }
+        }
+    }
+
+    public function gerarGrafico($body)
+    {
+        $projeto = $this->listarPorId($body->idProjeto);
+        if ($body->mes >= 1 && $body->mes <=12 && $body->ano >= 2005 && $body->ano <= date("Y")) {
+            $primeiroDia = new DateTime("$body->ano-$body->mes-01");
+            $ultimoDia = new DateTime($primeiroDia->format("Y-m-t"));
+            $ultimoDia = $ultimoDia->modify("+1 day");
+
+            $intervalo = new DateInterval("P1D");
+            $periodo = new DatePeriod($primeiroDia,$intervalo,$ultimoDia);
+            $atividadeDao = new AtividadeDao();
+            $atividadesUsuario = $atividadeDao->listarAtividadesUsuariosPeriodo($body->idProjeto,$primeiroDia->format("Y-m-d"));
+            if ($atividadesUsuario != false) {
+                $labels = [];
+                $datasets = [];
+                foreach ($projeto->getParticipantes() as $participante) {
+                    $dataset = ["label" => $participante->getLogin(),"data"=>[]];
+                    foreach ($periodo as $data) {
+                        $tempoGasto = 0;
+                        foreach ($atividadesUsuario as $atividadeUsuario) {
+                            if ($atividadeUsuario[0] == $data->format("d/m/Y") && $atividadeUsuario["login"] == $participante->getLogin() ) {
+                                $tempoGasto += $atividadeUsuario["tempoGasto"];
+                            }
+                        }
+                        $dataset["data"][] = $tempoGasto;
+                    }
+                    $datasets[]=$dataset;
+                }
+                foreach ($periodo as $data) {
+                    $labels[] = $data->format("d/m/Y");
+                }
+                return [$labels,$datasets];
+            } else {
+                return false;
+            }
+        } else {
+            throw new InvalidArgumentException("Mês ou ano inválido");
         }
     }
 

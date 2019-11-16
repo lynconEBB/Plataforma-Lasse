@@ -35,7 +35,15 @@ class FormularioModel
             "nome" => $this->getNome(),
             "caminhoDocumento" => $this->getCaminhoDocumento(),
             "usuario" => $this->getUsuario()->toArray(),
+            "dataModificacao"=> $this->getDataModificacao()->format("d/m/Y")
         ];
+        if ($this->getViagem() != null) {
+            $array["viagem"] = $this->getViagem()->toArray();
+            $array["compra"] = $this->getCompra();
+        } else {
+            $array["compra"] = $this->getCompra()->toArray();
+            $array["viagem"] = $this->getViagem();
+        }
         return $array;
     }
 

@@ -101,6 +101,10 @@ class Router{
         elseif ($this->url[0] == "erro" && $this->url[1] == "permissao" && count($this->url) == 2) {
             require "src/View/errorPages/erroSemAcesso.html";
         }
+        // /admin/graficos/
+        elseif ($this->url[0] == "admin" && $this->url[1] == "graficos" && count($this->url) == 2){
+            require "src/View/Admin/telaGraficosAdmin/telaGraficosAdmin.html";
+        }
         // /erro/naoEncontrado
         elseif ($this->url[0] == "erro" && $this->url[1] == "naoEncontrado" && count($this->url) == 2) {
             require "src/View/errorPages/erro404.html";

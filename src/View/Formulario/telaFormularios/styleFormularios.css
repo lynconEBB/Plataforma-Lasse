@@ -16,9 +16,9 @@
     margin-bottom: 20px;
 }
 .container-formularios {
-
     max-width: 1800px;
-    margin: 0 auto 20px;
+    margin-bottom: 40px;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(0,500px));
     grid-gap: 20px;

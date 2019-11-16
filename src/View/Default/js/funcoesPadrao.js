@@ -18,7 +18,7 @@ function setLinks(requisitor) {
 
     if (requisitor.admin === "1") {
         document.querySelector(".container-itens-admin").style.display = "block";
-        document.getElementById("graficosAdmin").href = "/graficos/admin";
+        document.getElementById("graficosAdmin").href = "/admin/graficos";
         document.getElementById("todosProjetos").href = "/projetos/user/todos";
         document.getElementById("usuarios").href = "/users";
     }
@@ -93,6 +93,7 @@ function requisicao(metodo,url,body,response) {
     }
 
     xhr.onload = function() {
+        console.log(xhr.response);
         response(JSON.parse(xhr.response),xhr.status);
     };
 

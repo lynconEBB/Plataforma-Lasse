@@ -64,7 +64,6 @@ function gerarGraficoTempoGastoTodosProjetos(projetos,idUsuario) {
         document.getElementById("aviso1").style.display = "block";
         return false;
     }
-
 }
 function gerarDataTempoGastoTodosProjetos(projetos,idUsuario) {
     let labels = [];
@@ -170,6 +169,7 @@ function gerarGraficoTempoGastoPorProjeto(idUsuario,cores) {
     });
 
 }
+
 function formataDadosResposta(dados,cores) {
     let labels = [];
     let datasets = [];
@@ -201,6 +201,7 @@ function formataDadosResposta(dados,cores) {
     }
 
 }
+
 function atualizarGraficotempoPorProjeto(idUsuario,cores) {
     document.getElementById("graficoTempoGastoPorProjeto").remove();
     let canvas = document.createElement("canvas");
@@ -212,7 +213,7 @@ function atualizarGraficotempoPorProjeto(idUsuario,cores) {
     let body = {
         mes:partes[0],
         ano:partes[1]
-    }
+    };
     requisicao("POST","/api/users/tempoGastoDiario/"+idUsuario,body,function (resposta,codigo) {
         if (resposta.status === "sucesso") {
             if (codigo === 200) {

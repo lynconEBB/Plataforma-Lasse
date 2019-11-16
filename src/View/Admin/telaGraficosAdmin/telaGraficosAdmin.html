@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png"/>
@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="/src/View/Default/css/modal.css">
     <link rel="stylesheet" href="/src/View/Default/css/body.css">
     <link rel="stylesheet" href="/src/View/Default/css/mensagem.css">
-    <link rel="stylesheet" href="/src/View/Usuario/telaGraficos/styleGraficos.css">
-    <title>LPM - Gráficos</title>
+    <link rel="stylesheet" href="/src/View/Admin/telaGraficosAdmin/styleGraficosAdmin.css">
+    <title>LPM - Gráficos Administrador</title>
 </head>
 <body>
 <!--------- Mensagem ---------------->
@@ -110,35 +110,73 @@
     </nav>
     <!-------------------- Main Content ------------------->
     <main class="main-content">
-        <h1 id="titulo">Gráficos de</h1>
-        <hr>
-        <h2>Horas totais gastas por projeto</h2>
-        <div class="container1">
-            <div class="aviso-sem-dados" id="aviso1">
-                <img src="/assets/images/vazio.png" alt="Icone vazio">
-                <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
-                <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+        <div class="container-graficos">
+            <div class="container-grafico">
+                <h2>Horas totais gastas por projeto</h2>
+                <div class="container-canvas">
+                    <div class="aviso-sem-dados" id="aviso1">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                    <canvas id="grafico1"></canvas>
+                </div>
             </div>
-            <canvas id="graficoTempoGastoTotal"></canvas>
+            <div class="container-grafico">
+                <h2>Valor total Gasto por projeto</h2>
+                <div class="container-canvas">
+                    <div class="aviso-sem-dados" id="aviso2">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                    <canvas id="grafico2"></canvas>
+                </div>
+            </div>
+            <div class="container-grafico" id="container-grafico4">
+                <h2>Tempo gasto por usuário em um mês</h2>
+                <div class="opcoes-grafico">
+                    <div class="form-group selecionado">
+                        <i class="material-icons select-seta">arrow_drop_down</i>
+                        <label for="projeto" class="form-label selecionado">Projeto</label>
+                        <select id="projeto" class="form-select"></select>
+                    </div>
+                    <div class="form-group selecionado">
+                        <i class="material-icons select-seta">arrow_drop_down</i>
+                        <label for="mesAno" class="form-label selecionado">Mês</label>
+                        <select id="mesAno" class="form-select"></select>
+                    </div>
+                    <button id="gerarGraficoAtividadesUsuario" class="botao sucesso">Gerar</button>
+                </div>
+                <div class="container-canvas" id="container-canvas4">
+                    <div class="aviso-sem-dados" id="aviso4">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                    <canvas id="grafico4"></canvas>
+                </div>
+            </div>
+            <div class="container-grafico" id="container-grafico3">
+                <h2>Valor gasto por categoria do Projeto</h2>
+                <div class="opcoes-grafico">
+                    <div class="form-group selecionado">
+                        <i class="material-icons select-seta">arrow_drop_down</i>
+                        <label for="projetoTipo" class="form-label selecionado">Projeto</label>
+                        <select id="projetoTipo" class="form-select"></select>
+                    </div>
+                    <button id="gerarGraficoTipoAtividades" class="botao sucesso">Gerar</button>
+                </div>
+                <div class="container-canvas" id="container-canvas3">
+                    <div class="aviso-sem-dados" id="aviso3">
+                        <img src="/assets/images/vazio.png" alt="Icone vazio">
+                        <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
+                        <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
+                    </div>
+                    <canvas id="grafico3"></canvas>
+                </div>
+            </div>
         </div>
-        <h2>Horas diárias gastas por projeto em um mês</h2>
-        <form id="opcoes-grafico">
-            <div class="form-group selecionado">
-                <i class="material-icons select-seta">arrow_drop_down</i>
-                <label for="mesAno" class="form-label selecionado">Mês</label>
-                <select id="mesAno" class="form-select"></select>
-            </div>
-            <button type="button" class="botao sucesso" id="gerarGraficoTempoPorProjeto">Gerar</button>
-        </form>
-        <div class="container1" id="container-canvas">
-            <div class="aviso-sem-dados" id="aviso2">
-                <img src="/assets/images/vazio.png" alt="Icone vazio">
-                <h3>Informações necessárias para gerar gráfico não encontradas.</h3>
-                <h3>Cadastre ativiadades em seus projetos para gerar este gráfico.</h3>
-            </div>
-            <canvas id="graficoTempoGastoPorProjeto"></canvas>
-        </div>
-
     </main>
 </div>
 <script src="/src/View/Default/js/inert.js"></script>
@@ -148,6 +186,6 @@
 <script src="/src/View/Default/js/formulario.js"></script>
 <script src="/src/View/Default/js/funcoesPadrao.js"></script>
 <script src="/src/View/Default/js/chart.js"></script>
-<script src="/src/View/Usuario/telaGraficos/funcoesGraficos.js"></script>
+<script src="/src/View/Admin/telaGraficosAdmin/funcoesGraficosAdmin.js"></script>
 </body>
 </html>

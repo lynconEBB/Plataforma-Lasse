@@ -155,4 +155,20 @@ class AtividadeDao extends CrudDao {
             return false;
         }
     }
+    public function listarAtividadesUsuariosPeriodo($idProjeto,$primeiroDia) {
+        $comando = "select date_format(dataRealizacao,'%d/%m/%Y'),tempoGasto,tU.login from tbAtividade inner join tbTarefa tT on tbAtividade.idTarefa = tT.id inner join tbProjeto tP on tT.idProjeto = tP.id 
+           inner join tbUsuario tU on tbAtividade.idUsuario = tU.id where tP.id = :idProjeto and idTarefa is not NULL and dataRealizacao >= :primeiroDia and dataRealizacao < :primeiroDia + INTERVAL 1 MONTH ";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue(':idProjeto',$idProjeto);
+        $stm->bindParam(":primeiroDia",$primeiroDia);
+        $stm->execute();
+
+        $result =  $stm->fetchAll();
+        if (count($result) > 0 ) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
 }
