@@ -66,7 +66,7 @@ function setGraficoAtividadesUsuario(mesAno,idProjeto) {
                 montaGraficoAtividadesUsuario(labels,datasets);
 
             } else {
-                exibirMensagem("Dados Insulficientes para gera grafico",true,document.getElementById("gerarGraficoAtividadesUsuario"));
+                exibirMensagem("Dados insuficientes para gerar gráfico",true,document.getElementById("gerarGraficoAtividadesUsuario"));
                 document.getElementById("grafico4").style.display = "none";
                 document.getElementById("aviso4").style.display = "block";
             }

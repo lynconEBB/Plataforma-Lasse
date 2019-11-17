@@ -1,0 +1,42 @@
+.sidebar-item:first-of-type,.sidebar-item:last-of-type {
+    margin-bottom: 50px;
+}
+.page h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: solid #000000 2px;
+    margin-bottom: 20px;
+}
+
+.page {
+    max-width: 1800px;
+    display: none;
+    padding: 0 20px;
+}
+.page.exibindo {
+    display: block;
+}
+
+.page ul{
+    list-style-position: inside;
+    text-indent: 50px;
+    list-style-type: square;
+}
+.page ul li {
+    font-size: 1.3rem;
+    margin-bottom: 60px;
+}
+.page ul img {
+    max-width: 600px;
+    display: block;
+    margin: 0 auto 40px;
+    width: 100%;
+    border: 5px solid #074a56;
+}
+.sidebar {
+    overflow-x: scroll;
+}
+b {
+    font-weight: bold;
+}

@@ -23,3 +23,34 @@
 [16/11/2019 - 20:10:12] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [16/11/2019 - 20:20:39] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Linux; Android 6.0.1; SM-G532MT) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.96 Mobile Safari/537.36
 [16/11/2019 - 11:56:21]: Usuário Ismael270 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362
+[16/11/2019 - 21:43:15] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 02:48:51]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[16/11/2019 - 23:49:01] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 11:16:19] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 03:08:03]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 12:08:13] Usuário ana123 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 12:11:59] Erro ocorrido com usuário ana123: Permissão negada ao tentar Excluir perfil de usuário
+[17/11/2019 - 03:12:44]: Usuário ana123 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 12:13:41] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 03:23:58]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 12:24:03] Usuário ana123 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 03:29:54]: Usuário ana1234 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 12:33:56] Erro ocorrido com usuário desconhecido: Permissão negada ao tentar Redefinir senha de acesso de LynconEBB
+[17/11/2019 - 12:37:35] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 13:03:48] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 04:22:36]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 13:22:41] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 04:22:51]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 13:22:57] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 04:58:34]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 13:58:41] Usuário Ismael270 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 05:02:02]: Usuário Ismael270 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 14:02:07] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 14:09:00] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36
+[17/11/2019 - 14:09:15] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar informações de todos os usuários
+[17/11/2019 - 14:09:23] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar projetos de outro usuário
+[17/11/2019 - 14:09:26] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar projetos de outro usuário
+[17/11/2019 - 14:09:33] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar informações não pertencentes ao mesmo
+[17/11/2019 - 14:09:49] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
+[17/11/2019 - 14:09:53] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar formulários de outro usuário
+[17/11/2019 - 14:10:00] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar formulários de outro usuário

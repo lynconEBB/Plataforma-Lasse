@@ -100,13 +100,7 @@ hr{
     color: white;
     text-align: center;
 }
-.modal-conteudo .form-input{
-    width: 80%;
-    max-width: 300px;
-    text-align: center;
-    margin: 50px auto;
-    display: block;
-}
+
 .botao-padrao{
     background-color: #e45d5a;
     margin: 20px auto;

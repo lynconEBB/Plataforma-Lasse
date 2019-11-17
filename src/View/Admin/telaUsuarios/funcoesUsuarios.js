@@ -11,7 +11,7 @@ window.onload = function () {
             for (let usuario of usuarios) {
                 usuariosAtivados.insertAdjacentHTML("afterbegin",`
                     <div class="usuario">
-                        <div class="container-img"></div>
+                        <div class="container-img" id="img${usuario.id}"></div>
                         <span class="nomeUsuario">${usuario.login}</span>
                         <span class="atuacao">${usuario.formacao}</span>
                         <div class="botoes">
@@ -21,6 +21,7 @@ window.onload = function () {
                         </div>
                     </div>
                 `);
+                document.getElementById("img"+usuario.id).style.backgroundImage =  "url('/"+usuario.foto+"')";
             }
 
             exibeUsuariosDesativados();
@@ -40,7 +41,7 @@ function exibeUsuariosDesativados() {
                 for (let usuario of usuarios) {
                     usuariosDesativados.insertAdjacentHTML("afterbegin",`
                         <div class="usuario">
-                            <div class="container-img"></div>
+                            <div class="container-img" id="img${usuario.id}"></div>
                             <span class="nomeUsuario">${usuario.login}</span>
                             <span class="atuacao">${usuario.formacao}</span>
                             <div class="botoes">
@@ -51,6 +52,7 @@ function exibeUsuariosDesativados() {
                             </div>
                         </div>
                     `);
+                    document.getElementById("img"+usuario.id).style.backgroundImage =  "url('/"+usuario.foto+"')";
                     document.getElementById("reativar"+usuario.id).onclick = function (event) {
                         requisicao("PUT","/api/users/reativar/"+usuario.id,null,function (resposta,codigo) {
                             if (resposta.status === "sucesso") {

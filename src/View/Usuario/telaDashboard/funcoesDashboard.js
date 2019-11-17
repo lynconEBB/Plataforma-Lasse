@@ -31,10 +31,10 @@ function requisitaDadosUsuario() {
                             document.getElementById("grafico2").style.display = "none";
                             document.getElementById("aviso2").style.display = "block";
                         }
-                        let ehDono = resposta.requisitor.infoAdd;
+                        let donosProjetos = resposta.requisitor.donosReais;
                         let qtdDono = 0;
-                        for( let key in ehDono) {
-                            if(ehDono[key] === true) {
+                        for( let idProjeto in donosProjetos) {
+                            if(idUserRequisitado === donosProjetos[idProjeto]) {
                                 qtdDono += 1;
                             }
                         }

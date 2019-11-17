@@ -69,6 +69,10 @@ class Router{
         elseif ($this->url[0] == "tarefa" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Tarefa/telaTarefa/telaTarefa.html";
         }
+        // /ajuda/{idUsuario}
+        elseif ($this->url[0] == "ajuda" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
+            require "src/View/Ajuda/telaAjuda/telaAjuda.html";
+        }
         // /viagem/{idViagem}
         elseif ($this->url[0] == "viagem" && $this->url[1] == (int)$this->url[1] && count($this->url) == 2){
             require "src/View/Viagem/telaViagem/telaViagem.html";

@@ -216,7 +216,6 @@ class ProjetoControl extends CrudControl
         } else {
             throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
         }
-
     }
 
     protected function excluir($id)
@@ -242,13 +241,23 @@ class ProjetoControl extends CrudControl
     {
         if (isset($body->dataFinalizacao) && isset($body->dataInicio) && isset($body->descricao) && isset($body->nome) && isset($body->centroCusto)) {
             if ($this->verificaDono($id, $this->requisitor['id'])) {
+                $projetoAntigo = $this->listarPorId($id);
                 $projeto = new ProjetoModel($body->dataFinalizacao, $body->dataInicio, $body->descricao, $body->nome,$body->centroCusto, $id, null, null, null);
+                if (is_array($projetoAntigo->getTarefas())) {
+                    foreach ($projetoAntigo->getTarefas() as $tarefa) {
+                        if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ) {
+                            continue;
+                        } else {
+                            throw new InvalidArgumentException("Périodo de existencia do projeto incoerente com o périodo de existencia de suas tarefas");
+                        }
+                    }
+                }
                 $this->DAO->alterar($projeto);
             } else {
                 throw new PermissionException("Permissão negada para alterar este projeto","Atualizar projeto que não é dono");
             }
         } else {
-            throw new UnexpectedValueException("Parametros insuficientes ou mal estruturados");
+            throw new UnexpectedValueException("Parâmetros insuficientes ou mal estruturados");
         }
     }
 

@@ -12,6 +12,8 @@ function setLinks(requisitor) {
     btnDashboard.href = "/dashboard/user/"+idUsuario;
     let btnImprevistos = document.querySelector("#imprevistos");
     btnImprevistos.href = "/imprevistos/user/"+idUsuario;
+    let btnAjuda= document.querySelector("#ajuda");
+    btnAjuda.href = "/ajuda/"+idUsuario;
 
     document.querySelector(".container-user-img").style.backgroundImage = "url('/"+requisitor.foto+"')";
     document.querySelector(".user-name").textContent = requisitor.login;
