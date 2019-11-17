@@ -52,12 +52,12 @@ class ProjetoControl extends CrudControl
                         $requisicaoEncontrada = true;
                         $projetos = $this->listar();
                         if ($projetos != false ) {
-                            $serDono = array();
+                            $donosReais =  array();
                             foreach ($projetos as $projeto) {
-                                $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
-                                $serDono[$projeto->getId()] = $dono;
+                                $idDono = $this->DAO->descobreDono($projeto->getId());
+                                $donosReais[$projeto->getId()] = $idDono;
                             }
-                            $this->requisitor["infoAdd"] = $serDono;
+                            $this->requisitor["donosReais"] = $donosReais;
                             $this->respostaSucesso("Listado Projetos",$projetos,$this->requisitor);
                         } else {
                             $this->respostaSucesso("Nenhum projeto encontrado",null,$this->requisitor);
@@ -67,7 +67,6 @@ class ProjetoControl extends CrudControl
                     } elseif (count($this->url) == 3 && $this->url[2] == (int)$this->url[2]) {
                         $requisicaoEncontrada = true;
                         $projeto = $this->listarPorId($this->url[2]);
-
                         if ($this->procuraFuncionario($this->url[2],$this->requisitor['id']) || $this->requisitor['admin'] == "1") {
                             $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
                             $this->requisitor["dono"] = $dono;
@@ -82,12 +81,12 @@ class ProjetoControl extends CrudControl
                         if ($this->requisitor['id'] == $this->url[3] || $this->requisitor['admin'] == "1") {
                             $projetos = $this->listarPorIdUsuario($this->url[3]);
                             if ($projetos != false) {
-                                $serDono = array();
+                                $donosReais =  array();
                                 foreach ($projetos as $projeto) {
-                                    $dono = $this->verificaDono($projeto->getId(),$this->requisitor['id']);
-                                    $serDono[$projeto->getId()] = $dono;
+                                    $idDono = $this->DAO->descobreDono($projeto->getId());
+                                    $donosReais[$projeto->getId()] = $idDono;
                                 }
-                                $this->requisitor["infoAdd"] = $serDono;
+                                $this->requisitor["donosReais"] = $donosReais;
                                 $this->respostaSucesso("Listando Projetos por Usuário",$projetos,$this->requisitor);
                             } else {
                                 $this->respostaSucesso("Nenhum projeto encontrado!",null,$this->requisitor);

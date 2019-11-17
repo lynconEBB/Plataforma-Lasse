@@ -80,7 +80,22 @@ class ProjetoDao extends CrudDao {
         }else {
             return false;
         }
+    }
 
+    public function descobreDono($idProjeto)
+    {
+        $comando = "SELECT idUsuario FROM tbUsuarioProjeto where idProjeto = :idProjeto and dono = 1";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindValue(':idProjeto',$idProjeto);
+        $stm->execute();
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if ($row != false){
+            return $row['idUsuario'];
+        }else{
+            return false;
+        }
     }
 
     public function listarPorId($id){

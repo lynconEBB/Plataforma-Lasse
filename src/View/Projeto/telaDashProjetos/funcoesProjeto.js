@@ -13,9 +13,8 @@ window.onload = function () {
                 if (codigo === 200) {
                     document.getElementById("titulo-cabecalho").textContent = "Todos Projetos";
                     let projetos = resposta.dados;
-
+                    let donosProjetos = requisitor.donosReais;
                     let main = document.querySelector("#dash-projetos");
-
                     for (let projeto of projetos) {
                         let template = ` 
                         <a href="/projeto/${projeto.id}" class="container-projeto" id="projeto${projeto.id}">
@@ -29,7 +28,12 @@ window.onload = function () {
 
                         main.insertAdjacentHTML("beforeend",template);
 
-                        if (requisitor.infoAdd[projeto.id] === true) {
+                        for (let participante of projeto.participantes) {
+                            if (participante.id === donosProjetos[projeto.id]) {
+                                document.getElementById("projeto"+projeto.id).insertAdjacentHTML("beforeend",` <span class="projeto-participantes"><b>Dono:</b> ${participante.login}</span>`)
+                            }
+                        }
+                        if (requisitor.id === donosProjetos[projeto.id]) {
                             let projetoContainer = document.getElementById("projeto"+projeto.id);
                             projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>supervisor_account</i></div>")
                         }
@@ -44,6 +48,7 @@ window.onload = function () {
     } else {
         requisicao("GET", "/api/projetos/user/"+idUserRequisitado, null, function (resposta,codigo) {
             if (resposta.status === "sucesso") {
+
                 let requisitor = resposta.requisitor;
                 let projetos = resposta.dados;
 
@@ -62,7 +67,7 @@ window.onload = function () {
                 }
 
                 if (codigo === 200) {
-
+                    let donosProjetos = requisitor.donosReais;
                     let main = document.querySelector("#dash-projetos");
                     for (let projeto of projetos) {
                         let template = ` 
@@ -74,10 +79,13 @@ window.onload = function () {
                             <span class="projeto-participantes"><b>Total Gasto:</b> R$ ${projeto.totalGasto}</span>
                             <span class="projeto-participantes"><b>Participantes:</b> ${projeto.participantes.length}</span>
                         </a>`;
-
                         main.insertAdjacentHTML("beforeend",template);
-
-                        if (requisitor.infoAdd[projeto.id] === true) {
+                        for (let participante of projeto.participantes) {
+                            if (participante.id === donosProjetos[projeto.id]) {
+                                document.getElementById("projeto"+projeto.id).insertAdjacentHTML("beforeend",` <span class="projeto-participantes"><b>Dono:</b> ${participante.login}</span>`)
+                            }
+                        }
+                        if (requisitor.id === donosProjetos[projeto.id]) {
                             let projetoContainer = document.getElementById("projeto"+projeto.id);
                             projetoContainer.insertAdjacentHTML("beforeend","<div class=\"admin\"><i class=\"material-icons\" title='Sendo dono deste projeto'>supervisor_account</i></div>")
                         }
