@@ -89,3 +89,4 @@ where tbAtividade.idUsuario = '26'' at line 1
 [17/11/2019 - 20:46:13] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362
 [18/11/2019 - 12:00:17]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [17/11/2019 - 21:00:23] Usuário ana123 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[18/11/2019 - 12:05:19]: Usuário ana123 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
