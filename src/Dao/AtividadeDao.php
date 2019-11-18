@@ -67,7 +67,6 @@ class AtividadeDao extends CrudDao {
         $stm->execute();
     }
 
-
     public function listarPorIdTarefa($idTarefa){
         $comando = "SELECT * FROM tbAtividade where idTarefa = :id";
         $stm = $this->pdo->prepare($comando);
@@ -127,7 +126,6 @@ class AtividadeDao extends CrudDao {
 
     }
 
-
     public function descobrirIdTarefa($id)
     {
         $comando = "SELECT idTarefa from tbAtividade WHERE id = :id";
@@ -141,8 +139,7 @@ class AtividadeDao extends CrudDao {
     }
 
     public function listarAtividadesPeriodo($idUsuario,$primeiroDia) {
-        $comando = "select date_format(dataRealizacao,'%d/%m/%Y'),tempoGasto,tP.nome from tbAtividade inner join tbTarefa tT on tbAtividade.idTarefa = tT.id inner join tbProjeto tP on tT.idProjeto = tP.id 
-            where idUsuario = :idUsuario and idTarefa is not NULL and dataRealizacao >= :primeiroDia and dataRealizacao < :primeiroDia + INTERVAL 1 MONTH ";
+        $comando = "select date_format(dataRealizacao,'%d/%m/%Y'),tempoGasto,tP.nome from tbAtividade inner join tbTarefa tT on tbAtividade.idTarefa = tT.id inner join tbProjeto tP on tT.idProjeto = tP.id where idUsuario = :idUsuario and idTarefa is not NULL and dataRealizacao >= :primeiroDia and dataRealizacao < :primeiroDia + INTERVAL 1 MONTH ";
         $stm = $this->pdo->prepare($comando);
         $stm->bindValue(':idUsuario',$idUsuario);
         $stm->bindParam(":primeiroDia",$primeiroDia);
@@ -155,6 +152,7 @@ class AtividadeDao extends CrudDao {
             return false;
         }
     }
+
     public function listarAtividadesUsuariosPeriodo($idProjeto,$primeiroDia) {
         $comando = "select date_format(dataRealizacao,'%d/%m/%Y'),tempoGasto,tU.login from tbAtividade inner join tbTarefa tT on tbAtividade.idTarefa = tT.id inner join tbProjeto tP on tT.idProjeto = tP.id 
            inner join tbUsuario tU on tbAtividade.idUsuario = tU.id where tP.id = :idProjeto and idTarefa is not NULL and dataRealizacao >= :primeiroDia and dataRealizacao < :primeiroDia + INTERVAL 1 MONTH ";
@@ -171,4 +169,22 @@ class AtividadeDao extends CrudDao {
         }
     }
 
+    public function listarUsuariosComAtividadesNoProjeto($idProjeto)
+    {
+        $comando = "select DISTINCT tbUsuario.login from tbAtividade inner join tbTarefa on tbTarefa.id = tbAtividade.idTarefa inner join tbProjeto on tbProjeto.id = tbTarefa.idProjeto inner join tbUsuario on tbUsuario.id = tbAtividade.idUsuario where tbProjeto.id = :idProjeto";
+        $stm = $this->pdo->prepare($comando);
+        $stm->bindParam(':idProjeto',$idProjeto);
+        $stm->execute();
+        $result =array();
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($linhas) > 0) {
+            foreach ($linhas as $row) {
+                $result[] = $row['login'];
+            }
+            return $result;
+        }else{
+            return false;
+        }
+    }
 }

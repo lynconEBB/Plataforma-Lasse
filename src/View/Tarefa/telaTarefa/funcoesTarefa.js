@@ -196,19 +196,19 @@ function mostrarTarefaNaoParticipando(tarefa) {
         <label id="nome">${tarefa.nome}</label>
         <span id="descricao">${tarefa.descricao}</span>
         <div class="tarefa-group">
-            <label class="tarefa-label" for="dtInicio">Data de Início</label>
+            <label class="alterar-label" for="dtInicio">Data de Início</label>
             <span class="detalhe-input" id="dtInicio">${tarefa.dataInicio}</span>
         </div>
         <div class="tarefa-group">
-            <label class="tarefa-label" for="dtConclusao">Data de Conlusão</label>
+            <label class="alterar-label" for="dtConclusao">Data de Conlusão</label>
             <span class="detalhe-input" id="dtConclusao">${tarefa.dataConclusao}</span>
         </div>
         <div class="tarefa-group">
-            <label class="tarefa-label" for="estado">Estado</label>
+            <label class="alterar-label" for="estado">Estado</label>
             <span class="detalhe-input" id="estado">${tarefa.estado}</span>
         </div>
         <div class="tarefa-group">
-            <label class="tarefa-label" for="totalGasto">Total Gasto</label>
+            <label class="alterar-label" for="totalGasto">Total Gasto</label>
             <label class="detalhe-input" id="totalGasto">${tarefa.totalGasto}</label>
         </div>
     `;

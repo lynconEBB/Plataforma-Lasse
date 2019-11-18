@@ -3,6 +3,7 @@
 namespace Lasse\LPM\Model;
 
 use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
@@ -169,7 +170,7 @@ class TarefaModel
         Validacao::validar('Data de Conclusão',$dataConclusao,'data');
         $dataformatada = Formatacao::formataData($dataConclusao);
         if ($dataformatada < $this->dataInicio) {
-            throw new Exception('A data de Conclusão precisa ser posterior a data de Início');
+            throw new InvalidArgumentException('A data de Conclusão precisa ser posterior a data de Início');
         } else {
             $this->dataConclusao = $dataformatada;
         }

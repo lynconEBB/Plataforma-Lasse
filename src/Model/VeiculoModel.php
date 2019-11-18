@@ -4,6 +4,7 @@ namespace Lasse\LPM\Model;
 
 use DateTime;
 use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
@@ -102,7 +103,7 @@ class VeiculoModel
         if ($devFormatada > $this->retirada) {
             $this->devolucao = $devFormatada;
         } else {
-            throw new Exception("O horario e data de devolução devem ser posteiores a retirada");
+            throw new InvalidArgumentException("O horario e data de devolução devem ser posteiores a retirada");
         }
     }
 

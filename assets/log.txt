@@ -54,3 +54,38 @@
 [17/11/2019 - 14:09:49] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar atividades não planejadas de outro usuário
 [17/11/2019 - 14:09:53] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar formulários de outro usuário
 [17/11/2019 - 14:10:00] Erro ocorrido com usuário Camiggf: Permissão negada ao tentar Acessar formulários de outro usuário
+[17/11/2019 - 06:25:18]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 15:45:26] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0[17/11/2019 - 07:17:43]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 18:30:55] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 09:31:07]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 18:33:14] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 18:34:14] Usuário 123456 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 09:34:46]: Usuário 123456 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 18:56:27] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 10:07:34]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:07:46] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 10:07:46]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:08:56] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:11:35] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:31:37] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:31:58] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:32:00] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:32:05] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:35:02] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 19:35:08] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 10:35:11]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:35:16] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 10:35:26]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:35:31] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 19:53:15] Erro ocorrido com usuário LynconEBB: Erro Interno Inesperado: Undefined index: P&D Entre Rios
+[17/11/2019 - 20:09:48] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: syntax error, unexpected 'if' (T_IF)
+[17/11/2019 - 20:12:51] Erro ocorrido com usuário LynconEBB: Erro durante transação com Banco de dados: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ']
+where tbAtividade.idUsuario = '26'' at line 1
+[17/11/2019 - 20:15:06] Usuário LynconEBB logou no sistema através de insomnia/7.0.3
+[17/11/2019 - 20:17:54] Erro ocorrido com usuário LynconEBB: Erro durante transação com Banco de dados: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ']
+where tbAtividade.idUsuario = '26'' at line 1
+[17/11/2019 - 11:39:01]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 20:39:05] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 20:46:13] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362
+[18/11/2019 - 12:00:17]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[17/11/2019 - 21:00:23] Usuário ana123 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0

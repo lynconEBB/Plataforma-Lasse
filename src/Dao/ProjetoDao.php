@@ -179,6 +179,17 @@ class ProjetoDao extends CrudDao {
         $stm->execute();
     }
 
+    public function removerUsuario($idUsuario,$idProjeto)
+    {
+        $comando = "delete from tbUsuarioProjeto where idUsuario = :idUsuario and idProjeto = :idProjeto ";
+        $stm = $this->pdo->prepare($comando);
+
+        $stm->bindParam(':idProjeto',$idProjeto);
+        $stm->bindParam('idUsuario',$idUsuario);
+
+        $stm->execute();
+    }
+
     public function transferirDominio($idProjeto,$idNovoDono,$idAntigoDono)
     {
         $comando1 = "UPDATE tbUsuarioProjeto set dono = '1' where idProjeto = :idProjeto and idUsuario = :idNovoDono";
@@ -195,5 +206,25 @@ class ProjetoDao extends CrudDao {
 
         $stm1->execute();
         $stm2->execute();
+    }
+
+    public function listarProjetosComAtividadesDoUsuario($idUsuario)
+    {
+        $comando1 = "select DISTINCT tbProjeto.nome from tbAtividade inner join tbTarefa on tbTarefa.id = tbAtividade.idTarefa inner join tbProjeto on tbProjeto.id = tbTarefa.idProjeto 
+where tbAtividade.idUsuario = :idUsuario";
+        $stm = $this->pdo->prepare($comando1);
+        $stm->bindValue(':idUsuario',$idUsuario);
+        $stm->execute();
+        $projetos = array();
+        $linhas = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($linhas) > 0) {
+            foreach ($linhas as $row) {
+                $projetos[] = $row['nome'];
+            }
+            return $projetos;
+        }else {
+            return false;
+        }
     }
 }

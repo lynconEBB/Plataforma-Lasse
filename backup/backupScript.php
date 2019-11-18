@@ -1,7 +1,7 @@
 <?php
-    $rootDir = "/home/lasse/Lasse-Project-Manager";
+    $rootDir = "c:/Lasse-Project-Manager";
     $filesDirPath = "$rootDir/assets/files";
-    $currentTime = date("d-m-Y_H:i:s");
+    $currentTime = date("d-m-Y_H-i-s");
     $generalDir = dir("$rootDir/backup/backups");
     $currentBackupDir = $generalDir->path."/".$currentTime;
     $backupsDir = [];

@@ -175,6 +175,14 @@ function formataDadosResposta(dados,cores) {
     let datasets = [];
     let count = 0;
     for (let projeto in dados) {
+        count++;
+    }
+
+    if (cores.length !== count) {
+        cores = getCores(count);
+    }
+    count = 0;
+    for (let projeto in dados) {
         labels = [];
         if (Object.prototype.hasOwnProperty.call(dados,projeto)) {
             let data = [];

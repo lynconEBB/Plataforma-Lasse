@@ -4,6 +4,7 @@ namespace Lasse\LPM\Model;
 
 use DateTime;
 use Exception;
+use InvalidArgumentException;
 use Lasse\LPM\Services\Formatacao;
 use Lasse\LPM\Services\Validacao;
 
@@ -106,7 +107,7 @@ class ProjetoModel
         Validacao::validar('Data de Finalização',$dataFinalizacao,'data');
         $dataformatada = Formatacao::formataData($dataFinalizacao);
         if ($dataformatada < $this->dataInicio) {
-            throw new Exception('A data de finalização não pode ser anterior a data de Início');
+            throw new InvalidArgumentException('A data de finalização não pode ser anterior a data de Início');
         }else {
             $this->dataFinalizacao = $dataformatada;
         }

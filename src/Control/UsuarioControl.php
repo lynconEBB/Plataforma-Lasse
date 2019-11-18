@@ -503,13 +503,19 @@ class UsuarioControl extends CrudControl {
                 $atividadeDao = new AtividadeDao();
                 $atividadesProjeto = $atividadeDao->listarAtividadesPeriodo($idUsuario,$primeiroDia->format("Y-m-d"));
                 $projetoControl = new ProjetoControl(null);
-                $projetos = $projetoControl->listarPorIdUsuario($idUsuario);
-                
+                $projetosModel = $projetoControl->listarPorIdUsuario($idUsuario);
+                $todosProjetos = [];
+                foreach ($projetosModel as $projetoModel) {
+                    $todosProjetos[] = $projetoModel->getNome();
+                }
+                $projetos = $projetoControl->DAO->listarProjetosComAtividadesDoUsuario($idUsuario);
+                $todosProjetos = array_unique(array_merge($projetos,$todosProjetos));
+
                 if ($atividadesProjeto != false) {
                     $dadosFormatados = [];
-                    foreach ($projetos as $projeto) {
+                    foreach ($todosProjetos as $projeto) {
                         foreach ($periodo as $data) {
-                            $dadosFormatados[$projeto->getNome()][$data->format("d/m/Y")] = 0;
+                            $dadosFormatados[$projeto][$data->format("d/m/Y")] = 0;
                         }
                     }
                     foreach ($atividadesProjeto as $atividade) {

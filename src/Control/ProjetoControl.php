@@ -143,6 +143,12 @@ class ProjetoControl extends CrudControl
                         $this->excluir($this->url[2]);
                         $this->respostaSucesso("Projeto excluido com sucesso.",null,$this->requisitor);
                     }
+                    // /api/projetos/sair/${idProjeto}
+                    elseif (count($this->url) == 4 && $this->url[3] == (int)$this->url[3] && $this->url[2] == "sair" ) {
+                        $requisicaoEncontrada = true;
+                        $this->removerUsuario($this->url[3]);
+                        $this->respostaSucesso("Usuário removido do sistema com sucesso.",null,$this->requisitor);
+                    }
                     break;
             }
             if (!$requisicaoEncontrada) {
@@ -161,17 +167,25 @@ class ProjetoControl extends CrudControl
 
             $intervalo = new DateInterval("P1D");
             $periodo = new DatePeriod($primeiroDia,$intervalo,$ultimoDia);
+
             $atividadeDao = new AtividadeDao();
             $atividadesUsuario = $atividadeDao->listarAtividadesUsuariosPeriodo($body->idProjeto,$primeiroDia->format("Y-m-d"));
+            $usuarios = $atividadeDao->listarUsuariosComAtividadesNoProjeto($body->idProjeto);
+            $participantes = array();
+            foreach ($projeto->getParticipantes() as $participante) {
+                $participantes[] = $participante->getLogin();
+            }
+            $participantes = array_unique (array_merge ($usuarios, $participantes));
+
             if ($atividadesUsuario != false) {
                 $labels = [];
                 $datasets = [];
-                foreach ($projeto->getParticipantes() as $participante) {
-                    $dataset = ["label" => $participante->getLogin(),"data"=>[]];
+                foreach ($participantes as $participante) {
+                    $dataset = ["label" => $participante,"data"=>[]];
                     foreach ($periodo as $data) {
                         $tempoGasto = 0;
                         foreach ($atividadesUsuario as $atividadeUsuario) {
-                            if ($atividadeUsuario[0] == $data->format("d/m/Y") && $atividadeUsuario["login"] == $participante->getLogin() ) {
+                            if ($atividadeUsuario[0] == $data->format("d/m/Y") && $atividadeUsuario["login"] == $participante ) {
                                 $tempoGasto += $atividadeUsuario["tempoGasto"];
                             }
                         }
@@ -248,7 +262,7 @@ class ProjetoControl extends CrudControl
                         if ($tarefa->getDataConclusao() > $projeto->getDataInicio() && $tarefa->getDataConclusao() < $projeto->getDataFinalizacao() && $tarefa->getDataInicio() > $projeto->getDataInicio() && $tarefa->getDataInicio() < $projeto->getDataFinalizacao() ) {
                             continue;
                         } else {
-                            throw new InvalidArgumentException("Périodo de existencia do projeto incoerente com o périodo de existencia de suas tarefas");
+                            throw new InvalidArgumentException("Périodo de existência do projeto incoerente com o périodo de existência de suas tarefas");
                         }
                     }
                 }
@@ -274,6 +288,20 @@ class ProjetoControl extends CrudControl
             return $projeto;
         } else {
             throw new NotFoundException("Projeto não encontrado no sistema");
+        }
+    }
+
+    public function removerUsuario($idProjeto)
+    {
+        if (!$this->verificaDono($idProjeto,$this->requisitor['id'])) {
+            $projeto = $this->listarPorId($idProjeto);
+            if ($this->DAO->procuraFuncionario($idProjeto,$this->requisitor['id'])) {
+                $this->DAO->removerUsuario($this->requisitor['id'],$idProjeto);
+            } else {
+                throw new InvalidArgumentException("Usuário não participa do projeto");
+            }
+        } else {
+            throw new InvalidArgumentException("O dono do projeto não pode sair de seu projeto, transfira o dominio do projeto ou exclua-o");
         }
     }
 

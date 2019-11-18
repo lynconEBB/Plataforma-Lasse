@@ -11,6 +11,8 @@ window.onload = function () {
 
             setLinks(requisitor);
 
+            let requisitorParticipa = exibeParticipantes(projeto.participantes,requisitor.id);
+
             if (requisitor.dono === true) {
                 setTemplateDono(projeto);
                 setExclusaoProjeto(projeto,requisitor.id);
@@ -18,12 +20,12 @@ window.onload = function () {
                 setBotaoTransferirDominio(projeto,requisitor);
                 setBotaoAdicionaFuncionario(projeto.id);
             } else {
-                setTemplateNaoDono(projeto);
+                setTemplateNaoDono(projeto,requisitor,requisitorParticipa);
             }
 
             setBotaoExibeParticipantes();
 
-            let requisitorParticipa = exibeParticipantes(projeto.participantes,requisitor.id);
+
 
             let tarefaFazer = document.getElementById("tarefas-a-fazer");
             let tarefaAndamento = document.getElementById("tarefas-fazendo");
@@ -290,8 +292,9 @@ function setTemplateDono(projeto) {
     document.getElementById("projeto-detalhes").insertAdjacentHTML("afterbegin",template);
 }
 
-function setTemplateNaoDono(projeto) {
+function setTemplateNaoDono(projeto,requisitor,requisitorParticipa) {
     let template = `
+        <button title="Sair do Projeto" id="botaoSair" class="botao alerta" type="button">Sair</button>
         <span id="nome" class="alterar-titulo titulo-projeto">${projeto.nome}</span>
         <span id="descricao" class="alterar-area descricao-projeto">${projeto.descricao}</span>
         <div class="group-projeto">
@@ -312,6 +315,21 @@ function setTemplateNaoDono(projeto) {
         </div>`;
 
     document.getElementById("projeto-detalhes").insertAdjacentHTML("afterbegin",template);
+    let botaoSair = document.getElementById("botaoSair");
+    if (requisitorParticipa) {
+        botaoSair.style.display = "block";
+        botaoSair.onclick = function (event) {
+            requisicao("DELETE", "/api/projetos/sair/" + projeto.id, null, function (resposta, codigo) {
+                if (resposta.status === "sucesso") {
+                    window.location.href = "/projetos/user/" + requisitor.id+"?sucesso=Removido-do-projeto-com-sucesso";
+                } else {
+                    exibirMensagem(resposta.mensagem,true,event.target);
+                }
+            });
+        };
+    } else {
+        botaoSair.style.display = "none";
+    }
 }
 
 
