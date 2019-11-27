@@ -90,3 +90,25 @@ where tbAtividade.idUsuario = '26'' at line 1
 [18/11/2019 - 12:00:17]: Usuário Camiggf deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [17/11/2019 - 21:00:23] Usuário ana123 logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
 [18/11/2019 - 12:05:19]: Usuário ana123 deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[22/11/2019 - 13:05:53] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[25/11/2019 - 13:20:46] Usuário lynconbaez logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[25/11/2019 - 13:20:50] Erro ocorrido com usuário lynconbaez: Erro Interno Inesperado: array_merge(): Expected parameter 1 to be an array, bool given
+[25/11/2019 - 13:20:55] Erro ocorrido com usuário lynconbaez: Erro Interno Inesperado: array_merge(): Expected parameter 1 to be an array, bool given
+[26/11/2019 - 13:14:06] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 04:18:26]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 04:18:26]: Usuário LynconEBB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 13:18:31] Usuário Camiggf logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 04:22:37]: Usuário AlmirB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 13:22:43] Usuário AlmirB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 04:22:47]: Usuário AlmirB deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 13:22:53] Usuário LynconEBB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[26/11/2019 - 16:05:38] Erro ocorrido com usuário desconhecido: Erro Interno Inesperado: Undefined offset: 1
+[26/11/2019 - 16:06:13] Usuário Lyncon logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36 OPR/65.0.3467.48
+[27/11/2019 - 12:33:06] Usuário AlmirB logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0
+[27/11/2019 - 12:37:50] Usuário Lyncon logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 03:39:14]: Usuário Lyncon deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 12:43:23] Usuário Lyncon logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 04:00:23]: Usuário Lyncon deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 13:10:37] Usuário Lyncon logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 04:44:48]: Usuário Lyncon deslogou no sistema em Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+[27/11/2019 - 13:45:15] Usuário Lyncon logou no sistema através de Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36

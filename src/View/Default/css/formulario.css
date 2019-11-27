@@ -108,13 +108,7 @@ input:-webkit-autofill {
     left: 1px;
     transition: all ease-in-out 0.3s;
 }
-.real-checkbox:focus + .form-checkbox {
-    border: #12bfe5 solid 2px;
-}
-.real-checkbox:focus ~ .checkbox-label {
-    color: #12bfe5;
-    font-weight: bolder;
-}
+
 .real-checkbox:checked + .form-checkbox::after {
     left : 20px;
 }
