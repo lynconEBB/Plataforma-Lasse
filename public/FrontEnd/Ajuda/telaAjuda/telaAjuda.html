@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/public/FrontEnd/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/reset.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/material-icons.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/botoes.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/formulario.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/modal.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/body.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/mensagem.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Ajudad/Ajuda/telaAjuda/styleAjuda.css">
+    <title>LPM - Ajuda</title>
+</head>
+<body>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
+</div>
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/public/FrontEnd/images/logo2.png" alt="logotipo Lasse Project Manager">
+
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="#" class="sidebar-item" id="voltar">
+                    <i class="material-icons" aria-hidden="true">keyboard_backspace</i>
+                    Voltar
+                </a>
+            </li>
+            <span class="titulo-admin">Usuário</span>
+            <hr class="hr-admin">
+            <li  class="sidebar-item pageLink" data-page="excluirPerfil" tabindex="0">Excluir Perfil</li>
+            <li  class="sidebar-item pageLink" data-page="editarInfo" tabindex="0">Editar Informações</li>
+            <li  class="sidebar-item pageLink" data-page="alterarSenha" tabindex="0">Alterar Senha</li>
+            <span class="titulo-admin">Projetos</span>
+            <hr class="hr-admin">
+            <li  class="sidebar-item pageLink" data-page="cadastrarProjeto" tabindex="0">Cadastrar Projeto</li>
+            <li  class="sidebar-item pageLink" data-page="editarProjeto" tabindex="0">Editar Projeto</li>
+            <li  class="sidebar-item pageLink" data-page="transferirDominio" tabindex="0">Transferir Domínio</li>
+            <li  class="sidebar-item pageLink" data-page="adicionarUsuario" tabindex="0">Adicionar Usuário</li>
+            <li  class="sidebar-item pageLink" data-page="excluirProjeto" tabindex="0">Excluir Projeto</li>
+        </ul>
+
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="page exibindo" id="pageInicial">
+            <h1>Página de ajuda</h1>
+            <ul>
+                <li>Esta é a tela de ajuda de Lasse-Project Manager, caso tenha uma dúvida sobre as funcionalidades do sistema, procure o que deseja na barra lateral e clique nesta opção.</li>
+                <img alt="Gif exibindo barra lateral sendo navagada" src="/public/FrontEnd/gifs/primeiroGif2.gif">
+            </ul>
+        </div>
+        <div class="page" id="excluirPerfil">
+            <h1>Excluir Perfil</h1>
+            <ul>
+                <li>Para excluir seu perfil de usuário, primeiramente navegue até seu perfil clicando em seu avatar no canto superior direito da tela e clique no botão "Perfil".</li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirPerfil1.gif">
+                <li>Clique no botão excluir no canto superior direito de seu perfil.</li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirPerfil2.gif">
+                <li>Digite confirmar na caixa de texto e clique em excluir. <b>Obs: A exclusão de perfil é permitida apenas caso você não possua projetos em seu dominío, caso isso ocorra, exclua esses projetos ou transfira seu domínio para outro participante do projeto.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirPerfil3.gif">
+            </ul>
+        </div>
+        <div class="page" id="editarInfo">
+            <h1>Edição de Perfil</h1>
+            <ul>
+                <li>Para editar as informações de seu perfil, primeiramente navegue até seu perfil clicando em seu avatar no canto superior direito da tela e clique no botão "Perfil". </li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirPerfil1.gif">
+                <li>Altere os campos de texto necessários e clique no botão "Alterar" no canto superior esquerdo do perfil. <b>Obs: O nome de usuário deve conter no minímo 6 caracteres.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarPerfil1.gif">
+            </ul>
+        </div>
+        <div class="page" id="alterarSenha">
+            <h1>Alteração de Senha</h1>
+            <ul>
+                <li>Na tela de login do sistema, clique no botao "Esqueci minha senha".</li>
+                <img alt="" src="/public/FrontEnd/gifs/alterarSenha1.gif">
+                <li>Digite seu e-mail cadastrado no sistema e clique em "confirmar".</li>
+                <img alt="" src="/public/FrontEnd/gifs/alterarSenha2.gif">
+                <li>Navegue até sua caixa de entrada do seu e-mail e clique no link enviado.</li>
+                <img alt="" src="/public/FrontEnd/gifs/alterarSenha3.gif">
+                <li>Digite sua nova senha e a confirmação da mesma nos campos exibidos e clique em "Alterar".</li>
+                <img alt="" src="/public/FrontEnd/gifs/alterarSenha4.gif">
+            </ul>
+        </div>
+        <div class="page" id="cadastrarProjeto">
+            <h1>Cadastrar Projeto</h1>
+            <ul>
+                <li>Navegue ate a tela de projetos clicando na opção "Projetos" da barra lateral.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto1.gif">
+                <li>Clique no botão "novo" localizado no top da página.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto2.gif">
+                <li>Preencha os campos de texto com as informações necessárias e clique em "Cadatrar".</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto3.gif">
+            </ul>
+        </div>
+        <div class="page" id="editarProjeto">
+            <h1>Editar Projeto</h1>
+            <ul>
+                <li>Navegue até a tela de projetos clicando na opção "Projetos" da barra lateral.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto1.gif">
+                <li>Acesse um projeto que seja dono clicando sobre o mesmo. <b>Projetos em que você é dono são marcados com um símbolo no canto superior direito do projeto</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarProjeto1.gif">
+                <li>Altere as informações necessárias e clique no botão alterar localizado no canto superior esquerdo do projeto. <b>A opção de alterar está apenas habilitada ao dono do projeto</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarProjeto2.gif">
+            </ul>
+        </div>
+        <div class="page" id="transferirDominio">
+            <h1>Transferir Domínio de um Projeto</h1>
+            <ul>
+                <li>Navegue até a tela de projetos clicando na opção "Projetos" da barra lateral.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto1.gif">
+                <li>Acesse um projeto que seja dono clicando sobre o mesmo. <b>Projetos em que você é dono são marcados com um símbolo no canto superior direito do projeto.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarProjeto1.gif">
+                <li>Clique no botão "Transferir Domnínio" localizado no centro do projeto <b>Obs: Caso você seja o único participante do projeto um erro será exibido, neste caso adicione um usuário ao projeto e em seguida transfira o domínio</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/transferirDominio1.gif">
+                <li>Selecione um participante para ser o novo dono do projeto e clique em "Transferir". <b></b></li>
+                <img alt="" src="/public/FrontEnd/gifs/transferirDominio2.gif">
+
+            </ul>
+        </div>
+        <div class="page" id="adicionarUsuario">
+            <h1>Adicionar Usuário a um Projeto</h1>
+            <ul>
+                <li>Navegue até a tela de projetos clicando na opção "Projetos" da barra lateral.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto1.gif">
+                <li>Acesse um projeto que seja dono clicando sobre o mesmo. <b>Projetos em que você é dono são marcados com um símbolo no canto superior direito do projeto.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarProjeto1.gif">
+                <li>Clique no botão para visualizar a aba de participantes de projeto e clique no botão "Novo".<b>Obs: Caso todos os usuários do sistema ja estejam participando do projeto um erro será exibido.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/adicionarUsuario1.gif">
+                <li>Selecione o usuário desejado e clique em "Adicionar".</li>
+                <img alt="" src="/public/FrontEnd/gifs/adicionarUsuario2.gif">
+            </ul>
+        </div>
+        <div class="page" id="excluirProjeto">
+            <h1>Excluir Projeto</h1>
+            <ul>
+                <li>Navegue até a tela de projetos clicando na opção "Projetos" da barra lateral.</li>
+                <img alt="" src="/public/FrontEnd/gifs/cadastrarProjeto1.gif">
+                <li>Acesse um projeto que seja dono clicando sobre o mesmo. <b>Projetos em que você é dono são marcados com um símbolo no canto superior direito do projeto.</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/editarProjeto1.gif">
+                <li>Clique no botão "Excluir" no canto superior direito do projeto. <b>Obs: Esta opçõe aparecerá somente caso você seja dono deste projeto</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirProjeto1.gif">
+                <li>Clique no botão "Excluir" da caixa de diálogo para confirmar a exclusão do projeto. <b>Obs: Tome muito cuidado com essa opção todos os dados presentes em um projeto serão excluídos para sempre</b></li>
+                <img alt="" src="/public/FrontEnd/gifs/excluirProjeto2.gif">
+            </ul>
+        </div>
+
+    </main>
+</div>
+<script src="/public/FrontEnd/DefaultDefault/js/inert.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/body.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/mensagem.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/modal.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/formulario.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/funcoesPadrao.js"></script>
+<script src="/public/FrontEnd/Ajudad/Ajuda/telaAjuda/funcoesAjuda.js"></script>
+</body>
+</html>

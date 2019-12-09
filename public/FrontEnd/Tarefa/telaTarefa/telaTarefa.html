@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/public/FrontEnd/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/reset.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/material-icons.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/botoes.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/formulario.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/modal.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/body.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Tarefa/Tarefa/telaTarefa/styleTarefa.css">
+    <title>LPM - Tarefa</title>
+</head>
+<body>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
+</div>
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/public/FrontEnd/images/logo2.png" alt="logotipo Lasse Project Manager">
+
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="/ajuda" class="sidebar-item" id="ajuda">
+                    <i class="material-icons" aria-hidden="true">help</i>
+                    Ajuda
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="dashboards">
+                    <i class="material-icons" aria-hidden="true">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="projetos">
+                    <i class="material-icons" aria-hidden="true">work</i>
+                    Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="imprevistos">
+                    <i class="material-icons" aria-hidden="true">book</i>
+                    Imprevistos
+                </a>
+            </li>
+            <li>
+                <a href="#" id="formularios" class="sidebar-item">
+                    <i class="material-icons" aria-hidden="true">assignment</i>
+                    Formulários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficos">
+                    <i class="material-icons" aria-hidden="true">assessment</i>
+                    Gráficos
+                </a>
+            </li>
+        </ul>
+        <ul class="container-itens-admin">
+            <span class="titulo-admin">Opções Admin</span>
+            <hr class="hr-admin">
+            <li>
+                <a href="#" class="sidebar-item" id="usuarios">
+                    <i class="material-icons" aria-hidden="true">people</i>
+                    Usuários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="todosProjetos">
+                    <i class="material-icons" aria-hidden="true">group_work</i>
+                    Todos Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficosAdmin">
+                    <i class="material-icons" aria-hidden="true">pie_chart</i>
+                    Gráficos Gerais
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="container">
+            <div id="tarefa-detalhes">
+                <form id="detalhe-conteudo">
+
+                </form>
+            </div>
+            <div id="itens-tarefa">
+                <!-------------------------- Atividades ----------------------------->
+                <div id="container-atividades">
+                    <h2 class="tabTitulo"><i class="material-icons">book</i>Atividades</h2>
+                    <button class='botao aviso' id='abreModalCadastroAtividade'>Novo</button>
+                    <hr>
+                    <div id="atividades" class="container-padrao">
+                        <div class="aviso-container" id="aviso-atividade">
+                            <img src="/public/FrontEnd/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Atividade encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova Atividade</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </div>
+                <!------------ Viagens --------------------->
+                <div id="container-viagens">
+                    <h2 class="tabTitulo"><i class="material-icons">airplanemode_active</i>Viagens</h2>
+                    <button class='botao aviso' id='abreModalCadastroViagem'>Novo</button>
+                    <hr>
+                    <div id="viagens" class="container-padrao">
+                        <div class="aviso-container" id="aviso-viagem">
+                            <img src="/public/FrontEnd/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Viagem encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova viagem</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </div>
+                <!----------------------- Compras ------------------>
+                <div id="container-compras">
+                    <h2 class="tabTitulo"><i class="material-icons">shop</i>Compras</h2>
+                    <button class='botao aviso' id='abreModalCadastroCompra'>Novo</button>
+                    <hr>
+                    <div id="compras" class="container-padrao">
+                        <div class="aviso-container" id="aviso-compra">
+                            <img src="/public/FrontEnd/images/not-found.svg" class="ImgSemItens" alt="icone sem itens">
+                            <h4>Nenhuma Compra encontrada!</h4>
+                            <h4>Clique em novo para cadastrar uma nova compra</h4>
+                        </div>
+                    </div>
+                    <div class="botoes-container">
+                        <button class="esquerda">
+                            <i class="material-icons md-3">keyboard_arrow_left</i>
+                        </button>
+                        <button class="direita">
+                            <i class="material-icons md-3">keyboard_arrow_right</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-background"></div>
+<!--------------------- Modal Exclusao Tarefa ----------------------------->
+<div class="modal" id="modalExcluirTarefa" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Excluir Tarefa</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <span class="texto-excluir">Deseja mesmo excluir esta tarefa?</span>
+        <span class="texto-excluir">Todos os dados presentes nesta tarefa serão excluidos <b>para sempre</b></span>
+        <button class="botao alerta center" id="excluirTarefa">Excluir</button>
+    </div>
+</div>
+
+<!--------------------- Modal Cadastro Atividade ---------------------------->
+<div class="modal" id="modalCadastroAtividade" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Atividade</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <i class="material-icons select-seta">arrow_drop_down</i>
+                <label class="form-label" for="tipoAtividade">Tipo</label>
+                <select class="form-select" id="tipoAtividade">
+                    <option selected value=""></option>
+                    <option value="Aprimoramento">Aprimoramento</option>
+                    <option value="Desenvolvimento">Desenvolvimento</option>
+                    <option value="Design">Design</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="comentario">Comentário</label>
+                <input class="form-input" type="text" id="comentario">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="data">Data de Realizacao</label>
+                <input class="form-input" type="text" id="data">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="tempo">Tempo Gasto</label>
+                <input class="form-input" type="text" id="tempo">
+            </div>
+            <button class="botao sucesso center" id="cadastrarAtividade">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+<!--------------------- Modal Cadastro Compra ----------------------------->
+<div class="modal" id="modalCadastroCompra" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Compra</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label for="proposito" class="form-label">Propósito</label>
+                <input type="text" id="proposito" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="fonteCompra" class="form-label">Fonte de Recurso</label>
+                <input type="text" id="fonteCompra" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="natOrcamentaria" class="form-label">Natureza Orçamentária</label>
+                <input type="text" id="natOrcamentaria" class="form-input">
+            </div>
+            <div id="cabecalho-itens">
+                <h3>Itens</h3>
+                <button class="botao aviso" id="novoItem">Novo</button>
+            </div>
+            <hr>
+            <div id="itens">
+                <div class="container-item">
+                    <div class="form-group">
+                        <label for="nomeItem" class="form-label">Item</label>
+                        <input type="text" id="nomeItem" class="form-input itemNome">
+                    </div>
+                    <div class="form-group">
+                        <label for="item" class="form-label ">Quantidade</label>
+                        <input type="text" id="item" class="form-input itemQtd">
+                    </div>
+                    <div class="form-group">
+                        <label for="qtdItem" class="form-label ">Valor</label>
+                        <input type="text" id="qtdItem" class="form-input itemValor">
+                    </div>
+                    <button class="botao alerta" id="excluiItem">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="botao sucesso center" id="cadastrarCompra">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+<!--------------------- Modal Cadastro Viagem ----------------------------->
+<div class="modal" id="modalCadastroViagem" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Viagem</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <input type="hidden" id="idCondutor" value="novo">
+            <input type="hidden" id="idVeiculo" value="novo">
+            <!------- Página Viagem ----------------->
+            <fieldset id="info-viagem" class="info-container ativado">
+                <h2>Informações da Viagem</h2>
+                <div class="form-group">
+                    <label class="form-label" for="origem">Origem</label>
+                    <input class="form-input" id="origem" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="destino">Destino</label>
+                    <input class="form-input" id="destino" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dataIda">Data de Ida</label>
+                    <input class="form-input" id="dataIda" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dataVolta">Data de Volta</label>
+                    <input class="form-input" id="dataVolta" type="text">
+                </div>
+                <div class="form-group">
+                    <i class="material-icons select-seta">arrow_drop_down</i>
+                    <label class="form-label label-select" for="tipo">Tipo de Viagem</label>
+                    <select id="tipo" class="form-select">
+                        <option value="" disabled selected></option>
+                        <option value="Viagem a trabalho">Viagem a trabalho</option>
+                        <option value="Evento/Congresso">Evento/Congresso</option>
+                        <option value="Viagem treinamento/aprimoramento">Viagem treinamento/aprimoramento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fonte">Fonte de Recurso</label>
+                    <input class="form-input" id="fonte" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="atividade">Atividade</label>
+                    <input class="form-input" id="atividade" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="justificativa">Justificativa</label>
+                    <input class="form-input" id="justificativa" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="observacoes">Observações</label>
+                    <input class="form-input" id="observacoes" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="passagem">Passagem</label>
+                    <input class="form-input" id="passagem" type="text">
+                </div>
+                <div class="form-group">
+                    <i class="material-icons select-seta">arrow_drop_down</i>
+                    <label class="form-label label-select" for="tipoPassagem">Tipo de Passagem</label>
+                    <select id="tipoPassagem" class="form-select">
+                        <option value="" disabled selected></option>
+                        <option value="Aérea nacional (com franquia de bagagem)">Aérea nacional (com franquia de bagagem)</option>
+                        <option value="Aérea nacional (sem franquia de bagagem)">Aérea nacional (sem franquia de bagagem)</option>
+                        <option value="Aérea internacional">Aérea internacional</option>
+                        <option value="Terrestre nacional">Terrestre nacional</option>
+                        <option value="Terrestre internacional">Terrestre internacional</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="botao sucesso center proximo" type="button" id="irPaginaHosp">Avançar</button>
+                </div>
+            </fieldset>
+            <!------- Página Hospedagem ----------------->
+            <fieldset class="info-container" id="info-hosp">
+                <h2>Informações Hospedagem</h2>
+                <div class="form-group">
+                    <label class="form-label" for="dtEntradaHosp">Data Entrada Hospedagem</label>
+                    <input class="form-input" id="dtEntradaHosp" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="dtSaidaHosp">Data Saida Hospedagem</label>
+                    <input class="form-input" id="dtSaidaHosp" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaEntradaHosp">Hora de Entrada Hospedagem</label>
+                    <input class="form-input" id="horaEntradaHosp" type="text">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="horaSaidaHosp">Hora de Saida na Hospedagem</label>
+                    <input class="form-input" id="horaSaidaHosp" type="text">
+                </div>
+                <div class="botoes">
+                    <button class="botao alerta anterior" type="button" id="voltaPagViagem">Voltar</button>
+                    <button class="botao sucesso proximo" type="button" id="irPagVeiculo">Avançar</button>
+                </div>
+            </fieldset>
+            <!------- Página Veiculo ----------------->
+            <fieldset id="info-veiculo"  class="info-container">
+                <h2>Selecione um Veículo ou Cadastre um novo</h2>
+                <button type="button" class="botao aviso center" id="novoVeiculo">Novo</button>
+                <div id="veiculos">
+                    <!------ Veiculos Aqui ---------------->
+                </div>
+                <div id="form-veiculo" style="display: none">
+                    <div class="form-group">
+                        <label class="form-label" for="veiculo">Nome do Veículo</label>
+                        <input class="form-input" id="veiculo" type="text">
+                    </div>
+                    <div class="form-group">
+                        <i class="material-icons select-seta">arrow_drop_down</i>
+                        <label class="form-label label-select" for="tipoVeiculo">Tipo de Veículo</label>
+                        <select id="tipoVeiculo" class="form-select">
+                            <option value="" disabled selected></option>
+                            <option value="Veículo locado">Veículo locado</option>
+                            <option value="Transporte com parceiros/terceiros">Transporte com parceiros/terceiros</option>
+                            <option value="Veículo Fundação PTI-BR">Veículo Fundação PTI-BR</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dataRetirada">Data de Retirada</label>
+                        <input class="form-input" id="dataRetirada" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="horaRetirada">Hora de Retirada</label>
+                        <input class="form-input" id="horaRetirada" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dataDevolucao">Data de Devolução</label>
+                        <input class="form-input" id="dataDevolucao" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="horaDevolucao">Hora de Devolução</label>
+                        <input class="form-input" id="horaDevolucao" type="text">
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="botao alerta anterior" type="button" id="voltarPaginaViagem">Voltar</button>
+                    <button class="botao sucesso proximo" type="button" style="display: none" id="irPaginaCondutor">Avançar</button>
+                </div>
+            </fieldset>
+            <!------- Página Condutor ----------------->
+            <fieldset id="info-condutor" class="info-container">
+                <h2>Selecione um condutor ou cadastre um novo</h2>
+                <button type="button" class="botao aviso center" id="novoCondutor">Novo</button>
+                <div id="condutores">
+                    <!-------- Condutores Aqui ---------->
+                </div>
+                <div id="form-condutor" style="display: none">
+                    <div class="form-group">
+                        <label class="form-label" for="nomeCondutor">Nome do Condutor</label>
+                        <input class="form-input" id="nomeCondutor" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cnh">Número CNH</label>
+                        <input class="form-input" id="cnh" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="validadeCNH">Validade da CNH</label>
+                        <input class="form-input" id="validadeCNH" type="text">
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button type="button" class="botao alerta anterior">Voltar</button>
+                    <button type="button" class="botao sucesso proximo" id="irPaginaGastos" style="display: none">Avançar</button>
+                </div>
+            </fieldset>
+            <!------- Página Gastos ----------------->
+            <fieldset id="info-gastos"  class="info-container">
+                <h2>Gastos da Viagem</h2>
+                <button type="button" class="botao aviso center" id="novoGasto">Novo</button>
+                <div id="gastos">
+
+                </div>
+                <div id="gastosPadroes">
+                    <div class="form-group">
+                        <label class="form-label" for="aluguel">Aluguel de veículos (locado fora de Foz)</label>
+                        <input class="form-input" id="aluguel" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="combustivel">Combustível</label>
+                        <input class="form-input" id="combustivel" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="estacionamento">Estacionamento</label>
+                        <input class="form-input" id="estacionamento" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="passagemRodMetro">Passagens rodoviárias (metrô/ônibus)</label>
+                        <input class="form-input" id="passagemRodMetro" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="passagemRodInter">Passagens rodoviárias internacionais</label>
+                        <input class="form-input" id="passagemRodInter" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="pedagio">Pedágio</label>
+                        <input class="form-input" id="pedagio" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="seguro">Seguro internacional (obrigatório)</label>
+                        <input class="form-input" id="seguro" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="taxi">Táxi</label>
+                        <input class="form-input" id="taxi" type="text">
+                    </div>
+                    <div id='lds-ring'></div>
+                    <div class="botoes">
+                        <button class="botao alerta anterior" id="voltarPagina" type="button">Voltar</button>
+                        <button class="botao sucesso" id="cadastrarViagem" type="button">Finalizar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script src="/public/FrontEnd/Default/js/inert.js"></script>
+<script src="/public/FrontEnd/Default/js/body.js"></script>
+<script src="/public/FrontEnd/Default/js/mensagem.js"></script>
+<script src="/public/FrontEnd/Default/js/modal.js"></script>
+<script src="/public/FrontEnd/Default/js/formulario.js"></script>
+<script src="/public/FrontEnd/Default/js/funcoesPadrao.js"></script>
+<script src="/public/FrontEnd/Tarefa/Tarefa/telaTarefa/funcoesTarefaViagem.js"></script>
+<script src="/public/FrontEnd/Tarefa/Tarefa/telaTarefa/funcoesTarefaCompra.js"></script>
+<script src="/public/FrontEnd/Tarefa/Tarefa/telaTarefa/funcoesTarefa.js"></script>
+</body>
+</html>

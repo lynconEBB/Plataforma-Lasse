@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/public/FrontEnd/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/reset.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/material-icons.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/botoes.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/formulario.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/modal.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/body.css">
+    <link rel="stylesheet" href="/public/FrontEnd/DefaultDefault/css/mensagem.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Compra/Compra/telaCompra/styleCompra.css">
+    <title>LPM - Compra</title>
+</head>
+<body>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
+</div>
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/public/FrontEnd/images/logo2.png" alt="logotipo Lasse Project Manager">
+
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="/ajuda" class="sidebar-item" id="ajuda">
+                    <i class="material-icons" aria-hidden="true">help</i>
+                    Ajuda
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="dashboards">
+                    <i class="material-icons" aria-hidden="true">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="projetos">
+                    <i class="material-icons" aria-hidden="true">work</i>
+                    Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="imprevistos">
+                    <i class="material-icons" aria-hidden="true">book</i>
+                    Imprevistos
+                </a>
+            </li>
+            <li>
+                <a href="#" id="formularios" class="sidebar-item">
+                    <i class="material-icons" aria-hidden="true">assignment</i>
+                    Formulários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficos">
+                    <i class="material-icons" aria-hidden="true">assessment</i>
+                    Gráficos
+                </a>
+            </li>
+        </ul>
+        <ul class="container-itens-admin">
+            <span class="titulo-admin">Opções Admin</span>
+            <hr class="hr-admin">
+            <li>
+                <a href="#" class="sidebar-item" id="usuarios">
+                    <i class="material-icons" aria-hidden="true">people</i>
+                    Usuários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="todosProjetos">
+                    <i class="material-icons" aria-hidden="true">group_work</i>
+                    Todos Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficosAdmin">
+                    <i class="material-icons" aria-hidden="true">pie_chart</i>
+                    Gráficos Gerais
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="container">
+            <h1 id="titulo">Compra realizada por gjdfhkg</h1>
+            <button class="botao" id="gerarFormulario">Cadastrar e gerar Formulário</button>
+            <hr>
+            <form class="info-compra">
+                <div class="form-group">
+                    <label class="alterar-label" for="natOrcamentaria">Natureza Orçamentária</label>
+                    <input type="text" id="natOrcamentaria" class="alterar-input">
+                    <span class="span-compra" id="span-nat"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alterar-label" for="fonte">Fonte de Recurso</label>
+                    <input type="text" id="fonte" class="alterar-input">
+                    <span class="span-compra" id="span-fonte"></span>
+                </div>
+                <div class="form-group">
+                    <label class="alterar-label" for="totalGasto">Total Gasto</label>
+                    <span class="span-compra" style="display: block" id="totalGasto"></span>
+                </div>
+                <div class="form-group" id="group-proposito">
+                    <label class="alterar-label" for="proposito">Propósito</label>
+                    <textarea id="proposito" class="alterar-area"></textarea>
+                    <span class="span-compra" id="span-proposito"></span>
+                </div>
+                <button class="botao info" id="alterarCompra">Alterar</button>
+                <button class="botao alerta" id="abreModalExcluirCompra">Excluir</button>
+            </form>
+            <div id="itens">
+                <button class="botao aviso center" id="novoItem">Novo Item</button>
+                <hr>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-background">
+</div>
+<!------------------ Modal Cadastro Item --------------------------->
+<div class="modal" id="modalCadastroItem" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Item</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="form-label" for="nomeCadastro">Nome</label>
+                <input type="text" id="nomeCadastro" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="qtdCadastro">Quantidade</label>
+                <input type="text" id="qtdCadastro" class="form-input">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="valorCadastro">Valor</label>
+                <input type="text" id="valorCadastro" class="form-input">
+            </div>
+        </form>
+        <button class="botao sucesso center" id="cadastrarItem">Cadastrar</button>
+    </div>
+</div>
+
+<!------------------ Modal Exclusao Compra --------------------------->
+<div class="modal" id="modalExclusaoCompra" role="dialog" tabindex="-1">
+    <div class="modal-header alerta">
+        <h2 class="modal-header-title">Excluir Compra</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <h3>Tem certeza que deseja excluir esta compra?</h3>
+        <h3>Caso possua um formulário este também será excluído</h3>
+        <button class="botao alerta center" id="excluirCompra">Excluir</button>
+    </div>
+</div>
+
+<script src="/public/FrontEnd/DefaultDefault/js/inert.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/body.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/mensagem.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/modal.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/formulario.js"></script>
+<script src="/public/FrontEnd/DefaultDefault/js/funcoesPadrao.js"></script>
+<script src="/public/FrontEnd/Compra/Compra/telaCompra/funcoesCompra.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/public/FrontEnd/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/material-icons.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/mensagem.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/body.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/modal.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/botoes.css">
+    <link rel="stylesheet" href="/public/FrontEnd/Default/css/formulario.css">
+    <link rel="stylesheet" href="/public/FrontEnd/UsuarioUsuario/telaAlterarSenha/styleAlterarSenha.css">
+    <title>LPM - Alterar Senha</title>
+</head>
+<body>
+    <div class="mensagem" role="alert" tabindex="-1">
+        <span id="mensagem-texto">
+        </span>
+        <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+            <i class="material-icons botao-fechar-mensagem">
+                close
+            </i>
+        </button>
+    </div>
+    <main class="container">
+        <header class="container-header">
+            <h1 class="container-titulo">Alterar Senha</h1>
+        </header>
+        <form class="form-padrao">
+            <div class="form-group">
+                <label class="form-label" for="senha">Nova senha</label>
+                <input class="form-input" type="password" id="senha">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="senhaConfirm">Confirmação nova senha</label>
+                <input class="form-input" type="password" id="senhaConfirm">
+            </div>
+            <button class="botao sucesso center" id="alterarSenha">Alterar</button>
+        </form>
+    </main>
+
+    <script src="/public/FrontEnd/Default/js/mensagem.js"></script>
+    <script src="/public/FrontEnd/Default/js/funcoesPadrao.js"></script>
+    <script src="/public/FrontEnd/Default/js/formulario.js"></script>
+    <script src="/public/FrontEnd/UsuarioUsuario/telaAlterarSenha/funcoesAlterarSenha.js"></script>
+    </body>
+</html>

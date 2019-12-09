@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    networks:
+      - development-network
+    volumes:
+      - ./public/:/code
+      - ./nginx/servers:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php
+
+  php:
+    image: lynconbaez/php-pdo
+    ports:
+      - 9000
+    networks:
+      - development-network
+    volumes:
+      - ./public/BackEnd:/code
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    command: --init-file /data/application/init.sql
+    environment:
+      MYSQL_DATABASE: 'dbLPM'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'superpass'
+      MYSQL_ROOT_PASSWORD: 'superpass'
+    ports:
+      - 3306
+    networks:
+      - development-network
+    volumes:
+      - ./init.sql:/data/application/init.sql
+      - ./db:/var/lib/mysql
+
+  redmine:
+    image: redmine:latest
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      REDMINE_DB_MYSQL: 'mysql'
+      REDMINE_DB_PORT: '3306'
+      REDMINE_DB_USERNAME: 'root'
+      REDMINE_DB_PASSWORD: 'superpass'
+      REDMINE_DB_DATABASE: 'redmine'
+      REDMINE_DB_ENCODING: 'utf8'
+    depends_on:
+      - mysql
+    networks:
+      - development-network
+
+networks:
+  development-network:
+    driver: bridge
