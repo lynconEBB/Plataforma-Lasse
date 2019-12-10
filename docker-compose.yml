@@ -15,7 +15,9 @@ services:
       - php
 
   php:
-    image: lynconbaez/php-pdo
+    build:
+      dockerfile: php.Dockerfile
+      context: .
     ports:
       - 9000
     networks:
