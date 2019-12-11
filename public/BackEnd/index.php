@@ -3,11 +3,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require 'LDAPConnection.php';
 
-$con = new LDAPConnection();
-
-/*require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
 use Lasse\LPM\Control\AtividadeControl;
 use Lasse\LPM\Control\CompraControl;
@@ -177,4 +174,4 @@ class Router{
     }
 }
 
-new Router();*/
+new Router();
