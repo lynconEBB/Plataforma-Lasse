@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/root/FrontEnd/images/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/reset.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/material-icons.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/botoes.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/formulario.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/modal.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/body.css">
+    <link rel="stylesheet" href="/root/FrontEnd/DefaultDefault/css/mensagem.css">
+    <link rel="stylesheet" href="/root/FrontEnd/Atividadeividade/telaImprevistos/styleImprevistos.css">
+    <title>LPM - Imprevistos </title>
+</head>
+<body>
+<!--------- Mensagem ---------------->
+<div class="mensagem" role="alert" tabindex="-1">
+    <span id="mensagem-texto"></span>
+    <button class="botao-fechar-mensagem" aria-hidden="true" tabindex="-1">
+        <i class="material-icons botao-fechar-mensagem">close</i>
+    </button>
+</div>
+<div class="fora-modal">
+    <!--------------------- Header ------------------->
+    <header class="main-header">
+        <button id="botao-menu" aria-hidden="true" tabindex="-1">
+            <i class="material-icons md-25">menu</i>
+        </button>
+        <img class="header-logo" src="/root/FrontEnd/images/logo2.png" alt="logotipo Lasse Project Manager">
+
+        <button class="user-info" role="button" tabindex="0" aria-expanded="false" aria-label="Informações de">
+            <span class="user-name" id="name"></span>
+            <div class="container-user-img" role="img"></div>
+        </button>
+        <ul tabindex="-1" class="user-menu">
+            <li>
+                <a class="user-menu-item" id="perfil" href="#" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">person</i>
+                    Perfil
+                </a>
+            </li>
+            <hr aria-hidden="true">
+            <li>
+                <button type="button" class="user-menu-item sair" id="sair" tabindex="-1">
+                    <i class="material-icons" aria-hidden="true">cancel</i>
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </header>
+    <!---------------------- Side Bar --------------------->
+    <nav class="sidebar">
+        <ul class="container-itens">
+            <li>
+                <a href="/ajuda" class="sidebar-item" id="ajuda">
+                    <i class="material-icons" aria-hidden="true">help</i>
+                    Ajuda
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="dashboards">
+                    <i class="material-icons" aria-hidden="true">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="projetos">
+                    <i class="material-icons" aria-hidden="true">work</i>
+                    Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item selecionado" id="imprevistos">
+                    <i class="material-icons" aria-hidden="true">book</i>
+                    Imprevistos
+                </a>
+            </li>
+            <li>
+                <a href="#" id="formularios" class="sidebar-item">
+                    <i class="material-icons" aria-hidden="true">assignment</i>
+                    Formulários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficos">
+                    <i class="material-icons" aria-hidden="true">assessment</i>
+                    Gráficos
+                </a>
+            </li>
+        </ul>
+        <ul class="container-itens-admin">
+            <span class="titulo-admin">Opções Admin</span>
+            <hr class="hr-admin">
+            <li>
+                <a href="#" class="sidebar-item" id="usuarios">
+                    <i class="material-icons" aria-hidden="true">people</i>
+                    Usuários
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="todosProjetos">
+                    <i class="material-icons" aria-hidden="true">group_work</i>
+                    Todos Projetos
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-item" id="graficosAdmin">
+                    <i class="material-icons" aria-hidden="true">pie_chart</i>
+                    Gráficos Gerais
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-------------------- Main Content ------------------->
+    <main class="main-content">
+        <div class="main-container">
+            <h1 id="titulo">Imprevistos do Usuário</h1>
+            <button class="botao aviso" type="button" id="abreModalCadastro">
+                <i class="material-icons md-12" aria-hidden="true">add_box</i>Novo
+            </button>
+            <hr>
+            <div class="imprevistos-table">
+                <div class="imprevistos-header" aria-hidden="true">
+                    <span>Tipo</span>
+                    <span>Data</span>
+                    <span class="total">Total Gasto</span>
+                </div>
+                <div class="imprevistos-body">
+
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-background">
+</div>
+<div class="modal" id="modalCadastroImprevisto" role="dialog" tabindex="-1">
+    <div class="modal-header">
+        <h2 class="modal-header-title">Cadastrar Imprevisto</h2>
+        <button class="modal-close" type="button" aria-label="Fechar Modal">
+            <i class="material-icons">close</i>
+        </button>
+    </div>
+    <div class="modal-conteudo">
+        <form class="form-padrao">
+            <div class="form-group">
+                <i class="material-icons select-seta">arrow_drop_down</i>
+                <label class="form-label" for="tipoCadastro">Tipo</label>
+                <select class="form-select" id="tipoCadastro">
+                    <option selected value=""></option>
+                    <option value="Reunião Interna">Reunião Interna</option>
+                    <option value="Reunião Externa">Reunião Externa</option>
+                    <option value="Atividade Acadêmica">Atividade Acadêmica</option>
+                    <option value="Workshop Interno">Workshop Interno</option>
+                    <option value="Workshop Externo">Workshop Externo</option>
+                    <option value="Trabalho em Campo">Trabalho em Campo</option>
+                    <option value="Operacional">Operacional</option>
+                    <option value="Treinamento Externo">Treinamento Externo</option>
+                    <option value="Orientação">Orientação</option>
+                    <option value="Compensação">Compensação</option>
+                    <option value="Projeto Interno">Projeto Interno</option>
+                    <option value="Atestado Médico">Atestado Médico</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="comentarioCadastro">Comentário</label>
+                <input class="form-input" type="text" id="comentarioCadastro">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="dataCadastro">Data de Realizacao</label>
+                <input class="form-input" type="text" id="dataCadastro">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="tempoCadastro">Tempo Gasto</label>
+                <input class="form-input" type="text" id="tempoCadastro">
+            </div>
+            <button class="botao sucesso center" id="cadastraImprevisto">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+<script src="/root/FrontEnd/DefaultDefault/js/inert.js"></script>
+<script src="/root/FrontEnd/DefaultDefault/js/body.js"></script>
+<script src="/root/FrontEnd/DefaultDefault/js/mensagem.js"></script>
+<script src="/root/FrontEnd/DefaultDefault/js/modal.js"></script>
+<script src="/root/FrontEnd/DefaultDefault/js/formulario.js"></script>
+<script src="/root/FrontEnd/DefaultDefault/js/funcoesPadrao.js"></script>
+<script src="/root/FrontEnd/Atividadeividade/telaImprevistos/funcoesImprevistos.js"></script>
+</body>
+</html>

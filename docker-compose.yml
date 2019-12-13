@@ -8,22 +8,20 @@ services:
     networks:
       - development-network
     volumes:
-      - ./public/:/code
+      - ./root/:/code
       - ./nginx/servers:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - php
 
   php:
-    build:
-      dockerfile: php.Dockerfile
-      context: .
+    image: lynconbaez/php-ldap-pdo
     ports:
       - 9000
     networks:
       - development-network
     volumes:
-      - ./public/BackEnd:/code
+      - ./root/BackEnd:/code
     depends_on:
       - mysql
 
