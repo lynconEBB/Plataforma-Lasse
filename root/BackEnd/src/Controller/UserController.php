@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
-    public function index(Request $request): Response
+    public function index()
     {
         return new Response();
     }
 
+    /**
+     * @Route("/users",methods={"GET"})
+     */
     public function show()
     {
 
@@ -27,13 +31,9 @@ class UserController extends AbstractController
     /**
      * @Route("/users",methods={"POST"})
      */
-    public function store(Request $request): Response
+    public function store()
     {
-        $jsonData = json_decode($request->getContent());
-
-        $user = new User();
-
-        return new JsonResponse($user);
+        return new JsonResponse();
     }
 
     public function update()
@@ -45,4 +45,6 @@ class UserController extends AbstractController
     {
         
     }
+
+
 }

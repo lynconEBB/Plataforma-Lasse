@@ -4,5 +4,6 @@
 
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
+    'app_user_show' => [[], ['_controller' => 'App\\Controller\\UserController::show'], [], [['text', '/users']], [], []],
     'app_user_store' => [[], ['_controller' => 'App\\Controller\\UserController::store'], [], [['text', '/users']], [], []],
 ];

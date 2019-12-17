@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'/vendor/autoload.php';
-require __DIR__.'/ContainerKtC7elU/App_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerQsRVktY/App_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory';
@@ -38,9 +38,22 @@ $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamCon
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener';
+$classes[] = 'Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener';
+$classes[] = 'Symfony\Component\Security\Core\Role\RoleHierarchy';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener';
 $classes[] = 'Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter';
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\Registry';
+$classes[] = 'Symfony\Component\Security\Core\Authorization\AuthorizationChecker';
+$classes[] = 'Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage';
+$classes[] = 'Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage';
+$classes[] = 'Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager';
+$classes[] = 'Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver';
+$classes[] = 'Symfony\Component\Security\Http\RememberMe\ResponseListener';
+$classes[] = 'Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager';
+$classes[] = 'Symfony\Component\Security\Core\Authorization\AccessDecisionManager';
+$classes[] = 'Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener';
+$classes[] = 'Symfony\Bundle\SecurityBundle\Security\FirewallMap';
+$classes[] = 'Symfony\Component\Security\Http\Logout\LogoutUrlGenerator';
 $classes[] = 'Symfony\Component\HttpKernel\Log\Logger';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Routing\Router';
 $classes[] = 'Symfony\Component\Config\ResourceCheckerConfigCacheFactory';

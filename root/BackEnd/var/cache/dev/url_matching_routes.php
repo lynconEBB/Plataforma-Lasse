@@ -8,7 +8,10 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/users' => [[['_route' => 'app_user_store', '_controller' => 'App\\Controller\\UserController::store'], null, ['POST' => 0], null, false, false, null]],
+        '/users' => [
+            [['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], null, ['GET' => 0], null, false, false, null],
+            [['_route' => 'app_user_store', '_controller' => 'App\\Controller\\UserController::store'], null, ['POST' => 0], null, false, false, null],
+        ],
     ],
     [ // $regexpList
         0 => '{^(?'
